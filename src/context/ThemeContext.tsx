@@ -14,7 +14,7 @@ type ThemeProviderProps = {
 };
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
-    const [themeMode, setThemeMode] = useState("dark");
+    const [themeMode, setThemeMode] = useState("light");
     const themeObject = themeMode === "light" ? lightTheme : darkTheme;
 
     return (
