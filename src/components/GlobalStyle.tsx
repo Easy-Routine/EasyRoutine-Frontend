@@ -4,7 +4,7 @@ import reset from "styled-reset";
 export const GlobalStyle = createGlobalStyle`
 	${reset}
 	body{
-		background:${(props) => props.theme.primary};
-        color: ${(props) => props.theme.secondary};
+		background:${(props) => props.theme.backgroundColor};
+        color: ${(props) => props.theme.mainTextColor};
 	}
 `;
