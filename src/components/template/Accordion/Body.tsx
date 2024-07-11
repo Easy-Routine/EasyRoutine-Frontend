@@ -12,12 +12,12 @@ const Container = styled.div<{ height: string; css?: RuleSet<object> }>`
     transition: all 1s ease-in-out;
 `;
 
-type HiddenContentProps = {
+type BodyProps = {
     children: React.ReactNode;
     css?: RuleSet<object>;
 };
 
-const HiddenContent = ({ children, css }: HiddenContentProps) => {
+const Body = ({ children, css }: BodyProps) => {
     const { isOpen } = useContext(AccordionContext) as AccordionContextType;
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [height, setHeight] = useState("0px");
@@ -36,4 +36,4 @@ const HiddenContent = ({ children, css }: HiddenContentProps) => {
     );
 };
 
-export default HiddenContent;
+export default Body;

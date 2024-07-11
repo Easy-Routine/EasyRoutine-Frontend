@@ -5,8 +5,12 @@ import {
 import React, { useContext } from "react";
 import styled, { RuleSet } from "styled-components";
 
-const Container = styled.div<{ css?: RuleSet<object> }>`
-    ${({ css }) => css}
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 40px;
 `;
 
 type TriggerProps = {
@@ -18,11 +22,7 @@ const Trigger = ({ children, css }: TriggerProps) => {
     const { handleToggleAccordion } = useContext(
         AccordionContext
     ) as AccordionContextType;
-    return (
-        <Container css={css} onClick={handleToggleAccordion}>
-            {children}
-        </Container>
-    );
+    return <Container onClick={handleToggleAccordion}>{children}</Container>;
 };
 
 export default Trigger;
