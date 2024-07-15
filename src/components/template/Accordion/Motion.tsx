@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import styled from "styled-components";
 import {
@@ -14,7 +14,6 @@ const Container = styled(motion.div)`
     box-sizing: border-box;
     cursor: grab;
     box-shadow: ${(props) => props.theme.boxShadow};
-    background-color: ${(props) => props.theme.backgroundColor};
     border-radius: ${(props) => props.theme.borderRadius};
 `;
 

@@ -16,7 +16,7 @@ const Container = styled(motion.div)`
     align-items: center;
     width: 65px;
     height: 80px;
-    background-color: ${(props) => props.theme.warningColor};
+    background-color: ${(props) => props.theme.color.warning};
     opacity: 0.7;
     color: white;
     border-radius: ${(props) => props.theme.borderRadius};
