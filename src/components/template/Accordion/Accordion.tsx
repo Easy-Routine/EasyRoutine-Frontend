@@ -6,6 +6,8 @@ import styled, { RuleSet } from "styled-components";
 import Header from "./Header";
 import Motion from "./Motion";
 import DeleteButton from "./DeleteButton";
+import IconText from "./IconText";
+import BodyFooter from "./BodyFooter";
 
 type AccordionProps = {
     children: React.ReactNode;
@@ -88,3 +90,5 @@ Accordion.BoldText = BoldText;
 Accordion.NormalText = NormalText;
 Accordion.Motion = Motion;
 Accordion.DeleteButton = DeleteButton;
+Accordion.BodyFooter = BodyFooter;
+Accordion.IconText = IconText;
