@@ -1,12 +1,15 @@
 import Accordion from "components/template/Accordion";
 import { ReactComponent as FireIcon } from "assets/image/fire.svg";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
+import { ReactComponent as PenIcon } from "assets/image/pen.svg";
+import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { RoutineConfig } from "types/routine-config";
 import SeatedRowImage from "assets/image/seated-row.png";
 import { WorkoutConfig } from "types/workout-config";
 import SmallCard from "components/template/SmallCard/SmallCard";
 import SmallCardList from "components/template/SmallCard/SmallCardList";
 import AccordionList from "components/template/Accordion/AccordionList";
+import { useTheme } from "styled-components";
 
 type RoutineConfigAccordionListProps = {
     routineConfigList: RoutineConfig[];
@@ -38,6 +41,7 @@ const RoutineConfigAccordion = ({
     routineConfig,
 }: RoutineConfigAccordionProps) => {
     const data = [{}, {}, {}, {}, {}];
+    const theme = useTheme();
     return (
         <Accordion>
             <Accordion.Motion>
@@ -61,6 +65,16 @@ const RoutineConfigAccordion = ({
                     <WorkoutConfigSmallCardList
                         workoutConfigList={data as WorkoutConfig[]}
                     />
+                    <Accordion.BodyFooter>
+                        <Accordion.IconText color={theme.color.text.dark}>
+                            <PenIcon />
+                            <div>루틴 수정하기</div>
+                        </Accordion.IconText>
+                        <Accordion.IconText color={theme.color.primary}>
+                            <RunIcon />
+                            <div>루틴 수정하기</div>
+                        </Accordion.IconText>
+                    </Accordion.BodyFooter>
                 </Accordion.Body>
                 <Accordion.DeleteButton />
             </Accordion.Motion>
