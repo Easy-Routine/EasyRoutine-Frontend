@@ -13,7 +13,7 @@ const Container = styled(motion.div)`
     padding: 10px;
     box-sizing: border-box;
     cursor: grab;
-    box-shadow: ${(props) => props.theme.boxShadow};
+    background-color: ${(props) => props.theme.color.background.box};
     border-radius: ${(props) => props.theme.borderRadius};
 `;
 
