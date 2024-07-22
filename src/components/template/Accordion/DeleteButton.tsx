@@ -19,7 +19,7 @@ const Container = styled(motion.div)`
     background-color: ${(props) => props.theme.color.warning};
     opacity: 0.7;
     color: white;
-    border-radius: ${(props) => props.theme.borderRadius};
+    border-radius: ${(props) => props.theme.borderRadius.lg};
     transition: transform 0.3s;
 `;
 

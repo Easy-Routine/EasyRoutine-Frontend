@@ -63,7 +63,7 @@ const ImageBox = styled.div`
     align-items: center;
     min-width: 60px;
     height: 60px;
-    border-radius: ${(props) => props.theme.borderRadius};
+    border-radius: ${(props) => props.theme.borderRadius.lg};
     background-color: #f0fff0;
 `;
 const ColumnBox = styled.div`
