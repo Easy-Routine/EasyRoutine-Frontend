@@ -10,6 +10,7 @@ import Description from "./Description";
 import Button from "./Button";
 import IconBox from "./IconBox";
 import Wrapper from "./Wrapper";
+import BottomSheet from "./BottomSheet";
 
 type ModalProps = {
     children: React.ReactNode;
@@ -43,3 +44,4 @@ Modal.Description = Description;
 Modal.Button = Button;
 Modal.IconBox = IconBox;
 Modal.Wrapper = Wrapper;
+Modal.BottomSheet = BottomSheet;
