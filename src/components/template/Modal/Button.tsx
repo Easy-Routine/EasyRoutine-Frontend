@@ -5,7 +5,7 @@ const Button = styled.button`
     height: 40px;
     border: none;
     background-color: ${({ theme }) => theme.color.primary};
-    color: ${({ theme }) => theme.color.text.main.white};
+    color: ${({ theme }) => theme.color.text.white};
     border-radius: ${({ theme }) => theme.borderRadius.xs};
 `;
 

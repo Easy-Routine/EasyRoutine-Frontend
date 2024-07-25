@@ -9,7 +9,7 @@ const Container = styled.div<{ color?: string }>`
     background-color: ${({ theme }) => theme.color.background.box};
     font-size: ${({ theme }) => theme.fontSize.xxl};
     font-weight: ${({ theme }) => theme.fontWeight.semibold};
-    color: ${({ color, theme }) => color || theme.color.text.main.black};
+    color: ${({ color, theme }) => color || theme.color.text.black};
     text-align: center;
 `;
 

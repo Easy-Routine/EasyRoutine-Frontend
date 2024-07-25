@@ -26,7 +26,7 @@ const BoldText = styled.div`
 const NormalText = styled.div`
     font-size: 13px;
     font-weight: 400;
-    color: ${(props) => props.theme.color.text.sub.normal};
+    color: ${(props) => props.theme.color.gray.normal};
 `;
 
 type SmallCardProps = {

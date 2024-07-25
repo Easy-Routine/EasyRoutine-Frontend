@@ -14,16 +14,14 @@ const commonTheme = {
             page: "",
             box: "",
         },
+        gray: {
+            light: "#C7C7C7",
+            normal: "#A8A8A8",
+            dark: "#7D7D7D",
+        },
         text: {
-            main: {
-                white: "",
-                black: "",
-            },
-            sub: {
-                light: "#C7C7C7",
-                normal: "#A8A8A8",
-                dark: "#7D7D7D",
-            },
+            white: "",
+            black: "",
         },
     },
     fontSize: {
@@ -44,11 +42,11 @@ const commonTheme = {
 export const lightTheme = structuredClone(commonTheme);
 lightTheme.color.background.page = "#F1F1F1";
 lightTheme.color.background.box = "#FFFFFF";
-lightTheme.color.text.main.black = "#202124";
-lightTheme.color.text.main.white = "#FFFFFF";
+lightTheme.color.text.black = "#202124";
+lightTheme.color.text.white = "#FFFFFF";
 
 export const darkTheme = structuredClone(commonTheme);
 darkTheme.color.background.page = "#202124";
 darkTheme.color.background.box = "#2C2D30";
-darkTheme.color.text.main.black = "#FFFFFF";
-darkTheme.color.text.main.white = "#202124";
+darkTheme.color.text.black = "#FFFFFF";
+darkTheme.color.text.white = "#202124";

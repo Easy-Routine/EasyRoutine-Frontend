@@ -7,7 +7,7 @@ const NavItem = styled.div`
     gap: 10px;
     font-size: ${({ theme }) => theme.fontSize.xs};
     font-weight: ${({ theme }) => theme.fontWeight.regular};
-    color: ${({ theme }) => theme.color.text.sub.light};
+    color: ${({ theme }) => theme.color.gray.light};
 `;
 
 export default NavItem;

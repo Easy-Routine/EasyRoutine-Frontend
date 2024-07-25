@@ -66,7 +66,7 @@ const RoutineConfigAccordion = ({
                         workoutConfigList={data as WorkoutConfig[]}
                     />
                     <Accordion.BodyFooter>
-                        <Accordion.IconText color={theme.color.text.dark}>
+                        <Accordion.IconText color={theme.color.gray.dark}>
                             <PenIcon />
                             <div>루틴 수정하기</div>
                         </Accordion.IconText>
