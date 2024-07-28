@@ -7,7 +7,6 @@ import { useState } from "react";
 import Portal from "./Portal";
 import Title from "./Title";
 import Description from "./Description";
-import Button from "./Button";
 import Wrapper from "./Wrapper";
 import BottomSheet from "./BottomSheet";
 
@@ -40,6 +39,5 @@ Modal.Content = Content;
 Modal.Portal = Portal;
 Modal.Title = Title;
 Modal.Description = Description;
-Modal.Button = Button;
 Modal.Wrapper = Wrapper;
 Modal.BottomSheet = BottomSheet;
