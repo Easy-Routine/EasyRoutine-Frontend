@@ -4,7 +4,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 85%;
     gap: 10px;
 `;
 
