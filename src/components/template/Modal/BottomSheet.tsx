@@ -31,8 +31,8 @@ const Container = styled.div<{ isOpen: boolean }>`
     background: ${({ theme }) => theme.color.background.box};
     padding: 25px;
     box-sizing: border-box;
-    border-top-left-radius: ${({ theme }) => theme.borderRadius.xl};
-    border-top-right-radius: ${({ theme }) => theme.borderRadius.xl};
+    border-top-left-radius: ${({ theme }) => theme.borderRadius.lg};
+    border-top-right-radius: ${({ theme }) => theme.borderRadius.lg};
     z-index: 300;
     width: 100%;
     animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.3s ease

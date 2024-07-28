@@ -2,8 +2,9 @@ const commonTheme = {
     borderRadius: {
         xs: "4px",
         sm: "8px",
-        lg: "12px",
-        xl: "16px",
+        md: "12px",
+        lg: "16px",
+        xl: "20px",
         circle: "50%",
     },
     boxShadow: `0px 4px 4px 0px rgba(0, 0, 0, 0.25)`,

@@ -6,7 +6,7 @@ const Container = styled.div<{ isSelected: boolean }>`
     font-size: ${({ theme }) => theme.fontSize.md};
     font-weight: ${({ theme, isSelected }) =>
         isSelected ? theme.fontWeight.bold : theme.fontWeight.regular};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
+    border-radius: ${({ theme }) => theme.borderRadius.lg};
     border: ${({ theme, isSelected }) =>
         `1px solid ${
             isSelected ? theme.color.primary : theme.color.gray.light

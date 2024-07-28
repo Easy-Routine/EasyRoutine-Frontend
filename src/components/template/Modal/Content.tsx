@@ -19,7 +19,7 @@ const Container = styled.div`
     background: ${({ theme }) => theme.color.background.box};
     padding: 25px;
     box-sizing: border-box;
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
+    border-radius: ${({ theme }) => theme.borderRadius.lg};
     z-index: 200;
     height: 300px;
     width: 80%;

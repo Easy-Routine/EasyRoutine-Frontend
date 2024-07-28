@@ -15,8 +15,8 @@ const Container = styled.div`
     align-items: center;
     gap: 10px;
     background-color: ${({ theme }) => theme.color.background.box};
-    border-top-left-radius: ${({ theme }) => theme.borderRadius.xl};
-    border-top-right-radius: ${({ theme }) => theme.borderRadius.xl};
+    border-top-left-radius: ${({ theme }) => theme.borderRadius.lg};
+    border-top-right-radius: ${({ theme }) => theme.borderRadius.lg};
 `;
 
 type BottomBarProps = {
