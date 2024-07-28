@@ -46,7 +46,7 @@ type BottomSheetProps = {
 
 const BottomSheet = ({ children }: BottomSheetProps) => {
     const { isOpen } = useContext(ModalContext) as ModalContextType;
-    return <Container isOpen={isOpen}>{children}</Container>;
+    return <> {isOpen && <Container isOpen={isOpen}>{children}</Container>}</>;
 };
 
 export default BottomSheet;
