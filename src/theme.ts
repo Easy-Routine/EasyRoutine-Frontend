@@ -16,6 +16,7 @@ const commonTheme = {
             box: "",
         },
         gray: {
+            lighter: "#F4F4F4",
             light: "#C7C7C7",
             normal: "#A8A8A8",
             dark: "#7D7D7D",
