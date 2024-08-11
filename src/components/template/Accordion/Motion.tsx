@@ -10,7 +10,7 @@ import {
 const Container = styled(motion.div)`
     width: 100%;
     height: auto;
-    padding: 10px;
+    padding: 10px 20px;
     box-sizing: border-box;
     cursor: grab;
     background-color: ${(props) => props.theme.color.background.box};
