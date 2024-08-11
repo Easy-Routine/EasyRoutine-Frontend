@@ -1,6 +1,5 @@
 import Accordion from "components/template/Accordion";
 import AccordionList from "components/template/Accordion/AccordionList";
-import InputGroupList from "components/template/InputGroup/InputGroupList";
 import ProgressForm from "components/template/ProgressForm/ProgressForm";
 import React from "react";
 import { useTheme } from "styled-components";
@@ -9,6 +8,9 @@ import { WorkoutConfig } from "types/workout-config";
 import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
 import { ReactComponent as PlusIcon } from "assets/image/plus2.svg";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
+import Column from "components/template/Table/Column";
+import Input from "components/template/Table/Input";
+import Table from "components/template/Table/Table";
 
 type WorkoutProgressFormProps = {
     workoutConfigList: WorkoutConfig[],
@@ -42,8 +44,7 @@ const WorkoutProgressForm = ({workoutConfigList}:WorkoutProgressFormProps) => {
                                 </Accordion.Trigger>
                             </Accordion.Header>
                             <Accordion.Body>
-                                <SetProgressInputGroupList setConfigList={workoutConfig.setConfigList} type={workoutConfig.type} />
-
+                                <SetProgressTable setConfigList={workoutConfig.setConfigList} type={workoutConfig.type} />
                                 <Accordion.BodyFooter>
                                 <Accordion.IconText color={theme.color.gray.dark}>
                                     <MinusIcon />
@@ -67,71 +68,61 @@ const WorkoutProgressForm = ({workoutConfigList}:WorkoutProgressFormProps) => {
 
 export default WorkoutProgressForm;
 
-type SetProgressInputGroupListProps = {
+type SetProgressRowProps = {
     setConfigList: SetConfig[];
     type: string;
 }
 
-const SetProgressInputGroupList = ({setConfigList, type}: SetProgressInputGroupListProps) => {
-    
-    return (
-        <InputGroupList<SetConfig>
-            data={setConfigList}
-            render={(setConfig) => (
-                <SetProgressInputGroup setConfig={setConfig} type={type} />
-            )}
-        />
-    )
-}
-
-type SetProgressInputGroupProps = {
-    setConfig: SetConfig;
-    type: string;
-}
-
-const SetProgressInputGroup = ({setConfig, type}:SetProgressInputGroupProps) => {
-
-    const renderInputsByType = (type: string) => {
+const SetProgressTable = ({setConfigList, type}: SetProgressRowProps) => {
+    const renderColumnsByType = (type: string) => {
         const components: React.ReactNode[] = [];
 
         if (type.includes("weight")) {
             components.push(
-                <ProgressForm.Input
-                    key="weight"
-                    value={setConfig.weight.toString()}
-                    onInputChange={() => console.log("Weight input changed")}
-                />
+                <SetProgressColumn label={"무게"} setConfigList={setConfigList} name="weight" />
             );
         }
 
         if (type.includes("rep")) {
             components.push(
-                <ProgressForm.Input
-                    key="rep"
-                    value={setConfig.rep.toString()}
-                    onInputChange={() => console.log("Rep input changed")}
-                />
+                <SetProgressColumn label={"횟수"} setConfigList={setConfigList} name="rep" />
             );
         }
         // workoutSec으로 교체 하기
         if (type.includes("workoutSec")) {
             components.push(
-                <ProgressForm.Input
-                    key="workoutSec"
-                    value={setConfig.restSec.toString()}
-                    onInputChange={() => console.log("Time input changed")}
-                />
+                <SetProgressColumn label={"운동시간"} setConfigList={setConfigList} name="workoutSec" />
             );
         }
 
         return components;
     };
 
+
     return (
-        <ProgressForm.InputGroup id={setConfig.id.toString()}>
-            <ProgressForm.Input value={setConfig.order.toString()} onInputChange={() => console.log("hi")}/>
-            {renderInputsByType(type)}
-            <ProgressForm.Input value={setConfig.restSec.toString()} onInputChange={() => console.log("hi")}/>
-        </ProgressForm.InputGroup>
+        <Table>
+            <SetProgressColumn label={"순서"} setConfigList={setConfigList} name="order" />
+            {renderColumnsByType(type)}
+            <SetProgressColumn label={"휴식"} setConfigList={setConfigList} name="restSec" />
+        </Table>
     )
 }
+
+type SetProgressColumnProps = {
+    label: string;
+    setConfigList: SetConfig[];
+    name: string;
+}
+
+const SetProgressColumn = ({label, setConfigList, name}:SetProgressColumnProps) => {
+    return (
+        <Table.Column<SetConfig> label={label} data={setConfigList} render={(routineConfig) => (
+            <Table.Input
+                key={routineConfig.id}
+                value={(routineConfig[name as keyof SetConfig])?.toString()} 
+                onInputChange={() =>  console.log("ㅎㅇ")}
+        />
+        )} />
+    )
+}
+
