@@ -1,5 +1,5 @@
 import AccordionProvider from "context/AccordionContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Body from "./Body";
 import Trigger from "./Trigger";
 import styled, { RuleSet } from "styled-components";
@@ -12,6 +12,7 @@ import BodyFooter from "./BodyFooter";
 type AccordionProps = {
     children: React.ReactNode;
     css?: RuleSet<object>;
+    isCurrentAccordion?: boolean;
 };
 
 const Container = styled.div`
@@ -21,10 +22,17 @@ const Container = styled.div`
     overflow: hidden;
 `;
 
-const Accordion = ({ children, css }: AccordionProps) => {
+const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [x, setX] = useState(0);
     const [opacity, setOpacity] = useState(0);
+
+    useEffect(() => {
+        if (isCurrentAccordion) {
+            console.log(isCurrentAccordion);
+            setIsOpen(true);
+        }
+    }, [isCurrentAccordion]);
 
     const handleDragEnd = (_: any, info: { offset: { x: number } }) => {
         if (info.offset.x > 0) {
