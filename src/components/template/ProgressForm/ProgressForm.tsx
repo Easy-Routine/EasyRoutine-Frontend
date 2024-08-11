@@ -2,9 +2,9 @@ import ProgressProvider from "context/ProgressContext";
 import { useEffect, useRef, useState } from "react";
 import ProgressAccordion from "./ProgressAccordion";
 import Button from "./ProgressButton";
-import InputGroup from "./InputGroup";
 import Input from "./Input";
 import { WorkoutConfig } from "types/workout-config";
+import ProgressLine from "./ProgressLine";
 
 function* createIterator(workoutConfigList: WorkoutConfig[]) {
     for (const workoutConfig of workoutConfigList) {
@@ -55,5 +55,5 @@ export default ProgressForm;
 
 ProgressForm.Accordion = ProgressAccordion;
 ProgressForm.Button = Button;
-ProgressForm.InputGroup = InputGroup;
+ProgressForm.ProgressLine = ProgressLine;
 ProgressForm.Input = Input;
