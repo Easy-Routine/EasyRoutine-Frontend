@@ -6,37 +6,22 @@ import { ProgressContext, ProgressContextType } from "context/ProgressContext";
 
 const Container = styled.div<{ isCurrent: boolean; isCompleted: boolean }>`
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    background-color: transparent;
     height: 22px;
-
-    position: relative;
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: ${({ isCurrent, isCompleted, theme }) =>
-            isCurrent
-                ? theme.color.primary
-                : isCompleted
-                ? theme.color.gray.dark
-                : theme.color.background.box};
-        opacity: 0.2;
-        z-index: 3;
-        border-radius: ${({ theme }) => theme.borderRadius.sm};
-    }
+    background-color: ${({ isCurrent, isCompleted, theme }) =>
+        isCurrent
+            ? theme.color.primary
+            : isCompleted
+            ? theme.color.gray.dark
+            : theme.color.background.box};
+    opacity: 0.2;
+    border-radius: ${({theme}) => theme.borderRadius.sm};   
 `;
 
-type ProgressLineProps = {
-    children: React.ReactNode;
+type RowProps = {
     id: string;
 };
 
-const ProgressLine = ({ children, id }: ProgressLineProps) => {
+const Row = ({ id }: RowProps) => {
     const { currentItem, completedInputs } = useContext(
         ProgressContext
     ) as ProgressContextType;
@@ -49,13 +34,11 @@ const ProgressLine = ({ children, id }: ProgressLineProps) => {
     }, [isCurrent])
 
     return (
-        <Container isCurrent={isCurrent} isCompleted={isCompleted}>
-            {children}
-        </Container>
+        <Container isCurrent={isCurrent} isCompleted={isCompleted} />
     );
 };
 
-export default ProgressLine;
+export default Row;
 
-ProgressLine.Input = Input;
-ProgressLine.Text = Text;
+Row.Input = Input;
+Row.Text = Text;
