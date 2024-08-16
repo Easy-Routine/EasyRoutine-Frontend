@@ -5,6 +5,7 @@ import Button from "./ProgressButton";
 import Input from "./Input";
 import { WorkoutConfig } from "types/workout-config";
 import ProgressLine from "./ProgressLine";
+import ProgressLineList from "./ProgressLineList";
 
 function* createIterator(workoutConfigList: WorkoutConfig[]) {
     for (const workoutConfig of workoutConfigList) {
@@ -57,3 +58,4 @@ ProgressForm.Accordion = ProgressAccordion;
 ProgressForm.Button = Button;
 ProgressForm.ProgressLine = ProgressLine;
 ProgressForm.Input = Input;
+ProgressForm.ProgressLineList = ProgressLineList;
