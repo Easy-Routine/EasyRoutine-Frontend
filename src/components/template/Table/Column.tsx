@@ -8,7 +8,7 @@ const Container = styled.div`
     align-items: center;
     gap: 10px;
     margin-top: 10px;
-    
+    justify-content: space-between;
 `;
 
 type ColumnProps<T> = {
