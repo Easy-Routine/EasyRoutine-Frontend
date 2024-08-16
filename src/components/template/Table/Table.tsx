@@ -6,8 +6,10 @@ import OrderText from './OrderText';
 import TitleText from './TitleText';
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
 `;
 
 type TableProps = {
