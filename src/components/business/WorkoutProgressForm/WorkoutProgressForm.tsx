@@ -79,19 +79,19 @@ const SetProgressTable = ({setConfigList, type}: SetProgressRowProps) => {
 
         if (type.includes("weight")) {
             components.push(
-                <SetProgressColumn label={"무게"} setConfigList={setConfigList} name="weight" />
+                <SetProgressInputColumn label={"무게"} setConfigList={setConfigList} name="weight" />
             );
         }
 
         if (type.includes("rep")) {
             components.push(
-                <SetProgressColumn label={"횟수"} setConfigList={setConfigList} name="rep" />
+                <SetProgressInputColumn label={"횟수"} setConfigList={setConfigList} name="rep" />
             );
         }
         // workoutSec으로 교체 하기
         if (type.includes("workoutSec")) {
             components.push(
-                <SetProgressColumn label={"운동시간"} setConfigList={setConfigList} name="workoutSec" />
+                <SetProgressInputColumn label={"운동시간"} setConfigList={setConfigList} name="workoutSec" />
             );
         }
 
@@ -101,20 +101,22 @@ const SetProgressTable = ({setConfigList, type}: SetProgressRowProps) => {
 
     return (
         <Table>
-            <SetProgressColumn label={"순서"} setConfigList={setConfigList} name="order" />
+            <ProgressForm.ProgressLineList data={setConfigList} render={(setConfig) => <ProgressForm.ProgressLine id={setConfig.id.toString()}  />} />
+            <SetProgressTextColumn label={"순서"} setConfigList={setConfigList} name="order" />
             {renderColumnsByType(type)}
-            <SetProgressColumn label={"휴식"} setConfigList={setConfigList} name="restSec" />
+            <SetProgressInputColumn label={"휴식"} setConfigList={setConfigList} name="restSec" />
+            
         </Table>
     )
 }
 
-type SetProgressColumnProps = {
+type SetProgressInputColumnProps = {
     label: string;
     setConfigList: SetConfig[];
     name: string;
 }
 
-const SetProgressColumn = ({label, setConfigList, name}:SetProgressColumnProps) => {
+const SetProgressInputColumn = ({label, setConfigList, name}:SetProgressInputColumnProps) => {
     return (
         <Table.Column<SetConfig> label={label} data={setConfigList} render={(routineConfig) => (
             <Table.Input
@@ -126,3 +128,12 @@ const SetProgressColumn = ({label, setConfigList, name}:SetProgressColumnProps) 
     )
 }
 
+const SetProgressTextColumn = ({label, setConfigList, name}:SetProgressInputColumnProps) => {
+    return (
+        <Table.Column<SetConfig> label={label} data={setConfigList} render={(setConfig) => (
+                <Table.OrderText key={setConfig.id}>
+                {(setConfig[name as keyof SetConfig])?.toString()}
+                </Table.OrderText>
+        )} />
+    )
+}
