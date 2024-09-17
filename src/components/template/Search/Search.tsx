@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
-import styled from "styled-components";
-import { ReactComponent as MagnifyIcon } from "assets/image/magnify.svg";
-import { ReactComponent as XIcon } from "assets/image/x.svg";
+import React, { ChangeEvent, useState } from 'react';
+import styled from 'styled-components';
+import { ReactComponent as MagnifyIcon } from 'assets/image/magnify.svg';
+import { ReactComponent as XIcon } from 'assets/image/x.svg';
 
 const Container = styled.div`
     width: 100%;
@@ -30,26 +30,21 @@ type SearchProps = {
 };
 
 const Search = ({ onInputChange }: SearchProps) => {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState('');
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
         onInputChange && onInputChange(e.target.value);
     };
     const handleXClick = () => {
-        setValue("");
-        onInputChange && onInputChange("");
+        setValue('');
+        onInputChange && onInputChange('');
     };
 
     return (
         <Container>
             <MagnifyIcon />
-            <Input
-                type="text"
-                placeholder="Search"
-                value={value}
-                onChange={handleInputChange}
-            />
+            <Input type="text" placeholder="Search" value={value} onChange={handleInputChange} />
             <XIcon onClick={handleXClick} />
         </Container>
     );

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import CheckBoxGroupProvider from "context/CheckBoxGroupContext";
-import CheckBox from "./CheckBox";
-import SubmitButton from "./SubmitButton";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import CheckBoxGroupProvider from 'context/CheckBoxGroupContext';
+import CheckBox from './CheckBox';
+import SubmitButton from './SubmitButton';
 
 const Container = styled.div``;
 
@@ -16,9 +16,7 @@ const CheckBoxGroup = ({ children }: CheckBoxGroupProps) => {
     const handleButtonClick = (value: string) => {
         const newState = structuredClone(selectedValues);
         if (selectedValues.includes(value)) {
-            setSelectedValues(
-                newState.filter((item: string) => item !== value)
-            );
+            setSelectedValues(newState.filter((item: string) => item !== value));
         } else {
             newState.push(value);
             setSelectedValues(newState);
@@ -26,7 +24,7 @@ const CheckBoxGroup = ({ children }: CheckBoxGroupProps) => {
     };
 
     useEffect(() => {
-        console.log("값변경", selectedValues);
+        console.log('값변경', selectedValues);
     }, [selectedValues]);
 
     return (

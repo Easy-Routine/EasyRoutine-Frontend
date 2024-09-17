@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode } from 'react';
 
 export type CheckBoxGroupContextType = {
     selectedValues: string[];
@@ -9,18 +9,11 @@ type CheckBoxGroupProviderProps = {
     value: CheckBoxGroupContextType;
 };
 
-export const CheckBoxGroupContext = createContext<
-    CheckBoxGroupContextType | {}
->({});
-const CheckBoxGroupProvider = ({
-    children,
-    value,
-}: CheckBoxGroupProviderProps) => {
+export const CheckBoxGroupContext = createContext<CheckBoxGroupContextType | {}>({});
+const CheckBoxGroupProvider = ({ children, value }: CheckBoxGroupProviderProps) => {
     const { selectedValues, handleButtonClick } = value;
     return (
-        <CheckBoxGroupContext.Provider
-            value={{ selectedValues, handleButtonClick }}
-        >
+        <CheckBoxGroupContext.Provider value={{ selectedValues, handleButtonClick }}>
             {children}
         </CheckBoxGroupContext.Provider>
     );

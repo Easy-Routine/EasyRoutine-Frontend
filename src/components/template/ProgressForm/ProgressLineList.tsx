@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Container = styled.div`
     width: 100%;
@@ -22,8 +22,13 @@ type ProgressLineListProps<T> = {
     render: (value: T, key: number) => React.ReactNode;
 };
 
-const ProgressLineList = <T,>({ data,render }: ProgressLineListProps<T>) => {
-    return <Container><Header />{data.map(render)}</Container>;
+const ProgressLineList = <T,>({ data, render }: ProgressLineListProps<T>) => {
+    return (
+        <Container>
+            <Header />
+            {data.map(render)}
+        </Container>
+    );
 };
 
 export default ProgressLineList;

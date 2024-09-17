@@ -1,6 +1,6 @@
-import { createContext, useState, ReactNode } from "react";
-import { lightTheme, darkTheme } from "theme";
-import { ThemeProvider as StyledProvider } from "styled-components";
+import { createContext, useState, ReactNode } from 'react';
+import { lightTheme, darkTheme } from 'theme';
+import { ThemeProvider as StyledProvider } from 'styled-components';
 
 export type ThemeContextType = {
     themeMode: string;
@@ -14,8 +14,8 @@ type ThemeProviderProps = {
 };
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
-    const [themeMode, setThemeMode] = useState("light");
-    const themeObject = themeMode === "light" ? lightTheme : darkTheme;
+    const [themeMode, setThemeMode] = useState('light');
+    const themeObject = themeMode === 'light' ? lightTheme : darkTheme;
 
     return (
         <ThemeContext.Provider value={{ themeMode, setThemeMode }}>

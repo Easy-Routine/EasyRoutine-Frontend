@@ -1,18 +1,14 @@
-import {
-    CheckBoxGroupContext,
-    CheckBoxGroupContextType,
-} from "context/CheckBoxGroupContext";
-import React, { useContext } from "react";
-import styled from "styled-components";
-import { ReactComponent as CheckIcon } from "assets/image/check.svg";
+import { CheckBoxGroupContext, CheckBoxGroupContextType } from 'context/CheckBoxGroupContext';
+import React, { useContext } from 'react';
+import styled from 'styled-components';
+import { ReactComponent as CheckIcon } from 'assets/image/check.svg';
 
 const Container = styled.div<{ isSelected: boolean }>`
     width: 20px;
     height: 20px;
     border-radius: ${({ theme }) => theme.borderRadius.xs};
     border: 1px solid ${({ theme }) => theme.color.gray.light};
-    background-color: ${({ theme, isSelected }) =>
-        isSelected ? theme.color.primary : theme.color.background.box};
+    background-color: ${({ theme, isSelected }) => (isSelected ? theme.color.primary : theme.color.background.box)};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,17 +20,12 @@ type CheckBoxProps = {
 
 const CheckBox = ({ value }: CheckBoxProps) => {
     // 버튼을 클릭하면, 선택상태가 변경된다.
-    const { handleButtonClick, selectedValues } = useContext(
-        CheckBoxGroupContext
-    ) as CheckBoxGroupContextType;
+    const { handleButtonClick, selectedValues } = useContext(CheckBoxGroupContext) as CheckBoxGroupContextType;
 
     const isSelected = selectedValues.includes(value);
 
     return (
-        <Container
-            isSelected={isSelected}
-            onClick={() => handleButtonClick(value)}
-        >
+        <Container isSelected={isSelected} onClick={() => handleButtonClick(value)}>
             {isSelected && <CheckIcon width={12.5} />}
         </Container>
     );

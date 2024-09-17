@@ -1,7 +1,7 @@
-import React from "react";
-import { useContext } from "react";
-import styled from "styled-components";
-import { ModalContext, ModalContextType } from "context/ModalContext";
+import React from 'react';
+import { useContext } from 'react';
+import styled from 'styled-components';
+import { ModalContext, ModalContextType } from 'context/ModalContext';
 
 type ContentProps = {
     children: React.ReactNode;

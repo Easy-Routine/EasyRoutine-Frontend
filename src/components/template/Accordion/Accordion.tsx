@@ -1,13 +1,13 @@
-import AccordionProvider from "context/AccordionContext";
-import { useEffect, useState } from "react";
-import Body from "./Body";
-import Trigger from "./Trigger";
-import styled, { RuleSet } from "styled-components";
-import Header from "./Header";
-import Motion from "./Motion";
-import DeleteButton from "./DeleteButton";
-import IconText from "./IconText";
-import BodyFooter from "./BodyFooter";
+import AccordionProvider from 'context/AccordionContext';
+import { useEffect, useState } from 'react';
+import Body from './Body';
+import Trigger from './Trigger';
+import styled, { RuleSet } from 'styled-components';
+import Header from './Header';
+import Motion from './Motion';
+import DeleteButton from './DeleteButton';
+import IconText from './IconText';
+import BodyFooter from './BodyFooter';
 
 type AccordionProps = {
     children: React.ReactNode;
@@ -51,9 +51,7 @@ const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
     };
 
     return (
-        <AccordionProvider
-            value={{ isOpen, handleToggleAccordion, handleDragEnd, opacity, x }}
-        >
+        <AccordionProvider value={{ isOpen, handleToggleAccordion, handleDragEnd, opacity, x }}>
             <Container>{children}</Container>
         </AccordionProvider>
     );

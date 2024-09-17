@@ -1,4 +1,4 @@
-import styled, { RuleSet } from "styled-components";
+import styled, { RuleSet } from 'styled-components';
 
 const Container = styled.div`
     display: flex;

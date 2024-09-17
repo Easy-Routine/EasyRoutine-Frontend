@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import NavItem from "./NavItem";
-import Timer from "./Timer";
+import styled from 'styled-components';
+import NavItem from './NavItem';
+import Timer from './Timer';
 
 const Container = styled.div`
     position: fixed;

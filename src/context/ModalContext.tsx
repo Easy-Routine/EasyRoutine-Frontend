@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode } from 'react';
 
 export type ModalContextType = {
     isOpen: boolean;
@@ -14,11 +14,7 @@ export const ModalContext = createContext<ModalContextType | {}>({});
 const ModalProvider = ({ children, value }: ModalProviderProps) => {
     const { isOpen, handleOpenModal, handleCloseModal } = value;
     return (
-        <ModalContext.Provider
-            value={{ isOpen, handleOpenModal, handleCloseModal }}
-        >
-            {children}
-        </ModalContext.Provider>
+        <ModalContext.Provider value={{ isOpen, handleOpenModal, handleCloseModal }}>{children}</ModalContext.Provider>
     );
 };
 

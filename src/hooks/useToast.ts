@@ -1,10 +1,8 @@
-import { ToastContext, ToastContextType } from "context/ToastContext";
-import { useContext } from "react";
+import { ToastContext, ToastContextType } from 'context/ToastContext';
+import { useContext } from 'react';
 
 const useToast = () => {
-    const { setMessage, setIsOpen } = useContext(
-        ToastContext
-    ) as ToastContextType;
+    const { setMessage, setIsOpen } = useContext(ToastContext) as ToastContextType;
 
     const showToast = (message: string) => {
         setIsOpen(true);

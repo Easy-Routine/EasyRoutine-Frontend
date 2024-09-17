@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode } from 'react';
 
 export type AccordionContextType = {
     isOpen: boolean;
@@ -16,9 +16,7 @@ export const AccordionContext = createContext<AccordionContextType | {}>({});
 const AccordionProvider = ({ children, value }: AccordionProviderProps) => {
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } = value;
     return (
-        <AccordionContext.Provider
-            value={{ isOpen, handleToggleAccordion, handleDragEnd, opacity, x }}
-        >
+        <AccordionContext.Provider value={{ isOpen, handleToggleAccordion, handleDragEnd, opacity, x }}>
             {children}
         </AccordionContext.Provider>
     );

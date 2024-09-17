@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const TitleText = styled.div`
     font-size: ${({ theme }) => theme.fontSize.sm};

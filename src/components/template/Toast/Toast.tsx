@@ -1,8 +1,8 @@
-import { ToastContext, ToastContextType } from "context/ToastContext";
-import { useContext, useEffect } from "react";
-import styled from "styled-components";
-import IconBox from "components/template/IconBox/IconBox";
-import { ReactComponent as CheckIcon } from "assets/image/check.svg";
+import { ToastContext, ToastContextType } from 'context/ToastContext';
+import { useContext, useEffect } from 'react';
+import styled from 'styled-components';
+import IconBox from 'components/template/IconBox/IconBox';
+import { ReactComponent as CheckIcon } from 'assets/image/check.svg';
 
 const Container = styled.div<{ isOpen: boolean }>`
     position: fixed;
@@ -18,9 +18,8 @@ const Container = styled.div<{ isOpen: boolean }>`
     padding: 10px 40px;
     box-sizing: border-box;
     transition: all 0.5s ease-in-out;
-    transform: ${({ isOpen }) =>
-        isOpen ? "translate(-50%, 25%)" : "translate(-50%, -100%)"};
-    opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
+    transform: ${({ isOpen }) => (isOpen ? 'translate(-50%, 25%)' : 'translate(-50%, -100%)')};
+    opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
 `;
 
 const Text = styled.div`

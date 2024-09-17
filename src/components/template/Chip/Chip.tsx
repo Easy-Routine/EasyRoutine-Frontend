@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import ChipProvider from "context/ChipContext";
-import Button from "./Button";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import ChipProvider from 'context/ChipContext';
+import Button from './Button';
 
 const Container = styled.div`
     display: flex;
@@ -21,7 +21,7 @@ const Chip = ({ children, defaultValue }: ChipProps) => {
     };
 
     useEffect(() => {
-        console.log("값변경", selectedValue);
+        console.log('값변경', selectedValue);
     }, [selectedValue]);
 
     return (

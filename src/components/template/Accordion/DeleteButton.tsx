@@ -1,11 +1,8 @@
-import {
-    AccordionContext,
-    AccordionContextType,
-} from "context/AccordionContext";
-import { motion } from "framer-motion";
-import { useContext } from "react";
-import styled from "styled-components";
-import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
+import { AccordionContext, AccordionContextType } from 'context/AccordionContext';
+import { motion } from 'framer-motion';
+import { useContext } from 'react';
+import styled from 'styled-components';
+import { ReactComponent as TrashIcon } from 'assets/image/trash.svg';
 
 const Container = styled(motion.div)`
     position: absolute;

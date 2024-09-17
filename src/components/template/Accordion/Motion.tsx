@@ -1,11 +1,8 @@
-import { motion } from "framer-motion";
-import { useContext } from "react";
+import { motion } from 'framer-motion';
+import { useContext } from 'react';
 
-import styled from "styled-components";
-import {
-    AccordionContext,
-    AccordionContextType,
-} from "context/AccordionContext";
+import styled from 'styled-components';
+import { AccordionContext, AccordionContextType } from 'context/AccordionContext';
 
 const Container = styled(motion.div)`
     width: 100%;
@@ -22,16 +19,9 @@ type MotionProps = {
 };
 
 const Motion = ({ children }: MotionProps) => {
-    const { handleDragEnd, x } = useContext(
-        AccordionContext
-    ) as AccordionContextType;
+    const { handleDragEnd, x } = useContext(AccordionContext) as AccordionContextType;
     return (
-        <Container
-            drag="x"
-            dragConstraints={{ left: -65, right: 0 }}
-            onDragEnd={handleDragEnd}
-            animate={{ x }}
-        >
+        <Container drag="x" dragConstraints={{ left: -65, right: 0 }} onDragEnd={handleDragEnd} animate={{ x }}>
             {children}
         </Container>
     );

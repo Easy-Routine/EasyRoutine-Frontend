@@ -1,6 +1,6 @@
-import { ModalContextType, ModalContext } from "context/ModalContext";
-import React from "react";
-import styled from "styled-components";
+import { ModalContextType, ModalContext } from 'context/ModalContext';
+import React from 'react';
+import styled from 'styled-components';
 
 const Container = styled.div`
     position: fixed;

@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode } from 'react';
 
 export type ChipContextType = {
     selectedValue: string;
@@ -12,11 +12,7 @@ type ChipProviderProps = {
 export const ChipContext = createContext<ChipContextType | {}>({});
 const ChipProvider = ({ children, value }: ChipProviderProps) => {
     const { selectedValue, handleButtonClick } = value;
-    return (
-        <ChipContext.Provider value={{ selectedValue, handleButtonClick }}>
-            {children}
-        </ChipContext.Provider>
-    );
+    return <ChipContext.Provider value={{ selectedValue, handleButtonClick }}>{children}</ChipContext.Provider>;
 };
 
 export default ChipProvider;

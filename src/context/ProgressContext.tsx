@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode } from 'react';
 
 export type ProgressContextType = {
     currentItem: any;
@@ -6,9 +6,7 @@ export type ProgressContextType = {
     setCurrentItem: React.Dispatch<React.SetStateAction<string>>;
     setCurrentInput: React.Dispatch<React.SetStateAction<string>>;
     model: any[];
-    iteratorRef: React.MutableRefObject<
-        Generator<any, void, unknown> | undefined
-    >;
+    iteratorRef: React.MutableRefObject<Generator<any, void, unknown> | undefined>;
     completedInputs: string[];
     setCompletedInputs: React.Dispatch<React.SetStateAction<string[]>>;
     // setModel: React.Dispatch<React.SetStateAction<any[]>>;

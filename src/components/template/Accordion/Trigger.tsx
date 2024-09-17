@@ -1,9 +1,6 @@
-import {
-    AccordionContext,
-    AccordionContextType,
-} from "context/AccordionContext";
-import React, { useContext } from "react";
-import styled, { RuleSet } from "styled-components";
+import { AccordionContext, AccordionContextType } from 'context/AccordionContext';
+import React, { useContext } from 'react';
+import styled, { RuleSet } from 'styled-components';
 
 const Container = styled.div`
     display: flex;
@@ -19,9 +16,7 @@ type TriggerProps = {
 };
 
 const Trigger = ({ children, css }: TriggerProps) => {
-    const { handleToggleAccordion } = useContext(
-        AccordionContext
-    ) as AccordionContextType;
+    const { handleToggleAccordion } = useContext(AccordionContext) as AccordionContextType;
     return <Container onClick={handleToggleAccordion}>{children}</Container>;
 };
 

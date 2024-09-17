@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const IconBox = styled.div<{ width: number; height: number }>`
     width: ${({ width }) => `${width}px`};

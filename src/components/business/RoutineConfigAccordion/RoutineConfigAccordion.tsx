@@ -1,32 +1,25 @@
-import Accordion from "components/template/Accordion";
-import { ReactComponent as FireIcon } from "assets/image/fire.svg";
-import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
-import { ReactComponent as PenIcon } from "assets/image/pen.svg";
-import { ReactComponent as RunIcon } from "assets/image/run.svg";
-import { RoutineConfig } from "types/routine-config";
-import SeatedRowImage from "assets/image/seated-row.png";
-import { WorkoutConfig } from "types/workout-config";
-import SmallCard from "components/template/SmallCard/SmallCard";
-import SmallCardList from "components/template/SmallCard/SmallCardList";
-import AccordionList from "components/template/Accordion/AccordionList";
-import { useTheme } from "styled-components";
+import Accordion from 'components/template/Accordion';
+import { ReactComponent as FireIcon } from 'assets/image/fire.svg';
+import { ReactComponent as ArrowIcon } from 'assets/image/arrow.svg';
+import { ReactComponent as PenIcon } from 'assets/image/pen.svg';
+import { ReactComponent as RunIcon } from 'assets/image/run.svg';
+import { RoutineConfig } from 'types/routine-config';
+import SeatedRowImage from 'assets/image/seated-row.png';
+import { WorkoutConfig } from 'types/workout-config';
+import SmallCard from 'components/template/SmallCard/SmallCard';
+import SmallCardList from 'components/template/SmallCard/SmallCardList';
+import AccordionList from 'components/template/Accordion/AccordionList';
+import { useTheme } from 'styled-components';
 
 type RoutineConfigAccordionListProps = {
     routineConfigList: RoutineConfig[];
 };
 
-const RoutineConfigAccordionList = ({
-    routineConfigList,
-}: RoutineConfigAccordionListProps) => {
+const RoutineConfigAccordionList = ({ routineConfigList }: RoutineConfigAccordionListProps) => {
     return (
         <AccordionList<RoutineConfig>
             data={routineConfigList as RoutineConfig[]}
-            render={(routineConfig) => (
-                <RoutineConfigAccordion
-                    key={routineConfig.id}
-                    routineConfig={routineConfig}
-                />
-            )}
+            render={(routineConfig) => <RoutineConfigAccordion key={routineConfig.id} routineConfig={routineConfig} />}
         />
     );
 };
@@ -37,11 +30,10 @@ type RoutineConfigAccordionProps = {
     routineConfig: RoutineConfig;
 };
 
-const RoutineConfigAccordion = ({
-    routineConfig,
-}: RoutineConfigAccordionProps) => {
+const RoutineConfigAccordion = ({ routineConfig }: RoutineConfigAccordionProps) => {
     const data = [{}, {}, {}, {}, {}];
     const theme = useTheme();
+
     return (
         <Accordion>
             <Accordion.Motion>
@@ -51,9 +43,7 @@ const RoutineConfigAccordion = ({
                             <FireIcon />
                         </Accordion.ImageBox>
                         <Accordion.ColumnBox>
-                            <Accordion.BoldText>
-                                {routineConfig.name}
-                            </Accordion.BoldText>
+                            <Accordion.BoldText>{routineConfig.name}</Accordion.BoldText>
                             <Accordion.NormalText>{5}종목</Accordion.NormalText>
                         </Accordion.ColumnBox>
                     </Accordion.Card>
@@ -62,9 +52,7 @@ const RoutineConfigAccordion = ({
                     </Accordion.Trigger>
                 </Accordion.Header>
                 <Accordion.Body>
-                    <WorkoutConfigSmallCardList
-                        workoutConfigList={data as WorkoutConfig[]}
-                    />
+                    <WorkoutConfigSmallCardList workoutConfigList={data as WorkoutConfig[]} />
                     <Accordion.BodyFooter>
                         <Accordion.IconText color={theme.color.gray.dark}>
                             <PenIcon />
@@ -85,18 +73,11 @@ type WorkoutConfigSmallCardListProps = {
     workoutConfigList: WorkoutConfig[];
 };
 
-const WorkoutConfigSmallCardList = ({
-    workoutConfigList,
-}: WorkoutConfigSmallCardListProps) => {
+const WorkoutConfigSmallCardList = ({ workoutConfigList }: WorkoutConfigSmallCardListProps) => {
     return (
         <SmallCardList<WorkoutConfig>
             data={workoutConfigList}
-            render={(workoutConfig) => (
-                <WorkoutConfigSmallCard
-                    key={workoutConfig.id}
-                    workoutConfig={workoutConfig}
-                />
-            )}
+            render={(workoutConfig) => <WorkoutConfigSmallCard key={workoutConfig.id} workoutConfig={workoutConfig} />}
         />
     );
 };
@@ -105,9 +86,7 @@ type WorkoutConfigSmallCardProps = {
     workoutConfig: WorkoutConfig;
 };
 
-const WorkoutConfigSmallCard = ({
-    workoutConfig,
-}: WorkoutConfigSmallCardProps) => {
+const WorkoutConfigSmallCard = ({ workoutConfig }: WorkoutConfigSmallCardProps) => {
     return (
         <SmallCard>
             <SmallCard.ImageBox>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import ColorTabProvider from "context/TabContext";
-import Color from "./Color";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import ColorTabProvider from 'context/TabContext';
+import Color from './Color';
 
 const Container = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ const ColorTab = ({ children, defaultValue }: ColorTabProps) => {
     };
 
     useEffect(() => {
-        console.log("값변경", selectedValue);
+        console.log('값변경', selectedValue);
     }, [selectedValue]);
 
     return (

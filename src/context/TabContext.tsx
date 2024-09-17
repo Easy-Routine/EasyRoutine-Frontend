@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode } from 'react';
 
 export type TabContextType = {
     selectedValue: string;
@@ -12,11 +12,7 @@ type TabProviderProps = {
 export const TabContext = createContext<TabContextType | {}>({});
 const TabProvider = ({ children, value }: TabProviderProps) => {
     const { selectedValue, handleButtonClick } = value;
-    return (
-        <TabContext.Provider value={{ selectedValue, handleButtonClick }}>
-            {children}
-        </TabContext.Provider>
-    );
+    return <TabContext.Provider value={{ selectedValue, handleButtonClick }}>{children}</TabContext.Provider>;
 };
 
 export default TabProvider;
