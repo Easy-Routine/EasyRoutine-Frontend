@@ -1,13 +1,13 @@
-import AccordionProvider from 'context/AccordionContext';
-import { useEffect, useState } from 'react';
-import Body from './Body';
-import Trigger from './Trigger';
-import styled, { RuleSet } from 'styled-components';
-import Header from './Header';
-import Motion from './Motion';
-import DeleteButton from './DeleteButton';
-import IconText from './IconText';
-import BodyFooter from './BodyFooter';
+import AccordionProvider from "context/AccordionContext";
+import { useEffect, useState } from "react";
+import Body from "./Body";
+import Trigger from "./Trigger";
+import styled, { RuleSet } from "styled-components";
+import Header from "./Header";
+import Motion from "./Motion";
+import DeleteButton from "./DeleteButton";
+import IconText from "./IconText";
+import BodyFooter from "./BodyFooter";
 
 type AccordionProps = {
     children: React.ReactNode;
@@ -51,7 +51,9 @@ const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
     };
 
     return (
-        <AccordionProvider value={{ isOpen, handleToggleAccordion, handleDragEnd, opacity, x }}>
+        <AccordionProvider
+            value={{ isOpen, handleToggleAccordion, handleDragEnd, opacity, x }}
+        >
             <Container>{children}</Container>
         </AccordionProvider>
     );
@@ -63,14 +65,14 @@ const Card = styled.div`
     align-items: center;
     gap: 15px;
 `;
-const ImageBox = styled.div`
+const ImageBox = styled.div<{ backgroundColor?: string }>`
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: 60px;
     height: 60px;
     border-radius: ${(props) => props.theme.borderRadius.md};
-    background-color: #f0fff0;
+    background-color: ${(props) => props.backgroundColor};
 `;
 const ColumnBox = styled.div`
     display: flex;
