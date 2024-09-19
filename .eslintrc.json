@@ -1,6 +1,0 @@
-{
-    "extends": ["react-app", "plugin:prettier/recommended"],
-    "rules": {
-        // 필요에 따라 추가적인 ESLint 규칙을 설정
-    }
-}
