@@ -1,6 +1,5 @@
-import { AccordionContext, AccordionContextType } from 'context/AccordionContext';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import styled, { RuleSet } from 'styled-components';
+import React, { useEffect, useRef, useState } from "react";
+import styled, { RuleSet } from "styled-components";
 
 const Container = styled.div<{ height: string; css?: RuleSet<object> }>`
     ${({ css }) => css}
@@ -10,18 +9,20 @@ const Container = styled.div<{ height: string; css?: RuleSet<object> }>`
 `;
 
 type BodyProps = {
+    isOpen: boolean;
     children: React.ReactNode;
     css?: RuleSet<object>;
 };
 
-const Body = ({ children, css }: BodyProps) => {
-    const { isOpen } = useContext(AccordionContext) as AccordionContextType;
+const Body = ({ isOpen, children, css }: BodyProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const [height, setHeight] = useState('0px');
+    const [height, setHeight] = useState("0px");
 
     useEffect(() => {
         if (containerRef.current) {
-            setHeight(isOpen ? `${containerRef.current.scrollHeight}px` : '0px');
+            setHeight(
+                isOpen ? `${containerRef.current.scrollHeight}px` : "0px"
+            );
         }
     }, [isOpen]);
     return (

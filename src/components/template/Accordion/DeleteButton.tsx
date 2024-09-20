@@ -1,8 +1,6 @@
-import { AccordionContext, AccordionContextType } from 'context/AccordionContext';
-import { motion } from 'framer-motion';
-import { useContext } from 'react';
-import styled from 'styled-components';
-import { ReactComponent as TrashIcon } from 'assets/image/trash.svg';
+import { motion } from "framer-motion";
+import styled from "styled-components";
+import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 
 const Container = styled(motion.div)`
     position: absolute;
@@ -20,8 +18,10 @@ const Container = styled(motion.div)`
     transition: transform 0.3s;
 `;
 
-const DeleteButton = () => {
-    const { opacity } = useContext(AccordionContext) as AccordionContextType;
+type DeleteButtonProps = {
+    opacity: number;
+};
+const DeleteButton = ({ opacity }: DeleteButtonProps) => {
     return (
         <Container animate={{ opacity }}>
             <TrashIcon />

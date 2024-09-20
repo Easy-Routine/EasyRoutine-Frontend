@@ -1,6 +1,5 @@
-import { AccordionContext, AccordionContextType } from 'context/AccordionContext';
-import React, { useContext } from 'react';
-import styled, { RuleSet } from 'styled-components';
+import React from "react";
+import styled, { RuleSet } from "styled-components";
 
 const Container = styled.div`
     display: flex;
@@ -11,13 +10,13 @@ const Container = styled.div`
 `;
 
 type TriggerProps = {
+    onToggleAccordion: any;
     children: React.ReactNode;
     css?: RuleSet<object>;
 };
 
-const Trigger = ({ children, css }: TriggerProps) => {
-    const { handleToggleAccordion } = useContext(AccordionContext) as AccordionContextType;
-    return <Container onClick={handleToggleAccordion}>{children}</Container>;
+const Trigger = ({ onToggleAccordion, children, css }: TriggerProps) => {
+    return <Container onClick={onToggleAccordion}>{children}</Container>;
 };
 
 export default Trigger;
