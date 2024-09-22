@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from 'react';
-import styled from 'styled-components';
+import React, { ChangeEvent, useState } from "react";
+import styled from "styled-components";
 
 const Container = styled.input<{ width: number }>`
     width: ${({ width }) => `${width}px`};
@@ -14,8 +14,8 @@ const Container = styled.input<{ width: number }>`
     &:focus {
         border-color: ${({ theme }) => theme.color.primary};
     }
-
     z-index: 1000;
+    text-align: center;
 `;
 
 type InputProps = {
@@ -32,7 +32,13 @@ const Input = ({ width = 18, value, onInputChange }: InputProps) => {
         onInputChange?.(e.target.value);
     };
 
-    return <Container width={width} value={inputValue} onChange={handleInputChange} />;
+    return (
+        <Container
+            width={width}
+            value={inputValue}
+            onChange={handleInputChange}
+        />
+    );
 };
 
 export default Input;

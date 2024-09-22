@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import Column from './Column';
-import Input from './Input';
-import OrderText from './OrderText';
-import TitleText from './TitleText';
+import React from "react";
+import styled from "styled-components";
+import Column from "./Column";
+import Input from "./Input";
+import OrderText from "./OrderText";
+import TitleText from "./TitleText";
+import Row from "./Row";
 
 const Container = styled.div`
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    position: relative;
+    flex-direction: column;
 `;
 
 type TableProps = {
@@ -26,3 +26,4 @@ Table.Column = Column;
 Table.Input = Input;
 Table.OrderText = OrderText;
 Table.TitleText = TitleText;
+Table.Row = Row;

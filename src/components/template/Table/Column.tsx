@@ -1,26 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
-import TitleText from './TitleText';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    width: 100%;
     margin-top: 10px;
-    justify-content: space-between;
 `;
 
 type ColumnProps<T> = {
-    label: string;
+    header: React.ReactNode;
     data: T[];
     render: (value: T, key: number) => React.ReactNode;
 };
 
-const Column = <T,>({ label, data, render }: ColumnProps<T>) => {
+const Column = <T,>({ header, data, render }: ColumnProps<T>) => {
     return (
         <Container>
-            <TitleText>{label}</TitleText>
+            {header}
             {data.map(render)}
         </Container>
     );
