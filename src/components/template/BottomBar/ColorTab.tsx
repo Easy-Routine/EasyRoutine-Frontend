@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import ColorTabProvider from 'context/TabContext';
-import Color from './Color';
+import React from "react";
+import styled from "styled-components";
+import Color from "./Color";
 
 const Container = styled.div`
     display: flex;
@@ -11,25 +10,10 @@ const Container = styled.div`
 
 type ColorTabProps = {
     children: React.ReactNode;
-    defaultValue: string;
 };
 
-const ColorTab = ({ children, defaultValue }: ColorTabProps) => {
-    const [selectedValue, setSelectedValue] = useState(defaultValue);
-
-    const handleButtonClick = (value: string) => {
-        setSelectedValue(value);
-    };
-
-    useEffect(() => {
-        console.log('값변경', selectedValue);
-    }, [selectedValue]);
-
-    return (
-        <ColorTabProvider value={{ selectedValue, handleButtonClick }}>
-            <Container>{children}</Container>
-        </ColorTabProvider>
-    );
+const ColorTab = ({ children }: ColorTabProps) => {
+    return <Container>{children}</Container>;
 };
 
 export default ColorTab;
