@@ -1,10 +1,9 @@
-import React from 'react';
-import styled, { RuleSet } from 'styled-components';
-import { useContext } from 'react';
-import { ModalContext, ModalContextType } from 'context/ModalContext';
+import React from "react";
+import styled, { RuleSet } from "styled-components";
 
 type CloseProps = {
     children?: React.ReactNode;
+    onCloseModal: () => void;
     css?: RuleSet<object>;
 };
 type ContainerProps = {
@@ -20,11 +19,10 @@ const Container = styled.button<ContainerProps>`
     font-weight: ${({ theme }) => theme.fontWeight.regular};
 `;
 
-const Close = ({ children, css }: CloseProps) => {
-    const { handleCloseModal } = useContext(ModalContext) as ModalContextType;
+const Close = ({ children, onCloseModal, css }: CloseProps) => {
     return (
-        <Container css={css} onClick={handleCloseModal}>
-            Cancel
+        <Container css={css} onClick={onCloseModal}>
+            {children}
         </Container>
     );
 };

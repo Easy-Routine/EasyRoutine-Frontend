@@ -1,30 +1,22 @@
-import ModalProvider from 'context/ModalContext';
-import Trigger from './Trigger';
-import Backdrop from './Backdrop';
-import Content from './Content';
-import Close from './Close';
-import { useState } from 'react';
-import Portal from './Portal';
-import Title from './Title';
-import Description from './Description';
-import Wrapper from './Wrapper';
-import BottomSheet from './BottomSheet';
+import Trigger from "./Trigger";
+import Backdrop from "./Backdrop";
+import Content from "./Content";
+import Close from "./Close";
+import Portal from "./Portal";
+import Title from "./Title";
+import Description from "./Description";
+import Wrapper from "./Wrapper";
+import BottomSheet from "./BottomSheet";
+import styled from "styled-components";
 
 type ModalProps = {
     children: React.ReactNode;
 };
 
+const Container = styled.div``;
+
 const Modal = ({ children }: ModalProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleOpenModal = () => {
-        setIsOpen(true);
-    };
-    const handleCloseModal = () => {
-        setIsOpen(false);
-    };
-
-    return <ModalProvider value={{ isOpen, handleOpenModal, handleCloseModal }}>{children}</ModalProvider>;
+    return <Container>{children}</Container>;
 };
 export default Modal;
 

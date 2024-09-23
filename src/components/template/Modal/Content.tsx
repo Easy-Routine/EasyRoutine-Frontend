@@ -1,10 +1,9 @@
-import React from 'react';
-import { useContext } from 'react';
-import styled from 'styled-components';
-import { ModalContext, ModalContextType } from 'context/ModalContext';
+import React from "react";
+import styled from "styled-components";
 
 type ContentProps = {
     children: React.ReactNode;
+    isOpen: boolean;
 };
 
 const Container = styled.div`
@@ -25,8 +24,7 @@ const Container = styled.div`
     width: 80%;
 `;
 
-const Content = ({ children }: ContentProps) => {
-    const { isOpen } = useContext(ModalContext) as ModalContextType;
+const Content = ({ children, isOpen }: ContentProps) => {
     return <>{isOpen && <Container>{children}</Container>}</>;
 };
 

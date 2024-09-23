@@ -1,6 +1,4 @@
-import { ModalContextType, ModalContext } from 'context/ModalContext';
-import React from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Container = styled.div`
     position: fixed;
@@ -12,8 +10,11 @@ const Container = styled.div`
     z-index: 99; /* 모달보다 더 위에 위치하도록 설정 */
 `;
 
-const Backdrop = () => {
-    const { isOpen } = React.useContext(ModalContext) as ModalContextType;
+type BackdropProps = {
+    isOpen: boolean;
+};
+
+const Backdrop = ({ isOpen }: BackdropProps) => {
     return <>{isOpen && <Container />}</>;
 };
 

@@ -1,6 +1,5 @@
-import { ModalContext, ModalContextType } from 'context/ModalContext';
-import React, { useContext } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div<{ isOpen: boolean }>`
     display: flex;
@@ -18,15 +17,15 @@ const Container = styled.div<{ isOpen: boolean }>`
     z-index: 300;
     width: 100%;
     transition: all 0.5s ease-in-out;
-    transform: translateY(${({ isOpen }) => (isOpen ? '0' : '100%')});
+    transform: translateY(${({ isOpen }) => (isOpen ? "0" : "100%")});
 `;
 
 type BottomSheetProps = {
     children: React.ReactNode;
+    isOpen: boolean;
 };
 
-const BottomSheet = ({ children }: BottomSheetProps) => {
-    const { isOpen } = useContext(ModalContext) as ModalContextType;
+const BottomSheet = ({ children, isOpen }: BottomSheetProps) => {
     return <Container isOpen={isOpen}>{children}</Container>;
 };
 

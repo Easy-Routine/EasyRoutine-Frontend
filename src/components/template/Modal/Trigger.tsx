@@ -1,10 +1,9 @@
-import React from 'react';
-import styled, { RuleSet } from 'styled-components';
-import { useContext } from 'react';
-import { ModalContext, ModalContextType } from 'context/ModalContext';
+import React from "react";
+import styled, { RuleSet } from "styled-components";
 
 type TriggerProps = {
     children?: React.ReactNode;
+    onOpenModal: () => void;
     css?: RuleSet<object>;
 };
 type ContainerProps = {
@@ -15,10 +14,9 @@ const Container = styled.button<ContainerProps>`
     ${({ css }) => css}
 `;
 
-const Trigger = ({ children, css }: TriggerProps) => {
-    const { handleOpenModal } = useContext(ModalContext) as ModalContextType;
+const Trigger = ({ children, css, onOpenModal }: TriggerProps) => {
     return (
-        <Container css={css} onClick={handleOpenModal}>
+        <Container css={css} onClick={onOpenModal}>
             {children}
         </Container>
     );
