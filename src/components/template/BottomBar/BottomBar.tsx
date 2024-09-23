@@ -1,6 +1,4 @@
-import styled from 'styled-components';
-import NavItem from './NavItem';
-import Timer from './Timer';
+import styled from "styled-components";
 
 const Container = styled.div`
     position: fixed;
@@ -28,6 +26,3 @@ const BottomBar = ({ children }: BottomBarProps) => {
 };
 
 export default BottomBar;
-
-BottomBar.NavItem = NavItem;
-BottomBar.Timer = Timer;
