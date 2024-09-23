@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import ChipProvider from 'context/ChipContext';
-import Button from './Button';
+import React from "react";
+import styled from "styled-components";
 
-const Container = styled.div`
-    display: flex;
-    gap: 10px;
+const Container = styled.div<{ isSelected: boolean }>`
+    flex: 1;
+    font-size: ${({ theme }) => theme.fontSize.md};
+    font-weight: ${({ theme, isSelected }) =>
+        isSelected ? theme.fontWeight.bold : theme.fontWeight.regular};
+    border-radius: ${({ theme }) => theme.borderRadius.lg};
+    border: ${({ theme, isSelected }) =>
+        `1px solid ${isSelected ? theme.color.primary : theme.color.gray.light}`};
+    padding: 8px 10px;
+    color: ${({ theme, isSelected }) =>
+        isSelected ? theme.color.text.white : theme.color.gray.light};
+    background-color: ${({ theme, isSelected }) =>
+        isSelected ? theme.color.primary : "none"};
+    text-align: center;
+    box-sizing: border-box;
+    min-width: 50px;
 `;
 
 type ChipProps = {
     children: React.ReactNode;
-    defaultValue: string;
+    value: string;
+    selectedValue: string;
+    onTabClick: (value: string) => void;
 };
 
-const Chip = ({ children, defaultValue }: ChipProps) => {
-    const [selectedValue, setSelectedValue] = useState(defaultValue);
+const Chip = ({ children, value, selectedValue, onTabClick }: ChipProps) => {
+    // 버튼을 클릭하면, 선택상태가 변경된다.
 
-    const handleButtonClick = (value: string) => {
-        setSelectedValue(value);
-    };
-
-    useEffect(() => {
-        console.log('값변경', selectedValue);
-    }, [selectedValue]);
+    const isSelected = value === selectedValue;
 
     return (
-        <ChipProvider value={{ selectedValue, handleButtonClick }}>
-            <Container>{children}</Container>
-        </ChipProvider>
+        <Container isSelected={isSelected} onClick={() => onTabClick(value)}>
+            {children}
+        </Container>
     );
 };
 
 export default Chip;
-
-Chip.Button = Button;
-
-// 스타일과 관련된 로직과 도메인관련된 로직을 분리하자
