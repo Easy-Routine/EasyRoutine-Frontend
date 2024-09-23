@@ -1,14 +1,12 @@
-import { CheckBoxGroupContext, CheckBoxGroupContextType } from 'context/CheckBoxGroupContext';
-import { useContext } from 'react';
-import Button from '../Button/Button';
+import Button from "../Button/Button";
 
 type CheckBoxProps = {
     onButtonClick?: (selectedValues: string[]) => void;
+    selectedValues: string[];
 };
 
-const SubmitButton = ({ onButtonClick }: CheckBoxProps) => {
+const SubmitButton = ({ onButtonClick, selectedValues }: CheckBoxProps) => {
     // 버튼을 클릭하면, 선택상태가 변경된다.
-    const { selectedValues } = useContext(CheckBoxGroupContext) as CheckBoxGroupContextType;
 
     const handleButtonClick = () => {
         onButtonClick && onButtonClick(selectedValues);
