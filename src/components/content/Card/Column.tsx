@@ -4,7 +4,8 @@ const Column = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+    justify-content: space-around;
 `;
 
 export default Column;
