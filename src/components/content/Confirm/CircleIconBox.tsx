@@ -1,5 +1,5 @@
 import React from "react";
-import IconBox from "../../box/IconBox/IconBox";
+import CircleBox from "../../box/CircleBox/CircleBox";
 
 type CircleIconBoxProps = {
     children: React.ReactNode;
@@ -7,9 +7,9 @@ type CircleIconBoxProps = {
 
 const CircleIconBox = ({ children }: CircleIconBoxProps) => {
     return (
-        <IconBox width={64} height={64}>
+        <CircleBox width={64} height={64}>
             {children}
-        </IconBox>
+        </CircleBox>
     );
 };
 

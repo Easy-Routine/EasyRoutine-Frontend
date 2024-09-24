@@ -1,7 +1,7 @@
 import { ToastContext, ToastContextType } from "context/ToastContext";
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
-import IconBox from "components/box/IconBox/IconBox";
+import CircleBox from "components/box/CircleBox/CircleBox";
 import { ReactComponent as CheckIcon } from "assets/image/check.svg";
 
 const Container = styled.div<{ isOpen: boolean }>`
@@ -44,9 +44,9 @@ const Toast = () => {
     return (
         <>
             <Container isOpen={isOpen}>
-                <IconBox width={32} height={32}>
+                <CircleBox width={32} height={32}>
                     <CheckIcon />
-                </IconBox>
+                </CircleBox>
                 <Text>{message}</Text>
             </Container>
         </>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import IconBox from "../../box/IconBox/IconBox";
+import { useState, useEffect } from "react";
+import CircleBox from "components/box/CircleBox/CircleBox";
 import { ReactComponent as PlusIcon } from "assets/image/plus.svg";
 import styled from "styled-components";
 
@@ -47,9 +47,9 @@ const FloatingActionButton = ({ onButtonClick }: FloatingActionButtonProps) => {
 
     return (
         <Container isVisible={isVisible} onClick={handleButtonClick}>
-            <IconBox width={64} height={64}>
+            <CircleBox width={64} height={64}>
                 <PlusIcon />
-            </IconBox>
+            </CircleBox>
         </Container>
     );
 };
