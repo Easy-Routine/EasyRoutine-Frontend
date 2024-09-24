@@ -10,6 +10,7 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 10px 0;
 `;
 
 type TableProps = {
