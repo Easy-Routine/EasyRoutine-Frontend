@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Accordion from "components/template/Accordion";
-import SmallCard from "components/template/SmallCard/SmallCard";
-import SmallCardList from "components/template/SmallCard/SmallCardList";
+import Accordion from "components/box/Accordion";
+import SmallCard from "components/content/SmallCard/SmallCard";
+import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SeatedRowImage from "assets/image/seated-row.png";
 import { ReactComponent as FireIcon } from "assets/image/fire.svg";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
@@ -9,8 +9,8 @@ import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import React from "react";
 import useAccordion from "hooks/client/useAccordion";
-import Table from "components/template/Table/Table";
-import Button from "components/template/Button/Button";
+import Table from "components/content/Table/Table";
+import Button from "components/content/Button/Button";
 
 type AccordionProps = React.ComponentProps<typeof Accordion>;
 

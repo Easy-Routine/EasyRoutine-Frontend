@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import BottomBar from "components/template/BottomBar/BottomBar";
-import ColorTab from "components/template/BottomBar/ColorTab";
+import BottomBar from "components/box/BottomBar/BottomBar";
+import ColorTab from "components/box/BottomBar/ColorTab";
 import { ReactComponent as HomeIcon } from "assets/image/home.svg";
 import { ReactComponent as GraphIcon } from "assets/image/graph.svg";
 import { ReactComponent as TileIcon } from "assets/image/tile.svg";
 import { ReactComponent as UserIcon } from "assets/image/user.svg";
-import NavigationTab from "components/template/BottomBar/NavigationTab";
+import NavigationTab from "components/box/BottomBar/NavigationTab";
 import useTab from "hooks/client/useTab";
-import Button from "components/template/Button/Button";
-import TimerTemplate from "components/template/BottomBar/TimerTemplate";
+import Button from "components/content/Button/Button";
+import TimerTemplate from "components/box/BottomBar/TimerTemplate";
 
 type BottomBarProps = React.ComponentProps<typeof BottomBar>;
 

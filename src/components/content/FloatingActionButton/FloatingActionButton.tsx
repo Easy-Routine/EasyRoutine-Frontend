@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import IconBox from '../IconBox/IconBox';
-import { ReactComponent as PlusIcon } from 'assets/image/plus.svg';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import IconBox from "../../box/IconBox/IconBox";
+import { ReactComponent as PlusIcon } from "assets/image/plus.svg";
+import styled from "styled-components";
 
 const Container = styled.div<{ isVisible: boolean }>`
     position: fixed;
-    bottom: ${({ isVisible }) => (isVisible ? '80px' : '-80px')};
+    bottom: ${({ isVisible }) => (isVisible ? "80px" : "-80px")};
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
@@ -38,10 +38,10 @@ const FloatingActionButton = ({ onButtonClick }: FloatingActionButtonProps) => {
     };
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener("scroll", handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, [lastScrollY]);
 

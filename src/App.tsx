@@ -1,14 +1,14 @@
-import ColorBox from 'components/Accordion/ColorBox';
-import Box from 'components/Box/Box';
-import Accordion from 'components/template/Accordion';
-import FloatingActionButton from 'components/template/FloatingActionButton/FloatingActionButton';
-import { css } from 'styled-components';
+import ColorBox from "components/Accordion/ColorBox";
+import Box from "components/Box/Box";
+import Accordion from "components/box/Accordion";
+import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
+import { css } from "styled-components";
 
 const routineConfigData = [
     {
         id: 1,
-        name: 'Sample Routine',
-        color: '#F0FFF0',
+        name: "Sample Routine",
+        color: "#F0FFF0",
         workoutSec: 30000,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -16,8 +16,8 @@ const routineConfigData = [
     },
     {
         id: 2,
-        name: 'Sample Routine',
-        color: '#F0FFF0',
+        name: "Sample Routine",
+        color: "#F0FFF0",
         workoutSec: 30000,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -25,8 +25,8 @@ const routineConfigData = [
     },
     {
         id: 3,
-        name: 'Sample Routine',
-        color: '#F0FFF0',
+        name: "Sample Routine",
+        color: "#F0FFF0",
         workoutSec: 30000,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -36,15 +36,15 @@ const routineConfigData = [
 
 const workoutConfigListData = [
     {
-        id: '1',
-        name: '벤치프레스',
-        workoutImage: '샘플이미지',
-        type: 'weight,rep,workoutSec',
+        id: "1",
+        name: "벤치프레스",
+        workoutImage: "샘플이미지",
+        type: "weight,rep,workoutSec",
         createdAt: new Date(),
         updatedAt: new Date(),
         setConfigList: [
             {
-                id: '1',
+                id: "1",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -54,7 +54,7 @@ const workoutConfigListData = [
                 workoutConfigId: 1,
             },
             {
-                id: '2',
+                id: "2",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -64,7 +64,7 @@ const workoutConfigListData = [
                 workoutConfigId: 1,
             },
             {
-                id: '3',
+                id: "3",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -76,15 +76,15 @@ const workoutConfigListData = [
         ],
     },
     {
-        id: '2',
-        name: '벤치프레스',
-        workoutImage: '샘플이미지',
-        type: 'weight,rep,workoutSec',
+        id: "2",
+        name: "벤치프레스",
+        workoutImage: "샘플이미지",
+        type: "weight,rep,workoutSec",
         createdAt: new Date(),
         updatedAt: new Date(),
         setConfigList: [
             {
-                id: '4',
+                id: "4",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -94,7 +94,7 @@ const workoutConfigListData = [
                 workoutConfigId: 1,
             },
             {
-                id: '5',
+                id: "5",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -104,7 +104,7 @@ const workoutConfigListData = [
                 workoutConfigId: 1,
             },
             {
-                id: '6',
+                id: "6",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -116,15 +116,15 @@ const workoutConfigListData = [
         ],
     },
     {
-        id: '3',
-        name: '벤치프레스',
-        workoutImage: '샘플이미지',
-        type: 'weight,rep,workoutSec',
+        id: "3",
+        name: "벤치프레스",
+        workoutImage: "샘플이미지",
+        type: "weight,rep,workoutSec",
         createdAt: new Date(),
         updatedAt: new Date(),
         setConfigList: [
             {
-                id: '7',
+                id: "7",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -134,7 +134,7 @@ const workoutConfigListData = [
                 workoutConfigId: 1,
             },
             {
-                id: '8',
+                id: "8",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -144,7 +144,7 @@ const workoutConfigListData = [
                 workoutConfigId: 1,
             },
             {
-                id: '9',
+                id: "9",
                 order: 1,
                 weight: 10,
                 rep: 10,
@@ -167,7 +167,9 @@ function App() {
                             <Accordion.ImageBox>아이콘</Accordion.ImageBox>
                             <Accordion.ColumnBox>
                                 <Accordion.BoldText>이름</Accordion.BoldText>
-                                <Accordion.NormalText>{5}종목</Accordion.NormalText>
+                                <Accordion.NormalText>
+                                    {5}종목
+                                </Accordion.NormalText>
                             </Accordion.ColumnBox>
                         </Accordion.Card>
                         <Accordion.Trigger>트리거</Accordion.Trigger>
@@ -179,7 +181,7 @@ function App() {
                 </Accordion.Motion>
             </Accordion>
             <FloatingActionButton onButtonClick={() => {}} />
-            <ColorBox color={'#455A64'} backgroundColor={'#E6F5FD'} />
+            <ColorBox color={"#455A64"} backgroundColor={"#E6F5FD"} />
         </div>
     );
 }

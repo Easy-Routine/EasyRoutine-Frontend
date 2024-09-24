@@ -1,5 +1,5 @@
 import React from "react";
-import IconBox from "../IconBox/IconBox";
+import IconBox from "../../box/IconBox/IconBox";
 
 type CircleIconBoxProps = {
     children: React.ReactNode;
