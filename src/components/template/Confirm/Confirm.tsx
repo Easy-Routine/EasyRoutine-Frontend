@@ -2,16 +2,21 @@ import React from "react";
 import Title from "./Title";
 import Description from "./Description";
 import ButtonBox from "./ButtonBox";
-import Box from "components/box/Box";
 import CircleIconBox from "./CircleIconBox";
 import ContentBox from "./ContentBox";
+import styled from "styled-components";
 
 type ConfirmProps = {
     children: React.ReactNode;
 };
 
+const Container = styled.div`
+    width: 100%;
+    height: 100%;
+`;
+
 const Confirm = ({ children }: ConfirmProps) => {
-    return <Box width={"80%"}>{children}</Box>;
+    return <Container>{children}</Container>;
 };
 
 export default Confirm;
