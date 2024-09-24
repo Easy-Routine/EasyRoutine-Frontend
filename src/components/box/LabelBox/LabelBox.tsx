@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.div<{ gap?: string }>`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: ${({ gap }) => (gap ? gap : "10px")};
 `;
 const Label = styled.div`
     font-size: ${({ theme }) => theme.fontSize.md};
@@ -14,11 +14,12 @@ const Label = styled.div`
 type LabelBoxProps = {
     children: React.ReactNode;
     labelText: string;
+    gap?: string;
 };
 
-const LabelBox = ({ children, labelText }: LabelBoxProps) => {
+const LabelBox = ({ children, labelText, gap }: LabelBoxProps) => {
     return (
-        <Container>
+        <Container gap={gap}>
             <Label>{labelText}</Label>
             {children}
         </Container>
