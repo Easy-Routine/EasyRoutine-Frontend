@@ -6,7 +6,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 10px;
+    padding: 10px 0;
 `;
 
 type SmallCardListProps<T> = {
