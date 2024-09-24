@@ -20,28 +20,23 @@ const Input = styled.input`
 `;
 
 type UnderlineInputProps = {
-    onInputChange?: (value: string) => void;
+    value: string;
+    onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
 };
 
 const UnderlineInput = ({
+    value,
     onInputChange,
     placeholder,
 }: UnderlineInputProps) => {
-    const [value, setValue] = useState("");
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
-        onInputChange && onInputChange(e.target.value);
-    };
-
     return (
         <Container>
             <Input
                 type="text"
                 placeholder={placeholder}
                 value={value}
-                onChange={handleInputChange}
+                onChange={onInputChange}
             />
         </Container>
     );

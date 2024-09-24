@@ -3,13 +3,14 @@ import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
 import ChipTab from "components/content/ChipTab/ChipTab";
 import BottomSheet from "components/box/Modal/BottomSheet";
 import Modal from "components/box/Modal/Modal";
-import Search from "components/content/Search/Search";
+import SearchInput from "components/content/SearchInput/SearchInput";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import useModal from "hooks/client/useModal";
 import useTab from "hooks/client/useTab";
 import SeatedRowImage from "assets/image/seated-row.png";
 import useCheckBox from "hooks/client/useCheckBox";
+import useInput from "hooks/client/useInput";
 
 type BottomSheetProps = React.ComponentProps<typeof BottomSheet>;
 
@@ -43,6 +44,7 @@ export const WorkoutLibraryBottomSheet: Story = {
         const { isOpen, handleOpenModal } = useModal();
         const { selectedValue, handleTabClick } = useTab("가슴");
         const { selectedValues, handleCheckBoxClick } = useCheckBox();
+        const { value, handleInputChange, handleInputClear } = useInput();
         return (
             <>
                 <Modal>
@@ -51,7 +53,11 @@ export const WorkoutLibraryBottomSheet: Story = {
                     </Modal.Trigger>
                     <Modal.Backdrop isOpen={isOpen} />
                     <Modal.BottomSheet isOpen={isOpen}>
-                        <Search />
+                        <SearchInput
+                            value={value}
+                            onInputChange={handleInputChange}
+                            onInputClear={handleInputClear}
+                        />
                         <ChipTab>
                             <ChipTab.Chip
                                 value="가슴"

@@ -1,14 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
-import ChipTab from "components/content/ChipTab/ChipTab";
 import Modal from "components/box/Modal/Modal";
-import Search from "components/content/Search/Search";
-import SmallCard from "components/content/SmallCard/SmallCard";
-import SmallCardList from "components/content/SmallCard/SmallCardList";
 import useModal from "hooks/client/useModal";
-import useTab from "hooks/client/useTab";
-import SeatedRowImage from "assets/image/seated-row.png";
-import useCheckBox from "hooks/client/useCheckBox";
 import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 
