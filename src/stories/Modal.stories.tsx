@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
-import ChipTab from "components/content/Chip/ChipTab";
+import ChipTab from "components/content/ChipTab/ChipTab";
 import Modal from "components/box/Modal/Modal";
 import Search from "components/content/Search/Search";
 import SmallCard from "components/content/SmallCard/SmallCard";
