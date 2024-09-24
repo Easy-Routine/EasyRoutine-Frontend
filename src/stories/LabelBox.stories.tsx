@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LabelBox from "components/box/LabelBox/LabelBox";
 import ChipTab from "components/content/ChipTab/ChipTab";
+import UnderlineInput from "components/content/UnderlineInput/UnderlineInput";
 import useTab from "hooks/client/useTab";
 
 type LabelBoxProps = React.ComponentProps<typeof LabelBox>;
@@ -62,6 +63,19 @@ export const DefaultLabelBox: Story = {
                         기타
                     </ChipTab.Chip>
                 </ChipTab>
+            </LabelBox>
+        );
+    },
+};
+
+export const WithUnderlineInput: Story = {
+    render: () => {
+        return (
+            <LabelBox labelText="운동 부위" gap="0px">
+                <UnderlineInput
+                    placeholder="운동 이름을 입력하세요."
+                    onInputChange={(value: string) => console.log(value)}
+                />
             </LabelBox>
         );
     },
