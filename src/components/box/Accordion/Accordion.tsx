@@ -6,9 +6,6 @@ import styled, { RuleSet } from "styled-components";
 import Header from "./Header";
 import Motion from "./Motion";
 import DeleteButton from "./DeleteButton";
-import IconText from "./IconText";
-import BodyFooter from "./BodyFooter";
-import ProgressBar from "./ProgressBar";
 
 type AccordionProps = {
     children: React.ReactNode;
@@ -61,46 +58,8 @@ const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
 };
 export default Accordion;
 
-const Card = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-`;
-const ImageBox = styled.div<{ backgroundColor?: string }>`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 60px;
-    height: 60px;
-    border-radius: ${(props) => props.theme.borderRadius.md};
-    background-color: ${(props) => props.backgroundColor};
-`;
-const ColumnBox = styled.div`
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    gap: 10px;
-`;
-const BoldText = styled.div`
-    font-size: 16px;
-    font-weight: 600;
-`;
-const NormalText = styled.div`
-    font-size: 13px;
-    font-weight: 400;
-`;
-
 Accordion.Header = Header;
 Accordion.Body = Body;
 Accordion.Trigger = Trigger;
-Accordion.Card = Card;
-Accordion.ImageBox = ImageBox;
-Accordion.ColumnBox = ColumnBox;
-Accordion.BoldText = BoldText;
-Accordion.NormalText = NormalText;
 Accordion.Motion = Motion;
 Accordion.DeleteButton = DeleteButton;
-Accordion.BodyFooter = BodyFooter;
-Accordion.IconText = IconText;
-Accordion.ProgressBar = ProgressBar;

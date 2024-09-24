@@ -6,6 +6,10 @@ const Container = styled.div<{ height: string; css?: RuleSet<object> }>`
     height: ${(props) => props.height};
     overflow: hidden;
     transition: all 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 `;
 
 type BodyProps = {

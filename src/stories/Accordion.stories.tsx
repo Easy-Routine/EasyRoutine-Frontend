@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Accordion from "components/box/Accordion";
+import Accordion from "components/box/Accordion/Accordion";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SeatedRowImage from "assets/image/seated-row.png";
@@ -11,10 +11,13 @@ import React from "react";
 import useAccordion from "hooks/client/useAccordion";
 import Table from "components/content/Table/Table";
 import Button from "components/content/Button/Button";
+import Card from "components/content/Card/Card";
+import IconTextBox from "components/content/IconTextBox/IconTextBox";
+import PaddingY from "components/box/PaddingY/PaddingY";
 
 type AccordionProps = React.ComponentProps<typeof Accordion>;
 
-const meta: Meta<any> = {
+const meta: Meta<AccordionProps> = {
     component: Accordion,
 };
 
@@ -69,19 +72,17 @@ export const RoutineConfigAccordionCard: Story = {
             <Accordion>
                 <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                     <Accordion.Header>
-                        <Accordion.Card>
-                            <Accordion.ImageBox backgroundColor={args.color}>
+                        <Card>
+                            <Card.ImageBox backgroundColor={args.color}>
                                 <FireIcon />
-                            </Accordion.ImageBox>
-                            <Accordion.ColumnBox>
-                                <Accordion.BoldText>
-                                    {args.name}
-                                </Accordion.BoldText>
-                                <Accordion.NormalText>
+                            </Card.ImageBox>
+                            <Card.Column>
+                                <Card.Title>{args.name}</Card.Title>
+                                <Card.Description>
                                     {args.workoutConfigs.length}종목
-                                </Accordion.NormalText>
-                            </Accordion.ColumnBox>
-                        </Accordion.Card>
+                                </Card.Description>
+                            </Card.Column>
+                        </Card>
                         <Accordion.Trigger
                             onToggleAccordion={handleToggleAccordion}
                         >
@@ -110,16 +111,16 @@ export const RoutineConfigAccordionCard: Story = {
                                 </SmallCard>
                             )}
                         />
-                        <Accordion.BodyFooter>
-                            <Accordion.IconText color={"#7D7D7D"}>
+                        <IconTextBox>
+                            <IconTextBox.IconText color={"#7D7D7D"}>
                                 <PenIcon />
                                 <div>루틴 수정하기</div>
-                            </Accordion.IconText>
-                            <Accordion.IconText color={"#40E0D0"}>
+                            </IconTextBox.IconText>
+                            <IconTextBox.IconText color={"#40E0D0"}>
                                 <RunIcon />
                                 <div>루틴 수정하기</div>
-                            </Accordion.IconText>
-                        </Accordion.BodyFooter>
+                            </IconTextBox.IconText>
+                        </IconTextBox>
                     </Accordion.Body>
                     <Accordion.DeleteButton opacity={opacity} />
                 </Accordion.Motion>
@@ -178,23 +179,21 @@ export const WorkoutConfigAccordionCard: Story = {
             <Accordion>
                 <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                     <Accordion.Header>
-                        <Accordion.Card>
-                            <Accordion.ImageBox>
+                        <Card>
+                            <Card.ImageBox>
                                 <img
                                     width={"100%"}
                                     src={args.workoutImage}
                                     alt={"운동 이미지"}
                                 />
-                            </Accordion.ImageBox>
-                            <Accordion.ColumnBox>
-                                <Accordion.BoldText>
-                                    {args.name}
-                                </Accordion.BoldText>
-                                <Accordion.NormalText>
+                            </Card.ImageBox>
+                            <Card.Column>
+                                <Card.Title>{args.name}</Card.Title>
+                                <Card.Description>
                                     {args.setConfigs.length}종목
-                                </Accordion.NormalText>
-                            </Accordion.ColumnBox>
-                        </Accordion.Card>
+                                </Card.Description>
+                            </Card.Column>
+                        </Card>
                         <Accordion.Trigger
                             onToggleAccordion={handleToggleAccordion}
                         >
@@ -243,16 +242,16 @@ export const WorkoutConfigAccordionCard: Story = {
                                 )}
                             />
                         </Table>
-                        <Accordion.BodyFooter>
-                            <Accordion.IconText color={"#7D7D7D"}>
+                        <IconTextBox>
+                            <IconTextBox.IconText color={"#7D7D7D"}>
                                 <PenIcon />
                                 <div>세트 삭제하기</div>
-                            </Accordion.IconText>
-                            <Accordion.IconText color={"#40E0D0"}>
+                            </IconTextBox.IconText>
+                            <IconTextBox.IconText color={"#40E0D0"}>
                                 <RunIcon />
                                 <div>세트 추가하기</div>
-                            </Accordion.IconText>
-                        </Accordion.BodyFooter>
+                            </IconTextBox.IconText>
+                        </IconTextBox>
                     </Accordion.Body>
                     <Accordion.DeleteButton opacity={opacity} />
                 </Accordion.Motion>
@@ -311,27 +310,25 @@ export const WorkoutProgressAccordionCard: Story = {
             <Accordion>
                 <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                     <Accordion.Header>
-                        <Accordion.Card>
-                            <Accordion.ImageBox>
+                        <Card>
+                            <Card.ImageBox>
                                 <img
                                     width={"100%"}
                                     src={args.workoutImage}
                                     alt={"운동 이미지"}
                                 />
-                            </Accordion.ImageBox>
-                            <Accordion.ColumnBox>
-                                <Accordion.BoldText>
-                                    {args.name}
-                                </Accordion.BoldText>
-                                <Accordion.NormalText>
+                            </Card.ImageBox>
+                            <Card.Column>
+                                <Card.Title>{args.name}</Card.Title>
+                                <Card.Description>
                                     {args.setConfigs.length}종목
-                                </Accordion.NormalText>
-                                <Accordion.ProgressBar
+                                </Card.Description>
+                                <Card.ProgressBar
                                     fullLength={100}
                                     portionLength={60}
                                 />
-                            </Accordion.ColumnBox>
-                        </Accordion.Card>
+                            </Card.Column>
+                        </Card>
                         <Accordion.Trigger
                             onToggleAccordion={handleToggleAccordion}
                         >
@@ -383,17 +380,19 @@ export const WorkoutProgressAccordionCard: Story = {
                                 )}
                             />
                         </Table>
-                        <Accordion.BodyFooter>
-                            <Accordion.IconText color={"#7D7D7D"}>
+                        <IconTextBox>
+                            <IconTextBox.IconText color={"#7D7D7D"}>
                                 <PenIcon />
                                 <div>세트 삭제하기</div>
-                            </Accordion.IconText>
-                            <Accordion.IconText color={"#40E0D0"}>
+                            </IconTextBox.IconText>
+                            <IconTextBox.IconText color={"#40E0D0"}>
                                 <RunIcon />
                                 <div>세트 추가하기</div>
-                            </Accordion.IconText>
-                        </Accordion.BodyFooter>
-                        <Button>세트완료</Button>
+                            </IconTextBox.IconText>
+                        </IconTextBox>
+                        <PaddingY>
+                            <Button>세트완료</Button>
+                        </PaddingY>
                     </Accordion.Body>
                     <Accordion.DeleteButton opacity={opacity} />
                 </Accordion.Motion>
