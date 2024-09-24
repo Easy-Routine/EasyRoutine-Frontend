@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import TabProvider from 'context/TabContext';
-import Button from './Button';
+import React from "react";
+import styled from "styled-components";
+import Button from "./Button";
 
 const Container = styled.div`
     display: flex;
-    width: 80%;
+    width: 100%;
 `;
 
 type TabProps = {
     children: React.ReactNode;
-    defaultValue: string;
 };
 
-const Tab = ({ children, defaultValue }: TabProps) => {
-    const [selectedValue, setSelectedValue] = useState(defaultValue);
-
-    const handleButtonClick = (value: string) => {
-        setSelectedValue(value);
-    };
-
-    useEffect(() => {
-        console.log('값변경', selectedValue);
-    }, [selectedValue]);
-
-    return (
-        <TabProvider value={{ selectedValue, handleButtonClick }}>
-            <Container>{children}</Container>
-        </TabProvider>
-    );
+const Tab = ({ children }: TabProps) => {
+    return <Container>{children}</Container>;
 };
 
 export default Tab;

@@ -1,5 +1,4 @@
-import { TabContext, TabContextType } from "context/TabContext";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div<{ isSelected: boolean }>`
@@ -18,21 +17,22 @@ const Container = styled.div<{ isSelected: boolean }>`
 type ButtonProps = {
     children: React.ReactNode;
     value: string;
+    selectedValue: string;
+    onButtonClick: (value: string) => void;
 };
 
-const Button = ({ children, value }: ButtonProps) => {
+const Button = ({
+    children,
+    value,
+    selectedValue,
+    onButtonClick,
+}: ButtonProps) => {
     // 버튼을 클릭하면, 선택상태가 변경된다.
-    const { handleButtonClick, selectedValue } = useContext(
-        TabContext
-    ) as TabContextType;
 
     const isSelected = value === selectedValue;
 
     return (
-        <Container
-            isSelected={isSelected}
-            onClick={() => handleButtonClick(value)}
-        >
+        <Container isSelected={isSelected} onClick={() => onButtonClick(value)}>
             {children}
         </Container>
     );
