@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const IconBox = styled.div<{ width: number; height: number }>`
+const CircleBox = styled.div<{ width: number; height: number }>`
     width: ${({ width }) => `${width}px`};
     height: ${({ height }) => `${height}px`};
     border-radius: ${({ theme }) => theme.borderRadius.circle};
@@ -10,4 +10,4 @@ const IconBox = styled.div<{ width: number; height: number }>`
     align-items: center;
 `;
 
-export default IconBox;
+export default CircleBox;
