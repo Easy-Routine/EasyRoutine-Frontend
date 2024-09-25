@@ -27,6 +27,7 @@ const commonTheme = {
         },
     },
     fontSize: {
+        xxs: "10px",
         xs: "12px",
         sm: "13px",
         md: "14px",
