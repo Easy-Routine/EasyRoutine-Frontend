@@ -11,22 +11,14 @@ import {
 } from "recharts";
 import { useTheme } from "styled-components";
 
-const data = [
-    { month: "1월", value: 400 },
-    { month: "2월", value: 300 },
-    { month: "3월", value: 200 },
-    { month: "4월", value: 278 },
-    { month: "5월", value: 189 },
-    { month: "6월", value: 400 },
-    { month: "7월", value: 300 },
-    { month: "8월", value: 400 },
-    { month: "9월", value: 300 },
-    { month: "10월", value: 200 },
-    { month: "11월", value: 278 },
-    { month: "12월", value: 189 },
-];
+type GraphProps = {
+    onDotClick: (data: any) => void; // dot click event handler
+    data: any[];
+    lineKey: string;
+    areaKey: string;
+};
 
-const Graph = () => {
+const Graph = ({ onDotClick, data, lineKey, areaKey }: GraphProps) => {
     const { color, fontSize } = useTheme();
     const [activeTick, setActiveTick] = useState(null); // 클릭된 tick을 저장
     const [tickSize, setTickSize] = useState({
@@ -36,6 +28,7 @@ const Graph = () => {
     }); // 커스텀 tick의 크기 상태
 
     const handleDotClick = (data: any) => {
+        onDotClick(data);
         setActiveTick(data.payload.month); // 클릭한 tick의 월을 상태로 설정
     };
 
@@ -109,7 +102,7 @@ const Graph = () => {
                     </linearGradient>
                 </defs>
                 <XAxis
-                    dataKey="month"
+                    dataKey={lineKey}
                     axisLine={false}
                     tickLine={false}
                     tick={<CustomTick />} // 커스텀 tick 컴포넌트 사용
@@ -119,7 +112,7 @@ const Graph = () => {
 
                 <Area
                     type="monotone"
-                    dataKey="value"
+                    dataKey={areaKey}
                     stroke={color.primary}
                     strokeWidth={5}
                     dot={<CustomDot onClick={handleDotClick} />}
