@@ -114,7 +114,7 @@ const Graph = ({ onDotClick, data, lineKey, areaKey }: GraphProps) => {
                     type="monotone"
                     dataKey={areaKey}
                     stroke={color.primary}
-                    strokeWidth={5}
+                    strokeWidth={3.5}
                     dot={<CustomDot onClick={handleDotClick} />}
                     activeDot={{ r: 0 }}
                     fillOpacity={1}
@@ -134,9 +134,9 @@ const CustomDot = (props: any) => {
         <Dot
             cx={cx}
             cy={cy}
-            r={4} // 점의 반지름
+            r={3} // 점의 반지름
             stroke={props.stroke}
-            strokeWidth={6}
+            strokeWidth={3.5}
             fill={props.fill}
             onClick={() => onClick({ cx, cy, value, onClick, payload })} // 클릭 시 데이터 포인트 정보 전달
             style={{ cursor: "pointer" }} // 포인터 커서 적용
