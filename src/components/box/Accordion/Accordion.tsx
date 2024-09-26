@@ -6,6 +6,7 @@ import styled, { RuleSet } from "styled-components";
 import Header from "./Header";
 import Motion from "./Motion";
 import DeleteButton from "./DeleteButton";
+import List from "./List";
 
 type AccordionProps = {
     children: React.ReactNode;
@@ -58,6 +59,7 @@ const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
 };
 export default Accordion;
 
+Accordion.List = List;
 Accordion.Header = Header;
 Accordion.Body = Body;
 Accordion.Trigger = Trigger;
