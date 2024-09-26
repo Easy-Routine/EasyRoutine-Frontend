@@ -19,6 +19,8 @@ const Container = styled.div`
     margin: -5px;
     padding: 5px;
     overflow: hidden;
+    border-radius: ${(props) => props.theme.borderRadius.md};
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
