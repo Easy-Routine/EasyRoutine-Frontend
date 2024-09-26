@@ -56,7 +56,7 @@ const Container = styled.div`
         flex-direction: column;
         gap: 5px;
         padding: 5px 0;
-        color: ${({ theme }) => theme.color.text.black};
+        // color: ${({ theme }) => theme.color.text.black};
     }
 
     .react-calendar__tile abbr {
@@ -100,7 +100,7 @@ const Circle = styled.div<{ isActive: boolean; isToday: boolean }>`
     background-color: ${({ theme, isActive }) =>
         isActive ? theme.color.primary : null};
     color: ${({ theme, isActive }) =>
-        isActive ? theme.color.text.white : theme.color.text.black};
+        isActive ? theme.color.text.white : null};
     display: flex;
     justify-content: center;
     align-items: center;
