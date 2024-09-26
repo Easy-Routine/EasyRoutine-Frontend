@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
     display: flex;
@@ -7,13 +7,13 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-type AccordionListProps<T> = {
+type ListProps<T> = {
     data: T[];
     render: (value: T, key: number) => React.ReactNode;
 };
 
-const AccordionList = <T,>({ data, render }: AccordionListProps<T>) => {
+const List = <T,>({ data, render }: ListProps<T>) => {
     return <Container>{data.map(render)}</Container>;
 };
 
-export default AccordionList;
+export default List;
