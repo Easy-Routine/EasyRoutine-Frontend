@@ -3,7 +3,7 @@ import styled, { RuleSet } from "styled-components";
 
 type TriggerProps = {
     children?: React.ReactNode;
-    onOpenModal: () => void;
+    onTriggerClick: () => void;
     css?: RuleSet<object>;
 };
 type ContainerProps = {
@@ -14,9 +14,9 @@ const Container = styled.button<ContainerProps>`
     ${({ css }) => css}
 `;
 
-const Trigger = ({ children, css, onOpenModal }: TriggerProps) => {
+const Trigger = ({ children, css, onTriggerClick }: TriggerProps) => {
     return (
-        <Container css={css} onClick={onOpenModal}>
+        <Container css={css} onClick={onTriggerClick}>
             {children}
         </Container>
     );

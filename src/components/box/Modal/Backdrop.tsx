@@ -12,10 +12,11 @@ const Container = styled.div`
 
 type BackdropProps = {
     isOpen: boolean;
+    onBackdropClick: () => void;
 };
 
-const Backdrop = ({ isOpen }: BackdropProps) => {
-    return <>{isOpen && <Container />}</>;
+const Backdrop = ({ isOpen, onBackdropClick }: BackdropProps) => {
+    return <>{isOpen && <Container onClick={onBackdropClick} />}</>;
 };
 
 export default Backdrop;
