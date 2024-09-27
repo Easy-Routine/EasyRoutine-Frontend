@@ -20,10 +20,13 @@ export const DefaultModal: Story = {
         return (
             <>
                 <Modal>
-                    <Modal.Trigger onOpenModal={handleOpenModal}>
+                    <Modal.Trigger onTriggerClick={handleOpenModal}>
                         트리거
                     </Modal.Trigger>
-                    <Modal.Backdrop isOpen={isOpen} />
+                    <Modal.Backdrop
+                        isOpen={isOpen}
+                        onBackdropClick={handleCloseModal}
+                    />
                     <Modal.Content isOpen={isOpen}>
                         <Confirm>
                             <Confirm.ContentBox>
