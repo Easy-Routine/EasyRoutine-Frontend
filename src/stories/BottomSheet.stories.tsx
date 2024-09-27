@@ -24,14 +24,17 @@ type Story = StoryObj<any>;
 
 export const DefaultBottomSheet: Story = {
     render: () => {
-        const { isOpen, handleOpenModal } = useModal();
+        const { isOpen, handleOpenModal, handleCloseModal } = useModal();
         return (
             <>
                 <Modal>
-                    <Modal.Trigger onOpenModal={handleOpenModal}>
+                    <Modal.Trigger onTriggerClick={handleOpenModal}>
                         트리거
                     </Modal.Trigger>
-                    <Modal.Backdrop isOpen={isOpen} />
+                    <Modal.Backdrop
+                        isOpen={isOpen}
+                        onBackdropClick={handleCloseModal}
+                    />
                     <Modal.BottomSheet isOpen={isOpen}>내용</Modal.BottomSheet>
                 </Modal>
             </>
@@ -41,17 +44,20 @@ export const DefaultBottomSheet: Story = {
 
 export const WorkoutLibraryBottomSheet: Story = {
     render: () => {
-        const { isOpen, handleOpenModal } = useModal();
+        const { isOpen, handleOpenModal, handleCloseModal } = useModal();
         const { selectedValue, handleTabClick } = useTab("가슴");
         const { selectedValues, handleCheckBoxClick } = useCheckBox();
         const { value, handleInputChange, handleInputClear } = useInput();
         return (
             <>
                 <Modal>
-                    <Modal.Trigger onOpenModal={handleOpenModal}>
+                    <Modal.Trigger onTriggerClick={handleOpenModal}>
                         트리거
                     </Modal.Trigger>
-                    <Modal.Backdrop isOpen={isOpen} />
+                    <Modal.Backdrop
+                        isOpen={isOpen}
+                        onBackdropClick={handleCloseModal}
+                    />
                     <Modal.BottomSheet isOpen={isOpen}>
                         <SearchInput
                             value={value}
