@@ -1,123 +1,78 @@
-import Accordion from "components/box/Accordion";
+import Accordion from "components/box/Accordion/Accordion";
+import Card from "components/content/Card/Card";
+import SmallCardList from "components/content/SmallCard/SmallCardList";
+import SmallCard from "components/content/SmallCard/SmallCard";
+import IconTextBox from "components/content/IconTextBox/IconTextBox";
+import useAccordion from "hooks/client/useAccordion";
 import { ReactComponent as FireIcon } from "assets/image/fire.svg";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
-import { RoutineConfig } from "types/routine-config";
-import SeatedRowImage from "assets/image/seated-row.png";
-import { WorkoutConfig } from "types/workout-config";
-import SmallCard from "components/content/SmallCard/SmallCard";
-import SmallCardList from "components/content/SmallCard/SmallCardList";
-import AccordionList from "components/box/Accordion/AccordionList";
-import { useTheme } from "styled-components";
+import { RoutineConfig } from "types/config";
 
-type RoutineConfigAccordionListProps = {
-    routineConfigList: RoutineConfig[];
-};
+const RoutineConfigAccordion = ({ data }: { data: RoutineConfig }) => {
+    const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
+        useAccordion();
 
-const RoutineConfigAccordionList = ({
-    routineConfigList,
-}: RoutineConfigAccordionListProps) => {
-    return (
-        <AccordionList<RoutineConfig>
-            data={routineConfigList as RoutineConfig[]}
-            render={(routineConfig) => (
-                <RoutineConfigAccordion
-                    key={routineConfig.id}
-                    routineConfig={routineConfig}
-                />
-            )}
-        />
-    );
-};
-
-export default RoutineConfigAccordionList;
-
-type RoutineConfigAccordionProps = {
-    routineConfig: RoutineConfig;
-};
-
-const RoutineConfigAccordion = ({
-    routineConfig,
-}: RoutineConfigAccordionProps) => {
-    const data = [{}, {}, {}, {}, {}];
-    const theme = useTheme();
-
+    // 비동기 작업 추가
     return (
         <Accordion>
-            <Accordion.Motion>
+            <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
-                    <Accordion.Card>
-                        <Accordion.ImageBox>
+                    <Card>
+                        <Card.ImageBox backgroundColor={data.color}>
                             <FireIcon />
-                        </Accordion.ImageBox>
-                        <Accordion.ColumnBox>
-                            <Accordion.BoldText>
-                                {routineConfig.name}
-                            </Accordion.BoldText>
-                            <Accordion.NormalText>{5}종목</Accordion.NormalText>
-                        </Accordion.ColumnBox>
-                    </Accordion.Card>
-                    <Accordion.Trigger>
+                        </Card.ImageBox>
+                        <Card.Column>
+                            <Card.Title>{data.name}</Card.Title>
+                            <Card.Description>
+                                {data.workoutConfigs.length}종목
+                            </Card.Description>
+                        </Card.Column>
+                    </Card>
+                    <Accordion.Trigger
+                        onToggleAccordion={handleToggleAccordion}
+                    >
                         <ArrowIcon />
                     </Accordion.Trigger>
                 </Accordion.Header>
-                <Accordion.Body>
-                    <WorkoutConfigSmallCardList
-                        workoutConfigList={data as WorkoutConfig[]}
+                <Accordion.Body isOpen={isOpen}>
+                    <SmallCardList<any>
+                        data={data.workoutConfigs}
+                        render={(workoutConfig) => (
+                            <SmallCard>
+                                <SmallCard.ImageBox>
+                                    <img
+                                        src={workoutConfig.workoutImage}
+                                        alt="seated row"
+                                    />
+                                </SmallCard.ImageBox>
+                                <SmallCard.ColumnBox>
+                                    <SmallCard.BoldText>
+                                        {workoutConfig.name}
+                                    </SmallCard.BoldText>
+                                    <SmallCard.NormalText>
+                                        {workoutConfig.setConfigs.length} 세트
+                                    </SmallCard.NormalText>
+                                </SmallCard.ColumnBox>
+                            </SmallCard>
+                        )}
                     />
-                    <Accordion.BodyFooter>
-                        <Accordion.IconText color={theme.color.gray.dark}>
+                    <IconTextBox>
+                        <IconTextBox.IconText color={"#7D7D7D"}>
                             <PenIcon />
                             <div>루틴 수정하기</div>
-                        </Accordion.IconText>
-                        <Accordion.IconText color={theme.color.primary}>
+                        </IconTextBox.IconText>
+                        <IconTextBox.IconText color={"#40E0D0"}>
                             <RunIcon />
                             <div>루틴 수정하기</div>
-                        </Accordion.IconText>
-                    </Accordion.BodyFooter>
+                        </IconTextBox.IconText>
+                    </IconTextBox>
                 </Accordion.Body>
-                <Accordion.DeleteButton />
+                <Accordion.DeleteButton opacity={opacity} />
             </Accordion.Motion>
         </Accordion>
     );
 };
-type WorkoutConfigSmallCardListProps = {
-    workoutConfigList: WorkoutConfig[];
-};
 
-const WorkoutConfigSmallCardList = ({
-    workoutConfigList,
-}: WorkoutConfigSmallCardListProps) => {
-    return (
-        <SmallCardList<WorkoutConfig>
-            data={workoutConfigList}
-            render={(workoutConfig) => (
-                <WorkoutConfigSmallCard
-                    key={workoutConfig.id}
-                    workoutConfig={workoutConfig}
-                />
-            )}
-        />
-    );
-};
-
-type WorkoutConfigSmallCardProps = {
-    workoutConfig: WorkoutConfig;
-};
-
-const WorkoutConfigSmallCard = ({
-    workoutConfig,
-}: WorkoutConfigSmallCardProps) => {
-    return (
-        <SmallCard>
-            <SmallCard.ImageBox>
-                <img src={SeatedRowImage} alt="seated row" />
-            </SmallCard.ImageBox>
-            <SmallCard.ColumnBox>
-                <SmallCard.BoldText>벤치프레스</SmallCard.BoldText>
-                <SmallCard.NormalText>5세트</SmallCard.NormalText>
-            </SmallCard.ColumnBox>
-        </SmallCard>
-    );
-};
+export default RoutineConfigAccordion;
