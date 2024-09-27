@@ -13,7 +13,6 @@ const ImageBox = styled.div`
     align-items: center;
     min-width: 40px;
     height: 40px;
-    background-color: #f0fff0;
 `;
 const ColumnBox = styled.div`
     display: flex;
