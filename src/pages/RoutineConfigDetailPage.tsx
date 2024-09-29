@@ -1,7 +1,7 @@
-import PageHeader from "components/content/PageHeader/PageHeader";
 import styled from "styled-components";
 import WorkoutLibraryBottomSheet from "components/business/WorkoutLibraryBottomSheet";
 import RoutineConfigDetailView from "components/business/RoutineConfigDetailView";
+import ReturnPageHeader from "components/business/ReturnPageHeader";
 
 const Container = styled.div`
     display: flex;
@@ -12,10 +12,7 @@ const Container = styled.div`
 const RoutineConfigDetailPage = () => {
     return (
         <Container>
-            <PageHeader>
-                <PageHeader.ReturnCircle />
-                <PageHeader.PageTitle>루틴 생성</PageHeader.PageTitle>
-            </PageHeader>
+            <ReturnPageHeader pageTitleText="루틴 생성" />
             <RoutineConfigDetailView />
             <WorkoutLibraryBottomSheet />
         </Container>
