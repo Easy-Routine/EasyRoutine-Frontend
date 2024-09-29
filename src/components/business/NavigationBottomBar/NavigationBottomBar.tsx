@@ -6,7 +6,8 @@ import { ReactComponent as GraphIcon } from "assets/image/graph.svg";
 import { ReactComponent as TileIcon } from "assets/image/tile.svg";
 import { ReactComponent as UserIcon } from "assets/image/user.svg";
 import useTab from "hooks/client/useTab";
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "constants/routes";
 
 type NavigationBottomBarProps = {
     defaultValue: string;
@@ -14,37 +15,43 @@ type NavigationBottomBarProps = {
 
 const NavigationBottomBar = ({ defaultValue }: NavigationBottomBarProps) => {
     const { selectedValue, handleTabClick } = useTab(defaultValue);
+    const navigate = useNavigate();
+
+    const handleNavigationTabClick = (value: string) => {
+        handleTabClick(value);
+        navigate(value);
+    };
 
     return (
         <BottomBar>
             <NavigationTab>
                 <NavigationTab.NavItem
-                    value="home"
+                    value={ROUTES.CONFIG.LIST.PATH}
                     selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
+                    onTabClick={handleNavigationTabClick}
                 >
                     <HomeIcon />홈
                 </NavigationTab.NavItem>
                 <NavigationTab.NavItem
-                    value="graph"
+                    value={ROUTES.RECORD.LIST.PATH}
                     selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
+                    onTabClick={handleNavigationTabClick}
                 >
                     <GraphIcon />
                     기록
                 </NavigationTab.NavItem>
                 <NavigationTab.NavItem
-                    value="library"
+                    value={ROUTES.LIBRARY.PATH}
                     selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
+                    onTabClick={handleNavigationTabClick}
                 >
                     <TileIcon />
                     라이브러리
                 </NavigationTab.NavItem>
                 <NavigationTab.NavItem
-                    value="my"
+                    value={ROUTES.MY.PATH}
                     selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
+                    onTabClick={handleNavigationTabClick}
                 >
                     <UserIcon />
                     마이
