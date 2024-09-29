@@ -18,7 +18,8 @@ const ROUTES = {
             COMPONENT: RoutineConfigListPage,
         },
         DETAIL: {
-            PATH: "/routine-config/:routineConfigId",
+            PATH: (routineConfigId: string) =>
+                `/routine-config/${routineConfigId}`,
             COMPONENT: RoutineConfigDetailPage,
         },
     },
@@ -28,12 +29,14 @@ const ROUTES = {
             COMPONENT: RoutineRecordListPage,
         },
         DETAIL: {
-            PATH: "/routine-record/:routineConfigId",
+            PATH: (routineRecordId: string) =>
+                `/routine-record/${routineRecordId}`,
             COMPONENT: RoutineRecordDetailPage,
         },
     },
     PROGRESS: {
-        PATH: "/routine-progress/:routineConfigId",
+        PATH: (routineRecordId: string) =>
+            `/routine-progress/${routineRecordId}`,
         COMPONENT: RoutineProgressPage,
     },
     LIBRARY: {

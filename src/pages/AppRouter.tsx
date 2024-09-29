@@ -15,7 +15,7 @@ const AppRouter = () => {
                     element={<ROUTES.CONFIG.LIST.COMPONENT />}
                 />
                 <Route
-                    path={ROUTES.CONFIG.DETAIL.PATH}
+                    path={ROUTES.CONFIG.DETAIL.PATH(":routineConfigId")}
                     element={<ROUTES.CONFIG.DETAIL.COMPONENT />}
                 />
                 <Route
@@ -23,11 +23,11 @@ const AppRouter = () => {
                     element={<ROUTES.RECORD.LIST.COMPONENT />}
                 />
                 <Route
-                    path={ROUTES.RECORD.DETAIL.PATH}
+                    path={ROUTES.RECORD.DETAIL.PATH(":routineRecordId")}
                     element={<ROUTES.RECORD.DETAIL.COMPONENT />}
                 />
                 <Route
-                    path={ROUTES.PROGRESS.PATH}
+                    path={ROUTES.PROGRESS.PATH(":routineConfigId")}
                     element={<ROUTES.PROGRESS.COMPONENT />}
                 />
                 <Route
