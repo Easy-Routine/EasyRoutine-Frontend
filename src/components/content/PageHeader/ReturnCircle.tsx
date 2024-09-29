@@ -1,9 +1,13 @@
 import CircleBox from "components/box/CircleBox/CircleBox";
 import { ReactComponent as LeftArrowIcon } from "assets/image/left-arrow.svg";
 
-const ReturnCircle = () => {
+type ReturnCircleProps = {
+    onReturnCircleClick: () => void;
+};
+
+const ReturnCircle = ({ onReturnCircleClick }: ReturnCircleProps) => {
     return (
-        <CircleBox width={42} height={42}>
+        <CircleBox width={42} height={42} onClick={onReturnCircleClick}>
             <LeftArrowIcon />
         </CircleBox>
     );
