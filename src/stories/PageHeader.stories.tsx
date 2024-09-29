@@ -11,7 +11,9 @@ export const Default: Story = {
     render: () => {
         return (
             <PageHeader>
-                <PageHeader.ReturnCircle />
+                <PageHeader.ReturnCircle
+                    onReturnCircleClick={() => console.log("")}
+                />
                 <PageHeader.PageTitle>루틴 생성</PageHeader.PageTitle>
             </PageHeader>
         );
