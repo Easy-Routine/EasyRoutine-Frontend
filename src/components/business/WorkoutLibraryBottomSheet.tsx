@@ -29,7 +29,7 @@ const WorkoutLibraryBottomSheet = () => {
     // TODO: API 교체
     const data = [
         {
-            id: 1,
+            id: "1",
             name: "벤치프레스",
             workoutImage: SeatedRowImage,
             workoutPart: "가슴",
@@ -39,7 +39,7 @@ const WorkoutLibraryBottomSheet = () => {
             userId: 1,
         },
         {
-            id: 2,
+            id: "2",
             name: "데드리프트",
             workoutImage: SeatedRowImage,
             workoutPart: "등",
@@ -49,7 +49,7 @@ const WorkoutLibraryBottomSheet = () => {
             userId: 1,
         },
         {
-            id: 3,
+            id: "3",
             name: "스쿼트",
             workoutImage: SeatedRowImage,
             workoutPart: "하체",
