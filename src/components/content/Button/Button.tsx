@@ -8,6 +8,7 @@ const Button = styled.button`
     background-color: ${({ theme }) => theme.color.primary};
     color: ${({ theme }) => theme.color.text.white};
     border-radius: ${({ theme }) => theme.borderRadius.xs};
+    font-family: "Noto Sans Korean", sans-serif;
 `;
 
 export default Button;
