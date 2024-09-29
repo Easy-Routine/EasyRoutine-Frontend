@@ -31,9 +31,10 @@ const NormalText = styled.div`
 
 type SmallCardProps = {
     children: React.ReactNode;
+    onCardClick?: () => void;
 };
-const SmallCard = ({ children }: SmallCardProps) => {
-    return <Container>{children}</Container>;
+const SmallCard = ({ children, onCardClick }: SmallCardProps) => {
+    return <Container onClick={onCardClick}>{children}</Container>;
 };
 
 export default SmallCard;
