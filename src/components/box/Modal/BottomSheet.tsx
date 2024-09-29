@@ -8,6 +8,8 @@ const Container = styled.div<{ isOpen: boolean }>`
     align-items: center;
     position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
 
     background: ${({ theme }) => theme.color.background.box};
     padding: 25px;
@@ -18,6 +20,8 @@ const Container = styled.div<{ isOpen: boolean }>`
     width: 100%;
     transition: all 0.5s ease-in-out;
     transform: translateY(${({ isOpen }) => (isOpen ? "0" : "100%")});
+
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 type BottomSheetProps = {
