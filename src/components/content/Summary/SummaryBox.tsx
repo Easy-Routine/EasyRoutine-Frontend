@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
     width: 100%;
@@ -11,6 +11,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-itmes: center;
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 const Divider = styled.div`
