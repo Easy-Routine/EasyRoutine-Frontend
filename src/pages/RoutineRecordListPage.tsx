@@ -1,7 +1,24 @@
-import React from "react";
+import NavigationBottomBar from "components/business/NavigationBottomBar/NavigationBottomBar";
+import RoutineRecordTabView from "components/business/RoutineRecordTabView";
+import Logo from "components/content/Logo/Logo";
+import ROUTES from "constants/routes";
+import styled from "styled-components";
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
 
 const RoutineRecordListPage = () => {
-    return <div>기록 목록 페이지</div>;
+    return (
+        <Container>
+            <Logo />
+            <RoutineRecordTabView />
+
+            <NavigationBottomBar defaultValue={ROUTES.RECORD.LIST.PATH} />
+        </Container>
+    );
 };
 
 export default RoutineRecordListPage;
