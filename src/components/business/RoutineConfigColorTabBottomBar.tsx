@@ -3,11 +3,13 @@ import ColorTab from "components/box/BottomBar/ColorTab";
 import useTab from "hooks/client/useTab";
 import React from "react";
 
-type ColorTabBottomBarProps = {
+type RoutineConfigColorTabBottomBarProps = {
     defaultValue: string;
 };
 
-const ColorTabBottomBar = ({ defaultValue }: ColorTabBottomBarProps) => {
+const RoutineConfigColorTabBottomBar = ({
+    defaultValue,
+}: RoutineConfigColorTabBottomBarProps) => {
     const { selectedValue, handleTabClick } = useTab(defaultValue);
     return (
         <BottomBar>
@@ -47,4 +49,4 @@ const ColorTabBottomBar = ({ defaultValue }: ColorTabBottomBarProps) => {
     );
 };
 
-export default ColorTabBottomBar;
+export default RoutineConfigColorTabBottomBar;
