@@ -3,7 +3,7 @@ import ROUTES from "constants/routes";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const RoutineConfigCreateFloatingActionButton = () => {
+const RoutineConfigFloatingActionButton = () => {
     const navigate = useNavigate();
     const handleButtonClick = async () => {
         // TODO: routineConfig 데이터 생성
@@ -13,4 +13,4 @@ const RoutineConfigCreateFloatingActionButton = () => {
     return <FloatingActionButton onButtonClick={handleButtonClick} />;
 };
 
-export default RoutineConfigCreateFloatingActionButton;
+export default RoutineConfigFloatingActionButton;
