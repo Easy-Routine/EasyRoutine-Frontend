@@ -7,7 +7,7 @@ const Container = styled.div<{ isSelected: boolean }>`
     font-weight: ${({ theme, isSelected }) =>
         isSelected ? theme.fontWeight.bold : theme.fontWeight.regular};
     border-bottom: ${({ theme, isSelected }) =>
-        `1px solid ${isSelected ? theme.color.primary : theme.color.gray.light}`};
+        `1px solid ${isSelected ? theme.color.primary : null}`};
     padding: 15px 0;
     color: ${({ theme, isSelected }) =>
         isSelected ? theme.color.primary : theme.color.text.black};
