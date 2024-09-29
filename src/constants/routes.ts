@@ -1,11 +1,11 @@
-import ConfigDetailPage from "pages/ConfigDetailPage";
-import ConfigListPage from "pages/ConfigListPage";
-import LibraryPage from "pages/LibraryPage";
 import LoginPage from "pages/LoginPage";
 import MyPage from "pages/MyPage";
-import ProgressPage from "pages/ProgressPage";
-import RecordDetailPage from "pages/RecordDetailPage";
-import RecordListPage from "pages/RecordListPage";
+import RoutineConfigDetailPage from "pages/RoutineConfigDetailPage";
+import RoutineConfigListPage from "pages/RoutineConfigListPage";
+import RoutineProgressPage from "pages/RoutineProgressPage";
+import RoutineRecordDetailPage from "pages/RoutineRecordDetailPage";
+import RoutineRecordListPage from "pages/RoutineRecordListPage";
+import WorkoutLibraryPage from "pages/WorkoutLibraryPage";
 
 const ROUTES = {
     LOGIN: {
@@ -14,31 +14,31 @@ const ROUTES = {
     },
     CONFIG: {
         LIST: {
-            PATH: "/config/list",
-            COMPONENT: ConfigListPage,
+            PATH: "/routine-config/list",
+            COMPONENT: RoutineConfigListPage,
         },
         DETAIL: {
-            PATH: "/config/:routineConfigId",
-            COMPONENT: ConfigDetailPage,
+            PATH: "/routine-config/:routineConfigId",
+            COMPONENT: RoutineConfigDetailPage,
         },
     },
     RECORD: {
         LIST: {
-            PATH: "/record/list",
-            COMPONENT: RecordListPage,
+            PATH: "/routine-record/list",
+            COMPONENT: RoutineRecordListPage,
         },
         DETAIL: {
-            PATH: "/record/:routineConfigId",
-            COMPONENT: RecordDetailPage,
+            PATH: "/routine-record/:routineConfigId",
+            COMPONENT: RoutineRecordDetailPage,
         },
     },
     PROGRESS: {
-        PATH: "/progress/:routineConfigId",
-        COMPONENT: ProgressPage,
+        PATH: "/routine-progress/:routineConfigId",
+        COMPONENT: RoutineProgressPage,
     },
     LIBRARY: {
-        PATH: "/library",
-        COMPONENT: LibraryPage,
+        PATH: "/workout-library",
+        COMPONENT: WorkoutLibraryPage,
     },
     MY: {
         PATH: "/my",
