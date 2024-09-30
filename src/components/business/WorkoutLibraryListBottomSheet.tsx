@@ -20,7 +20,7 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const WorkoutLibraryBottomSheet = () => {
+const WorkoutLibraryListBottomSheet = () => {
     const { isOpen, handleOpenModal, handleCloseModal } = useModal();
     const { selectedValue, handleTabClick } = useTab("가슴");
     const { selectedValues, handleCheckBoxClick } = useCheckBox();
@@ -164,4 +164,4 @@ const WorkoutLibraryBottomSheet = () => {
     );
 };
 
-export default WorkoutLibraryBottomSheet;
+export default WorkoutLibraryListBottomSheet;
