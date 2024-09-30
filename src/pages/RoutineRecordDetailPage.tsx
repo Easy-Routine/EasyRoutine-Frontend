@@ -1,7 +1,21 @@
+import ReturnPageHeader from "components/business/ReturnPageHeader";
+import RoutineRecordDetailView from "components/business/RoutineRecordDetailView";
 import React from "react";
+import styled from "styled-components";
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
 
 const RoutineRecordDetailPage = () => {
-    return <div>기록 상세 페이지</div>;
+    return (
+        <Container>
+            <ReturnPageHeader pageTitleText="운동 기록" />
+            <RoutineRecordDetailView />
+        </Container>
+    );
 };
 
 export default RoutineRecordDetailPage;
