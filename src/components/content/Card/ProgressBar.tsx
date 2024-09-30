@@ -11,7 +11,9 @@ const CurrentProgressBar = styled.div<{ percentage: number }>`
     width: ${({ percentage }) => `${percentage}%`};
     height: inherit;
     border-radius: inherit;
-    background-color: ${({ theme }) => theme.color.warning};
+    background-color: ${({ theme, percentage }) =>
+        percentage === 100 ? theme.color.primary : theme.color.warning};
+    transition: width 0.5s ease;
 `;
 
 type ProgressBarProps = {
