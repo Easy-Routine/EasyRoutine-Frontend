@@ -1,12 +1,13 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 
-const Container = styled.input<{ width: number }>`
+const Container = styled.input<{ width: number; disabled?: boolean }>`
     width: ${({ width }) => `${width}px`};
     height: 22px;
     outline: none;
     border: none;
-    border-bottom: 2px solid ${({ theme }) => theme.color.gray.light};
+    border-bottom: 2px solid
+        ${({ theme, disabled }) => (disabled ? "none" : theme.color.gray.light)};
     box-sizing: border-box;
     background-color: inherit;
     font-size: ${({ theme }) => theme.fontSize.sm};
