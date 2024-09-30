@@ -10,7 +10,7 @@ const useInput = () => {
     const handleInputClear = () => {
         setValue("");
     };
-    return { value, handleInputChange, handleInputClear };
+    return { value, setValue, handleInputChange, handleInputClear };
 };
 
 export default useInput;
