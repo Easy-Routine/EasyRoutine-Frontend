@@ -9,10 +9,18 @@ import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "constants/routes";
 
 const RoutineRecordAccordion = ({ data }: { data: RoutineRecord }) => {
+    const navigate = useNavigate();
+
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
+
+    const handleRoutineMutateTextClick = (routineRecordId: string) => {
+        navigate(ROUTES.RECORD.DETAIL.PATH(routineRecordId));
+    };
 
     return (
         <Accordion>
@@ -58,7 +66,12 @@ const RoutineRecordAccordion = ({ data }: { data: RoutineRecord }) => {
                         )}
                     />
                     <IconTextBox>
-                        <IconTextBox.IconText color={"#7D7D7D"}>
+                        <IconTextBox.IconText
+                            color={"#7D7D7D"}
+                            onIconTextClick={() =>
+                                handleRoutineMutateTextClick(data.id.toString())
+                            }
+                        >
                             <PenIcon />
                             <div>루틴 수정하기</div>
                         </IconTextBox.IconText>
