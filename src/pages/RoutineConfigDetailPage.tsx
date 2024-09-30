@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import WorkoutLibraryBottomSheet from "components/business/WorkoutLibraryBottomSheet";
+import WorkoutLibraryListBottomSheet from "components/business/WorkoutLibraryListBottomSheet";
 import RoutineConfigDetailView from "components/business/RoutineConfigDetailView";
 import ReturnPageHeader from "components/business/ReturnPageHeader";
 
@@ -14,7 +14,7 @@ const RoutineConfigDetailPage = () => {
         <Container>
             <ReturnPageHeader pageTitleText="루틴 생성" />
             <RoutineConfigDetailView />
-            <WorkoutLibraryBottomSheet />
+            <WorkoutLibraryListBottomSheet />
         </Container>
     );
 };
