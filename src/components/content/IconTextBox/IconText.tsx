@@ -12,10 +12,15 @@ const Container = styled.div<{ color: string }>`
 type IconTextProps = {
     children: React.ReactNode;
     color: string;
+    onIconTextClick?: () => void;
 };
 
-const IconText = ({ children, color }: IconTextProps) => {
-    return <Container color={color}>{children}</Container>;
+const IconText = ({ children, color, onIconTextClick }: IconTextProps) => {
+    return (
+        <Container color={color} onClick={onIconTextClick}>
+            {children}
+        </Container>
+    );
 };
 
 export default IconText;
