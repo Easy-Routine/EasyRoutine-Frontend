@@ -19,7 +19,7 @@ const useCheckBox = () => {
         console.log("값변경", selectedValues);
     }, [selectedValues]);
 
-    return { selectedValues, handleCheckBoxClick };
+    return { selectedValues, handleCheckBoxClick, setSelectedValues };
 };
 
 export default useCheckBox;
