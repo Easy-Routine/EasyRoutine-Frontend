@@ -22,9 +22,15 @@ type InputProps = {
     width?: number;
     value: string;
     onInputChange: (value: string) => void;
+    disabled?: boolean;
 };
 
-const Input = ({ width = 18, value, onInputChange }: InputProps) => {
+const Input = ({
+    width = 18,
+    value,
+    onInputChange,
+    disabled = false,
+}: InputProps) => {
     const [inputValue, setInputValue] = useState(value);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +43,7 @@ const Input = ({ width = 18, value, onInputChange }: InputProps) => {
             width={width}
             value={inputValue}
             onChange={handleInputChange}
+            disabled={disabled}
         />
     );
 };
