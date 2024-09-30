@@ -4,6 +4,7 @@ import React from "react";
 import RoutineRecordAccordion from "./RoutineRecordAccordion";
 import SeatedRowImage from "assets/image/seated-row.png";
 import styled from "styled-components";
+import { RoutineRecord } from "types/recrod";
 
 const Container = styled.div`
     display: flex;
@@ -17,123 +18,123 @@ type RoutineRecordListViewProps = {
 
 const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
     // TODO: date에 따라 routine-record 가져오기
-    const data = [
+    const data: RoutineRecord[] = [
         {
-            id: 1,
+            id: "1",
             name: "나의 가슴 루틴",
             color: "#f0fff0",
             createdAt: new Date(),
             updatedAt: new Date(),
-            userId: 3,
+            userId: "3",
             workoutRecords: [
                 {
-                    id: 1,
+                    id: "1", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
                 {
-                    id: 2,
+                    id: "2", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
                 {
-                    id: 3,
+                    id: "3", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
             ],
         },
         {
-            id: 2,
+            id: "2",
             name: "나의 가슴 루틴",
             color: "#f0fff0",
             createdAt: new Date(),
             updatedAt: new Date(),
-            userId: 3,
+            userId: "3",
             workoutRecords: [
                 {
-                    id: 1,
+                    id: "1", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
                 {
-                    id: 2,
+                    id: "2", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
                 {
-                    id: 3,
+                    id: "3", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
             ],
         },
         {
-            id: 3,
+            id: "3",
             name: "나의 가슴 루틴",
             color: "#f0fff0",
             createdAt: new Date(),
             updatedAt: new Date(),
-            userId: 3,
+            userId: "3",
             workoutRecords: [
                 {
-                    id: 1,
+                    id: "1", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
                 {
-                    id: 2,
+                    id: "2", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
                 {
-                    id: 3,
+                    id: "3", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: "weight, time",
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    routineRecordId: 1,
+                    routineRecordId: "1",
                     setRecords: [],
                 },
             ],
