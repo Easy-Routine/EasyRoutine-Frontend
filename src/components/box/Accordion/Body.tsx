@@ -5,7 +5,7 @@ const Container = styled.div<{ height: string; css?: RuleSet<object> }>`
     ${({ css }) => css}
     height: ${(props) => props.height};
     overflow: hidden;
-    transition: all 1s ease-in-out;
+    transition: height 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,11 +24,18 @@ const Body = ({ isOpen, children, css }: BodyProps) => {
 
     useEffect(() => {
         if (containerRef.current) {
-            setHeight(
-                isOpen ? `${containerRef.current.scrollHeight}px` : "0px"
-            );
+            // 모든 자식 요소의 높이를 합산
+            const totalHeight = Array.from(
+                containerRef.current.children
+            ).reduce((acc, child) => {
+                return acc + (child as HTMLElement).offsetHeight;
+            }, 0);
+
+            const newHeight = isOpen ? `${totalHeight}px` : "0px";
+            setHeight(newHeight);
         }
-    }, [isOpen]);
+    }, [isOpen, children]); // children도 의존성 배열에 포함
+
     return (
         <Container ref={containerRef} height={height} css={css}>
             {children}
