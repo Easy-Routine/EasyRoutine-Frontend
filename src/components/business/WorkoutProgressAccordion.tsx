@@ -21,20 +21,22 @@ type WorkoutProgressAccordionProp = {
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"]
     ) => void;
+    onSetComplete: (restSec: number) => void;
+    onCompletedSetIdsMutate: (completedSetIds: string[]) => void;
 };
 
 const WorkoutProgressAccordion = ({
     data,
     onSetCreate,
     onSetDelete,
+    onSetComplete,
+    onCompletedSetIdsMutate,
 }: WorkoutProgressAccordionProp) => {
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
     const [currentSetId, setCurrentSetId] = useState(data.setConfigs[0]?.id);
     const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
-
-    const [currentWorkoutId, setCurrentWorkoutId] = useState(null);
 
     useEffect(() => {
         // 컴포넌트가 마운트 될때 운동 기록 데이터를 생성  및 setCurrentWorkoutId하기
@@ -50,16 +52,22 @@ const WorkoutProgressAccordion = ({
         newCompletedSetIds.push(currentSetId);
         setCompletedSetIds(newCompletedSetIds);
         setCurrentSetId(data.setConfigs[newCompletedSetIds.length]?.id);
+
+        const restSec = data.setConfigs.find(
+            (setConfig) => setConfig.id === currentSetId
+        )?.restSec as number;
+
+        onSetComplete(restSec);
         // TODO: 데이터 추가 API
     };
 
     const handleDeleteSetButtonClick = () => {
         const newSetConfigs = structuredClone(data.setConfigs);
         const poppedSetConfig = newSetConfigs.pop();
-        const filteredSetConfig = completedSetIds.filter(
+        const filteredCompletedSetIds = completedSetIds.filter(
             (id) => id !== poppedSetConfig?.id
         );
-        setCompletedSetIds(filteredSetConfig);
+        setCompletedSetIds(filteredCompletedSetIds);
         onSetDelete(data.id, newSetConfigs);
         // currentWorkoutId에 세트 데이터 삭제하기
     };
@@ -80,6 +88,10 @@ const WorkoutProgressAccordion = ({
         onSetCreate(data.id, newSetConfigs);
         // // currentWorkoutId에 세트 데이터 추가하기
     };
+
+    useEffect(() => {
+        onCompletedSetIdsMutate(completedSetIds);
+    }, [completedSetIds]);
 
     return (
         <Accordion>
@@ -132,24 +144,28 @@ const WorkoutProgressAccordion = ({
                                         onInputChange={(value) =>
                                             console.log(value)
                                         }
+                                        disabled={isCompletedSet(setConfig.id)}
                                     />
                                     <Table.Input
                                         value={setConfig.order.toString()}
                                         onInputChange={(value) =>
                                             console.log(value)
                                         }
+                                        disabled={isCompletedSet(setConfig.id)}
                                     />
                                     <Table.Input
                                         value={setConfig.order.toString()}
                                         onInputChange={(value) =>
                                             console.log(value)
                                         }
+                                        disabled={isCompletedSet(setConfig.id)}
                                     />
                                     <Table.Input
-                                        value={setConfig.order.toString()}
+                                        value={setConfig.restSec.toString()}
                                         onInputChange={(value) =>
                                             console.log(value)
                                         }
+                                        disabled={isCompletedSet(setConfig.id)}
                                     />
                                 </Table.Row>
                             )}
