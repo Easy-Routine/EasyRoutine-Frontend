@@ -9,10 +9,17 @@ import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { RoutineConfig } from "types/config";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "constants/routes";
 
 const RoutineConfigAccordion = ({ data }: { data: RoutineConfig }) => {
+    const navigate = useNavigate();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
+
+    const handleRoutineProgressButtonClick = (routineConfigId: string) => {
+        navigate(ROUTES.PROGRESS.PATH(routineConfigId));
+    };
 
     // 비동기 작업 추가
     return (
@@ -63,9 +70,14 @@ const RoutineConfigAccordion = ({ data }: { data: RoutineConfig }) => {
                             <PenIcon />
                             <div>루틴 수정하기</div>
                         </IconTextBox.IconText>
-                        <IconTextBox.IconText color={"#40E0D0"}>
+                        <IconTextBox.IconText
+                            color={"#40E0D0"}
+                            onIconTextClick={() =>
+                                handleRoutineProgressButtonClick(data.id)
+                            }
+                        >
                             <RunIcon />
-                            <div>루틴 수정하기</div>
+                            <div>루틴 시작하기</div>
                         </IconTextBox.IconText>
                     </IconTextBox>
                 </Accordion.Body>
