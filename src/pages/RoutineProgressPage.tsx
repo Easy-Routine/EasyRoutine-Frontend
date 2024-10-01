@@ -1,5 +1,5 @@
 import ReturnPageHeader from "components/business/ReturnPageHeader";
-import RoutineProgressListView from "components/business/RoutineProgressListView";
+import RoutineProgressView from "components/business/RoutineProgressView";
 import React from "react";
 import styled from "styled-components";
 
@@ -13,7 +13,7 @@ const RoutineProgressPage = () => {
     return (
         <Container>
             <ReturnPageHeader pageTitleText="운동 진행" />
-            <RoutineProgressListView />
+            <RoutineProgressView />
         </Container>
     );
 };
