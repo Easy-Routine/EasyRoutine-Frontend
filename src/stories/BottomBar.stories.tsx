@@ -112,7 +112,10 @@ export const TimerBottomBar: Story = {
         return (
             <BottomBar>
                 <TimerTemplate>
-                    <TimerTemplate.Timer color="red">01:30</TimerTemplate.Timer>
+                    <TimerTemplate.Timer
+                        value={90}
+                        onTimerClick={() => console.log()}
+                    />
                     <TimerTemplate.ButtonWrapper>
                         <Button>세트 완료</Button>
                     </TimerTemplate.ButtonWrapper>
