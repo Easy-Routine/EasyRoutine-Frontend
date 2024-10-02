@@ -2,6 +2,8 @@ import Accordion from "components/box/Accordion/Accordion";
 import RoutineConfigAccordion from "./RoutineConfigAccordion/RoutineConfigAccordion";
 import { RoutineConfig } from "types/config";
 import SeatedRowImage from "assets/image/seated-row.png";
+import EmptyBoundary from "./EmptyBoundary";
+import EmptyView from "components/content/EmptyView/EmptyView";
 
 const RoutineConfigAccordionList = () => {
     const data: RoutineConfig[] = [
@@ -127,10 +129,15 @@ const RoutineConfigAccordionList = () => {
         },
     ];
     return (
-        <Accordion.List
+        <EmptyBoundary
+            fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
             data={data}
-            render={(item) => <RoutineConfigAccordion data={item} />}
-        />
+        >
+            <Accordion.List
+                data={data}
+                render={(item) => <RoutineConfigAccordion data={item} />}
+            />
+        </EmptyBoundary>
     );
 };
 
