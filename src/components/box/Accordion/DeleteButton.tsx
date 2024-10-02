@@ -20,10 +20,11 @@ const Container = styled(motion.div)`
 
 type DeleteButtonProps = {
     opacity: number;
+    onDeleteButtonClick?: () => void;
 };
-const DeleteButton = ({ opacity }: DeleteButtonProps) => {
+const DeleteButton = ({ opacity, onDeleteButtonClick }: DeleteButtonProps) => {
     return (
-        <Container animate={{ opacity }}>
+        <Container animate={{ opacity }} onClick={onDeleteButtonClick}>
             <TrashIcon />
         </Container>
     );
