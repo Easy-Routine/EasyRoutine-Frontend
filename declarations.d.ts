@@ -16,3 +16,12 @@ declare module "*.ttf" {
     const src: string;
     export default src;
 }
+
+// declarations.d.ts
+declare module "moment-duration-format" {
+    import { Duration } from "moment";
+
+    interface Duration {
+        format(format: string, options?: any): string;
+    }
+}
