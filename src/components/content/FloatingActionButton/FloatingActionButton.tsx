@@ -10,15 +10,33 @@ const Container = styled.div<{ isVisible: boolean }>`
     transform: translateX(-50%);
     z-index: 999;
     transition: bottom 0.3s ease-in-out;
-    box-shadow: ${({ theme }) => theme.boxShadow};
+
     border-radius: ${({ theme }) => theme.borderRadius.circle};
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+`;
+
+const Text = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.sm};
+    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    color: ${({ theme }) => theme.color.gray.light};
+    text-align: center;
+    line-height: 18px;
 `;
 
 type FloatingActionButtonProps = {
     onButtonClick: () => void;
+    text?: React.ReactNode;
 };
 
-const FloatingActionButton = ({ onButtonClick }: FloatingActionButtonProps) => {
+const FloatingActionButton = ({
+    onButtonClick,
+    text,
+}: FloatingActionButtonProps) => {
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -47,6 +65,7 @@ const FloatingActionButton = ({ onButtonClick }: FloatingActionButtonProps) => {
 
     return (
         <Container isVisible={isVisible} onClick={handleButtonClick}>
+            <Text>{text}</Text>
             <CircleBox width={64} height={64}>
                 <PlusIcon />
             </CircleBox>
