@@ -1,6 +1,6 @@
 import moment from "moment";
+import "moment-duration-format";
 import styled from "styled-components";
-import formatTime from "utils/formatTime";
 
 const Container = styled.div<{ color?: string }>`
     width: 40%;
@@ -30,7 +30,9 @@ type TimerProps = {
 };
 
 const Timer = ({ value, onTimerClick }: TimerProps) => {
-    const formatted = moment.duration(value, "seconds").format("mm : ss");
+    const formatted = moment
+        .duration(value, "seconds")
+        .format("mm:ss", { trim: false });
 
     return (
         <Container onClick={onTimerClick}>
