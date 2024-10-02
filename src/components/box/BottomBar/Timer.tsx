@@ -1,3 +1,4 @@
+import moment from "moment";
 import styled from "styled-components";
 import formatTime from "utils/formatTime";
 
@@ -29,9 +30,11 @@ type TimerProps = {
 };
 
 const Timer = ({ value, onTimerClick }: TimerProps) => {
+    const formatted = moment.duration(value, "seconds").format("mm : ss");
+
     return (
         <Container onClick={onTimerClick}>
-            <Text seconds={value}>{formatTime(value)}</Text>
+            <Text seconds={value}>{formatted}</Text>
         </Container>
     );
 };
