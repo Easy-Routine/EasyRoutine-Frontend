@@ -11,6 +11,11 @@ const Container = styled.div`
     font-size: ${({ theme }) => theme.fontSize.sm};
     font-weight: ${({ theme }) => theme.fontWeight.regular};
     color: ${({ theme }) => theme.color.gray.normal};
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 `;
 
 type EmptyViewProps = {
