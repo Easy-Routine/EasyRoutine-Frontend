@@ -35,7 +35,38 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
-                    setRecords: [],
+                    setRecords: [
+                        {
+                            id: "1",
+                            order: 1,
+                            weight: 10,
+                            rep: 10,
+                            restSec: 50,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "2",
+                            order: 2,
+                            weight: 15,
+                            rep: 8,
+                            restSec: 30,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "3",
+                            order: 3,
+                            weight: 20,
+                            rep: 6,
+                            restSec: 10,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                    ],
                 },
                 {
                     id: "2", // string으로 수정
@@ -45,7 +76,38 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
-                    setRecords: [],
+                    setRecords: [
+                        {
+                            id: "1",
+                            order: 1,
+                            weight: 10,
+                            rep: 10,
+                            restSec: 50,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "2",
+                            order: 2,
+                            weight: 15,
+                            rep: 8,
+                            restSec: 30,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "3",
+                            order: 3,
+                            weight: 20,
+                            rep: 6,
+                            restSec: 10,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                    ],
                 },
                 {
                     id: "3", // string으로 수정
@@ -55,7 +117,38 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
-                    setRecords: [],
+                    setRecords: [
+                        {
+                            id: "1",
+                            order: 1,
+                            weight: 10,
+                            rep: 10,
+                            restSec: 50,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "2",
+                            order: 2,
+                            weight: 15,
+                            rep: 8,
+                            restSec: 30,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "3",
+                            order: 3,
+                            weight: 20,
+                            rep: 6,
+                            restSec: 10,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                    ],
                 },
             ],
         },
@@ -115,7 +208,38 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
-                    setRecords: [],
+                    setRecords: [
+                        {
+                            id: "1",
+                            order: 1,
+                            weight: 10,
+                            rep: 10,
+                            restSec: 50,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "2",
+                            order: 2,
+                            weight: 15,
+                            rep: 8,
+                            restSec: 30,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "3",
+                            order: 3,
+                            weight: 20,
+                            rep: 6,
+                            restSec: 10,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                    ],
                 },
                 {
                     id: "2", // string으로 수정
@@ -125,7 +249,38 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
-                    setRecords: [],
+                    setRecords: [
+                        {
+                            id: "1",
+                            order: 1,
+                            weight: 10,
+                            rep: 10,
+                            restSec: 50,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "2",
+                            order: 2,
+                            weight: 15,
+                            rep: 8,
+                            restSec: 30,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "3",
+                            order: 3,
+                            weight: 20,
+                            rep: 6,
+                            restSec: 10,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                    ],
                 },
                 {
                     id: "3", // string으로 수정
@@ -135,15 +290,74 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
-                    setRecords: [],
+                    setRecords: [
+                        {
+                            id: "1",
+                            order: 1,
+                            weight: 10,
+                            rep: 10,
+                            restSec: 50,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "2",
+                            order: 2,
+                            weight: 15,
+                            rep: 8,
+                            restSec: 30,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                        {
+                            id: "3",
+                            order: 3,
+                            weight: 20,
+                            rep: 6,
+                            restSec: 10,
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                            workoutRecordId: "1",
+                        },
+                    ],
                 },
             ],
         },
     ];
 
+    const totalWeight = data.reduce((acc, record) => {
+        return (
+            acc +
+            record.workoutRecords.reduce((innerAcc, workout) => {
+                return (
+                    innerAcc +
+                    workout.setRecords.reduce((setAcc, set) => {
+                        return setAcc + (set.weight || 0); // weight를 합산
+                    }, 0)
+                );
+            }, 0)
+        );
+    }, 0);
+
+    const totalSeconds = data.reduce((acc, record) => {
+        return (
+            acc +
+            record.workoutRecords.reduce((innerAcc, workout) => {
+                return (
+                    innerAcc +
+                    workout.setRecords.reduce((setAcc, set) => {
+                        return setAcc + set.rep * (set.restSec || 0); // 초를 합산 (예시)
+                    }, 0)
+                );
+            }, 0)
+        );
+    }, 0);
+
     return (
         <Container>
-            <SummaryBox hour={7} minute={30} weight={3450} />
+            <SummaryBox seconds={totalSeconds} weight={totalWeight} />
             <Accordion.List
                 data={data}
                 render={(item) => <RoutineRecordAccordion data={item} />}
