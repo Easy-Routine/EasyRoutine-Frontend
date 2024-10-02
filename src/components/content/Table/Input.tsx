@@ -15,7 +15,6 @@ const Container = styled.input<{ width: number; disabled?: boolean }>`
     &:focus {
         border-color: ${({ theme }) => theme.color.primary};
     }
-    z-index: 1000;
     text-align: center;
 `;
 

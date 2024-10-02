@@ -8,7 +8,7 @@ const Container = styled.div<{ isVisible: boolean }>`
     bottom: ${({ isVisible }) => (isVisible ? "80px" : "-80px")};
     left: 50%;
     transform: translateX(-50%);
-    z-index: 999;
+    z-index: ${({ theme }) => theme.zIndex.FloatingActionButton};
     transition: bottom 0.3s ease-in-out;
 
     border-radius: ${({ theme }) => theme.borderRadius.circle};

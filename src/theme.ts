@@ -40,6 +40,12 @@ const commonTheme = {
         semibold: "600",
         regular: "400",
     },
+
+    zIndex: {
+        floatingActionButton: "300",
+        backdrop: "400",
+        modal: "500",
+    },
 };
 
 export const lightTheme = structuredClone(commonTheme);

@@ -12,7 +12,7 @@ const Container = styled.div`
     transform: translate(-50%, -50%);
     background: ${({ theme }) => theme.color.background.box};
     border-radius: ${({ theme }) => theme.borderRadius.lg};
-    z-index: 200;
+    z-index: ${({ theme }) => theme.zIndex.modal};
     width: 80%;
 `;
 
