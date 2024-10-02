@@ -1,21 +1,18 @@
 import ChipTab from "components/content/ChipTab/ChipTab";
-import SmallCard from "components/content/SmallCard/SmallCard";
+
 import SmallCardList from "components/content/SmallCard/SmallCardList";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { WorkoutLibrary } from "types/workout-library";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import SeatedRowImage from "assets/image/seated-row.png";
 import useTab from "hooks/client/useTab";
 import useInput from "hooks/client/useInput";
-import Modal from "components/box/Modal/Modal";
-import LabelBox from "components/box/LabelBox/LabelBox";
-import UnderlineInput from "components/content/UnderlineInput/UnderlineInput";
-import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
-import Button from "components/content/Button/Button";
-import useCheckBox from "hooks/client/useCheckBox";
 import useModal from "hooks/client/useModal";
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
+import WorkoutLibrarySmallCard from "components/business/WorkoutLibrarySmallCard";
+import WorkoutLibraryDetailBottomSheet from "./WorkoutLibraryDetailBottomSheet";
+import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
 
 const Container = styled.div`
     display: flex;
@@ -23,41 +20,7 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const CheckBoxItem = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.md};
-    display: flex;
-    gap: 10px;
-    align-items: center;
-`;
-
 const WorkoutLibraryListView = () => {
-    const { selectedValue, handleTabClick } = useTab("가슴");
-    const { value, handleInputChange, handleInputClear } = useInput();
-    const [currentWorkoutLibrary, setCurrentWorkoutLibrary] =
-        useState<WorkoutLibrary>({
-            id: "",
-            name: "",
-            workoutImage: "",
-            workoutPart: "",
-            type: [],
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: 0,
-        });
-
-    const {
-        setValue,
-        value: underlineInputValue,
-        handleInputChange: handleUnderlineInputChange,
-    } = useInput();
-    const {
-        selectedValue: selectedCategory,
-        handleTabClick: handleCategoryChipTabClick,
-    } = useTab("가슴");
-    const { selectedValues, handleCheckBoxClick, setSelectedValues } =
-        useCheckBox();
-    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-
     // TODO: API 교체
     const data: WorkoutLibrary[] = [
         {
@@ -92,35 +55,37 @@ const WorkoutLibraryListView = () => {
         },
     ];
 
+    const { selectedValue, handleTabClick } = useTab("가슴");
+    const { value, handleInputChange, handleInputClear } = useInput();
+    const [workoutLibraryId, setWorkoutLibraryId] = useState("");
+
+    const {
+        isOpen: isWorkoutDeleteModalOpen,
+        handleOpenModal: openWorkoutDeleteModal,
+        handleCloseModal: closeWorkoutDeleteModal,
+    } = useModal();
+
+    const {
+        isOpen: isWorkoutLibraryBottomSheetOpen,
+        handleOpenModal: openWorkoutLibraryBottomSheet,
+        handleCloseModal: closeWorkoutLibraryBottomSheet,
+    } = useModal();
+
     const handleFloatingActionButtonClick = () => {
-        handleOpenModal();
-        //TODO: 라이브러리 아이템 추가
-        setCurrentWorkoutLibrary({
-            id: "",
-            name: "",
-            workoutImage: "",
-            workoutPart: "",
-            type: [],
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: 0,
-        });
+        //TODO: 운동라이브러리 아이템 생성
+        setWorkoutLibraryId("1");
+        openWorkoutLibraryBottomSheet();
     };
 
     const handleSmallCardClick = (workoutLibraryId: string) => {
-        const currentWorkoutLibrary = data.find(
-            (item) => item.id === workoutLibraryId
-        ) as WorkoutLibrary;
-
-        setCurrentWorkoutLibrary(currentWorkoutLibrary);
-        handleOpenModal();
+        setWorkoutLibraryId(workoutLibraryId);
+        openWorkoutLibraryBottomSheet();
     };
 
-    useEffect(() => {
-        setValue(currentWorkoutLibrary.name);
-        handleCategoryChipTabClick(currentWorkoutLibrary.workoutPart);
-        setSelectedValues(currentWorkoutLibrary.type);
-    }, [currentWorkoutLibrary]);
+    const handleSmallCardLongPress = (workoutLibraryId: string) => {
+        setWorkoutLibraryId(workoutLibraryId);
+        openWorkoutDeleteModal();
+    };
 
     return (
         <Container>
@@ -176,120 +141,32 @@ const WorkoutLibraryListView = () => {
             <SmallCardList<WorkoutLibrary>
                 data={data}
                 render={(item, index) => (
-                    <SmallCard
-                        onCardClick={() => handleSmallCardClick(item.id)}
-                    >
-                        <SmallCard.ImageBox>
-                            <img src={SeatedRowImage} alt="seated row" />
-                        </SmallCard.ImageBox>
-                        <SmallCard.NormalText>{item.name}</SmallCard.NormalText>
-                    </SmallCard>
+                    <WorkoutLibrarySmallCard
+                        data={item}
+                        onSmallCardClick={handleSmallCardClick}
+                        onSmallCardLongPress={handleSmallCardLongPress}
+                    />
                 )}
             />
-
-            <Modal>
-                <Modal.Backdrop
-                    isOpen={isOpen}
-                    onBackdropClick={handleCloseModal}
-                />
-                <Modal.BottomSheet isOpen={isOpen}>
-                    <Container>
-                        <LabelBox labelText="운동 이름" gap="20px">
-                            <UnderlineInput
-                                value={underlineInputValue}
-                                placeholder="운동 이름을 입력하세요."
-                                onInputChange={handleUnderlineInputChange}
-                            />
-                        </LabelBox>
-                        <LabelBox labelText="운동 부위" gap="20px">
-                            <ChipTab>
-                                <ChipTab.Chip
-                                    value="가슴"
-                                    selectedValue={selectedCategory}
-                                    onTabClick={handleCategoryChipTabClick}
-                                >
-                                    가슴
-                                </ChipTab.Chip>
-                                <ChipTab.Chip
-                                    value="등"
-                                    selectedValue={selectedCategory}
-                                    onTabClick={handleCategoryChipTabClick}
-                                >
-                                    등
-                                </ChipTab.Chip>
-                                <ChipTab.Chip
-                                    value="어깨"
-                                    selectedValue={selectedCategory}
-                                    onTabClick={handleCategoryChipTabClick}
-                                >
-                                    어깨
-                                </ChipTab.Chip>
-                                <ChipTab.Chip
-                                    value="하체"
-                                    selectedValue={selectedCategory}
-                                    onTabClick={handleCategoryChipTabClick}
-                                >
-                                    하체
-                                </ChipTab.Chip>
-                                <ChipTab.Chip
-                                    value="팔"
-                                    selectedValue={selectedCategory}
-                                    onTabClick={handleCategoryChipTabClick}
-                                >
-                                    팔
-                                </ChipTab.Chip>
-                                <ChipTab.Chip
-                                    value="기타"
-                                    selectedValue={selectedCategory}
-                                    onTabClick={handleCategoryChipTabClick}
-                                >
-                                    기타
-                                </ChipTab.Chip>
-                            </ChipTab>
-                        </LabelBox>
-                        <LabelBox labelText="타입" gap="20px">
-                            <CheckBoxGroup>
-                                <CheckBoxGroup.Wrapper>
-                                    <CheckBoxItem>
-                                        <CheckBoxGroup.CheckBox
-                                            value="weight"
-                                            selectedValues={selectedValues}
-                                            onCheckBoxClick={
-                                                handleCheckBoxClick
-                                            }
-                                        />
-                                        무게
-                                    </CheckBoxItem>
-                                    <CheckBoxItem>
-                                        <CheckBoxGroup.CheckBox
-                                            value="rep"
-                                            selectedValues={selectedValues}
-                                            onCheckBoxClick={
-                                                handleCheckBoxClick
-                                            }
-                                        />
-                                        횟수
-                                    </CheckBoxItem>
-                                    <CheckBoxItem>
-                                        <CheckBoxGroup.CheckBox
-                                            value="workoutSec"
-                                            selectedValues={selectedValues}
-                                            onCheckBoxClick={
-                                                handleCheckBoxClick
-                                            }
-                                        />
-                                        시간
-                                    </CheckBoxItem>
-                                </CheckBoxGroup.Wrapper>
-                            </CheckBoxGroup>
-                        </LabelBox>
-                        <Button>운동 수정하기</Button>
-                    </Container>
-                </Modal.BottomSheet>
-                <FloatingActionButton
-                    onButtonClick={handleFloatingActionButtonClick}
-                />
-            </Modal>
+            <WorkoutLibraryDetailBottomSheet
+                workoutLibraryId={workoutLibraryId}
+                isOpen={isWorkoutLibraryBottomSheetOpen}
+                onBackdropClick={() => closeWorkoutLibraryBottomSheet()}
+            />
+            <WorkoutLibraryDeleteModal
+                workoutLibraryId={workoutLibraryId}
+                isOpen={isWorkoutDeleteModalOpen}
+                onBackdropClick={() => closeWorkoutDeleteModal()}
+                onCancelButtonClick={() => {
+                    closeWorkoutDeleteModal();
+                }}
+                onConfirmButtonClick={() => {
+                    closeWorkoutDeleteModal();
+                }}
+            />
+            <FloatingActionButton
+                onButtonClick={handleFloatingActionButtonClick}
+            />
         </Container>
     );
 };
