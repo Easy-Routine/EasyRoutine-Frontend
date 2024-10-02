@@ -11,6 +11,16 @@ import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { useEffect, useState } from "react";
 
+type TypeMapper = {
+    [key: string]: string;
+};
+
+const typeMapper: TypeMapper = {
+    weight: "무게",
+    rep: "횟수",
+    workoutSec: "시간",
+};
+
 type WorkoutProgressAccordionProp = {
     data: WorkoutConfig;
     onSetCreate: (
@@ -129,8 +139,11 @@ const WorkoutProgressAccordion = ({
                             header={
                                 <Table.Row>
                                     <Table.TitleText>세트</Table.TitleText>
-                                    <Table.TitleText>KG</Table.TitleText>
-                                    <Table.TitleText>횟수</Table.TitleText>
+                                    {data.type.map((key) => (
+                                        <Table.TitleText>
+                                            {typeMapper[key]}
+                                        </Table.TitleText>
+                                    ))}
                                     <Table.TitleText>휴식</Table.TitleText>
                                 </Table.Row>
                             }
@@ -144,22 +157,20 @@ const WorkoutProgressAccordion = ({
                                         onInputChange={(value) =>
                                             console.log(value)
                                         }
-                                        disabled={isCompletedSet(setConfig.id)}
+                                        disabled={true}
                                     />
-                                    <Table.Input
-                                        value={setConfig.order.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
-                                        disabled={isCompletedSet(setConfig.id)}
-                                    />
-                                    <Table.Input
-                                        value={setConfig.order.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
-                                        disabled={isCompletedSet(setConfig.id)}
-                                    />
+                                    {data.type.map((key) => (
+                                        <Table.Input
+                                            value={setConfig[key].toString()}
+                                            onInputChange={(value) =>
+                                                console.log(value)
+                                            }
+                                            disabled={isCompletedSet(
+                                                setConfig.id
+                                            )}
+                                        />
+                                    ))}
+
                                     <Table.Input
                                         value={setConfig.restSec.toString()}
                                         onInputChange={(value) =>

@@ -6,6 +6,16 @@ import { WorkoutRecord } from "types/recrod";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
 
+type TypeMapper = {
+    [key: string]: string;
+};
+
+const typeMapper: TypeMapper = {
+    weight: "무게",
+    rep: "횟수",
+    workoutSec: "시간",
+};
+
 const WorkoutRecordAccordion = ({ data }: { data: WorkoutRecord }) => {
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
@@ -38,8 +48,11 @@ const WorkoutRecordAccordion = ({ data }: { data: WorkoutRecord }) => {
                             header={
                                 <Table.Row>
                                     <Table.TitleText>세트</Table.TitleText>
-                                    <Table.TitleText>KG</Table.TitleText>
-                                    <Table.TitleText>횟수</Table.TitleText>
+                                    {data.type.map((key) => (
+                                        <Table.TitleText>
+                                            {typeMapper[key]}
+                                        </Table.TitleText>
+                                    ))}
                                     <Table.TitleText>휴식</Table.TitleText>
                                 </Table.Row>
                             }
@@ -52,20 +65,15 @@ const WorkoutRecordAccordion = ({ data }: { data: WorkoutRecord }) => {
                                         }
                                         disabled={true}
                                     />
-                                    <Table.Input
-                                        value={setRecord.order.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
-                                        disabled={true}
-                                    />
-                                    <Table.Input
-                                        value={setRecord.order.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
-                                        disabled={true}
-                                    />
+                                    {data.type.map((key) => (
+                                        <Table.Input
+                                            value={setRecord[key].toString()}
+                                            onInputChange={(value) =>
+                                                console.log(value)
+                                            }
+                                            disabled={true}
+                                        />
+                                    ))}
                                     <Table.Input
                                         value={setRecord.order.toString()}
                                         onInputChange={(value) =>

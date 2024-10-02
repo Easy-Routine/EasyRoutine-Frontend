@@ -9,6 +9,16 @@ import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
 import { WorkoutConfig } from "types/config";
 import Table from "components/content/Table/Table";
 
+type TypeMapper = {
+    [key: string]: string;
+};
+
+const typeMapper: TypeMapper = {
+    weight: "무게",
+    rep: "횟수",
+    workoutSec: "시간",
+};
+
 const WorkoutConfigAccordion = ({ data }: { data: WorkoutConfig }) => {
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
@@ -42,8 +52,11 @@ const WorkoutConfigAccordion = ({ data }: { data: WorkoutConfig }) => {
                             header={
                                 <Table.Row>
                                     <Table.TitleText>세트</Table.TitleText>
-                                    <Table.TitleText>KG</Table.TitleText>
-                                    <Table.TitleText>횟수</Table.TitleText>
+                                    {data.type.map((key) => (
+                                        <Table.TitleText>
+                                            {typeMapper[key]}
+                                        </Table.TitleText>
+                                    ))}
                                     <Table.TitleText>휴식</Table.TitleText>
                                 </Table.Row>
                             }
@@ -54,19 +67,16 @@ const WorkoutConfigAccordion = ({ data }: { data: WorkoutConfig }) => {
                                         onInputChange={(value) =>
                                             console.log(value)
                                         }
+                                        disabled={true}
                                     />
-                                    <Table.Input
-                                        value={setConfig.order.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
-                                    />
-                                    <Table.Input
-                                        value={setConfig.order.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
-                                    />
+                                    {data.type.map((key) => (
+                                        <Table.Input
+                                            value={setConfig[key].toString()}
+                                            onInputChange={(value) =>
+                                                console.log(value)
+                                            }
+                                        />
+                                    ))}
                                     <Table.Input
                                         value={setConfig.order.toString()}
                                         onInputChange={(value) =>

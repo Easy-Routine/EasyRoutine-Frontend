@@ -39,7 +39,7 @@ const WorkoutLibraryListView = () => {
             name: "",
             workoutImage: "",
             workoutPart: "",
-            type: "",
+            type: [],
             createdAt: new Date(),
             updatedAt: new Date(),
             userId: 0,
@@ -65,7 +65,7 @@ const WorkoutLibraryListView = () => {
             name: "벤치프레스",
             workoutImage: SeatedRowImage,
             workoutPart: "가슴",
-            type: "rep,workoutSec",
+            type: ["weight", "rep"],
             createdAt: new Date(),
             updatedAt: new Date(),
             userId: 1,
@@ -75,7 +75,7 @@ const WorkoutLibraryListView = () => {
             name: "데드리프트",
             workoutImage: SeatedRowImage,
             workoutPart: "등",
-            type: "weight,rep,",
+            type: ["weight", "rep"],
             createdAt: new Date(),
             updatedAt: new Date(),
             userId: 1,
@@ -85,7 +85,7 @@ const WorkoutLibraryListView = () => {
             name: "스쿼트",
             workoutImage: SeatedRowImage,
             workoutPart: "하체",
-            type: "weight,rep,workoutSec",
+            type: ["weight", "rep"],
             createdAt: new Date(),
             updatedAt: new Date(),
             userId: 1,
@@ -100,7 +100,7 @@ const WorkoutLibraryListView = () => {
             name: "",
             workoutImage: "",
             workoutPart: "",
-            type: "",
+            type: [],
             createdAt: new Date(),
             updatedAt: new Date(),
             userId: 0,
@@ -119,7 +119,7 @@ const WorkoutLibraryListView = () => {
     useEffect(() => {
         setValue(currentWorkoutLibrary.name);
         handleCategoryChipTabClick(currentWorkoutLibrary.workoutPart);
-        setSelectedValues(currentWorkoutLibrary.type.split(","));
+        setSelectedValues(currentWorkoutLibrary.type);
     }, [currentWorkoutLibrary]);
 
     return (

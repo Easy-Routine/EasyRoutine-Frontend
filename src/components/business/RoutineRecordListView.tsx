@@ -31,7 +31,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "1", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -41,7 +41,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "2", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -51,7 +51,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "3", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -71,7 +71,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "1", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -81,7 +81,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "2", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -91,7 +91,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "3", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -111,7 +111,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "1", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -121,7 +121,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "2", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
@@ -131,7 +131,7 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
                     id: "3", // string으로 수정
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
-                    type: "weight, time",
+                    type: ["weight", "rep"],
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     routineRecordId: "1",
