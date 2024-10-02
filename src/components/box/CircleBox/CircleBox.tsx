@@ -8,6 +8,7 @@ const CircleBox = styled.div<{ width: number; height: number }>`
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 export default CircleBox;
