@@ -16,8 +16,10 @@ import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
 import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 import useModal from "hooks/client/useModal";
+import { useTheme } from "styled-components";
 
 const RoutineConfigAccordion = ({ data }: { data: RoutineConfig }) => {
+    const { color } = useTheme();
     const navigate = useNavigate();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
@@ -72,7 +74,7 @@ const RoutineConfigAccordion = ({ data }: { data: RoutineConfig }) => {
                                     <SmallCard.ImageBox>
                                         <img
                                             src={workoutConfig.workoutImage}
-                                            alt="seated row"
+                                            alt="운동 이미지"
                                         />
                                     </SmallCard.ImageBox>
                                     <SmallCard.ColumnBox>
@@ -89,7 +91,7 @@ const RoutineConfigAccordion = ({ data }: { data: RoutineConfig }) => {
                         />
                         <IconTextBox>
                             <IconTextBox.IconText
-                                color={"#7D7D7D"}
+                                color={color.gray.dark}
                                 onIconTextClick={() => {
                                     handleRoutineUpdateButtonClick(data.id);
                                 }}
@@ -98,7 +100,7 @@ const RoutineConfigAccordion = ({ data }: { data: RoutineConfig }) => {
                                 <div>루틴 수정하기</div>
                             </IconTextBox.IconText>
                             <IconTextBox.IconText
-                                color={"#40E0D0"}
+                                color={color.primary}
                                 onIconTextClick={() =>
                                     openRoutineProgressModal()
                                 }

@@ -10,6 +10,7 @@ import Button from "components/content/Button/Button";
 import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { useEffect, useState } from "react";
+import { useTheme } from "styled-components";
 
 type TypeMapper = {
     [key: string]: string;
@@ -42,6 +43,7 @@ const WorkoutProgressAccordion = ({
     onSetComplete,
     onCompletedSetIdsMutate,
 }: WorkoutProgressAccordionProp) => {
+    const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
@@ -184,18 +186,18 @@ const WorkoutProgressAccordion = ({
                     </Table>
                     <IconTextBox>
                         <IconTextBox.IconText
-                            color={"#7D7D7D"}
+                            color={color.gray.dark}
                             onIconTextClick={handleDeleteSetButtonClick}
                         >
                             <PenIcon />
-                            <div>세트 삭제하기</div>
+                            세트 삭제하기
                         </IconTextBox.IconText>
                         <IconTextBox.IconText
-                            color={"#40E0D0"}
+                            color={color.primary}
                             onIconTextClick={handleCreateSetButtonClick}
                         >
                             <RunIcon />
-                            <div>세트 추가하기</div>
+                            세트 추가하기
                         </IconTextBox.IconText>
                     </IconTextBox>
                     <PaddingY>

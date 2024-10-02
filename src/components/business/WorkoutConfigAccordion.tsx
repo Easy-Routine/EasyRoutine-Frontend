@@ -8,6 +8,7 @@ import { ReactComponent as PlusIcon } from "assets/image/plus2.svg";
 import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
 import { WorkoutConfig } from "types/config";
 import Table from "components/content/Table/Table";
+import { useTheme } from "styled-components";
 
 type TypeMapper = {
     [key: string]: string;
@@ -20,6 +21,7 @@ const typeMapper: TypeMapper = {
 };
 
 const WorkoutConfigAccordion = ({ data }: { data: WorkoutConfig }) => {
+    const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
@@ -88,13 +90,13 @@ const WorkoutConfigAccordion = ({ data }: { data: WorkoutConfig }) => {
                         />
                     </Table>
                     <IconTextBox>
-                        <IconTextBox.IconText color={"#7D7D7D"}>
+                        <IconTextBox.IconText color={color.gray.dark}>
                             <MinusIcon />
-                            <div>세트 삭제하기</div>
+                            세트 삭제하기
                         </IconTextBox.IconText>
-                        <IconTextBox.IconText color={"#40E0D0"}>
+                        <IconTextBox.IconText color={color.primary}>
                             <PlusIcon />
-                            <div>세트 추가하기</div>
+                            세트 추가하기
                         </IconTextBox.IconText>
                     </IconTextBox>
                 </Accordion.Body>

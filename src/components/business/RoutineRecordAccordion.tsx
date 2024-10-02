@@ -11,14 +11,16 @@ import SmallCard from "components/content/SmallCard/SmallCard";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
+import { useTheme } from "styled-components";
 
 const RoutineRecordAccordion = ({ data }: { data: RoutineRecord }) => {
     const navigate = useNavigate();
+    const { color } = useTheme();
 
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
-    const handleRoutineMutateTextClick = (routineRecordId: string) => {
+    const handleRoutineRecordDetailClick = (routineRecordId: string) => {
         navigate(ROUTES.RECORD.DETAIL.PATH(routineRecordId));
     };
 
@@ -51,7 +53,7 @@ const RoutineRecordAccordion = ({ data }: { data: RoutineRecord }) => {
                                 <SmallCard.ImageBox>
                                     <img
                                         src={item.workoutImage}
-                                        alt="seated row"
+                                        alt="운동 이미지"
                                     />
                                 </SmallCard.ImageBox>
                                 <SmallCard.ColumnBox>
@@ -67,17 +69,17 @@ const RoutineRecordAccordion = ({ data }: { data: RoutineRecord }) => {
                     />
                     <IconTextBox>
                         <IconTextBox.IconText
-                            color={"#7D7D7D"}
+                            color={color.gray.dark}
                             onIconTextClick={() =>
-                                handleRoutineMutateTextClick(data.id.toString())
+                                handleRoutineRecordDetailClick(data.id)
                             }
                         >
                             <PenIcon />
-                            <div>루틴 수정하기</div>
+                            세부 기록보기
                         </IconTextBox.IconText>
-                        <IconTextBox.IconText color={"#FF0000"}>
+                        <IconTextBox.IconText color={color.warning}>
                             <RunIcon />
-                            <div>루틴 삭제하기</div>
+                            루틴 삭제하기
                         </IconTextBox.IconText>
                     </IconTextBox>
                 </Accordion.Body>
