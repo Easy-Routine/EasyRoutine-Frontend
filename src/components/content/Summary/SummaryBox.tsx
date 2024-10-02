@@ -1,5 +1,7 @@
+import moment from "moment";
 import React from "react";
 import styled from "styled-components";
+import "moment-duration-format";
 
 const Container = styled.div`
     width: 100%;
@@ -40,19 +42,18 @@ const Description = styled.div`
 `;
 
 type SummaryBoxProps = {
-    hour: number;
-    minute: number;
+    seconds: number;
     weight: number;
 };
 
-const SummaryBox = ({ hour, minute, weight }: SummaryBoxProps) => {
+const SummaryBox = ({ seconds, weight }: SummaryBoxProps) => {
+    const formatted = moment.duration(seconds, "seconds").format("h시간m분");
+
     return (
         <Container>
             <Column>
                 <Title>운동 시간</Title>
-                <Description>
-                    {hour}시간 {minute}분
-                </Description>
+                <Description>{formatted}</Description>
             </Column>
             <Divider />
             <Column>
