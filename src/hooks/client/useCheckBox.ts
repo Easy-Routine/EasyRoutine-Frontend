@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
-const useCheckBox = () => {
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
+const useCheckBox = (defaultValues?: string[]) => {
+    const [selectedValues, setSelectedValues] = useState<string[]>(
+        defaultValues ?? []
+    );
 
     const handleCheckBoxClick = (value: string) => {
         const newState = structuredClone(selectedValues);
