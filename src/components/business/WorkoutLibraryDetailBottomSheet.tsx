@@ -38,12 +38,15 @@ const WorkoutLibraryDetailBottomSheet = ({
     const {
         value: underlineInputValue,
         handleInputChange: handleUnderlineInputChange,
-    } = useInput();
+    } = useInput("벤치프레스");
     const {
         selectedValue: selectedCategory,
         handleTabClick: handleCategoryChipTabClick,
     } = useTab("가슴");
-    const { selectedValues, handleCheckBoxClick } = useCheckBox();
+    const { selectedValues, handleCheckBoxClick } = useCheckBox([
+        "weight",
+        "workoutSec",
+    ]);
 
     return (
         <Modal>
