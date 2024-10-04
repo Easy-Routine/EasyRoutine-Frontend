@@ -9,7 +9,7 @@ import SeatedRowImage from "assets/image/seated-row.png";
 import useTab from "hooks/client/useTab";
 import useInput from "hooks/client/useInput";
 import useModal from "hooks/client/useModal";
-import WorkoutLibrarySmallCard from "components/business/WorkoutLibrarySmallCard";
+import WorkoutLibraryDetailSmallCard from "components/business/WorkoutLibraryDetailSmallCard";
 import WorkoutLibraryDetailBottomSheet from "./WorkoutLibraryDetailBottomSheet";
 import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
 import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
@@ -140,7 +140,7 @@ const WorkoutLibraryListView = () => {
             <SmallCardList<WorkoutLibrary>
                 data={data}
                 render={(item, index) => (
-                    <WorkoutLibrarySmallCard
+                    <WorkoutLibraryDetailSmallCard
                         data={item}
                         onSmallCardClick={handleSmallCardClick}
                         onSmallCardLongPress={handleSmallCardLongPress}
