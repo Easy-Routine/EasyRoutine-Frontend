@@ -15,7 +15,7 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const RoutineRecordGraphView = () => {
+const RoutineRecorListGraphView = () => {
     const { selectedValue, handleTabClick } = useTab("1week");
     const {
         isOpen: isWorkoutLibraryListGraphBottomSheetOpen,
@@ -25,10 +25,14 @@ const RoutineRecordGraphView = () => {
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 
-    // TODO: 운동 id와 기간값으로 데이터 가져오기
-    const data = {
+    // TODO: workoutLibraryId로 운동 종목 상세 데이터 가져오기
+    const workoutLibraryDetailData = {
         id: 1,
         name: "벤치프레스",
+    };
+
+    // TODO: 운동 id와 기간값으로 데이터 가져오기
+    const data = {
         workoutRecordByDateList: [
             { key: "1월", value: 400 },
             { key: "2월", value: 300 },
@@ -57,7 +61,7 @@ const RoutineRecordGraphView = () => {
     return (
         <Container>
             <Box>
-                <TitleText>{data.name}</TitleText>
+                <TitleText>{workoutLibraryDetailData.name}</TitleText>
             </Box>
             <Box>
                 <Graph
@@ -121,4 +125,4 @@ const RoutineRecordGraphView = () => {
     );
 };
 
-export default RoutineRecordGraphView;
+export default RoutineRecorListGraphView;
