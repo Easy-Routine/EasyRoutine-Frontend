@@ -36,7 +36,7 @@ type WorkoutProgressAccordionProp = {
     onCompletedSetIdsMutate: (completedSetIds: string[]) => void;
 };
 
-const WorkoutProgressAccordion = ({
+const WorkoutConfigDetailProgressAccordion = ({
     data,
     onSetCreate,
     onSetDelete,
@@ -215,4 +215,4 @@ const WorkoutProgressAccordion = ({
     );
 };
 
-export default WorkoutProgressAccordion;
+export default WorkoutConfigDetailProgressAccordion;
