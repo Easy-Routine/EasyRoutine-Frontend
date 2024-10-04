@@ -1,11 +1,11 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Box from "components/box/Box/Box";
 import TitleText from "components/content/TitleText/TitleText";
-import WorkoutConfigAccordion from "./WorkoutConfigAccordion";
 import { RoutineConfig } from "types/config";
 import SeatedRowImage from "assets/image/seated-row.png";
 import RoutineConfigColorTabBottomBar from "./RoutineConfigColorTabBottomBar";
 import styled from "styled-components";
+import WorkoutConfigDetailAccordion from "./WorkoutConfigDetailAccordion";
 
 const Container = styled.div`
     display: flex;
@@ -156,7 +156,7 @@ const RoutineConfigDetailView = () => {
             <Accordion.List
                 data={data.workoutConfigs}
                 render={(workoutConfig) => (
-                    <WorkoutConfigAccordion data={workoutConfig} />
+                    <WorkoutConfigDetailAccordion data={workoutConfig} />
                 )}
             />
             <RoutineConfigColorTabBottomBar defaultValue={data.color} />
