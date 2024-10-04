@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import NavigationBottomBar from "components/business/NavigationBottomBar/NavigationBottomBar";
 import Logo from "components/content/Logo/Logo";
-import RoutineConfigAccordionList from "components/business/RoutineConfigAccordionList";
 import ROUTES from "constants/routes";
 import RoutineConfigFloatingActionButton from "components/business/RoutineConfigFloatingActionButton";
+import RoutineConfigListView from "components/business/RoutineConfigListView";
 
 const Container = styled.div`
     display: flex;
@@ -15,7 +15,7 @@ const RoutineConfigListPage = () => {
     return (
         <Container>
             <Logo />
-            <RoutineConfigAccordionList />
+            <RoutineConfigListView />
             <NavigationBottomBar defaultValue={ROUTES.CONFIG.LIST.PATH} />
             <RoutineConfigFloatingActionButton />
         </Container>
