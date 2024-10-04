@@ -9,10 +9,10 @@ import SeatedRowImage from "assets/image/seated-row.png";
 import useTab from "hooks/client/useTab";
 import useInput from "hooks/client/useInput";
 import useModal from "hooks/client/useModal";
-import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import WorkoutLibrarySmallCard from "components/business/WorkoutLibrarySmallCard";
 import WorkoutLibraryDetailBottomSheet from "./WorkoutLibraryDetailBottomSheet";
 import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
+import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
 
 const Container = styled.div`
     display: flex;
@@ -71,9 +71,8 @@ const WorkoutLibraryListView = () => {
         handleCloseModal: closeWorkoutLibraryBottomSheet,
     } = useModal();
 
-    const handleFloatingActionButtonClick = () => {
-        //TODO: 운동라이브러리 아이템 생성
-        setWorkoutLibraryId("1");
+    const handleFloatingActionButtonClick = (workoutLibraryId: string) => {
+        setWorkoutLibraryId(workoutLibraryId);
         openWorkoutLibraryBottomSheet();
     };
 
@@ -164,8 +163,10 @@ const WorkoutLibraryListView = () => {
                     closeWorkoutDeleteModal();
                 }}
             />
-            <FloatingActionButton
-                onButtonClick={handleFloatingActionButtonClick}
+            <WorkoutLibraryCreateFloatingActionButton
+                onButtonClick={(workoutLibraryId: string) =>
+                    handleFloatingActionButtonClick(workoutLibraryId)
+                }
             />
         </Container>
     );
