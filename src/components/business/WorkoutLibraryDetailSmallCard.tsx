@@ -8,17 +8,17 @@ const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);
 `;
 
-type WorkoutLibrarySmallCardProps = {
+type WorkoutLibraryDetailSmallCardProps = {
     data: WorkoutLibrary;
     onSmallCardClick: (workoutLibraryId: string) => void;
     onSmallCardLongPress: (workoutLibraryId: string) => void;
 };
 
-const WorkoutLibrarySmallCard = ({
+const WorkoutLibraryDetailSmallCard = ({
     data,
     onSmallCardClick,
     onSmallCardLongPress,
-}: WorkoutLibrarySmallCardProps) => {
+}: WorkoutLibraryDetailSmallCardProps) => {
     return (
         <SmallCard
             onCardClick={() => onSmallCardClick(data.id)}
@@ -37,4 +37,4 @@ const WorkoutLibrarySmallCard = ({
     );
 };
 
-export default WorkoutLibrarySmallCard;
+export default WorkoutLibraryDetailSmallCard;
