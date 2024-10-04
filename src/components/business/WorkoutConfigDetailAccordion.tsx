@@ -20,7 +20,7 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-const WorkoutConfigAccordion = ({ data }: { data: WorkoutConfig }) => {
+const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
     const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
@@ -106,4 +106,4 @@ const WorkoutConfigAccordion = ({ data }: { data: WorkoutConfig }) => {
     );
 };
 
-export default WorkoutConfigAccordion;
+export default WorkoutConfigDetailAccordion;
