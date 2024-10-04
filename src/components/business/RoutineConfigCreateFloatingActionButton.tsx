@@ -1,12 +1,10 @@
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import ROUTES from "constants/routes";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import EmptyBoundary from "./EmptyBoundary";
-import styled from "styled-components";
 import { RoutineConfig } from "types/config";
 
-const RoutineConfigFloatingActionButton = () => {
+const RoutineConfigCreateFloatingActionButton = () => {
     // TODO : 데이터 페칭
     const data: RoutineConfig[] | {} = [{}];
 
@@ -35,4 +33,4 @@ const RoutineConfigFloatingActionButton = () => {
     );
 };
 
-export default RoutineConfigFloatingActionButton;
+export default RoutineConfigCreateFloatingActionButton;
