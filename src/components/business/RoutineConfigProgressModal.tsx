@@ -3,6 +3,7 @@ import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
+import useToast from "hooks/useToast";
 
 type RoutineProgressModalProps = {
     routineConfigId: string;
@@ -20,6 +21,7 @@ const RoutineConfigProgressModal = ({
     onConfirmButtonClick,
 }: RoutineProgressModalProps) => {
     const navigate = useNavigate();
+    const { showToast } = useToast();
     // TODO: API 호출
     const data = {
         id: "1",
@@ -28,6 +30,7 @@ const RoutineConfigProgressModal = ({
 
     const handleRoutineProgressButtonClick = () => {
         // TODO: API 호출
+        showToast("루틴이 시작되었습니다.");
         onConfirmButtonClick();
         navigate(ROUTES.PROGRESS.PATH(data.id));
     };

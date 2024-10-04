@@ -1,6 +1,7 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
+import useToast from "hooks/useToast";
 
 type RoutineConfigDeleteModalProps = {
     routineConfigId: string;
@@ -17,6 +18,8 @@ const RoutineConfigDeleteModal = ({
     onCancelButtonClick,
     onConfirmButtonClick,
 }: RoutineConfigDeleteModalProps) => {
+    const { showToast } = useToast();
+
     // TODO: API 호출
     const data = {
         name: "월요일 루틴",
@@ -24,6 +27,7 @@ const RoutineConfigDeleteModal = ({
 
     const handleRoutineConfigDeleteButtonClick = () => {
         // TODO: API 호출
+        showToast("루틴이 삭제되었습니다.");
         onConfirmButtonClick();
     };
 

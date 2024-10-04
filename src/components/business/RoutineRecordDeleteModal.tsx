@@ -1,6 +1,7 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
+import useToast from "hooks/useToast";
 
 type RoutineRecordDeleteModalProps = {
     isOpen: boolean;
@@ -15,8 +16,11 @@ const RoutineRecordDeleteModal = ({
     onCancelButtonClick,
     onConfirmButtonClick,
 }: RoutineRecordDeleteModalProps) => {
+    const { showToast } = useToast();
+
     const handleRoutineRecordDeleteButtonClick = () => {
         // TODO: API 호출
+        showToast("운동 기록이 삭제되었습니다.");
         onConfirmButtonClick();
     };
 

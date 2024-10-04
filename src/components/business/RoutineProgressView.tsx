@@ -17,6 +17,7 @@ import { ReactComponent as QuestionIcon } from "assets/image/question.svg";
 import { ReactComponent as CompleteIcon } from "assets/image/complete.svg";
 import { replace, useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
+import useToast from "hooks/useToast";
 
 const Container = styled.div`
     display: flex;
@@ -31,6 +32,7 @@ const TimerText = styled.div`
 
 const RoutineProgressView = () => {
     const navigate = useNavigate();
+    const { showToast } = useToast();
 
     const {
         isOpen: isTimerModalOpen,
@@ -310,6 +312,7 @@ const RoutineProgressView = () => {
                     navigate(ROUTES.CONFIG.LIST.PATH, { replace: true });
                 }}
                 onConfirmButtonClick={() => {
+                    showToast("루틴이 완료되었습니다.");
                     navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
                 }}
             />

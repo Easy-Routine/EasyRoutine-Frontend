@@ -59,7 +59,7 @@ const WorkoutProgressAccordion = ({
     const isWorkoutCompleted =
         completedSetIds.length === data.setConfigs.length;
 
-    const handleCompleteWorkoutButtonClick = () => {
+    const handleCompleteSetButtonClick = () => {
         const newCompletedSetIds = structuredClone(completedSetIds);
         newCompletedSetIds.push(currentSetId);
         setCompletedSetIds(newCompletedSetIds);
@@ -202,7 +202,7 @@ const WorkoutProgressAccordion = ({
                     </IconTextBox>
                     <PaddingY>
                         <Button
-                            onClick={handleCompleteWorkoutButtonClick}
+                            onClick={handleCompleteSetButtonClick}
                             disabled={isWorkoutCompleted}
                         >
                             세트완료

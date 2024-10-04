@@ -3,14 +3,17 @@ import ROUTES from "constants/routes";
 import { useNavigate } from "react-router-dom";
 import EmptyBoundary from "./EmptyBoundary";
 import { RoutineConfig } from "types/config";
+import useToast from "hooks/useToast";
 
 const RoutineConfigCreateFloatingActionButton = () => {
     // TODO : 데이터 페칭
     const data: RoutineConfig[] | {} = [{}];
 
     const navigate = useNavigate();
+    const { showToast } = useToast();
     const handleButtonClick = async () => {
         // TODO: routineConfig 데이터 생성
+        showToast("루틴이 생성되었습니다.");
         navigate(ROUTES.CONFIG.DETAIL.PATH("1"));
     };
 
