@@ -1,6 +1,5 @@
 import ReturnPageHeader from "components/business/ReturnPageHeader";
-import RoutineProgressView from "components/business/RoutineProgressView";
-import React from "react";
+import RoutineConfigListProgressView from "components/business/RoutineConfigListProgressView";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -9,13 +8,13 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const RoutineProgressPage = () => {
+const RoutineConfigListProgressPage = () => {
     return (
         <Container>
             <ReturnPageHeader pageTitleText="운동 진행" />
-            <RoutineProgressView />
+            <RoutineConfigListProgressView />
         </Container>
     );
 };
 
-export default RoutineProgressPage;
+export default RoutineConfigListProgressPage;
