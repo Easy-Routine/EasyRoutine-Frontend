@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { RoutineConfig, SetConfig, WorkoutConfig } from "types/config";
 import SeatedRowImage from "assets/image/seated-row.png";
 import { useCallback, useState } from "react";
-import WorkoutProgressAccordion from "./WorkoutProgressAccordion";
 import useTimer from "hooks/client/useTimer";
 import Modal from "components/box/Modal/Modal";
 import useModal from "hooks/client/useModal";
@@ -15,9 +14,10 @@ import formatTime from "utils/formatTime";
 import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
 import { ReactComponent as QuestionIcon } from "assets/image/question.svg";
 import { ReactComponent as CompleteIcon } from "assets/image/complete.svg";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
+import WorkoutConfigDetailProgressAccordion from "./WorkoutConfigDetailProgressAccordion";
 
 const Container = styled.div`
     display: flex;
@@ -30,7 +30,7 @@ const TimerText = styled.div`
     font-weight: ${({ theme }) => theme.fontWeight.semibold};
 `;
 
-const RoutineProgressView = () => {
+const RoutineConfigListProgressView = () => {
     const navigate = useNavigate();
     const { showToast } = useToast();
 
@@ -270,7 +270,7 @@ const RoutineProgressView = () => {
             <Accordion.List<WorkoutConfig>
                 data={routineConfigState.workoutConfigs}
                 render={(item) => (
-                    <WorkoutProgressAccordion
+                    <WorkoutConfigDetailProgressAccordion
                         data={item}
                         onSetCreate={handleSetCreate}
                         onSetDelete={handleSetDelete}
@@ -330,7 +330,7 @@ const RoutineProgressView = () => {
     );
 };
 
-export default RoutineProgressView;
+export default RoutineConfigListProgressView;
 
 type TimerModalProps = {
     seconds: number;
