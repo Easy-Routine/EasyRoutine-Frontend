@@ -1,11 +1,18 @@
 import Accordion from "components/box/Accordion/Accordion";
-import RoutineConfigAccordion from "./RoutineConfigAccordion/RoutineConfigAccordion";
+import RoutineConfigDetailAccordion from "./RoutineConfigAccordion/RoutineConfigDetailAccordion";
 import { RoutineConfig } from "types/config";
 import SeatedRowImage from "assets/image/seated-row.png";
 import EmptyBoundary from "./EmptyBoundary";
 import EmptyView from "components/content/EmptyView/EmptyView";
+import styled from "styled-components";
+import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
+import { useState } from "react";
+import useModal from "hooks/client/useModal";
+import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
 
-const RoutineConfigAccordionList = () => {
+const Container = styled.div``;
+
+const RoutineConfigListView = () => {
     const data: RoutineConfig[] = [
         {
             id: "1",
@@ -128,17 +135,71 @@ const RoutineConfigAccordionList = () => {
             ],
         },
     ];
+
+    const {
+        isOpen: isRoutineProgressModalOpen,
+        handleOpenModal: openRoutineProgressModal,
+        handleCloseModal: closeRoutineProgressModal,
+    } = useModal();
+    const {
+        isOpen: isRoutineConfigDeleteModalOpen,
+        handleOpenModal: openRoutineConfigDeleteModal,
+        handleCloseModal: closeRoutineConfigDeleteModal,
+    } = useModal();
+
+    const [routineConfigId, setRoutineConfigId] = useState("");
+
     return (
-        <EmptyBoundary
-            fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
-            data={data}
-        >
-            <Accordion.List
+        <Container>
+            <EmptyBoundary
+                fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
                 data={data}
-                render={(item) => <RoutineConfigAccordion data={item} />}
+            >
+                <Accordion.List
+                    data={data}
+                    render={(item) => (
+                        <RoutineConfigDetailAccordion
+                            data={item}
+                            onRoutineConfigProgressButtonClick={(
+                                routineConfigId: string
+                            ) => {
+                                setRoutineConfigId(routineConfigId);
+                                openRoutineProgressModal();
+                            }}
+                            onRoutineConfigDeleteButtonClick={(
+                                routineConfigId: string
+                            ) => {
+                                setRoutineConfigId(routineConfigId);
+                                openRoutineConfigDeleteModal();
+                            }}
+                        />
+                    )}
+                />
+            </EmptyBoundary>
+            <RoutineConfigProgressModal
+                routineConfigId={routineConfigId}
+                isOpen={isRoutineProgressModalOpen}
+                onBackdropClick={() => closeRoutineProgressModal()}
+                onCancelButtonClick={() => closeRoutineProgressModal()}
+                onConfirmButtonClick={() => {
+                    closeRoutineProgressModal();
+                }}
             />
-        </EmptyBoundary>
+            <RoutineConfigDeleteModal
+                routineConfigId={routineConfigId}
+                isOpen={isRoutineConfigDeleteModalOpen}
+                onBackdropClick={() => {
+                    closeRoutineConfigDeleteModal();
+                }}
+                onCancelButtonClick={() => {
+                    closeRoutineConfigDeleteModal();
+                }}
+                onConfirmButtonClick={() => {
+                    closeRoutineConfigDeleteModal();
+                }}
+            />
+        </Container>
     );
 };
 
-export default RoutineConfigAccordionList;
+export default RoutineConfigListView;
