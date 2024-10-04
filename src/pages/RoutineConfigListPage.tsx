@@ -2,7 +2,7 @@ import styled from "styled-components";
 import NavigationBottomBar from "components/business/NavigationBottomBar/NavigationBottomBar";
 import Logo from "components/content/Logo/Logo";
 import ROUTES from "constants/routes";
-import RoutineConfigFloatingActionButton from "components/business/RoutineConfigFloatingActionButton";
+import RoutineConfigCreateFloatingActionButton from "components/business/RoutineConfigCreateFloatingActionButton";
 import RoutineConfigListView from "components/business/RoutineConfigListView";
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const RoutineConfigListPage = () => {
             <Logo />
             <RoutineConfigListView />
             <NavigationBottomBar defaultValue={ROUTES.CONFIG.LIST.PATH} />
-            <RoutineConfigFloatingActionButton />
+            <RoutineConfigCreateFloatingActionButton />
         </Container>
     );
 };
