@@ -1,8 +1,8 @@
 import Tab from "components/content/Tab/Tab";
 import useTab from "hooks/client/useTab";
 import styled from "styled-components";
-import RoutineCalendarView from "./RoutineCalendarView";
-import RoutineRecordGraphView from "./RoutineRecordGraphView";
+import RoutineRecordListCalendarView from "./RoutineRecordListCalendarView";
+import RoutineRecordListGraphView from "./RoutineRecordListGraphView";
 
 const Container = styled.div`
     display: flex;
@@ -18,8 +18,8 @@ type ViewMapper = {
 
 const RoutineRecordTabView = () => {
     const viewMapper: ViewMapper = {
-        calendar: RoutineCalendarView,
-        graph: RoutineRecordGraphView, // TODO: Add Graph View component here
+        calendar: RoutineRecordListCalendarView,
+        graph: RoutineRecordListGraphView, // TODO: Add Graph View component here
     };
 
     const { selectedValue, handleTabClick } = useTab("calendar");
