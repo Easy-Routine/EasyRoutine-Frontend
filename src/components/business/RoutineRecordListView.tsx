@@ -1,10 +1,12 @@
 import Accordion from "components/box/Accordion/Accordion";
 import SummaryBox from "components/content/Summary/SummaryBox";
 import React from "react";
-import RoutineRecordAccordion from "./RoutineRecordAccordion";
+import RoutineRecordDetailAccordion from "./RoutineRecordDetailAccordion";
 import SeatedRowImage from "assets/image/seated-row.png";
 import styled from "styled-components";
 import { RoutineRecord } from "types/recrod";
+import useModal from "hooks/client/useModal";
+import RoutineRecordDeleteModal from "./RoutineRecordDeleteModal";
 
 const Container = styled.div`
     display: flex;
@@ -327,6 +329,12 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
         },
     ];
 
+    const {
+        isOpen: isRoutineRecordDeleteModalOpen,
+        handleOpenModal: openRoutineRecordDeleteModal,
+        handleCloseModal: closeRoutineRecordDeleteModal,
+    } = useModal();
+
     const totalWeight = data.reduce((acc, record) => {
         return (
             acc +
@@ -360,7 +368,27 @@ const RoutineRecordListView = ({ date }: RoutineRecordListViewProps) => {
             <SummaryBox seconds={totalSeconds} weight={totalWeight} />
             <Accordion.List
                 data={data}
-                render={(item) => <RoutineRecordAccordion data={item} />}
+                render={(item) => (
+                    <RoutineRecordDetailAccordion
+                        data={item}
+                        onRoutineRecordDeleteButtonClick={() => {
+                            openRoutineRecordDeleteModal();
+                        }}
+                    />
+                )}
+            />
+
+            <RoutineRecordDeleteModal
+                isOpen={isRoutineRecordDeleteModalOpen}
+                onBackdropClick={() => {
+                    closeRoutineRecordDeleteModal();
+                }}
+                onCancelButtonClick={() => {
+                    closeRoutineRecordDeleteModal();
+                }}
+                onConfirmButtonClick={() => {
+                    closeRoutineRecordDeleteModal();
+                }}
             />
         </Container>
     );
