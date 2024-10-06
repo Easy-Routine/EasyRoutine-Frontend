@@ -1,7 +1,7 @@
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import ROUTES from "constants/routes";
 import { useNavigate } from "react-router-dom";
-import EmptyBoundary from "./EmptyBoundary";
+import EmptyBoundary from "../EmptyBoundary";
 import { RoutineConfig } from "types/config";
 import useToast from "hooks/useToast";
 

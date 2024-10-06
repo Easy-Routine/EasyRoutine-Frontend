@@ -42,7 +42,13 @@ const RoutineConfigProgressModal = ({
                 <Confirm>
                     <Confirm.ContentBox>
                         <Confirm.IconBox>
-                            <RunIcon />
+                            <RunIcon
+                                style={{
+                                    color: "white",
+                                    width: "28px",
+                                    height: "40px",
+                                }}
+                            />
                         </Confirm.IconBox>
                         <Confirm.Title>루틴 진행</Confirm.Title>
                         <Confirm.Description>

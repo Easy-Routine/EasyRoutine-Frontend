@@ -1,5 +1,5 @@
 import ReturnPageHeader from "components/business/ReturnPageHeader";
-import RoutineRecordDetailView from "components/business/RoutineRecordDetailView";
+import RoutineRecordDetailView from "components/business/routine-record/RoutineRecordDetailView";
 import React from "react";
 import styled from "styled-components";
 

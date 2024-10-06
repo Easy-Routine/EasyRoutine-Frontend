@@ -7,7 +7,7 @@ import styled from "styled-components";
 import useModal from "hooks/client/useModal";
 import { useState } from "react";
 import TitleText from "components/content/TitleText/TitleText";
-import WorkoutLibraryListGraphBottomSheet from "./WorkoutLibraryListGraphBottomSheet";
+import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
 
 const Container = styled.div`
     display: flex;

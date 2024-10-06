@@ -5,7 +5,7 @@ import { RoutineRecord } from "types/recrod";
 import Box from "components/box/Box/Box";
 import TitleText from "components/content/TitleText/TitleText";
 import Accordion from "components/box/Accordion/Accordion";
-import WorkoutRecordAccordion from "./WorkoutRecordAccordion";
+import WorkoutRecordAccordion from "../workout-record/WorkoutRecordAccordion";
 
 const Container = styled.div`
     display: flex;

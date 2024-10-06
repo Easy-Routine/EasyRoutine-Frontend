@@ -1,5 +1,5 @@
 import NavigationBottomBar from "components/business/NavigationBottomBar";
-import WorkoutLibraryListView from "components/business/WorkoutLibraryListView";
+import WorkoutLibraryListView from "components/business/workout-library/WorkoutLibraryListView";
 import Logo from "components/content/Logo/Logo";
 import ROUTES from "constants/routes";
 import styled from "styled-components";

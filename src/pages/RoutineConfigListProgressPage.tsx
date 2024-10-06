@@ -1,5 +1,5 @@
 import ReturnPageHeader from "components/business/ReturnPageHeader";
-import RoutineConfigListProgressView from "components/business/RoutineConfigListProgressView";
+import RoutineConfigListProgressView from "components/business/routine-config/RoutineConfigListProgressView";
 import styled from "styled-components";
 
 const Container = styled.div`

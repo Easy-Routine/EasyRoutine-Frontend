@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import WorkoutLibraryListBottomSheet from "components/business/WorkoutLibraryListBottomSheet";
-import RoutineConfigDetailView from "components/business/RoutineConfigDetailView";
+import RoutineConfigDetailView from "components/business/routine-config/RoutineConfigDetailView";
 import ReturnPageHeader from "components/business/ReturnPageHeader";
+import WorkoutLibraryListBottomSheet from "components/business/workout-library/WorkoutLibraryListBottomSheet";
 
 const Container = styled.div`
     display: flex;

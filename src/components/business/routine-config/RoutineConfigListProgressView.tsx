@@ -17,7 +17,7 @@ import { ReactComponent as CompleteIcon } from "assets/image/complete.svg";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
-import WorkoutConfigDetailProgressAccordion from "./WorkoutConfigDetailProgressAccordion";
+import WorkoutConfigDetailProgressAccordion from "../workout-config/WorkoutConfigDetailProgressAccordion";
 
 const Container = styled.div`
     display: flex;

@@ -9,10 +9,10 @@ import SeatedRowImage from "assets/image/seated-row.png";
 import useTab from "hooks/client/useTab";
 import useInput from "hooks/client/useInput";
 import useModal from "hooks/client/useModal";
-import WorkoutLibraryDetailSmallCard from "components/business/WorkoutLibraryDetailSmallCard";
 import WorkoutLibraryDetailBottomSheet from "./WorkoutLibraryDetailBottomSheet";
 import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
 import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
+import WorkoutLibraryDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
 
 const Container = styled.div`
     display: flex;

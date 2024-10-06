@@ -3,9 +3,9 @@ import Box from "components/box/Box/Box";
 import TitleText from "components/content/TitleText/TitleText";
 import { RoutineConfig } from "types/config";
 import SeatedRowImage from "assets/image/seated-row.png";
-import RoutineConfigColorTabBottomBar from "./RoutineConfigColorTabBottomBar";
+import RoutineConfigColorTabBottomBar from "./RoutineConfigUpdateColorTabBottomBar";
 import styled from "styled-components";
-import WorkoutConfigDetailAccordion from "./WorkoutConfigDetailAccordion";
+import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailAccordion";
 
 const Container = styled.div`
     display: flex;

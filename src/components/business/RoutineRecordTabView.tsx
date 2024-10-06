@@ -1,8 +1,8 @@
 import Tab from "components/content/Tab/Tab";
 import useTab from "hooks/client/useTab";
 import styled from "styled-components";
-import RoutineRecordListCalendarView from "./RoutineRecordListCalendarView";
-import RoutineRecordListGraphView from "./RoutineRecordListGraphView";
+import RoutineRecordListCalendarView from "./routine-record/RoutineRecordListCalendarView";
+import RoutineRecordListGraphView from "./routine-record/RoutineRecordListGraphView";
 
 const Container = styled.div`
     display: flex;

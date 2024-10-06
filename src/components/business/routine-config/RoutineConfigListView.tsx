@@ -2,7 +2,7 @@ import Accordion from "components/box/Accordion/Accordion";
 import RoutineConfigDetailAccordion from "./RoutineConfigDetailAccordion";
 import { RoutineConfig } from "types/config";
 import SeatedRowImage from "assets/image/seated-row.png";
-import EmptyBoundary from "./EmptyBoundary";
+import EmptyBoundary from "../EmptyBoundary";
 import EmptyView from "components/content/EmptyView/EmptyView";
 import styled from "styled-components";
 import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
