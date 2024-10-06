@@ -1,4 +1,4 @@
-import NavigationBottomBar from "components/business/NavigationBottomBar/NavigationBottomBar";
+import NavigationBottomBar from "components/business/NavigationBottomBar";
 import WorkoutLibraryListView from "components/business/WorkoutLibraryListView";
 import Logo from "components/content/Logo/Logo";
 import ROUTES from "constants/routes";

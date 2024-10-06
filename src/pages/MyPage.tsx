@@ -1,4 +1,4 @@
-import NavigationBottomBar from "components/business/NavigationBottomBar/NavigationBottomBar";
+import NavigationBottomBar from "components/business/NavigationBottomBar";
 import Logo from "components/content/Logo/Logo";
 import UnderlineBox from "components/content/UnderlineBox/UnderlineBox";
 import ROUTES from "constants/routes";

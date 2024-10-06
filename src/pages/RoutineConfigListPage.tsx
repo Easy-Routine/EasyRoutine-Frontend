@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NavigationBottomBar from "components/business/NavigationBottomBar/NavigationBottomBar";
+import NavigationBottomBar from "components/business/NavigationBottomBar";
 import Logo from "components/content/Logo/Logo";
 import ROUTES from "constants/routes";
 import RoutineConfigCreateFloatingActionButton from "components/business/RoutineConfigCreateFloatingActionButton";
