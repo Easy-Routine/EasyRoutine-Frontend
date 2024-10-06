@@ -1,5 +1,5 @@
 import Accordion from "components/box/Accordion/Accordion";
-import RoutineConfigDetailAccordion from "./RoutineConfigAccordion/RoutineConfigDetailAccordion";
+import RoutineConfigDetailAccordion from "./RoutineConfigDetailAccordion";
 import { RoutineConfig } from "types/config";
 import SeatedRowImage from "assets/image/seated-row.png";
 import EmptyBoundary from "./EmptyBoundary";
