@@ -6,7 +6,7 @@ const useTab = (defaultValue: string) => {
         setSelectedValue(value);
     };
 
-    return { selectedValue, handleTabClick };
+    return { selectedValue, handleTabClick, setSelectedValue };
 };
 
 export default useTab;
