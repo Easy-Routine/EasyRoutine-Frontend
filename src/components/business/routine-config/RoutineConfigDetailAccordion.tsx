@@ -8,10 +8,10 @@ import { ReactComponent as FireIcon } from "assets/image/fire.svg";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
-import { RoutineConfig } from "types/config";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
+import { RoutineConfig, WorkoutConfig } from "db";
 
 type RoutineConfigDetailAccordionProps = {
     data: RoutineConfig;
@@ -46,7 +46,7 @@ const RoutineConfigAccordion = ({
                             <Card.Column>
                                 <Card.Title>{data.name}</Card.Title>
                                 <Card.Description>
-                                    {data.workoutConfigs.length}종목
+                                    {data.workoutConfigs?.length}종목
                                 </Card.Description>
                             </Card.Column>
                         </Card>
@@ -57,19 +57,22 @@ const RoutineConfigAccordion = ({
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Body isOpen={isOpen}>
-                        <SmallCardList<any>
+                        <SmallCardList<WorkoutConfig>
                             data={data.workoutConfigs}
                             render={(workoutConfig) => (
                                 <SmallCard>
                                     <SmallCard.ImageBox>
                                         <img
-                                            src={workoutConfig.workoutImage}
+                                            src={
+                                                workoutConfig.workoutLibrary
+                                                    .workoutImage
+                                            }
                                             alt="운동 이미지"
                                         />
                                     </SmallCard.ImageBox>
                                     <SmallCard.ColumnBox>
                                         <SmallCard.BoldText>
-                                            {workoutConfig.name}
+                                            {workoutConfig.workoutLibrary.name}
                                         </SmallCard.BoldText>
                                         <SmallCard.NormalText>
                                             {workoutConfig.setConfigs.length}{" "}
