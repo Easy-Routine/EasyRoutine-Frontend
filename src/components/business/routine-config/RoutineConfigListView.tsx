@@ -1,7 +1,5 @@
 import Accordion from "components/box/Accordion/Accordion";
 import RoutineConfigDetailAccordion from "./RoutineConfigDetailAccordion";
-import { RoutineConfig } from "types/config";
-import SeatedRowImage from "assets/image/seated-row.png";
 import EmptyBoundary from "../EmptyBoundary";
 import EmptyView from "components/content/EmptyView/EmptyView";
 import styled from "styled-components";
@@ -9,132 +7,14 @@ import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
 import { useState } from "react";
 import useModal from "hooks/client/useModal";
 import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
+import useRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 
 const Container = styled.div``;
 
 const RoutineConfigListView = () => {
-    const data: RoutineConfig[] = [
-        {
-            id: "1",
-            name: "나의 가슴 루틴",
-            color: "#f0fff0",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: "3",
-            workoutConfigs: [
-                {
-                    id: "1",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-                {
-                    id: "2",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-                {
-                    id: "3",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-            ],
-        },
-        {
-            id: "2",
-            name: "나의 가슴 루틴",
-            color: "#f0fff0",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: "3",
-            workoutConfigs: [
-                {
-                    id: "1",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-                {
-                    id: "2",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-                {
-                    id: "3",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-            ],
-        },
-        {
-            id: "3",
-            name: "나의 가슴 루틴",
-            color: "#f0fff0",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: "3",
-            workoutConfigs: [
-                {
-                    id: "1",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-                {
-                    id: "2",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-                {
-                    id: "3",
-                    name: "벤치프레스",
-                    workoutImage: SeatedRowImage,
-                    type: ["weight", "rep"],
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    routineConfigId: "1",
-                    setConfigs: [],
-                },
-            ],
-        },
-    ];
+    const { data: routineConfigAllData } = useRoutineConfigAllQuery();
+
+    const routineConfigAll = routineConfigAllData ?? [];
 
     const {
         isOpen: isRoutineProgressModalOpen,
@@ -153,13 +33,13 @@ const RoutineConfigListView = () => {
         <Container>
             <EmptyBoundary
                 fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
-                data={data}
+                data={routineConfigAll}
             >
                 <Accordion.List
-                    data={data}
-                    render={(item) => (
+                    data={routineConfigAll}
+                    render={(routineConfig) => (
                         <RoutineConfigDetailAccordion
-                            data={item}
+                            data={routineConfig}
                             onRoutineConfigProgressButtonClick={(
                                 routineConfigId: string
                             ) => {
