@@ -2,8 +2,9 @@ import FloatingActionButton from "components/content/FloatingActionButton/Floati
 import ROUTES from "constants/routes";
 import { useNavigate } from "react-router-dom";
 import EmptyBoundary from "../EmptyBoundary";
-import { RoutineConfig } from "types/config";
 import useToast from "hooks/useToast";
+import { RoutineConfig } from "db";
+import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
 
 const RoutineConfigCreateFloatingActionButton = () => {
     // TODO : 데이터 페칭
@@ -11,10 +12,23 @@ const RoutineConfigCreateFloatingActionButton = () => {
 
     const navigate = useNavigate();
     const { showToast } = useToast();
+    const { mutateAsync: createRoutineConfigOneMutate } =
+        useCreateRoutineConfigMutation();
+
     const handleButtonClick = async () => {
-        // TODO: routineConfig 데이터 생성
-        showToast("루틴이 생성되었습니다.");
-        navigate(ROUTES.CONFIG.DETAIL.PATH("1"));
+        try {
+            const newRoutineConfig = await createRoutineConfigOneMutate({
+                name: "새 루틴",
+                color: "#855CF8",
+                userId: "doggopawer",
+            });
+
+            showToast("루틴이 생성되었습니다.");
+
+            navigate(ROUTES.CONFIG.DETAIL.PATH(newRoutineConfig?.id as string));
+        } catch (e) {
+            showToast("루틴을 생성하던 중 오류가 발생했습니다.");
+        }
     };
 
     return (
