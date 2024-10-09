@@ -1,7 +1,7 @@
 import BottomBar from "components/box/BottomBar/BottomBar";
 import ColorTab from "components/box/BottomBar/ColorTab";
 import useTab from "hooks/client/useTab";
-import React from "react";
+import React, { useEffect } from "react";
 
 type RoutineConfigColorTabBottomBarProps = {
     defaultValue: string;
@@ -10,7 +10,12 @@ type RoutineConfigColorTabBottomBarProps = {
 const RoutineConfigColorTabBottomBar = ({
     defaultValue,
 }: RoutineConfigColorTabBottomBarProps) => {
-    const { selectedValue, handleTabClick } = useTab(defaultValue);
+    const { selectedValue, setSelectedValue, handleTabClick } =
+        useTab(defaultValue);
+
+    useEffect(() => {
+        setSelectedValue(defaultValue);
+    }, [defaultValue, setSelectedValue]);
 
     const handleColorTabClick = (value: string) => {
         //TODO: routine-config 칼라 수정 API 연결
@@ -23,31 +28,31 @@ const RoutineConfigColorTabBottomBar = ({
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={handleColorTabClick}
-                    value="violet"
+                    value="#855CF8"
                     backgroundColor="#855CF8"
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={handleColorTabClick}
-                    value="orange"
+                    value="#F26B2C"
                     backgroundColor="#F26B2C"
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={handleColorTabClick}
-                    value="green"
+                    value="#2DAF2D"
                     backgroundColor="#2DAF2D"
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={handleColorTabClick}
-                    value="blue"
+                    value="#455A64"
                     backgroundColor="#455A64"
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={handleColorTabClick}
-                    value="pink"
+                    value="#DD408F"
                     backgroundColor="#DD408F"
                 />
             </ColorTab>
