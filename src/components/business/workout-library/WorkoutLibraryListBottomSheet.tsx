@@ -7,12 +7,14 @@ import useCheckBox from "hooks/client/useCheckBox";
 import useInput from "hooks/client/useInput";
 import useModal from "hooks/client/useModal";
 import useTab from "hooks/client/useTab";
-import React from "react";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import styled from "styled-components";
 import SeatedRowImage from "assets/image/seated-row.png";
-import { WorkoutLibrary } from "types/workout-library";
+import { WorkoutLibrary } from "db";
+import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
+import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -21,48 +23,30 @@ const Container = styled.div`
 `;
 
 const WorkoutLibraryListBottomSheet = () => {
+    const { routineConfigId } = useParams();
+
     const { isOpen, handleOpenModal, handleCloseModal } = useModal();
     const { selectedValue, handleTabClick } = useTab("가슴");
     const { selectedValues, handleCheckBoxClick } = useCheckBox();
     const { value, handleInputChange, handleInputClear } = useInput();
 
-    // TODO: API 교체
-    const data = [
-        {
-            id: "1",
-            name: "벤치프레스",
-            workoutImage: SeatedRowImage,
-            workoutPart: "가슴",
-            type: ["weight", "rep"],
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: 1,
-        },
-        {
-            id: "2",
-            name: "데드리프트",
-            workoutImage: SeatedRowImage,
-            workoutPart: "등",
-            type: ["weight", "rep"],
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: 1,
-        },
-        {
-            id: "3",
-            name: "스쿼트",
-            workoutImage: SeatedRowImage,
-            workoutPart: "하체",
-            type: ["weight", "rep"],
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: 1,
-        },
-    ];
+    const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery();
+    const { mutateAsync: createWorkoutConfigAllMutation } =
+        useCreateWorkoutConfigAllMutation();
+
+    const workoutLibraryAll = workoutLibraryAllData ?? [];
 
     const handleWorkoutLibraryTabClick = (value: string) => {
         handleTabClick(value);
         // TODO: API 교체
+    };
+
+    const handleSubmitButtonClick = async (values: string[]) => {
+        await createWorkoutConfigAllMutation({
+            workoutLibraryIds: values,
+            routineConfigId: routineConfigId as string,
+        });
+        handleCloseModal();
     };
 
     return (
@@ -125,7 +109,7 @@ const WorkoutLibraryListBottomSheet = () => {
                         </ChipTab>
                         <CheckBoxGroup>
                             <SmallCardList<WorkoutLibrary>
-                                data={data}
+                                data={workoutLibraryAll}
                                 render={(item, index) => (
                                     <CheckBoxGroup.Wrapper>
                                         <SmallCard>
@@ -151,9 +135,7 @@ const WorkoutLibraryListBottomSheet = () => {
                             />
                         </CheckBoxGroup>
                         <CheckBoxGroup.SubmitButton
-                            onButtonClick={(selectedValues) =>
-                                console.log(selectedValues)
-                            }
+                            onButtonClick={handleSubmitButtonClick}
                             selectedValues={selectedValues}
                         />
                     </Container>
