@@ -6,9 +6,9 @@ import useAccordion from "hooks/client/useAccordion";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import { ReactComponent as PlusIcon } from "assets/image/plus2.svg";
 import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
-import { WorkoutConfig } from "types/config";
 import Table from "components/content/Table/Table";
 import { useTheme } from "styled-components";
+import { SetConfig, WorkoutConfig } from "db";
 
 type TypeMapper = {
     [key: string]: string;
@@ -32,10 +32,13 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                 <Accordion.Header>
                     <Card>
                         <Card.ImageBox>
-                            <img src={data.workoutImage} alt="" />
+                            <img
+                                src={data.workoutLibrary.workoutImage}
+                                alt=""
+                            />
                         </Card.ImageBox>
                         <Card.Column>
-                            <Card.Title>{data.name}</Card.Title>
+                            <Card.Title>{data.workoutLibrary.name}</Card.Title>
                             <Card.Description>
                                 {data.setConfigs.length}세트
                             </Card.Description>
@@ -54,7 +57,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                             header={
                                 <Table.Row>
                                     <Table.TitleText>세트</Table.TitleText>
-                                    {data.type.map((key) => (
+                                    {data.workoutLibrary.type.map((key) => (
                                         <Table.TitleText>
                                             {typeMapper[key]}
                                         </Table.TitleText>
@@ -62,7 +65,9 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                     <Table.TitleText>휴식</Table.TitleText>
                                 </Table.Row>
                             }
-                            render={(setConfig) => (
+                            render={(
+                                setConfig: SetConfig & { [key: string]: any }
+                            ) => (
                                 <Table.Row>
                                     <Table.Input
                                         value={setConfig.order.toString()}
@@ -71,7 +76,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                         }
                                         disabled={true}
                                     />
-                                    {data.type.map((key) => (
+                                    {data.workoutLibrary.type.map((key) => (
                                         <Table.Input
                                             value={setConfig[key].toString()}
                                             onInputChange={(value) =>
