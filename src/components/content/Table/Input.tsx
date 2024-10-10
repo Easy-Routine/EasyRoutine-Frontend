@@ -21,7 +21,7 @@ const Container = styled.input<{ width: number; disabled?: boolean }>`
 type InputProps = {
     width?: number;
     value: string;
-    onInputChange: (value: string) => void;
+    onInputChange?: (value: string) => void;
     disabled?: boolean;
 };
 
