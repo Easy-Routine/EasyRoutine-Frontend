@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getRoutineConfigAll } from "services/routine-config";
 import queryKey from "constants/queryKeys";
 
-const useRoutineConfigAllQuery = () => {
+const useGetRoutineConfigAllQuery = () => {
     return useQuery({
         queryKey: [queryKey.getRoutineConfigAll],
         queryFn: async () => {
@@ -12,4 +12,4 @@ const useRoutineConfigAllQuery = () => {
     });
 };
 
-export default useRoutineConfigAllQuery;
+export default useGetRoutineConfigAllQuery;
