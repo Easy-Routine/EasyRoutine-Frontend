@@ -9,6 +9,8 @@ import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
 import Table from "components/content/Table/Table";
 import { useTheme } from "styled-components";
 import { SetConfig, WorkoutConfig } from "db";
+import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMutation";
+import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
 
 type TypeMapper = {
     [key: string]: string;
@@ -24,6 +26,23 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
     const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
+
+    const { mutateAsync: createSetConfigMutate } =
+        useCreateSetConfigOneMutation();
+    const { mutateAsync: updateSetConfigFieldMutate } =
+        useUpdateSetConfigFieldMutation();
+
+    const handleSetCreateButtonClick = async () => {
+        await createSetConfigMutate(data.id);
+    };
+
+    const handleSetInputChange = async (
+        setConfigId: string,
+        key: string,
+        value: string
+    ) => {
+        await updateSetConfigFieldMutate({ setConfigId, key, value });
+    };
 
     // 비동기 작업 추가
     return (
@@ -58,7 +77,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                 <Table.Row>
                                     <Table.TitleText>세트</Table.TitleText>
                                     {data.workoutLibrary.type.map((key) => (
-                                        <Table.TitleText>
+                                        <Table.TitleText key={key}>
                                             {typeMapper[key]}
                                         </Table.TitleText>
                                     ))}
@@ -66,28 +85,37 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                 </Table.Row>
                             }
                             render={(
-                                setConfig: SetConfig & { [key: string]: any }
+                                setConfig: SetConfig & { [key: string]: any },
+                                index: number
                             ) => (
-                                <Table.Row>
+                                <Table.Row key={setConfig.id}>
+                                    {" "}
+                                    {/* 고유한 id를 key로 사용 */}
                                     <Table.Input
-                                        value={setConfig.order.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
+                                        value={(index + 1).toString()}
                                         disabled={true}
                                     />
                                     {data.workoutLibrary.type.map((key) => (
                                         <Table.Input
+                                            key={key} // 각 Input에도 key를 추가
                                             value={setConfig[key].toString()}
                                             onInputChange={(value) =>
-                                                console.log(value)
+                                                handleSetInputChange(
+                                                    setConfig.id,
+                                                    key,
+                                                    value
+                                                )
                                             }
                                         />
                                     ))}
                                     <Table.Input
-                                        value={setConfig.order.toString()}
+                                        value={setConfig.restSec.toString()}
                                         onInputChange={(value) =>
-                                            console.log(value)
+                                            handleSetInputChange(
+                                                setConfig.id,
+                                                "restSec",
+                                                value
+                                            )
                                         }
                                     />
                                 </Table.Row>
@@ -99,7 +127,10 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                             <MinusIcon />
                             세트 삭제하기
                         </IconTextBox.IconText>
-                        <IconTextBox.IconText color={color.primary}>
+                        <IconTextBox.IconText
+                            color={color.primary}
+                            onIconTextClick={handleSetCreateButtonClick}
+                        >
                             <PlusIcon />
                             세트 추가하기
                         </IconTextBox.IconText>
