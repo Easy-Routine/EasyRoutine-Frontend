@@ -6,13 +6,9 @@ export const getSetConfigAll = async () => {};
 export const createSetConfigOne = async (
     workoutConfigId: string
 ): Promise<SetConfig | null> => {
-    const currentSetConfigs = await db.setConfigs.toArray(); // 모든 SetConfig를 가져옵니다.
-    const order = currentSetConfigs.length;
-
     const newSetConfig: SetConfig = {
         id: uuidv4(),
         workoutConfigId,
-        order, // <= setConfigs의 길이보다 1 큰값을 order로 set하기
         rep: 0,
         weight: 0,
         restSec: 0,
