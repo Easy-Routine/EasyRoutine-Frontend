@@ -60,7 +60,7 @@ const RoutineConfigAccordion = ({
                         <SmallCardList<WorkoutConfig>
                             data={data.workoutConfigs}
                             render={(workoutConfig) => (
-                                <SmallCard>
+                                <SmallCard key={workoutConfig.id}>
                                     <SmallCard.ImageBox>
                                         <img
                                             src={

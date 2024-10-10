@@ -53,7 +53,7 @@ const RoutineRecordDetailAccordion = ({
                     <SmallCardList<any>
                         data={data.workoutRecords}
                         render={(item) => (
-                            <SmallCard>
+                            <SmallCard key={item.id}>
                                 <SmallCard.ImageBox>
                                     <img
                                         src={item.workoutImage}

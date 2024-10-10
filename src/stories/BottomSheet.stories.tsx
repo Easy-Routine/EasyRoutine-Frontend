@@ -112,7 +112,7 @@ export const WorkoutLibraryBottomSheet: Story = {
                             <SmallCardList<any>
                                 data={[{}, {}, {}]}
                                 render={(item, index) => (
-                                    <CheckBoxGroup.Wrapper>
+                                    <CheckBoxGroup.Wrapper key={index}>
                                         <SmallCard>
                                             <SmallCard.ImageBox>
                                                 <img

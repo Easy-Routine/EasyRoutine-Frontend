@@ -93,7 +93,7 @@ export const RoutineConfigAccordionCard: Story = {
                         <SmallCardList<any>
                             data={args.workoutConfigs}
                             render={(item) => (
-                                <SmallCard>
+                                <SmallCard key={item.id}>
                                     <SmallCard.ImageBox>
                                         <img
                                             src={SeatedRowImage}

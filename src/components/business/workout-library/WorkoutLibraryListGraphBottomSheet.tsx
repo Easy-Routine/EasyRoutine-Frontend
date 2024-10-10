@@ -123,7 +123,10 @@ const WorkoutLibraryListGraphBottomSheet = ({
                     <SmallCardList<WorkoutLibrary>
                         data={data}
                         render={({ id, name }) => (
-                            <SmallCard onCardClick={() => onSmallCardClick(id)}>
+                            <SmallCard
+                                onCardClick={() => onSmallCardClick(id)}
+                                key={id}
+                            >
                                 <SmallCard.ImageBox>
                                     <img
                                         src={SeatedRowImage}

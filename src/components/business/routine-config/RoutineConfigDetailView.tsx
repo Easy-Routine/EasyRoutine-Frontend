@@ -41,7 +41,10 @@ const RoutineConfigDetailView = () => {
             <Accordion.List
                 data={routineConfigDetail.workoutConfigs}
                 render={(workoutConfig) => (
-                    <WorkoutConfigDetailAccordion data={workoutConfig} />
+                    <WorkoutConfigDetailAccordion
+                        data={workoutConfig}
+                        key={workoutConfig.id}
+                    />
                 )}
             />
             <RoutineConfigColorTabBottomBar

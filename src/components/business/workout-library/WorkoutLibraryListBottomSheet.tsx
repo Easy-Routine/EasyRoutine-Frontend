@@ -111,7 +111,7 @@ const WorkoutLibraryListBottomSheet = () => {
                             <SmallCardList<WorkoutLibrary>
                                 data={workoutLibraryAll}
                                 render={(item, index) => (
-                                    <CheckBoxGroup.Wrapper>
+                                    <CheckBoxGroup.Wrapper key={item.id}>
                                         <SmallCard>
                                             <SmallCard.ImageBox>
                                                 <img
