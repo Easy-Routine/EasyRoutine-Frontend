@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
-const Container = styled.div<{ isSelected: boolean; backgroundColor: string }>`
+const Container = styled.div<{
+    $isSelected: boolean;
+    $backgroundColor: string;
+}>`
     width: 35px;
     height: 35px;
     border-radius: ${({ theme }) => theme.borderRadius.circle};
-    background-color: ${({ backgroundColor }) => backgroundColor};
-    border: ${({ theme, isSelected }) =>
-        isSelected ? `5px solid ${theme.color.primary}` : "none"};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
+    border: ${({ theme, $isSelected }) =>
+        $isSelected ? `5px solid ${theme.color.primary}` : "none"};
     box-sizing: border-box;
 `;
 
@@ -29,8 +32,8 @@ const Color = ({
 
     return (
         <Container
-            isSelected={isSelected}
-            backgroundColor={backgroundColor}
+            $isSelected={isSelected}
+            $backgroundColor={backgroundColor}
             onClick={() => onTabClick(value)}
         />
     );

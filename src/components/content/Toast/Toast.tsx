@@ -4,7 +4,7 @@ import styled from "styled-components";
 import CircleBox from "components/box/CircleBox/CircleBox";
 import { ReactComponent as CheckIcon } from "assets/image/check.svg";
 
-const Container = styled.div<{ isOpen: boolean }>`
+const Container = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 0;
     left: 50%;
@@ -18,9 +18,9 @@ const Container = styled.div<{ isOpen: boolean }>`
     padding: 10px 40px;
     box-sizing: border-box;
     transition: all 0.5s ease-in-out;
-    transform: ${({ isOpen }) =>
-        isOpen ? "translate(-50%, 25%)" : "translate(-50%, -100%)"};
-    opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
+    transform: ${({ $isOpen }) =>
+        $isOpen ? "translate(-50%, 25%)" : "translate(-50%, -100%)"};
+    opacity: ${({ $isOpen }) => ($isOpen ? "1" : "0")};
     z-index: ${({ theme }) => theme.zIndex.modal};
     box-shadow: ${({ theme }) => theme.boxShadow};
 `;
@@ -45,7 +45,7 @@ const Toast = () => {
 
     return (
         <>
-            <Container isOpen={isOpen}>
+            <Container $isOpen={isOpen}>
                 <CircleBox width={32} height={32}>
                     <CheckIcon />
                 </CircleBox>

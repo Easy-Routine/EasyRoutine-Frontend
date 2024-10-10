@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { ReactComponent as CheckIcon } from "assets/image/check.svg";
 
-const Container = styled.div<{ isSelected: boolean }>`
+const Container = styled.div<{ $isSelected: boolean }>`
     width: 21px;
     height: 20px;
     border-radius: ${({ theme }) => theme.borderRadius.xs};
     border: 1px solid
-        ${({ theme, isSelected }) =>
-            isSelected ? "none" : theme.color.gray.light};
-    background-color: ${({ theme, isSelected }) =>
-        isSelected ? theme.color.primary : theme.color.background.box};
+        ${({ theme, $isSelected }) =>
+            $isSelected ? "none" : theme.color.gray.light};
+    background-color: ${({ theme, $isSelected }) =>
+        $isSelected ? theme.color.primary : theme.color.background.box};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,7 +33,7 @@ const CheckBox = ({
 
     return (
         <Container
-            isSelected={isSelected}
+            $isSelected={isSelected}
             onClick={() => onCheckBoxClick(value)}
         >
             {isSelected && <CheckIcon width={12.5} />}

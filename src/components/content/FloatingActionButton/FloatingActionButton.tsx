@@ -3,9 +3,10 @@ import CircleBox from "components/box/CircleBox/CircleBox";
 import { ReactComponent as PlusIcon } from "assets/image/plus.svg";
 import styled from "styled-components";
 
-const Container = styled.div<{ isVisible: boolean }>`
+// Container 컴포넌트에 isVisible을 prop으로 전달하여 스타일 적용
+const Container = styled.div<{ $isVisible: boolean }>`
     position: fixed;
-    bottom: ${({ isVisible }) => (isVisible ? "80px" : "-80px")};
+    bottom: ${({ $isVisible }) => ($isVisible ? "80px" : "-80px")};
     left: 50%;
     transform: translateX(-50%);
     z-index: ${({ theme }) => theme.zIndex.FloatingActionButton};
@@ -64,7 +65,7 @@ const FloatingActionButton = ({
     }, [lastScrollY]);
 
     return (
-        <Container isVisible={isVisible} onClick={handleButtonClick}>
+        <Container $isVisible={isVisible} onClick={handleButtonClick}>
             <Text>{text}</Text>
             <CircleBox width={64} height={64}>
                 <PlusIcon />

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Container = styled.div<{ isOpen: boolean }>`
+const Container = styled.div<{ $isOpen: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -19,7 +19,7 @@ const Container = styled.div<{ isOpen: boolean }>`
     z-index: ${({ theme }) => theme.zIndex.modal};
     width: 100%;
     transition: all 0.5s ease-in-out;
-    transform: translateY(${({ isOpen }) => (isOpen ? "0" : "100%")});
+    transform: translateY(${({ $isOpen }) => ($isOpen ? "0" : "100%")});
 
     box-shadow: ${({ theme }) => theme.boxShadow};
 `;
@@ -30,7 +30,7 @@ type BottomSheetProps = {
 };
 
 const BottomSheet = ({ children, isOpen }: BottomSheetProps) => {
-    return <Container isOpen={isOpen}>{children}</Container>;
+    return <Container $isOpen={isOpen}>{children}</Container>;
 };
 
 export default BottomSheet;
