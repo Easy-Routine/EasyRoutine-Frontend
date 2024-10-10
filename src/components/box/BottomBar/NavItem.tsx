@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div<{ isSelected: boolean }>`
+const Container = styled.div<{ $isSelected: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,8 +8,8 @@ const Container = styled.div<{ isSelected: boolean }>`
     gap: 10px;
     font-size: ${({ theme }) => theme.fontSize.xs};
     font-weight: ${({ theme }) => theme.fontWeight.regular};
-    color: ${({ theme, isSelected }) =>
-        isSelected ? theme.color.primary : theme.color.gray.light};
+    color: ${({ theme, $isSelected }) =>
+        $isSelected ? theme.color.primary : theme.color.gray.light};
 `;
 
 type NavItemProps = {
@@ -27,7 +27,7 @@ const NavItem = ({
 }: NavItemProps) => {
     const isSelected = value === selectedValue;
     return (
-        <Container isSelected={isSelected} onClick={() => onTabClick(value)}>
+        <Container $isSelected={isSelected} onClick={() => onTabClick(value)}>
             {children}
         </Container>
     );
