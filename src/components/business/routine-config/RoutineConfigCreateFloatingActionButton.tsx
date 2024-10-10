@@ -3,17 +3,18 @@ import ROUTES from "constants/routes";
 import { useNavigate } from "react-router-dom";
 import EmptyBoundary from "../EmptyBoundary";
 import useToast from "hooks/useToast";
-import { RoutineConfig } from "db";
 import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
+import useGetRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 
 const RoutineConfigCreateFloatingActionButton = () => {
-    // TODO : 데이터 페칭
-    const data: RoutineConfig[] | {} = [{}];
-
     const navigate = useNavigate();
     const { showToast } = useToast();
     const { mutateAsync: createRoutineConfigOneMutate } =
         useCreateRoutineConfigMutation();
+
+    const { data: routineConfigAllData } = useGetRoutineConfigAllQuery();
+
+    const routineConfigAll = routineConfigAllData ?? [];
 
     const handleButtonClick = async () => {
         try {
@@ -33,7 +34,7 @@ const RoutineConfigCreateFloatingActionButton = () => {
 
     return (
         <EmptyBoundary
-            data={data}
+            data={routineConfigAll}
             fallback={
                 <FloatingActionButton
                     onButtonClick={handleButtonClick}
