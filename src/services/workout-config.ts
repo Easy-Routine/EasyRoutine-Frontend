@@ -40,3 +40,31 @@ export const createWorkoutConfigAll = async (
         throw new Error("Failed to create workout configurations"); // 오류 발생 시 예외 던짐
     }
 };
+
+export const deleteWorkoutConfigOne = async (
+    workoutConfigId: string
+): Promise<boolean> => {
+    try {
+        // 해당 workoutConfig에 연결된 모든 setConfig를 가져옵니다.
+        const setConfigs = await db.setConfigs
+            .where("workoutConfigId")
+            .equals(workoutConfigId)
+            .toArray();
+
+        // 모든 setConfig를 삭제합니다.
+        await Promise.all(
+            setConfigs.map((setConfig) => db.setConfigs.delete(setConfig.id))
+        );
+
+        // workoutConfig 삭제
+        await db.workoutConfigs.delete(workoutConfigId);
+
+        console.log(
+            `WorkoutConfig and its related setConfigs deleted for ID: ${workoutConfigId}`
+        );
+        return true; // 삭제 성공
+    } catch (error) {
+        console.error("Error deleting WorkoutConfig:", error);
+        return false; // 오류 발생
+    }
+};
