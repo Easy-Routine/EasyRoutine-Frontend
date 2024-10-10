@@ -2,6 +2,8 @@ import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
 import useToast from "hooks/useToast";
+import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
+import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 
 type RoutineConfigDeleteModalProps = {
     routineConfigId: string;
@@ -20,13 +22,20 @@ const RoutineConfigDeleteModal = ({
 }: RoutineConfigDeleteModalProps) => {
     const { showToast } = useToast();
 
-    // TODO: API 호출
-    const data = {
-        name: "월요일 루틴",
-    };
+    const { mutateAsync: deleteRoutineConfigOne } =
+        useDeleteRoutineConfigOneMutation();
 
-    const handleRoutineConfigDeleteButtonClick = () => {
+    // TODO: API 호출
+    const { data: routineConfigOneData } =
+        useGetRoutineConfigOneQuery(routineConfigId);
+
+    const routineConfigOne = routineConfigOneData ?? { name: "" };
+
+    const handleRoutineConfigDeleteButtonClick = async (
+        routineConfgId: string
+    ) => {
         // TODO: API 호출
+        await deleteRoutineConfigOne(routineConfigId);
         showToast("루틴이 삭제되었습니다.");
         onConfirmButtonClick();
     };
@@ -42,7 +51,7 @@ const RoutineConfigDeleteModal = ({
                         </Confirm.IconBox>
                         <Confirm.Title>루틴 삭제</Confirm.Title>
                         <Confirm.Description>
-                            '{data.name}'을
+                            '{routineConfigOne.name}'을
                             <br /> 삭제하시겠습니까?
                         </Confirm.Description>
                     </Confirm.ContentBox>
@@ -50,8 +59,10 @@ const RoutineConfigDeleteModal = ({
                         cancelLabel="취소"
                         confirmLabel="삭제하기"
                         onCancelButtonClick={onCancelButtonClick}
-                        onConfirmButtonClick={
-                            handleRoutineConfigDeleteButtonClick
+                        onConfirmButtonClick={() =>
+                            handleRoutineConfigDeleteButtonClick(
+                                routineConfigId
+                            )
                         }
                     />
                 </Confirm>
