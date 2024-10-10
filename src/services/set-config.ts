@@ -56,3 +56,33 @@ export const updateSetConfigField = async (
         return null; // 오류 발생 시 null 반환
     }
 };
+
+export const deleteSetConfigOne = async (
+    workoutConfigId: string
+): Promise<boolean> => {
+    try {
+        // 해당 workoutConfigId에 연결된 모든 SetConfig를 가져옵니다.
+        const setConfigs = await db.setConfigs
+            .where("workoutConfigId")
+            .equals(workoutConfigId)
+            .toArray();
+
+        // 가장 최근에 생성된 SetConfig를 찾습니다.
+        const latestSetConfig = setConfigs.sort(
+            (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+        )[0];
+
+        // 최신 SetConfig가 있는 경우 삭제합니다.
+        if (latestSetConfig) {
+            await db.setConfigs.delete(latestSetConfig.id);
+            console.log("SetConfig deleted:", latestSetConfig);
+            return true; // 삭제 성공
+        } else {
+            console.log("No SetConfig found to delete.");
+            return false; // 삭제할 SetConfig가 없음
+        }
+    } catch (error) {
+        console.error("Error deleting SetConfig:", error);
+        return false; // 오류 발생
+    }
+};
