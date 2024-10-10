@@ -19,7 +19,7 @@ type RoutineConfigDetailAccordionProps = {
     onRoutineConfigProgressButtonClick: (routineConfigId: string) => void;
 };
 
-const RoutineConfigAccordion = ({
+const RoutineConfigDetailAccordion = ({
     data,
     onRoutineConfigProgressButtonClick,
     onRoutineConfigDeleteButtonClick,
@@ -40,7 +40,7 @@ const RoutineConfigAccordion = ({
                 <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                     <Accordion.Header>
                         <Card>
-                            <Card.ImageBox backgroundColor={data.color}>
+                            <Card.ImageBox $backgroundColor={data.color}>
                                 <FireIcon />
                             </Card.ImageBox>
                             <Card.Column>
@@ -75,7 +75,7 @@ const RoutineConfigAccordion = ({
                                             {workoutConfig.workoutLibrary.name}
                                         </SmallCard.BoldText>
                                         <SmallCard.NormalText>
-                                            {workoutConfig.setConfigs.length}{" "}
+                                            {workoutConfig.setConfigs.length}
                                             세트
                                         </SmallCard.NormalText>
                                     </SmallCard.ColumnBox>
@@ -115,4 +115,4 @@ const RoutineConfigAccordion = ({
     );
 };
 
-export default RoutineConfigAccordion;
+export default RoutineConfigDetailAccordion;
