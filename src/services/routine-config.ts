@@ -197,3 +197,26 @@ export const deleteRoutineConfigOne = async (
         return false; // 오류 발생
     }
 };
+
+export const updateRoutineConfigColor = async (
+    routineConfigId: string,
+    value: string
+): Promise<RoutineConfig | null> => {
+    try {
+        const routineConfig = await db.routineConfigs.get(routineConfigId);
+
+        if (!routineConfig) {
+            console.error("RoutineConfig not found");
+            return null;
+        }
+
+        routineConfig.color = value;
+
+        await db.routineConfigs.put(routineConfig);
+
+        return routineConfig;
+    } catch (error) {
+        console.error("Error updating SetConfig:", error);
+        return null; // 오류 발생 시 null 반환
+    }
+};
