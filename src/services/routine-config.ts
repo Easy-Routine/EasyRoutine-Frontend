@@ -149,3 +149,51 @@ export const createRoutineConfigOne = async ({
         throw error;
     }
 };
+
+export const deleteRoutineConfigOne = async (
+    routineConfigId: string
+): Promise<boolean> => {
+    try {
+        // 해당 루틴 구성에 연결된 모든 workoutConfig를 가져옵니다.
+        const workoutConfigs = await db.workoutConfigs
+            .where("routineConfigId")
+            .equals(routineConfigId)
+            .toArray();
+
+        // 각 workoutConfig에 연결된 setConfig를 삭제합니다.
+        await Promise.all(
+            workoutConfigs.map(async (workoutConfig) => {
+                // 해당 workoutConfig에 연결된 모든 setConfig를 가져옵니다.
+                const setConfigs = await db.setConfigs
+                    .where("workoutConfigId")
+                    .equals(workoutConfig.id)
+                    .toArray();
+
+                // setConfig를 삭제합니다.
+                await Promise.all(
+                    setConfigs.map((setConfig) =>
+                        db.setConfigs.delete(setConfig.id)
+                    )
+                );
+            })
+        );
+
+        // workoutConfig를 삭제합니다.
+        await Promise.all(
+            workoutConfigs.map((workoutConfig) =>
+                db.workoutConfigs.delete(workoutConfig.id)
+            )
+        );
+
+        // 루틴 구성 삭제
+        await db.routineConfigs.delete(routineConfigId);
+
+        console.log(
+            `RoutineConfig and its related workoutConfigs and setConfigs deleted for ID: ${routineConfigId}`
+        );
+        return true; // 삭제 성공
+    } catch (error) {
+        console.error("Error deleting RoutineConfig:", error);
+        return false; // 오류 발생
+    }
+};
