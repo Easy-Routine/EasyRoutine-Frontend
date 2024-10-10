@@ -11,6 +11,8 @@ import { useTheme } from "styled-components";
 import { SetConfig, WorkoutConfig } from "db";
 import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMutation";
 import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
+import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";
+import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
 
 type TypeMapper = {
     [key: string]: string;
@@ -27,13 +29,25 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
-    const { mutateAsync: createSetConfigMutate } =
+    const { mutateAsync: createSetConfigOneMutate } =
         useCreateSetConfigOneMutation();
     const { mutateAsync: updateSetConfigFieldMutate } =
         useUpdateSetConfigFieldMutation();
+    const { mutateAsync: deleteSetConfigOneMutate } =
+        useDeleteSetConfigOneMutation();
+    const { mutateAsync: deleteWorkoutConfigOneMutate } =
+        useDeleteWorkoutConfigOneMutation();
 
-    const handleSetCreateButtonClick = async () => {
-        await createSetConfigMutate(data.id);
+    const handleSetDeleteButtonClick = async (workoutConfigId: string) => {
+        await deleteSetConfigOneMutate(workoutConfigId);
+    };
+
+    const handleSetCreateButtonClick = async (workoutConfigId: string) => {
+        await createSetConfigOneMutate(workoutConfigId);
+    };
+
+    const handleWorkoutDeleteButtonClick = async (workoutConfigId: string) => {
+        await deleteWorkoutConfigOneMutate(workoutConfigId);
     };
 
     const handleSetInputChange = async (
@@ -89,8 +103,6 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                 index: number
                             ) => (
                                 <Table.Row key={setConfig.id}>
-                                    {" "}
-                                    {/* 고유한 id를 key로 사용 */}
                                     <Table.Input
                                         value={(index + 1).toString()}
                                         disabled={true}
@@ -123,20 +135,32 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                         />
                     </Table>
                     <IconTextBox>
-                        <IconTextBox.IconText color={color.gray.dark}>
+                        <IconTextBox.IconText
+                            color={color.gray.dark}
+                            onIconTextClick={() =>
+                                handleSetDeleteButtonClick(data.id)
+                            }
+                        >
                             <MinusIcon />
                             세트 삭제하기
                         </IconTextBox.IconText>
                         <IconTextBox.IconText
                             color={color.primary}
-                            onIconTextClick={handleSetCreateButtonClick}
+                            onIconTextClick={() =>
+                                handleSetCreateButtonClick(data.id)
+                            }
                         >
                             <PlusIcon />
                             세트 추가하기
                         </IconTextBox.IconText>
                     </IconTextBox>
                 </Accordion.Body>
-                <Accordion.DeleteButton opacity={opacity} />
+                <Accordion.DeleteButton
+                    opacity={opacity}
+                    onDeleteButtonClick={() =>
+                        handleWorkoutDeleteButtonClick(data.id)
+                    }
+                />
             </Accordion.Motion>
         </Accordion>
     );
