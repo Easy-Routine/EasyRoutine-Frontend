@@ -39,6 +39,7 @@ const RoutineConfigListView = () => {
                     data={routineConfigAll}
                     render={(routineConfig) => (
                         <RoutineConfigDetailAccordion
+                            key={routineConfig.id}
                             data={routineConfig}
                             onRoutineConfigProgressButtonClick={(
                                 routineConfigId: string
@@ -65,19 +66,21 @@ const RoutineConfigListView = () => {
                     closeRoutineProgressModal();
                 }}
             />
-            <RoutineConfigDeleteModal
-                routineConfigId={routineConfigId}
-                isOpen={isRoutineConfigDeleteModalOpen}
-                onBackdropClick={() => {
-                    closeRoutineConfigDeleteModal();
-                }}
-                onCancelButtonClick={() => {
-                    closeRoutineConfigDeleteModal();
-                }}
-                onConfirmButtonClick={() => {
-                    closeRoutineConfigDeleteModal();
-                }}
-            />
+            {isRoutineConfigDeleteModalOpen && (
+                <RoutineConfigDeleteModal
+                    routineConfigId={routineConfigId}
+                    isOpen={isRoutineConfigDeleteModalOpen}
+                    onBackdropClick={() => {
+                        closeRoutineConfigDeleteModal();
+                    }}
+                    onCancelButtonClick={() => {
+                        closeRoutineConfigDeleteModal();
+                    }}
+                    onConfirmButtonClick={() => {
+                        closeRoutineConfigDeleteModal();
+                    }}
+                />
+            )}
         </Container>
     );
 };
