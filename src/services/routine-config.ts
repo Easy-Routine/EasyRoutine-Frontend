@@ -17,6 +17,11 @@ export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
                     .equals(routine.id)
                     .toArray();
 
+                // 운동 구성 createdAt에 따라 정렬
+                workoutConfigs.sort(
+                    (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
+                );
+
                 // 각 운동에 연결된 세트 구성 가져오기
                 const workoutConfigsWithSets = await Promise.all(
                     workoutConfigs.map(async (workout) => {
@@ -24,6 +29,12 @@ export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
                             .where("workoutConfigId")
                             .equals(workout.id)
                             .toArray();
+
+                        // 세트 구성 createdAt에 따라 정렬
+                        setConfigs.sort(
+                            (a, b) =>
+                                a.createdAt.getTime() - b.createdAt.getTime()
+                        );
 
                         // 운동 구성에 세트 구성 추가
                         return {
@@ -39,6 +50,11 @@ export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
                     workoutConfigs: workoutConfigsWithSets,
                 };
             })
+        );
+
+        // 루틴 구성 createdAt에 따라 정렬
+        routineConfigsWithWorkouts.sort(
+            (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
         );
 
         return routineConfigsWithWorkouts;
@@ -75,7 +91,12 @@ export const getRoutineConfigOne = async (
                 const setConfigs = await db.setConfigs
                     .where("workoutConfigId")
                     .equals(workout.id)
-                    .toArray();
+                    .toArray(); // 먼저 모든 세트 구성 가져오기
+
+                // createdAt에 따라 정렬
+                setConfigs.sort(
+                    (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
+                );
 
                 // 운동 구성에 세트 구성 추가
                 return {
@@ -83,6 +104,11 @@ export const getRoutineConfigOne = async (
                     setConfigs, // 세트 구성 추가
                 };
             })
+        );
+
+        // 운동 구성 createdAt에 따라 정렬
+        workoutConfigsWithSets.sort(
+            (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
         );
 
         // 루틴 구성에 운동 구성 추가
