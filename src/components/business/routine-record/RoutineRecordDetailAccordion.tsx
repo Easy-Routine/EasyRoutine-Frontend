@@ -33,7 +33,7 @@ const RoutineRecordDetailAccordion = ({
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
                     <Card>
-                        <Card.ImageBox backgroundColor={data.color}>
+                        <Card.ImageBox $backgroundColor={data.color}>
                             <FireIcon />
                         </Card.ImageBox>
                         <Card.Column>

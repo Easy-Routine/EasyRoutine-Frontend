@@ -73,7 +73,7 @@ export const RoutineConfigAccordionCard: Story = {
                 <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                     <Accordion.Header>
                         <Card>
-                            <Card.ImageBox backgroundColor={args.color}>
+                            <Card.ImageBox $backgroundColor={args.color}>
                                 <FireIcon />
                             </Card.ImageBox>
                             <Card.Column>
