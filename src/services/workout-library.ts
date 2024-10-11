@@ -48,3 +48,57 @@ export const createWorkoutLibraryOne = async (
         return null; // 오류 발생 시 null 반환
     }
 };
+
+export const updateWorkoutLibraryField = async (
+    workoutLibraryId: string,
+    key: string, // WorkoutLibrary의 키로 제한
+    value: string | number // value는 string 또는 number로 받을 수 있음
+): Promise<WorkoutLibrary | null> => {
+    try {
+        // 데이터베이스에서 WorkoutLibrary 가져오기
+        const workoutLibrary = await db.workoutLibraries.get(workoutLibraryId);
+
+        if (!workoutLibrary) {
+            console.error("WorkoutLibrary not found");
+            return null; // 해당 ID의 WorkoutLibrary가 존재하지 않을 경우
+        }
+
+        // 필드 업데이트
+        workoutLibrary[key] = value; // key에 해당하는 필드 업데이트
+
+        // 업데이트된 운동 라이브러리 저장
+        await db.workoutLibraries.put(workoutLibrary);
+        console.log("WorkoutLibrary updated:", workoutLibrary);
+        return workoutLibrary; // 업데이트된 WorkoutLibrary 반환
+    } catch (error) {
+        console.error("Error updating WorkoutLibrary:", error);
+        return null; // 오류 발생 시 null 반환
+    }
+};
+
+export const updateWorkoutLibraryOne = async (
+    workoutLibraryId: string,
+    updatedData: Partial<WorkoutLibrary> // 업데이트할 데이터
+): Promise<boolean> => {
+    try {
+        // 해당 워크아웃 라이브러리 항목을 가져옵니다.
+        const workoutLibrary = await db.workoutLibraries.get(workoutLibraryId);
+
+        if (!workoutLibrary) {
+            console.error("WorkoutLibrary not found for ID:", workoutLibraryId);
+            return false; // 항목이 존재하지 않음
+        }
+
+        // 업데이트할 데이터로 항목을 수정합니다.
+        const newData = { ...workoutLibrary, ...updatedData };
+
+        // 데이터 저장
+        await db.workoutLibraries.put(newData);
+
+        console.log("WorkoutLibrary updated:", newData);
+        return true; // 업데이트 성공
+    } catch (error) {
+        console.error("Error updating WorkoutLibrary:", error);
+        return false; // 오류 발생
+    }
+};
