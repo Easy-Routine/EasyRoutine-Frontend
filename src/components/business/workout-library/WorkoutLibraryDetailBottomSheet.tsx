@@ -9,6 +9,7 @@ import useCheckBox from "hooks/client/useCheckBox";
 import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
+import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Category } from "type/Category";
@@ -30,6 +31,7 @@ const CheckBoxItem = styled.div`
 type WorkoutLibraryBottomSheetProps = {
     isOpen: boolean;
     onBackdropClick: () => void;
+    onSubmitButtonClick: () => void;
     workoutLibraryId: string;
 };
 
@@ -47,6 +49,7 @@ const initialWorkoutLibraryOne: WorkoutLibrary = {
 const WorkoutLibraryDetailBottomSheet = ({
     isOpen,
     onBackdropClick,
+    onSubmitButtonClick,
     workoutLibraryId,
 }: WorkoutLibraryBottomSheetProps) => {
     // TODO: workoutLibraryId로 상세 데이터 가져오기
@@ -69,11 +72,26 @@ const WorkoutLibraryDetailBottomSheet = ({
     const { selectedValues, setSelectedValues, handleCheckBoxClick } =
         useCheckBox(workoutLibraryOne.type);
 
+    const { mutateAsync: updateWorkoutLibraryOneMutate } =
+        useUpdateWorkoutLibraryOneMutation();
+
     useEffect(() => {
         setValue(workoutLibraryOne.name);
         setSelectedValue(workoutLibraryOne.category);
         setSelectedValues(workoutLibraryOne.type);
     }, [workoutLibraryOne, setValue, setSelectedValue, setSelectedValues]);
+
+    const handleWorkoutLibraryUpdateButtonClick = async () => {
+        await updateWorkoutLibraryOneMutate({
+            workoutLibraryId,
+            updatedData: {
+                name: underlineInputValue,
+                category: selectedCategory,
+                type: selectedValues,
+            },
+        });
+        onSubmitButtonClick();
+    };
 
     return (
         <Modal>
@@ -163,7 +181,9 @@ const WorkoutLibraryDetailBottomSheet = ({
                             </CheckBoxGroup.Wrapper>
                         </CheckBoxGroup>
                     </LabelBox>
-                    <Button>운동 수정하기</Button>
+                    <Button onClick={handleWorkoutLibraryUpdateButtonClick}>
+                        운동 수정하기
+                    </Button>
                 </Container>
                 {workoutLibraryId}
             </Modal.BottomSheet>

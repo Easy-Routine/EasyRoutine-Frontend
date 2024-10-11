@@ -122,6 +122,7 @@ const WorkoutLibraryListView = () => {
                 workoutLibraryId={workoutLibraryId}
                 isOpen={isWorkoutLibraryBottomSheetOpen}
                 onBackdropClick={() => closeWorkoutLibraryBottomSheet()}
+                onSubmitButtonClick={() => closeWorkoutLibraryBottomSheet()}
             />
             <WorkoutLibraryDeleteModal
                 workoutLibraryId={workoutLibraryId}
