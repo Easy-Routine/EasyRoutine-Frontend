@@ -36,8 +36,8 @@ export type SetConfig = {
 export type WorkoutLibrary = {
     id: string;
     name: string;
-    workoutImage: string;
-    workoutPart: string;
+    image: string;
+    category: string;
     type: string[];
     createdAt: Date;
     updatedAt: Date;
@@ -60,7 +60,7 @@ db.version(1).stores({
     setConfigs:
         "id, weight, rep, restSec, createdAt, updatedAt, workoutConfigId",
     workoutLibraries:
-        "id, name, workoutImage, workoutPart, type, createdAt, updatedAt, userId",
+        "id, name, image, category, type, createdAt, updatedAt, userId",
 });
 
 export { db };
