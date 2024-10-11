@@ -1,6 +1,5 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Box from "components/box/Box/Box";
-import TitleText from "components/content/TitleText/TitleText";
 import RoutineConfigColorTabBottomBar from "./RoutineConfigUpdateColorTabBottomBar";
 import styled from "styled-components";
 import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailAccordion";
@@ -8,6 +7,7 @@ import { useParams } from "react-router-dom";
 import useRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import { RoutineConfig } from "db";
 import { Color } from "type/Color";
+import RoutineConfigUpdateNameTitleText from "./RoutineConfigUpdateNameTitleText";
 
 const Container = styled.div`
     display: flex;
@@ -37,9 +37,9 @@ const RoutineConfigDetailView = () => {
     return (
         <Container>
             <Box>
-                <TitleText contentEditable={true}>
-                    {routineConfigDetail.name}
-                </TitleText>
+                <RoutineConfigUpdateNameTitleText
+                    defaultValue={routineConfigDetail.name}
+                />
             </Box>
             <Accordion.List
                 data={routineConfigDetail.workoutConfigs}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SeatedRowImage from "assets/image/seated-row.png";
 import { RoutineRecord } from "types/recrod";
 import Box from "components/box/Box/Box";
-import TitleText from "components/content/TitleText/TitleText";
+import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import Accordion from "components/box/Accordion/Accordion";
 import WorkoutRecordAccordion from "../workout-record/WorkoutRecordAccordion";
 import { Color } from "type/Color";
@@ -152,7 +152,7 @@ const RoutineRecordDetailView = () => {
     return (
         <Container>
             <Box>
-                <TitleText>{data.name}</TitleText>
+                <TitleTextInput value={data.name} />
             </Box>
             <Accordion.List
                 data={data.workoutRecords}

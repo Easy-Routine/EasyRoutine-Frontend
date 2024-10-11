@@ -6,7 +6,7 @@ import useTab from "hooks/client/useTab";
 import styled from "styled-components";
 import useModal from "hooks/client/useModal";
 import { useState } from "react";
-import TitleText from "components/content/TitleText/TitleText";
+import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
 
 const Container = styled.div`
@@ -61,7 +61,7 @@ const RoutineRecorListGraphView = () => {
     return (
         <Container>
             <Box>
-                <TitleText>{workoutLibraryDetailData.name}</TitleText>
+                <TitleTextInput value={workoutLibraryDetailData.name} />
             </Box>
             <Box>
                 <Graph
