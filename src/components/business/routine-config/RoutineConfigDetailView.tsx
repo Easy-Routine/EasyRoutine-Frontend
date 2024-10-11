@@ -37,7 +37,9 @@ const RoutineConfigDetailView = () => {
     return (
         <Container>
             <Box>
-                <TitleText>{routineConfigDetail.name}</TitleText>
+                <TitleText contentEditable={true}>
+                    {routineConfigDetail.name}
+                </TitleText>
             </Box>
             <Accordion.List
                 data={routineConfigDetail.workoutConfigs}
