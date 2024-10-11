@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Color as ColorType } from "type/Color";
 
 const Container = styled.div<{
     $isSelected: boolean;
@@ -14,10 +15,10 @@ const Container = styled.div<{
 `;
 
 type ColorProps = {
-    value: string;
+    value: ColorType;
     backgroundColor: string;
     selectedValue: string;
-    onTabClick: (value: string) => void;
+    onTabClick: (value: ColorType) => void;
 };
 
 const Color = ({

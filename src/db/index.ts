@@ -1,10 +1,11 @@
 // db.ts
 import Dexie, { type EntityTable } from "dexie";
+import { Color } from "type/Color";
 
 export type RoutineConfig = {
     id: string;
     name: string;
-    color: string;
+    color: Color;
     createdAt: Date;
     updatedAt: Date;
     userId: string;

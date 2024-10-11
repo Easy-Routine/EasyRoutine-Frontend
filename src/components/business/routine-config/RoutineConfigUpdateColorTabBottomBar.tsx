@@ -4,6 +4,7 @@ import useTab from "hooks/client/useTab";
 import useUpdateRoutineConfigColorMutation from "hooks/server/useUpdateRoutineConfigColorMutation";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Color } from "type/Color";
 
 type RoutineConfigColorTabBottomBarProps = {
     defaultValue: string;
@@ -26,7 +27,7 @@ const RoutineConfigColorTabBottomBar = ({
 
     const handleColorTabClick = async (
         routineConfigId: string,
-        value: string
+        value: Color
     ) => {
         await updateRoutineConfigColor({ routineConfigId, value });
 
@@ -41,40 +42,40 @@ const RoutineConfigColorTabBottomBar = ({
                     onTabClick={(value) =>
                         handleColorTabClick(routineConfigId as string, value)
                     }
-                    value="#855CF8"
-                    backgroundColor="#855CF8"
+                    value={Color.VIOLET}
+                    backgroundColor={Color.VIOLET}
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={(value) =>
                         handleColorTabClick(routineConfigId as string, value)
                     }
-                    value="#F26B2C"
-                    backgroundColor="#F26B2C"
+                    value={Color.ORANGE}
+                    backgroundColor={Color.ORANGE}
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={(value) =>
                         handleColorTabClick(routineConfigId as string, value)
                     }
-                    value="#2DAF2D"
-                    backgroundColor="#2DAF2D"
+                    value={Color.GREEN}
+                    backgroundColor={Color.GREEN}
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={(value) =>
                         handleColorTabClick(routineConfigId as string, value)
                     }
-                    value="#455A64"
-                    backgroundColor="#455A64"
+                    value={Color.BLUE}
+                    backgroundColor={Color.BLUE}
                 />
                 <ColorTab.Color
                     selectedValue={selectedValue}
                     onTabClick={(value) =>
                         handleColorTabClick(routineConfigId as string, value)
                     }
-                    value="#DD408F"
-                    backgroundColor="#DD408F"
+                    value={Color.PINK}
+                    backgroundColor={Color.PINK}
                 />
             </ColorTab>
         </BottomBar>

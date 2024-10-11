@@ -14,6 +14,7 @@ import Button from "components/content/Button/Button";
 import Card from "components/content/Card/Card";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import PaddingY from "components/box/PaddingY/PaddingY";
+import { Color } from "type/Color";
 
 type AccordionProps = React.ComponentProps<typeof Accordion>;
 
@@ -30,7 +31,7 @@ export const RoutineConfigAccordionCard: Story = {
         const args = {
             id: 1,
             name: "나의 가슴 루틴",
-            color: "#f0fff0",
+            color: Color.ORANGE,
             createdAt: new Date(),
             updatedAt: new Date(),
             userId: 3,

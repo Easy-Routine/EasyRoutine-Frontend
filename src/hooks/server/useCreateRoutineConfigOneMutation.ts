@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import { createRoutineConfigOne } from "services/routine-config";
+import { Color } from "type/Color";
 
 const useCreateRoutineConfigMutation = () => {
     const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ const useCreateRoutineConfigMutation = () => {
             userId,
         }: {
             name: string;
-            color: string;
+            color: Color;
             userId: string;
         }) => createRoutineConfigOne({ name, color, userId }),
         onSettled: () => {

@@ -12,6 +12,7 @@ import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
+import { Color } from "type/Color";
 
 type RoutineRecordDetailAccordionProps = {
     data: RoutineRecord;
@@ -33,7 +34,7 @@ const RoutineRecordDetailAccordion = ({
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
                     <Card>
-                        <Card.ImageBox $backgroundColor={data.color}>
+                        <Card.ImageBox $backgroundColor={data.color as Color}>
                             <FireIcon />
                         </Card.ImageBox>
                         <Card.Column>

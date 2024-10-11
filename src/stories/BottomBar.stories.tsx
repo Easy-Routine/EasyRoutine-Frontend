@@ -10,6 +10,7 @@ import NavigationTab from "components/box/BottomBar/NavigationTab";
 import useTab from "hooks/client/useTab";
 import Button from "components/content/Button/Button";
 import TimerTemplate from "components/box/BottomBar/TimerTemplate";
+import { Color } from "type/Color";
 
 type BottomBarProps = React.ComponentProps<typeof BottomBar>;
 
@@ -31,32 +32,32 @@ export const ColorTabBottomBar: Story = {
                     <ColorTab.Color
                         selectedValue={selectedValue}
                         onTabClick={handleTabClick}
-                        value="violet"
-                        backgroundColor="#855CF8"
+                        value={Color.VIOLET}
+                        backgroundColor={Color.VIOLET}
                     />
                     <ColorTab.Color
                         selectedValue={selectedValue}
                         onTabClick={handleTabClick}
-                        value="orange"
-                        backgroundColor="#F26B2C"
+                        value={Color.ORANGE}
+                        backgroundColor={Color.ORANGE}
                     />
                     <ColorTab.Color
                         selectedValue={selectedValue}
                         onTabClick={handleTabClick}
-                        value="green"
-                        backgroundColor="#2DAF2D"
+                        value={Color.GREEN}
+                        backgroundColor={Color.GREEN}
                     />
                     <ColorTab.Color
                         selectedValue={selectedValue}
                         onTabClick={handleTabClick}
-                        value="blue"
-                        backgroundColor="#455A64"
+                        value={Color.BLUE}
+                        backgroundColor={Color.BLUE}
                     />
                     <ColorTab.Color
                         selectedValue={selectedValue}
                         onTabClick={handleTabClick}
-                        value="pink"
-                        backgroundColor="#DD408F"
+                        value={Color.PINK}
+                        backgroundColor={Color.PINK}
                     />
                 </ColorTab>
             </BottomBar>

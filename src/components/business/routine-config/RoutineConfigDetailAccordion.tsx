@@ -41,7 +41,7 @@ const RoutineConfigDetailAccordion = ({
                     <Accordion.Header>
                         <Card>
                             <Card.ImageBox $backgroundColor={data.color}>
-                                <FireIcon />
+                                <FireIcon style={{ color: data.color }} />
                             </Card.ImageBox>
                             <Card.Column>
                                 <Card.Title>{data.name}</Card.Title>

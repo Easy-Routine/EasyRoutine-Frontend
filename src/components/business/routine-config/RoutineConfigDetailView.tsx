@@ -7,6 +7,7 @@ import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailA
 import { useParams } from "react-router-dom";
 import useRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import { RoutineConfig } from "db";
+import { Color } from "type/Color";
 
 const Container = styled.div`
     display: flex;
@@ -17,7 +18,7 @@ const Container = styled.div`
 const initialRoutineConfigDetail: RoutineConfig = {
     id: "",
     name: "",
-    color: "",
+    color: Color.VIOLET,
     createdAt: new Date(),
     updatedAt: new Date(),
     userId: "",

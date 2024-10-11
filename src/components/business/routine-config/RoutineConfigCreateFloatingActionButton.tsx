@@ -5,6 +5,7 @@ import EmptyBoundary from "../EmptyBoundary";
 import useToast from "hooks/useToast";
 import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
 import useGetRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
+import { Color } from "type/Color";
 
 const RoutineConfigCreateFloatingActionButton = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const RoutineConfigCreateFloatingActionButton = () => {
         try {
             const newRoutineConfig = await createRoutineConfigOneMutate({
                 name: "새 루틴",
-                color: "#855CF8",
+                color: Color.VIOLET,
                 userId: "doggopawer",
             });
 

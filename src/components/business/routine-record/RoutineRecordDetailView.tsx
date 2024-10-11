@@ -6,6 +6,7 @@ import Box from "components/box/Box/Box";
 import TitleText from "components/content/TitleText/TitleText";
 import Accordion from "components/box/Accordion/Accordion";
 import WorkoutRecordAccordion from "../workout-record/WorkoutRecordAccordion";
+import { Color } from "type/Color";
 
 const Container = styled.div`
     display: flex;
@@ -17,7 +18,7 @@ const RoutineRecordDetailView = () => {
     const data: RoutineRecord = {
         id: "1",
         name: "나의 가슴 루틴",
-        color: "orange",
+        color: Color.ORANGE,
         createdAt: new Date(),
         updatedAt: new Date(),
         userId: "3",

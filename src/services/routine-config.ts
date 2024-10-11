@@ -1,6 +1,7 @@
 // db.ts 파일에서 import
 
 import { db, RoutineConfig } from "db"; // 경로에 맞게 수정
+import { Color } from "type/Color";
 import { v4 as uuidv4 } from "uuid";
 
 export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
@@ -127,7 +128,7 @@ export const createRoutineConfigOne = async ({
     userId,
 }: {
     name: string;
-    color: string;
+    color: Color;
     userId: string;
 }): Promise<RoutineConfig | null> => {
     const newRoutine: RoutineConfig = {
@@ -200,7 +201,7 @@ export const deleteRoutineConfigOne = async (
 
 export const updateRoutineConfigColor = async (
     routineConfigId: string,
-    value: string
+    value: Color
 ): Promise<RoutineConfig | null> => {
     try {
         const routineConfig = await db.routineConfigs.get(routineConfigId);

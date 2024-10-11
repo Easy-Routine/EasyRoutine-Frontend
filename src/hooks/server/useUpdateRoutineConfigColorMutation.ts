@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import { updateRoutineConfigColor } from "services/routine-config";
+import { Color } from "type/Color";
 
 const useUpdateRoutineConfigColorMutation = () => {
     const queryClient = useQueryClient();
@@ -10,7 +11,7 @@ const useUpdateRoutineConfigColorMutation = () => {
             value,
         }: {
             routineConfigId: string;
-            value: string;
+            value: Color;
         }) => updateRoutineConfigColor(routineConfigId, value),
         onSettled: () => {
             queryClient.invalidateQueries({
