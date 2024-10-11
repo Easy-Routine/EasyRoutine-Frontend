@@ -199,9 +199,10 @@ export const deleteRoutineConfigOne = async (
     }
 };
 
-export const updateRoutineConfigColor = async (
+export const updateRoutineConfigField = async (
     routineConfigId: string,
-    value: Color
+    key: string,
+    value: string | Color
 ): Promise<RoutineConfig | null> => {
     try {
         const routineConfig = await db.routineConfigs.get(routineConfigId);
@@ -211,7 +212,7 @@ export const updateRoutineConfigColor = async (
             return null;
         }
 
-        routineConfig.color = value;
+        routineConfig[key] = value;
 
         await db.routineConfigs.put(routineConfig);
 

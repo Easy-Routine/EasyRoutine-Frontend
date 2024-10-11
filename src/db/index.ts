@@ -10,6 +10,7 @@ export type RoutineConfig = {
     updatedAt: Date;
     userId: string;
     workoutConfigs: WorkoutConfig[];
+    [key: string]: any;
 };
 
 export type WorkoutConfig = {
