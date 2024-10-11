@@ -8,15 +8,15 @@ const useCreateWorkoutLibraryMutation = () => {
     return useMutation({
         mutationFn: ({
             name,
-            workoutImage,
-            workoutPart,
+            image,
+            category,
             type,
             userId,
         }: Omit<WorkoutLibrary, "id" | "createdAt" | "updatedAt">) =>
             createWorkoutLibraryOne({
                 name,
-                workoutImage,
-                workoutPart,
+                image,
+                category,
                 type,
                 userId,
             }),

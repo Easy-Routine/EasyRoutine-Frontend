@@ -1,8 +1,9 @@
 import SmallCard from "components/content/SmallCard/SmallCard";
-import { WorkoutLibrary } from "types/workout-library";
+
 import SeatedRowImage from "assets/image/seated-row.png";
 import styled from "styled-components";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
+import { WorkoutLibrary } from "db";
 
 const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);

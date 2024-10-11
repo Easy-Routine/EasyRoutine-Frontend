@@ -65,7 +65,7 @@ const RoutineConfigDetailAccordion = ({
                                         <img
                                             src={
                                                 workoutConfig.workoutLibrary
-                                                    .workoutImage
+                                                    .image
                                             }
                                             alt="운동 이미지"
                                         />
