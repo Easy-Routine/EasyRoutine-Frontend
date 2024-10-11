@@ -38,4 +38,7 @@ export const GlobalStyle = createGlobalStyle`
         color: ${(props) => props.theme.color.text.black};
 		font-family: 'Noto Sans Korean', sans-serif;
 	}
+	input {
+	    font-family: 'Noto Sans Korean', sans-serif;
+	}
 `;
