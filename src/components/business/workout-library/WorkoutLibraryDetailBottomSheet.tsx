@@ -4,10 +4,15 @@ import Button from "components/content/Button/Button";
 import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
 import ChipTab from "components/content/ChipTab/ChipTab";
 import UnderlineInput from "components/content/UnderlineInput/UnderlineInput";
+import { WorkoutLibrary } from "db";
 import useCheckBox from "hooks/client/useCheckBox";
 import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
+import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
+import { useEffect } from "react";
 import styled from "styled-components";
+import { Category } from "type/Category";
+import { Type } from "type/Type";
 
 const Container = styled.div`
     display: flex;
@@ -28,6 +33,17 @@ type WorkoutLibraryBottomSheetProps = {
     workoutLibraryId: string;
 };
 
+const initialWorkoutLibraryOne: WorkoutLibrary = {
+    id: "",
+    name: "",
+    image: "",
+    category: "",
+    type: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    userId: "",
+};
+
 const WorkoutLibraryDetailBottomSheet = ({
     isOpen,
     onBackdropClick,
@@ -35,18 +51,29 @@ const WorkoutLibraryDetailBottomSheet = ({
 }: WorkoutLibraryBottomSheetProps) => {
     // TODO: workoutLibraryId로 상세 데이터 가져오기
 
+    const { data: workoutLibraryOneData } =
+        useGetWorkoutLibraryOneQuery(workoutLibraryId);
+
+    const workoutLibraryOne = workoutLibraryOneData ?? initialWorkoutLibraryOne;
+
     const {
         value: underlineInputValue,
+        setValue,
         handleInputChange: handleUnderlineInputChange,
-    } = useInput("벤치프레스");
+    } = useInput(workoutLibraryOne.name);
     const {
         selectedValue: selectedCategory,
+        setSelectedValue,
         handleTabClick: handleCategoryChipTabClick,
-    } = useTab("가슴");
-    const { selectedValues, handleCheckBoxClick } = useCheckBox([
-        "weight",
-        "workoutSec",
-    ]);
+    } = useTab(workoutLibraryOne.category);
+    const { selectedValues, setSelectedValues, handleCheckBoxClick } =
+        useCheckBox(workoutLibraryOne.type);
+
+    useEffect(() => {
+        setValue(workoutLibraryOne.name);
+        setSelectedValue(workoutLibraryOne.category);
+        setSelectedValues(workoutLibraryOne.type);
+    }, [workoutLibraryOne, setValue, setSelectedValue, setSelectedValues]);
 
     return (
         <Modal>
@@ -63,42 +90,42 @@ const WorkoutLibraryDetailBottomSheet = ({
                     <LabelBox labelText="운동 부위" gap="20px">
                         <ChipTab>
                             <ChipTab.Chip
-                                value="가슴"
+                                value={Category.CHEST}
                                 selectedValue={selectedCategory}
                                 onTabClick={handleCategoryChipTabClick}
                             >
                                 가슴
                             </ChipTab.Chip>
                             <ChipTab.Chip
-                                value="등"
+                                value={Category.BACK}
                                 selectedValue={selectedCategory}
                                 onTabClick={handleCategoryChipTabClick}
                             >
                                 등
                             </ChipTab.Chip>
                             <ChipTab.Chip
-                                value="어깨"
+                                value={Category.SHOULDER}
                                 selectedValue={selectedCategory}
                                 onTabClick={handleCategoryChipTabClick}
                             >
                                 어깨
                             </ChipTab.Chip>
                             <ChipTab.Chip
-                                value="하체"
+                                value={Category.LEG}
                                 selectedValue={selectedCategory}
                                 onTabClick={handleCategoryChipTabClick}
                             >
                                 하체
                             </ChipTab.Chip>
                             <ChipTab.Chip
-                                value="팔"
+                                value={Category.ARM}
                                 selectedValue={selectedCategory}
                                 onTabClick={handleCategoryChipTabClick}
                             >
                                 팔
                             </ChipTab.Chip>
                             <ChipTab.Chip
-                                value="기타"
+                                value={Category.ETC}
                                 selectedValue={selectedCategory}
                                 onTabClick={handleCategoryChipTabClick}
                             >
@@ -111,7 +138,7 @@ const WorkoutLibraryDetailBottomSheet = ({
                             <CheckBoxGroup.Wrapper>
                                 <CheckBoxItem>
                                     <CheckBoxGroup.CheckBox
-                                        value="weight"
+                                        value={Type.WEIGHT}
                                         selectedValues={selectedValues}
                                         onCheckBoxClick={handleCheckBoxClick}
                                     />
@@ -119,7 +146,7 @@ const WorkoutLibraryDetailBottomSheet = ({
                                 </CheckBoxItem>
                                 <CheckBoxItem>
                                     <CheckBoxGroup.CheckBox
-                                        value="rep"
+                                        value={Type.REP}
                                         selectedValues={selectedValues}
                                         onCheckBoxClick={handleCheckBoxClick}
                                     />
@@ -127,7 +154,7 @@ const WorkoutLibraryDetailBottomSheet = ({
                                 </CheckBoxItem>
                                 <CheckBoxItem>
                                     <CheckBoxGroup.CheckBox
-                                        value="workoutSec"
+                                        value={Type.WORKOUT_SEC}
                                         selectedValues={selectedValues}
                                         onCheckBoxClick={handleCheckBoxClick}
                                     />
