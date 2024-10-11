@@ -42,6 +42,7 @@ export type WorkoutLibrary = {
     createdAt: Date;
     updatedAt: Date;
     userId: string;
+    [key: string]: any;
 };
 
 const db = new Dexie("healper-client-db") as Dexie & {
