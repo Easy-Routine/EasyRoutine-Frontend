@@ -2,6 +2,7 @@ import { db, WorkoutLibrary } from "db";
 import { v4 as uuidv4 } from "uuid";
 
 export const getWorkoutLibraryAll = async (
+    name?: string,
     category?: string
 ): Promise<WorkoutLibrary[]> => {
     try {
@@ -17,12 +18,13 @@ export const getWorkoutLibraryAll = async (
         });
 
         // 카테고리에 따라 필터링
-        const filteredWorkouts = category
-            ? workoutsLibraries.filter(
-                  (workoutLibrary) => workoutLibrary.category === category
-              )
-            : workoutsLibraries;
-        console.log(filteredWorkouts);
+        const filteredWorkouts = workoutsLibraries.filter((workout) => {
+            const categoryMatch = category
+                ? workout.category === category
+                : true;
+            const nameMatch = name ? workout.name.includes(name) : true; // name 포함 여부 체크
+            return categoryMatch && nameMatch;
+        });
 
         return filteredWorkouts; // 필터링된 운동 배열 반환
     } catch (error) {
