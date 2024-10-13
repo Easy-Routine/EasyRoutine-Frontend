@@ -1,7 +1,9 @@
 import { db, WorkoutLibrary } from "db";
 import { v4 as uuidv4 } from "uuid";
 
-export const getWorkoutLibraryAll = async (): Promise<WorkoutLibrary[]> => {
+export const getWorkoutLibraryAll = async (
+    category?: string
+): Promise<WorkoutLibrary[]> => {
     try {
         // 데이터베이스에서 모든 운동 가져오기
         const workoutsLibraries = await db.workoutLibraries.toArray();
@@ -14,7 +16,15 @@ export const getWorkoutLibraryAll = async (): Promise<WorkoutLibrary[]> => {
             );
         });
 
-        return workoutsLibraries; // 정렬된 운동 배열 반환
+        // 카테고리에 따라 필터링
+        const filteredWorkouts = category
+            ? workoutsLibraries.filter(
+                  (workoutLibrary) => workoutLibrary.category === category
+              )
+            : workoutsLibraries;
+        console.log(filteredWorkouts);
+
+        return filteredWorkouts; // 필터링된 운동 배열 반환
     } catch (error) {
         console.error("Error fetching workout library:", error);
         throw new Error("Failed to fetch workout library"); // 오류 발생 시 예외 던짐
