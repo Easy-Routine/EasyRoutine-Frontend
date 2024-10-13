@@ -22,12 +22,14 @@ const Container = styled.div`
 `;
 
 const WorkoutLibraryListView = () => {
-    const { selectedValue, handleTabClick } = useTab(Category.CHEST);
+    const { selectedValue, handleTabClick } = useTab(Category.ALL);
     const { value, handleInputChange, handleInputClear } = useInput();
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 
-    const { data: workoutLibraryAllData } =
-        useGetWorkoutLibraryAllQuery(selectedValue);
+    const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery(
+        value,
+        selectedValue
+    );
 
     const workoutLibraryAll = workoutLibraryAllData ?? [];
 
@@ -66,6 +68,13 @@ const WorkoutLibraryListView = () => {
                 onInputClear={handleInputClear}
             />
             <ChipTab>
+                <ChipTab.Chip
+                    value={Category.ALL}
+                    selectedValue={selectedValue}
+                    onTabClick={handleTabClick}
+                >
+                    전체
+                </ChipTab.Chip>
                 <ChipTab.Chip
                     value={Category.CHEST}
                     selectedValue={selectedValue}
