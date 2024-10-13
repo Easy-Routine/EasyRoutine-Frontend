@@ -3,6 +3,7 @@ const queryKey = {
     getRoutineConfigOne: "getRoutineConfigOne",
     getWorkoutLibraryAll: "getWorkoutLibraryAll",
     getWorkoutLibraryOne: "getWorkoutLibraryOne",
+    getRoutineRecordAll: "getRoutineRecordAll",
 } as const;
 
 export default queryKey;
