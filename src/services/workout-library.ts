@@ -5,7 +5,16 @@ export const getWorkoutLibraryAll = async (): Promise<WorkoutLibrary[]> => {
     try {
         // 데이터베이스에서 모든 운동 가져오기
         const workoutsLibraries = await db.workoutLibraries.toArray();
-        return workoutsLibraries; // 운동 배열 반환
+
+        // 생성 시간(createdAt) 기준으로 정렬 (오름차순)
+        workoutsLibraries.sort((a, b) => {
+            return (
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime()
+            );
+        });
+
+        return workoutsLibraries; // 정렬된 운동 배열 반환
     } catch (error) {
         console.error("Error fetching workout library:", error);
         throw new Error("Failed to fetch workout library"); // 오류 발생 시 예외 던짐
@@ -99,6 +108,23 @@ export const updateWorkoutLibraryOne = async (
         return true; // 업데이트 성공
     } catch (error) {
         console.error("Error updating WorkoutLibrary:", error);
+        return false; // 오류 발생
+    }
+};
+
+export const deleteWorkoutLibraryOne = async (
+    workoutLibraryId: string
+): Promise<boolean> => {
+    try {
+        // 해당 워크아웃 라이브러리 항목을 삭제합니다.
+        await db.workoutLibraries.delete(workoutLibraryId);
+
+        console.log(
+            `WorkoutLibrary with ID ${workoutLibraryId} has been deleted.`
+        );
+        return true; // 삭제 성공
+    } catch (error) {
+        console.error("Error deleting WorkoutLibrary:", error);
         return false; // 오류 발생
     }
 };
