@@ -3,7 +3,7 @@ import queryKey from "constants/queryKeys";
 import { WorkoutLibrary } from "db";
 import { createWorkoutLibraryOne } from "services/workout-library";
 
-const useCreateWorkoutLibraryMutation = () => {
+const useCreateWorkoutLibraryOneMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
@@ -28,4 +28,4 @@ const useCreateWorkoutLibraryMutation = () => {
     });
 };
 
-export default useCreateWorkoutLibraryMutation;
+export default useCreateWorkoutLibraryOneMutation;
