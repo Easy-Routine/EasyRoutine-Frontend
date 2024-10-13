@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import styled from "styled-components";
 import { ReactComponent as MagnifyIcon } from "assets/image/magnify.svg";
 import { ReactComponent as XIcon } from "assets/image/x.svg";
@@ -6,6 +6,7 @@ import { ReactComponent as XIcon } from "assets/image/x.svg";
 const Container = styled.div`
     width: 100%;
     height: 44px;
+    min-height: 44px;
     padding: 15px; 20px;
     box-sizing: border-box;
     border-radius: ${({ theme }) => theme.borderRadius.xl};
