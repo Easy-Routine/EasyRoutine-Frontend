@@ -41,6 +41,7 @@ const initialWorkoutLibraryOne: WorkoutLibrary = {
     image: "",
     category: "",
     type: [],
+    isEditable: true,
     createdAt: new Date(),
     updatedAt: new Date(),
     userId: "",

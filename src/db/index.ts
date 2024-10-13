@@ -39,6 +39,7 @@ export type WorkoutLibrary = {
     image: string;
     category: string;
     type: string[];
+    isEditable: boolean;
     createdAt: Date;
     updatedAt: Date;
     userId: string;

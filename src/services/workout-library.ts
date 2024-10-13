@@ -43,6 +43,7 @@ export const createWorkoutLibraryOne = async (
         image: workoutData.image,
         category: workoutData.category,
         type: workoutData.type,
+        isEditable: true,
         createdAt: new Date(), // 현재 날짜
         updatedAt: new Date(), // 현재 날짜
         userId: workoutData.userId, // 사용자 ID
