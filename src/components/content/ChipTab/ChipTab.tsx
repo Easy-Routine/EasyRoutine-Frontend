@@ -7,6 +7,7 @@ const Container = styled.div`
     display: flex;
     overflow-x: scroll;
     gap: 10px;
+    min-height: 32px;
 
     &::-webkit-scrollbar {
         display: none; /* 크롬, 사파리에서 스크롤바 숨김 */
