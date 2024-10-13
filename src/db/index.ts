@@ -46,11 +46,45 @@ export type WorkoutLibrary = {
     [key: string]: any;
 };
 
+export type RoutineRecord = {
+    id: string;
+    name: string;
+    color: Color;
+    createdAt: Date;
+    updatedAt: Date;
+    userId: string;
+    workoutRecords: WorkoutRecord[];
+    [key: string]: any;
+};
+
+export type WorkoutRecord = {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    routineRecordId: string;
+    setRecords: SetRecord[];
+    workoutLibrary: WorkoutLibrary;
+};
+
+export type SetRecord = {
+    id: string;
+    weight: number;
+    rep: number;
+    restSec: number;
+    createdAt: Date;
+    updatedAt: Date;
+    workoutRecordId: string;
+    [key: string]: any;
+};
+
 const db = new Dexie("healper-client-db") as Dexie & {
     routineConfigs: EntityTable<RoutineConfig, "id">;
     workoutConfigs: EntityTable<WorkoutConfig, "id">;
     setConfigs: EntityTable<SetConfig, "id">;
     workoutLibraries: EntityTable<WorkoutLibrary, "id">;
+    routineRecords: EntityTable<RoutineRecord, "id">;
+    workoutRecords: EntityTable<WorkoutRecord, "id">;
+    setRecords: EntityTable<SetRecord, "id">;
 };
 
 // Schema declaration:
@@ -63,6 +97,12 @@ db.version(1).stores({
         "id, weight, rep, restSec, createdAt, updatedAt, workoutConfigId",
     workoutLibraries:
         "id, name, image, category, type, createdAt, updatedAt, userId",
+    routineRecords:
+        "id, name, color, createdAt, updatedAt, userId, workoutRecords", // 쉼표 추가
+    workoutRecords:
+        "id, createdAt, updatedAt, routineRecordId, setRecords, workoutLibrary",
+    setRecords:
+        "id, weight, rep, restSec, createdAt, updatedAt, workoutRecordId",
 });
 
 export { db };
