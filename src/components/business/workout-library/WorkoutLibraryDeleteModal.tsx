@@ -2,6 +2,7 @@ import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
+import useDeleteWorkoutLibraryOneMutation from "hooks/server/useDeleteWorkoutLibraryOneMutation";
 
 type WorkoutLibraryDeleteModalProps = {
     workoutLibraryId: string;
@@ -20,8 +21,11 @@ const WorkoutLibraryDeleteModal = ({
 }: WorkoutLibraryDeleteModalProps) => {
     const { showToast } = useToast();
 
-    const handleConfirmButtonClick = () => {
-        // TODO: 운동라이브러리 삭제하는 API 연결
+    const { mutateAsync: deleteWorkoutLibraryOneMutate } =
+        useDeleteWorkoutLibraryOneMutation();
+
+    const handleConfirmButtonClick = async (workoutLibraryId: string) => {
+        await deleteWorkoutLibraryOneMutate(workoutLibraryId);
         showToast("운동 종목이 삭제되었습니다.");
         onConfirmButtonClick();
     };
@@ -45,7 +49,9 @@ const WorkoutLibraryDeleteModal = ({
                         cancelLabel="취소"
                         confirmLabel="삭제하기"
                         onCancelButtonClick={onCancelButtonClick}
-                        onConfirmButtonClick={handleConfirmButtonClick}
+                        onConfirmButtonClick={() =>
+                            handleConfirmButtonClick(workoutLibraryId)
+                        }
                     />
                 </Confirm>
             </Modal.Content>
