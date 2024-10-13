@@ -1,8 +1,8 @@
 import Accordion from "components/box/Accordion/Accordion";
 import styled from "styled-components";
-import { RoutineConfig, SetConfig, WorkoutConfig } from "types/config";
+
 import SeatedRowImage from "assets/image/seated-row.png";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useTimer from "hooks/client/useTimer";
 import Modal from "components/box/Modal/Modal";
 import useModal from "hooks/client/useModal";
@@ -14,10 +14,14 @@ import formatTime from "utils/formatTime";
 import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
 import { ReactComponent as QuestionIcon } from "assets/image/question.svg";
 import { ReactComponent as CompleteIcon } from "assets/image/complete.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
 import WorkoutConfigDetailProgressAccordion from "../workout-config/WorkoutConfigDetailProgressAccordion";
+import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
+import { Color } from "type/Color";
+import { RoutineConfig, SetConfig, WorkoutConfig } from "db";
+import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
 
 const Container = styled.div`
     display: flex;
@@ -30,9 +34,20 @@ const TimerText = styled.div`
     font-weight: ${({ theme }) => theme.fontWeight.semibold};
 `;
 
+const initialRoutineConfigDetail: RoutineConfig = {
+    id: "",
+    name: "",
+    color: Color.VIOLET,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    userId: "",
+    workoutConfigs: [],
+};
+
 const RoutineConfigListProgressView = () => {
     const navigate = useNavigate();
     const { showToast } = useToast();
+    const { routineConfigId } = useParams();
 
     const {
         isOpen: isTimerModalOpen,
@@ -56,142 +71,33 @@ const RoutineConfigListProgressView = () => {
         }, [])
     );
 
-    const data: RoutineConfig = {
-        id: "1",
-        name: "월요일 루틴",
-        color: "tomato",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        userId: "1",
-        workoutConfigs: [
-            {
-                id: "1",
-                name: "벤치프레스",
-                workoutImage: SeatedRowImage,
-                type: ["weight", "rep"],
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                routineConfigId: "1",
-                setConfigs: [
-                    {
-                        id: "1",
-                        order: 1,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 15,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                    {
-                        id: "2",
-                        order: 2,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                    {
-                        id: "3",
-                        order: 3,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                ],
-            },
-            {
-                id: "2",
-                name: "벤치프레스",
-                workoutImage: SeatedRowImage,
-                type: ["weight", "rep"],
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                routineConfigId: "1",
-                setConfigs: [
-                    {
-                        id: "4",
-                        order: 1,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                    {
-                        id: "5",
-                        order: 2,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                    {
-                        id: "6",
-                        order: 3,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                ],
-            },
-            {
-                id: "3",
-                name: "벤치프레스",
-                workoutImage: SeatedRowImage,
-                type: ["weight", "rep", "restSec"],
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                routineConfigId: "1",
-                setConfigs: [
-                    {
-                        id: "7",
-                        order: 1,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 15,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                    {
-                        id: "8",
-                        order: 2,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                    {
-                        id: "9",
-                        order: 3,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutConfigId: "1",
-                    },
-                ],
-            },
-        ],
-    };
+    const { data: routineConfigDetailData } = useGetRoutineConfigOneQuery(
+        routineConfigId as string
+    );
 
-    const [routineConfigState, setRoutineConfigState] = useState(data);
+    const { mutateAsync: createRoutineRecordOneMutate } =
+        useCreateRoutineRecordOneMutation();
+
+    const routineConfigDetail =
+        routineConfigDetailData ?? initialRoutineConfigDetail;
+
+    const [routineConfigState, setRoutineConfigState] =
+        useState(routineConfigDetail);
     const [totalCompletedSetIds, setTotalCompletdSetIds] = useState(new Set());
+    const [routineRecordId, setRoutineRecordId] = useState("");
+
+    useEffect(() => {
+        (async () => {
+            const newRoutineRecordOne = await createRoutineRecordOneMutate({
+                name: routineConfigState.name,
+                color: routineConfigState.color,
+                userId: routineConfigState.userId,
+            });
+            if (newRoutineRecordOne) {
+                setRoutineRecordId(newRoutineRecordOne.id);
+            }
+        })();
+    }, [createRoutineRecordOneMutate, routineConfigState]);
 
     const handleSetCreate = (
         workoutConfigId: string,
@@ -272,6 +178,7 @@ const RoutineConfigListProgressView = () => {
                 render={(item) => (
                     <WorkoutConfigDetailProgressAccordion
                         data={item}
+                        routineRecordId={routineRecordId}
                         onSetCreate={handleSetCreate}
                         onSetDelete={handleSetDelete}
                         onSetComplete={handleSetComplete}
