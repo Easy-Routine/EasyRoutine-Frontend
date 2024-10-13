@@ -186,7 +186,6 @@ const WorkoutLibraryDetailBottomSheet = ({
                         운동 수정하기
                     </Button>
                 </Container>
-                {workoutLibraryId}
             </Modal.BottomSheet>
         </Modal>
     );
