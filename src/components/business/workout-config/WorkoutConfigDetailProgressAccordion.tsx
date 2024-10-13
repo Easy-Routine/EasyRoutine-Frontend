@@ -1,7 +1,7 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import useAccordion from "hooks/client/useAccordion";
-import { WorkoutConfig } from "types/config";
+import { RoutineConfig, SetConfig, WorkoutConfig } from "db";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
@@ -11,6 +11,7 @@ import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
+import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutRecordOneMutation";
 
 type TypeMapper = {
     [key: string]: string;
@@ -22,8 +23,9 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-type WorkoutProgressAccordionProp = {
+type WorkoutConfigDetailProgressAccordionProps = {
     data: WorkoutConfig;
+    routineRecordId: string;
     onSetCreate: (
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"]
@@ -38,21 +40,38 @@ type WorkoutProgressAccordionProp = {
 
 const WorkoutConfigDetailProgressAccordion = ({
     data,
+    routineRecordId,
     onSetCreate,
     onSetDelete,
     onSetComplete,
     onCompletedSetIdsMutate,
-}: WorkoutProgressAccordionProp) => {
+}: WorkoutConfigDetailProgressAccordionProps) => {
     const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
     const [currentSetId, setCurrentSetId] = useState(data.setConfigs[0]?.id);
     const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
+    const [currentWorkoutId, setCurrentWorkoutId] = useState("");
+
+    const { mutateAsync: createWorkoutRecordOneMutate } =
+        useCreateWorkoutRecordOneMutation();
 
     useEffect(() => {
         // 컴포넌트가 마운트 될때 운동 기록 데이터를 생성  및 setCurrentWorkoutId하기
-    }, []);
+
+        if (routineRecordId && data) {
+            (async () => {
+                const newWorkoutRecordOne = await createWorkoutRecordOneMutate({
+                    routineRecordId,
+                    workoutLibrary: data.workoutLibrary,
+                });
+                if (newWorkoutRecordOne) {
+                    setCurrentWorkoutId(newWorkoutRecordOne.id);
+                }
+            })();
+        }
+    }, [createWorkoutRecordOneMutate, data, routineRecordId]);
 
     const isCurrentSet = (setId: string) => setId === currentSetId;
     const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
@@ -71,6 +90,7 @@ const WorkoutConfigDetailProgressAccordion = ({
 
         onSetComplete(restSec);
         // TODO: 데이터 추가 API
+        // // currentWorkoutId에 세트 데이터 추가하기
     };
 
     const handleDeleteSetButtonClick = () => {
@@ -81,14 +101,13 @@ const WorkoutConfigDetailProgressAccordion = ({
         );
         setCompletedSetIds(filteredCompletedSetIds);
         onSetDelete(data.id, newSetConfigs);
-        // currentWorkoutId에 세트 데이터 삭제하기
+        // currentWorkoutId에 세트 데이터 삭제하기 (삭제할때, 생성 순으로 가져온 후 마지막요소 삭제후 put 하기)
     };
 
     const handleCreateSetButtonClick = () => {
         const newSetConfigs = structuredClone(data.setConfigs);
         newSetConfigs.push({
             id: (newSetConfigs.length + 1).toString(),
-            order: newSetConfigs.length + 1,
             weight: 50,
             rep: 10,
             restSec: 10,
@@ -98,7 +117,6 @@ const WorkoutConfigDetailProgressAccordion = ({
         });
         setCurrentSetId(newSetConfigs[completedSetIds.length].id);
         onSetCreate(data.id, newSetConfigs);
-        // // currentWorkoutId에 세트 데이터 추가하기
     };
 
     useEffect(() => {
@@ -113,12 +131,12 @@ const WorkoutConfigDetailProgressAccordion = ({
                         <Card.ImageBox>
                             <img
                                 width={"100%"}
-                                src={data.workoutImage}
+                                src={data.workoutLibrary.image}
                                 alt={"운동 이미지"}
                             />
                         </Card.ImageBox>
                         <Card.Column>
-                            <Card.Title>{data.name}</Card.Title>
+                            <Card.Title>{data.workoutLibrary.name}</Card.Title>
                             <Card.Description>
                                 {data.setConfigs.length}종목
                             </Card.Description>
@@ -141,7 +159,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                             header={
                                 <Table.Row>
                                     <Table.TitleText>세트</Table.TitleText>
-                                    {data.type.map((key) => (
+                                    {data.workoutLibrary.type.map((key) => (
                                         <Table.TitleText>
                                             {typeMapper[key]}
                                         </Table.TitleText>
@@ -149,19 +167,19 @@ const WorkoutConfigDetailProgressAccordion = ({
                                     <Table.TitleText>휴식</Table.TitleText>
                                 </Table.Row>
                             }
-                            render={(setConfig) => (
+                            render={(setConfig: SetConfig, index) => (
                                 <Table.Row
                                     isGrayLine={isCompletedSet(setConfig.id)}
                                     isPrimaryLine={isCurrentSet(setConfig.id)}
                                 >
                                     <Table.Input
-                                        value={setConfig.order.toString()}
+                                        value={index.toString()}
                                         onInputChange={(value) =>
                                             console.log(value)
                                         }
                                         disabled={true}
                                     />
-                                    {data.type.map((key) => (
+                                    {data.workoutLibrary.type.map((key) => (
                                         <Table.Input
                                             value={setConfig[key].toString()}
                                             onInputChange={(value) =>
