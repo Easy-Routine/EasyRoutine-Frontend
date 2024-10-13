@@ -1,9 +1,10 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
+import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 
 type RoutineProgressModalProps = {
     routineConfigId: string;
@@ -22,17 +23,17 @@ const RoutineConfigProgressModal = ({
 }: RoutineProgressModalProps) => {
     const navigate = useNavigate();
     const { showToast } = useToast();
-    // TODO: API 호출
-    const data = {
-        id: "1",
-        name: "월요일 루틴",
-    };
+
+    const { data: routineConfigOneData } =
+        useGetRoutineConfigOneQuery(routineConfigId);
+
+    const routineConfigOne = routineConfigOneData ?? { name: "", id: "" };
 
     const handleRoutineProgressButtonClick = () => {
         // TODO: API 호출
         showToast("루틴이 시작되었습니다.");
         onConfirmButtonClick();
-        navigate(ROUTES.PROGRESS.PATH(data.id));
+        navigate(ROUTES.PROGRESS.PATH(routineConfigOne.id));
     };
 
     return (
@@ -52,7 +53,7 @@ const RoutineConfigProgressModal = ({
                         </Confirm.IconBox>
                         <Confirm.Title>루틴 진행</Confirm.Title>
                         <Confirm.Description>
-                            '{data.name}'으로
+                            '{routineConfigOne.name}'으로
                             <br /> 운동을 시작하시겠습니까?
                         </Confirm.Description>
                     </Confirm.ContentBox>
