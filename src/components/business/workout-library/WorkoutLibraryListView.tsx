@@ -13,6 +13,7 @@ import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloa
 import WorkoutLibraryDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import { WorkoutLibrary } from "db";
+import { Category } from "type/Category";
 
 const Container = styled.div`
     display: flex;
@@ -21,11 +22,12 @@ const Container = styled.div`
 `;
 
 const WorkoutLibraryListView = () => {
-    const { selectedValue, handleTabClick } = useTab("가슴");
+    const { selectedValue, handleTabClick } = useTab(Category.CHEST);
     const { value, handleInputChange, handleInputClear } = useInput();
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 
-    const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery();
+    const { data: workoutLibraryAllData } =
+        useGetWorkoutLibraryAllQuery(selectedValue);
 
     const workoutLibraryAll = workoutLibraryAllData ?? [];
 
@@ -65,42 +67,42 @@ const WorkoutLibraryListView = () => {
             />
             <ChipTab>
                 <ChipTab.Chip
-                    value="가슴"
+                    value={Category.CHEST}
                     selectedValue={selectedValue}
                     onTabClick={handleTabClick}
                 >
                     가슴
                 </ChipTab.Chip>
                 <ChipTab.Chip
-                    value="등"
+                    value={Category.BACK}
                     selectedValue={selectedValue}
                     onTabClick={handleTabClick}
                 >
                     등
                 </ChipTab.Chip>
                 <ChipTab.Chip
-                    value="어깨"
+                    value={Category.SHOULDER}
                     selectedValue={selectedValue}
                     onTabClick={handleTabClick}
                 >
                     어깨
                 </ChipTab.Chip>
                 <ChipTab.Chip
-                    value="하체"
+                    value={Category.LEG}
                     selectedValue={selectedValue}
                     onTabClick={handleTabClick}
                 >
                     하체
                 </ChipTab.Chip>
                 <ChipTab.Chip
-                    value="팔"
+                    value={Category.ARM}
                     selectedValue={selectedValue}
                     onTabClick={handleTabClick}
                 >
                     팔
                 </ChipTab.Chip>
                 <ChipTab.Chip
-                    value="기타"
+                    value={Category.ETC}
                     selectedValue={selectedValue}
                     onTabClick={handleTabClick}
                 >
