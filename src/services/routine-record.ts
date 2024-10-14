@@ -131,6 +131,60 @@ export const getRoutineRecordAllDaily = async ({
     }
 };
 
+export const getRoutineRecordOne = async (
+    routineRecordId: string
+): Promise<RoutineRecord | null> => {
+    try {
+        // 주어진 ID로 루틴 구성 가져오기
+        const routineRecord = await db.routineRecords.get(routineRecordId);
+
+        if (!routineRecord) {
+            console.error("RoutineRecord not found");
+            return null; // 루틴이 없는 경우 null 반환
+        }
+
+        // 루틴에 연결된 운동 구성 가져오기
+        const workoutRecords = await db.workoutRecords
+            .where("routineRecordId")
+            .equals(routineRecordId)
+            .toArray();
+
+        // 각 운동에 연결된 세트 구성 가져오기
+        const workoutRecordsWithSets = await Promise.all(
+            workoutRecords.map(async (workout) => {
+                const setRecords = await db.setRecords
+                    .where("workoutRecordId")
+                    .equals(workout.id)
+                    .toArray(); // 먼저 모든 세트 구성 가져오기
+
+                // createdAt에 따라 정렬
+                setRecords.sort(
+                    (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
+                );
+
+                // 운동 구성에 세트 구성 추가
+                return {
+                    ...workout,
+                    setRecords, // 세트 구성 추가
+                };
+            })
+        );
+
+        // 운동 구성 createdAt에 따라 정렬
+        workoutRecordsWithSets.sort(
+            (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
+        );
+
+        // 루틴 구성에 운동 구성 추가
+        routineRecord.workoutRecords = workoutRecordsWithSets;
+
+        return routineRecord; // 루틴 구성 반환
+    } catch (error) {
+        console.error("Error fetching RoutineRecord:", error);
+        return null; // 오류 발생 시 null 반환
+    }
+};
+
 export const deleteRoutineRecordOne = async (
     routineRecordId: string
 ): Promise<boolean> => {
