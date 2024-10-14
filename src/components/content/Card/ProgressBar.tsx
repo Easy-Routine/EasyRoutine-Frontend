@@ -22,7 +22,8 @@ type ProgressBarProps = {
 };
 
 const ProgressBar = ({ fullLength, portionLength }: ProgressBarProps) => {
-    const percentage = (portionLength / fullLength) * 100;
+    const percentage =
+        fullLength === 0 ? 100 : (portionLength / fullLength) * 100;
 
     return (
         <Container>
