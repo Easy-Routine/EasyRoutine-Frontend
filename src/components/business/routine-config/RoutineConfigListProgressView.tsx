@@ -97,7 +97,7 @@ const RoutineConfigListProgressView = () => {
                 setRoutineRecordId(newRoutineRecordOne.id);
             }
         })();
-    }, [createRoutineRecordOneMutate, routineConfigState]);
+    }, [createRoutineRecordOneMutate]);
 
     const handleSetCreate = (
         workoutConfigId: string,
@@ -132,6 +132,23 @@ const RoutineConfigListProgressView = () => {
     const handleSetComplete = (restSec: number) => {
         startTimer(restSec);
         handleOpenTimerModal();
+    };
+
+    const handleSetUpdate = (
+        workoutConfigId: string,
+        setConfigs: SetConfig[]
+    ) => {
+        const newRoutineConfigState = structuredClone(routineConfigState);
+        const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
+            (workoutConfig: WorkoutConfig) =>
+                workoutConfig.id === workoutConfigId
+        );
+
+        if (selectedWorkoutConfig) {
+            selectedWorkoutConfig.setConfigs = setConfigs;
+        }
+
+        setRoutineConfigState(newRoutineConfigState);
     };
 
     const handleCompletedSetIdsMutate = (completedSetIds: string[]) => {
@@ -182,6 +199,7 @@ const RoutineConfigListProgressView = () => {
                         onSetCreate={handleSetCreate}
                         onSetDelete={handleSetDelete}
                         onSetComplete={handleSetComplete}
+                        onSetUpdate={handleSetUpdate}
                         onCompletedSetIdsMutate={handleCompletedSetIdsMutate}
                     />
                 )}
