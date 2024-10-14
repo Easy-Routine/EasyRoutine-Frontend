@@ -4,8 +4,9 @@ const queryKey = {
     getWorkoutLibraryAll: "getWorkoutLibraryAll",
     getWorkoutLibraryOne: "getWorkoutLibraryOne",
     getRoutineRecordAll: "getRoutineRecordAll",
+    getRoutineRecordOne: "getRoutineRecordOne",
     getRoutineRecordAllMonthly: "getRoutineRecordAllMonthly",
-    getRoutineRecordAllDaily: "getRoutineRecordAllDaily"
+    getRoutineRecordAllDaily: "getRoutineRecordAllDaily",
 } as const;
 
 export default queryKey;
