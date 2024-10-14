@@ -1,6 +1,6 @@
 import Accordion from "components/box/Accordion/Accordion";
 import styled from "styled-components";
-
+import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import SeatedRowImage from "assets/image/seated-row.png";
 import { useCallback, useEffect, useState } from "react";
 import useTimer from "hooks/client/useTimer";
@@ -22,6 +22,7 @@ import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuer
 import { Color } from "type/Color";
 import { RoutineConfig, SetConfig, WorkoutConfig } from "db";
 import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
+import Box from "components/box/Box/Box";
 
 const Container = styled.div`
     display: flex;
@@ -190,6 +191,13 @@ const RoutineConfigListProgressView = () => {
 
     return (
         <Container>
+            <Box>
+                <TitleTextInput
+                    disabled={true}
+                    value={routineConfigState.name}
+                />
+            </Box>
+
             <Accordion.List<WorkoutConfig>
                 data={routineConfigState.workoutConfigs}
                 render={(item) => (
