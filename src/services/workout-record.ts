@@ -28,3 +28,31 @@ export const createWorkoutRecordOne = async ({
         throw error;
     }
 };
+
+export const deleteWorkoutRecordOne = async (
+    workoutRecordId: string
+): Promise<boolean> => {
+    try {
+        // 해당 workoutRecord에 연결된 모든 setRecord를 가져옵니다.
+        const setRecords = await db.setRecords
+            .where("workoutRecordId")
+            .equals(workoutRecordId)
+            .toArray();
+
+        // 모든 setRecord를 삭제합니다.
+        await Promise.all(
+            setRecords.map((setRecord) => db.setRecords.delete(setRecord.id))
+        );
+
+        // workoutRecord 삭제
+        await db.workoutRecords.delete(workoutRecordId);
+
+        console.log(
+            `WorkoutRecord and its related setRecords deleted for ID: ${workoutRecordId}`
+        );
+        return true; // 삭제 성공
+    } catch (error) {
+        console.error("Error deleting WorkoutRecord:", error);
+        return false; // 오류 발생
+    }
+};
