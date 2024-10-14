@@ -1,12 +1,12 @@
-import React from "react";
 import styled from "styled-components";
-import SeatedRowImage from "assets/image/seated-row.png";
-import { RoutineRecord } from "types/recrod";
 import Box from "components/box/Box/Box";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import Accordion from "components/box/Accordion/Accordion";
-import WorkoutRecordAccordion from "../workout-record/WorkoutRecordAccordion";
 import { Color } from "type/Color";
+import { RoutineRecord, WorkoutRecord } from "db";
+import useGetRoutineRecordOneQuery from "hooks/server/useGetRoutineRecordOneMutation";
+import { useParams } from "react-router-dom";
+import WorkoutRecordDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";
 
 const Container = styled.div`
     display: flex;
@@ -14,150 +14,38 @@ const Container = styled.div`
     gap: 20px;
 `;
 
+const initialRoutineRecordDetail: RoutineRecord = {
+    id: "",
+    name: "",
+    color: Color.VIOLET,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    userId: "",
+    workoutRecords: [],
+};
+
 const RoutineRecordDetailView = () => {
-    const data: RoutineRecord = {
-        id: "1",
-        name: "나의 가슴 루틴",
-        color: Color.ORANGE,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        userId: "3",
-        workoutRecords: [
-            {
-                id: "1",
-                name: "벤치프레스",
-                workoutImage: SeatedRowImage,
-                type: ["weight", "rep"],
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                routineRecordId: "1",
-                setRecords: [
-                    {
-                        id: "1",
-                        order: 1,
-                        weight: 10,
-                        rep: 10,
-                        restSec: 50,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                    {
-                        id: "2",
-                        order: 2,
-                        weight: 15,
-                        rep: 8,
-                        restSec: 30,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                    {
-                        id: "3",
-                        order: 3,
-                        weight: 20,
-                        rep: 6,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                ],
-            },
-            {
-                id: "2",
-                name: "벤치프레스",
-                workoutImage: SeatedRowImage,
-                type: ["weight", "rep"],
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                routineRecordId: "1",
-                setRecords: [
-                    {
-                        id: "1",
-                        order: 1,
-                        weight: 10,
-                        rep: 10,
-                        restSec: 50,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                    {
-                        id: "2",
-                        order: 2,
-                        weight: 15,
-                        rep: 8,
-                        restSec: 30,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                    {
-                        id: "3",
-                        order: 3,
-                        weight: 20,
-                        rep: 6,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                ],
-            },
-            {
-                id: "3",
-                name: "벤치프레스",
-                workoutImage: SeatedRowImage,
-                type: ["weight", "rep"],
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                routineRecordId: "1",
-                setRecords: [
-                    {
-                        id: "1",
-                        order: 1,
-                        weight: 10,
-                        rep: 10,
-                        restSec: 50,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                    {
-                        id: "2",
-                        order: 2,
-                        weight: 15,
-                        rep: 8,
-                        restSec: 30,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                    {
-                        id: "3",
-                        order: 3,
-                        weight: 20,
-                        rep: 6,
-                        restSec: 10,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        workoutRecordId: "1",
-                    },
-                ],
-            },
-        ],
-    };
+    const { routineRecordId } = useParams();
+
+    const { data: routineRecordDetailData } = useGetRoutineRecordOneQuery(
+        routineRecordId as string
+    );
+
+    const routineRecordDetail =
+        routineRecordDetailData ?? initialRoutineRecordDetail;
 
     return (
         <Container>
             <Box>
-                <TitleTextInput value={data.name} />
+                <TitleTextInput value={routineRecordDetail.name} />
             </Box>
             <Accordion.List
-                data={data.workoutRecords}
-                render={(workoutRecord) => (
-                    <WorkoutRecordAccordion data={workoutRecord} />
+                data={routineRecordDetail.workoutRecords}
+                render={(workoutRecord: WorkoutRecord) => (
+                    <WorkoutRecordDetailAccordion
+                        key={workoutRecord.id}
+                        data={workoutRecord}
+                    />
                 )}
             />
         </Container>
