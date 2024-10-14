@@ -13,6 +13,7 @@ const Container = styled.input`
 
     &:disabled {
         color: inherit;
+        background-color: transparent;
     }
 `;
 
