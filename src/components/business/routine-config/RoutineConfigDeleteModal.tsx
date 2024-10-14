@@ -25,16 +25,14 @@ const RoutineConfigDeleteModal = ({
     const { mutateAsync: deleteRoutineConfigOne } =
         useDeleteRoutineConfigOneMutation();
 
-    // TODO: API 호출
     const { data: routineConfigOneData } =
         useGetRoutineConfigOneQuery(routineConfigId);
 
     const routineConfigOne = routineConfigOneData ?? { name: "" };
 
     const handleRoutineConfigDeleteButtonClick = async (
-        routineConfgId: string
+        routineConfigId: string
     ) => {
-        // TODO: API 호출
         await deleteRoutineConfigOne(routineConfigId);
         showToast("루틴이 삭제되었습니다.");
         onConfirmButtonClick();
