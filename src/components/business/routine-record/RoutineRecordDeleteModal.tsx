@@ -2,9 +2,11 @@ import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
+import useDeleteRoutineRecordOneMutation from "hooks/server/useDeleteRoutineRecordOneMutation";
 
 type RoutineRecordDeleteModalProps = {
     isOpen: boolean;
+    routineRecordId: string;
     onBackdropClick: () => void;
     onCancelButtonClick: () => void;
     onConfirmButtonClick: () => void;
@@ -12,14 +14,21 @@ type RoutineRecordDeleteModalProps = {
 
 const RoutineRecordDeleteModal = ({
     isOpen,
+    routineRecordId,
     onBackdropClick,
     onCancelButtonClick,
     onConfirmButtonClick,
 }: RoutineRecordDeleteModalProps) => {
     const { showToast } = useToast();
 
-    const handleRoutineRecordDeleteButtonClick = () => {
-        // TODO: API 호출
+    const { mutateAsync: deleteRoutineRecordOneMutate } =
+        useDeleteRoutineRecordOneMutation();
+
+    const handleRoutineRecordDeleteButtonClick = async (
+        routineRecordId: string
+    ) => {
+        await deleteRoutineRecordOneMutate(routineRecordId);
+
         showToast("운동 기록이 삭제되었습니다.");
         onConfirmButtonClick();
     };
@@ -43,8 +52,10 @@ const RoutineRecordDeleteModal = ({
                         cancelLabel="취소"
                         confirmLabel="삭제하기"
                         onCancelButtonClick={onCancelButtonClick}
-                        onConfirmButtonClick={
-                            handleRoutineRecordDeleteButtonClick
+                        onConfirmButtonClick={() =>
+                            handleRoutineRecordDeleteButtonClick(
+                                routineRecordId
+                            )
                         }
                     />
                 </Confirm>
