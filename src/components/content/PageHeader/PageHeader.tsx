@@ -7,6 +7,7 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
     position: relative;
+    height: 42px;
 `;
 
 type PageHeaderProps = {
