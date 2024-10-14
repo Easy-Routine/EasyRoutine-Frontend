@@ -45,7 +45,9 @@ const RoutineRecordListCalendarView = () => {
                     return (
                         innerAcc +
                         workoutRecord.setRecords.reduce((setAcc, setRecord) => {
-                            return setAcc + (setRecord.weight || 0); // weight를 합산
+                            return (
+                                setAcc + (setRecord.weight * setRecord.rep || 0)
+                            ); // weight를 합산
                         }, 0)
                     );
                 },
