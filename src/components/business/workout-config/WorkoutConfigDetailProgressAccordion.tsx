@@ -12,6 +12,8 @@ import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutRecordOneMutation";
+import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMutation";
+import useDeleteSetRecordOneMutation from "hooks/server/useDeleteSetRecordOneMutation";
 
 type TypeMapper = {
     [key: string]: string;
@@ -35,6 +37,10 @@ type WorkoutConfigDetailProgressAccordionProps = {
         newSetConfigs: WorkoutConfig["setConfigs"]
     ) => void;
     onSetComplete: (restSec: number) => void;
+    onSetUpdate: (
+        workoutConfigId: string,
+        newSetConfigs: WorkoutConfig["setConfigs"]
+    ) => void;
     onCompletedSetIdsMutate: (completedSetIds: string[]) => void;
 };
 
@@ -44,6 +50,7 @@ const WorkoutConfigDetailProgressAccordion = ({
     onSetCreate,
     onSetDelete,
     onSetComplete,
+    onSetUpdate,
     onCompletedSetIdsMutate,
 }: WorkoutConfigDetailProgressAccordionProps) => {
     const { color } = useTheme();
@@ -57,9 +64,14 @@ const WorkoutConfigDetailProgressAccordion = ({
     const { mutateAsync: createWorkoutRecordOneMutate } =
         useCreateWorkoutRecordOneMutation();
 
+    const { mutateAsync: createSetRecordOneMutate } =
+        useCreateSetRecordOneMutation();
+
+    const { mutateAsync: deleteSetRecordOneMutate } =
+        useDeleteSetRecordOneMutation();
+
     useEffect(() => {
         // 컴포넌트가 마운트 될때 운동 기록 데이터를 생성  및 setCurrentWorkoutId하기
-
         if (routineRecordId && data) {
             (async () => {
                 const newWorkoutRecordOne = await createWorkoutRecordOneMutate({
@@ -71,29 +83,33 @@ const WorkoutConfigDetailProgressAccordion = ({
                 }
             })();
         }
-    }, [createWorkoutRecordOneMutate, data, routineRecordId]);
+    }, [createWorkoutRecordOneMutate, routineRecordId]);
 
     const isCurrentSet = (setId: string) => setId === currentSetId;
     const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
     const isWorkoutCompleted =
         completedSetIds.length === data.setConfigs.length;
 
-    const handleCompleteSetButtonClick = () => {
+    const handleCompleteSetButtonClick = async () => {
         const newCompletedSetIds = structuredClone(completedSetIds);
         newCompletedSetIds.push(currentSetId);
         setCompletedSetIds(newCompletedSetIds);
         setCurrentSetId(data.setConfigs[newCompletedSetIds.length]?.id);
 
-        const restSec = data.setConfigs.find(
+        const currentSetConfig = data.setConfigs.find(
             (setConfig) => setConfig.id === currentSetId
-        )?.restSec as number;
+        );
 
-        onSetComplete(restSec);
-        // TODO: 데이터 추가 API
-        // // currentWorkoutId에 세트 데이터 추가하기
+        if (currentSetConfig) {
+            onSetComplete(currentSetConfig.restSec);
+            await createSetRecordOneMutate({
+                workoutRecordId: currentWorkoutId,
+                setConfig: currentSetConfig,
+            });
+        }
     };
 
-    const handleDeleteSetButtonClick = () => {
+    const handleDeleteSetButtonClick = async () => {
         const newSetConfigs = structuredClone(data.setConfigs);
         const poppedSetConfig = newSetConfigs.pop();
         const filteredCompletedSetIds = completedSetIds.filter(
@@ -102,6 +118,12 @@ const WorkoutConfigDetailProgressAccordion = ({
         setCompletedSetIds(filteredCompletedSetIds);
         onSetDelete(data.id, newSetConfigs);
         // currentWorkoutId에 세트 데이터 삭제하기 (삭제할때, 생성 순으로 가져온 후 마지막요소 삭제후 put 하기)
+
+        if (completedSetIds.includes(poppedSetConfig?.id as string)) {
+            await deleteSetRecordOneMutate({
+                workoutRecordId: currentWorkoutId,
+            });
+        }
     };
 
     const handleCreateSetButtonClick = () => {
@@ -117,6 +139,17 @@ const WorkoutConfigDetailProgressAccordion = ({
         });
         setCurrentSetId(newSetConfigs[completedSetIds.length].id);
         onSetCreate(data.id, newSetConfigs);
+    };
+
+    const handleUpdateSetInputChange = (
+        index: number,
+        key: string,
+        value: string
+    ) => {
+        const newSetConfigs = structuredClone(data.setConfigs);
+        newSetConfigs[index][key] = value;
+
+        onSetUpdate(data.id, newSetConfigs);
     };
 
     useEffect(() => {
@@ -174,16 +207,17 @@ const WorkoutConfigDetailProgressAccordion = ({
                                 >
                                     <Table.Input
                                         value={index.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
                                         disabled={true}
                                     />
                                     {data.workoutLibrary.type.map((key) => (
                                         <Table.Input
                                             value={setConfig[key].toString()}
                                             onInputChange={(value) =>
-                                                console.log(value)
+                                                handleUpdateSetInputChange(
+                                                    index,
+                                                    key,
+                                                    value
+                                                )
                                             }
                                             disabled={isCompletedSet(
                                                 setConfig.id
@@ -194,7 +228,11 @@ const WorkoutConfigDetailProgressAccordion = ({
                                     <Table.Input
                                         value={setConfig.restSec.toString()}
                                         onInputChange={(value) =>
-                                            console.log(value)
+                                            handleUpdateSetInputChange(
+                                                index,
+                                                "restSec",
+                                                value
+                                            )
                                         }
                                         disabled={isCompletedSet(setConfig.id)}
                                     />
