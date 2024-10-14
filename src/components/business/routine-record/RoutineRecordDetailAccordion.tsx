@@ -2,7 +2,6 @@ import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import useAccordion from "hooks/client/useAccordion";
 import { ReactComponent as FireIcon } from "assets/image/fire.svg";
-import { RoutineRecord } from "types/recrod";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import { ReactComponent as PenIcon } from "assets/image/pen.svg";
 import { ReactComponent as RunIcon } from "assets/image/run.svg";
@@ -13,10 +12,11 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
 import { Color } from "type/Color";
+import { RoutineRecord } from "db";
 
 type RoutineRecordDetailAccordionProps = {
     data: RoutineRecord;
-    onRoutineRecordDeleteButtonClick: () => void;
+    onRoutineRecordDeleteButtonClick: (routineRecordId: string) => void;
 };
 
 const RoutineRecordDetailAccordion = ({
@@ -84,7 +84,9 @@ const RoutineRecordDetailAccordion = ({
                         </IconTextBox.IconText>
                         <IconTextBox.IconText
                             color={color.warning}
-                            onIconTextClick={onRoutineRecordDeleteButtonClick}
+                            onIconTextClick={() =>
+                                onRoutineRecordDeleteButtonClick(data.id)
+                            }
                         >
                             <RunIcon />
                             루틴 삭제하기
@@ -93,7 +95,9 @@ const RoutineRecordDetailAccordion = ({
                 </Accordion.Body>
                 <Accordion.DeleteButton
                     opacity={opacity}
-                    onDeleteButtonClick={onRoutineRecordDeleteButtonClick}
+                    onDeleteButtonClick={() =>
+                        onRoutineRecordDeleteButtonClick(data.id)
+                    }
                 />
             </Accordion.Motion>
         </Accordion>
