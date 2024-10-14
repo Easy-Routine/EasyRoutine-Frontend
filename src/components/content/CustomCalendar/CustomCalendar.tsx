@@ -40,7 +40,6 @@ const Container = styled.div`
         align-items: center;
         justify-content: center;
         font-size: 16px;
-        border-radius: 50%; /* 원형으로 만들기 (필요시) */
         transition: background-color 0.2s;
         box-sizing: border-box; /* 패딩과 마진 포함 */
     }
@@ -54,6 +53,7 @@ const Container = styled.div`
     .react-calendar__tile {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         gap: 5px;
         padding: 5px 0;
         // color: ${({ theme }) => theme.color.text.black};
@@ -92,8 +92,8 @@ const NavigationButtonWrapper = styled.div`
 `;
 
 const Circle = styled.div<{ isActive: boolean; isToday: boolean }>`
-    width: 40px;
-    height: 40px;
+    width: 75%;
+    aspect-ratio: 1;
     border-radius: 50%;
     background-color: ${({ theme, isToday }) =>
         isToday ? theme.color.gray.light : null};
@@ -107,18 +107,20 @@ const Circle = styled.div<{ isActive: boolean; isToday: boolean }>`
 `;
 
 const DotWrapper = styled.div`
-    width: 100%;
-    height: 5px;
+    width: 80%;
+    height: auto;
     display: flex;
     justify-content: center;
     gap: 5px;
     align-items: center;
+    flex-wrap: wrap;
+    overflow: visible;
 `;
 
 const Dot = styled.div<{ backgroundColor: string }>`
     width: 5px;
     height: 5px;
-    border-radius: 50%;
+    border-radius: 5px;
     background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
