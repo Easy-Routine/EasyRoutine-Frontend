@@ -8,6 +8,10 @@ import useModal from "hooks/client/useModal";
 import { useState } from "react";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
+import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
+import { WorkoutLibrary } from "db";
+import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
+import { Period } from "type/Period";
 
 const Container = styled.div`
     display: flex;
@@ -15,8 +19,20 @@ const Container = styled.div`
     gap: 20px;
 `;
 
+const initialWorkoutLibraryDetail: WorkoutLibrary = {
+    id: "",
+    name: "",
+    image: "",
+    category: "",
+    type: [],
+    isEditable: false,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    userId: "",
+};
+
 const RoutineRecorListGraphView = () => {
-    const { selectedValue, handleTabClick } = useTab("1week");
+    const { selectedValue, handleTabClick } = useTab(Period.Month);
     const {
         isOpen: isWorkoutLibraryListGraphBottomSheetOpen,
         handleOpenModal: openWorkoutLibraryListGraphBottomSheet,
@@ -25,90 +41,85 @@ const RoutineRecorListGraphView = () => {
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 
-    // TODO: workoutLibraryId로 운동 종목 상세 데이터 가져오기
-    const workoutLibraryDetailData = {
-        id: 1,
-        name: "벤치프레스",
-    };
+    const { data: workoutLibraryDetailData } =
+        useGetWorkoutLibraryOneQuery(workoutLibraryId);
+    const workoutLibraryDetail =
+        workoutLibraryDetailData ?? initialWorkoutLibraryDetail;
 
-    // TODO: 운동 id와 기간값으로 데이터 가져오기
-    const data = {
-        workoutRecordByDateList: [
-            { key: "1월", value: 400 },
-            { key: "2월", value: 300 },
-            { key: "3월", value: 200 },
-            { key: "4월", value: 278 },
-            { key: "5월", value: 189 },
-            { key: "6월", value: 400 },
-            { key: "7월", value: 300 },
-            { key: "8월", value: 400 },
-            { key: "9월", value: 300 },
-            { key: "10월", value: 200 },
-            { key: "11월", value: 278 },
-            { key: "12월", value: 189 },
-        ],
-    };
+    const { data: workoutRecordSumListByDateData } =
+        useGetWorkoutRecordSumAllQuery({
+            workoutLibraryId,
+            period: selectedValue as Period,
+        });
+
+    const workoutRecordSumListByDate = workoutRecordSumListByDateData ?? [];
 
     const handleButtonClick = () => {
         openWorkoutLibraryListGraphBottomSheet();
     };
 
     const handleSmallCardClick = (id: string) => {
+        console.log(id);
         setWorkoutLibraryId(id);
         closeWorkoutLibraryListGraphBottomSheet();
     };
 
+    // workoutLibraryId, selectedValue 를 이용해서 전체 운동 볼륨을 구하기
+
     return (
         <Container>
-            <Box>
-                <TitleTextInput value={workoutLibraryDetailData.name} />
-            </Box>
-            <Box>
-                <Graph
-                    onDotClick={(data) => console.log(data)}
-                    data={data.workoutRecordByDateList}
-                    lineKey="key"
-                    areaKey="value"
-                />
-            </Box>
-
-            <ChipTab>
-                <ChipTab.Chip
-                    value="1week"
-                    selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
-                >
-                    1주
-                </ChipTab.Chip>
-                <ChipTab.Chip
-                    value="1month"
-                    selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
-                >
-                    1달
-                </ChipTab.Chip>
-                <ChipTab.Chip
-                    value="3month"
-                    selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
-                >
-                    3달
-                </ChipTab.Chip>
-                <ChipTab.Chip
-                    value="1year"
-                    selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
-                >
-                    1년
-                </ChipTab.Chip>
-                <ChipTab.Chip
-                    value="all"
-                    selectedValue={selectedValue}
-                    onTabClick={handleTabClick}
-                >
-                    전체
-                </ChipTab.Chip>
-            </ChipTab>
+            {workoutLibraryId && (
+                <>
+                    <Box>
+                        <TitleTextInput value={workoutLibraryDetail.name} />
+                    </Box>
+                    <Box>
+                        <Graph
+                            onDotClick={(data) => console.log(data)}
+                            data={workoutRecordSumListByDate}
+                            lineKey="key"
+                            areaKey="value"
+                        />
+                    </Box>
+                    <ChipTab>
+                        <ChipTab.Chip
+                            value={Period.Month}
+                            selectedValue={selectedValue}
+                            onTabClick={handleTabClick}
+                        >
+                            1개월
+                        </ChipTab.Chip>
+                        <ChipTab.Chip
+                            value={Period.Quarter}
+                            selectedValue={selectedValue}
+                            onTabClick={handleTabClick}
+                        >
+                            3개월
+                        </ChipTab.Chip>
+                        <ChipTab.Chip
+                            value={Period.Half}
+                            selectedValue={selectedValue}
+                            onTabClick={handleTabClick}
+                        >
+                            6개월
+                        </ChipTab.Chip>
+                        <ChipTab.Chip
+                            value={Period.Year}
+                            selectedValue={selectedValue}
+                            onTabClick={handleTabClick}
+                        >
+                            1년
+                        </ChipTab.Chip>
+                        <ChipTab.Chip
+                            value={Period.All}
+                            selectedValue={selectedValue}
+                            onTabClick={handleTabClick}
+                        >
+                            전체
+                        </ChipTab.Chip>
+                    </ChipTab>
+                </>
+            )}
 
             <WorkoutLibraryListGraphBottomSheet
                 isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
