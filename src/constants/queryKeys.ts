@@ -7,6 +7,7 @@ const queryKey = {
     getRoutineRecordOne: "getRoutineRecordOne",
     getRoutineRecordAllMonthly: "getRoutineRecordAllMonthly",
     getRoutineRecordAllDaily: "getRoutineRecordAllDaily",
+    getWorkoutRecordSumAll: "getWorkoutRecordSumAll",
 } as const;
 
 export default queryKey;
