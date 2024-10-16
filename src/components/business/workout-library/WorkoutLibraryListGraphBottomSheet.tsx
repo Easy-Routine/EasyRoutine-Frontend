@@ -19,6 +19,11 @@ const Container = styled.div`
     overflow: auto;
 `;
 
+const SmallCardListContainer = styled.div`
+    height: 205px;
+    overflow-y: auto;
+`;
+
 type WorkoutLibraryListGraphBottomSheetProps = {
     isOpen: boolean;
     onBackdropClick: () => void;
@@ -105,25 +110,27 @@ const WorkoutLibraryListGraphBottomSheet = ({
                         </ChipTab.Chip>
                     </ChipTab>
 
-                    <SmallCardList<WorkoutLibrary>
-                        data={workoutLibraryAll}
-                        render={({ id, name }) => (
-                            <SmallCard
-                                onCardClick={() => onSmallCardClick(id)}
-                                key={id}
-                            >
-                                <SmallCard.ImageBox>
-                                    <img
-                                        src={SeatedRowImage}
-                                        alt="seated row"
-                                    />
-                                </SmallCard.ImageBox>
-                                <SmallCard.NormalText>
-                                    {name}
-                                </SmallCard.NormalText>
-                            </SmallCard>
-                        )}
-                    />
+                    <SmallCardListContainer>
+                        <SmallCardList<WorkoutLibrary>
+                            data={workoutLibraryAll}
+                            render={({ id, name }) => (
+                                <SmallCard
+                                    onCardClick={() => onSmallCardClick(id)}
+                                    key={id}
+                                >
+                                    <SmallCard.ImageBox>
+                                        <img
+                                            src={SeatedRowImage}
+                                            alt="seated row"
+                                        />
+                                    </SmallCard.ImageBox>
+                                    <SmallCard.NormalText>
+                                        {name}
+                                    </SmallCard.NormalText>
+                                </SmallCard>
+                            )}
+                        />
+                    </SmallCardListContainer>
                 </Container>
             </Modal.BottomSheet>
         </Modal>
