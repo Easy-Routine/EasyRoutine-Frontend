@@ -25,6 +25,11 @@ const Container = styled.div`
     overflow: auto;
 `;
 
+const SmallCardListContainer = styled.div`
+    height: 205px;
+    overflow-y: auto;
+`;
+
 const WorkoutLibraryListBottomSheet = () => {
     const { routineConfigId } = useParams();
 
@@ -121,31 +126,33 @@ const WorkoutLibraryListBottomSheet = () => {
                             </ChipTab.Chip>
                         </ChipTab>
                         <CheckBoxGroup>
-                            <SmallCardList<WorkoutLibrary>
-                                data={workoutLibraryAll}
-                                render={(item, index) => (
-                                    <CheckBoxGroup.Wrapper key={item.id}>
-                                        <SmallCard>
-                                            <SmallCard.ImageBox>
-                                                <img
-                                                    src={SeatedRowImage}
-                                                    alt="seated row"
-                                                />
-                                            </SmallCard.ImageBox>
-                                            <SmallCard.NormalText>
-                                                {item.name}
-                                            </SmallCard.NormalText>
-                                        </SmallCard>
-                                        <CheckBoxGroup.CheckBox
-                                            value={item.id.toString()}
-                                            selectedValues={selectedValues}
-                                            onCheckBoxClick={
-                                                handleCheckBoxClick
-                                            }
-                                        />
-                                    </CheckBoxGroup.Wrapper>
-                                )}
-                            />
+                            <SmallCardListContainer>
+                                <SmallCardList<WorkoutLibrary>
+                                    data={workoutLibraryAll}
+                                    render={(item, index) => (
+                                        <CheckBoxGroup.Wrapper key={item.id}>
+                                            <SmallCard>
+                                                <SmallCard.ImageBox>
+                                                    <img
+                                                        src={SeatedRowImage}
+                                                        alt="seated row"
+                                                    />
+                                                </SmallCard.ImageBox>
+                                                <SmallCard.NormalText>
+                                                    {item.name}
+                                                </SmallCard.NormalText>
+                                            </SmallCard>
+                                            <CheckBoxGroup.CheckBox
+                                                value={item.id.toString()}
+                                                selectedValues={selectedValues}
+                                                onCheckBoxClick={
+                                                    handleCheckBoxClick
+                                                }
+                                            />
+                                        </CheckBoxGroup.Wrapper>
+                                    )}
+                                />
+                            </SmallCardListContainer>
                         </CheckBoxGroup>
                         <CheckBoxGroup.SubmitButton
                             onButtonClick={handleSubmitButtonClick}
