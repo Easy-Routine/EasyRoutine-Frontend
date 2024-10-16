@@ -18,7 +18,6 @@ const Container = styled.div<{ $isOpen: boolean }>`
     border-top-right-radius: ${({ theme }) => theme.borderRadius.lg};
     z-index: ${({ theme }) => theme.zIndex.modal};
     width: 100%;
-    max-height: 60%;
     transition: all 0.5s ease-in-out;
     transform: translateY(${({ $isOpen }) => ($isOpen ? "0" : "100%")});
 
