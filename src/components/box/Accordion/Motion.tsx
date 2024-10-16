@@ -22,7 +22,7 @@ const Motion = ({ x, onDragEnd, children }: MotionProps) => {
     return (
         <Container
             drag="x"
-            dragConstraints={{ left: -65, right: 0 }}
+            dragConstraints={{ left: 0, right: 0 }}
             onDragEnd={onDragEnd}
             animate={{ x }}
         >
