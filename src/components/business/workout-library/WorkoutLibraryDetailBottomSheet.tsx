@@ -3,6 +3,7 @@ import Modal from "components/box/Modal/Modal";
 import Button from "components/content/Button/Button";
 import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
 import ChipTab from "components/content/ChipTab/ChipTab";
+import ImageInput from "components/content/ImageInput/ImageInput";
 import UnderlineInput from "components/content/UnderlineInput/UnderlineInput";
 import { WorkoutLibrary } from "db";
 import useCheckBox from "hooks/client/useCheckBox";
@@ -10,7 +11,7 @@ import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import styled from "styled-components";
 import { Category } from "type/Category";
 import { Type } from "type/Type";
@@ -61,6 +62,12 @@ const WorkoutLibraryDetailBottomSheet = ({
     const workoutLibraryOne = workoutLibraryOneData ?? initialWorkoutLibraryOne;
 
     const {
+        value: imageInputValue,
+        setValue: setImageInputValue,
+        handleFileChange,
+    } = useInput(workoutLibraryOne.image);
+
+    const {
         value: underlineInputValue,
         setValue,
         handleInputChange: handleUnderlineInputChange,
@@ -78,9 +85,24 @@ const WorkoutLibraryDetailBottomSheet = ({
 
     useEffect(() => {
         setValue(workoutLibraryOne.name);
+        setImageInputValue(workoutLibraryOne.image);
         setSelectedValue(workoutLibraryOne.category);
         setSelectedValues(workoutLibraryOne.type);
-    }, [workoutLibraryOne, setValue, setSelectedValue, setSelectedValues]);
+    }, [
+        workoutLibraryOne,
+        setValue,
+        setImageInputValue,
+        setSelectedValue,
+        setSelectedValues,
+    ]);
+
+    const handleImageInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        handleFileChange(e);
+
+        // TODO: 이미지를 만들고 패스로 반환해주는 API 필요
+        // API 통신후 받은 패스로 다시 한번 set해주는 과정이 필요
+        // setImageInputValue()
+    };
 
     const handleWorkoutLibraryUpdateButtonClick = async () => {
         await updateWorkoutLibraryOneMutate({
@@ -99,6 +121,13 @@ const WorkoutLibraryDetailBottomSheet = ({
             <Modal.Backdrop isOpen={isOpen} onBackdropClick={onBackdropClick} />
             <Modal.BottomSheet isOpen={isOpen}>
                 <Container>
+                    <LabelBox labelText="운동 이미지" gap="20px" align="center">
+                        <ImageInput
+                            value={imageInputValue}
+                            onInputChange={handleImageInputChange}
+                        />
+                    </LabelBox>
+
                     <LabelBox labelText="운동 이름" gap="20px">
                         <UnderlineInput
                             value={underlineInputValue}
