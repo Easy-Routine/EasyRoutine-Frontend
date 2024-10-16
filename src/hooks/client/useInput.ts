@@ -7,10 +7,26 @@ const useInput = (defaultValue?: string) => {
         console.log(e.target.value);
         setValue(e.target.value);
     };
+
     const handleInputClear = () => {
         setValue("");
     };
-    return { value, setValue, handleInputChange, handleInputClear };
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setValue(imageUrl);
+        }
+    };
+
+    return {
+        value,
+        setValue,
+        handleInputChange,
+        handleInputClear,
+        handleFileChange,
+    };
 };
 
 export default useInput;
