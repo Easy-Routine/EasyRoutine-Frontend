@@ -12,6 +12,7 @@ export const createSetConfigOne = async (
         rep: 0,
         weight: 0,
         restSec: 0,
+        workoutSec: 0,
         createdAt: new Date(),
         updatedAt: new Date(),
     };
