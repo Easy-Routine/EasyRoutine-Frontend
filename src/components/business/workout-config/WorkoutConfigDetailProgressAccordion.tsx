@@ -130,9 +130,10 @@ const WorkoutConfigDetailProgressAccordion = ({
         const newSetConfigs = structuredClone(data.setConfigs);
         newSetConfigs.push({
             id: (newSetConfigs.length + 1).toString(),
-            weight: 50,
-            rep: 10,
-            restSec: 10,
+            weight: 0,
+            rep: 0,
+            restSec: 0,
+            workoutSec: 0,
             createdAt: new Date(),
             updatedAt: new Date(),
             workoutConfigId: "1",
