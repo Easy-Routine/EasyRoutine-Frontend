@@ -25,6 +25,8 @@ const Container = styled.div`
     .react-calendar {
         width: 100%;
         border: none;
+        background-color: ${({ theme }) => theme.color.background.box};
+        font-family: "Noto Sans Korean";
     }
 
     .react-calendar__month-view__weekdays {
@@ -40,8 +42,15 @@ const Container = styled.div`
         align-items: center;
         justify-content: center;
         font-size: 16px;
+        color: ${({ theme }) => theme.color.text.black};
         transition: background-color 0.2s;
         box-sizing: border-box; /* 패딩과 마진 포함 */
+    }
+    .react-calendar__month-view__days__day--weekend {
+        color: ${({ theme }) => theme.color.warning};
+    }
+    .react-calendar__month-view__days__day--neighboringMonth {
+        color: ${({ theme }) => theme.color.gray.light};
     }
 
     .react-calendar__tile--active:enabled:hover,
