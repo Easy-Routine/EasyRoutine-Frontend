@@ -51,11 +51,11 @@ const commonTheme = {
 export const lightTheme = structuredClone(commonTheme);
 lightTheme.color.background.page = "#FFFFFF";
 lightTheme.color.background.box = "#FFFFFF";
-lightTheme.color.text.black = "#202124";
+lightTheme.color.text.black = "#2D2D2D";
 lightTheme.color.text.white = "#FFFFFF";
 
 export const darkTheme = structuredClone(commonTheme);
-darkTheme.color.background.page = "#212121";
-darkTheme.color.background.box = "#212121";
+darkTheme.color.background.page = "#2D2D2D";
+darkTheme.color.background.box = "#2D2D2D";
 darkTheme.color.text.black = "#FFFFFF";
-darkTheme.color.text.white = "#212121";
+darkTheme.color.text.white = "#2D2D2D";
