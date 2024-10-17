@@ -2,7 +2,7 @@ import Accordion from "components/box/Accordion/Accordion";
 import styled from "styled-components";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import SeatedRowImage from "assets/image/seated-row.png";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useTimer from "hooks/client/useTimer";
 import Modal from "components/box/Modal/Modal";
 import useModal from "hooks/client/useModal";
@@ -23,6 +23,8 @@ import { Color } from "type/Color";
 import { RoutineConfig, SetConfig, WorkoutConfig } from "db";
 import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
 import Box from "components/box/Box/Box";
+import useUpdateRoutineRecordWorkoutEndAtMutation from "hooks/server/useUpdateRoutineRecordWorkoutEndAtMutation";
+import moment from "moment";
 
 const Container = styled.div`
     display: flex;
@@ -49,6 +51,7 @@ const RoutineConfigListProgressView = () => {
     const navigate = useNavigate();
     const { showToast } = useToast();
     const { routineConfigId } = useParams();
+    const workoutStartTime = useRef(moment());
 
     const {
         isOpen: isTimerModalOpen,
@@ -78,6 +81,8 @@ const RoutineConfigListProgressView = () => {
 
     const { mutateAsync: createRoutineRecordOneMutate } =
         useCreateRoutineRecordOneMutation();
+    const { mutateAsync: updateRoutineRecordOneMutate } =
+        useUpdateRoutineRecordWorkoutEndAtMutation();
 
     const routineConfigDetail =
         routineConfigDetailData ?? initialRoutineConfigDetail;
@@ -240,13 +245,33 @@ const RoutineConfigListProgressView = () => {
             <CompletedModal
                 isOpen={isCompletedModalOpen}
                 onBackdropClick={() => handleCloseCompletedModal}
-                onCancelButtonClick={() => {
-                    handleCloseCompletedModal();
-                    navigate(ROUTES.CONFIG.LIST.PATH, { replace: true });
-                }}
-                onConfirmButtonClick={() => {
+                onCancelButtonClick={async () => {
+                    const workoutEndTime = moment();
+                    const workoutTime = moment
+                        .duration(workoutEndTime.diff(workoutStartTime.current))
+                        .asSeconds();
+
+                    await updateRoutineRecordOneMutate({
+                        routineRecordId,
+                        workoutTime,
+                    });
                     showToast("루틴이 완료되었습니다.");
                     navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
+                }}
+                onConfirmButtonClick={async () => {
+                    const workoutEndTime = moment();
+                    const workoutTime = moment
+                        .duration(workoutEndTime.diff(workoutStartTime.current))
+                        .asSeconds();
+
+                    await updateRoutineRecordOneMutate({
+                        routineRecordId,
+                        workoutTime,
+                    });
+                    showToast("루틴이 완료되었습니다.");
+                    navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
+
+                    // TODO: 끝난 시간 저장
                 }}
             />
             <UncompletedModal
@@ -255,8 +280,19 @@ const RoutineConfigListProgressView = () => {
                 onCancelButtonClick={() => {
                     handleCloseUncompletedModal();
                 }}
-                onConfirmButtonClick={() => {
+                onConfirmButtonClick={async () => {
+                    const workoutEndTime = moment();
+                    const workoutTime = moment
+                        .duration(workoutEndTime.diff(workoutStartTime.current))
+                        .asSeconds();
+
+                    await updateRoutineRecordOneMutate({
+                        routineRecordId,
+                        workoutTime,
+                    });
+                    showToast("루틴이 완료되었습니다.");
                     navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
+                    // TODO: 끝난 시간 저장
                 }}
             />
         </Container>
