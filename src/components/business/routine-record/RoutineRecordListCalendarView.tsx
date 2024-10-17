@@ -57,20 +57,7 @@ const RoutineRecordListCalendarView = () => {
     }, 0);
 
     const totalSeconds = routineRecordAllDaily.reduce((acc, record) => {
-        return (
-            acc +
-            record.workoutRecords.reduce(
-                (innerAcc: number, workout: WorkoutRecord) => {
-                    return (
-                        innerAcc +
-                        workout.setRecords.reduce((setAcc, set) => {
-                            return setAcc + set.rep * (set.restSec || 0); // 초를 합산 (예시)
-                        }, 0)
-                    );
-                },
-                0
-            )
-        );
+        return acc + record.workoutTime;
     }, 0);
 
     return (
