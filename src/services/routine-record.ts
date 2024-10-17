@@ -19,6 +19,7 @@ export const createRoutineRecordOne = async ({
         color,
         createdAt: new Date(), // 현재 날짜
         updatedAt: new Date(), // 현재 날짜
+        workoutTime: 0,
         userId,
         workoutRecords: [], // 초기값은 빈 배열
     };
@@ -230,5 +231,35 @@ export const deleteRoutineRecordOne = async (
     } catch (error) {
         console.error("Error deleting RoutineRecord:", error);
         return false; // 오류 발생
+    }
+};
+
+type UpdateRoutineRecordWorkoutEndAtParmas = {
+    routineRecordId: string;
+    workoutTime: number;
+};
+
+export const updateRoutineRecordWorkoutEndAt = async ({
+    routineRecordId,
+    workoutTime,
+}: UpdateRoutineRecordWorkoutEndAtParmas): Promise<RoutineRecord | null> => {
+    try {
+        const routineRecord = await db.routineRecords.get(routineRecordId); // 루틴 기록 가져오기
+
+        if (!routineRecord) {
+            console.error("RoutineRecord not found");
+            return null; // 루틴 기록이 없으면 null 반환
+        }
+
+        // 데이터베이스에 업데이트
+        await db.routineRecords.update(routineRecordId, {
+            workoutTime,
+        });
+
+        console.log("RoutineRecord updated:", routineRecord);
+        return routineRecord; // 업데이트된 루틴 기록 반환
+    } catch (error) {
+        console.error("Error updating RoutineRecord:", error);
+        throw error;
     }
 };
