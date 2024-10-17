@@ -16,6 +16,7 @@ export const createSetRecordOne = async ({
         rep: setConfig.rep,
         weight: setConfig.weight,
         restSec: setConfig.restSec,
+        workoutSec: setConfig.workoutSec,
         createdAt: new Date(),
         updatedAt: new Date(),
     };
