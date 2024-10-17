@@ -19,6 +19,7 @@ const Container = styled.div<{ $isVisible: boolean }>`
     align-items: center;
     justify-content: center;
     gap: 10px;
+    color: ${({ theme }) => theme.color.text.white};
 `;
 
 const Text = styled.div`
