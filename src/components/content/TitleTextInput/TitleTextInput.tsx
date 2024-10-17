@@ -10,7 +10,8 @@ const Container = styled.input`
     outline: none; /* 포커스 시 outline 제거 */
     box-sizing: border-box;
     border-radius: inherit;
-
+    background-color: ${({ theme }) => theme.color.background.box};
+    color: ${({ theme }) => theme.color.text.black};
     &:disabled {
         color: inherit;
         background-color: transparent;
