@@ -27,6 +27,7 @@ export type SetConfig = {
     weight: number;
     rep: number;
     restSec: number;
+    workoutSec: number;
     createdAt: Date;
     updatedAt: Date;
     workoutConfigId: string;
@@ -50,6 +51,7 @@ export type RoutineRecord = {
     id: string;
     name: string;
     color: Color;
+    workoutTime: number;
     createdAt: Date;
     updatedAt: Date;
     userId: string;
@@ -71,6 +73,7 @@ export type SetRecord = {
     weight: number;
     rep: number;
     restSec: number;
+    workoutSec: number;
     createdAt: Date;
     updatedAt: Date;
     workoutRecordId: string;
@@ -94,15 +97,15 @@ db.version(1).stores({
     workoutConfigs:
         "id, createdAt, updatedAt, routineConfigId, setConfigs, workoutLibrary",
     setConfigs:
-        "id, weight, rep, restSec, createdAt, updatedAt, workoutConfigId",
+        "id, weight, rep, restSec, workoutSec, createdAt, updatedAt, workoutConfigId",
     workoutLibraries:
         "id, name, image, category, type, createdAt, updatedAt, userId",
     routineRecords:
-        "id, name, color, createdAt, updatedAt, userId, workoutRecords", // 쉼표 추가
+        "id, name, color, workoutTime, createdAt, updatedAt, userId, workoutRecords", // 쉼표 추가
     workoutRecords:
         "id, createdAt, updatedAt, routineRecordId, setRecords, workoutLibrary",
     setRecords:
-        "id, weight, rep, restSec, createdAt, updatedAt, workoutRecordId",
+        "id, weight, rep, restSec, workoutSec, createdAt, updatedAt, workoutRecordId",
 });
 
 export { db };
