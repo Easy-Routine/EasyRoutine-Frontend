@@ -7,6 +7,7 @@ import { RoutineRecord, WorkoutRecord } from "db";
 import useGetRoutineRecordOneQuery from "hooks/server/useGetRoutineRecordOneMutation";
 import { useParams } from "react-router-dom";
 import WorkoutRecordDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";
+import SummaryBox from "components/content/Summary/SummaryBox";
 
 const Container = styled.div`
     display: flex;
@@ -20,6 +21,7 @@ const initialRoutineRecordDetail: RoutineRecord = {
     color: Color.VIOLET,
     createdAt: new Date(),
     updatedAt: new Date(),
+    workoutTime: 0,
     userId: "",
     workoutRecords: [],
 };
@@ -34,11 +36,27 @@ const RoutineRecordDetailView = () => {
     const routineRecordDetail =
         routineRecordDetailData ?? initialRoutineRecordDetail;
 
+    const totalWeight = routineRecordDetail.workoutRecords.reduce(
+        (innerAcc: number, workoutRecord: WorkoutRecord) => {
+            return (
+                innerAcc +
+                workoutRecord.setRecords.reduce((setAcc, setRecord) => {
+                    return setAcc + (setRecord.weight * setRecord.rep || 0); // weight를 합산
+                }, 0)
+            );
+        },
+        0
+    );
+
     return (
         <Container>
             <Box>
                 <TitleTextInput value={routineRecordDetail.name} />
             </Box>
+            <SummaryBox
+                seconds={routineRecordDetail.workoutTime}
+                weight={totalWeight}
+            />
             <Accordion.List
                 data={routineRecordDetail.workoutRecords}
                 render={(workoutRecord: WorkoutRecord) => (
