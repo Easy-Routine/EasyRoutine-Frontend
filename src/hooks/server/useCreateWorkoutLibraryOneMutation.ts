@@ -11,6 +11,7 @@ const useCreateWorkoutLibraryOneMutation = () => {
             image,
             category,
             type,
+            isEditable,
             userId,
         }: Omit<WorkoutLibrary, "id" | "createdAt" | "updatedAt">) =>
             createWorkoutLibraryOne({
@@ -18,6 +19,7 @@ const useCreateWorkoutLibraryOneMutation = () => {
                 image,
                 category,
                 type,
+                isEditable,
                 userId,
             }),
         onSettled: () => {
