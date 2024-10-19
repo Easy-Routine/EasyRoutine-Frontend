@@ -14,6 +14,8 @@ import WorkoutLibraryDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import { WorkoutLibrary } from "db";
 import { Category } from "type/Category";
+import useToast from "hooks/useToast";
+import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
 
 const Container = styled.div`
     display: flex;
@@ -25,11 +27,14 @@ const WorkoutLibraryListView = () => {
     const { selectedValue, handleTabClick } = useTab(Category.ALL);
     const { value, handleInputChange, handleInputClear } = useInput();
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
+    const { showToast } = useToast();
 
     const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery(
         value,
         selectedValue
     );
+    const { mutateAsync: getWorkoutLibraryOneMutate } =
+        useGetWorkoutLibraryOneMutation();
 
     const workoutLibraryAll = workoutLibraryAllData ?? [];
 
@@ -50,14 +55,37 @@ const WorkoutLibraryListView = () => {
         openWorkoutLibraryBottomSheet();
     };
 
-    const handleSmallCardClick = (workoutLibraryId: string) => {
-        setWorkoutLibraryId(workoutLibraryId);
-        openWorkoutLibraryBottomSheet();
-    };
+    // 짧은 클릭
+    const handleSmallCardClick = async (workoutLibraryId: string) => {
+        // TODO: 운동 라이브러리 하나 가져오기
 
-    const handleSmallCardLongPress = (workoutLibraryId: string) => {
-        setWorkoutLibraryId(workoutLibraryId);
-        openWorkoutDeleteModal();
+        // isEditable이 true라면 아래 로직 실행하기
+        const workoutLibraryOne =
+            await getWorkoutLibraryOneMutate(workoutLibraryId);
+        const isEditable = workoutLibraryOne?.isEditable;
+
+        if (isEditable) {
+            setWorkoutLibraryId(workoutLibraryId);
+            openWorkoutLibraryBottomSheet();
+        } else {
+            showToast("기본 운동은 변경할 수 없습니다.");
+        }
+    };
+    // 긴 클릭
+    const handleSmallCardLongPress = async (workoutLibraryId: string) => {
+        // TODO: 운동 라이브러리 하나 가져오기
+
+        // isEditable이 true라면 아래 로직 실행하기
+        const workoutLibraryOne =
+            await getWorkoutLibraryOneMutate(workoutLibraryId);
+        const isEditable = workoutLibraryOne?.isEditable;
+
+        if (isEditable) {
+            setWorkoutLibraryId(workoutLibraryId);
+            openWorkoutDeleteModal();
+        } else {
+            showToast("기본 운동은 변경할 수 없습니다.");
+        }
     };
 
     return (
