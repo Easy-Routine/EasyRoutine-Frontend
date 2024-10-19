@@ -22,6 +22,7 @@ const WorkoutLibraryCreateFloatingActionButton = ({
             image: "",
             category: Category.CHEST,
             type: [Type.REP, Type.WEIGHT],
+            isEditable: false,
             userId: "doggopawer",
         });
         showToast("운동 종목이 추가되었습니다.");
