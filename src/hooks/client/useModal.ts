@@ -5,9 +5,11 @@ const useModal = () => {
 
     const handleOpenModal = () => {
         setIsOpen(true);
+        document.body.style.overflowY = "hidden";
     };
     const handleCloseModal = () => {
         setIsOpen(false);
+        document.body.style.overflowY = "scroll";
     };
 
     return { isOpen, handleOpenModal, handleCloseModal };
