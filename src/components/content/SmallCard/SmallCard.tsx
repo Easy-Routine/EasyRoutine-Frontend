@@ -54,6 +54,9 @@ const SmallCard = ({ children, onCardClick, onLongPress }: SmallCardProps) => {
     const isLongPress = useRef(false);
 
     const handleSmallCardClick = () => {
+        if (isLongPress.current) {
+            return;
+        }
         onCardClick && onCardClick();
     };
 
@@ -65,7 +68,7 @@ const SmallCard = ({ children, onCardClick, onLongPress }: SmallCardProps) => {
         },
         {
             onFinish: () => {
-                // isLongPress.current = false;
+                isLongPress.current = false;
                 console.log("onLongPressFinish", isLongPress.current);
             },
         }
