@@ -17,6 +17,7 @@ import { Category } from "type/Category";
 import { Type } from "type/Type";
 
 const Container = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
