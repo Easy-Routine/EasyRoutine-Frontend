@@ -5,6 +5,7 @@ import ThemeProvider from "context/ThemeContext";
 import { GlobalStyle } from "style/GlobalStyle";
 import ToastProvider from "context/ToastContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "style/GlobalFont.css";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
