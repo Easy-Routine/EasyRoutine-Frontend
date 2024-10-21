@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -12,6 +12,7 @@ const Container = styled.div`
 const PageTemplate = () => {
     return (
         <Container>
+            <ScrollRestoration />
             <Outlet />
         </Container>
     );
