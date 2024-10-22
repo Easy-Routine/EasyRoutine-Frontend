@@ -49,12 +49,17 @@ export const getWorkoutLibraryOne = async (
 export const createWorkoutLibraryOne = async (
     workoutData: Omit<WorkoutLibrary, "id" | "createdAt" | "updatedAt">
 ): Promise<WorkoutLibrary | null> => {
+    const desiredWorkoutOrder = ["weight", "rep", "workoutSec"]; // 원하는 순서
+    const sortedType = workoutData.type.sort((a: string, b: string) => {
+        return desiredWorkoutOrder.indexOf(a) - desiredWorkoutOrder.indexOf(b);
+    });
+
     const newWorkoutLibraryOne: WorkoutLibrary = {
         id: uuidv4(), // UUID로 ID 생성
         name: workoutData.name,
         image: workoutData.image,
         category: workoutData.category,
-        type: workoutData.type,
+        type: sortedType,
         isEditable: workoutData.isEditable,
         createdAt: new Date(), // 현재 날짜
         updatedAt: new Date(), // 현재 날짜
@@ -110,6 +115,14 @@ export const updateWorkoutLibraryOne = async (
             console.error("WorkoutLibrary not found for ID:", workoutLibraryId);
             return false; // 항목이 존재하지 않음
         }
+
+        const desiredWorkoutOrder = ["weight", "rep", "workoutSec"]; // 원하는 순서
+        const sortedType = updatedData.type?.sort((a: string, b: string) => {
+            return (
+                desiredWorkoutOrder.indexOf(a) - desiredWorkoutOrder.indexOf(b)
+            );
+        });
+        updatedData.type = sortedType;
 
         // 업데이트할 데이터로 항목을 수정합니다.
         const newData = { ...workoutLibrary, ...updatedData };
