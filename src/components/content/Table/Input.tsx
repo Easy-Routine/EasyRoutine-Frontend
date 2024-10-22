@@ -16,6 +16,7 @@ const Container = styled.input<{ width: number; disabled?: boolean }>`
         border-color: ${({ theme }) => theme.color.primary};
     }
     text-align: center;
+    color: ${({ theme }) => theme.color.text.black};
 `;
 
 type InputProps = {
