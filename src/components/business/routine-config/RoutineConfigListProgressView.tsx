@@ -255,8 +255,9 @@ const RoutineConfigListProgressView = () => {
                         routineRecordId,
                         workoutTime,
                     });
+                    handleCloseUncompletedModal();
                     showToast("루틴이 완료되었습니다.");
-                    navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
+                    navigate(ROUTES.CONFIG.LIST.PATH, { replace: true });
                 }}
                 onConfirmButtonClick={async () => {
                     const workoutEndTime = moment();
@@ -268,6 +269,7 @@ const RoutineConfigListProgressView = () => {
                         routineRecordId,
                         workoutTime,
                     });
+                    handleCloseUncompletedModal();
                     showToast("루틴이 완료되었습니다.");
                     navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
 
@@ -290,6 +292,7 @@ const RoutineConfigListProgressView = () => {
                         routineRecordId,
                         workoutTime,
                     });
+                    handleCloseUncompletedModal();
                     showToast("루틴이 완료되었습니다.");
                     navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
                     // TODO: 끝난 시간 저장
