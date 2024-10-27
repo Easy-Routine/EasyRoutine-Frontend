@@ -2,7 +2,7 @@ import LoginPage from "pages/LoginPage";
 import MyPage from "pages/MyPage";
 import RoutineConfigDetailPage from "pages/RoutineConfigDetailPage";
 import RoutineConfigListPage from "pages/RoutineConfigListPage";
-import RoutineConfigListProgressPage from "pages/RoutineConfigListProgressPage";
+import RoutineConfigOneProgressPage from "pages/RoutineConfigOneProgressPage";
 import RoutineRecordDetailPage from "pages/RoutineRecordDetailPage";
 import RoutineRecordListPage from "pages/RoutineRecordListPage";
 import WorkoutLibraryPage from "pages/WorkoutLibraryPage";
@@ -37,7 +37,7 @@ const ROUTES = {
     PROGRESS: {
         PATH: (routineRecordId: string) =>
             `/routine-progress/${routineRecordId}`,
-        COMPONENT: RoutineConfigListProgressPage,
+        COMPONENT: RoutineConfigOneProgressPage,
     },
     LIBRARY: {
         PATH: "/workout-library",

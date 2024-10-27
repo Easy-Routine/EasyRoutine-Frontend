@@ -13,6 +13,7 @@ import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMut
 import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
 import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";
 import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
+import { useParams } from "react-router-dom";
 
 type TypeMapper = {
     [key: string]: string;
@@ -28,6 +29,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
     const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
+    const { routineConfigId } = useParams();
 
     const { mutateAsync: createSetConfigOneMutate } =
         useCreateSetConfigOneMutation();
@@ -39,15 +41,24 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
         useDeleteWorkoutConfigOneMutation();
 
     const handleSetDeleteButtonClick = async (workoutConfigId: string) => {
-        await deleteSetConfigOneMutate(workoutConfigId);
+        await deleteSetConfigOneMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId,
+        });
     };
 
     const handleSetCreateButtonClick = async (workoutConfigId: string) => {
-        await createSetConfigOneMutate(workoutConfigId);
+        await createSetConfigOneMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId,
+        });
     };
 
     const handleWorkoutDeleteButtonClick = async (workoutConfigId: string) => {
-        await deleteWorkoutConfigOneMutate(workoutConfigId);
+        await deleteWorkoutConfigOneMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId,
+        });
     };
 
     const handleSetInputChange = async (
@@ -55,7 +66,13 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
         key: string,
         value: string
     ) => {
-        await updateSetConfigFieldMutate({ setConfigId, key, value });
+        await updateSetConfigFieldMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId: data.id,
+            setConfigId,
+            key,
+            value,
+        });
     };
 
     // 비동기 작업 추가

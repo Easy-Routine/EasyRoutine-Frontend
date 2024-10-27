@@ -1,4 +1,4 @@
-import RoutineConfigListProgressView from "components/business/routine-config/RoutineConfigListProgressView";
+import RoutineConfigListProgressView from "components/business/routine-config/RoutineConfigOneProgressView";
 import PageHeader from "components/content/PageHeader/PageHeader";
 import styled from "styled-components";
 

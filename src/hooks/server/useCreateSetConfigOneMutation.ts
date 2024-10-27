@@ -5,8 +5,13 @@ import { createSetConfigOne } from "services/set-config";
 const useCreateSetConfigOneMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (workoutConfigId: string) =>
-            createSetConfigOne(workoutConfigId),
+        mutationFn: ({
+            routineConfigId,
+            workoutConfigId,
+        }: {
+            routineConfigId: string;
+            workoutConfigId: string;
+        }) => createSetConfigOne({ routineConfigId, workoutConfigId }),
         onSettled: () => {
             queryClient.invalidateQueries({
                 queryKey: [queryKey.getRoutineConfigOne],

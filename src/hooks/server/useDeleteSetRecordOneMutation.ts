@@ -4,8 +4,17 @@ import { deleteSetRecordOne } from "services/set-record";
 const useDeleteSetRecordOneMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({ workoutRecordId }: { workoutRecordId: string }) =>
-            deleteSetRecordOne({ workoutRecordId }),
+        mutationFn: ({
+            routineRecordId,
+            workoutRecordId,
+        }: {
+            routineRecordId: string;
+            workoutRecordId: string;
+        }) =>
+            deleteSetRecordOne({
+                routineRecordId,
+                workoutRecordId,
+            }),
         onSettled: () => {
             // queryClient.invalidateQueries({
             //     queryKey: [queryKey.getRoutineConfigOne],

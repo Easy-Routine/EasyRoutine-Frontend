@@ -5,8 +5,13 @@ import { deleteWorkoutConfigOne } from "services/workout-config";
 const useDeleteWorkoutConfigOneMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (workoutConfigId: string) =>
-            deleteWorkoutConfigOne(workoutConfigId),
+        mutationFn: ({
+            routineConfigId,
+            workoutConfigId,
+        }: {
+            routineConfigId: string;
+            workoutConfigId: string;
+        }) => deleteWorkoutConfigOne({ routineConfigId, workoutConfigId }),
         onSettled: () => {
             queryClient.invalidateQueries({
                 queryKey: [queryKey.getRoutineConfigOne],

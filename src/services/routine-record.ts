@@ -4,6 +4,7 @@ import { Color } from "type/Color";
 import { DotDataByDate } from "components/content/CustomCalendar/CustomCalendar";
 import moment from "moment";
 
+// 확인: 완료
 export const createRoutineRecordOne = async ({
     name,
     color,
@@ -33,7 +34,7 @@ export const createRoutineRecordOne = async ({
         throw error;
     }
 };
-
+// 확인: 완료
 export const getRoutineRecordAllMonthly = async ({
     date,
 }: {
@@ -75,7 +76,7 @@ export const getRoutineRecordAllMonthly = async ({
         return []; // 오류 발생 시 빈 배열 반환
     }
 };
-
+// 확인: 완료
 export const getRoutineRecordAllDaily = async ({
     date,
 }: {
@@ -91,38 +92,7 @@ export const getRoutineRecordAllDaily = async ({
             .between(targetDateStart, targetDateEnd, true, true) // 날짜 범위에 해당하는 레코드
             .toArray();
 
-        // 각 루틴 기록에 대해 관련된 운동 기록과 세트 기록을 가져오기
-        const result: RoutineRecord[] = await Promise.all(
-            routineRecords.map(async (routineRecord) => {
-                const workoutRecords = await db.workoutRecords
-                    .where("routineRecordId")
-                    .equals(routineRecord.id) // 루틴 기록 ID에 해당하는 운동 기록
-                    .toArray();
-
-                // 각 운동 기록에 대해 세트 기록을 가져오기
-                const workoutRecordsWithSets = await Promise.all(
-                    workoutRecords.map(async (workoutRecord) => {
-                        const setRecords = await db.setRecords
-                            .where("workoutRecordId")
-                            .equals(workoutRecord.id) // 운동 기록 ID에 해당하는 세트 기록
-                            .toArray();
-
-                        return {
-                            ...workoutRecord,
-                            setRecords, // 세트 기록 추가
-                        };
-                    })
-                );
-
-                return {
-                    ...routineRecord,
-                    workoutRecords: workoutRecordsWithSets, // 운동 기록 추가
-                };
-            })
-        );
-
-        console.log("결과", result);
-        return result;
+        return routineRecords;
     } catch (error) {
         console.error(
             "Error fetching routine records for the given date:",
@@ -131,103 +101,31 @@ export const getRoutineRecordAllDaily = async ({
         return null; // 오류 발생 시 null 반환
     }
 };
-
+// 확인: 완료
 export const getRoutineRecordOne = async (
     routineRecordId: string
 ): Promise<RoutineRecord | null> => {
     try {
-        // 주어진 ID로 루틴 구성 가져오기
         const routineRecord = await db.routineRecords.get(routineRecordId);
 
         if (!routineRecord) {
             console.error("RoutineRecord not found");
-            return null; // 루틴이 없는 경우 null 반환
+            return null;
         }
 
-        // 루틴에 연결된 운동 구성 가져오기
-        const workoutRecords = await db.workoutRecords
-            .where("routineRecordId")
-            .equals(routineRecordId)
-            .toArray();
-
-        // 각 운동에 연결된 세트 구성 가져오기
-        const workoutRecordsWithSets = await Promise.all(
-            workoutRecords.map(async (workout) => {
-                const setRecords = await db.setRecords
-                    .where("workoutRecordId")
-                    .equals(workout.id)
-                    .toArray(); // 먼저 모든 세트 구성 가져오기
-
-                // createdAt에 따라 정렬
-                setRecords.sort(
-                    (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
-                );
-
-                // 운동 구성에 세트 구성 추가
-                return {
-                    ...workout,
-                    setRecords, // 세트 구성 추가
-                };
-            })
-        );
-
-        // 운동 구성 createdAt에 따라 정렬
-        workoutRecordsWithSets.sort(
-            (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
-        );
-
-        // 루틴 구성에 운동 구성 추가
-        routineRecord.workoutRecords = workoutRecordsWithSets;
-
-        return routineRecord; // 루틴 구성 반환
+        return routineRecord;
     } catch (error) {
-        console.error("Error fetching RoutineRecord:", error);
-        return null; // 오류 발생 시 null 반환
+        console.error("Error fetching RoutineConfig:", error);
+        return null;
     }
 };
-
+// 확인: 완료
 export const deleteRoutineRecordOne = async (
     routineRecordId: string
 ): Promise<boolean> => {
     try {
-        // 해당 루틴 구성에 연결된 모든 workoutRecord를 가져옵니다.
-        const workoutRecords = await db.workoutRecords
-            .where("routineRecordId")
-            .equals(routineRecordId)
-            .toArray();
-
-        // 각 workoutRecord에 연결된 setRecord를 삭제합니다.
-        await Promise.all(
-            workoutRecords.map(async (workoutRecord) => {
-                // 해당 workoutRecord에 연결된 모든 setRecord를 가져옵니다.
-                const setRecords = await db.setRecords
-                    .where("workoutRecordId")
-                    .equals(workoutRecord.id)
-                    .toArray();
-
-                // setRecord를 삭제합니다.
-                await Promise.all(
-                    setRecords.map((setRecord) =>
-                        db.setRecords.delete(setRecord.id)
-                    )
-                );
-            })
-        );
-
-        // workoutRecord를 삭제합니다.
-        await Promise.all(
-            workoutRecords.map((workoutRecord) =>
-                db.workoutRecords.delete(workoutRecord.id)
-            )
-        );
-
-        // 루틴 구성 삭제
         await db.routineRecords.delete(routineRecordId);
-
-        console.log(
-            `RoutineRecord and its related workoutRecords and setRecords deleted for ID: ${routineRecordId}`
-        );
-        return true; // 삭제 성공
+        return true;
     } catch (error) {
         console.error("Error deleting RoutineRecord:", error);
         return false; // 오류 발생
@@ -238,7 +136,7 @@ type UpdateRoutineRecordWorkoutEndAtParmas = {
     routineRecordId: string;
     workoutTime: number;
 };
-
+// 확인: 완료
 export const updateRoutineRecordWorkoutEndAt = async ({
     routineRecordId,
     workoutTime,

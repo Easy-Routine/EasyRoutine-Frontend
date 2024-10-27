@@ -7,12 +7,15 @@ const useCreateSetRecordOneMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
+            routineRecordId,
             workoutRecordId,
             setConfig,
         }: {
+            routineRecordId: string;
             workoutRecordId: string;
             setConfig: SetConfig;
-        }) => createSetRecordOne({ workoutRecordId, setConfig }),
+        }) =>
+            createSetRecordOne({ routineRecordId, workoutRecordId, setConfig }),
         onSettled: () => {
             // queryClient.invalidateQueries({
             //     queryKey: [queryKey.getRoutineConfigOne],

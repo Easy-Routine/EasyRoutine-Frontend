@@ -6,6 +6,7 @@ import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
 import { WorkoutRecord } from "db";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
+import { useParams } from "react-router-dom";
 
 type TypeMapper = {
     [key: string]: string;
@@ -18,6 +19,8 @@ const typeMapper: TypeMapper = {
 };
 
 const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
+    const { routineRecordId } = useParams();
+
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
@@ -27,7 +30,10 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
     const handleWorkoutRecordDeleteButtonClick = async (
         workoutRecordId: string
     ) => {
-        await deleteWorkoutRecordOneMutate(workoutRecordId);
+        await deleteWorkoutRecordOneMutate({
+            routineRecordId: routineRecordId as string,
+            workoutRecordId,
+        });
     };
 
     return (

@@ -6,14 +6,25 @@ const useUpdateSetConfigFieldMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
+            routineConfigId,
+            workoutConfigId,
             setConfigId,
             key,
             value,
         }: {
+            routineConfigId: string;
+            workoutConfigId: string;
             setConfigId: string;
             key: string;
             value: string;
-        }) => updateSetConfigField(setConfigId, key, value),
+        }) =>
+            updateSetConfigField({
+                routineConfigId,
+                workoutConfigId,
+                setConfigId,
+                key,
+                value,
+            }),
         onSettled: () => {
             queryClient.invalidateQueries({
                 queryKey: [queryKey.getRoutineConfigOne],

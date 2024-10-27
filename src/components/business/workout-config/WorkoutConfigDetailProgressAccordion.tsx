@@ -90,6 +90,8 @@ const WorkoutConfigDetailProgressAccordion = ({
     const isWorkoutCompleted =
         completedSetIds.length === data.setConfigs.length;
 
+    console.log(completedSetIds.length, data.setConfigs.length);
+
     const handleCompleteSetButtonClick = async () => {
         const newCompletedSetIds = structuredClone(completedSetIds);
         newCompletedSetIds.push(currentSetId);
@@ -103,6 +105,7 @@ const WorkoutConfigDetailProgressAccordion = ({
         if (currentSetConfig) {
             onSetComplete(currentSetConfig.restSec);
             await createSetRecordOneMutate({
+                routineRecordId: routineRecordId as string,
                 workoutRecordId: currentWorkoutId,
                 setConfig: currentSetConfig,
             });
@@ -121,6 +124,7 @@ const WorkoutConfigDetailProgressAccordion = ({
 
         if (completedSetIds.includes(poppedSetConfig?.id as string)) {
             await deleteSetRecordOneMutate({
+                routineRecordId: routineRecordId as string,
                 workoutRecordId: currentWorkoutId,
             });
         }

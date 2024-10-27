@@ -47,7 +47,7 @@ const initialRoutineConfigDetail: RoutineConfig = {
     workoutConfigs: [],
 };
 
-const RoutineConfigListProgressView = () => {
+const RoutineConfigOneProgressView = () => {
     const navigate = useNavigate();
     const { showToast } = useToast();
     const { routineConfigId } = useParams();
@@ -302,7 +302,7 @@ const RoutineConfigListProgressView = () => {
     );
 };
 
-export default RoutineConfigListProgressView;
+export default RoutineConfigOneProgressView;
 
 type TimerModalProps = {
     seconds: number;

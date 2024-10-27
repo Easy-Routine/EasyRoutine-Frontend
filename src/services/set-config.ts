@@ -1,11 +1,14 @@
 import { db, SetConfig } from "db";
 import { v4 as uuidv4 } from "uuid";
 
-export const getSetConfigAll = async () => {};
-
-export const createSetConfigOne = async (
-    workoutConfigId: string
-): Promise<SetConfig | null> => {
+// 확인: 완료
+export const createSetConfigOne = async ({
+    routineConfigId,
+    workoutConfigId,
+}: {
+    routineConfigId: string;
+    workoutConfigId: string;
+}): Promise<SetConfig | null> => {
     const newSetConfig: SetConfig = {
         id: uuidv4(),
         workoutConfigId,
@@ -18,8 +21,17 @@ export const createSetConfigOne = async (
     };
 
     try {
-        await db.setConfigs.add(newSetConfig);
-        console.log("SetConfig created:", newSetConfig);
+        const routineConfigOne = await db.routineConfigs.get(routineConfigId);
+        if (routineConfigOne) {
+            const workoutConfigOne = routineConfigOne.workoutConfigs.find(
+                (workoutConfig) => workoutConfig.id === workoutConfigId
+            );
+            if (workoutConfigOne) {
+                workoutConfigOne.setConfigs.push(newSetConfig);
+            }
+            await db.routineConfigs.put(routineConfigOne);
+        }
+
         return newSetConfig;
     } catch (error) {
         console.error("Error creating SetConfig:", error);
@@ -27,57 +39,74 @@ export const createSetConfigOne = async (
     }
 };
 
-export const updateSetConfigField = async (
-    setConfigId: string,
-    key: string, // SetConfig의 키로 제한
-    value: string // value는 string 또는 number로 받을 수 있음
-): Promise<SetConfig | null> => {
+// 확인: 완료
+export const updateSetConfigField = async ({
+    routineConfigId,
+    workoutConfigId,
+    setConfigId,
+    key,
+    value,
+}: {
+    routineConfigId: string;
+    workoutConfigId: string;
+    setConfigId: string;
+    key: string;
+    value: string;
+}): Promise<boolean | null> => {
     try {
-        // 데이터베이스에서 SetConfig 가져오기
-        const setConfig = await db.setConfigs.get(setConfigId);
+        const routineConfigOne = await db.routineConfigs.get(routineConfigId);
+        if (routineConfigOne) {
+            const workoutConfigOne = routineConfigOne.workoutConfigs.find(
+                (workoutConfig) => workoutConfig.id === workoutConfigId
+            );
+            if (workoutConfigOne) {
+                const setConfigOne = workoutConfigOne.setConfigs.find(
+                    (setConfig) => setConfig.id === setConfigId
+                );
 
-        if (!setConfig) {
-            console.error("SetConfig not found");
-            return null; // 해당 ID의 SetConfig가 존재하지 않을 경우
+                if (setConfigOne) {
+                    setConfigOne[key] = value;
+                    setConfigOne.updatedAt = new Date();
+                }
+            }
+            await db.routineConfigs.put(routineConfigOne);
         }
 
-        // 필드 업데이트
-        setConfig[key] = parseInt(value); // key에 해당하는 필드 업데이트
-
-        // 업데이트된 세트 구성 저장
-        await db.setConfigs.put(setConfig);
-        console.log("SetConfig updated:", setConfig);
-        return setConfig; // 업데이트된 SetConfig 반환
+        return true;
     } catch (error) {
         console.error("Error updating SetConfig:", error);
         return null; // 오류 발생 시 null 반환
     }
 };
 
-export const deleteSetConfigOne = async (
-    workoutConfigId: string
-): Promise<boolean> => {
+// 확인: 완료
+export const deleteSetConfigOne = async ({
+    routineConfigId,
+    workoutConfigId,
+}: {
+    routineConfigId: string;
+    workoutConfigId: string;
+}): Promise<boolean> => {
     try {
-        // 해당 workoutConfigId에 연결된 모든 SetConfig를 가져옵니다.
-        const setConfigs = await db.setConfigs
-            .where("workoutConfigId")
-            .equals(workoutConfigId)
-            .toArray();
+        const routineConfigOne = await db.routineConfigs.get(routineConfigId);
+        if (routineConfigOne) {
+            const workoutConfigOne = routineConfigOne.workoutConfigs.find(
+                (workoutConfig) => workoutConfig.id === workoutConfigId
+            );
+            if (workoutConfigOne) {
+                const latestSetConfigOne = workoutConfigOne.setConfigs.sort(
+                    (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+                )[0];
 
-        // 가장 최근에 생성된 SetConfig를 찾습니다.
-        const latestSetConfig = setConfigs.sort(
-            (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-        )[0];
-
-        // 최신 SetConfig가 있는 경우 삭제합니다.
-        if (latestSetConfig) {
-            await db.setConfigs.delete(latestSetConfig.id);
-            console.log("SetConfig deleted:", latestSetConfig);
-            return true; // 삭제 성공
-        } else {
-            console.log("No SetConfig found to delete.");
-            return false; // 삭제할 SetConfig가 없음
+                const newSetConfigs = workoutConfigOne.setConfigs.filter(
+                    (setConfig) => setConfig.id !== latestSetConfigOne.id
+                );
+                workoutConfigOne.setConfigs = newSetConfigs;
+            }
+            await db.routineConfigs.put(routineConfigOne);
         }
+
+        return true;
     } catch (error) {
         console.error("Error deleting SetConfig:", error);
         return false; // 오류 발생
