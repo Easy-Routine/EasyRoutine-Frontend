@@ -157,6 +157,32 @@ const RoutineConfigOneProgressView = () => {
         setRoutineConfigState(newRoutineConfigState);
     };
 
+    const handleWorkoutDelete = (workoutConfigId: string) => {
+        const newRoutineConfigState = structuredClone(routineConfigState);
+        const newTotalCompletedSetIds = structuredClone(totalCompletedSetIds);
+        const workoutConfigOne = newRoutineConfigState.workoutConfigs.find(
+            (workoutConfig: WorkoutConfig) =>
+                workoutConfig.id === workoutConfigId
+        );
+
+        newRoutineConfigState.workoutConfigs =
+            newRoutineConfigState.workoutConfigs.filter(
+                (workoutConfig: WorkoutConfig) =>
+                    workoutConfig.id !== workoutConfigId
+            );
+
+        workoutConfigOne?.setConfigs.forEach((setConfig: SetConfig) => {
+            // setConfig의 id가 completedIds에 존재하는 경우 삭제합니다.
+            if (newTotalCompletedSetIds.has(setConfig.id)) {
+                newTotalCompletedSetIds.delete(setConfig.id);
+            }
+        });
+        console.log(newTotalCompletedSetIds);
+
+        setTotalCompletdSetIds(newTotalCompletedSetIds);
+        setRoutineConfigState(newRoutineConfigState);
+    };
+
     const handleCompletedSetIdsMutate = (completedSetIds: string[]) => {
         setTotalCompletdSetIds((prevState) => {
             const newSet = new Set(prevState);
@@ -207,6 +233,7 @@ const RoutineConfigOneProgressView = () => {
                 data={routineConfigState.workoutConfigs}
                 render={(item) => (
                     <WorkoutConfigDetailProgressAccordion
+                        key={item.id}
                         data={item}
                         routineRecordId={routineRecordId}
                         onSetCreate={handleSetCreate}
@@ -214,6 +241,7 @@ const RoutineConfigOneProgressView = () => {
                         onSetComplete={handleSetComplete}
                         onSetUpdate={handleSetUpdate}
                         onCompletedSetIdsMutate={handleCompletedSetIdsMutate}
+                        onWorkoutDelete={handleWorkoutDelete}
                     />
                 )}
             />

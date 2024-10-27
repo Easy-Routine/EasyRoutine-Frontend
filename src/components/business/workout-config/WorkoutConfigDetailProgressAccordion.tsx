@@ -14,6 +14,7 @@ import { useTheme } from "styled-components";
 import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutRecordOneMutation";
 import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMutation";
 import useDeleteSetRecordOneMutation from "hooks/server/useDeleteSetRecordOneMutation";
+import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 
 type TypeMapper = {
     [key: string]: string;
@@ -42,6 +43,7 @@ type WorkoutConfigDetailProgressAccordionProps = {
         newSetConfigs: WorkoutConfig["setConfigs"]
     ) => void;
     onCompletedSetIdsMutate: (completedSetIds: string[]) => void;
+    onWorkoutDelete: (workoutConfigId: string) => void;
 };
 
 const WorkoutConfigDetailProgressAccordion = ({
@@ -52,6 +54,7 @@ const WorkoutConfigDetailProgressAccordion = ({
     onSetComplete,
     onSetUpdate,
     onCompletedSetIdsMutate,
+    onWorkoutDelete,
 }: WorkoutConfigDetailProgressAccordionProps) => {
     const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
@@ -69,6 +72,9 @@ const WorkoutConfigDetailProgressAccordion = ({
 
     const { mutateAsync: deleteSetRecordOneMutate } =
         useDeleteSetRecordOneMutation();
+
+    const { mutateAsync: deleteWorkoutRecordOneMutate } =
+        useDeleteWorkoutRecordOneMutation();
 
     useEffect(() => {
         // 컴포넌트가 마운트 될때 운동 기록 데이터를 생성  및 setCurrentWorkoutId하기
@@ -157,6 +163,14 @@ const WorkoutConfigDetailProgressAccordion = ({
         onSetUpdate(data.id, newSetConfigs);
     };
 
+    const handleDeleteWorkoutButtonClick = async (workoutRecordId: string) => {
+        await deleteWorkoutRecordOneMutate({
+            routineRecordId: routineRecordId as string,
+            workoutRecordId,
+        });
+        onWorkoutDelete(data.id);
+    };
+
     useEffect(() => {
         onCompletedSetIdsMutate(completedSetIds);
     }, [completedSetIds]);
@@ -207,6 +221,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                             }
                             render={(setConfig: SetConfig, index) => (
                                 <Table.Row
+                                    key={setConfig.id}
                                     isGrayLine={isCompletedSet(setConfig.id)}
                                     isPrimaryLine={isCurrentSet(setConfig.id)}
                                 >
@@ -270,7 +285,12 @@ const WorkoutConfigDetailProgressAccordion = ({
                         </Button>
                     </PaddingY>
                 </Accordion.Body>
-                <Accordion.DeleteButton opacity={opacity} />
+                <Accordion.DeleteButton
+                    opacity={opacity}
+                    onDeleteButtonClick={() =>
+                        handleDeleteWorkoutButtonClick(currentWorkoutId)
+                    }
+                />
             </Accordion.Motion>
         </Accordion>
     );
