@@ -57,15 +57,19 @@ const RoutineConfigListView = () => {
                     )}
                 />
             </EmptyBoundary>
-            <RoutineConfigProgressModal
-                routineConfigId={routineConfigId}
-                isOpen={isRoutineProgressModalOpen}
-                onBackdropClick={() => closeRoutineProgressModal()}
-                onCancelButtonClick={() => closeRoutineProgressModal()}
-                onConfirmButtonClick={() => {
-                    closeRoutineProgressModal();
-                }}
-            />
+
+            {isRoutineProgressModalOpen && (
+                <RoutineConfigProgressModal
+                    routineConfigId={routineConfigId}
+                    isOpen={isRoutineProgressModalOpen}
+                    onBackdropClick={() => closeRoutineProgressModal()}
+                    onCancelButtonClick={() => closeRoutineProgressModal()}
+                    onConfirmButtonClick={() => {
+                        closeRoutineProgressModal();
+                    }}
+                />
+            )}
+
             {isRoutineConfigDeleteModalOpen && (
                 <RoutineConfigDeleteModal
                     routineConfigId={routineConfigId}
