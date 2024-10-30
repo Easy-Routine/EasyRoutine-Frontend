@@ -29,7 +29,7 @@ type Story = StoryObj<any>;
 export const RoutineConfigAccordionCard: Story = {
     render: () => {
         const args = {
-            id: 1,
+            _id: 1,
             name: "나의 가슴 루틴",
             color: Color.ORANGE,
             createdAt: new Date(),
@@ -37,7 +37,7 @@ export const RoutineConfigAccordionCard: Story = {
             userId: 3,
             workoutConfigs: [
                 {
-                    id: 1,
+                    _id: 1,
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: ["weight", "rep"],
@@ -46,7 +46,7 @@ export const RoutineConfigAccordionCard: Story = {
                     routineConfigId: 1,
                 },
                 {
-                    id: 2,
+                    _id: 2,
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: ["weight", "rep"],
@@ -55,7 +55,7 @@ export const RoutineConfigAccordionCard: Story = {
                     routineConfigId: 1,
                 },
                 {
-                    id: 3,
+                    _id: 3,
                     name: "벤치프레스",
                     workoutImage: SeatedRowImage,
                     type: ["weight", "rep"],
@@ -94,7 +94,7 @@ export const RoutineConfigAccordionCard: Story = {
                         <SmallCardList<any>
                             data={args.workoutConfigs}
                             render={(item) => (
-                                <SmallCard key={item.id}>
+                                <SmallCard key={item._id}>
                                     <SmallCard.ImageBox>
                                         <img
                                             src={SeatedRowImage}
@@ -133,7 +133,7 @@ export const RoutineConfigAccordionCard: Story = {
 export const WorkoutConfigAccordionCard: Story = {
     render: () => {
         const args = {
-            id: 1,
+            _id: 1,
             name: "벤치프레스",
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -141,7 +141,7 @@ export const WorkoutConfigAccordionCard: Story = {
             routineId: 3,
             setConfigs: [
                 {
-                    id: 1,
+                    _id: 1,
                     order: 1,
                     weight: 10,
                     rep: 10,
@@ -151,7 +151,7 @@ export const WorkoutConfigAccordionCard: Story = {
                     workoutConfigId: 1,
                 },
                 {
-                    id: 2,
+                    _id: 2,
                     order: 1,
                     weight: 10,
                     rep: 10,
@@ -161,7 +161,7 @@ export const WorkoutConfigAccordionCard: Story = {
                     workoutConfigId: 1,
                 },
                 {
-                    id: 3,
+                    _id: 3,
                     order: 1,
                     weight: 10,
                     rep: 10,
@@ -264,7 +264,7 @@ export const WorkoutConfigAccordionCard: Story = {
 export const WorkoutProgressAccordionCard: Story = {
     render: () => {
         const args = {
-            id: 1,
+            _id: 1,
             name: "벤치프레스",
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -272,7 +272,7 @@ export const WorkoutProgressAccordionCard: Story = {
             routineId: 3,
             setConfigs: [
                 {
-                    id: 1,
+                    _id: 1,
                     order: 1,
                     weight: 10,
                     rep: 10,
@@ -282,7 +282,7 @@ export const WorkoutProgressAccordionCard: Story = {
                     workoutConfigId: 1,
                 },
                 {
-                    id: 2,
+                    _id: 2,
                     order: 1,
                     weight: 10,
                     rep: 10,
@@ -292,7 +292,7 @@ export const WorkoutProgressAccordionCard: Story = {
                     workoutConfigId: 1,
                 },
                 {
-                    id: 3,
+                    _id: 3,
                     order: 1,
                     weight: 10,
                     rep: 10,
@@ -350,8 +350,8 @@ export const WorkoutProgressAccordionCard: Story = {
                                 }
                                 render={(setConfig) => (
                                     <Table.Row
-                                        isGrayLine={setConfig.id === 1}
-                                        isPrimaryLine={setConfig.id === 2}
+                                        isGrayLine={setConfig._id === 1}
+                                        isPrimaryLine={setConfig._id === 2}
                                     >
                                         <Table.Input
                                             value={setConfig.order.toString()}

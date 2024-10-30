@@ -38,6 +38,10 @@ const router = createBrowserRouter([
                 path: ROUTES.MY.PATH,
                 element: <ROUTES.MY.COMPONENT />,
             },
+            {
+                path: "/user/login/redirect",
+                element: <ROUTES.MY.COMPONENT />,
+            },
         ],
     },
 ]);

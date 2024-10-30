@@ -38,7 +38,7 @@ type WorkoutLibraryBottomSheetProps = {
 };
 
 const initialWorkoutLibraryOne: WorkoutLibrary = {
-    id: "",
+    _id: "",
     name: "",
     image: "",
     category: "",

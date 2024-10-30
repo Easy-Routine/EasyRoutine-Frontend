@@ -150,7 +150,7 @@ const WorkoutLibraryListView = () => {
                 data={workoutLibraryAll}
                 render={(workoutLibrary, index) => (
                     <WorkoutLibraryDetailSmallCard
-                        key={workoutLibrary.id}
+                        key={workoutLibrary._id}
                         data={workoutLibrary}
                         onSmallCardClick={handleSmallCardClick}
                         onSmallCardLongPress={handleSmallCardLongPress}

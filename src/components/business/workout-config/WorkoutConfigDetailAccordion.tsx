@@ -68,7 +68,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
     ) => {
         await updateSetConfigFieldMutate({
             routineConfigId: routineConfigId as string,
-            workoutConfigId: data.id,
+            workoutConfigId: data._id,
             setConfigId,
             key,
             value,
@@ -116,7 +116,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                 setConfig: SetConfig & { [key: string]: any },
                                 index: number
                             ) => (
-                                <Table.Row key={setConfig.id}>
+                                <Table.Row key={setConfig._id}>
                                     <Table.Input
                                         value={(index + 1).toString()}
                                         disabled={true}
@@ -127,7 +127,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                             value={setConfig[key].toString()}
                                             onInputChange={(value) =>
                                                 handleSetInputChange(
-                                                    setConfig.id,
+                                                    setConfig._id,
                                                     key,
                                                     value
                                                 )
@@ -138,7 +138,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                         value={setConfig.restSec.toString()}
                                         onInputChange={(value) =>
                                             handleSetInputChange(
-                                                setConfig.id,
+                                                setConfig._id,
                                                 "restSec",
                                                 value
                                             )
@@ -152,7 +152,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                         <IconTextBox.IconText
                             color={color.gray.dark}
                             onIconTextClick={() =>
-                                handleSetDeleteButtonClick(data.id)
+                                handleSetDeleteButtonClick(data._id)
                             }
                         >
                             <MinusIcon />
@@ -161,7 +161,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                         <IconTextBox.IconText
                             color={color.primary}
                             onIconTextClick={() =>
-                                handleSetCreateButtonClick(data.id)
+                                handleSetCreateButtonClick(data._id)
                             }
                         >
                             <PlusIcon />
@@ -172,7 +172,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                 <Accordion.DeleteButton
                     opacity={opacity}
                     onDeleteButtonClick={() =>
-                        handleWorkoutDeleteButtonClick(data.id)
+                        handleWorkoutDeleteButtonClick(data._id)
                     }
                 />
             </Accordion.Motion>

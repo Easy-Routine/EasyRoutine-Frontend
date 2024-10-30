@@ -3,7 +3,7 @@ import Dexie, { type EntityTable } from "dexie";
 import { Color } from "type/Color";
 
 export type RoutineConfig = {
-    id: string;
+    _id: string;
     name: string;
     color: Color;
     createdAt: Date;
@@ -14,7 +14,7 @@ export type RoutineConfig = {
 };
 
 export type WorkoutConfig = {
-    id: string;
+    _id: string;
     createdAt: Date;
     updatedAt: Date;
     routineConfigId: string;
@@ -23,7 +23,7 @@ export type WorkoutConfig = {
 };
 
 export type SetConfig = {
-    id: string;
+    _id: string;
     weight: number;
     rep: number;
     restSec: number;
@@ -35,7 +35,7 @@ export type SetConfig = {
 };
 
 export type WorkoutLibrary = {
-    id: string;
+    _id: string;
     name: string;
     image: string;
     category: string;
@@ -48,7 +48,7 @@ export type WorkoutLibrary = {
 };
 
 export type RoutineRecord = {
-    id: string;
+    _id: string;
     name: string;
     color: Color;
     workoutTime: number;
@@ -60,7 +60,7 @@ export type RoutineRecord = {
 };
 
 export type WorkoutRecord = {
-    id: string;
+    _id: string;
     createdAt: Date;
     updatedAt: Date;
     routineRecordId: string;
@@ -69,7 +69,7 @@ export type WorkoutRecord = {
 };
 
 export type SetRecord = {
-    id: string;
+    _id: string;
     weight: number;
     rep: number;
     restSec: number;
@@ -81,19 +81,19 @@ export type SetRecord = {
 };
 
 const db = new Dexie("healper-client-db") as Dexie & {
-    routineConfigs: EntityTable<RoutineConfig, "id">;
-    workoutLibraries: EntityTable<WorkoutLibrary, "id">;
-    routineRecords: EntityTable<RoutineRecord, "id">;
+    routineConfigs: EntityTable<RoutineConfig, "_id">;
+    workoutLibraries: EntityTable<WorkoutLibrary, "_id">;
+    routineRecords: EntityTable<RoutineRecord, "_id">;
 };
 
 // Schema declaration:
-db.version(1).stores({
+db.version(2).stores({
     routineConfigs:
-        "id, name, color, createdAt, updatedAt, userId, workoutConfigs", // 쉼표 추가
+        "_id, name, color, createdAt, updatedAt, userId, workoutConfigs", // 쉼표 추가
     workoutLibraries:
-        "id, name, image, category, type, createdAt, updatedAt, userId",
+        "_id, name, image, category, type, createdAt, updatedAt, userId",
     routineRecords:
-        "id, name, color, workoutTime, createdAt, updatedAt, userId, workoutRecords", // 쉼표 추가
+        "_id, name, color, workoutTime, createdAt, updatedAt, userId, workoutRecords", // 쉼표 추가
 });
 
 export { db };

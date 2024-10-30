@@ -39,7 +39,7 @@ const RoutineConfigListView = () => {
                     data={routineConfigAll}
                     render={(routineConfig) => (
                         <RoutineConfigDetailAccordion
-                            key={routineConfig.id}
+                            key={routineConfig._id}
                             data={routineConfig}
                             onRoutineConfigProgressButtonClick={(
                                 routineConfigId: string

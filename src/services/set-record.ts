@@ -13,7 +13,7 @@ export const createSetRecordOne = async ({
     setConfig,
 }: CreateSetRecordOneParams): Promise<SetRecord | null> => {
     const newSetRecord: SetRecord = {
-        id: uuidv4(),
+        _id: uuidv4(),
         workoutRecordId,
         rep: setConfig.rep,
         weight: setConfig.weight,
@@ -27,7 +27,7 @@ export const createSetRecordOne = async ({
         const routineRecordOne = await db.routineRecords.get(routineRecordId);
         if (routineRecordOne) {
             const workoutRecordOne = routineRecordOne.workoutRecords.find(
-                (workoutRecord) => workoutRecord.id === workoutRecordId
+                (workoutRecord) => workoutRecord._id === workoutRecordId
             );
             if (workoutRecordOne) {
                 workoutRecordOne.setRecords.push(newSetRecord);
@@ -55,7 +55,7 @@ export const deleteSetRecordOne = async ({
         const routineRecordOne = await db.routineRecords.get(routineRecordId);
         if (routineRecordOne) {
             const workoutRecordOne = routineRecordOne.workoutRecords.find(
-                (workoutRecord) => workoutRecord.id === workoutRecordId
+                (workoutRecord) => workoutRecord._id === workoutRecordId
             );
             if (workoutRecordOne) {
                 const latestSetRecordOne = workoutRecordOne.setRecords.sort(
@@ -63,7 +63,7 @@ export const deleteSetRecordOne = async ({
                 )[0];
 
                 const newSetRecords = workoutRecordOne.setRecords.filter(
-                    (setRecord) => setRecord.id !== latestSetRecordOne.id
+                    (setRecord) => setRecord._id !== latestSetRecordOne._id
                 );
                 workoutRecordOne.setRecords = newSetRecords;
             }

@@ -78,7 +78,7 @@ const RoutineRecordListCalendarView = () => {
                 data={routineRecordAllDaily}
                 render={(item) => (
                     <RoutineRecordDetailAccordion
-                        key={item.id}
+                        key={item._id}
                         data={item}
                         onRoutineRecordDeleteButtonClick={(
                             routineRecordId: string

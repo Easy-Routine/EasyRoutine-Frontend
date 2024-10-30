@@ -108,7 +108,7 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
                 <Accordion.DeleteButton
                     opacity={opacity}
                     onDeleteButtonClick={() =>
-                        handleWorkoutRecordDeleteButtonClick(data.id)
+                        handleWorkoutRecordDeleteButtonClick(data._id)
                     }
                 />
             </Accordion.Motion>

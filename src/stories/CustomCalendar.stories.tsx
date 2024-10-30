@@ -19,16 +19,16 @@ export const WithCalendar: Story = {
             {
                 date: "2024-09-26",
                 routineRecords: [
-                    { id: 1, color: "#855CF8" },
-                    { id: 2, color: "#F26B2C" },
-                    { id: 3, color: "#2DAF2D" },
+                    { _id: 1, color: "#855CF8" },
+                    { _id: 2, color: "#F26B2C" },
+                    { _id: 3, color: "#2DAF2D" },
                 ],
             },
             {
                 date: "2024-09-27",
                 routineRecords: [
-                    { id: 3, color: "#F26B2C" },
-                    { id: 4, color: "#2DAF2D" },
+                    { _id: 3, color: "#F26B2C" },
+                    { _id: 4, color: "#2DAF2D" },
                 ],
             },
         ];

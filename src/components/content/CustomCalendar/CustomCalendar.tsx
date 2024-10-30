@@ -134,7 +134,7 @@ const Dot = styled.div<{ backgroundColor: string }>`
 `;
 
 type DotData = {
-    id: number;
+    _id: number;
     color: string; // 색상은 문자열로 가정
 };
 
@@ -211,7 +211,7 @@ const CustomCalendar = ({
                 <DotWrapper>
                     {Array.isArray(dotData) &&
                         dotData.map((item) => (
-                            <Dot key={item.id} backgroundColor={item.color} />
+                            <Dot key={item._id} backgroundColor={item.color} />
                         ))}
                 </DotWrapper>
             </>

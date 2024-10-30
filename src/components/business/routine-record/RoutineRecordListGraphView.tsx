@@ -20,7 +20,7 @@ const Container = styled.div`
 `;
 
 const initialWorkoutLibraryDetail: WorkoutLibrary = {
-    id: "",
+    _id: "",
     name: "",
     image: "",
     category: "",
@@ -58,9 +58,9 @@ const RoutineRecorListGraphView = () => {
         openWorkoutLibraryListGraphBottomSheet();
     };
 
-    const handleSmallCardClick = (id: string) => {
-        console.log(id);
-        setWorkoutLibraryId(id);
+    const handleSmallCardClick = (_id: string) => {
+        console.log(_id);
+        setWorkoutLibraryId(_id);
         closeWorkoutLibraryListGraphBottomSheet();
     };
 

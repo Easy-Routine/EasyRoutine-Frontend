@@ -130,7 +130,7 @@ const WorkoutLibraryListBottomSheet = () => {
                                 <SmallCardList<WorkoutLibrary>
                                     data={workoutLibraryAll}
                                     render={(item, index) => (
-                                        <CheckBoxGroup.Wrapper key={item.id}>
+                                        <CheckBoxGroup.Wrapper key={item._id}>
                                             <SmallCard>
                                                 <SmallCard.ImageBox>
                                                     <img
@@ -143,7 +143,7 @@ const WorkoutLibraryListBottomSheet = () => {
                                                 </SmallCard.NormalText>
                                             </SmallCard>
                                             <CheckBoxGroup.CheckBox
-                                                value={item.id.toString()}
+                                                value={item._id.toString()}
                                                 selectedValues={selectedValues}
                                                 onCheckBoxClick={
                                                     handleCheckBoxClick

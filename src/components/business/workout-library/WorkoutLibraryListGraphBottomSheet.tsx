@@ -113,10 +113,10 @@ const WorkoutLibraryListGraphBottomSheet = ({
                     <SmallCardListContainer>
                         <SmallCardList<WorkoutLibrary>
                             data={workoutLibraryAll}
-                            render={({ id, name }) => (
+                            render={({ _id, name }) => (
                                 <SmallCard
-                                    onCardClick={() => onSmallCardClick(id)}
-                                    key={id}
+                                    onCardClick={() => onSmallCardClick(_id)}
+                                    key={_id}
                                 >
                                     <SmallCard.ImageBox>
                                         <img

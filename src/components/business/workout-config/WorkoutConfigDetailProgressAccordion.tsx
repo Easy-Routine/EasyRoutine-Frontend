@@ -60,7 +60,7 @@ const WorkoutConfigDetailProgressAccordion = ({
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
-    const [currentSetId, setCurrentSetId] = useState(data.setConfigs[0]?.id);
+    const [currentSetId, setCurrentSetId] = useState(data.setConfigs[0]?._id);
     const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
     const [currentWorkoutId, setCurrentWorkoutId] = useState("");
 
@@ -85,7 +85,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                     workoutLibrary: data.workoutLibrary,
                 });
                 if (newWorkoutRecordOne) {
-                    setCurrentWorkoutId(newWorkoutRecordOne.id);
+                    setCurrentWorkoutId(newWorkoutRecordOne._id);
                 }
             })();
         }
@@ -102,10 +102,10 @@ const WorkoutConfigDetailProgressAccordion = ({
         const newCompletedSetIds = structuredClone(completedSetIds);
         newCompletedSetIds.push(currentSetId);
         setCompletedSetIds(newCompletedSetIds);
-        setCurrentSetId(data.setConfigs[newCompletedSetIds.length]?.id);
+        setCurrentSetId(data.setConfigs[newCompletedSetIds.length]?._id);
 
         const currentSetConfig = data.setConfigs.find(
-            (setConfig) => setConfig.id === currentSetId
+            (setConfig) => setConfig._id === currentSetId
         );
 
         if (currentSetConfig) {
@@ -122,13 +122,13 @@ const WorkoutConfigDetailProgressAccordion = ({
         const newSetConfigs = structuredClone(data.setConfigs);
         const poppedSetConfig = newSetConfigs.pop();
         const filteredCompletedSetIds = completedSetIds.filter(
-            (id) => id !== poppedSetConfig?.id
+            (_id) => _id !== poppedSetConfig?._id
         );
         setCompletedSetIds(filteredCompletedSetIds);
-        onSetDelete(data.id, newSetConfigs);
+        onSetDelete(data._id, newSetConfigs);
         // currentWorkoutId에 세트 데이터 삭제하기 (삭제할때, 생성 순으로 가져온 후 마지막요소 삭제후 put 하기)
 
-        if (completedSetIds.includes(poppedSetConfig?.id as string)) {
+        if (completedSetIds.includes(poppedSetConfig?._id as string)) {
             await deleteSetRecordOneMutate({
                 routineRecordId: routineRecordId as string,
                 workoutRecordId: currentWorkoutId,
@@ -139,7 +139,7 @@ const WorkoutConfigDetailProgressAccordion = ({
     const handleCreateSetButtonClick = () => {
         const newSetConfigs = structuredClone(data.setConfigs);
         newSetConfigs.push({
-            id: (newSetConfigs.length + 1).toString(),
+            _id: (newSetConfigs.length + 1).toString(),
             weight: 0,
             rep: 0,
             restSec: 0,
@@ -148,8 +148,8 @@ const WorkoutConfigDetailProgressAccordion = ({
             updatedAt: new Date(),
             workoutConfigId: "1",
         });
-        setCurrentSetId(newSetConfigs[completedSetIds.length].id);
-        onSetCreate(data.id, newSetConfigs);
+        setCurrentSetId(newSetConfigs[completedSetIds.length]._id);
+        onSetCreate(data._id, newSetConfigs);
     };
 
     const handleUpdateSetInputChange = (
@@ -160,7 +160,7 @@ const WorkoutConfigDetailProgressAccordion = ({
         const newSetConfigs = structuredClone(data.setConfigs);
         newSetConfigs[index][key] = value;
 
-        onSetUpdate(data.id, newSetConfigs);
+        onSetUpdate(data._id, newSetConfigs);
     };
 
     const handleDeleteWorkoutButtonClick = async (workoutRecordId: string) => {
@@ -168,7 +168,7 @@ const WorkoutConfigDetailProgressAccordion = ({
             routineRecordId: routineRecordId as string,
             workoutRecordId,
         });
-        onWorkoutDelete(data.id);
+        onWorkoutDelete(data._id);
     };
 
     useEffect(() => {
@@ -221,9 +221,9 @@ const WorkoutConfigDetailProgressAccordion = ({
                             }
                             render={(setConfig: SetConfig, index) => (
                                 <Table.Row
-                                    key={setConfig.id}
-                                    isGrayLine={isCompletedSet(setConfig.id)}
-                                    isPrimaryLine={isCurrentSet(setConfig.id)}
+                                    key={setConfig._id}
+                                    isGrayLine={isCompletedSet(setConfig._id)}
+                                    isPrimaryLine={isCurrentSet(setConfig._id)}
                                 >
                                     <Table.Input
                                         value={index.toString()}
@@ -240,7 +240,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                                                 )
                                             }
                                             disabled={isCompletedSet(
-                                                setConfig.id
+                                                setConfig._id
                                             )}
                                         />
                                     ))}
@@ -254,7 +254,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                                                 value
                                             )
                                         }
-                                        disabled={isCompletedSet(setConfig.id)}
+                                        disabled={isCompletedSet(setConfig._id)}
                                     />
                                 </Table.Row>
                             )}

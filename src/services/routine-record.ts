@@ -10,12 +10,12 @@ export const createRoutineRecordOne = async ({
     color,
     userId,
 }: {
-    name: string; // 루틴 구성 ID
-    color: Color; // 사용자 ID
+    name: string; // 루틴 구성 _id
+    color: Color; // 사용자 _id
     userId: string; // 루틴 수행 날짜
 }): Promise<RoutineRecord | null> => {
     const newRoutineRecord: RoutineRecord = {
-        id: uuidv4(), // UUID로 ID 생성
+        _id: uuidv4(), // UUID로 _id 생성
         name,
         color,
         createdAt: new Date(), // 현재 날짜

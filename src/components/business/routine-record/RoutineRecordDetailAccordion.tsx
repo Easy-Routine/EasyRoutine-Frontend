@@ -54,7 +54,7 @@ const RoutineRecordDetailAccordion = ({
                     <SmallCardList<any>
                         data={data.workoutRecords}
                         render={(item) => (
-                            <SmallCard key={item.id}>
+                            <SmallCard key={item._id}>
                                 <SmallCard.ImageBox>
                                     <img
                                         src={item.workoutImage}
@@ -76,7 +76,7 @@ const RoutineRecordDetailAccordion = ({
                         <IconTextBox.IconText
                             color={color.gray.dark}
                             onIconTextClick={() =>
-                                navigate(ROUTES.RECORD.DETAIL.PATH(data.id))
+                                navigate(ROUTES.RECORD.DETAIL.PATH(data._id))
                             }
                         >
                             <PenIcon />
@@ -85,7 +85,7 @@ const RoutineRecordDetailAccordion = ({
                         <IconTextBox.IconText
                             color={color.warning}
                             onIconTextClick={() =>
-                                onRoutineRecordDeleteButtonClick(data.id)
+                                onRoutineRecordDeleteButtonClick(data._id)
                             }
                         >
                             <RunIcon />
@@ -96,7 +96,7 @@ const RoutineRecordDetailAccordion = ({
                 <Accordion.DeleteButton
                     opacity={opacity}
                     onDeleteButtonClick={() =>
-                        onRoutineRecordDeleteButtonClick(data.id)
+                        onRoutineRecordDeleteButtonClick(data._id)
                     }
                 />
             </Accordion.Motion>

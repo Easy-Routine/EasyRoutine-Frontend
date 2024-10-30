@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
 
 const initialRoutineRecordDetail: RoutineRecord = {
-    id: "",
+    _id: "",
     name: "",
     color: Color.VIOLET,
     createdAt: new Date(),
@@ -61,7 +61,7 @@ const RoutineRecordDetailView = () => {
                 data={routineRecordDetail.workoutRecords}
                 render={(workoutRecord: WorkoutRecord) => (
                     <WorkoutRecordDetailAccordion
-                        key={workoutRecord.id}
+                        key={workoutRecord._id}
                         data={workoutRecord}
                     />
                 )}

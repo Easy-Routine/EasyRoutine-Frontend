@@ -15,8 +15,8 @@ export const createWorkoutConfigAll = async (
             );
 
             const workoutLibraries = await Promise.all(
-                workoutLibraryIds.map(async (id) => {
-                    const workoutLibrary = await db.workoutLibraries.get(id); // 데이터베이스에서 운동 라이브러리 가져오기
+                workoutLibraryIds.map(async (_id) => {
+                    const workoutLibrary = await db.workoutLibraries.get(_id); // 데이터베이스에서 운동 라이브러리 가져오기
                     return workoutLibrary;
                 })
             );
@@ -25,7 +25,7 @@ export const createWorkoutConfigAll = async (
             workoutLibraries.forEach((workoutLibrary) => {
                 if (workoutLibrary) {
                     const newWorkoutConfig: WorkoutConfig = {
-                        id: uuidv4(),
+                        _id: uuidv4(),
                         createdAt: new Date(),
                         updatedAt: new Date(),
                         routineConfigId,
@@ -64,7 +64,7 @@ export const deleteWorkoutConfigOne = async ({
 
         if (routineConfigOne) {
             const newWorkoutConfigs = routineConfigOne.workoutConfigs.filter(
-                (workoutConfig) => workoutConfig.id !== workoutConfigId
+                (workoutConfig) => workoutConfig._id !== workoutConfigId
             );
             routineConfigOne.workoutConfigs = newWorkoutConfigs;
             await db.routineConfigs.put(routineConfigOne);

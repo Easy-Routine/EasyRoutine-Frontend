@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
 
 const initialRoutineConfigDetail: RoutineConfig = {
-    id: "",
+    _id: "",
     name: "",
     color: Color.VIOLET,
     createdAt: new Date(),
@@ -46,7 +46,7 @@ const RoutineConfigDetailView = () => {
                 render={(workoutConfig) => (
                     <WorkoutConfigDetailAccordion
                         data={workoutConfig}
-                        key={workoutConfig.id}
+                        key={workoutConfig._id}
                     />
                 )}
             />

@@ -13,7 +13,7 @@ const useCreateWorkoutLibraryOneMutation = () => {
             type,
             isEditable,
             userId,
-        }: Omit<WorkoutLibrary, "id" | "createdAt" | "updatedAt">) =>
+        }: Omit<WorkoutLibrary, "_id" | "createdAt" | "updatedAt">) =>
             createWorkoutLibraryOne({
                 name,
                 image,

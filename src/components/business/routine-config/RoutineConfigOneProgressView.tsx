@@ -38,7 +38,7 @@ const TimerText = styled.div`
 `;
 
 const initialRoutineConfigDetail: RoutineConfig = {
-    id: "",
+    _id: "",
     name: "",
     color: Color.VIOLET,
     createdAt: new Date(),
@@ -100,7 +100,7 @@ const RoutineConfigOneProgressView = () => {
                 userId: routineConfigState.userId,
             });
             if (newRoutineRecordOne) {
-                setRoutineRecordId(newRoutineRecordOne.id);
+                setRoutineRecordId(newRoutineRecordOne._id);
             }
         })();
     }, [createRoutineRecordOneMutate]);
@@ -112,7 +112,7 @@ const RoutineConfigOneProgressView = () => {
         const newRoutineConfigState = structuredClone(routineConfigState);
         const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig.id === workoutConfigId
+                workoutConfig._id === workoutConfigId
         );
         if (selectedWorkoutConfig) {
             selectedWorkoutConfig.setConfigs = setConfigs;
@@ -127,7 +127,7 @@ const RoutineConfigOneProgressView = () => {
         const newRoutineConfigState = structuredClone(routineConfigState);
         const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig.id === workoutConfigId
+                workoutConfig._id === workoutConfigId
         );
         if (selectedWorkoutConfig) {
             selectedWorkoutConfig.setConfigs = setConfigs;
@@ -147,7 +147,7 @@ const RoutineConfigOneProgressView = () => {
         const newRoutineConfigState = structuredClone(routineConfigState);
         const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig.id === workoutConfigId
+                workoutConfig._id === workoutConfigId
         );
 
         if (selectedWorkoutConfig) {
@@ -162,19 +162,19 @@ const RoutineConfigOneProgressView = () => {
         const newTotalCompletedSetIds = structuredClone(totalCompletedSetIds);
         const workoutConfigOne = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig.id === workoutConfigId
+                workoutConfig._id === workoutConfigId
         );
 
         newRoutineConfigState.workoutConfigs =
             newRoutineConfigState.workoutConfigs.filter(
                 (workoutConfig: WorkoutConfig) =>
-                    workoutConfig.id !== workoutConfigId
+                    workoutConfig._id !== workoutConfigId
             );
 
         workoutConfigOne?.setConfigs.forEach((setConfig: SetConfig) => {
             // setConfig의 id가 completedIds에 존재하는 경우 삭제합니다.
-            if (newTotalCompletedSetIds.has(setConfig.id)) {
-                newTotalCompletedSetIds.delete(setConfig.id);
+            if (newTotalCompletedSetIds.has(setConfig._id)) {
+                newTotalCompletedSetIds.delete(setConfig._id);
             }
         });
         console.log(newTotalCompletedSetIds);
@@ -204,7 +204,7 @@ const RoutineConfigOneProgressView = () => {
         // 모든 세트 ID를 routineConfigState에서 수집
         routineConfigState.workoutConfigs.forEach((workoutConfig) => {
             workoutConfig.setConfigs.forEach((setConfig) => {
-                totalSetIds.add(setConfig.id); // 세트 ID 추가
+                totalSetIds.add(setConfig._id); // 세트 _id 추가
             });
         });
 
@@ -233,7 +233,7 @@ const RoutineConfigOneProgressView = () => {
                 data={routineConfigState.workoutConfigs}
                 render={(item) => (
                     <WorkoutConfigDetailProgressAccordion
-                        key={item.id}
+                        key={item._id}
                         data={item}
                         routineRecordId={routineRecordId}
                         onSetCreate={handleSetCreate}

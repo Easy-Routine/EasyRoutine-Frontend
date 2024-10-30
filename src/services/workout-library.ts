@@ -47,7 +47,7 @@ export const getWorkoutLibraryOne = async (
 };
 
 export const createWorkoutLibraryOne = async (
-    workoutData: Omit<WorkoutLibrary, "id" | "createdAt" | "updatedAt">
+    workoutData: Omit<WorkoutLibrary, "_id" | "createdAt" | "updatedAt">
 ): Promise<WorkoutLibrary | null> => {
     const desiredWorkoutOrder = ["weight", "rep", "workoutSec"]; // 원하는 순서
     const sortedType = workoutData.type.sort((a: string, b: string) => {
@@ -55,7 +55,7 @@ export const createWorkoutLibraryOne = async (
     });
 
     const newWorkoutLibraryOne: WorkoutLibrary = {
-        id: uuidv4(), // UUID로 ID 생성
+        _id: uuidv4(), // UUID로 _id 생성
         name: workoutData.name,
         image: workoutData.image,
         category: workoutData.category,
@@ -63,7 +63,7 @@ export const createWorkoutLibraryOne = async (
         isEditable: workoutData.isEditable,
         createdAt: new Date(), // 현재 날짜
         updatedAt: new Date(), // 현재 날짜
-        userId: workoutData.userId, // 사용자 ID
+        userId: workoutData.userId, // 사용자 _id
     };
 
     try {
@@ -112,7 +112,10 @@ export const updateWorkoutLibraryOne = async (
         const workoutLibrary = await db.workoutLibraries.get(workoutLibraryId);
 
         if (!workoutLibrary) {
-            console.error("WorkoutLibrary not found for ID:", workoutLibraryId);
+            console.error(
+                "WorkoutLibrary not found for _id:",
+                workoutLibraryId
+            );
             return false; // 항목이 존재하지 않음
         }
 
@@ -146,7 +149,7 @@ export const deleteWorkoutLibraryOne = async (
         await db.workoutLibraries.delete(workoutLibraryId);
 
         console.log(
-            `WorkoutLibrary with ID ${workoutLibraryId} has been deleted.`
+            `WorkoutLibrary with _id ${workoutLibraryId} has been deleted.`
         );
         return true; // 삭제 성공
     } catch (error) {

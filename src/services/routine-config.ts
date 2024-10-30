@@ -49,7 +49,7 @@ export const createRoutineConfigOne = async ({
     userId: string;
 }): Promise<RoutineConfig | null> => {
     const newRoutine: RoutineConfig = {
-        id: uuidv4(), // UUID로 ID 생성
+        _id: uuidv4(), // UUID로 _id 생성
         name,
         color,
         createdAt: new Date(), // 현재 날짜

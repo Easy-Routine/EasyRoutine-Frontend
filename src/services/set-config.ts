@@ -10,7 +10,7 @@ export const createSetConfigOne = async ({
     workoutConfigId: string;
 }): Promise<SetConfig | null> => {
     const newSetConfig: SetConfig = {
-        id: uuidv4(),
+        _id: uuidv4(),
         workoutConfigId,
         rep: 0,
         weight: 0,
@@ -24,7 +24,7 @@ export const createSetConfigOne = async ({
         const routineConfigOne = await db.routineConfigs.get(routineConfigId);
         if (routineConfigOne) {
             const workoutConfigOne = routineConfigOne.workoutConfigs.find(
-                (workoutConfig) => workoutConfig.id === workoutConfigId
+                (workoutConfig) => workoutConfig._id === workoutConfigId
             );
             if (workoutConfigOne) {
                 workoutConfigOne.setConfigs.push(newSetConfig);
@@ -57,11 +57,11 @@ export const updateSetConfigField = async ({
         const routineConfigOne = await db.routineConfigs.get(routineConfigId);
         if (routineConfigOne) {
             const workoutConfigOne = routineConfigOne.workoutConfigs.find(
-                (workoutConfig) => workoutConfig.id === workoutConfigId
+                (workoutConfig) => workoutConfig._id === workoutConfigId
             );
             if (workoutConfigOne) {
                 const setConfigOne = workoutConfigOne.setConfigs.find(
-                    (setConfig) => setConfig.id === setConfigId
+                    (setConfig) => setConfig._id === setConfigId
                 );
 
                 if (setConfigOne) {
@@ -91,7 +91,7 @@ export const deleteSetConfigOne = async ({
         const routineConfigOne = await db.routineConfigs.get(routineConfigId);
         if (routineConfigOne) {
             const workoutConfigOne = routineConfigOne.workoutConfigs.find(
-                (workoutConfig) => workoutConfig.id === workoutConfigId
+                (workoutConfig) => workoutConfig._id === workoutConfigId
             );
             if (workoutConfigOne) {
                 const latestSetConfigOne = workoutConfigOne.setConfigs.sort(
@@ -99,7 +99,7 @@ export const deleteSetConfigOne = async ({
                 )[0];
 
                 const newSetConfigs = workoutConfigOne.setConfigs.filter(
-                    (setConfig) => setConfig.id !== latestSetConfigOne.id
+                    (setConfig) => setConfig._id !== latestSetConfigOne._id
                 );
                 workoutConfigOne.setConfigs = newSetConfigs;
             }

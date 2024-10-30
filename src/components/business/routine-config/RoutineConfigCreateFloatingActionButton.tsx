@@ -27,7 +27,9 @@ const RoutineConfigCreateFloatingActionButton = () => {
 
             showToast("루틴이 생성되었습니다.");
 
-            navigate(ROUTES.CONFIG.DETAIL.PATH(newRoutineConfig?.id as string));
+            navigate(
+                ROUTES.CONFIG.DETAIL.PATH(newRoutineConfig?._id as string)
+            );
         } catch (e) {
             showToast("루틴을 생성하던 중 오류가 발생했습니다.");
         }

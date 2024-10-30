@@ -22,8 +22,8 @@ const WorkoutLibraryDetailSmallCard = ({
 }: WorkoutLibraryDetailSmallCardProps) => {
     return (
         <SmallCard
-            onCardClick={() => onSmallCardClick(data.id)}
-            onLongPress={() => onSmallCardLongPress(data.id)}
+            onCardClick={() => onSmallCardClick(data._id)}
+            onLongPress={() => onSmallCardLongPress(data._id)}
         >
             <SmallCard.Between>
                 <SmallCard.ImageText>

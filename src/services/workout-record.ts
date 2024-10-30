@@ -13,8 +13,8 @@ export const createWorkoutRecordOne = async ({
     workoutLibrary,
 }: CreateWorkoutRecordOneParams): Promise<WorkoutRecord | null> => {
     const newWorkoutRecordOne: WorkoutRecord = {
-        id: uuidv4(), // UUID로 ID 생성
-        routineRecordId, // 연결된 루틴 기록 ID
+        _id: uuidv4(), // UUID로 _id 생성
+        routineRecordId, // 연결된 루틴 기록 _id
         createdAt: new Date(), // 현재 날짜
         updatedAt: new Date(), // 현재 날짜
         setRecords: [],
@@ -60,7 +60,7 @@ export const deleteWorkoutRecordOne = async ({
 
         if (routineRecordOne) {
             const newWorkoutRecords = routineRecordOne.workoutRecords.filter(
-                (workoutRecord) => workoutRecord.id !== workoutRecordId
+                (workoutRecord) => workoutRecord._id !== workoutRecordId
             );
             routineRecordOne.workoutRecords = newWorkoutRecords;
             await db.routineRecords.put(routineRecordOne);
@@ -111,7 +111,7 @@ export const getWorkoutRecordSumAll = async ({
         const workoutRecords = routineRecords.flatMap((routineRecord) =>
             routineRecord.workoutRecords.filter(
                 (workoutRecord) =>
-                    workoutRecord.workoutLibrary.id === workoutLibraryId
+                    workoutRecord.workoutLibrary._id === workoutLibraryId
             )
         );
 

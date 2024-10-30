@@ -27,13 +27,13 @@ const RoutineConfigProgressModal = ({
     const { data: routineConfigOneData } =
         useGetRoutineConfigOneQuery(routineConfigId);
 
-    const routineConfigOne = routineConfigOneData ?? { name: "", id: "" };
+    const routineConfigOne = routineConfigOneData ?? { name: "", _id: "" };
 
     const handleRoutineProgressButtonClick = () => {
         // TODO: API 호출
         showToast("루틴이 시작되었습니다.");
         onConfirmButtonClick();
-        navigate(ROUTES.PROGRESS.PATH(routineConfigOne.id));
+        navigate(ROUTES.PROGRESS.PATH(routineConfigOne._id));
     };
 
     return (
