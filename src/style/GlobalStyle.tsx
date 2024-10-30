@@ -11,4 +11,8 @@ export const GlobalStyle = createGlobalStyle`
 	input {
 	    font-family: 'Noto Sans Korean', sans-serif;
 	}
+	button {
+		font-family: 'Noto Sans Korean', sans-serif;
+	}
+
 `;

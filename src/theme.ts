@@ -34,6 +34,7 @@ const commonTheme = {
         lg: "16px",
         xl: "18px",
         xxl: "24px",
+        xxxl: "36px",
     },
     fontWeight: {
         bold: "700",

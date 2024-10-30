@@ -6,6 +6,7 @@ import { GlobalStyle } from "style/GlobalStyle";
 import ToastProvider from "context/ToastContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "style/GlobalFont.css";
+import { RecoilRoot } from "recoil";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -15,11 +16,13 @@ const queryClient = new QueryClient();
 
 root.render(
     <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-            <ToastProvider>
-                <GlobalStyle />
-                <App />
-            </ToastProvider>
-        </ThemeProvider>
+        <RecoilRoot>
+            <ThemeProvider>
+                <ToastProvider>
+                    <GlobalStyle />
+                    <App />
+                </ToastProvider>
+            </ThemeProvider>
+        </RecoilRoot>
     </QueryClientProvider>
 );

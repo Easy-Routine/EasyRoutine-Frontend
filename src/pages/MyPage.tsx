@@ -8,6 +8,7 @@ import { ReactComponent as HumanIcon } from "assets/image/human2.svg";
 import Toggle from "components/content/Toggle/Toggle";
 import { useContext } from "react";
 import { ThemeContext, ThemeContextType } from "context/ThemeContext";
+import { db } from "db";
 
 const Container = styled.div`
     display: flex;
@@ -24,6 +25,22 @@ const MyPage = () => {
 
     const handleToggleButtonClick = () => {
         setThemeMode(themeMode === "dark" ? "light" : "dark");
+    };
+
+    const handleTest = async () => {
+        const routineConfigs = await db.routineConfigs.toArray();
+        const routineRecords = await db.routineRecords.toArray();
+        const workoutLibraries = await db.workoutLibraries.toArray();
+
+        const data = { routineConfigs, routineRecords, workoutLibraries };
+
+        const response = await fetch("http://localhost:4000/sync", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data), // JSON 형식으로 데이터 전송
+        });
     };
 
     return (
@@ -49,6 +66,8 @@ const MyPage = () => {
                     </UnderlineBox.TitleWrapper>
                 </UnderlineBox>
             </UnderlineBoxWrapper>
+
+            <button onClick={handleTest}>동기화테스트</button>
         </Container>
     );
 };

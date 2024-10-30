@@ -1,15 +1,16 @@
 import PageTemplate from "components/box/PageTemplate/PageTemplate";
+import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import ROUTES from "constants/routes";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
     {
+        path: ROUTES.LOGIN.PATH,
+        element: <ROUTES.LOGIN.COMPONENT />,
+    },
+    {
         element: <PageTemplate />,
         children: [
-            {
-                path: ROUTES.LOGIN.PATH,
-                element: <ROUTES.LOGIN.COMPONENT />,
-            },
             {
                 path: ROUTES.CONFIG.LIST.PATH,
                 element: <ROUTES.CONFIG.LIST.COMPONENT />,
@@ -36,10 +37,6 @@ const router = createBrowserRouter([
             },
             {
                 path: ROUTES.MY.PATH,
-                element: <ROUTES.MY.COMPONENT />,
-            },
-            {
-                path: "/user/login/redirect",
                 element: <ROUTES.MY.COMPONENT />,
             },
         ],
