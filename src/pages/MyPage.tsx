@@ -9,6 +9,9 @@ import Toggle from "components/content/Toggle/Toggle";
 import { useContext } from "react";
 import { ThemeContext, ThemeContextType } from "context/ThemeContext";
 import { db } from "db";
+import { APIContext, APIContextType } from "context/APIProvider";
+import useToast from "hooks/useToast";
+import { AxiosError } from "axios";
 
 const Container = styled.div`
     display: flex;
@@ -22,6 +25,9 @@ const MyPage = () => {
     const { themeMode, setThemeMode } = useContext(
         ThemeContext
     ) as ThemeContextType;
+    const { showToast } = useToast();
+
+    const { api } = useContext(APIContext) as APIContextType;
 
     const handleToggleButtonClick = () => {
         setThemeMode(themeMode === "dark" ? "light" : "dark");
@@ -33,14 +39,11 @@ const MyPage = () => {
         const workoutLibraries = await db.workoutLibraries.toArray();
 
         const data = { routineConfigs, routineRecords, workoutLibraries };
-
-        const response = await fetch("http://localhost:4000/sync", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data), // JSON 형식으로 데이터 전송
-        });
+        try {
+            const response = await api.post("/sync", data);
+        } catch (e) {
+            showToast("로그인이 만료되었습니다.");
+        }
     };
 
     return (
