@@ -35,7 +35,8 @@ const WorkoutLibraryListBottomSheet = () => {
 
     const { isOpen, handleOpenModal, handleCloseModal } = useModal();
     const { selectedValue, handleTabClick } = useTab(Category.ALL);
-    const { selectedValues, handleCheckBoxClick } = useCheckBox();
+    const { selectedValues, handleCheckBoxClick, resetSelectedValues } =
+        useCheckBox();
     const { value, handleInputChange, handleInputClear } = useInput();
 
     const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery(
@@ -57,6 +58,7 @@ const WorkoutLibraryListBottomSheet = () => {
             workoutLibraryIds: values,
             routineConfigId: routineConfigId as string,
         });
+        resetSelectedValues();
         handleCloseModal();
     };
 
