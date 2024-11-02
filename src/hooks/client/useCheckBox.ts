@@ -17,11 +17,20 @@ const useCheckBox = (defaultValues?: string[]) => {
         }
     };
 
+    const resetSelectedValues = () => {
+        setSelectedValues([]);
+    };
+
     useEffect(() => {
         console.log("값변경", selectedValues);
     }, [selectedValues]);
 
-    return { selectedValues, handleCheckBoxClick, setSelectedValues };
+    return {
+        selectedValues,
+        handleCheckBoxClick,
+        setSelectedValues,
+        resetSelectedValues,
+    };
 };
 
 export default useCheckBox;
