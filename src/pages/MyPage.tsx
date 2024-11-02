@@ -41,6 +41,16 @@ const MyPage = () => {
         const data = { routineConfigs, routineRecords, workoutLibraries };
         try {
             const response = await api.post("/sync", data);
+
+            const { routineConfigs, routineRecords, workoutLibraries } =
+                response.data;
+
+            console.log(response);
+
+            // IndexedDB에 저장
+            // await db.routineConfigs.bulkPut(routineConfigs);
+            // await db.routineRecords.bulkPut(routineRecords);
+            // await db.workoutLibraries.bulkPut(workoutLibraries);
         } catch (e) {
             showToast("로그인이 만료되었습니다.", "error");
         }

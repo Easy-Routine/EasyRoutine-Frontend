@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode } from "react";
 import { useSetRecoilState } from "recoil";
 import axios, { AxiosInstance } from "axios";
-import { tokenStore } from "store/tokenStore";
+import { userContextStore } from "store/userContextStore";
 
 // Axios 인스턴스 생성
 const createAxiosInstance = () => {
@@ -24,7 +24,7 @@ type APIProviderProps = {
 export const APIContext = createContext<APIContextType | {}>({});
 // APIProvider 컴포넌트
 const APIProvider = ({ children }: APIProviderProps) => {
-    const setToken = useSetRecoilState(tokenStore); // Recoil 상태 업데이트 함수
+    const setUserContext = useSetRecoilState(userContextStore); // Recoil 상태 업데이트 함수
     const api = createAxiosInstance();
 
     // 요청 인터셉터 추가
@@ -45,7 +45,8 @@ const APIProvider = ({ children }: APIProviderProps) => {
         (error) => {
             if (error.response && error.response.status === 401) {
                 localStorage.removeItem("accessToken"); // 토큰 삭제
-                setToken(null); // Recoil 상태 업데이트
+                localStorage.removeItem("userId");
+                setUserContext({ accessToken: null, userId: null }); // Recoil 상태 업데이트
             }
             return Promise.reject(error);
         }

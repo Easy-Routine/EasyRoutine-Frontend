@@ -6,7 +6,7 @@ import { ReactComponent as KaKaoLogoIcon } from "assets/image/kakao-logo.svg";
 import { useLocation } from "react-router-dom";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import { useRecoilState } from "recoil";
-import { tokenStore } from "store/tokenStore";
+import { userContextStore } from "store/userContextStore";
 
 // const Logo = styled.div``;
 
@@ -79,19 +79,24 @@ const LoginPage = () => {
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };
-    const [token, setToken] = useRecoilState(tokenStore);
+    const [userContext, setUserContext] = useRecoilState(userContextStore);
 
     const query = useQuery();
 
     useEffect(() => {
-        const token = query.get("token");
+        const accessToken = query.get("token");
+        const userId = query.get("id");
 
-        if (token) {
+        if (accessToken) {
             console.log("셋토큰");
-            localStorage.setItem("accessToken", token);
-            setToken(localStorage.getItem("accessToken"));
+            localStorage.setItem("accessToken", accessToken as string);
+            localStorage.setItem("userId", userId as string);
+            setUserContext({
+                accessToken: localStorage.getItem("accessToken"),
+                userId: localStorage.getItem("userId"),
+            });
         }
-    }, [query, setToken]);
+    }, []);
 
     const handleGoogleLoginButtonClick = () => {
         window.open("http://localhost:4000/login", "_self");
