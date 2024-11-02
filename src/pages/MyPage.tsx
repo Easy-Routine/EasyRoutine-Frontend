@@ -12,6 +12,8 @@ import { db } from "db";
 import { APIContext, APIContextType } from "context/APIProvider";
 import useToast from "hooks/useToast";
 import { AxiosError } from "axios";
+import { useRecoilValue } from "recoil";
+import { userContextStore } from "store/userContextStore";
 
 const Container = styled.div`
     display: flex;
@@ -26,6 +28,7 @@ const MyPage = () => {
         ThemeContext
     ) as ThemeContextType;
     const { showToast } = useToast();
+    const userContext = useRecoilValue(userContextStore);
 
     const { api } = useContext(APIContext) as APIContextType;
 
@@ -34,9 +37,20 @@ const MyPage = () => {
     };
 
     const handleTest = async () => {
-        const routineConfigs = await db.routineConfigs.toArray();
-        const routineRecords = await db.routineRecords.toArray();
-        const workoutLibraries = await db.workoutLibraries.toArray();
+        const routineConfigs = await db.routineConfigs
+            .where("userId") // userId 필드에 대해 조건 설정
+            .equals(userContext.userId as string) // userId와 일치하는 데이터만 가져오기
+            .toArray();
+
+        const routineRecords = await db.routineRecords
+            .where("userId") // userId 필드에 대해 조건 설정
+            .equals(userContext.userId as string) // userId와 일치하는 데이터만 가져오기
+            .toArray();
+
+        const workoutLibraries = await db.workoutLibraries
+            .where("userId") // userId 필드에 대해 조건 설정
+            .equals(userContext.userId as string) // userId와 일치하는 데이터만 가져오기
+            .toArray();
 
         const data = { routineConfigs, routineRecords, workoutLibraries };
         try {

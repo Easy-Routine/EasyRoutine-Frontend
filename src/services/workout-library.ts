@@ -1,13 +1,21 @@
 import { db, WorkoutLibrary } from "db";
 import { v4 as uuidv4 } from "uuid";
 
-export const getWorkoutLibraryAll = async (
-    name?: string,
-    category?: string
-): Promise<WorkoutLibrary[]> => {
+export const getWorkoutLibraryAll = async ({
+    name,
+    category,
+    userId,
+}: {
+    name?: string;
+    category?: string;
+    userId: string;
+}): Promise<WorkoutLibrary[]> => {
     try {
-        // 데이터베이스에서 모든 운동 가져오기
-        const workoutsLibraries = await db.workoutLibraries.toArray();
+        // 데이터베이스에서 모든 운동 가져오기 (userId로 필터링)
+        const workoutsLibraries = await db.workoutLibraries
+            .where("userId")
+            .equals(userId) // userId로 필터링
+            .toArray();
 
         // 생성 시간(createdAt) 기준으로 정렬 (오름차순)
         workoutsLibraries.sort((a, b) => {

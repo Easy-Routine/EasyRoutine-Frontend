@@ -37,17 +37,20 @@ export const createRoutineRecordOne = async ({
 // 확인: 완료
 export const getRoutineRecordAllMonthly = async ({
     date,
+    userId,
 }: {
     date: Date;
+    userId: string;
 }): Promise<DotDataByDate[]> => {
     const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
     const endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0); // 해당 월의 마지막 날
 
     try {
-        // 해당 월의 모든 루틴 기록 가져오기
+        // 해당 월의 모든 루틴 기록 가져오기 (userId로 필터링)
         const routineRecords = await db.routineRecords
             .where("createdAt")
             .between(startDate, endDate, true, true) // 시작일과 종료일 사이의 레코드
+            .and((record) => record.userId === userId) // userId로 필터링
             .toArray();
 
         console.log(routineRecords, "응아");
@@ -76,20 +79,24 @@ export const getRoutineRecordAllMonthly = async ({
         return []; // 오류 발생 시 빈 배열 반환
     }
 };
+
 // 확인: 완료
 export const getRoutineRecordAllDaily = async ({
     date,
+    userId,
 }: {
     date: Date;
+    userId: string;
 }): Promise<RoutineRecord[] | null> => {
     const targetDateStart = moment(date).startOf("day").toDate(); // 날짜의 시작
     const targetDateEnd = moment(date).endOf("day").toDate(); // 날짜의 끝
 
     try {
-        // 해당 날짜에 해당하는 루틴 기록 가져오기
+        // 해당 날짜에 해당하는 루틴 기록 가져오기 (userId로 필터링)
         const routineRecords = await db.routineRecords
             .where("createdAt")
             .between(targetDateStart, targetDateEnd, true, true) // 날짜 범위에 해당하는 레코드
+            .and((record) => record.userId === userId) // userId로 필터링
             .toArray();
 
         return routineRecords;
@@ -101,6 +108,7 @@ export const getRoutineRecordAllDaily = async ({
         return null; // 오류 발생 시 null 반환
     }
 };
+
 // 확인: 완료
 export const getRoutineRecordOne = async (
     routineRecordId: string

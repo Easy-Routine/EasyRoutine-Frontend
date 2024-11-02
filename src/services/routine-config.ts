@@ -5,10 +5,17 @@ import { Color } from "type/Color";
 import { v4 as uuidv4 } from "uuid";
 
 // 확인: 완료
-export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
+export const getRoutineConfigAll = async ({
+    userId,
+}: {
+    userId: string;
+}): Promise<RoutineConfig[]> => {
     try {
-        // 모든 루틴 구성 가져오기
-        const routineConfigs = await db.routineConfigs.toArray();
+        // userId로 필터링하여 루틴 구성 가져오기
+        const routineConfigs = await db.routineConfigs
+            .where("userId") // userId 필드에 대해 조건 설정
+            .equals(userId) // userId와 일치하는 데이터만 가져오기
+            .toArray();
 
         return routineConfigs;
     } catch (error) {
@@ -19,7 +26,6 @@ export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
         return [];
     }
 };
-
 // 확인: 완료
 export const getRoutineConfigOne = async (
     routineConfigId: string
