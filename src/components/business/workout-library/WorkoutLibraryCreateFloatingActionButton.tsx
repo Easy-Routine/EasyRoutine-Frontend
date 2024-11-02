@@ -25,7 +25,7 @@ const WorkoutLibraryCreateFloatingActionButton = ({
             isEditable: true,
             userId: "doggopawer",
         });
-        showToast("운동 종목이 추가되었습니다.");
+        showToast("운동 종목이 추가되었습니다.", "success");
 
         if (newWorkoutLibraryOne) {
             onButtonClick(newWorkoutLibraryOne._id);

@@ -1,7 +1,8 @@
 import { ToastContext, ToastContextType } from "context/ToastContext";
 import { useContext, useEffect } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import CircleBox from "components/box/CircleBox/CircleBox";
+import { ReactComponent as XIcon } from "assets/image/x.svg";
 import { ReactComponent as CheckIcon } from "assets/image/check.svg";
 
 const Container = styled.div<{ $isOpen: boolean }>`
@@ -32,8 +33,11 @@ const Text = styled.div`
 
 const Toast = () => {
     // 프로바이더로 가져오기
-    const { isOpen, setIsOpen } = useContext(ToastContext) as ToastContextType;
+    const { isOpen, setIsOpen, type } = useContext(
+        ToastContext
+    ) as ToastContextType;
     const { message } = useContext(ToastContext) as ToastContextType;
+    const { color } = useTheme();
 
     useEffect(() => {
         if (isOpen) {
@@ -46,8 +50,8 @@ const Toast = () => {
     return (
         <>
             <Container $isOpen={isOpen}>
-                <CircleBox width={32} height={32}>
-                    <CheckIcon />
+                <CircleBox width={32} height={32} color={color.warning}>
+                    {type === "success" ? <CheckIcon /> : <XIcon />}
                 </CircleBox>
                 <Text>{message}</Text>
             </Container>

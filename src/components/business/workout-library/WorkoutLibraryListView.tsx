@@ -68,7 +68,7 @@ const WorkoutLibraryListView = () => {
             setWorkoutLibraryId(workoutLibraryId);
             openWorkoutLibraryBottomSheet();
         } else {
-            showToast("기본 운동은 변경할 수 없습니다.");
+            showToast("기본 운동은 변경할 수 없습니다.", "error");
         }
     };
     // 긴 클릭
@@ -84,7 +84,7 @@ const WorkoutLibraryListView = () => {
             setWorkoutLibraryId(workoutLibraryId);
             openWorkoutDeleteModal();
         } else {
-            showToast("기본 운동은 변경할 수 없습니다.");
+            showToast("기본 운동은 변경할 수 없습니다.", "error");
         }
     };
 

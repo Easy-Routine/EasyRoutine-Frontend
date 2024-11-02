@@ -42,7 +42,7 @@ const MyPage = () => {
         try {
             const response = await api.post("/sync", data);
         } catch (e) {
-            showToast("로그인이 만료되었습니다.");
+            showToast("로그인이 만료되었습니다.", "error");
         }
     };
 

@@ -31,7 +31,7 @@ const RoutineConfigProgressModal = ({
 
     const handleRoutineProgressButtonClick = () => {
         // TODO: API 호출
-        showToast("루틴이 시작되었습니다.");
+        showToast("루틴이 시작되었습니다.", "success");
         onConfirmButtonClick();
         navigate(ROUTES.PROGRESS.PATH(routineConfigOne._id));
     };

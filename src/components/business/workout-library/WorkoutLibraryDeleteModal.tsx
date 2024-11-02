@@ -26,7 +26,7 @@ const WorkoutLibraryDeleteModal = ({
 
     const handleConfirmButtonClick = async (workoutLibraryId: string) => {
         await deleteWorkoutLibraryOneMutate(workoutLibraryId);
-        showToast("운동 종목이 삭제되었습니다.");
+        showToast("운동 종목이 삭제되었습니다.", "error");
         onConfirmButtonClick();
     };
 

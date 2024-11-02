@@ -34,7 +34,7 @@ const RoutineConfigDeleteModal = ({
         routineConfigId: string
     ) => {
         await deleteRoutineConfigOne(routineConfigId);
-        showToast("루틴이 삭제되었습니다.");
+        showToast("루틴이 삭제되었습니다.", "success");
         onConfirmButtonClick();
     };
 

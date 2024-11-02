@@ -25,13 +25,13 @@ const RoutineConfigCreateFloatingActionButton = () => {
                 userId: "doggopawer",
             });
 
-            showToast("루틴이 생성되었습니다.");
+            showToast("루틴이 생성되었습니다.", "success");
 
             navigate(
                 ROUTES.CONFIG.DETAIL.PATH(newRoutineConfig?._id as string)
             );
         } catch (e) {
-            showToast("루틴을 생성하던 중 오류가 발생했습니다.");
+            showToast("루틴을 생성하던 중 오류가 발생했습니다.", "error");
         }
     };
 

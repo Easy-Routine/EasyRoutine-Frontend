@@ -18,7 +18,9 @@ export const DefaultToast: Story = {
         return (
             <>
                 <button
-                    onClick={() => showToast("원하시는 내용을 입력해주세요.")}
+                    onClick={() =>
+                        showToast("원하시는 내용을 입력해주세요.", "success")
+                    }
                 >
                     트리거
                 </button>
