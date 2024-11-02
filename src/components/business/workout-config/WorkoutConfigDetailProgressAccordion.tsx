@@ -226,7 +226,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                                     isPrimaryLine={isCurrentSet(setConfig._id)}
                                 >
                                     <Table.Input
-                                        value={index.toString()}
+                                        value={(index + 1).toString()}
                                         disabled={true}
                                     />
                                     {data.workoutLibrary.type.map((key) => (
