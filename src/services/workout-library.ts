@@ -1,4 +1,5 @@
 import { db, WorkoutLibrary } from "db";
+import api from "utils/axios";
 import { v4 as uuidv4 } from "uuid";
 
 export const getWorkoutLibraryAll = async ({
@@ -153,6 +154,7 @@ export const deleteWorkoutLibraryOne = async (
 ): Promise<boolean> => {
     try {
         // 해당 워크아웃 라이브러리 항목을 삭제합니다.
+        await api.delete(`/workout-library/${workoutLibraryId}`);
         await db.workoutLibraries.delete(workoutLibraryId);
 
         console.log(
