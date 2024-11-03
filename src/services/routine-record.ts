@@ -3,6 +3,7 @@ import { db, RoutineRecord } from "db";
 import { Color } from "type/Color";
 import { DotDataByDate } from "components/content/CustomCalendar/CustomCalendar";
 import moment from "moment";
+import api from "utils/axios";
 
 // 확인: 완료
 export const createRoutineRecordOne = async ({
@@ -131,6 +132,7 @@ export const deleteRoutineRecordOne = async (
     routineRecordId: string
 ): Promise<boolean> => {
     try {
+        await api.delete(`/routine-record/${routineRecordId}`);
         await db.routineRecords.delete(routineRecordId);
         return true;
     } catch (error) {
