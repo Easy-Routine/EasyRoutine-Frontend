@@ -2,6 +2,7 @@
 
 import { db, RoutineConfig } from "db"; // 경로에 맞게 수정
 import { Color } from "type/Color";
+import api from "utils/axios";
 import { v4 as uuidv4 } from "uuid";
 
 // 확인: 완료
@@ -76,13 +77,18 @@ export const deleteRoutineConfigOne = async (
     routineConfigId: string
 ): Promise<boolean> => {
     try {
+        await api.delete(`/routine-config/${routineConfigId}`);
         await db.routineConfigs.delete(routineConfigId);
+
+        // API 요청을 try-catch로 감싸서 오류를 처리
+
         return true;
     } catch (error) {
         console.error("Error deleting RoutineConfig:", error);
-        return false; // 오류 발생
+        throw error;
     }
 };
+
 // 확인: 완료
 export const updateRoutineConfigField = async (
     routineConfigId: string,
