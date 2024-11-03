@@ -37,15 +37,14 @@ export const createRoutineRecordOne = async ({
 // 확인: 완료
 export const getRoutineRecordAllMonthly = async ({
     date,
-    userId,
 }: {
     date: Date;
-    userId: string;
 }): Promise<DotDataByDate[]> => {
     const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
     const endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0); // 해당 월의 마지막 날
 
     try {
+        const userId = localStorage.getItem("userId");
         // 해당 월의 모든 루틴 기록 가져오기 (userId로 필터링)
         const routineRecords = await db.routineRecords
             .where("createdAt")
@@ -83,15 +82,15 @@ export const getRoutineRecordAllMonthly = async ({
 // 확인: 완료
 export const getRoutineRecordAllDaily = async ({
     date,
-    userId,
 }: {
     date: Date;
-    userId: string;
 }): Promise<RoutineRecord[] | null> => {
     const targetDateStart = moment(date).startOf("day").toDate(); // 날짜의 시작
     const targetDateEnd = moment(date).endOf("day").toDate(); // 날짜의 끝
 
     try {
+        const userId = localStorage.getItem("userId");
+
         // 해당 날짜에 해당하는 루틴 기록 가져오기 (userId로 필터링)
         const routineRecords = await db.routineRecords
             .where("createdAt")

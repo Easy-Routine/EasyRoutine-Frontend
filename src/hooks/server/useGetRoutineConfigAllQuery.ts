@@ -5,13 +5,10 @@ import { useRecoilValue } from "recoil";
 import { userContextStore } from "store/userContextStore";
 
 const useGetRoutineConfigAllQuery = () => {
-    const userContext = useRecoilValue(userContextStore);
     return useQuery({
         queryKey: [queryKey.getRoutineConfigAll],
         queryFn: async () => {
-            const data = await getRoutineConfigAll({
-                userId: userContext.userId as string,
-            });
+            const data = await getRoutineConfigAll();
             return data;
         },
     });

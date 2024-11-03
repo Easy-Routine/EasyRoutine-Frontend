@@ -5,16 +5,14 @@ import { Color } from "type/Color";
 import { v4 as uuidv4 } from "uuid";
 
 // 확인: 완료
-export const getRoutineConfigAll = async ({
-    userId,
-}: {
-    userId: string;
-}): Promise<RoutineConfig[]> => {
+export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
     try {
         // userId로 필터링하여 루틴 구성 가져오기
+        const userId = localStorage.getItem("userId");
+
         const routineConfigs = await db.routineConfigs
             .where("userId") // userId 필드에 대해 조건 설정
-            .equals(userId) // userId와 일치하는 데이터만 가져오기
+            .equals(userId as string) // userId와 일치하는 데이터만 가져오기
             .toArray();
 
         return routineConfigs;

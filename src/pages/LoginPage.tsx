@@ -79,7 +79,6 @@ const LoginPage = () => {
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };
-    const [userContext, setUserContext] = useRecoilState(userContextStore);
 
     const query = useQuery();
 
@@ -91,10 +90,7 @@ const LoginPage = () => {
             console.log("셋토큰");
             localStorage.setItem("accessToken", accessToken as string);
             localStorage.setItem("userId", userId as string);
-            setUserContext({
-                accessToken: localStorage.getItem("accessToken"),
-                userId: localStorage.getItem("userId"),
-            });
+            window.dispatchEvent(new Event("accessTokenChanged")); // 이벤트 발생
         }
     }, []);
 

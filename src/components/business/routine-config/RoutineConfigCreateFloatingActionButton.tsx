@@ -6,15 +6,12 @@ import useToast from "hooks/useToast";
 import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
 import useGetRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 import { Color } from "type/Color";
-import { useRecoilValue } from "recoil";
-import { userContextStore } from "store/userContextStore";
 
 const RoutineConfigCreateFloatingActionButton = () => {
     const navigate = useNavigate();
     const { showToast } = useToast();
     const { mutateAsync: createRoutineConfigOneMutate } =
         useCreateRoutineConfigMutation();
-    const userContext = useRecoilValue(userContextStore);
 
     const { data: routineConfigAllData } = useGetRoutineConfigAllQuery();
 
@@ -22,10 +19,12 @@ const RoutineConfigCreateFloatingActionButton = () => {
 
     const handleButtonClick = async () => {
         try {
+            const userId = localStorage.getItem("userId");
+
             const newRoutineConfig = await createRoutineConfigOneMutate({
                 name: "새 루틴",
                 color: Color.VIOLET,
-                userId: userContext.userId as string,
+                userId: userId as string,
             });
 
             showToast("루틴이 생성되었습니다.", "success");

@@ -1,26 +1,35 @@
 import ROUTES from "constants/routes";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { userContextStore } from "store/userContextStore";
 
 type PublicRouteProps = {
     children: React.ReactNode;
 };
 
 const PublicRoute = ({ children }: PublicRouteProps) => {
-    const [userContext, setUserContext] = useRecoilState(userContextStore);
-
     const navigate = useNavigate();
 
     useEffect(() => {
-        // 상황 1: 로그인해서 token 상태가 업데이트 됨
-        // 상황 2: 로그인 상태에서, 검색창에 로그인 주소를 직접 입력하여 들어옴
-        if (userContext.accessToken) {
-            console.log("토큰있음", userContext.accessToken);
-            navigate(ROUTES.CONFIG.LIST.PATH);
-        }
-    }, [userContext, navigate]);
+        const handleAccessTokenChange = () => {
+            const accessToken = localStorage.getItem("accessToken");
+
+            if (accessToken) {
+                navigate(ROUTES.CONFIG.LIST.PATH);
+            }
+        };
+        // 상황1: 로그인이 된 상태에서, 검색창에 직접 로그인페이지를 쳐서 들어감
+        handleAccessTokenChange();
+
+        // 상황1: 로그인에 성공해 토큰이 저장되어 로컬스토리지가 업데이트됨
+        window.addEventListener("accessTokenChanged", handleAccessTokenChange);
+
+        return () => {
+            window.removeEventListener(
+                "accessTokenChanged",
+                handleAccessTokenChange
+            ); // 정리
+        };
+    }, [navigate]);
 
     return <>{children}</>;
 };

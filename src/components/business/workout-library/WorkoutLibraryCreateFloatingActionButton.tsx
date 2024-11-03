@@ -16,17 +16,18 @@ const WorkoutLibraryCreateFloatingActionButton = ({
     const { showToast } = useToast();
     const { mutateAsync: createWorkoutLibraryOneMutate } =
         useCreateWorkoutLibraryOneMutation();
-    const userContext = useRecoilValue(userContextStore);
 
     const handleButtonClick = async () => {
         // TODO: 워크아웃 라이브러리 생성 API 연결
+        const userId = localStorage.getItem("userId");
+
         const newWorkoutLibraryOne = await createWorkoutLibraryOneMutate({
             name: "새 종목",
             image: "",
             category: Category.CHEST,
             type: [Type.REP, Type.WEIGHT],
             isEditable: true,
-            userId: userContext.userId,
+            userId: userId,
         });
         showToast("운동 종목이 추가되었습니다.", "success");
 
