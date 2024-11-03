@@ -14,6 +14,7 @@ import useToast from "hooks/useToast";
 import { AxiosError } from "axios";
 import { useRecoilValue } from "recoil";
 import { userContextStore } from "store/userContextStore";
+import convertDateStringsToDateObjects from "utils/convertDateStringsToDateObjects";
 
 const Container = styled.div`
     display: flex;
@@ -62,9 +63,15 @@ const MyPage = () => {
             console.log(response);
 
             // IndexedDB에 저장
-            // await db.routineConfigs.bulkPut(routineConfigs);
-            // await db.routineRecords.bulkPut(routineRecords);
-            // await db.workoutLibraries.bulkPut(workoutLibraries);
+            await db.routineConfigs.bulkPut(
+                convertDateStringsToDateObjects(routineConfigs)
+            );
+            await db.routineRecords.bulkPut(
+                convertDateStringsToDateObjects(routineRecords)
+            );
+            await db.workoutLibraries.bulkPut(
+                convertDateStringsToDateObjects(workoutLibraries)
+            );
         } catch (e) {
             showToast("로그인이 만료되었습니다.", "error");
         }
