@@ -77,6 +77,12 @@ const MyPage = () => {
         }
     };
 
+    const handleLogoutButtonClick = () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userId");
+        window.dispatchEvent(new Event("accessTokenChanged"));
+    };
+
     return (
         <Container>
             <Logo />
@@ -99,9 +105,28 @@ const MyPage = () => {
                         문의 사항
                     </UnderlineBox.TitleWrapper>
                 </UnderlineBox>
+                <UnderlineBox>
+                    <UnderlineBox.TitleWrapper>
+                        <MoonIcon />
+                        동기화
+                    </UnderlineBox.TitleWrapper>
+                    <button onClick={handleTest}>동기화테스트</button>
+                </UnderlineBox>
+                <UnderlineBox>
+                    <UnderlineBox.TitleWrapper>
+                        <MoonIcon />
+                        자동 동기화 설정
+                    </UnderlineBox.TitleWrapper>
+                    <button onClick={handleTest}>동기화테스트</button>
+                </UnderlineBox>
+                <UnderlineBox>
+                    <UnderlineBox.TitleWrapper>
+                        <MoonIcon />
+                        로그아웃
+                    </UnderlineBox.TitleWrapper>
+                    <button onClick={handleLogoutButtonClick}>로그아웃</button>
+                </UnderlineBox>
             </UnderlineBoxWrapper>
-
-            <button onClick={handleTest}>동기화테스트</button>
         </Container>
     );
 };
