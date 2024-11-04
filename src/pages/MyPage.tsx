@@ -90,6 +90,7 @@ const MyPage = () => {
 
             // 데이터 동기화가 완료될 때까지 기다립니다.
             await syncPromise;
+            showToast("데이터를 동기화했습니다.", "success");
         } catch (e) {
             showToast("로그인이 만료되었습니다.", "error");
         } finally {
