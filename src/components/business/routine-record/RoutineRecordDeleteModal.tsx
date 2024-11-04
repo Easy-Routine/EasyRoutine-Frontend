@@ -27,10 +27,14 @@ const RoutineRecordDeleteModal = ({
     const handleRoutineRecordDeleteButtonClick = async (
         routineRecordId: string
     ) => {
-        await deleteRoutineRecordOneMutate(routineRecordId);
+        try {
+            await deleteRoutineRecordOneMutate(routineRecordId);
 
-        showToast("운동 기록이 삭제되었습니다.", "success");
-        onConfirmButtonClick();
+            showToast("운동 기록이 삭제되었습니다.", "success");
+            onConfirmButtonClick();
+        } catch (e) {
+            showToast("루틴 기록 삭제 중 에러가 발생했습니다.", "error");
+        }
     };
 
     return (

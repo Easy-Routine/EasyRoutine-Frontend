@@ -163,6 +163,6 @@ export const deleteWorkoutLibraryOne = async (
         return true; // 삭제 성공
     } catch (error) {
         console.error("Error deleting WorkoutLibrary:", error);
-        return false; // 오류 발생
+        throw error;
     }
 };

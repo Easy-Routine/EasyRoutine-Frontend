@@ -137,7 +137,7 @@ export const deleteRoutineRecordOne = async (
         return true;
     } catch (error) {
         console.error("Error deleting RoutineRecord:", error);
-        return false; // 오류 발생
+        throw error;
     }
 };
 
