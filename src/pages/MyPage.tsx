@@ -6,14 +6,13 @@ import styled from "styled-components";
 import { ReactComponent as MoonIcon } from "assets/image/moon.svg";
 import { ReactComponent as HumanIcon } from "assets/image/human2.svg";
 import Toggle from "components/content/Toggle/Toggle";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext, ThemeContextType } from "context/ThemeContext";
-import { db } from "db";
 import useToast from "hooks/useToast";
-import convertDateStringsToDateObjects from "utils/convertDateStringsToDateObjects";
-import api from "utils/axios";
 import syncData from "utils/syncData";
 import useGetUserOneQuery from "hooks/server/useGetUserOneQuery";
+import useModal from "hooks/client/useModal";
+import DataSyncModal from "components/business/DataSyncModal";
 
 const Container = styled.div`
     display: flex;
@@ -55,6 +54,11 @@ const MyPage = () => {
     ) as ThemeContextType;
     const { showToast } = useToast();
 
+    const {
+        isOpen: isDataSyncModalOpen,
+        handleOpenModal: openDataSyncModal,
+        handleCloseModal: closeDataSyncModal,
+    } = useModal();
     const { data: userOne, isLoading } = useGetUserOneQuery();
 
     const [syncMode, setSyncMode] = useState(
@@ -74,10 +78,24 @@ const MyPage = () => {
     };
 
     const handleSyncButtonClick = async () => {
+        let modalOpenTimeout;
         try {
-            await syncData();
+            // 데이터 동기화 작업을 비동기로 시작합니다.
+            const syncPromise = syncData();
+
+            // 1초 후에 모달을 열도록 설정합니다.
+            modalOpenTimeout = setTimeout(() => {
+                openDataSyncModal();
+            }, 1000);
+
+            // 데이터 동기화가 완료될 때까지 기다립니다.
+            await syncPromise;
         } catch (e) {
             showToast("로그인이 만료되었습니다.", "error");
+        } finally {
+            // 데이터 동기화 후 모달을 닫습니다.
+            clearTimeout(modalOpenTimeout); // 모달 열기 타이머를 클리어
+            closeDataSyncModal(); // 모달 닫기
         }
     };
 
@@ -139,6 +157,8 @@ const MyPage = () => {
                     />
                 </UnderlineBox>
             </UnderlineBoxWrapper>
+
+            <DataSyncModal isOpen={isDataSyncModalOpen} />
         </Container>
     );
 };
