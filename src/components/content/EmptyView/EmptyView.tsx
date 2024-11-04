@@ -12,7 +12,7 @@ const Container = styled.div`
     font-weight: ${({ theme }) => theme.fontWeight.regular};
     color: ${({ theme }) => theme.color.gray.normal};
 
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
