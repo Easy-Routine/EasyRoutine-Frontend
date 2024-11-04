@@ -1,6 +1,7 @@
 import moment from "moment";
 import AppRouter from "pages/AppRouter";
 import { useEffect } from "react";
+import { checkAccessToken } from "services";
 import styled from "styled-components";
 import syncData from "utils/syncData";
 
@@ -31,10 +32,14 @@ const App = () => {
             }
         }
     };
+
     // handleAppMounted
     useEffect(() => {
         (async () => {
-            await syncDataPeriodically();
+            const isAccessTokenFresh = await checkAccessToken();
+            if (isAccessTokenFresh) {
+                await syncDataPeriodically();
+            }
         })();
     }, []);
 
