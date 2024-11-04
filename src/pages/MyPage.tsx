@@ -6,18 +6,45 @@ import styled from "styled-components";
 import { ReactComponent as MoonIcon } from "assets/image/moon.svg";
 import { ReactComponent as HumanIcon } from "assets/image/human2.svg";
 import Toggle from "components/content/Toggle/Toggle";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext, ThemeContextType } from "context/ThemeContext";
 import { db } from "db";
 import useToast from "hooks/useToast";
 import convertDateStringsToDateObjects from "utils/convertDateStringsToDateObjects";
 import api from "utils/axios";
 import syncData from "utils/syncData";
+import useGetUserOneQuery from "hooks/server/useGetUserOneQuery";
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+`;
+
+const ProfileBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+`;
+const UserName = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.md};
+    font-weight: ${({ theme }) => theme.fontWeight.regular};
+`;
+
+const ProfileImage = styled.img`
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+`;
+const LogoutButton = styled.button`
+    width: 102px;
+    height: 26px;
+    box-sizing: border-box;
+    border-radius: 24px;
+    background-color: ${({ theme }) => theme.color.background.box};
+    border: 1px solid ${({ theme }) => theme.color.gray.light};
+    color: ${({ theme }) => theme.color.text.black};
 `;
 
 const UnderlineBoxWrapper = styled.div``;
@@ -27,6 +54,8 @@ const MyPage = () => {
         ThemeContext
     ) as ThemeContextType;
     const { showToast } = useToast();
+
+    const { data: userOne, isLoading } = useGetUserOneQuery();
 
     const [syncMode, setSyncMode] = useState(
         localStorage.getItem("syncMode") &&
@@ -61,6 +90,18 @@ const MyPage = () => {
     return (
         <Container>
             <Logo />
+            {isLoading
+                ? null
+                : userOne && (
+                      <ProfileBox>
+                          <ProfileImage src={userOne.profileImage} />
+                          <UserName>{userOne.name}</UserName>
+                          <LogoutButton onClick={handleLogoutButtonClick}>
+                              로그아웃
+                          </LogoutButton>
+                      </ProfileBox>
+                  )}
+
             <NavigationBottomBar defaultValue={ROUTES.MY.PATH} />
 
             <UnderlineBoxWrapper>
@@ -96,13 +137,6 @@ const MyPage = () => {
                         defaultValue={syncMode}
                         onToggleChange={handleSyncModeToggleClick}
                     />
-                </UnderlineBox>
-                <UnderlineBox>
-                    <UnderlineBox.TitleWrapper>
-                        <MoonIcon />
-                        로그아웃
-                    </UnderlineBox.TitleWrapper>
-                    <button onClick={handleLogoutButtonClick}>로그아웃</button>
                 </UnderlineBox>
             </UnderlineBoxWrapper>
         </Container>
