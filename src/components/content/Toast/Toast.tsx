@@ -50,7 +50,11 @@ const Toast = () => {
     return (
         <>
             <Container $isOpen={isOpen}>
-                <CircleBox width={32} height={32} color={color.warning}>
+                <CircleBox
+                    width={32}
+                    height={32}
+                    color={type === "success" ? color.primary : color.warning}
+                >
                     {type === "success" ? <CheckIcon /> : <XIcon />}
                 </CircleBox>
                 <Text>{message}</Text>
