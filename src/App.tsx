@@ -1,4 +1,5 @@
 import DataSyncModal from "components/business/DataSyncModal";
+import SideBanner from "components/content/SideBanner/SideBanner";
 import useModal from "hooks/client/useModal";
 import useToast from "hooks/useToast";
 import moment from "moment";
@@ -83,6 +84,7 @@ const App = () => {
         <MaxWidthWrapper id="wrap">
             <AppRouter />
             <DataSyncModal isOpen={isDataSyncModalOpen} />
+            <SideBanner />
         </MaxWidthWrapper>
     );
 };

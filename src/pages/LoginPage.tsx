@@ -5,8 +5,7 @@ import { ReactComponent as GoogleLogoIcon } from "assets/image/google-logo.svg";
 import { ReactComponent as KaKaoLogoIcon } from "assets/image/kakao-logo.svg";
 import { useLocation } from "react-router-dom";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
-import { useRecoilState } from "recoil";
-import { userContextStore } from "store/userContextStore";
+import LogoDescription from "components/content/LogoDescription/LogoDescription";
 
 // const Logo = styled.div``;
 
@@ -102,11 +101,7 @@ const LoginPage = () => {
         <PublicRoute>
             <Container>
                 <TitleBox>
-                    <Logo type="large" />
-                    <Description>
-                        간단하고 편리한 운동을 위한
-                        <br /> 당신의 헬스 메이트
-                    </Description>
+                    <LogoDescription />
                 </TitleBox>
 
                 <ButtonBox>
