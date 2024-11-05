@@ -13,6 +13,7 @@ import syncData from "utils/syncData";
 import useGetUserOneQuery from "hooks/server/useGetUserOneQuery";
 import useModal from "hooks/client/useModal";
 import DataSyncModal from "components/business/DataSyncModal";
+import { ReactComponent as SyncIcon } from "assets/image/sync.svg";
 
 const Container = styled.div`
     display: flex;
@@ -44,6 +45,18 @@ const LogoutButton = styled.button`
     background-color: ${({ theme }) => theme.color.background.box};
     border: 1px solid ${({ theme }) => theme.color.gray.light};
     color: ${({ theme }) => theme.color.text.black};
+`;
+
+const SyncButton = styled.button`
+    background-color: ${({ theme }) => theme.color.primary};
+    width: 44px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: none;
+    border: none;
+    border-radius: ${({ theme }) => theme.borderRadius.xl};
 `;
 
 const UnderlineBoxWrapper = styled.div``;
@@ -145,7 +158,9 @@ const MyPage = () => {
                         <MoonIcon />
                         동기화
                     </UnderlineBox.TitleWrapper>
-                    <button onClick={handleSyncButtonClick}>동기화</button>
+                    <SyncButton onClick={handleSyncButtonClick}>
+                        <SyncIcon />
+                    </SyncButton>
                 </UnderlineBox>
                 <UnderlineBox>
                     <UnderlineBox.TitleWrapper>
