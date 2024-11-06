@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import Logo from "../Logo/Logo";
 import LogoDescription from "../LogoDescription/LogoDescription";
+import { ReactComponent as PlayStoreIcon } from "assets/image/play-store.svg";
+import { ReactComponent as AppleIcon } from "assets/image/apple.svg";
 
 const Container = styled.div`
     position: fixed;
@@ -55,6 +56,18 @@ const Button = styled.div`
     color: ${({ theme }) => theme.color.text.black};
 `;
 
+const AppleLogo = styled(AppleIcon)`
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+`;
+
+const PlayStoreLogo = styled(PlayStoreIcon)`
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+`;
+
 const SideBanner = () => {
     const bottomBarRef = useRef<HTMLDivElement>(null);
 
@@ -82,8 +95,12 @@ const SideBanner = () => {
             <LogoDescription />
             <IntroText>앱을 다운받아보세요!</IntroText>
             <ButtonBox>
-                <Button>앱 다운로드</Button>
-                <Button>앱 다운로드</Button>
+                <Button>
+                    <AppleLogo /> 앱 다운로드
+                </Button>
+                <Button>
+                    <PlayStoreLogo /> 앱 다운로드
+                </Button>
             </ButtonBox>
         </Container>
     );
