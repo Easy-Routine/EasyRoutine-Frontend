@@ -10,7 +10,6 @@ const Container = styled.div<{ $isOpen: boolean }>`
     top: 0;
     left: 50%;
     width: 80%;
-    height: 50px;
     background-color: ${({ theme }) => theme.color.background.box};
     border-radius: ${({ theme }) => theme.borderRadius.xl};
     display: flex;
