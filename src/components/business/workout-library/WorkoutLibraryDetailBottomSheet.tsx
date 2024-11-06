@@ -12,12 +12,12 @@ import useTab from "hooks/client/useTab";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
 import useUploadWorkoutLibraryImageMutation from "hooks/server/useUploadWorkoutLibraryImageMutation";
+import Lottie from "lottie-react";
 import { ChangeEvent, useEffect } from "react";
-import { uploadImage } from "services";
 import styled from "styled-components";
 import { Category } from "type/Category";
 import { Type } from "type/Type";
-import api from "utils/axios";
+import loadingAnimation from "assets/image/loading.json"; // JSON 파일 경로
 
 const Container = styled.div`
     width: 100%;
@@ -85,8 +85,10 @@ const WorkoutLibraryDetailBottomSheet = ({
     const { mutateAsync: updateWorkoutLibraryOneMutate } =
         useUpdateWorkoutLibraryOneMutation();
 
-    const { mutateAsync: uploadWorkoutLibraryImageMutation } =
-        useUploadWorkoutLibraryImageMutation();
+    const {
+        mutateAsync: uploadWorkoutLibraryImageMutation,
+        isPending: isUploadWorkoutLibraryImagePending,
+    } = useUploadWorkoutLibraryImageMutation();
 
     useEffect(() => {
         setValue(workoutLibraryOne.name);
@@ -232,8 +234,23 @@ const WorkoutLibraryDetailBottomSheet = ({
                             </CheckBoxGroup.Wrapper>
                         </CheckBoxGroup>
                     </LabelBox>
-                    <Button onClick={handleWorkoutLibraryUpdateButtonClick}>
-                        운동 수정하기
+                    <Button
+                        disabled={isUploadWorkoutLibraryImagePending}
+                        onClick={handleWorkoutLibraryUpdateButtonClick}
+                    >
+                        {isUploadWorkoutLibraryImagePending ? (
+                            <Lottie
+                                animationData={loadingAnimation}
+                                loop={true}
+                                style={{
+                                    width: 35,
+                                    height: 35,
+                                    textAlign: "center",
+                                }}
+                            />
+                        ) : (
+                            "운동 수정하기"
+                        )}
                     </Button>
                 </Container>
             </Modal.BottomSheet>

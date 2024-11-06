@@ -10,6 +10,9 @@ const Button = styled.button<{ disabled?: boolean }>`
     border-radius: ${({ theme }) => theme.borderRadius.xs};
     font-family: "Noto Sans Korean", sans-serif;
     opacity: ${({ disabled }) => (disabled ? "0.5" : "1")};
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export default Button;
