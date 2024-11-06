@@ -9,11 +9,12 @@ const Container = styled.div`
     gap: 15px;
     cursor: pointer; // 클릭 가능한 느낌을 주기 위해 추가
 `;
-const ImageBox = styled.div`
+const ImageBox = styled.img`
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: 40px;
+    width: 40px;
     height: 40px;
 `;
 const ColumnBox = styled.div`

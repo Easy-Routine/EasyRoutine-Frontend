@@ -55,12 +55,9 @@ const RoutineRecordDetailAccordion = ({
                         data={data.workoutRecords}
                         render={(item) => (
                             <SmallCard key={item._id}>
-                                <SmallCard.ImageBox>
-                                    <img
-                                        src={item.workoutImage}
-                                        alt="운동 이미지"
-                                    />
-                                </SmallCard.ImageBox>
+                                <SmallCard.ImageBox
+                                    src={item.workoutLibrary.image}
+                                />
                                 <SmallCard.ColumnBox>
                                     <SmallCard.BoldText>
                                         {item.name}

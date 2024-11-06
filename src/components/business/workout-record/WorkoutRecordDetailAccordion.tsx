@@ -43,8 +43,10 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
                     <Card>
                         <Card.ImageBox>
                             <img
-                                src={data.workoutLibrary.workoutImage}
+                                src={data.workoutLibrary.image}
                                 alt=""
+                                width="100%"
+                                height="100%"
                             />
                         </Card.ImageBox>
                         <Card.Column>

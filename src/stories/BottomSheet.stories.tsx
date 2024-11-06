@@ -114,12 +114,9 @@ export const WorkoutLibraryBottomSheet: Story = {
                                 render={(item, index) => (
                                     <CheckBoxGroup.Wrapper key={index}>
                                         <SmallCard>
-                                            <SmallCard.ImageBox>
-                                                <img
-                                                    src={SeatedRowImage}
-                                                    alt="seated row"
-                                                />
-                                            </SmallCard.ImageBox>
+                                            <SmallCard.ImageBox
+                                                src={item.image}
+                                            />
                                             <SmallCard.NormalText>
                                                 데드리프트
                                             </SmallCard.NormalText>

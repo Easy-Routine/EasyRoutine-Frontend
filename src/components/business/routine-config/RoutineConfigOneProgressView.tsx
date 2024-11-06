@@ -1,7 +1,6 @@
 import Accordion from "components/box/Accordion/Accordion";
 import styled from "styled-components";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
-import SeatedRowImage from "assets/image/seated-row.png";
 import { useCallback, useEffect, useRef, useState } from "react";
 import useTimer from "hooks/client/useTimer";
 import Modal from "components/box/Modal/Modal";

@@ -13,6 +13,7 @@ const ImageBox = styled.div<{ $backgroundColor?: Color }>`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 60px;
     min-width: 60px;
     height: 60px;
     border-radius: ${(props) => props.theme.borderRadius.md};

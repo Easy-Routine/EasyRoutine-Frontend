@@ -82,7 +82,12 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                 <Accordion.Header>
                     <Card>
                         <Card.ImageBox>
-                            <img src={data.workoutLibrary.image} alt="" />
+                            <img
+                                src={data.workoutLibrary.image}
+                                alt=""
+                                width="100%"
+                                height="100%"
+                            />
                         </Card.ImageBox>
                         <Card.Column>
                             <Card.Title>{data.workoutLibrary.name}</Card.Title>

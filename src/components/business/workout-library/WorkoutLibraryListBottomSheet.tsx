@@ -10,7 +10,6 @@ import useTab from "hooks/client/useTab";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import styled from "styled-components";
-import SeatedRowImage from "assets/image/seated-row.png";
 import { WorkoutLibrary } from "db";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
@@ -134,12 +133,9 @@ const WorkoutLibraryListBottomSheet = () => {
                                     render={(item, index) => (
                                         <CheckBoxGroup.Wrapper key={item._id}>
                                             <SmallCard>
-                                                <SmallCard.ImageBox>
-                                                    <img
-                                                        src={SeatedRowImage}
-                                                        alt="seated row"
-                                                    />
-                                                </SmallCard.ImageBox>
+                                                <SmallCard.ImageBox
+                                                    src={item.image}
+                                                />
                                                 <SmallCard.NormalText>
                                                     {item.name}
                                                 </SmallCard.NormalText>

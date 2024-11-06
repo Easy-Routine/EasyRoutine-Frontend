@@ -1,6 +1,4 @@
 import SmallCard from "components/content/SmallCard/SmallCard";
-
-import SeatedRowImage from "assets/image/seated-row.png";
 import styled from "styled-components";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import { WorkoutLibrary } from "db";
@@ -27,9 +25,7 @@ const WorkoutLibraryDetailSmallCard = ({
         >
             <SmallCard.Between>
                 <SmallCard.ImageText>
-                    <SmallCard.ImageBox>
-                        <img src={SeatedRowImage} alt="seated row" />
-                    </SmallCard.ImageBox>
+                    <SmallCard.ImageBox src={data.image} />
                     <SmallCard.NormalText>{data.name}</SmallCard.NormalText>
                 </SmallCard.ImageText>
                 <RightArrowIcon />

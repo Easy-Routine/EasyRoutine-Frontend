@@ -6,7 +6,6 @@ import ChipTab from "components/content/ChipTab/ChipTab";
 import useTab from "hooks/client/useTab";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
-import SeatedRowImage from "assets/image/seated-row.png";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import { WorkoutLibrary } from "db";
 import { Category } from "type/Category";
@@ -113,17 +112,12 @@ const WorkoutLibraryListGraphBottomSheet = ({
                     <SmallCardListContainer>
                         <SmallCardList<WorkoutLibrary>
                             data={workoutLibraryAll}
-                            render={({ _id, name }) => (
+                            render={({ _id, name, image }) => (
                                 <SmallCard
                                     onCardClick={() => onSmallCardClick(_id)}
                                     key={_id}
                                 >
-                                    <SmallCard.ImageBox>
-                                        <img
-                                            src={SeatedRowImage}
-                                            alt="seated row"
-                                        />
-                                    </SmallCard.ImageBox>
+                                    <SmallCard.ImageBox src={image} />
                                     <SmallCard.NormalText>
                                         {name}
                                     </SmallCard.NormalText>

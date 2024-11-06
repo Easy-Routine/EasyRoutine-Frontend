@@ -61,15 +61,9 @@ const RoutineConfigDetailAccordion = ({
                             data={data.workoutConfigs}
                             render={(workoutConfig) => (
                                 <SmallCard key={workoutConfig._id}>
-                                    <SmallCard.ImageBox>
-                                        <img
-                                            src={
-                                                workoutConfig.workoutLibrary
-                                                    .image
-                                            }
-                                            alt="운동 이미지"
-                                        />
-                                    </SmallCard.ImageBox>
+                                    <SmallCard.ImageBox
+                                        src={workoutConfig.workoutLibrary.image}
+                                    />
                                     <SmallCard.ColumnBox>
                                         <SmallCard.BoldText>
                                             {workoutConfig.workoutLibrary.name}
