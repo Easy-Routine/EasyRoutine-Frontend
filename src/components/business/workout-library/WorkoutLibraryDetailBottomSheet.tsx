@@ -11,10 +11,13 @@ import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
+import useUploadWorkoutLibraryImageMutation from "hooks/server/useUploadWorkoutLibraryImageMutation";
 import { ChangeEvent, useEffect } from "react";
+import { uploadImage } from "services";
 import styled from "styled-components";
 import { Category } from "type/Category";
 import { Type } from "type/Type";
+import api from "utils/axios";
 
 const Container = styled.div`
     width: 100%;
@@ -62,11 +65,9 @@ const WorkoutLibraryDetailBottomSheet = ({
 
     const workoutLibraryOne = workoutLibraryOneData ?? initialWorkoutLibraryOne;
 
-    const {
-        value: imageInputValue,
-        setValue: setImageInputValue,
-        handleFileChange,
-    } = useInput(workoutLibraryOne.image);
+    const { value: imageInputValue, setValue: setImageInputValue } = useInput(
+        workoutLibraryOne.image
+    );
 
     const {
         value: underlineInputValue,
@@ -84,6 +85,9 @@ const WorkoutLibraryDetailBottomSheet = ({
     const { mutateAsync: updateWorkoutLibraryOneMutate } =
         useUpdateWorkoutLibraryOneMutation();
 
+    const { mutateAsync: uploadWorkoutLibraryImageMutation } =
+        useUploadWorkoutLibraryImageMutation();
+
     useEffect(() => {
         setValue(workoutLibraryOne.name);
         setImageInputValue(workoutLibraryOne.image);
@@ -98,17 +102,33 @@ const WorkoutLibraryDetailBottomSheet = ({
     ]);
 
     const handleImageInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        handleFileChange(e);
-
+        // handleFileChange(e);
         // TODO: 이미지를 만들고 패스로 반환해주는 API 필요
         // API 통신후 받은 패스로 다시 한번 set해주는 과정이 필요
         // setImageInputValue()
+
+        const file = e.target.files?.[0];
+        const formData = new FormData();
+        if (file) {
+            formData.append("image", file);
+
+            try {
+                // await uploadImage(formData, workoutLibraryId);
+                const response = await uploadWorkoutLibraryImageMutation({
+                    formData,
+                });
+                setImageInputValue(response.Location);
+            } catch (error) {
+                console.error(error);
+            }
+        }
     };
 
     const handleWorkoutLibraryUpdateButtonClick = async () => {
         await updateWorkoutLibraryOneMutate({
             workoutLibraryId,
             updatedData: {
+                image: imageInputValue,
                 name: underlineInputValue,
                 category: selectedCategory,
                 type: selectedValues,

@@ -27,10 +27,17 @@ type ImageInputProps = {
 };
 
 const ImageInput = ({ value, onInputChange }: ImageInputProps) => {
+    const [image, setImage] = useState(value);
+
+    useEffect(() => {
+        setImage(value);
+        console.log(value);
+    }, [value]);
+
     return (
         <Container>
             <Input type="file" accept="image/*" onChange={onInputChange} />
-            {value ? <Image src={value} /> : <PlaceholderIcon />}
+            {image ? <Image src={image} /> : <PlaceholderIcon />}
         </Container>
     );
 };
