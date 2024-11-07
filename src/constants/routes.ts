@@ -14,7 +14,7 @@ const ROUTES = {
     },
     CONFIG: {
         LIST: {
-            PATH: "/routine-config/list",
+            PATH: "/",
             COMPONENT: RoutineConfigListPage,
         },
         DETAIL: {
