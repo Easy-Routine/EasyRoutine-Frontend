@@ -37,6 +37,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "build:prod": "env-cmd -f .env.production react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "storybook": "storybook dev -p 6006",
@@ -73,6 +74,7 @@
         "@storybook/react-webpack5": "^8.3.1",
         "@storybook/test": "^8.3.1",
         "@svgr/webpack": "^8.1.0",
+        "env-cmd": "^10.1.0",
         "eslint": "^8.57.1",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.1",

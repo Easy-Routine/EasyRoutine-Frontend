@@ -94,7 +94,7 @@ const LoginPage = () => {
     }, []);
 
     const handleGoogleLoginButtonClick = () => {
-        window.open("http://localhost:4000/login", "_self");
+        window.open(`${process.env.REACT_APP_API_URL}/login`, "_self");
     };
 
     return (
