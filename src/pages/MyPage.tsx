@@ -117,9 +117,6 @@ const MyPage = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");
         window.dispatchEvent(new Event("accessTokenChanged"));
-        window.ReactNativeWebView.postMessage(
-            JSON.stringify({ accessToken: "" })
-        );
     };
 
     return (

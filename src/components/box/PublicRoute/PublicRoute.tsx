@@ -15,9 +15,11 @@ const PublicRoute = ({ children }: PublicRouteProps) => {
 
             if (accessToken) {
                 navigate(ROUTES.CONFIG.LIST.PATH);
-                window.ReactNativeWebView.postMessage(
-                    JSON.stringify({ accessToken })
-                );
+
+                window.ReactNativeWebView &&
+                    window.ReactNativeWebView.postMessage(
+                        JSON.stringify({ accessToken })
+                    );
             }
         };
         // 상황1: 로그인이 된 상태에서, 검색창에 직접 로그인페이지를 쳐서 들어감
