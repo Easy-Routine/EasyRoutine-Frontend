@@ -24,6 +24,8 @@ import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineReco
 import Box from "components/box/Box/Box";
 import useUpdateRoutineRecordWorkoutEndAtMutation from "hooks/server/useUpdateRoutineRecordWorkoutEndAtMutation";
 import moment from "moment";
+import axios from "axios";
+import { sendPushAlarm } from "services";
 
 const Container = styled.div`
     display: flex;
@@ -71,6 +73,15 @@ const RoutineConfigOneProgressView = () => {
     const { seconds, startTimer, skipTimer } = useTimer(
         useCallback(() => {
             handleCloseTimerModal();
+            console.log("언제 발생하나?");
+            (async () => {
+                try {
+                    await sendPushAlarm({
+                        title: "헬퍼",
+                        body: "휴식 시간이 끝났습니다.",
+                    });
+                } catch (e) {}
+            })();
         }, [])
     );
 

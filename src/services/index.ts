@@ -49,3 +49,24 @@ export const uploadImage = async (
         throw new Error("Error uploading file:");
     }
 };
+
+export const sendPushAlarm = async ({
+    title,
+    body,
+}: {
+    title: string;
+    body: string;
+}): Promise<ImageResponse> => {
+    try {
+        const response = await api.post<{ Location: string }>("/send_alarm", {
+            title,
+            body,
+        });
+
+        console.log("File uploaded successfully:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error uploading file:", error);
+        throw new Error("Error uploading file:");
+    }
+};

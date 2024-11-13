@@ -11,7 +11,7 @@ const useTimer = (onComplete?: () => void) => {
             intervalId = setInterval(() => {
                 setSeconds((prev) => prev - 1);
             }, 1000);
-        } else if (seconds === 0) {
+        } else if (isActive && seconds === 0) {
             setIsActive(false);
             onComplete && onComplete(); // 콜백 실행
         }
