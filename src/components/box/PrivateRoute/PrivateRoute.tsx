@@ -15,6 +15,9 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
             if (!accessToken) {
                 navigate(ROUTES.LOGIN.PATH);
+                window.ReactNativeWebView.postMessage(
+                    JSON.stringify({ accessToken: "" })
+                );
             }
         };
         // 상황1: 로그인이 되지 않은 상태에서, 검색창에 직접 인증페이지를 쳐서 들어감

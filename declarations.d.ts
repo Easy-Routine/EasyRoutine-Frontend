@@ -25,3 +25,10 @@ declare module "moment-duration-format" {
         format(format: string, options?: any): string;
     }
 }
+
+// global.d.ts
+interface Window {
+    ReactNativeWebView: {
+        postMessage: (message: string) => void;
+    };
+}
