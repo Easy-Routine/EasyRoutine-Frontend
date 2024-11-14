@@ -70,20 +70,13 @@ const RoutineConfigOneProgressView = () => {
         handleCloseModal: handleCloseUncompletedModal,
     } = useModal();
 
-    const { seconds, startTimer, skipTimer } = useTimer(
-        useCallback(() => {
-            handleCloseTimerModal();
-            console.log("언제 발생하나?");
-            (async () => {
-                try {
-                    await sendPushAlarm({
-                        title: "헬퍼",
-                        body: "휴식 시간이 끝났습니다.",
-                    });
-                } catch (e) {}
-            })();
-        }, [])
-    );
+    const { endTime, startTimer, isActive, skipTimer, remainingTime } =
+        useTimer(
+            useCallback(() => {
+                handleCloseTimerModal();
+                console.log("언제 발생하나?");
+            }, [])
+        );
 
     const { data: routineConfigDetailData } = useGetRoutineConfigOneQuery(
         routineConfigId as string
@@ -202,7 +195,7 @@ const RoutineConfigOneProgressView = () => {
     };
 
     const handleTimerClick = () => {
-        if (seconds === 0) {
+        if (remainingTime === 0) {
             return;
         }
         handleOpenTimerModal();
@@ -258,7 +251,7 @@ const RoutineConfigOneProgressView = () => {
             <BottomBar>
                 <TimerTemplate>
                     <TimerTemplate.Timer
-                        value={seconds}
+                        value={remainingTime}
                         onTimerClick={handleTimerClick}
                     />
                     <TimerTemplate.ButtonWrapper>
@@ -270,7 +263,7 @@ const RoutineConfigOneProgressView = () => {
             </BottomBar>
 
             <TimerModal
-                seconds={seconds}
+                seconds={remainingTime}
                 isOpen={isTimerModalOpen}
                 onBackdropClick={() => handleCloseTimerModal}
                 onCancelButtonClick={() => {
