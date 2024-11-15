@@ -16,6 +16,8 @@ const ImageBox = styled.img`
     min-width: 40px;
     width: 40px;
     height: 40px;
+    border-radius: ${({ theme }) => theme.borderRadius.xs};
+    border: 1px solid ${({ theme }) => theme.color.gray.light};
 `;
 const ColumnBox = styled.div`
     display: flex;

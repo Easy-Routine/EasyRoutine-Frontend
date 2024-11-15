@@ -26,7 +26,7 @@ const typeMapper: TypeMapper = {
 };
 
 const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
-    const { color } = useTheme();
+    const { color, borderRadius } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
     const { routineConfigId } = useParams();
@@ -82,12 +82,16 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                 <Accordion.Header>
                     <Card>
                         <Card.ImageBox>
-                            <img
+                            {/* <img
                                 src={data.workoutLibrary.image}
                                 alt=""
-                                width="100%"
-                                height="100%"
-                            />
+                                style={{
+                                    borderRadius: borderRadius.md,
+                                    width: "100%",
+                                    height: "100%",
+                                }}
+                            /> */}
+                            <Card.Image src={data.workoutLibrary.image} />
                         </Card.ImageBox>
                         <Card.Column>
                             <Card.Title>{data.workoutLibrary.name}</Card.Title>

@@ -7,6 +7,7 @@ import Table from "components/content/Table/Table";
 import { WorkoutRecord } from "db";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import { useParams } from "react-router-dom";
+import { useTheme } from "styled-components";
 
 type TypeMapper = {
     [key: string]: string;
@@ -20,6 +21,7 @@ const typeMapper: TypeMapper = {
 
 const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
     const { routineRecordId } = useParams();
+    const { borderRadius } = useTheme();
 
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
@@ -42,12 +44,16 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
                 <Accordion.Header>
                     <Card>
                         <Card.ImageBox>
-                            <img
+                            {/* <img
                                 src={data.workoutLibrary.image}
                                 alt=""
-                                width="100%"
-                                height="100%"
-                            />
+                                style={{
+                                    borderRadius: borderRadius.md,
+                                    width: "100%",
+                                    height: "100%",
+                                }}
+                            /> */}
+                            <Card.Image src={data.workoutLibrary.image} />
                         </Card.ImageBox>
                         <Card.Column>
                             <Card.Title>{data.workoutLibrary.name}</Card.Title>

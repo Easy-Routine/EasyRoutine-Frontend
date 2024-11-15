@@ -57,7 +57,7 @@ const WorkoutConfigDetailProgressAccordion = ({
     onCompletedSetIdsMutate,
     onWorkoutDelete,
 }: WorkoutConfigDetailProgressAccordionProps) => {
-    const { color } = useTheme();
+    const { color, borderRadius } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
 
@@ -182,11 +182,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                 <Accordion.Header>
                     <Card>
                         <Card.ImageBox>
-                            <img
-                                width={"100%"}
-                                src={data.workoutLibrary.image}
-                                alt={"운동 이미지"}
-                            />
+                            <Card.Image src={data.workoutLibrary.image} />
                         </Card.ImageBox>
                         <Card.Column>
                             <Card.Title>{data.workoutLibrary.name}</Card.Title>
