@@ -32,7 +32,7 @@ const Container = styled.div<{ isPrimaryLine?: boolean; isGrayLine?: boolean }>`
 const InputBox = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 90%;
+    width: 100%;
 `;
 
 type RowProps = {

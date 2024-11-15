@@ -6,6 +6,8 @@ const Container = styled.input<{ width: number; disabled?: boolean }>`
     height: 22px;
     outline: none;
     border: none;
+    padding: 0;
+    border-radius: 0;
     border-bottom: 2px solid
         ${({ theme, disabled }) => (disabled ? "none" : theme.color.gray.light)};
     box-sizing: border-box;
@@ -27,7 +29,7 @@ type InputProps = {
 };
 
 const Input = ({
-    width = 18,
+    width = 35,
     value,
     onInputChange,
     disabled = false,
@@ -35,9 +37,29 @@ const Input = ({
     const [inputValue, setInputValue] = useState(value);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value);
-        onInputChange?.(e.target.value);
+        const value = e.target.value;
+
+        // 빈 문자열일 경우 0으로 설정
+        if (value === "") {
+            setInputValue("0");
+            onInputChange && onInputChange("0");
+        } else if (/^\d*$/.test(value) && value.length <= 3) {
+            // 현재 값이 0이고 새로운 값이 0이 아닐 경우
+            if (inputValue === "0" && value !== "0") {
+                setInputValue(value.substring(1)); // 0을 지우고 새로운 값으로 설정
+                onInputChange && onInputChange(value.substring(1));
+            } else {
+                setInputValue(value);
+                onInputChange && onInputChange(value);
+            }
+        }
     };
+
+    // const handleKeyPress = (e:KeyboardEvent) => {
+    //     if (!/[0-9]/.test(e.key)) {
+    //         e.preventDefault();
+    //     }
+    // };
 
     return (
         <Container
@@ -45,6 +67,10 @@ const Input = ({
             value={inputValue}
             onChange={handleInputChange}
             disabled={disabled}
+            autoComplete="off"
+            type="number"
+            maxLength={3}
+            pattern="[0-9]*"
         />
     );
 };
