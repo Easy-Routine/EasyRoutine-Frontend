@@ -12,6 +12,7 @@ import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQu
 import { WorkoutLibrary } from "db";
 import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
 import { Period } from "type/Period";
+import moment from "moment";
 
 const Container = styled.div`
     display: flex;
@@ -26,8 +27,8 @@ const initialWorkoutLibraryDetail: WorkoutLibrary = {
     category: "",
     type: [],
     isEditable: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: moment().toISOString(),
+    updatedAt: moment().toISOString(),
     userId: "",
 };
 

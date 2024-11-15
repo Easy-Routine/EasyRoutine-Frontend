@@ -31,13 +31,16 @@ const syncData = async () => {
 
         // IndexedDB에 저장
         await db.routineConfigs.bulkPut(
-            convertDateStringsToDateObjects(routineConfigs)
+            // convertDateStringsToDateObjects(routineConfigs)
+            routineConfigs
         );
         await db.routineRecords.bulkPut(
-            convertDateStringsToDateObjects(routineRecords)
+            // convertDateStringsToDateObjects(routineRecords)
+            routineRecords
         );
         await db.workoutLibraries.bulkPut(
-            convertDateStringsToDateObjects(workoutLibraries)
+            // convertDateStringsToDateObjects(workoutLibraries)
+            workoutLibraries
         );
     } catch (e) {
         throw e;

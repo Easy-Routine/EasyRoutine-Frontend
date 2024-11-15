@@ -1,6 +1,7 @@
 // db.ts 파일에서 import
 
 import { db, RoutineConfig } from "db"; // 경로에 맞게 수정
+import moment from "moment";
 import { Color } from "type/Color";
 import api from "utils/axios";
 import { v4 as uuidv4 } from "uuid";
@@ -57,8 +58,8 @@ export const createRoutineConfigOne = async ({
         _id: uuidv4(), // UUID로 _id 생성
         name,
         color,
-        createdAt: new Date(), // 현재 날짜
-        updatedAt: new Date(), // 현재 날짜
+        createdAt: moment().toISOString(), // 현재 날짜
+        updatedAt: moment().toISOString(), // 현재 날짜
         userId,
         workoutConfigs: [], // 초기값은 빈 배열
     };

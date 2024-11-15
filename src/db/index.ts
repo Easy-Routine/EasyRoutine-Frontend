@@ -6,8 +6,8 @@ export type RoutineConfig = {
     _id: string;
     name: string;
     color: Color;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     workoutConfigs: WorkoutConfig[];
     userId: string;
     [key: string]: any;
@@ -15,8 +15,8 @@ export type RoutineConfig = {
 
 export type WorkoutConfig = {
     _id: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     routineConfigId: string;
     setConfigs: SetConfig[];
     workoutLibrary: WorkoutLibrary;
@@ -28,8 +28,8 @@ export type SetConfig = {
     rep: number;
     restSec: number;
     workoutSec: number;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     workoutConfigId: string;
     [key: string]: any;
 };
@@ -41,8 +41,8 @@ export type WorkoutLibrary = {
     category: string;
     type: string[];
     isEditable: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     userId: string;
     [key: string]: any;
 };
@@ -52,8 +52,8 @@ export type RoutineRecord = {
     name: string;
     color: Color;
     workoutTime: number;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     workoutRecords: WorkoutRecord[];
     userId: string;
     [key: string]: any;
@@ -61,8 +61,8 @@ export type RoutineRecord = {
 
 export type WorkoutRecord = {
     _id: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     routineRecordId: string;
     setRecords: SetRecord[];
     workoutLibrary: WorkoutLibrary;
@@ -74,8 +74,8 @@ export type SetRecord = {
     rep: number;
     restSec: number;
     workoutSec: number;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     workoutRecordId: string;
     [key: string]: any;
 };

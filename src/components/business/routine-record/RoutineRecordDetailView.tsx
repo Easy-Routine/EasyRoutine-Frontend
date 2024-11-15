@@ -8,6 +8,7 @@ import useGetRoutineRecordOneQuery from "hooks/server/useGetRoutineRecordOneMuta
 import { useParams } from "react-router-dom";
 import WorkoutRecordDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";
 import SummaryBox from "components/content/Summary/SummaryBox";
+import moment from "moment";
 
 const Container = styled.div`
     display: flex;
@@ -19,8 +20,8 @@ const initialRoutineRecordDetail: RoutineRecord = {
     _id: "",
     name: "",
     color: Color.VIOLET,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: moment().toISOString(),
+    updatedAt: moment().toISOString(),
     workoutTime: 0,
     userId: "",
     workoutRecords: [],

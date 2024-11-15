@@ -1,4 +1,5 @@
 import { db, WorkoutConfig } from "db"; // 경로에 맞게 수정
+import moment from "moment";
 import { v4 as uuidv4 } from "uuid"; // UUID 생성 라이브러리
 
 // 확인: 완료
@@ -26,8 +27,8 @@ export const createWorkoutConfigAll = async (
                 if (workoutLibrary) {
                     const newWorkoutConfig: WorkoutConfig = {
                         _id: uuidv4(),
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
+                        createdAt: moment().toISOString(),
+                        updatedAt: moment().toISOString(),
                         routineConfigId,
                         setConfigs: [],
                         workoutLibrary,

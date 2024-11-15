@@ -19,8 +19,8 @@ export const createRoutineRecordOne = async ({
         _id: uuidv4(), // UUID로 _id 생성
         name,
         color,
-        createdAt: new Date(), // 현재 날짜
-        updatedAt: new Date(), // 현재 날짜
+        createdAt: moment().toISOString(), // 현재 날짜
+        updatedAt: moment().toISOString(), // 현재 날짜
         workoutTime: 0,
         userId,
         workoutRecords: [], // 초기값은 빈 배열
@@ -41,8 +41,8 @@ export const getRoutineRecordAllMonthly = async ({
 }: {
     date: Date;
 }): Promise<DotDataByDate[]> => {
-    const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-    const endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0); // 해당 월의 마지막 날
+    const startDate = moment(date).startOf("month").toISOString(); // 해당 월의 시작일
+    const endDate = moment(date).endOf("month").toISOString(); // 해당 월의 마지막 날
 
     try {
         const userId = localStorage.getItem("userId");
@@ -59,7 +59,9 @@ export const getRoutineRecordAllMonthly = async ({
         const groupedRecords: { [key: string]: any[] } = {};
 
         routineRecords.forEach((record) => {
-            const recordDate = record.createdAt.toISOString().split("T")[0]; // YYYY-MM-DD 형식으로 변환
+            const localDate = moment(record.createdAt);
+            const recordDate = localDate.format("YYYY-MM-DD");
+
             if (!groupedRecords[recordDate]) {
                 groupedRecords[recordDate] = [];
             }
@@ -72,7 +74,6 @@ export const getRoutineRecordAllMonthly = async ({
             routineRecords: groupedRecords[recordDate],
         }));
 
-        console.log(result, "엌ㅋㅋ");
         return result;
     } catch (error) {
         console.error("Error fetching routine records:", error);
@@ -86,16 +87,17 @@ export const getRoutineRecordAllDaily = async ({
 }: {
     date: Date;
 }): Promise<RoutineRecord[] | null> => {
-    const targetDateStart = moment(date).startOf("day").toDate(); // 날짜의 시작
-    const targetDateEnd = moment(date).endOf("day").toDate(); // 날짜의 끝
-
+    const startDate = moment(date).startOf("day").toISOString(); // 날짜의 시작
+    const endDate = moment(date).endOf("day").toISOString(); // 날짜의 끝
+    console.log("해당 날짜", startDate);
     try {
         const userId = localStorage.getItem("userId");
 
         // 해당 날짜에 해당하는 루틴 기록 가져오기 (userId로 필터링)
+
         const routineRecords = await db.routineRecords
             .where("createdAt")
-            .between(targetDateStart, targetDateEnd, true, true) // 날짜 범위에 해당하는 레코드
+            .between(startDate, endDate, true, true) // 날짜 범위에 해당하는 레코드
             .and((record) => record.userId === userId) // userId로 필터링
             .toArray();
 

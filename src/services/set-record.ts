@@ -1,4 +1,5 @@
 import { SetConfig, SetRecord, db } from "db";
+import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
 type CreateSetRecordOneParams = {
@@ -19,8 +20,8 @@ export const createSetRecordOne = async ({
         weight: setConfig.weight,
         restSec: setConfig.restSec,
         workoutSec: setConfig.workoutSec,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: moment().toISOString(),
+        updatedAt: moment().toISOString(),
     };
 
     try {
@@ -59,7 +60,9 @@ export const deleteSetRecordOne = async ({
             );
             if (workoutRecordOne) {
                 const latestSetRecordOne = workoutRecordOne.setRecords.sort(
-                    (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+                    (a, b) =>
+                        moment(b.createdAt).valueOf() -
+                        moment(a.createdAt).valueOf()
                 )[0];
 
                 const newSetRecords = workoutRecordOne.setRecords.filter(

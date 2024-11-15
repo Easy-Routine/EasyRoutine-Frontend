@@ -1,4 +1,5 @@
 import { db, SetConfig } from "db";
+import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
 // 확인: 완료
@@ -16,8 +17,8 @@ export const createSetConfigOne = async ({
         weight: 0,
         restSec: 0,
         workoutSec: 0,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: moment().toISOString(),
+        updatedAt: moment().toISOString(),
     };
 
     try {
@@ -66,7 +67,7 @@ export const updateSetConfigField = async ({
 
                 if (setConfigOne) {
                     setConfigOne[key] = value;
-                    setConfigOne.updatedAt = new Date();
+                    setConfigOne.updatedAt = moment().toISOString();
                 }
             }
             await db.routineConfigs.put(routineConfigOne);
@@ -96,8 +97,8 @@ export const deleteSetConfigOne = async ({
             if (workoutConfigOne) {
                 const latestSetConfigOne = workoutConfigOne.setConfigs.sort(
                     (a, b) =>
-                        new Date(b.createdAt).getTime() -
-                        new Date(a.createdAt).getTime()
+                        moment(b.createdAt).valueOf() -
+                        moment(a.createdAt).valueOf()
                 )[0];
 
                 // 최신 setConfig 삭제
@@ -108,8 +109,8 @@ export const deleteSetConfigOne = async ({
                 // 삭제 후 setConfigs를 시간 순서에 따라 정렬
                 workoutConfigOne.setConfigs = newSetConfigs.sort(
                     (a, b) =>
-                        new Date(a.createdAt).getTime() -
-                        new Date(b.createdAt).getTime()
+                        moment(b.createdAt).valueOf() -
+                        moment(a.createdAt).valueOf()
                 );
             }
             await db.routineConfigs.put(routineConfigOne); // 변경된 routineConfig 저장

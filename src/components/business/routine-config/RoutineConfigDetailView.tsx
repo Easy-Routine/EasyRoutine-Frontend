@@ -8,6 +8,7 @@ import useRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import { RoutineConfig } from "db";
 import { Color } from "type/Color";
 import RoutineConfigUpdateNameTitleText from "./RoutineConfigUpdateNameTitleText";
+import moment from "moment";
 
 const Container = styled.div`
     display: flex;
@@ -19,8 +20,8 @@ const initialRoutineConfigDetail: RoutineConfig = {
     _id: "",
     name: "",
     color: Color.VIOLET,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: moment().toISOString(),
+    updatedAt: moment().toISOString(),
     userId: "",
     workoutConfigs: [],
 };

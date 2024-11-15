@@ -15,6 +15,7 @@ import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutReco
 import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMutation";
 import useDeleteSetRecordOneMutation from "hooks/server/useDeleteSetRecordOneMutation";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
+import moment from "moment";
 
 type TypeMapper = {
     [key: string]: string;
@@ -144,8 +145,8 @@ const WorkoutConfigDetailProgressAccordion = ({
             rep: 0,
             restSec: 0,
             workoutSec: 0,
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            createdAt: moment().toISOString(),
+            updatedAt: moment().toISOString(),
             workoutConfigId: "1",
         });
         setCurrentSetId(newSetConfigs[completedSetIds.length]._id);

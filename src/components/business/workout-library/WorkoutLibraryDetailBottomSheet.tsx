@@ -18,6 +18,7 @@ import styled from "styled-components";
 import { Category } from "type/Category";
 import { Type } from "type/Type";
 import loadingAnimation from "assets/image/loading.json"; // JSON 파일 경로
+import moment from "moment";
 
 const Container = styled.div`
     width: 100%;
@@ -47,8 +48,8 @@ const initialWorkoutLibraryOne: WorkoutLibrary = {
     category: "",
     type: [],
     isEditable: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: moment().toISOString(),
+    updatedAt: moment().toISOString(),
     userId: "",
 };
 

@@ -1,4 +1,5 @@
 import { db, WorkoutLibrary } from "db";
+import moment from "moment";
 import api from "utils/axios";
 import { v4 as uuidv4 } from "uuid";
 
@@ -18,12 +19,10 @@ export const getWorkoutLibraryAll = async ({
             .toArray();
 
         // 생성 시간(createdAt) 기준으로 정렬 (오름차순)
-        workoutsLibraries.sort((a, b) => {
-            return (
-                new Date(a.createdAt).getTime() -
-                new Date(b.createdAt).getTime()
-            );
-        });
+        workoutsLibraries.sort(
+            (a, b) =>
+                moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf()
+        );
 
         // 카테고리에 따라 필터링
         const filteredWorkouts = workoutsLibraries.filter((workout) => {
@@ -69,8 +68,8 @@ export const createWorkoutLibraryOne = async (
         category: workoutData.category,
         type: sortedType,
         isEditable: workoutData.isEditable,
-        createdAt: new Date(), // 현재 날짜
-        updatedAt: new Date(), // 현재 날짜
+        createdAt: moment().toISOString(), // 현재 날짜
+        updatedAt: moment().toISOString(), // 현재 날짜
         userId: workoutData.userId, // 사용자 _id
     };
 

@@ -15,8 +15,8 @@ export const createWorkoutRecordOne = async ({
     const newWorkoutRecordOne: WorkoutRecord = {
         _id: uuidv4(), // UUID로 _id 생성
         routineRecordId, // 연결된 루틴 기록 _id
-        createdAt: new Date(), // 현재 날짜
-        updatedAt: new Date(), // 현재 날짜
+        createdAt: moment().toISOString(), // 현재 날짜
+        updatedAt: moment().toISOString(), // 현재 날짜
         setRecords: [],
         workoutLibrary: workoutLibrary, // 연결된 운동 라이브러리
     };
@@ -122,6 +122,7 @@ export const getWorkoutRecordSumAll = async ({
         const groupedData: { [key: string]: number } = {};
 
         workoutRecords.forEach((record) => {
+            // 로컬 타임으로 변환
             const recordDate = moment(record.createdAt);
             if (recordDate.isBetween(startDate, endDate, null, "[]")) {
                 const dateKey = recordDate.format("MM.DD"); // 날짜 형식 설정

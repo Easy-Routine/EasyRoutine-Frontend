@@ -42,8 +42,8 @@ const initialRoutineConfigDetail: RoutineConfig = {
     _id: "",
     name: "",
     color: Color.VIOLET,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: moment().toISOString(),
+    updatedAt: moment().toISOString(),
     userId: "",
     workoutConfigs: [],
 };
