@@ -6,6 +6,10 @@ export const GlobalStyle = createGlobalStyle`
 
 	html, body, #root {
 		height: 100%;
+		user-select: none;
+		-webkit-user-select: none; /* Safari */
+    	-moz-user-select: none; /* Firefox */
+    	-ms-user-select: none;
 	}
 
 	body {

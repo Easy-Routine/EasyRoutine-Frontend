@@ -16,7 +16,11 @@ type ModalProps = {
 const Container = styled.div``;
 
 const Modal = ({ children }: ModalProps) => {
-    return <Container>{children}</Container>;
+    return (
+        <Container onContextMenu={(e) => e.preventDefault()}>
+            {children}
+        </Container>
+    );
 };
 export default Modal;
 
