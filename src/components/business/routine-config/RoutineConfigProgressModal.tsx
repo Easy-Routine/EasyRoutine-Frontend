@@ -1,6 +1,6 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
-import { ReactComponent as RunIcon } from "assets/image/run.svg";
+import { ReactComponent as FireIcon } from "assets/image/fire.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
@@ -43,11 +43,11 @@ const RoutineConfigProgressModal = ({
                 <Confirm>
                     <Confirm.ContentBox>
                         <Confirm.IconBox>
-                            <RunIcon
+                            <FireIcon
                                 style={{
                                     color: "white",
-                                    width: "28px",
-                                    height: "40px",
+                                    width: "30px",
+                                    height: "30px",
                                 }}
                             />
                         </Confirm.IconBox>
