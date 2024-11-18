@@ -4,6 +4,9 @@ import reset from "styled-reset";
 export const GlobalStyle = createGlobalStyle`
 	${reset}
 
+	* {
+		overscroll-behavior: none;
+	}
 	html, body, #root {
 		height: 100%;
 		user-select: none;
