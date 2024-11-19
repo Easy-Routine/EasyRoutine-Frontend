@@ -12,6 +12,7 @@ const Container = styled.div`
     border-radius: ${({ theme }) => theme.borderRadius.xl};
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 10px;
     background-color: ${({ theme }) => theme.color.gray.lighter};
     
@@ -35,14 +36,16 @@ type SearchProps = {
 const Search = ({ onInputChange, onInputClear, value }: SearchProps) => {
     return (
         <Container>
-            <MagnifyIcon />
+            <MagnifyIcon width={20} height={20} />
             <Input
                 type="text"
                 placeholder="Search"
                 value={value}
                 onChange={onInputChange}
             />
-            <XIcon onClick={onInputClear} />
+            {value.length > 0 && (
+                <XIcon width={12.5} height={12.5} onClick={onInputClear} />
+            )}
         </Container>
     );
 };
