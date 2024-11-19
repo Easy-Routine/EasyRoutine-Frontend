@@ -5,6 +5,7 @@ const TitleWrapper = styled.div`
     gap: 10px;
     font-size: 14px;
     font-weight: ${({ theme }) => theme.fontWeight.regular};
+    align-items: center;
 `;
 
 export default TitleWrapper;
