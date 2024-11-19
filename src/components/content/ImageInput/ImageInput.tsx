@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as PlaceholderIcon } from "assets/image/img-placeholder.svg";
+import { ReactComponent as CameraCircleIcon } from "assets/image/camera-circle.svg";
 
 const Container = styled.label`
     width: 150px;
@@ -12,6 +13,7 @@ const Container = styled.label`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    position: relative;
 `;
 const Input = styled.input`
     display: none;
@@ -21,6 +23,13 @@ const Image = styled.img`
     height: 100%;
 `;
 
+const CameraCircle = styled(CameraCircleIcon)`
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+`;
 type ImageInputProps = {
     value: string;
     onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -38,6 +47,7 @@ const ImageInput = ({ value, onInputChange }: ImageInputProps) => {
         <Container>
             <Input type="file" accept="image/*" onChange={onInputChange} />
             {image ? <Image src={image} /> : <PlaceholderIcon />}
+            <CameraCircle />
         </Container>
     );
 };
