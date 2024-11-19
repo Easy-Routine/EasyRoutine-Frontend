@@ -16,7 +16,7 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.color.background.box};
     border-top-left-radius: ${({ theme }) => theme.borderRadius.lg};
     border-top-right-radius: ${({ theme }) => theme.borderRadius.lg};
-    // box-shadow: ${({ theme }) => theme.boxShadow};
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 type BottomBarProps = {

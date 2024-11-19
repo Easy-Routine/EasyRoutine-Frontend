@@ -22,7 +22,7 @@ const Container = styled.div<{ $isOpen: boolean }>`
         $isOpen ? "translate(-50%, 25%)" : "translate(-50%, -100%)"};
     opacity: ${({ $isOpen }) => ($isOpen ? "1" : "0")};
     z-index: ${({ theme }) => theme.zIndex.modal};
-    // box-shadow: ${({ theme }) => theme.boxShadow};
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 const Text = styled.div`

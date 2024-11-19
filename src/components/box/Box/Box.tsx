@@ -5,7 +5,7 @@ const Container = styled.div<{ width?: string }>`
     background-color: ${({ theme }) => theme.color.background.box};
     border-radius: ${({ theme }) => theme.borderRadius.lg};
     width: ${({ width }) => width};
-    // box-shadow: ${({ theme }) => theme.boxShadow};
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 type BoxProps = {

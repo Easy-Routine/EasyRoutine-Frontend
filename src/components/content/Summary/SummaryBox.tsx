@@ -13,7 +13,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-itmes: center;
-    // box-shadow: ${({ theme }) => theme.boxShadow};
+    box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 const Divider = styled.div`

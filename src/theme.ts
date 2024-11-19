@@ -7,7 +7,7 @@ const commonTheme = {
         xl: "20px",
         circle: "50%",
     },
-    boxShadow: `0px 2px 48px rgba(0, 0, 0, 0.12)`,
+    boxShadow: `0 4px 16px 0 rgba(0,0,0,.04)`,
     color: {
         primary: "#40E0D0",
         warning: "#FF0000",
