@@ -22,7 +22,9 @@ const Text = styled.div<{ seconds: number }>`
     align-items: center;
     justify-content: center;
     color: ${({ theme, seconds }) =>
-        seconds <= 10 ? theme.color.warning : theme.color.text.black};
+        seconds <= 9 && seconds >= 1
+            ? theme.color.warning
+            : theme.color.text.black};
 `;
 type TimerProps = {
     value: number;

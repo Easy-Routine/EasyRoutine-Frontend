@@ -33,9 +33,13 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const TimerText = styled.div`
+const TimerText = styled.div<{ seconds: number }>`
     font-size: 40px;
     font-weight: ${({ theme }) => theme.fontWeight.semibold};
+    color: ${({ theme, seconds }) =>
+        seconds <= 9 && seconds >= 1
+            ? theme.color.warning
+            : theme.color.text.black};
 `;
 
 const initialRoutineConfigDetail: RoutineConfig = {
@@ -238,6 +242,7 @@ const RoutineConfigOneProgressView = () => {
                     <WorkoutConfigDetailProgressAccordion
                         key={item._id}
                         data={item}
+                        remainingTime={remainingTime}
                         routineRecordId={routineRecordId}
                         onSetCreate={handleSetCreate}
                         onSetDelete={handleSetDelete}
@@ -361,7 +366,9 @@ const TimerModal = ({
                         </Confirm.IconBox>
                         <Confirm.Title>휴식 타이머</Confirm.Title>
                         <Confirm.Description>
-                            <TimerText>{formatTime(seconds)}</TimerText>
+                            <TimerText seconds={seconds}>
+                                {formatTime(seconds)}
+                            </TimerText>
                         </Confirm.Description>
                     </Confirm.ContentBox>
                     <Confirm.ButtonBox

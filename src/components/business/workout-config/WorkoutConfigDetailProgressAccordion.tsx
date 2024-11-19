@@ -30,6 +30,7 @@ const typeMapper: TypeMapper = {
 type WorkoutConfigDetailProgressAccordionProps = {
     data: WorkoutConfig;
     routineRecordId: string;
+    remainingTime: number;
     onSetCreate: (
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"]
@@ -50,6 +51,7 @@ type WorkoutConfigDetailProgressAccordionProps = {
 const WorkoutConfigDetailProgressAccordion = ({
     data,
     routineRecordId,
+    remainingTime,
     onSetCreate,
     onSetDelete,
     onSetComplete,
@@ -96,6 +98,7 @@ const WorkoutConfigDetailProgressAccordion = ({
     const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
     const isWorkoutCompleted =
         completedSetIds.length === data.setConfigs.length;
+    const isRestTime = remainingTime > 0;
 
     console.log(completedSetIds.length, data.setConfigs.length);
 
@@ -276,7 +279,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                     <PaddingY>
                         <Button
                             onClick={handleCompleteSetButtonClick}
-                            disabled={isWorkoutCompleted}
+                            disabled={isWorkoutCompleted || isRestTime}
                         >
                             세트완료
                         </Button>
