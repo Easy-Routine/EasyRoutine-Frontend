@@ -14,6 +14,7 @@ import useGetUserOneQuery from "hooks/server/useGetUserOneQuery";
 import useModal from "hooks/client/useModal";
 import DataSyncModal from "components/business/DataSyncModal";
 import { ReactComponent as SyncIcon } from "assets/image/sync.svg";
+import PageHeader from "components/content/PageHeader/PageHeader";
 
 const Container = styled.div`
     display: flex;
@@ -121,7 +122,10 @@ const MyPage = () => {
 
     return (
         <Container>
-            <Logo />
+            <PageHeader>
+                <Logo />
+            </PageHeader>
+
             {isLoading
                 ? null
                 : userOne && (

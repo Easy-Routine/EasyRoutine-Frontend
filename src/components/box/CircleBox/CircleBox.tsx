@@ -10,7 +10,7 @@ const CircleBox = styled.div<{ width: number; height: number; color?: string }>`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    // box-shadow: ${({ theme }) => theme.boxShadow};
     color: ${({ theme }) => theme.color.text.white};
 `;
 

@@ -9,7 +9,7 @@ const Container = styled(motion.div)`
     cursor: grab;
     background-color: ${(props) => props.theme.color.background.box};
     border-radius: ${(props) => props.theme.borderRadius.md};
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    // box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 type MotionProps = {

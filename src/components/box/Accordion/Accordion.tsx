@@ -20,7 +20,7 @@ const Container = styled.div`
     padding: 5px;
     overflow: hidden;
     border-radius: ${(props) => props.theme.borderRadius.md};
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    // box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {

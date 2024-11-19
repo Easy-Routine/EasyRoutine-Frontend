@@ -4,6 +4,7 @@ import Logo from "components/content/Logo/Logo";
 import ROUTES from "constants/routes";
 import RoutineConfigCreateFloatingActionButton from "components/business/routine-config/RoutineConfigCreateFloatingActionButton";
 import RoutineConfigListView from "components/business/routine-config/RoutineConfigListView";
+import PageHeader from "components/content/PageHeader/PageHeader";
 
 const Container = styled.div`
     display: flex;
@@ -14,7 +15,9 @@ const Container = styled.div`
 const RoutineConfigListPage = () => {
     return (
         <Container>
-            <Logo />
+            <PageHeader>
+                <Logo />
+            </PageHeader>
             <RoutineConfigListView />
             <NavigationBottomBar defaultValue={ROUTES.CONFIG.LIST.PATH} />
             <RoutineConfigCreateFloatingActionButton />

@@ -43,6 +43,7 @@ const commonTheme = {
     },
 
     zIndex: {
+        header: "200",
         floatingActionButton: "300",
         backdrop: "400",
         modal: "500",
@@ -50,13 +51,13 @@ const commonTheme = {
 };
 
 export const lightTheme = structuredClone(commonTheme);
-lightTheme.color.background.page = "#FFFFFF";
+lightTheme.color.background.page = "#F8F9FA";
 lightTheme.color.background.box = "#FFFFFF";
 lightTheme.color.text.black = "#2D2D2D";
 lightTheme.color.text.white = "#FFFFFF";
 
 export const darkTheme = structuredClone(commonTheme);
-darkTheme.color.background.page = "#2D2D2D";
-darkTheme.color.background.box = "#2D2D2D";
+darkTheme.color.background.page = "#121212";
+darkTheme.color.background.box = "#1E1E1E";
 darkTheme.color.text.black = "#FFFFFF";
 darkTheme.color.text.white = "#2D2D2D";
