@@ -6,7 +6,7 @@ const ContentBox = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    padding: 20px 0;
+    padding: 20px;
 `;
 
 export default ContentBox;

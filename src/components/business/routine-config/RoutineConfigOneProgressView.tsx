@@ -400,8 +400,9 @@ const CompletedModal = ({
                         </Confirm.IconBox>
                         <Confirm.Title>루틴 완료</Confirm.Title>
                         <Confirm.Description>
-                            루틴이 완료되었습니다. 운동 기록을 확인하시려면 기록
-                            페이지로 이동해 주세요.
+                            루틴이 완료되었습니다.
+                            <br /> 운동 기록을 확인하시려면 기록 페이지로 이동해
+                            주세요.
                         </Confirm.Description>
                     </Confirm.ContentBox>
                     <Confirm.ButtonBox
@@ -441,7 +442,8 @@ const UncompletedModal = ({
                         <Confirm.Title>루틴 미완료</Confirm.Title>
                         <Confirm.Description>
                             이 페이지를 벗어나면 지금까지 진행한 운동만 캘린더에
-                            저장됩니다. 운동을 종료하시겠습니까?
+                            저장됩니다.
+                            <br /> 운동을 종료하시겠습니까?
                         </Confirm.Description>
                     </Confirm.ContentBox>
                     <Confirm.ButtonBox
