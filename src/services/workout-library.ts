@@ -21,7 +21,7 @@ export const getWorkoutLibraryAll = async ({
         // 생성 시간(createdAt) 기준으로 정렬 (오름차순)
         workoutsLibraries.sort(
             (a, b) =>
-                moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf()
+                moment(a.createdAt).valueOf() - moment(b.createdAt).valueOf()
         );
 
         // 카테고리에 따라 필터링

@@ -61,9 +61,9 @@ export const deleteSetRecordOne = async ({
             if (workoutRecordOne) {
                 const latestSetRecordOne = workoutRecordOne.setRecords.sort(
                     (a, b) =>
-                        moment(b.createdAt).valueOf() -
-                        moment(a.createdAt).valueOf()
-                )[0];
+                        moment(a.createdAt).valueOf() -
+                        moment(b.createdAt).valueOf()
+                )[workoutRecordOne.setRecords.length - 1];
 
                 const newSetRecords = workoutRecordOne.setRecords.filter(
                     (setRecord) => setRecord._id !== latestSetRecordOne._id

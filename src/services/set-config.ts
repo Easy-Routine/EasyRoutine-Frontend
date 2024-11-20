@@ -97,21 +97,15 @@ export const deleteSetConfigOne = async ({
             if (workoutConfigOne) {
                 const latestSetConfigOne = workoutConfigOne.setConfigs.sort(
                     (a, b) =>
-                        moment(b.createdAt).valueOf() -
-                        moment(a.createdAt).valueOf()
-                )[0];
+                        moment(a.createdAt).valueOf() -
+                        moment(b.createdAt).valueOf()
+                )[workoutConfigOne.setConfigs.length - 1];
 
                 // 최신 setConfig 삭제
                 const newSetConfigs = workoutConfigOne.setConfigs.filter(
                     (setConfig) => setConfig._id !== latestSetConfigOne._id
                 );
-
-                // 삭제 후 setConfigs를 시간 순서에 따라 정렬
-                workoutConfigOne.setConfigs = newSetConfigs.sort(
-                    (a, b) =>
-                        moment(b.createdAt).valueOf() -
-                        moment(a.createdAt).valueOf()
-                );
+                workoutConfigOne.setConfigs = newSetConfigs;
             }
             await db.routineConfigs.put(routineConfigOne); // 변경된 routineConfig 저장
         }
