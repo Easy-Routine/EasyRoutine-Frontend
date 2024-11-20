@@ -1,7 +1,7 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import useAccordion from "hooks/client/useAccordion";
-import { RoutineConfig, SetConfig, WorkoutConfig } from "db";
+import { RoutineConfig, SetConfig, WorkoutConfig, WorkoutLibrary } from "db";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
@@ -16,6 +16,7 @@ import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMut
 import useDeleteSetRecordOneMutation from "hooks/server/useDeleteSetRecordOneMutation";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import moment from "moment";
+import { Type } from "type/Type";
 
 type TypeMapper = {
     [key: string]: string;
@@ -179,6 +180,9 @@ const WorkoutConfigDetailProgressAccordion = ({
         onCompletedSetIdsMutate(completedSetIds);
     }, [completedSetIds]);
 
+    const isTypeExist = (workoutLibrary: WorkoutLibrary, type: Type) =>
+        workoutLibrary.type.includes(type);
+
     return (
         <Accordion>
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
@@ -225,17 +229,20 @@ const WorkoutConfigDetailProgressAccordion = ({
                                     isGrayLine={isCompletedSet(setConfig._id)}
                                     isPrimaryLine={isCurrentSet(setConfig._id)}
                                 >
-                                    <Table.Input
-                                        value={(index + 1).toString()}
+                                    <Table.NumberPicker
+                                        value={index + 1}
                                         disabled={true}
                                     />
-                                    {data.workoutLibrary.type.map((key) => (
-                                        <Table.Input
-                                            value={setConfig[key].toString()}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.WEIGHT
+                                    ) && (
+                                        <Table.WeightPicker
+                                            value={setConfig.weight}
                                             onInputChange={(value) =>
                                                 handleUpdateSetInputChange(
                                                     index,
-                                                    key,
+                                                    Type.WEIGHT,
                                                     value
                                                 )
                                             }
@@ -243,9 +250,45 @@ const WorkoutConfigDetailProgressAccordion = ({
                                                 setConfig._id
                                             )}
                                         />
-                                    ))}
+                                    )}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.REP
+                                    ) && (
+                                        <Table.NumberPicker
+                                            value={setConfig.rep}
+                                            onInputChange={(value) =>
+                                                handleUpdateSetInputChange(
+                                                    index,
+                                                    Type.REP,
+                                                    value
+                                                )
+                                            }
+                                            disabled={isCompletedSet(
+                                                setConfig._id
+                                            )}
+                                        />
+                                    )}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.WORKOUT_SEC
+                                    ) && (
+                                        <Table.TimePicker
+                                            value={setConfig.workoutSec.toString()}
+                                            onInputChange={(value) =>
+                                                handleUpdateSetInputChange(
+                                                    index,
+                                                    Type.WORKOUT_SEC,
+                                                    value
+                                                )
+                                            }
+                                            disabled={isCompletedSet(
+                                                setConfig._id
+                                            )}
+                                        />
+                                    )}
 
-                                    <Table.Input
+                                    <Table.TimePicker
                                         value={setConfig.restSec.toString()}
                                         onInputChange={(value) =>
                                             handleUpdateSetInputChange(

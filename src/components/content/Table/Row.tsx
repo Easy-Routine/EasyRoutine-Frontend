@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Container = styled.div<{ isPrimaryLine?: boolean; isGrayLine?: boolean }>`
     display: flex;
-    justify-content: center;
+
     width: 100%;
     height: 22px;
     position: relative;
@@ -33,6 +33,7 @@ const InputBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    gap: 20px;
 `;
 
 type RowProps = {

@@ -5,6 +5,9 @@ import Input from "./Input";
 import OrderText from "./OrderText";
 import TitleText from "./TitleText";
 import Row from "./Row";
+import TimePicker from "./TimePicker";
+import WeightPicker from "./WeightPicker";
+import NumberPicker from "./NumberPicker";
 
 const Container = styled.div`
     width: 100%;
@@ -28,3 +31,6 @@ Table.Input = Input;
 Table.OrderText = OrderText;
 Table.TitleText = TitleText;
 Table.Row = Row;
+Table.TimePicker = TimePicker;
+Table.WeightPicker = WeightPicker;
+Table.NumberPicker = NumberPicker;

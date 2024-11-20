@@ -1,23 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 
 type PortalProps = {
     children: React.ReactNode;
 };
 
 const Portal = ({ children }: PortalProps) => {
-    const portalRoot = document.getElementById('root');
-    const portalElement = document.createElement('div');
+    const portalRoot = document.getElementById("root");
+    const portalElement = useRef(document.createElement("div")); // useRef로 portalElement 관리
 
-    React.useEffect(() => {
-        portalRoot?.appendChild(portalElement);
+    useEffect(() => {
+        if (portalRoot) {
+            portalRoot.appendChild(portalElement.current); // 현재 portalElement를 추가
+        }
 
         return () => {
-            portalRoot?.removeChild(portalElement);
+            if (portalRoot) {
+                portalRoot.removeChild(portalElement.current); // 클린업 시 현재 portalElement 제거
+            }
         };
-    }, [portalElement, portalRoot]);
+    }, [portalRoot]);
 
-    return portalElement ? ReactDOM.createPortal(children, portalElement) : null;
+    return portalRoot
+        ? ReactDOM.createPortal(children, portalElement.current)
+        : null;
 };
 
 export default Portal;

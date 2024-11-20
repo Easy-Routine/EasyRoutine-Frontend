@@ -19,6 +19,7 @@ const Container = styled.input<{ width: number; disabled?: boolean }>`
     }
     text-align: center;
     color: ${({ theme }) => theme.color.text.black};
+    flex: 1;
 `;
 
 type InputProps = {

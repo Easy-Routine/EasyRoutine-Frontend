@@ -8,12 +8,13 @@ import { ReactComponent as PlusIcon } from "assets/image/plus2.svg";
 import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
 import Table from "components/content/Table/Table";
 import { useTheme } from "styled-components";
-import { SetConfig, WorkoutConfig } from "db";
+import { SetConfig, WorkoutConfig, WorkoutLibrary } from "db";
 import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMutation";
 import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
 import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";
 import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
 import { useParams } from "react-router-dom";
+import { Type } from "type/Type";
 
 type TypeMapper = {
     [key: string]: string;
@@ -75,6 +76,9 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
         });
     };
 
+    const isTypeExist = (workoutLibrary: WorkoutLibrary, type: Type) =>
+        workoutLibrary.type.includes(type);
+
     // 비동기 작업 추가
     return (
         <Accordion>
@@ -126,24 +130,56 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                 index: number
                             ) => (
                                 <Table.Row key={setConfig._id}>
-                                    <Table.Input
-                                        value={(index + 1).toString()}
+                                    <Table.NumberPicker
+                                        value={index + 1}
                                         disabled={true}
                                     />
-                                    {data.workoutLibrary.type.map((key) => (
-                                        <Table.Input
-                                            key={key} // 각 Input에도 key를 추가
-                                            value={setConfig[key].toString()}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.WEIGHT
+                                    ) && (
+                                        <Table.WeightPicker
+                                            value={setConfig.weight}
                                             onInputChange={(value) =>
                                                 handleSetInputChange(
                                                     setConfig._id,
-                                                    key,
+                                                    Type.WEIGHT,
                                                     value
                                                 )
                                             }
                                         />
-                                    ))}
-                                    <Table.Input
+                                    )}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.REP
+                                    ) && (
+                                        <Table.NumberPicker
+                                            value={setConfig.rep}
+                                            onInputChange={(value) =>
+                                                handleSetInputChange(
+                                                    setConfig._id,
+                                                    Type.REP,
+                                                    value
+                                                )
+                                            }
+                                        />
+                                    )}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.WORKOUT_SEC
+                                    ) && (
+                                        <Table.TimePicker
+                                            value={setConfig.workoutSec.toString()}
+                                            onInputChange={(value) =>
+                                                handleSetInputChange(
+                                                    setConfig._id,
+                                                    Type.WORKOUT_SEC,
+                                                    value
+                                                )
+                                            }
+                                        />
+                                    )}
+                                    <Table.TimePicker
                                         value={setConfig.restSec.toString()}
                                         onInputChange={(value) =>
                                             handleSetInputChange(

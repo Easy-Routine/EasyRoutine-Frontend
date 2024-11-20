@@ -4,10 +4,11 @@ import useAccordion from "hooks/client/useAccordion";
 import React from "react";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
-import { WorkoutRecord } from "db";
+import { WorkoutLibrary, WorkoutRecord } from "db";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import { useParams } from "react-router-dom";
 import { useTheme } from "styled-components";
+import { Type } from "type/Type";
 
 type TypeMapper = {
     [key: string]: string;
@@ -37,6 +38,9 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
             workoutRecordId,
         });
     };
+
+    const isTypeExist = (workoutLibrary: WorkoutLibrary, type: Type) =>
+        workoutLibrary.type.includes(type);
 
     return (
         <Accordion>
@@ -85,27 +89,40 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
                             }
                             render={(setRecord, index) => (
                                 <Table.Row>
-                                    <Table.Input
-                                        value={(index + 1).toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
+                                    <Table.NumberPicker
+                                        value={index + 1}
                                         disabled={true}
                                     />
-                                    {data.workoutLibrary.type.map((key) => (
-                                        <Table.Input
-                                            value={setRecord[key].toString()}
-                                            onInputChange={(value) =>
-                                                console.log(value)
-                                            }
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.WEIGHT
+                                    ) && (
+                                        <Table.WeightPicker
+                                            value={setRecord.weight}
                                             disabled={true}
                                         />
-                                    ))}
-                                    <Table.Input
+                                    )}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.REP
+                                    ) && (
+                                        <Table.NumberPicker
+                                            value={setRecord.rep}
+                                            disabled={true}
+                                        />
+                                    )}
+                                    {isTypeExist(
+                                        data.workoutLibrary,
+                                        Type.WORKOUT_SEC
+                                    ) && (
+                                        <Table.TimePicker
+                                            value={setRecord.workoutSec.toString()}
+                                            disabled={true}
+                                        />
+                                    )}
+
+                                    <Table.TimePicker
                                         value={setRecord.restSec.toString()}
-                                        onInputChange={(value) =>
-                                            console.log(value)
-                                        }
                                         disabled={true}
                                     />
                                 </Table.Row>
