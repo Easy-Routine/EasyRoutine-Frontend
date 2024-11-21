@@ -87,7 +87,7 @@ export const RoutineConfigAccordionCard: Story = {
                         <Accordion.Trigger
                             onToggleAccordion={handleToggleAccordion}
                         >
-                            <ArrowIcon />
+                            <Accordion.Arrow isOpen={isOpen} />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Body isOpen={isOpen}>
@@ -193,7 +193,7 @@ export const WorkoutConfigAccordionCard: Story = {
                         <Accordion.Trigger
                             onToggleAccordion={handleToggleAccordion}
                         >
-                            <ArrowIcon />
+                            <Accordion.Arrow isOpen={isOpen} />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Body isOpen={isOpen}>
@@ -328,7 +328,7 @@ export const WorkoutProgressAccordionCard: Story = {
                         <Accordion.Trigger
                             onToggleAccordion={handleToggleAccordion}
                         >
-                            <ArrowIcon />
+                            <Accordion.Arrow isOpen={isOpen} />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Body isOpen={isOpen}>

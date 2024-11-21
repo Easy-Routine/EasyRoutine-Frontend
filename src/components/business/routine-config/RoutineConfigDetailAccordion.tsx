@@ -53,7 +53,7 @@ const RoutineConfigDetailAccordion = ({
                         <Accordion.Trigger
                             onToggleAccordion={handleToggleAccordion}
                         >
-                            <ArrowIcon />
+                            <Accordion.Arrow isOpen={isOpen} />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Body isOpen={isOpen}>

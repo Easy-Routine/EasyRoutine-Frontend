@@ -107,7 +107,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                     <Accordion.Trigger
                         onToggleAccordion={handleToggleAccordion}
                     >
-                        <ArrowIcon />
+                        <Accordion.Arrow isOpen={isOpen} />
                     </Accordion.Trigger>
                 </Accordion.Header>
                 <Accordion.Body isOpen={isOpen}>
