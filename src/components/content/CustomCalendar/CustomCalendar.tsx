@@ -4,10 +4,17 @@ import "react-calendar/dist/Calendar.css";
 // import "./CalendarStyle.css";
 import Box from "components/box/Box/Box";
 import styled from "styled-components";
-import { ReactComponent as CalendarArrowLeft } from "assets/image/calendar-arrow-left.svg";
-import { ReactComponent as CalendarArrowRight } from "assets/image/calendar-arrow-right.svg";
+import { ReactComponent as CalendarArrowLeftIcon } from "assets/image/calendar-arrow-left.svg";
+import { ReactComponent as CalendarArrowRightIcon } from "assets/image/calendar-arrow-right.svg";
 import moment from "moment";
 import "moment/locale/ko";
+
+const CalendarArrowLeft = styled(CalendarArrowLeftIcon)`
+    padding: 5px;
+`;
+const CalendarArrowRight = styled(CalendarArrowRightIcon)`
+    padding: 5px;
+`;
 
 const Container = styled.div`
     padding: 20px;
@@ -80,6 +87,9 @@ const Container = styled.div`
         react-calendar__month-view__days__day
         react-calendar__month-view__days__day--weekend {
     }
+    react-calendar__tile--now {
+        background: none;
+    }
 `;
 
 const CalendarHeader = styled.div`
@@ -97,7 +107,8 @@ const DateInfo = styled.span`
 
 const NavigationButtonWrapper = styled.div`
     display: flex;
-    gap: 40px;
+    justify-content: space-between;
+    width: 60px;
 `;
 
 const Circle = styled.div<{ isActive: boolean; isToday: boolean }>`
@@ -210,9 +221,14 @@ const CustomCalendar = ({
                 </Circle>
                 <DotWrapper>
                     {Array.isArray(dotData) &&
-                        dotData.map((item) => (
-                            <Dot key={item._id} backgroundColor={item.color} />
-                        ))}
+                        dotData
+                            .map((item) => (
+                                <Dot
+                                    key={item._id}
+                                    backgroundColor={item.color}
+                                />
+                            ))
+                            .splice(0, 3)}
                 </DotWrapper>
             </>
         );
