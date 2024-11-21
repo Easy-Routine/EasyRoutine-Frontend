@@ -3,6 +3,7 @@ import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
 import useDeleteWorkoutLibraryOneMutation from "hooks/server/useDeleteWorkoutLibraryOneMutation";
+import useNativeMessage from "hooks/client/useNativeMessage";
 
 type WorkoutLibraryDeleteModalProps = {
     workoutLibraryId: string;
@@ -20,6 +21,7 @@ const WorkoutLibraryDeleteModal = ({
     onConfirmButtonClick,
 }: WorkoutLibraryDeleteModalProps) => {
     const { showToast } = useToast();
+    const { sendNativeMessage } = useNativeMessage();
 
     const { mutateAsync: deleteWorkoutLibraryOneMutate } =
         useDeleteWorkoutLibraryOneMutation();
@@ -29,6 +31,7 @@ const WorkoutLibraryDeleteModal = ({
             await deleteWorkoutLibraryOneMutate(workoutLibraryId);
             showToast("운동 종목이 삭제되었습니다.", "success");
             onConfirmButtonClick();
+            sendNativeMessage({ type: "vibrate" });
         } catch (e) {
             showToast("운동 종목 삭제 중 에러가 발생했습니다.", "error");
         }

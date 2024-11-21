@@ -4,6 +4,7 @@ import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
 import useToast from "hooks/useToast";
 import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
 import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
+import useNativeMessage from "hooks/client/useNativeMessage";
 
 type RoutineConfigDeleteModalProps = {
     routineConfigId: string;
@@ -21,6 +22,7 @@ const RoutineConfigDeleteModal = ({
     onConfirmButtonClick,
 }: RoutineConfigDeleteModalProps) => {
     const { showToast } = useToast();
+    const { sendNativeMessage } = useNativeMessage();
 
     const { mutateAsync: deleteRoutineConfigOne } =
         useDeleteRoutineConfigOneMutation();
@@ -37,6 +39,7 @@ const RoutineConfigDeleteModal = ({
             await deleteRoutineConfigOne(routineConfigId);
             showToast("루틴이 삭제되었습니다.", "success");
             onConfirmButtonClick();
+            sendNativeMessage({ type: "vibrate" });
         } catch (e) {
             showToast("루틴 삭제 중 에러가 발생했습니다.", "error");
         }

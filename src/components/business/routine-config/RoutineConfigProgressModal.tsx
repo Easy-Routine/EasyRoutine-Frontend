@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
 import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
+import useNativeMessage from "hooks/client/useNativeMessage";
 
 type RoutineProgressModalProps = {
     routineConfigId: string;
@@ -23,6 +24,7 @@ const RoutineConfigProgressModal = ({
 }: RoutineProgressModalProps) => {
     const navigate = useNavigate();
     const { showToast } = useToast();
+    const { sendNativeMessage } = useNativeMessage();
 
     const { data: routineConfigOneData } =
         useGetRoutineConfigOneQuery(routineConfigId);
@@ -33,6 +35,7 @@ const RoutineConfigProgressModal = ({
         // TODO: API 호출
         showToast("루틴이 시작되었습니다.", "success");
         onConfirmButtonClick();
+        sendNativeMessage({ type: "vibrate" });
         navigate(ROUTES.PROGRESS.PATH(routineConfigOne._id));
     };
 

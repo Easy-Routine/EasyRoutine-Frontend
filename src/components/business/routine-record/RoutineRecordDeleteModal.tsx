@@ -3,6 +3,7 @@ import Confirm from "components/content/Confirm/Confirm";
 import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
 import useDeleteRoutineRecordOneMutation from "hooks/server/useDeleteRoutineRecordOneMutation";
+import useNativeMessage from "hooks/client/useNativeMessage";
 
 type RoutineRecordDeleteModalProps = {
     isOpen: boolean;
@@ -20,6 +21,7 @@ const RoutineRecordDeleteModal = ({
     onConfirmButtonClick,
 }: RoutineRecordDeleteModalProps) => {
     const { showToast } = useToast();
+    const { sendNativeMessage } = useNativeMessage();
 
     const { mutateAsync: deleteRoutineRecordOneMutate } =
         useDeleteRoutineRecordOneMutation();
@@ -32,6 +34,7 @@ const RoutineRecordDeleteModal = ({
 
             showToast("운동 기록이 삭제되었습니다.", "success");
             onConfirmButtonClick();
+            sendNativeMessage({ type: "vibrate" });
         } catch (e) {
             showToast("루틴 기록 삭제 중 에러가 발생했습니다.", "error");
         }

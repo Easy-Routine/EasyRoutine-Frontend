@@ -26,6 +26,7 @@ import useUpdateRoutineRecordWorkoutEndAtMutation from "hooks/server/useUpdateRo
 import moment from "moment";
 import axios from "axios";
 import { sendPushAlarm } from "services";
+import useNativeMessage from "hooks/client/useNativeMessage";
 
 const Container = styled.div`
     display: flex;
@@ -55,6 +56,7 @@ const initialRoutineConfigDetail: RoutineConfig = {
 const RoutineConfigOneProgressView = () => {
     const navigate = useNavigate();
     const { showToast } = useToast();
+    const { sendNativeMessage } = useNativeMessage();
     const { routineConfigId } = useParams();
     const workoutStartTime = useRef(moment());
 
@@ -78,7 +80,7 @@ const RoutineConfigOneProgressView = () => {
         useTimer(
             useCallback(() => {
                 handleCloseTimerModal();
-                console.log("언제 발생하나?");
+                sendNativeMessage({ type: "vibrate" });
             }, [])
         );
 
@@ -294,6 +296,7 @@ const RoutineConfigOneProgressView = () => {
                     handleCloseUncompletedModal();
                     showToast("루틴이 완료되었습니다.", "success");
                     navigate(ROUTES.CONFIG.LIST.PATH, { replace: true });
+                    sendNativeMessage({ type: "vibrate" });
                 }}
                 onConfirmButtonClick={async () => {
                     const workoutEndTime = moment();
@@ -308,8 +311,7 @@ const RoutineConfigOneProgressView = () => {
                     handleCloseUncompletedModal();
                     showToast("루틴이 완료되었습니다.", "success");
                     navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
-
-                    // TODO: 끝난 시간 저장
+                    sendNativeMessage({ type: "vibrate" });
                 }}
             />
             <UncompletedModal
@@ -331,7 +333,7 @@ const RoutineConfigOneProgressView = () => {
                     handleCloseUncompletedModal();
                     showToast("루틴이 완료되었습니다.", "success");
                     navigate(ROUTES.RECORD.LIST.PATH, { replace: true });
-                    // TODO: 끝난 시간 저장
+                    sendNativeMessage({ type: "vibrate" });
                 }}
             />
         </Container>
