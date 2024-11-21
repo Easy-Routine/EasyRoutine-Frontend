@@ -96,12 +96,14 @@ const TimePicker = ({
                                 pickerData={timeData}
                                 value={minutes}
                                 onPickerChange={handleTimePickerMinutesChange}
+                                freemode={true}
                             />
                             <ScrollPicker.Label>분</ScrollPicker.Label>
                             <ScrollPicker
                                 pickerData={timeData}
                                 value={seconds}
                                 onPickerChange={handleTimePickerSecondsChange}
+                                freemode={true}
                             />
                             <ScrollPicker.Label>초</ScrollPicker.Label>
                             <ScrollPicker.HighlightArea />

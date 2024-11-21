@@ -5,6 +5,7 @@ const Container = styled.div`
     gap: 10px;
     position: relative;
     padding: 0 20px;
+    align-items: center;
 `;
 
 export default Container;

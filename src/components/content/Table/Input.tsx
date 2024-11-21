@@ -6,13 +6,13 @@ const Container = styled.input<{ width: number; disabled?: boolean }>`
     height: 22px;
     outline: none;
     border: none;
-    padding: 0;
+    padding: 15px 0;
     border-radius: 0;
     border-bottom: 2px solid
         ${({ theme, disabled }) => (disabled ? "none" : theme.color.gray.light)};
     box-sizing: border-box;
     background-color: inherit;
-    font-size: ${({ theme }) => theme.fontSize.sm};
+    font-size: ${({ theme }) => theme.fontSize.xxl};
     font-weight: ${({ theme }) => theme.fontWeight.regular};
     &:focus {
         border-color: ${({ theme }) => theme.color.primary};
@@ -20,6 +20,7 @@ const Container = styled.input<{ width: number; disabled?: boolean }>`
     text-align: center;
     color: ${({ theme }) => theme.color.text.black};
     flex: 1;
+    z-index: 1;
 `;
 
 type InputProps = {

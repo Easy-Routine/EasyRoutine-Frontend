@@ -4,7 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Container from "./Container";
 import Label from "./Label";
 import "swiper/css";
+import "swiper/css/free-mode";
 import "swiper/css/pagination";
+import { FreeMode } from "swiper/modules";
 import HighlightArea from "./HightLightArea";
 
 const StyledSwiper = styled(Swiper)`
@@ -15,30 +17,30 @@ const StyledSwiperSlide = styled(SwiperSlide)`
     justify-content: center;
     align-items: center;
 
-    font-size: 24px;
-    font-weight: bold;
+    font-size: ${({ theme }) => theme.fontSize.xxl};
+    font-weight: ${({ theme }) => theme.fontWeight.semibold}
     transition: transform 0.3s;
+    // padding: 0 10px;
 `;
 
 const ScrollPicker = ({
     value,
     pickerData,
     onPickerChange,
+    freemode = false,
 }: {
     value: number;
     pickerData: number[];
     onPickerChange: (value: number) => void;
+    freemode?: boolean;
 }) => {
     const values = pickerData;
     const [selectedValue, setSelectedValue] = useState(
         values.findIndex((v: number) => v === value)
     );
 
-    console.log("받은데이터", value);
-
     const handlePickerChange = (swiper: any) => {
         const newValue = values[swiper.activeIndex];
-        console.log("newValue: ", newValue);
         onPickerChange(newValue);
         setSelectedValue(swiper.activeIndex);
     };
@@ -54,7 +56,13 @@ const ScrollPicker = ({
                 onSlidePrevTransitionEnd={handlePickerChange}
                 onSlideNextTransitionEnd={handlePickerChange}
                 grabCursor={true}
+                freeMode={{
+                    enabled: freemode,
+                    sticky: true,
+                }}
+                // snapOnRelease={true}
                 initialSlide={selectedValue}
+                modules={[FreeMode]}
             >
                 {values.map((value) => (
                     <StyledSwiperSlide key={value}>{value}</StyledSwiperSlide>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useModal from "hooks/client/useModal";
 import Modal from "components/box/Modal/Modal";
 import ScrollPicker from "../ScrollPicker/ScrollPicker";
+import Input from "./Input";
 
 const Container = styled.div<{ disabled: boolean }>`
     flex: 1;
@@ -40,8 +41,6 @@ const NumberPicker = ({
     onInputChange,
     disabled = false,
 }: NumberPickerProps) => {
-    const IntegerData = Array.from({ length: 1000 }, (_, i) => i);
-
     const [integer, setInteger] = useState(Math.floor(value));
     const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
@@ -58,7 +57,7 @@ const NumberPicker = ({
     };
 
     const handleNumberPickerIntegerChange = (value: any) => {
-        setInteger(value);
+        setInteger(Number(value));
     };
 
     useEffect(() => {
@@ -86,13 +85,13 @@ const NumberPicker = ({
                     />
                     <Modal.BottomSheet isOpen={isOpen}>
                         <ScrollPicker.Container>
-                            <ScrollPicker
-                                pickerData={IntegerData}
-                                value={integer}
-                                onPickerChange={handleNumberPickerIntegerChange}
+                            <Input
+                                width={50}
+                                value={integer.toString()}
+                                onInputChange={handleNumberPickerIntegerChange}
                             />
                             <ScrollPicker.Label>회</ScrollPicker.Label>
-                            <ScrollPicker.HighlightArea />
+                            {/* <ScrollPicker.HighlightArea /> */}
                         </ScrollPicker.Container>
                     </Modal.BottomSheet>
                 </Modal.Portal>

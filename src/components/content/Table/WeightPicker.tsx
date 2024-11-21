@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useModal from "hooks/client/useModal";
 import Modal from "components/box/Modal/Modal";
 import ScrollPicker from "../ScrollPicker/ScrollPicker";
+import Input from "./Input";
 
 const Container = styled.div<{ disabled: boolean }>`
     flex: 1;
@@ -28,6 +29,12 @@ const Container = styled.div<{ disabled: boolean }>`
     }
 `;
 
+const Flex = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`;
+
 type WeightPickerProps = {
     width?: number;
     value: number;
@@ -40,7 +47,7 @@ const WeightPicker = ({
     onInputChange,
     disabled = false,
 }: WeightPickerProps) => {
-    const IntegerData = Array.from({ length: 1000 }, (_, i) => i);
+    console.log("hi");
     const FloatData = [0, 0.25, 0.5, 0.75];
 
     const [integer, setInteger] = useState(Math.floor(value));
@@ -60,7 +67,7 @@ const WeightPicker = ({
     };
 
     const handleWeightPickerIntegerChange = (value: any) => {
-        setInteger(value);
+        setInteger(Number(value));
     };
     const handleWeightPickerFloatChange = (value: any) => {
         setFloat(value);
@@ -91,21 +98,26 @@ const WeightPicker = ({
                         opacity={0.1}
                     />
                     <Modal.BottomSheet isOpen={isOpen}>
-                        <ScrollPicker.Container>
-                            <ScrollPicker
-                                pickerData={IntegerData}
-                                value={integer}
-                                onPickerChange={handleWeightPickerIntegerChange}
+                        <Flex>
+                            <Input
+                                width={50}
+                                value={integer.toString()}
+                                onInputChange={handleWeightPickerIntegerChange}
                             />
-                            <ScrollPicker.Label>.</ScrollPicker.Label>
-                            <ScrollPicker
-                                pickerData={FloatData}
-                                value={float}
-                                onPickerChange={handleWeightPickerFloatChange}
-                            />
-                            <ScrollPicker.Label>KG</ScrollPicker.Label>
-                            <ScrollPicker.HighlightArea />
-                        </ScrollPicker.Container>
+                            +
+                            <ScrollPicker.Container>
+                                {/* <ScrollPicker.Label>+</ScrollPicker.Label> */}
+                                <ScrollPicker
+                                    pickerData={FloatData}
+                                    value={float}
+                                    onPickerChange={
+                                        handleWeightPickerFloatChange
+                                    }
+                                />
+                                <ScrollPicker.Label>KG</ScrollPicker.Label>
+                                <ScrollPicker.HighlightArea />
+                            </ScrollPicker.Container>
+                        </Flex>
                     </Modal.BottomSheet>
                 </Modal.Portal>
             )}
