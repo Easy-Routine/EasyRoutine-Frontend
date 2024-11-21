@@ -15,7 +15,14 @@ export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
         const routineConfigs = await db.routineConfigs
             .where("userId") // userId 필드에 대해 조건 설정
             .equals(userId as string) // userId와 일치하는 데이터만 가져오기
-            .toArray();
+            .toArray()
+            .then((configs) =>
+                configs.sort(
+                    (a, b) =>
+                        moment(a.createdAt).valueOf() -
+                        moment(b.createdAt).valueOf()
+                )
+            ); // date 기준으로 정렬
 
         return routineConfigs;
     } catch (error) {
@@ -26,6 +33,7 @@ export const getRoutineConfigAll = async (): Promise<RoutineConfig[]> => {
         return [];
     }
 };
+
 // 확인: 완료
 export const getRoutineConfigOne = async (
     routineConfigId: string
