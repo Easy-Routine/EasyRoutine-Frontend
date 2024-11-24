@@ -25,24 +25,24 @@ export const getUserOne = async (): Promise<User> => {
 };
 
 type ImageResponse = {
-    Location: string;
+    message: string;
+    data: {
+        thumbnail: string;
+        original: string;
+    };
 };
 
 export const uploadImage = async (
     formData: FormData
 ): Promise<ImageResponse> => {
     try {
-        const response = await api.post<{ Location: string }>(
-            "/upload-image",
-            formData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data", // FormData로 전송 시 이 헤더가 필요
-                },
-            }
-        );
+        const response = await api.post<any>("/upload-image", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data", // FormData로 전송 시 이 헤더가 필요
+            },
+        });
 
-        console.log("File uploaded successfully:", response.data);
+        console.log("File uploaded successfully:", response);
         return response.data;
     } catch (error) {
         console.error("Error uploading file:", error);
@@ -56,7 +56,7 @@ export const sendPushAlarm = async ({
 }: {
     title: string;
     body: string;
-}): Promise<ImageResponse> => {
+}): Promise<any> => {
     try {
         const response = await api.post<{ Location: string }>("/send_alarm", {
             title,

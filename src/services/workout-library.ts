@@ -65,6 +65,7 @@ export const createWorkoutLibraryOne = async (
         _id: uuidv4(), // UUID로 _id 생성
         name: workoutData.name,
         image: workoutData.image,
+        originImage: workoutData.originImage,
         category: workoutData.category,
         type: sortedType,
         isEditable: workoutData.isEditable,

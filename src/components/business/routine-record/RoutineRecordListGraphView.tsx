@@ -24,6 +24,7 @@ const initialWorkoutLibraryDetail: WorkoutLibrary = {
     _id: "",
     name: "",
     image: "",
+    originImage: "",
     category: "",
     type: [],
     isEditable: false,

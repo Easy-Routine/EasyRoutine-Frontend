@@ -13,7 +13,7 @@ import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQu
 import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
 import useUploadWorkoutLibraryImageMutation from "hooks/server/useUploadWorkoutLibraryImageMutation";
 import Lottie from "lottie-react";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Category } from "type/Category";
 import { Type } from "type/Type";
@@ -45,6 +45,7 @@ const initialWorkoutLibraryOne: WorkoutLibrary = {
     _id: "",
     name: "",
     image: "",
+    originImage: "",
     category: "",
     type: [],
     isEditable: true,
@@ -66,9 +67,10 @@ const WorkoutLibraryDetailBottomSheet = ({
 
     const workoutLibraryOne = workoutLibraryOneData ?? initialWorkoutLibraryOne;
 
-    const { value: imageInputValue, setValue: setImageInputValue } = useInput(
-        workoutLibraryOne.image
-    );
+    const { value: originImageInputValue, setValue: setOriginImageInputValue } =
+        useInput(workoutLibraryOne.originImage);
+
+    const [imageValue, setImageValue] = useState("");
 
     const {
         value: underlineInputValue,
@@ -93,13 +95,13 @@ const WorkoutLibraryDetailBottomSheet = ({
 
     useEffect(() => {
         setValue(workoutLibraryOne.name);
-        setImageInputValue(workoutLibraryOne.image);
+        setOriginImageInputValue(workoutLibraryOne.originImage);
         setSelectedValue(workoutLibraryOne.category);
         setSelectedValues(workoutLibraryOne.type);
     }, [
         workoutLibraryOne,
         setValue,
-        setImageInputValue,
+        setOriginImageInputValue,
         setSelectedValue,
         setSelectedValues,
     ]);
@@ -120,7 +122,8 @@ const WorkoutLibraryDetailBottomSheet = ({
                 const response = await uploadWorkoutLibraryImageMutation({
                     formData,
                 });
-                setImageInputValue(response.Location);
+                setOriginImageInputValue(response.data.original);
+                setImageValue(response.data.thumbnail);
             } catch (error) {
                 console.error(error);
             }
@@ -131,7 +134,8 @@ const WorkoutLibraryDetailBottomSheet = ({
         await updateWorkoutLibraryOneMutate({
             workoutLibraryId,
             updatedData: {
-                image: imageInputValue,
+                image: imageValue,
+                originImage: originImageInputValue,
                 name: underlineInputValue,
                 category: selectedCategory,
                 type: selectedValues,
@@ -147,7 +151,7 @@ const WorkoutLibraryDetailBottomSheet = ({
                 <Container>
                     <LabelBox labelText="운동 이미지" gap="20px" align="center">
                         <ImageInput
-                            value={imageInputValue}
+                            value={originImageInputValue}
                             onInputChange={handleImageInputChange}
                         />
                     </LabelBox>
