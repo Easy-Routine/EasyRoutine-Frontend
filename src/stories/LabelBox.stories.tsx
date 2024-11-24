@@ -78,6 +78,7 @@ export const WithUnderlineInput: Story = {
                     value={value}
                     placeholder="운동 이름을 입력하세요."
                     onInputChange={handleInputChange}
+                    disabled={false}
                 />
             </LabelBox>
         );

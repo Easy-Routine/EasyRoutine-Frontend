@@ -60,16 +60,10 @@ const WorkoutLibraryListView = () => {
         // TODO: 운동 라이브러리 하나 가져오기
 
         // isEditable이 true라면 아래 로직 실행하기
-        const workoutLibraryOne =
-            await getWorkoutLibraryOneMutate(workoutLibraryId);
-        const isEditable = workoutLibraryOne?.isEditable;
+        // const isEditable = workoutLibraryOne?.isEditable;
 
-        if (isEditable) {
-            setWorkoutLibraryId(workoutLibraryId);
-            openWorkoutLibraryBottomSheet();
-        } else {
-            showToast("기본 운동은 변경할 수 없습니다.", "error");
-        }
+        setWorkoutLibraryId(workoutLibraryId);
+        openWorkoutLibraryBottomSheet();
     };
     // 긴 클릭
     const handleSmallCardLongPress = async (workoutLibraryId: string) => {

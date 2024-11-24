@@ -23,12 +23,14 @@ type UnderlineInputProps = {
     value: string;
     onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
+    disabled: boolean;
 };
 
 const UnderlineInput = ({
     value,
     onInputChange,
     placeholder,
+    disabled,
 }: UnderlineInputProps) => {
     return (
         <Container>
@@ -37,6 +39,7 @@ const UnderlineInput = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={onInputChange}
+                disabled={disabled}
             />
         </Container>
     );

@@ -33,9 +33,10 @@ const CameraCircle = styled(CameraCircleIcon)`
 type ImageInputProps = {
     value: string;
     onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    disabled: boolean;
 };
 
-const ImageInput = ({ value, onInputChange }: ImageInputProps) => {
+const ImageInput = ({ value, onInputChange, disabled }: ImageInputProps) => {
     const [image, setImage] = useState(value);
 
     useEffect(() => {
@@ -45,9 +46,14 @@ const ImageInput = ({ value, onInputChange }: ImageInputProps) => {
 
     return (
         <Container>
-            <Input type="file" accept="image/*" onChange={onInputChange} />
+            <Input
+                type="file"
+                accept="image/*"
+                onChange={onInputChange}
+                disabled={disabled}
+            />
             {image ? <Image src={image} /> : <PlaceholderIcon />}
-            <CameraCircle />
+            {disabled || <CameraCircle />}
         </Container>
     );
 };

@@ -67,6 +67,7 @@ const WorkoutLibraryDetailBottomSheet = ({
 
     const workoutLibraryOne = workoutLibraryOneData ?? initialWorkoutLibraryOne;
 
+    const isDisabled = !workoutLibraryOne.isEditable;
     const { value: originImageInputValue, setValue: setOriginImageInputValue } =
         useInput(workoutLibraryOne.originImage);
 
@@ -81,9 +82,9 @@ const WorkoutLibraryDetailBottomSheet = ({
         selectedValue: selectedCategory,
         setSelectedValue,
         handleTabClick: handleCategoryChipTabClick,
-    } = useTab(workoutLibraryOne.category);
+    } = useTab(workoutLibraryOne.category, isDisabled);
     const { selectedValues, setSelectedValues, handleCheckBoxClick } =
-        useCheckBox(workoutLibraryOne.type);
+        useCheckBox(workoutLibraryOne.type, isDisabled);
 
     const { mutateAsync: updateWorkoutLibraryOneMutate } =
         useUpdateWorkoutLibraryOneMutation();
@@ -153,6 +154,7 @@ const WorkoutLibraryDetailBottomSheet = ({
                         <ImageInput
                             value={originImageInputValue}
                             onInputChange={handleImageInputChange}
+                            disabled={isDisabled}
                         />
                     </LabelBox>
 
@@ -161,6 +163,7 @@ const WorkoutLibraryDetailBottomSheet = ({
                             value={underlineInputValue}
                             placeholder="운동 이름을 입력하세요."
                             onInputChange={handleUnderlineInputChange}
+                            disabled={isDisabled}
                         />
                     </LabelBox>
                     <LabelBox labelText="운동 부위" gap="20px">
@@ -240,7 +243,9 @@ const WorkoutLibraryDetailBottomSheet = ({
                         </CheckBoxGroup>
                     </LabelBox>
                     <Button
-                        disabled={isUploadWorkoutLibraryImagePending}
+                        disabled={
+                            isDisabled || isUploadWorkoutLibraryImagePending
+                        }
                         onClick={handleWorkoutLibraryUpdateButtonClick}
                     >
                         {isUploadWorkoutLibraryImagePending ? (

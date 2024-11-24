@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 
-const useCheckBox = (defaultValues?: string[]) => {
+const useCheckBox = (defaultValues?: string[], disabled?: boolean) => {
     const [selectedValues, setSelectedValues] = useState<string[]>(
         defaultValues ?? []
     );
 
     const handleCheckBoxClick = (value: string) => {
+        if (disabled) {
+            return;
+        }
         const newState = structuredClone(selectedValues);
         if (selectedValues.includes(value)) {
             setSelectedValues(

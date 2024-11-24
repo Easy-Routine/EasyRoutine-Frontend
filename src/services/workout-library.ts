@@ -12,20 +12,31 @@ export const getWorkoutLibraryAll = async ({
 }): Promise<WorkoutLibrary[]> => {
     try {
         const userId = localStorage.getItem("userId");
+
         // 데이터베이스에서 모든 운동 가져오기 (userId로 필터링)
         const workoutsLibraries = await db.workoutLibraries
             .where("userId")
             .equals(userId as string) // userId로 필터링
             .toArray();
 
+        // 기본운동 가져오기
+        const editableWorkouts = await db.workoutLibraries
+            .where("userId")
+            .equals("admin")
+            .filter((workout) => workout.isEditable === false)
+            .toArray();
+
+        // 두 배열을 합칩니다.
+        const combinedWorkouts = [...workoutsLibraries, ...editableWorkouts];
+
         // 생성 시간(createdAt) 기준으로 정렬 (오름차순)
-        workoutsLibraries.sort(
+        combinedWorkouts.sort(
             (a, b) =>
                 moment(a.createdAt).valueOf() - moment(b.createdAt).valueOf()
         );
 
         // 카테고리에 따라 필터링
-        const filteredWorkouts = workoutsLibraries.filter((workout) => {
+        const filteredWorkouts = combinedWorkouts.filter((workout) => {
             const categoryMatch = category
                 ? workout.category === category
                 : true;
