@@ -70,3 +70,14 @@ export const sendPushAlarm = async ({
         throw new Error("Error uploading file:");
     }
 };
+
+export const getBaseWorkout = async (): Promise<any> => {
+    try {
+        const response = await api.get("/base_workout");
+
+        return response.data;
+    } catch (error) {
+        console.error("Error uploading file:", error);
+        throw new Error("Error uploading file:");
+    }
+};

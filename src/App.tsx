@@ -1,11 +1,12 @@
 import DataSyncModal from "components/business/DataSyncModal";
 import SideBanner from "components/content/SideBanner/SideBanner";
+import { db } from "db";
 import useModal from "hooks/client/useModal";
 import useToast from "hooks/useToast";
 import moment from "moment";
 import AppRouter from "pages/AppRouter";
 import { useEffect } from "react";
-import { checkAccessToken } from "services";
+import { checkAccessToken, getBaseWorkout } from "services";
 import styled from "styled-components";
 import syncData from "utils/syncData";
 
@@ -56,13 +57,24 @@ const App = () => {
         }
     };
 
+    const getBaseWorkoutAPI = async () => {
+        const hasBaseWorkout = localStorage.getItem("hasBaseWorkout");
+        console.log(hasBaseWorkout, "hasBaseWorkout");
+        if (!hasBaseWorkout) {
+            const baseWorkoutLibraries = await getBaseWorkout();
+            localStorage.setItem("hasBaseWorkout", "true");
+            console.log(baseWorkoutLibraries);
+            await db.workoutLibraries.bulkPut(baseWorkoutLibraries);
+        }
+    };
+
     // handleAppMounted
     useEffect(() => {
         (async () => {
             let modalOpenTimeout;
             try {
                 const isAccessTokenFresh = await checkAccessToken();
-
+                await getBaseWorkoutAPI();
                 if (isAccessTokenFresh) {
                     const syncPromise = syncDataPeriodically();
 
