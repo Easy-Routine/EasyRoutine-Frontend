@@ -28,6 +28,7 @@ const RoutineRecordDetailAccordion = ({
 
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
+    console.log("이게말이돼?", data);
 
     return (
         <Accordion>
@@ -60,7 +61,7 @@ const RoutineRecordDetailAccordion = ({
                                 />
                                 <SmallCard.ColumnBox>
                                     <SmallCard.BoldText>
-                                        {item.name}
+                                        {item.workoutLibrary.name}
                                     </SmallCard.BoldText>
                                     <SmallCard.NormalText>
                                         {item.setRecords.length}세트
