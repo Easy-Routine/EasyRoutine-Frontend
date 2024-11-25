@@ -53,8 +53,9 @@ const ScrollPicker = ({
                 spaceBetween={0}
                 slidesPerView={3}
                 centeredSlides={true}
-                onSlidePrevTransitionEnd={handlePickerChange}
-                onSlideNextTransitionEnd={handlePickerChange}
+                // onSlidePrevTransitionEnd={handlePickerChange}
+                // onSlideNextTransitionEnd={handlePickerChange}
+                onSlideChange={handlePickerChange}
                 grabCursor={true}
                 freeMode={{
                     enabled: freemode,
