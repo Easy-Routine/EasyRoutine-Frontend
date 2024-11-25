@@ -14,7 +14,7 @@ const Container = styled.div``;
 const RoutineConfigListView = () => {
     const { data: routineConfigAllData } = useRoutineConfigAllQuery();
 
-    const routineConfigAll = routineConfigAllData ?? [];
+    const routineConfigAll = routineConfigAllData;
 
     const {
         isOpen: isRoutineProgressModalOpen,
@@ -35,27 +35,29 @@ const RoutineConfigListView = () => {
                 fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
                 data={routineConfigAll}
             >
-                <Accordion.List
-                    data={routineConfigAll}
-                    render={(routineConfig) => (
-                        <RoutineConfigDetailAccordion
-                            key={routineConfig._id}
-                            data={routineConfig}
-                            onRoutineConfigProgressButtonClick={(
-                                routineConfigId: string
-                            ) => {
-                                setRoutineConfigId(routineConfigId);
-                                openRoutineProgressModal();
-                            }}
-                            onRoutineConfigDeleteButtonClick={(
-                                routineConfigId: string
-                            ) => {
-                                setRoutineConfigId(routineConfigId);
-                                openRoutineConfigDeleteModal();
-                            }}
-                        />
-                    )}
-                />
+                {routineConfigAll && (
+                    <Accordion.List
+                        data={routineConfigAll}
+                        render={(routineConfig) => (
+                            <RoutineConfigDetailAccordion
+                                key={routineConfig._id}
+                                data={routineConfig}
+                                onRoutineConfigProgressButtonClick={(
+                                    routineConfigId: string
+                                ) => {
+                                    setRoutineConfigId(routineConfigId);
+                                    openRoutineProgressModal();
+                                }}
+                                onRoutineConfigDeleteButtonClick={(
+                                    routineConfigId: string
+                                ) => {
+                                    setRoutineConfigId(routineConfigId);
+                                    openRoutineConfigDeleteModal();
+                                }}
+                            />
+                        )}
+                    />
+                )}
             </EmptyBoundary>
 
             {isRoutineProgressModalOpen && (

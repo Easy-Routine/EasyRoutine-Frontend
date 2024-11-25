@@ -15,8 +15,6 @@ const RoutineConfigCreateFloatingActionButton = () => {
 
     const { data: routineConfigAllData } = useGetRoutineConfigAllQuery();
 
-    const routineConfigAll = routineConfigAllData ?? [];
-
     const handleButtonClick = async () => {
         try {
             const userId = localStorage.getItem("userId");
@@ -39,7 +37,7 @@ const RoutineConfigCreateFloatingActionButton = () => {
 
     return (
         <EmptyBoundary
-            data={routineConfigAll}
+            data={routineConfigAllData}
             fallback={
                 <FloatingActionButton
                     onButtonClick={handleButtonClick}
