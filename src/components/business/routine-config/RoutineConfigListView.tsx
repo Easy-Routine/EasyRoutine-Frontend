@@ -4,7 +4,7 @@ import EmptyBoundary from "../EmptyBoundary";
 import EmptyView from "components/content/EmptyView/EmptyView";
 import styled from "styled-components";
 import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import useModal from "hooks/client/useModal";
 import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
 import useRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
@@ -60,17 +60,19 @@ const RoutineConfigListView = () => {
                 )}
             </EmptyBoundary>
 
-            {isRoutineProgressModalOpen && (
-                <RoutineConfigProgressModal
-                    routineConfigId={routineConfigId}
-                    isOpen={isRoutineProgressModalOpen}
-                    onBackdropClick={() => closeRoutineProgressModal()}
-                    onCancelButtonClick={() => closeRoutineProgressModal()}
-                    onConfirmButtonClick={() => {
-                        closeRoutineProgressModal();
-                    }}
-                />
-            )}
+            <Suspense fallback={"로딩"}>
+                {isRoutineProgressModalOpen && (
+                    <RoutineConfigProgressModal
+                        routineConfigId={routineConfigId}
+                        isOpen={isRoutineProgressModalOpen}
+                        onBackdropClick={() => closeRoutineProgressModal()}
+                        onCancelButtonClick={() => closeRoutineProgressModal()}
+                        onConfirmButtonClick={() => {
+                            closeRoutineProgressModal();
+                        }}
+                    />
+                )}
+            </Suspense>
 
             {isRoutineConfigDeleteModalOpen && (
                 <RoutineConfigDeleteModal

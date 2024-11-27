@@ -27,10 +27,8 @@ const RoutineConfigDeleteModal = ({
     const { mutateAsync: deleteRoutineConfigOne } =
         useDeleteRoutineConfigOneMutation();
 
-    const { data: routineConfigOneData } =
+    const { data: routineConfigOne } =
         useGetRoutineConfigOneQuery(routineConfigId);
-
-    const routineConfigOne = routineConfigOneData ?? { name: "" };
 
     const handleRoutineConfigDeleteButtonClick = async (
         routineConfigId: string
@@ -56,7 +54,7 @@ const RoutineConfigDeleteModal = ({
                         </Confirm.IconBox>
                         <Confirm.Title>루틴 삭제</Confirm.Title>
                         <Confirm.Description>
-                            '{routineConfigOne.name}'을
+                            '{routineConfigOne!.name}'을
                             <br /> 삭제하시겠습니까?
                         </Confirm.Description>
                     </Confirm.ContentBox>

@@ -45,7 +45,7 @@ const WorkoutLibraryListGraphBottomSheet = ({
         selectedChipTabValue
     );
 
-    const workoutLibraryAll = workoutLibraryAllData ?? [];
+    const workoutLibraryAll = workoutLibraryAllData!;
 
     return (
         <Modal>

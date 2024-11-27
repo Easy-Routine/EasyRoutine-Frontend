@@ -1,7 +1,7 @@
 import ChipTab from "components/content/ChipTab/ChipTab";
 
 import SmallCardList from "components/content/SmallCard/SmallCardList";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import styled from "styled-components";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import useTab from "hooks/client/useTab";
@@ -36,7 +36,7 @@ const WorkoutLibraryListView = () => {
     const { mutateAsync: getWorkoutLibraryOneMutate } =
         useGetWorkoutLibraryOneMutation();
 
-    const workoutLibraryAll = workoutLibraryAllData ?? [];
+    const workoutLibraryAll = workoutLibraryAllData!;
 
     const {
         isOpen: isWorkoutDeleteModalOpen,
@@ -151,12 +151,19 @@ const WorkoutLibraryListView = () => {
                     />
                 )}
             />
-            <WorkoutLibraryDetailBottomSheet
-                workoutLibraryId={workoutLibraryId}
-                isOpen={isWorkoutLibraryBottomSheetOpen}
-                onBackdropClick={() => closeWorkoutLibraryBottomSheet()}
-                onSubmitButtonClick={() => closeWorkoutLibraryBottomSheet()}
-            />
+            <Suspense fallback={"로딩중"}>
+                {isWorkoutLibraryBottomSheetOpen && (
+                    <WorkoutLibraryDetailBottomSheet
+                        workoutLibraryId={workoutLibraryId}
+                        isOpen={isWorkoutLibraryBottomSheetOpen}
+                        onBackdropClick={() => closeWorkoutLibraryBottomSheet()}
+                        onSubmitButtonClick={() =>
+                            closeWorkoutLibraryBottomSheet()
+                        }
+                    />
+                )}
+            </Suspense>
+
             <WorkoutLibraryDeleteModal
                 workoutLibraryId={workoutLibraryId}
                 isOpen={isWorkoutDeleteModalOpen}

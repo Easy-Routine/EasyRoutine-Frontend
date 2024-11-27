@@ -9,29 +9,14 @@ import { useState } from "react";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
-import { WorkoutLibrary } from "db";
 import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
 import { Period } from "type/Period";
-import moment from "moment";
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
 `;
-
-const initialWorkoutLibraryDetail: WorkoutLibrary = {
-    _id: "",
-    name: "",
-    image: "",
-    originImage: "",
-    category: "",
-    type: [],
-    isEditable: false,
-    createdAt: moment().toISOString(),
-    updatedAt: moment().toISOString(),
-    userId: "",
-};
 
 const RoutineRecorListGraphView = () => {
     const { selectedValue, handleTabClick } = useTab(Period.Month);
@@ -43,18 +28,15 @@ const RoutineRecorListGraphView = () => {
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 
-    const { data: workoutLibraryDetailData } =
+    const { data: workoutLibraryDetail } =
         useGetWorkoutLibraryOneQuery(workoutLibraryId);
-    const workoutLibraryDetail =
-        workoutLibraryDetailData ?? initialWorkoutLibraryDetail;
 
-    const { data: workoutRecordSumListByDateData } =
-        useGetWorkoutRecordSumAllQuery({
+    const { data: workoutRecordSumListByDate } = useGetWorkoutRecordSumAllQuery(
+        {
             workoutLibraryId,
             period: selectedValue as Period,
-        });
-
-    const workoutRecordSumListByDate = workoutRecordSumListByDateData ?? [];
+        }
+    );
 
     const handleButtonClick = () => {
         openWorkoutLibraryListGraphBottomSheet();
@@ -73,12 +55,12 @@ const RoutineRecorListGraphView = () => {
             {workoutLibraryId && (
                 <>
                     <Box>
-                        <TitleTextInput value={workoutLibraryDetail.name} />
+                        <TitleTextInput value={workoutLibraryDetail!.name} />
                     </Box>
                     <Box>
                         <Graph
                             onDotClick={(data) => console.log(data)}
-                            data={workoutRecordSumListByDate}
+                            data={workoutRecordSumListByDate!}
                             lineKey="key"
                             areaKey="value"
                         />

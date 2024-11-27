@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import { getWorkoutRecordSumAll } from "services/workout-record";
 import { Period } from "type/Period";
@@ -10,7 +10,7 @@ const useGetWorkoutRecordSumAllQuery = ({
     workoutLibraryId: string;
     period: Period;
 }) => {
-    return useQuery({
+    return useSuspenseQuery({
         queryKey: [queryKey.getWorkoutRecordSumAll, workoutLibraryId, period],
         queryFn: async () => {
             const data = await getWorkoutRecordSumAll({

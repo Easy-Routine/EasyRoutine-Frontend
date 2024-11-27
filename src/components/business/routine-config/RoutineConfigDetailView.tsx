@@ -5,10 +5,7 @@ import styled from "styled-components";
 import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailAccordion";
 import { useParams } from "react-router-dom";
 import useRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
-import { RoutineConfig } from "db";
-import { Color } from "type/Color";
 import RoutineConfigUpdateNameTitleText from "./RoutineConfigUpdateNameTitleText";
-import moment from "moment";
 
 const Container = styled.div`
     display: flex;
@@ -16,34 +13,21 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const initialRoutineConfigDetail: RoutineConfig = {
-    _id: "",
-    name: "",
-    color: Color.VIOLET,
-    createdAt: moment().toISOString(),
-    updatedAt: moment().toISOString(),
-    userId: "",
-    workoutConfigs: [],
-};
-
 const RoutineConfigDetailView = () => {
     const { routineConfigId } = useParams();
-    const { data: routineConfigDetailData } = useRoutineConfigOneQuery(
+    const { data: routineConfigDetail } = useRoutineConfigOneQuery(
         routineConfigId as string
     );
-
-    const routineConfigDetail =
-        routineConfigDetailData ?? initialRoutineConfigDetail;
-
+    console.log("데이터터", routineConfigDetail);
     return (
         <Container>
             <Box>
                 <RoutineConfigUpdateNameTitleText
-                    defaultValue={routineConfigDetail.name}
+                    defaultValue={routineConfigDetail!.name}
                 />
             </Box>
             <Accordion.List
-                data={routineConfigDetail.workoutConfigs}
+                data={routineConfigDetail!.workoutConfigs}
                 render={(workoutConfig) => (
                     <WorkoutConfigDetailAccordion
                         data={workoutConfig}
@@ -52,7 +36,7 @@ const RoutineConfigDetailView = () => {
                 )}
             />
             <RoutineConfigColorTabBottomBar
-                defaultValue={routineConfigDetail.color}
+                defaultValue={routineConfigDetail!.color}
             />
         </Container>
     );

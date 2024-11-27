@@ -1,6 +1,6 @@
 import ReturnPageHeader from "components/business/ReturnPageHeader";
 import RoutineRecordDetailView from "components/business/routine-record/RoutineRecordDetailView";
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -13,7 +13,9 @@ const RoutineRecordDetailPage = () => {
     return (
         <Container>
             <ReturnPageHeader pageTitleText="운동 기록" />
-            <RoutineRecordDetailView />
+            <Suspense fallback={<div>안녕</div>}>
+                <RoutineRecordDetailView />
+            </Suspense>
         </Container>
     );
 };

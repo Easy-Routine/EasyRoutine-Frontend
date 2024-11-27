@@ -41,18 +41,18 @@ type WorkoutLibraryBottomSheetProps = {
     workoutLibraryId: string;
 };
 
-const initialWorkoutLibraryOne: WorkoutLibrary = {
-    _id: "",
-    name: "",
-    image: "",
-    originImage: "",
-    category: "",
-    type: [],
-    isEditable: true,
-    createdAt: moment().toISOString(),
-    updatedAt: moment().toISOString(),
-    userId: "",
-};
+// const initialWorkoutLibraryOne: WorkoutLibrary = {
+//     _id: "",
+//     name: "",
+//     image: "",
+//     originImage: "",
+//     category: "",
+//     type: [],
+//     isEditable: true,
+//     createdAt: moment().toISOString(),
+//     updatedAt: moment().toISOString(),
+//     userId: "",
+// };
 
 const WorkoutLibraryDetailBottomSheet = ({
     isOpen,
@@ -65,7 +65,9 @@ const WorkoutLibraryDetailBottomSheet = ({
     const { data: workoutLibraryOneData } =
         useGetWorkoutLibraryOneQuery(workoutLibraryId);
 
-    const workoutLibraryOne = workoutLibraryOneData ?? initialWorkoutLibraryOne;
+    const workoutLibraryOne = workoutLibraryOneData!;
+
+    console.log("데이퉁투", workoutLibraryOne);
 
     const isDisabled = !workoutLibraryOne.isEditable;
     const { value: originImageInputValue, setValue: setOriginImageInputValue } =

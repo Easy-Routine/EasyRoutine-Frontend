@@ -2,13 +2,11 @@ import styled from "styled-components";
 import Box from "components/box/Box/Box";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import Accordion from "components/box/Accordion/Accordion";
-import { Color } from "type/Color";
-import { RoutineRecord, WorkoutRecord } from "db";
+import { WorkoutRecord } from "db";
 import useGetRoutineRecordOneQuery from "hooks/server/useGetRoutineRecordOneMutation";
 import { useParams } from "react-router-dom";
 import WorkoutRecordDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";
 import SummaryBox from "components/content/Summary/SummaryBox";
-import moment from "moment";
 
 const Container = styled.div`
     display: flex;
@@ -16,28 +14,14 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const initialRoutineRecordDetail: RoutineRecord = {
-    _id: "",
-    name: "",
-    color: Color.VIOLET,
-    createdAt: moment().toISOString(),
-    updatedAt: moment().toISOString(),
-    workoutTime: 0,
-    userId: "",
-    workoutRecords: [],
-};
-
 const RoutineRecordDetailView = () => {
     const { routineRecordId } = useParams();
 
-    const { data: routineRecordDetailData } = useGetRoutineRecordOneQuery(
+    const { data: routineRecordDetail } = useGetRoutineRecordOneQuery(
         routineRecordId as string
     );
 
-    const routineRecordDetail =
-        routineRecordDetailData ?? initialRoutineRecordDetail;
-
-    const totalWeight = routineRecordDetail.workoutRecords.reduce(
+    const totalWeight = routineRecordDetail!.workoutRecords.reduce(
         (innerAcc: number, workoutRecord: WorkoutRecord) => {
             return (
                 innerAcc +
@@ -52,14 +36,14 @@ const RoutineRecordDetailView = () => {
     return (
         <Container>
             <Box>
-                <TitleTextInput value={routineRecordDetail.name} />
+                <TitleTextInput value={routineRecordDetail!.name} />
             </Box>
             <SummaryBox
-                seconds={routineRecordDetail.workoutTime}
+                seconds={routineRecordDetail!.workoutTime}
                 weight={totalWeight}
             />
             <Accordion.List
-                data={routineRecordDetail.workoutRecords}
+                data={routineRecordDetail!.workoutRecords}
                 render={(workoutRecord: WorkoutRecord) => (
                     <WorkoutRecordDetailAccordion
                         key={workoutRecord._id}

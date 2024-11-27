@@ -93,8 +93,7 @@ const RoutineConfigOneProgressView = () => {
     const { mutateAsync: updateRoutineRecordOneMutate } =
         useUpdateRoutineRecordWorkoutEndAtMutation();
 
-    const routineConfigDetail =
-        routineConfigDetailData ?? initialRoutineConfigDetail;
+    const routineConfigDetail = routineConfigDetailData!;
 
     const [routineConfigState, setRoutineConfigState] =
         useState(routineConfigDetail);

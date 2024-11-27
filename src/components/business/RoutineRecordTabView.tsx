@@ -3,6 +3,7 @@ import useTab from "hooks/client/useTab";
 import styled from "styled-components";
 import RoutineRecordListCalendarView from "./routine-record/RoutineRecordListCalendarView";
 import RoutineRecordListGraphView from "./routine-record/RoutineRecordListGraphView";
+import { Suspense } from "react";
 
 const Container = styled.div`
     display: flex;
@@ -45,7 +46,9 @@ const RoutineRecordTabView = () => {
                     통계
                 </Tab.Button>
             </Tab>
-            <SelectedView />
+            <Suspense fallback={"로딩"}>
+                <SelectedView />
+            </Suspense>
         </Container>
     );
 };

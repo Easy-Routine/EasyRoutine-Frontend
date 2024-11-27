@@ -29,7 +29,7 @@ const RoutineConfigProgressModal = ({
     const { data: routineConfigOneData } =
         useGetRoutineConfigOneQuery(routineConfigId);
 
-    const routineConfigOne = routineConfigOneData ?? { name: "", _id: "" };
+    const routineConfigOne = routineConfigOneData!;
 
     const handleRoutineProgressButtonClick = () => {
         // TODO: API 호출

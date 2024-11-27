@@ -21,15 +21,11 @@ const RoutineRecordListCalendarView = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [routineRecordId, setRoutineRecordId] = useState("");
 
-    const { data: routineRecordAllMonthlyData } =
+    const { data: routineRecordAllMonthly } =
         useGetRoutineRecordAllMonthlyQuery(currentMonth);
 
-    const routineRecordAllMonthly = routineRecordAllMonthlyData ?? [];
-
-    const { data: routineRecordAllDailyData } =
+    const { data: routineRecordAllDaily } =
         useGetRoutineRecordAllDailyQuery(selectedDate);
-
-    const routineRecordAllDaily = routineRecordAllDailyData ?? [];
 
     const {
         isOpen: isRoutineRecordDeleteModalOpen,
@@ -37,7 +33,7 @@ const RoutineRecordListCalendarView = () => {
         handleCloseModal: closeRoutineRecordDeleteModal,
     } = useModal();
 
-    const totalWeight = routineRecordAllDaily.reduce((acc, record) => {
+    const totalWeight = routineRecordAllDaily!.reduce((acc, record) => {
         return (
             acc +
             record.workoutRecords.reduce(
@@ -56,7 +52,7 @@ const RoutineRecordListCalendarView = () => {
         );
     }, 0);
 
-    const totalSeconds = routineRecordAllDaily.reduce((acc, record) => {
+    const totalSeconds = routineRecordAllDaily!.reduce((acc, record) => {
         return acc + record.workoutTime;
     }, 0);
 
@@ -69,13 +65,13 @@ const RoutineRecordListCalendarView = () => {
                     console.log(date, "해당 날짜의 운동 기록 가져오기");
                     setSelectedDate(date);
                 }}
-                dotDataByDate={routineRecordAllMonthly}
+                dotDataByDate={routineRecordAllMonthly!}
                 dotDataKey={"routineRecords"}
             />
 
             <SummaryBox seconds={totalSeconds} weight={totalWeight} />
             <Accordion.List
-                data={routineRecordAllDaily}
+                data={routineRecordAllDaily!}
                 render={(item) => (
                     <RoutineRecordDetailAccordion
                         key={item._id}
