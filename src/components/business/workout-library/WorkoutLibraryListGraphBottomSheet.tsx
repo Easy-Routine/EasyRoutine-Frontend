@@ -8,7 +8,7 @@ import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import { WorkoutLibrary } from "db";
-import { Category } from "type/Category";
+import { Category } from "types/enum";
 
 const Container = styled.div`
     display: flex;

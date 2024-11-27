@@ -5,7 +5,7 @@ import EmptyBoundary from "../EmptyBoundary";
 import useToast from "hooks/useToast";
 import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
 import useGetRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
-import { Color } from "type/Color";
+import { Color } from "types/enum";
 
 const RoutineConfigCreateFloatingActionButton = () => {
     const navigate = useNavigate();

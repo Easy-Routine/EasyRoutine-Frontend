@@ -10,7 +10,7 @@ import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
-import { Period } from "type/Period";
+import { Period } from "types/enum";
 
 const Container = styled.div`
     display: flex;

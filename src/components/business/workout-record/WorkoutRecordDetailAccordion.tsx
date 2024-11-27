@@ -8,7 +8,7 @@ import { WorkoutLibrary, WorkoutRecord } from "db";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import { useParams } from "react-router-dom";
 import { useTheme } from "styled-components";
-import { Type } from "type/Type";
+import { Type } from "types/enum";
 
 type TypeMapper = {
     [key: string]: string;

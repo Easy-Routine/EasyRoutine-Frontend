@@ -4,7 +4,7 @@ import useTab from "hooks/client/useTab";
 import useUpdateRoutineConfigFieldMutation from "hooks/server/useUpdateRoutineConfigFieldMutation";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Color } from "type/Color";
+import { Color } from "types/enum";
 
 type RoutineConfigColorTabBottomBarProps = {
     defaultValue: Color;

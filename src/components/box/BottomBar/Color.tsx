@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Color as ColorType } from "type/Color";
+import { Color as ColorType } from "types/enum";
 
 const Container = styled.div<{
     $isSelected: boolean;

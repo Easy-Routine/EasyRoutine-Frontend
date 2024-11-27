@@ -14,7 +14,7 @@ import { WorkoutLibrary } from "db";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import { useParams } from "react-router-dom";
-import { Category } from "type/Category";
+import { Category } from "types/enum";
 
 const Container = styled.div`
     display: flex;

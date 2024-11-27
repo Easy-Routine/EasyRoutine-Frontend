@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BackgroundColor, Color } from "type/Color";
+import { BackgroundColor, Color } from "types/enum";
 
 const ColorMapper = {
     [Color.VIOLET]: [BackgroundColor.VIOLET],

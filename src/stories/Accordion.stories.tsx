@@ -14,7 +14,7 @@ import Button from "components/content/Button/Button";
 import Card from "components/content/Card/Card";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import PaddingY from "components/box/PaddingY/PaddingY";
-import { Color } from "type/Color";
+import { Color } from "types/enum";
 
 type AccordionProps = React.ComponentProps<typeof Accordion>;
 

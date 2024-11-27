@@ -1,10 +1,7 @@
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import useCreateWorkoutLibraryOneMutation from "hooks/server/useCreateWorkoutLibraryOneMutation";
 import useToast from "hooks/useToast";
-import { useRecoilValue } from "recoil";
-import { userContextStore } from "store/userContextStore";
-import { Category } from "type/Category";
-import { Type } from "type/Type";
+import { Category, Type } from "types/enum";
 
 type WorkoutLibraryCreateFloatingActionButtonProps = {
     onButtonClick: (workoutLibraryId: string) => void;

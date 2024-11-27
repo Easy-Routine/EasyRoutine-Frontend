@@ -2,7 +2,7 @@
 
 import { db, RoutineConfig } from "db"; // 경로에 맞게 수정
 import moment from "moment";
-import { Color } from "type/Color";
+import { Color } from "types/enum";
 import api from "utils/axios";
 import { v4 as uuidv4 } from "uuid";
 

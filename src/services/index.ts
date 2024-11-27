@@ -1,4 +1,4 @@
-import { User } from "types/user";
+import { User } from "types/model";
 import api from "utils/axios";
 
 export const checkAccessToken = async (): Promise<boolean> => {

@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import { getWorkoutRecordSumAll } from "services/workout-record";
-import { Period } from "type/Period";
+import { Period } from "types/enum";
 
 const useGetWorkoutRecordSumAllQuery = ({
     workoutLibraryId,

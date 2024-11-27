@@ -10,7 +10,7 @@ import NavigationTab from "components/box/BottomBar/NavigationTab";
 import useTab from "hooks/client/useTab";
 import Button from "components/content/Button/Button";
 import TimerTemplate from "components/box/BottomBar/TimerTemplate";
-import { Color } from "type/Color";
+import { Color } from "types/enum";
 
 type BottomBarProps = React.ComponentProps<typeof BottomBar>;
 

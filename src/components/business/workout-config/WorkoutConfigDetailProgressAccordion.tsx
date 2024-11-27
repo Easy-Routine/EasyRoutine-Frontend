@@ -16,7 +16,7 @@ import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMut
 import useDeleteSetRecordOneMutation from "hooks/server/useDeleteSetRecordOneMutation";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import moment from "moment";
-import { Type } from "type/Type";
+import { Type } from "types/enum";
 
 type TypeMapper = {
     [key: string]: string;

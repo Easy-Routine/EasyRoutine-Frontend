@@ -11,7 +11,7 @@ import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
-import { Color } from "type/Color";
+import { Color } from "types/enum";
 import { RoutineRecord } from "db";
 
 type RoutineRecordDetailAccordionProps = {

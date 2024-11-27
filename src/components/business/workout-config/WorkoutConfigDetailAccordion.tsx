@@ -14,7 +14,7 @@ import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFile
 import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";
 import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
 import { useParams } from "react-router-dom";
-import { Type } from "type/Type";
+import { Type } from "types/enum";
 
 type TypeMapper = {
     [key: string]: string;

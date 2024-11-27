@@ -1,6 +1,6 @@
 // db.ts
 import Dexie, { type EntityTable } from "dexie";
-import { Color } from "type/Color";
+import { Color } from "types/enum";
 
 export type RoutineConfig = {
     _id: string;

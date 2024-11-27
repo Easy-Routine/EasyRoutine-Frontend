@@ -5,7 +5,6 @@ import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
 import ChipTab from "components/content/ChipTab/ChipTab";
 import ImageInput from "components/content/ImageInput/ImageInput";
 import UnderlineInput from "components/content/UnderlineInput/UnderlineInput";
-import { WorkoutLibrary } from "db";
 import useCheckBox from "hooks/client/useCheckBox";
 import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
@@ -15,10 +14,8 @@ import useUploadWorkoutLibraryImageMutation from "hooks/server/useUploadWorkoutL
 import Lottie from "lottie-react";
 import { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Category } from "type/Category";
-import { Type } from "type/Type";
+import { Category, Type } from "types/enum";
 import loadingAnimation from "assets/image/loading.json"; // JSON 파일 경로
-import moment from "moment";
 
 const Container = styled.div`
     width: 100%;
