@@ -1,7 +1,11 @@
 import PageTemplate from "components/box/PageTemplate/PageTemplate";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import ROUTES from "constants/routes";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+    createBrowserRouter,
+    Navigate,
+    RouterProvider,
+} from "react-router-dom";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: ROUTES.MY.PATH,
                 element: <ROUTES.MY.COMPONENT />,
+            },
+            {
+                path: "*", // 모든 경로에 대해 처리
+                element: <Navigate to={ROUTES.CONFIG.LIST.PATH} replace />, // 원하는 페이지로 리디렉션
             },
         ],
     },
