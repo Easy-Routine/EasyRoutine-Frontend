@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid"; // UUID 생성을 위한 라이브러리
-import { db, WorkoutRecord, WorkoutLibrary } from "db"; // WorkoutRecord 타입의 경로를 설정하세요.
+import { WorkoutRecord, WorkoutLibrary } from "types/model"; // WorkoutRecord 타입의 경로를 설정하세요.
+import { db } from "db";
 import moment from "moment";
 import { Period } from "types/enum";
 import { handleError } from "utils/handleError";

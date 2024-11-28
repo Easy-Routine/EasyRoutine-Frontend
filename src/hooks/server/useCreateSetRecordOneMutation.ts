@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
-import { SetConfig } from "db";
+import { SetConfig } from "types/model";
 import { createSetRecordOne } from "services/set-record";
 
 const useCreateSetRecordOneMutation = () => {

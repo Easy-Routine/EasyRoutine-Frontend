@@ -7,7 +7,7 @@ import useTab from "hooks/client/useTab";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
-import { WorkoutLibrary } from "db";
+import { WorkoutLibrary } from "types/model";
 import { Category } from "types/enum";
 
 const Container = styled.div`

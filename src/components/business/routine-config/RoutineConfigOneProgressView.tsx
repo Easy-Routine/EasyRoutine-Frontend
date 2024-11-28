@@ -18,7 +18,7 @@ import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
 import WorkoutConfigDetailProgressAccordion from "../workout-config/WorkoutConfigDetailProgressAccordion";
 import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
-import { SetConfig, WorkoutConfig } from "db";
+import { SetConfig, WorkoutConfig } from "types/model";
 import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
 import Box from "components/box/Box/Box";
 import useUpdateRoutineRecordWorkoutEndAtMutation from "hooks/server/useUpdateRoutineRecordWorkoutEndAtMutation";

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { WorkoutLibrary } from "db";
+import { WorkoutLibrary } from "types/model";
 import { createWorkoutRecordOne } from "services/workout-record";
 
 const useCreateWorkoutRecordOneMutation = () => {

@@ -1,4 +1,5 @@
-import { SetConfig, SetRecord, db } from "db";
+import { SetConfig, SetRecord } from "types/model";
+import { db } from "db";
 import moment from "moment";
 import { CustomError, ErrorDefinitions } from "types/error";
 import { handleError } from "utils/handleError";

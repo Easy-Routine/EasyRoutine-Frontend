@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
-import { WorkoutLibrary } from "db";
+import { WorkoutLibrary } from "types/model";
 import { createWorkoutLibraryOne } from "services/workout-library";
 
 const useCreateWorkoutLibraryOneMutation = () => {

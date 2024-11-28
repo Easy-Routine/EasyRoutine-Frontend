@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
 import { Color } from "types/enum";
-import { RoutineRecord } from "db";
+import { RoutineRecord } from "types/model";
 
 type RoutineRecordDetailAccordionProps = {
     data: RoutineRecord;

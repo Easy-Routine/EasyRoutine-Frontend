@@ -10,7 +10,7 @@ import useTab from "hooks/client/useTab";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import styled from "styled-components";
-import { WorkoutLibrary } from "db";
+import { WorkoutLibrary } from "types/model";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import { useParams } from "react-router-dom";

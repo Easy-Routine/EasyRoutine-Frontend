@@ -1,4 +1,5 @@
-import { db, WorkoutConfig } from "db"; // 경로에 맞게 수정
+import { WorkoutConfig } from "types/model"; // 경로에 맞게 수정
+import { db } from "db";
 import moment from "moment";
 import { CustomError, ErrorDefinitions } from "types/error";
 import { handleError } from "utils/handleError";

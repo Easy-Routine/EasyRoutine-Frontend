@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Box from "components/box/Box/Box";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import Accordion from "components/box/Accordion/Accordion";
-import { WorkoutRecord } from "db";
+import { WorkoutRecord } from "types/model";
 import useGetRoutineRecordOneQuery from "hooks/server/useGetRoutineRecordOneMutation";
 import { useParams } from "react-router-dom";
 import WorkoutRecordDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";

@@ -12,7 +12,7 @@ import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
 import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
 import WorkoutLibraryDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
-import { WorkoutLibrary } from "db";
+import { WorkoutLibrary } from "types/model";
 import { Category } from "types/enum";
 import useToast from "hooks/useToast";
 import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";

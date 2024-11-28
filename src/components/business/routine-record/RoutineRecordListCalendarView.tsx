@@ -8,7 +8,7 @@ import Accordion from "components/box/Accordion/Accordion";
 import useModal from "hooks/client/useModal";
 import useGetRoutineRecordAllMonthlyQuery from "hooks/server/useGetRoutineRecordAllMonthlyQuery";
 import useGetRoutineRecordAllDailyQuery from "hooks/server/useGetRoutineRecordAllDailyQuery";
-import { WorkoutRecord } from "db";
+import { WorkoutRecord } from "types/model";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 
 const Container = styled.div`

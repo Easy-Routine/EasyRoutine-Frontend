@@ -11,7 +11,7 @@ import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
-import { RoutineConfig, WorkoutConfig } from "db";
+import { RoutineConfig, WorkoutConfig } from "types/model";
 
 type RoutineConfigDetailAccordionProps = {
     data: RoutineConfig;

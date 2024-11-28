@@ -1,4 +1,5 @@
-import { db, WorkoutLibrary } from "db";
+import { WorkoutLibrary } from "types/model";
+import { db } from "db";
 import moment from "moment";
 import { CustomError, ErrorDefinitions } from "types/error";
 import api from "utils/axios";

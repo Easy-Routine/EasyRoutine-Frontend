@@ -1,7 +1,12 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import useAccordion from "hooks/client/useAccordion";
-import { RoutineConfig, SetConfig, WorkoutConfig, WorkoutLibrary } from "db";
+import {
+    RoutineConfig,
+    SetConfig,
+    WorkoutConfig,
+    WorkoutLibrary,
+} from "types/model";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";

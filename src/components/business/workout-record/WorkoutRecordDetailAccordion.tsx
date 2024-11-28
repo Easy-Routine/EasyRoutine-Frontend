@@ -4,7 +4,7 @@ import useAccordion from "hooks/client/useAccordion";
 import React from "react";
 import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
-import { WorkoutLibrary, WorkoutRecord } from "db";
+import { WorkoutLibrary, WorkoutRecord } from "types/model";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import { useParams } from "react-router-dom";
 import { useTheme } from "styled-components";

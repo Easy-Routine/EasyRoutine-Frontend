@@ -8,7 +8,7 @@ import { ReactComponent as PlusIcon } from "assets/image/plus2.svg";
 import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
 import Table from "components/content/Table/Table";
 import { useTheme } from "styled-components";
-import { SetConfig, WorkoutConfig, WorkoutLibrary } from "db";
+import { SetConfig, WorkoutConfig, WorkoutLibrary } from "types/model";
 import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMutation";
 import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
 import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";

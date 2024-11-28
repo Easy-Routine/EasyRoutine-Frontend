@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid"; // UUID 생성을 위한 라이브러리
-import { db, RoutineRecord } from "db";
+import { RoutineRecord } from "types/model";
+import { db } from "db";
 import { Color } from "types/enum";
 import { DotDataByDate } from "components/content/CustomCalendar/CustomCalendar";
 import moment from "moment";

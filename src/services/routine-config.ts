@@ -1,6 +1,7 @@
 // db.ts 파일에서 import
 
-import { db, RoutineConfig } from "db"; // 경로에 맞게 수정
+import { RoutineConfig } from "types/model"; // 경로에 맞게 수정
+import { db } from "db";
 import moment from "moment";
 import { Color } from "types/enum";
 import { CustomError, ErrorDefinitions } from "types/error";
