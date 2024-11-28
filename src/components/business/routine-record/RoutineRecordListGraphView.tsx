@@ -8,9 +8,12 @@ import useModal from "hooks/client/useModal";
 import { useState } from "react";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
-import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
 import { Period } from "types/enum";
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
+import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
+import { WorkoutLibrary } from "types/model";
+import useThrowError from "hooks/client/useThrowError";
 
 const Container = styled.div`
     display: flex;
@@ -20,6 +23,7 @@ const Container = styled.div`
 
 const RoutineRecorListGraphView = () => {
     const { selectedValue, handleTabClick } = useTab(Period.Month);
+    const { throwError } = useThrowError();
     const {
         isOpen: isWorkoutLibraryListGraphBottomSheetOpen,
         handleOpenModal: openWorkoutLibraryListGraphBottomSheet,
@@ -27,9 +31,14 @@ const RoutineRecorListGraphView = () => {
     } = useModal();
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
+    const [workoutLibraryDetail, setWorkoutLibraryDetail] =
+        useState<WorkoutLibrary | null>();
 
-    const { data: workoutLibraryDetail } =
-        useGetWorkoutLibraryOneQuery(workoutLibraryId);
+    // const { data: workoutLibraryDetail } =
+    //     useGetWorkoutLibraryOneQuery(workoutLibraryId);
+
+    const { mutateAsync: getWorkoutLibraryOneMutate } =
+        useGetWorkoutLibraryOneMutation();
 
     const { data: workoutRecordSumListByDate } = useGetWorkoutRecordSumAllQuery(
         {
@@ -38,24 +47,27 @@ const RoutineRecorListGraphView = () => {
         }
     );
 
-    const handleButtonClick = () => {
+    const handleButtonClick = async () => {
         openWorkoutLibraryListGraphBottomSheet();
     };
 
-    const handleSmallCardClick = (_id: string) => {
-        console.log(_id);
+    const handleSmallCardClick = async (_id: string) => {
         setWorkoutLibraryId(_id);
-        closeWorkoutLibraryListGraphBottomSheet();
+        await throwError({
+            fetchFn: async () => await getWorkoutLibraryOneMutate(_id),
+            onSuccess: (response) => {
+                setWorkoutLibraryDetail(response);
+                closeWorkoutLibraryListGraphBottomSheet();
+            },
+        });
     };
-
-    // workoutLibraryId, selectedValue 를 이용해서 전체 운동 볼륨을 구하기
 
     return (
         <Container>
             {workoutLibraryId && (
                 <>
                     <Box>
-                        <TitleTextInput value={workoutLibraryDetail!.name} />
+                        <TitleTextInput value={workoutLibraryDetail?.name} />
                     </Box>
                     <Box>
                         <Graph
@@ -104,16 +116,17 @@ const RoutineRecorListGraphView = () => {
                     </ChipTab>
                 </>
             )}
-
-            <WorkoutLibraryListGraphBottomSheet
-                isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
-                onBackdropClick={() =>
-                    closeWorkoutLibraryListGraphBottomSheet()
-                }
-                onSmallCardClick={(workoutLibraryId: string) =>
-                    handleSmallCardClick(workoutLibraryId)
-                }
-            />
+            <ErrorBoundary>
+                <WorkoutLibraryListGraphBottomSheet
+                    isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
+                    onBackdropClick={() =>
+                        closeWorkoutLibraryListGraphBottomSheet()
+                    }
+                    onSmallCardClick={(workoutLibraryId: string) =>
+                        handleSmallCardClick(workoutLibraryId)
+                    }
+                />
+            </ErrorBoundary>
 
             <Button onClick={handleButtonClick}>운동 선택하기</Button>
         </Container>

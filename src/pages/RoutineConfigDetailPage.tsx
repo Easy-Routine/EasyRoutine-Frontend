@@ -3,6 +3,7 @@ import RoutineConfigDetailView from "components/business/routine-config/RoutineC
 import ReturnPageHeader from "components/business/ReturnPageHeader";
 import WorkoutLibraryListBottomSheet from "components/business/workout-library/WorkoutLibraryListBottomSheet";
 import { Suspense } from "react";
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 
 const Container = styled.div`
     display: flex;
@@ -17,8 +18,9 @@ const RoutineConfigDetailPage = () => {
             <Suspense fallback={"로딩중"}>
                 <RoutineConfigDetailView />
             </Suspense>
-
-            <WorkoutLibraryListBottomSheet />
+            <ErrorBoundary>
+                <WorkoutLibraryListBottomSheet />
+            </ErrorBoundary>
         </Container>
     );
 };

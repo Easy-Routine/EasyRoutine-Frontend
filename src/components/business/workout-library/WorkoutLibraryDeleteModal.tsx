@@ -4,6 +4,7 @@ import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
 import useDeleteWorkoutLibraryOneMutation from "hooks/server/useDeleteWorkoutLibraryOneMutation";
 import useNativeMessage from "hooks/client/useNativeMessage";
+import useThrowError from "hooks/client/useThrowError";
 
 type WorkoutLibraryDeleteModalProps = {
     workoutLibraryId: string;
@@ -22,19 +23,22 @@ const WorkoutLibraryDeleteModal = ({
 }: WorkoutLibraryDeleteModalProps) => {
     const { showToast } = useToast();
     const { sendNativeMessage } = useNativeMessage();
+    const { throwError } = useThrowError();
 
     const { mutateAsync: deleteWorkoutLibraryOneMutate } =
         useDeleteWorkoutLibraryOneMutation();
 
     const handleConfirmButtonClick = async (workoutLibraryId: string) => {
-        try {
-            await deleteWorkoutLibraryOneMutate(workoutLibraryId);
-            showToast("운동 종목이 삭제되었습니다.", "success");
-            onConfirmButtonClick();
-            sendNativeMessage({ type: "vibrate" });
-        } catch (e) {
-            showToast("운동 종목 삭제 중 에러가 발생했습니다.", "error");
-        }
+        await throwError({
+            fetchFn: async () =>
+                await deleteWorkoutLibraryOneMutate(workoutLibraryId),
+            onSuccess: () => {
+                showToast("운동 종목이 삭제되었습니다.", "success");
+                onConfirmButtonClick();
+                sendNativeMessage({ type: "vibrate" });
+            },
+        });
+        // showToast("운동 종목 삭제 중 에러가 발생했습니다.", "error");
     };
 
     return (

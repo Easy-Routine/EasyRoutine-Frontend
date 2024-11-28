@@ -9,6 +9,7 @@ import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutReco
 import { useParams } from "react-router-dom";
 import { useTheme } from "styled-components";
 import { Type } from "types/enum";
+import useThrowError from "hooks/client/useThrowError";
 
 type TypeMapper = {
     [key: string]: string;
@@ -22,7 +23,7 @@ const typeMapper: TypeMapper = {
 
 const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
     const { routineRecordId } = useParams();
-    const { borderRadius } = useTheme();
+    const { throwError } = useThrowError();
 
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
@@ -33,9 +34,12 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
     const handleWorkoutRecordDeleteButtonClick = async (
         workoutRecordId: string
     ) => {
-        await deleteWorkoutRecordOneMutate({
-            routineRecordId: routineRecordId as string,
-            workoutRecordId,
+        await throwError({
+            fetchFn: async () =>
+                await deleteWorkoutRecordOneMutate({
+                    routineRecordId: routineRecordId as string,
+                    workoutRecordId,
+                }),
         });
     };
 

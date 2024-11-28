@@ -6,6 +6,7 @@ import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailA
 import { useParams } from "react-router-dom";
 import useRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import RoutineConfigUpdateNameTitleText from "./RoutineConfigUpdateNameTitleText";
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 
 const Container = styled.div`
     display: flex;
@@ -22,22 +23,30 @@ const RoutineConfigDetailView = () => {
     return (
         <Container>
             <Box>
-                <RoutineConfigUpdateNameTitleText
-                    defaultValue={routineConfigDetail!.name}
-                />
-            </Box>
-            <Accordion.List
-                data={routineConfigDetail!.workoutConfigs}
-                render={(workoutConfig) => (
-                    <WorkoutConfigDetailAccordion
-                        data={workoutConfig}
-                        key={workoutConfig._id}
+                <ErrorBoundary>
+                    <RoutineConfigUpdateNameTitleText
+                        defaultValue={routineConfigDetail!.name}
                     />
-                )}
-            />
-            <RoutineConfigColorTabBottomBar
-                defaultValue={routineConfigDetail!.color}
-            />
+                </ErrorBoundary>
+            </Box>
+
+            <ErrorBoundary>
+                <Accordion.List
+                    data={routineConfigDetail!.workoutConfigs}
+                    render={(workoutConfig) => (
+                        <WorkoutConfigDetailAccordion
+                            data={workoutConfig}
+                            key={workoutConfig._id}
+                        />
+                    )}
+                />
+            </ErrorBoundary>
+
+            <ErrorBoundary>
+                <RoutineConfigColorTabBottomBar
+                    defaultValue={routineConfigDetail!.color}
+                />
+            </ErrorBoundary>
         </Container>
     );
 };

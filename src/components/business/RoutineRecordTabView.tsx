@@ -4,6 +4,7 @@ import styled from "styled-components";
 import RoutineRecordListCalendarView from "./routine-record/RoutineRecordListCalendarView";
 import RoutineRecordListGraphView from "./routine-record/RoutineRecordListGraphView";
 import { Suspense } from "react";
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 
 const Container = styled.div`
     display: flex;
@@ -46,9 +47,11 @@ const RoutineRecordTabView = () => {
                     통계
                 </Tab.Button>
             </Tab>
-            <Suspense fallback={"로딩"}>
-                <SelectedView />
-            </Suspense>
+            <ErrorBoundary>
+                <Suspense fallback={"로딩"}>
+                    <SelectedView />
+                </Suspense>
+            </ErrorBoundary>
         </Container>
     );
 };

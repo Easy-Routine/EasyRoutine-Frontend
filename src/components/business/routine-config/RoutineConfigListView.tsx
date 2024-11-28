@@ -8,13 +8,14 @@ import { Suspense, useState } from "react";
 import useModal from "hooks/client/useModal";
 import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
 import useRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 
 const Container = styled.div``;
 
 const RoutineConfigListView = () => {
     const { data: routineConfigAllData } = useRoutineConfigAllQuery();
 
-    const routineConfigAll = routineConfigAllData;
+    const routineConfigAll = routineConfigAllData!;
 
     const {
         isOpen: isRoutineProgressModalOpen,
@@ -35,44 +36,46 @@ const RoutineConfigListView = () => {
                 fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
                 data={routineConfigAll}
             >
-                {routineConfigAll && (
-                    <Accordion.List
-                        data={routineConfigAll}
-                        render={(routineConfig) => (
-                            <RoutineConfigDetailAccordion
-                                key={routineConfig._id}
-                                data={routineConfig}
-                                onRoutineConfigProgressButtonClick={(
-                                    routineConfigId: string
-                                ) => {
-                                    setRoutineConfigId(routineConfigId);
-                                    openRoutineProgressModal();
-                                }}
-                                onRoutineConfigDeleteButtonClick={(
-                                    routineConfigId: string
-                                ) => {
-                                    setRoutineConfigId(routineConfigId);
-                                    openRoutineConfigDeleteModal();
-                                }}
-                            />
-                        )}
-                    />
-                )}
+                <Accordion.List
+                    data={routineConfigAll}
+                    render={(routineConfig) => (
+                        <RoutineConfigDetailAccordion
+                            key={routineConfig._id}
+                            data={routineConfig}
+                            onRoutineConfigProgressButtonClick={(
+                                routineConfigId: string
+                            ) => {
+                                setRoutineConfigId(routineConfigId);
+                                openRoutineProgressModal();
+                            }}
+                            onRoutineConfigDeleteButtonClick={(
+                                routineConfigId: string
+                            ) => {
+                                setRoutineConfigId(routineConfigId);
+                                openRoutineConfigDeleteModal();
+                            }}
+                        />
+                    )}
+                />
             </EmptyBoundary>
 
-            <Suspense fallback={"로딩"}>
-                {isRoutineProgressModalOpen && (
-                    <RoutineConfigProgressModal
-                        routineConfigId={routineConfigId}
-                        isOpen={isRoutineProgressModalOpen}
-                        onBackdropClick={() => closeRoutineProgressModal()}
-                        onCancelButtonClick={() => closeRoutineProgressModal()}
-                        onConfirmButtonClick={() => {
-                            closeRoutineProgressModal();
-                        }}
-                    />
-                )}
-            </Suspense>
+            <ErrorBoundary>
+                <Suspense fallback={"로딩"}>
+                    {isRoutineProgressModalOpen && (
+                        <RoutineConfigProgressModal
+                            routineConfigId={routineConfigId}
+                            isOpen={isRoutineProgressModalOpen}
+                            onBackdropClick={() => closeRoutineProgressModal()}
+                            onCancelButtonClick={() =>
+                                closeRoutineProgressModal()
+                            }
+                            onConfirmButtonClick={() => {
+                                closeRoutineProgressModal();
+                            }}
+                        />
+                    )}
+                </Suspense>
+            </ErrorBoundary>
 
             {isRoutineConfigDeleteModalOpen && (
                 <RoutineConfigDeleteModal

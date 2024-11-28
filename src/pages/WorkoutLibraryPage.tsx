@@ -1,3 +1,4 @@
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import NavigationBottomBar from "components/business/NavigationBottomBar";
 import WorkoutLibraryListView from "components/business/workout-library/WorkoutLibraryListView";
 import Logo from "components/content/Logo/Logo";
@@ -18,9 +19,12 @@ const WorkoutLibraryPage = () => {
             <PageHeader>
                 <Logo />
             </PageHeader>
-            <Suspense fallback="로딩중">
-                <WorkoutLibraryListView />
-            </Suspense>
+            <ErrorBoundary>
+                <Suspense fallback="로딩중">
+                    <WorkoutLibraryListView />
+                </Suspense>
+            </ErrorBoundary>
+
             <NavigationBottomBar defaultValue={ROUTES.LIBRARY.PATH} />
         </Container>
     );

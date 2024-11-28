@@ -15,6 +15,7 @@ import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQu
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import { useParams } from "react-router-dom";
 import { Category } from "types/enum";
+import useThrowError from "hooks/client/useThrowError";
 
 const Container = styled.div`
     display: flex;
@@ -31,7 +32,7 @@ const SmallCardListContainer = styled.div`
 
 const WorkoutLibraryListBottomSheet = () => {
     const { routineConfigId } = useParams();
-
+    const { throwError } = useThrowError();
     const { isOpen, handleOpenModal, handleCloseModal } = useModal();
     const { selectedValue, handleTabClick } = useTab(Category.ALL);
     const { selectedValues, handleCheckBoxClick, resetSelectedValues } =
@@ -53,12 +54,17 @@ const WorkoutLibraryListBottomSheet = () => {
     };
 
     const handleSubmitButtonClick = async (values: string[]) => {
-        await createWorkoutConfigAllMutation({
-            workoutLibraryIds: values,
-            routineConfigId: routineConfigId as string,
+        await throwError({
+            fetchFn: async () =>
+                await createWorkoutConfigAllMutation({
+                    workoutLibraryIds: values,
+                    routineConfigId: routineConfigId as string,
+                }),
+            onSuccess: () => {
+                resetSelectedValues();
+                handleCloseModal();
+            },
         });
-        resetSelectedValues();
-        handleCloseModal();
     };
 
     return (

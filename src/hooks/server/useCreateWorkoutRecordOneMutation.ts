@@ -1,10 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import queryKey from "constants/queryKeys";
+import { useMutation } from "@tanstack/react-query";
 import { WorkoutLibrary } from "db";
 import { createWorkoutRecordOne } from "services/workout-record";
 
 const useCreateWorkoutRecordOneMutation = () => {
-    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
             routineRecordId,
@@ -13,11 +11,7 @@ const useCreateWorkoutRecordOneMutation = () => {
             routineRecordId: string;
             workoutLibrary: WorkoutLibrary;
         }) => createWorkoutRecordOne({ routineRecordId, workoutLibrary }),
-        onSettled: () => {
-            // queryClient.invalidateQueries({
-            //     queryKey: [queryKey.getRoutineRecordAll],
-            // });
-        },
+        onSettled: () => {},
     });
 };
 

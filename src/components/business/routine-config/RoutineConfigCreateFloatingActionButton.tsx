@@ -6,33 +6,34 @@ import useToast from "hooks/useToast";
 import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
 import useGetRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 import { Color } from "types/enum";
+import useThrowError from "hooks/client/useThrowError";
+import { RoutineConfig } from "types/model";
 
 const RoutineConfigCreateFloatingActionButton = () => {
     const navigate = useNavigate();
     const { showToast } = useToast();
+    const { throwError } = useThrowError();
     const { mutateAsync: createRoutineConfigOneMutate } =
         useCreateRoutineConfigMutation();
 
     const { data: routineConfigAllData } = useGetRoutineConfigAllQuery();
 
     const handleButtonClick = async () => {
-        try {
-            const userId = localStorage.getItem("userId");
+        const userId = localStorage.getItem("userId");
 
-            const newRoutineConfig = await createRoutineConfigOneMutate({
-                name: "새 루틴",
-                color: Color.VIOLET,
-                userId: userId as string,
-            });
+        await throwError<RoutineConfig | undefined>({
+            fetchFn: async () =>
+                await createRoutineConfigOneMutate({
+                    name: "새 루틴",
+                    color: Color.VIOLET,
+                    userId: userId as string,
+                }),
 
-            showToast("루틴이 생성되었습니다.", "success");
-
-            navigate(
-                ROUTES.CONFIG.DETAIL.PATH(newRoutineConfig?._id as string)
-            );
-        } catch (e) {
-            showToast("루틴을 생성하던 중 오류가 발생했습니다.", "error");
-        }
+            onSuccess: (data) => {
+                showToast("루틴이 생성되었습니다.", "success");
+                navigate(ROUTES.CONFIG.DETAIL.PATH(data!._id));
+            },
+        });
     };
 
     return (

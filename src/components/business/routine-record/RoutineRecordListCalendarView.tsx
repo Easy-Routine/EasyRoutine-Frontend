@@ -9,6 +9,7 @@ import useModal from "hooks/client/useModal";
 import useGetRoutineRecordAllMonthlyQuery from "hooks/server/useGetRoutineRecordAllMonthlyQuery";
 import useGetRoutineRecordAllDailyQuery from "hooks/server/useGetRoutineRecordAllDailyQuery";
 import { WorkoutRecord } from "db";
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 
 const Container = styled.div`
     display: flex;
@@ -85,20 +86,23 @@ const RoutineRecordListCalendarView = () => {
                     />
                 )}
             />
-
-            <RoutineRecordDeleteModal
-                isOpen={isRoutineRecordDeleteModalOpen}
-                routineRecordId={routineRecordId}
-                onBackdropClick={() => {
-                    closeRoutineRecordDeleteModal();
-                }}
-                onCancelButtonClick={() => {
-                    closeRoutineRecordDeleteModal();
-                }}
-                onConfirmButtonClick={() => {
-                    closeRoutineRecordDeleteModal();
-                }}
-            />
+            <ErrorBoundary>
+                {isRoutineRecordDeleteModalOpen && (
+                    <RoutineRecordDeleteModal
+                        isOpen={isRoutineRecordDeleteModalOpen}
+                        routineRecordId={routineRecordId}
+                        onBackdropClick={() => {
+                            closeRoutineRecordDeleteModal();
+                        }}
+                        onCancelButtonClick={() => {
+                            closeRoutineRecordDeleteModal();
+                        }}
+                        onConfirmButtonClick={() => {
+                            closeRoutineRecordDeleteModal();
+                        }}
+                    />
+                )}
+            </ErrorBoundary>
         </Container>
     );
 };

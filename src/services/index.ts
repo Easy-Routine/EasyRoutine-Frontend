@@ -1,5 +1,7 @@
+import { AxiosError } from "axios";
 import { User } from "types/model";
 import api from "utils/axios";
+import { handleError } from "utils/handleError";
 
 export const checkAccessToken = async (): Promise<boolean> => {
     try {
@@ -34,19 +36,17 @@ type ImageResponse = {
 
 export const uploadImage = async (
     formData: FormData
-): Promise<ImageResponse> => {
+): Promise<ImageResponse | undefined> => {
     try {
         const response = await api.post<any>("/upload-image", formData, {
             headers: {
                 "Content-Type": "multipart/form-data", // FormData로 전송 시 이 헤더가 필요
             },
         });
-
-        console.log("File uploaded successfully:", response);
         return response.data;
-    } catch (error) {
-        console.error("Error uploading file:", error);
-        throw new Error("Error uploading file:");
+    } catch (e) {
+        console.log("야야~~");
+        handleError(e);
     }
 };
 

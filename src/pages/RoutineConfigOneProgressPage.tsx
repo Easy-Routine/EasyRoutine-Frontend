@@ -1,3 +1,4 @@
+import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import RoutineConfigListProgressView from "components/business/routine-config/RoutineConfigOneProgressView";
 import PageHeader from "components/content/PageHeader/PageHeader";
 import styled from "styled-components";
@@ -14,7 +15,9 @@ const RoutineConfigListProgressPage = () => {
             <PageHeader>
                 <PageHeader.PageTitle>운동 진행</PageHeader.PageTitle>
             </PageHeader>
-            <RoutineConfigListProgressView />
+            <ErrorBoundary>
+                <RoutineConfigListProgressView />
+            </ErrorBoundary>
         </Container>
     );
 };

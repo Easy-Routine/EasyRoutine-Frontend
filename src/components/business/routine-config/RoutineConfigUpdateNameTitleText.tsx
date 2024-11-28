@@ -1,5 +1,6 @@
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import useInput from "hooks/client/useInput";
+import useThrowError from "hooks/client/useThrowError";
 import useUpdateRoutineConfigFieldMutation from "hooks/server/useUpdateRoutineConfigFieldMutation";
 
 import { ChangeEvent, useEffect } from "react";
@@ -12,6 +13,7 @@ const RoutineConfigUpdateNameTitleText = ({
 }) => {
     const { routineConfigId } = useParams();
     const { value, setValue, handleInputChange } = useInput(defaultValue);
+    const { throwError } = useThrowError();
 
     useEffect(() => {
         setValue(defaultValue);
@@ -22,16 +24,14 @@ const RoutineConfigUpdateNameTitleText = ({
 
     const handleTitleTextChange = async (e: ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
-        console.log(newValue);
-
-        // 상태 업데이트
         handleInputChange(e);
-
-        // 서버에 업데이트 요청
-        await updateRoutineConfigFieldMutate({
-            routineConfigId: routineConfigId as string,
-            key: "name",
-            value: newValue,
+        await throwError({
+            fetchFn: async () =>
+                await updateRoutineConfigFieldMutate({
+                    routineConfigId: routineConfigId as string,
+                    key: "name",
+                    value: newValue,
+                }),
         });
     };
 

@@ -16,6 +16,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Category, Type } from "types/enum";
 import loadingAnimation from "assets/image/loading.json"; // JSON 파일 경로
+import useThrowError from "hooks/client/useThrowError";
 
 const Container = styled.div`
     width: 100%;
@@ -64,7 +65,7 @@ const WorkoutLibraryDetailBottomSheet = ({
 
     const workoutLibraryOne = workoutLibraryOneData!;
 
-    console.log("데이퉁투", workoutLibraryOne);
+    const { throwError } = useThrowError();
 
     const isDisabled = !workoutLibraryOne.isEditable;
     const { value: originImageInputValue, setValue: setOriginImageInputValue } =
@@ -116,32 +117,37 @@ const WorkoutLibraryDetailBottomSheet = ({
         const formData = new FormData();
         if (file) {
             formData.append("image", file);
-
-            try {
-                // await uploadImage(formData, workoutLibraryId);
-                const response = await uploadWorkoutLibraryImageMutation({
-                    formData,
-                });
-                setOriginImageInputValue(response.data.original);
-                setImageValue(response.data.thumbnail);
-            } catch (error) {
-                console.error(error);
-            }
+            throwError({
+                fetchFn: async () =>
+                    await uploadWorkoutLibraryImageMutation({
+                        formData,
+                    }),
+                onSuccess: (response) => {
+                    const data = response!.data;
+                    setOriginImageInputValue(data.original);
+                    setImageValue(data.thumbnail);
+                },
+            });
         }
     };
 
     const handleWorkoutLibraryUpdateButtonClick = async () => {
-        await updateWorkoutLibraryOneMutate({
-            workoutLibraryId,
-            updatedData: {
-                image: imageValue,
-                originImage: originImageInputValue,
-                name: underlineInputValue,
-                category: selectedCategory,
-                type: selectedValues,
+        await throwError({
+            fetchFn: async () =>
+                await updateWorkoutLibraryOneMutate({
+                    workoutLibraryId,
+                    updatedData: {
+                        image: imageValue,
+                        originImage: originImageInputValue,
+                        name: underlineInputValue,
+                        category: selectedCategory,
+                        type: selectedValues,
+                    },
+                }),
+            onSuccess: () => {
+                onSubmitButtonClick();
             },
         });
-        onSubmitButtonClick();
     };
 
     return (

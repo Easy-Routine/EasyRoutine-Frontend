@@ -1,6 +1,8 @@
 import { db, WorkoutLibrary } from "db";
 import moment from "moment";
+import { CustomError, ErrorDefinitions } from "types/error";
 import api from "utils/axios";
+import { handleError } from "utils/handleError";
 import { v4 as uuidv4 } from "uuid";
 
 export const getWorkoutLibraryAll = async ({
@@ -9,7 +11,7 @@ export const getWorkoutLibraryAll = async ({
 }: {
     name?: string;
     category?: string;
-}): Promise<WorkoutLibrary[]> => {
+}): Promise<WorkoutLibrary[] | undefined> => {
     try {
         const userId = localStorage.getItem("userId");
 
@@ -45,98 +47,92 @@ export const getWorkoutLibraryAll = async ({
         });
 
         return filteredWorkouts; // 필터링된 운동 배열 반환
-    } catch (error) {
-        console.error("Error fetching workout library:", error);
-        throw new Error("Failed to fetch workout library"); // 오류 발생 시 예외 던짐
+    } catch (e) {
+        handleError(e);
     }
 };
 
 export const getWorkoutLibraryOne = async (
     workoutLibraryId: string
-): Promise<WorkoutLibrary | null> => {
+): Promise<WorkoutLibrary | undefined> => {
     try {
-        // 데이터베이스에서 특정 운동 라이브러리 가져오기
-        const workoutLibrary = await db.workoutLibraries.get(workoutLibraryId);
-        return workoutLibrary || null; // 운동 라이브러리 반환
-    } catch (error) {
-        console.error("Error fetching workout library:", error);
-        throw new Error("Failed to fetch workout library"); // 오류 발생 시 예외 던짐
+        if (!workoutLibraryId) {
+            return;
+        }
+
+        const workoutLibraryOne =
+            await db.workoutLibraries.get(workoutLibraryId);
+        if (!workoutLibraryOne)
+            throw new CustomError(ErrorDefinitions.NOT_FOUND);
+        return workoutLibraryOne;
+    } catch (e) {
+        handleError(e);
     }
 };
 
 export const createWorkoutLibraryOne = async (
     workoutData: Omit<WorkoutLibrary, "_id" | "createdAt" | "updatedAt">
-): Promise<WorkoutLibrary | null> => {
-    const desiredWorkoutOrder = ["weight", "rep", "workoutSec"]; // 원하는 순서
-    const sortedType = workoutData.type.sort((a: string, b: string) => {
-        return desiredWorkoutOrder.indexOf(a) - desiredWorkoutOrder.indexOf(b);
-    });
-
-    const newWorkoutLibraryOne: WorkoutLibrary = {
-        _id: uuidv4(), // UUID로 _id 생성
-        name: workoutData.name,
-        image: workoutData.image,
-        originImage: workoutData.originImage,
-        category: workoutData.category,
-        type: sortedType,
-        isEditable: workoutData.isEditable,
-        createdAt: moment().toISOString(), // 현재 날짜
-        updatedAt: moment().toISOString(), // 현재 날짜
-        userId: workoutData.userId, // 사용자 _id
-    };
-
+): Promise<WorkoutLibrary | undefined> => {
     try {
+        const desiredWorkoutOrder = ["weight", "rep", "workoutSec"]; // 원하는 순서
+        const sortedType = workoutData.type.sort((a: string, b: string) => {
+            return (
+                desiredWorkoutOrder.indexOf(a) - desiredWorkoutOrder.indexOf(b)
+            );
+        });
+
+        const newWorkoutLibraryOne: WorkoutLibrary = {
+            _id: uuidv4(), // UUID로 _id 생성
+            name: workoutData.name,
+            image: workoutData.image,
+            originImage: workoutData.originImage,
+            category: workoutData.category,
+            type: sortedType,
+            isEditable: workoutData.isEditable,
+            createdAt: moment().toISOString(), // 현재 날짜
+            updatedAt: moment().toISOString(), // 현재 날짜
+            userId: workoutData.userId, // 사용자 _id
+        };
+
         await db.workoutLibraries.add(newWorkoutLibraryOne); // 데이터베이스에 추가
-        console.log("WorkoutConfig created:", newWorkoutLibraryOne);
         return newWorkoutLibraryOne; // 생성된 운동 구성 반환
-    } catch (error) {
-        console.error("Error creating WorkoutConfig:", error);
-        return null; // 오류 발생 시 null 반환
+    } catch (e) {
+        handleError(e);
     }
 };
 
 export const updateWorkoutLibraryField = async (
     workoutLibraryId: string,
-    key: string, // WorkoutLibrary의 키로 제한
-    value: string | number // value는 string 또는 number로 받을 수 있음
-): Promise<WorkoutLibrary | null> => {
+    key: string,
+    value: string | number
+): Promise<WorkoutLibrary | undefined> => {
     try {
-        // 데이터베이스에서 WorkoutLibrary 가져오기
-        const workoutLibrary = await db.workoutLibraries.get(workoutLibraryId);
+        const workoutLibraryOne =
+            await db.workoutLibraries.get(workoutLibraryId);
 
-        if (!workoutLibrary) {
-            console.error("WorkoutLibrary not found");
-            return null; // 해당 ID의 WorkoutLibrary가 존재하지 않을 경우
-        }
+        if (!workoutLibraryOne)
+            throw new CustomError(ErrorDefinitions.NOT_FOUND);
 
-        // 필드 업데이트
-        workoutLibrary[key] = value; // key에 해당하는 필드 업데이트
+        workoutLibraryOne[key] = value;
 
-        // 업데이트된 운동 라이브러리 저장
-        await db.workoutLibraries.put(workoutLibrary);
-        console.log("WorkoutLibrary updated:", workoutLibrary);
-        return workoutLibrary; // 업데이트된 WorkoutLibrary 반환
-    } catch (error) {
-        console.error("Error updating WorkoutLibrary:", error);
-        return null; // 오류 발생 시 null 반환
+        await db.workoutLibraries.put(workoutLibraryOne);
+        return workoutLibraryOne;
+    } catch (e) {
+        handleError(e);
     }
 };
 
 export const updateWorkoutLibraryOne = async (
     workoutLibraryId: string,
     updatedData: Partial<WorkoutLibrary> // 업데이트할 데이터
-): Promise<boolean> => {
+): Promise<boolean | undefined> => {
     try {
         // 해당 워크아웃 라이브러리 항목을 가져옵니다.
-        const workoutLibrary = await db.workoutLibraries.get(workoutLibraryId);
+        const workoutLibraryOne =
+            await db.workoutLibraries.get(workoutLibraryId);
 
-        if (!workoutLibrary) {
-            console.error(
-                "WorkoutLibrary not found for _id:",
-                workoutLibraryId
-            );
-            return false; // 항목이 존재하지 않음
-        }
+        if (!workoutLibraryOne)
+            throw new CustomError(ErrorDefinitions.NOT_FOUND);
 
         const desiredWorkoutOrder = ["weight", "rep", "workoutSec"]; // 원하는 순서
         const sortedType = updatedData.type?.sort((a: string, b: string) => {
@@ -146,34 +142,24 @@ export const updateWorkoutLibraryOne = async (
         });
         updatedData.type = sortedType;
 
-        // 업데이트할 데이터로 항목을 수정합니다.
-        const newData = { ...workoutLibrary, ...updatedData };
+        const newData = { ...workoutLibraryOne, ...updatedData };
 
-        // 데이터 저장
         await db.workoutLibraries.put(newData);
-
-        console.log("WorkoutLibrary updated:", newData);
-        return true; // 업데이트 성공
-    } catch (error) {
-        console.error("Error updating WorkoutLibrary:", error);
-        return false; // 오류 발생
+        return true;
+    } catch (e) {
+        handleError(e);
     }
 };
 
 export const deleteWorkoutLibraryOne = async (
     workoutLibraryId: string
-): Promise<boolean> => {
+): Promise<boolean | undefined> => {
     try {
-        // 해당 워크아웃 라이브러리 항목을 삭제합니다.
         await api.delete(`/workout-library/${workoutLibraryId}`);
         await db.workoutLibraries.delete(workoutLibraryId);
 
-        console.log(
-            `WorkoutLibrary with _id ${workoutLibraryId} has been deleted.`
-        );
         return true; // 삭제 성공
-    } catch (error) {
-        console.error("Error deleting WorkoutLibrary:", error);
-        throw error;
+    } catch (e) {
+        handleError(e);
     }
 };

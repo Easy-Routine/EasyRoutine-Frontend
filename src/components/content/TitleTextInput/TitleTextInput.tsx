@@ -19,7 +19,7 @@ const Container = styled.input`
 `;
 
 type TitleTextProps = {
-    value: string;
+    value?: string;
     disabled?: boolean;
     onTitleTextChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
