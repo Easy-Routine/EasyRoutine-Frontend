@@ -24,12 +24,13 @@ const WorkoutLibraryDeleteModal = ({
     const { showToast } = useToast();
     const { sendNativeMessage } = useNativeMessage();
     const { throwError } = useThrowError();
+    // const [promise, setPromise] =
 
     const { mutateAsync: deleteWorkoutLibraryOneMutate } =
         useDeleteWorkoutLibraryOneMutation();
 
     const handleConfirmButtonClick = async (workoutLibraryId: string) => {
-        await throwError({
+        return throwError({
             fetchFn: async () =>
                 await deleteWorkoutLibraryOneMutate(workoutLibraryId),
             onSuccess: () => {

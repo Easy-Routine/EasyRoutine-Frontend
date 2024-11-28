@@ -1,6 +1,7 @@
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import ReturnPageHeader from "components/business/ReturnPageHeader";
 import RoutineRecordDetailView from "components/business/routine-record/RoutineRecordDetailView";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import React, { Suspense } from "react";
 import styled from "styled-components";
 
@@ -15,7 +16,7 @@ const RoutineRecordDetailPage = () => {
         <Container>
             <ReturnPageHeader pageTitleText="운동 기록" />
             <ErrorBoundary>
-                <Suspense fallback={<div>안녕</div>}>
+                <Suspense fallback={<CommonLoading />}>
                     <RoutineRecordDetailView />
                 </Suspense>
             </ErrorBoundary>

@@ -18,6 +18,7 @@ import useToast from "hooks/useToast";
 import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import useThrowError from "hooks/client/useThrowError";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const Container = styled.div`
     display: flex;
@@ -156,7 +157,7 @@ const WorkoutLibraryListView = () => {
                 )}
             />
             <ErrorBoundary>
-                <Suspense fallback={"로딩중"}>
+                <Suspense fallback={<CommonLoading />}>
                     {isWorkoutLibraryBottomSheetOpen && (
                         <WorkoutLibraryDetailBottomSheet
                             workoutLibraryId={workoutLibraryId}

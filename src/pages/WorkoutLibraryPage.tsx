@@ -1,6 +1,7 @@
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import NavigationBottomBar from "components/business/NavigationBottomBar";
 import WorkoutLibraryListView from "components/business/workout-library/WorkoutLibraryListView";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import Logo from "components/content/Logo/Logo";
 import PageHeader from "components/content/PageHeader/PageHeader";
 import ROUTES from "constants/routes";
@@ -20,7 +21,7 @@ const WorkoutLibraryPage = () => {
                 <Logo />
             </PageHeader>
             <ErrorBoundary>
-                <Suspense fallback="로딩중">
+                <Suspense fallback={<CommonLoading />}>
                     <WorkoutLibraryListView />
                 </Suspense>
             </ErrorBoundary>

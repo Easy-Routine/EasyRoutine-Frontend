@@ -5,6 +5,7 @@ import RoutineRecordListCalendarView from "./routine-record/RoutineRecordListCal
 import RoutineRecordListGraphView from "./routine-record/RoutineRecordListGraphView";
 import { Suspense } from "react";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const Container = styled.div`
     display: flex;
@@ -48,7 +49,7 @@ const RoutineRecordTabView = () => {
                 </Tab.Button>
             </Tab>
             <ErrorBoundary>
-                <Suspense fallback={"로딩"}>
+                <Suspense fallback={<CommonLoading />}>
                     <SelectedView />
                 </Suspense>
             </ErrorBoundary>

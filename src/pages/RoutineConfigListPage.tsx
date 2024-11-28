@@ -8,6 +8,7 @@ import PageHeader from "components/content/PageHeader/PageHeader";
 // import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import { Suspense } from "react";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const Container = styled.div`
     display: flex;
@@ -22,14 +23,14 @@ const RoutineConfigListPage = () => {
                 <Logo />
             </PageHeader>
             <ErrorBoundary>
-                <Suspense fallback={"로딩중"}>
+                <Suspense fallback={<CommonLoading />}>
                     <RoutineConfigListView />
                 </Suspense>
             </ErrorBoundary>
 
             <NavigationBottomBar defaultValue={ROUTES.CONFIG.LIST.PATH} />
             <ErrorBoundary>
-                <Suspense fallback={"로딩중"}>
+                <Suspense fallback={<CommonLoading />}>
                     <RoutineConfigCreateFloatingActionButton />
                 </Suspense>
             </ErrorBoundary>

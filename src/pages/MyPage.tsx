@@ -17,6 +17,7 @@ import { ReactComponent as SyncIcon } from "assets/image/sync.svg";
 import PageHeader from "components/content/PageHeader/PageHeader";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import useThrowError from "hooks/client/useThrowError";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const Container = styled.div`
     display: flex;
@@ -126,17 +127,19 @@ const MyPageContent = () => {
                 <Logo />
             </PageHeader>
 
-            {isLoading
-                ? null
-                : userOne && (
-                      <ProfileBox>
-                          <ProfileImage src={userOne.profileImage} />
-                          <UserName>{userOne.name}</UserName>
-                          <LogoutButton onClick={handleLogoutButtonClick}>
-                              로그아웃
-                          </LogoutButton>
-                      </ProfileBox>
-                  )}
+            {isLoading ? (
+                <CommonLoading />
+            ) : (
+                userOne && (
+                    <ProfileBox>
+                        <ProfileImage src={userOne.profileImage} />
+                        <UserName>{userOne.name}</UserName>
+                        <LogoutButton onClick={handleLogoutButtonClick}>
+                            로그아웃
+                        </LogoutButton>
+                    </ProfileBox>
+                )
+            )}
 
             <NavigationBottomBar defaultValue={ROUTES.MY.PATH} />
 

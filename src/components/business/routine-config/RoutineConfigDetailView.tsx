@@ -19,7 +19,6 @@ const RoutineConfigDetailView = () => {
     const { data: routineConfigDetail } = useRoutineConfigOneQuery(
         routineConfigId as string
     );
-    console.log("데이터터", routineConfigDetail);
     return (
         <Container>
             <Box>

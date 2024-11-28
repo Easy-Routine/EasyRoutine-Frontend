@@ -9,6 +9,7 @@ import useModal from "hooks/client/useModal";
 import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
 import useRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const Container = styled.div``;
 
@@ -60,7 +61,7 @@ const RoutineConfigListView = () => {
             </EmptyBoundary>
 
             <ErrorBoundary>
-                <Suspense fallback={"로딩"}>
+                <Suspense fallback={<CommonLoading />}>
                     {isRoutineProgressModalOpen && (
                         <RoutineConfigProgressModal
                             routineConfigId={routineConfigId}
