@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import RoutineConfigDetailView from "components/business/routine-config/RoutineConfigDetailView";
 import ReturnPageHeader from "components/business/ReturnPageHeader";
-import WorkoutLibraryListBottomSheet from "components/business/workout-library/WorkoutLibraryListBottomSheet";
 import { Suspense } from "react";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
@@ -20,10 +19,6 @@ const RoutineConfigDetailPage = () => {
                 <Suspense fallback={<CommonLoading />}>
                     <RoutineConfigDetailView />
                 </Suspense>
-            </ErrorBoundary>
-
-            <ErrorBoundary>
-                <WorkoutLibraryListBottomSheet />
             </ErrorBoundary>
         </Container>
     );

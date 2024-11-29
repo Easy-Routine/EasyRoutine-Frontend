@@ -50,13 +50,13 @@ const WorkoutLibraryListView = () => {
 
     const {
         isOpen: isWorkoutLibraryBottomSheetOpen,
-        handleOpenModal: openWorkoutLibraryBottomSheet,
-        handleCloseModal: closeWorkoutLibraryBottomSheet,
+        handleOpenModal: openWorkoutLibraryDetailBottomSheet,
+        handleCloseModal: closeWorkoutLibraryDetailBottomSheet,
     } = useModal();
 
     const handleFloatingActionButtonClick = (workoutLibraryId: string) => {
         setWorkoutLibraryId(workoutLibraryId);
-        openWorkoutLibraryBottomSheet();
+        openWorkoutLibraryDetailBottomSheet();
     };
 
     // 짧은 클릭
@@ -67,7 +67,7 @@ const WorkoutLibraryListView = () => {
         // const isEditable = workoutLibraryOne?.isEditable;
 
         setWorkoutLibraryId(workoutLibraryId);
-        openWorkoutLibraryBottomSheet();
+        openWorkoutLibraryDetailBottomSheet();
     };
     // 긴 클릭
     const handleSmallCardLongPress = async (workoutLibraryId: string) => {
@@ -163,16 +163,17 @@ const WorkoutLibraryListView = () => {
                             workoutLibraryId={workoutLibraryId}
                             isOpen={isWorkoutLibraryBottomSheetOpen}
                             onBackdropClick={() =>
-                                closeWorkoutLibraryBottomSheet()
+                                closeWorkoutLibraryDetailBottomSheet()
                             }
                             onSubmitButtonClick={() =>
-                                closeWorkoutLibraryBottomSheet()
+                                closeWorkoutLibraryDetailBottomSheet()
                             }
                         />
                     )}
                 </Suspense>
             </ErrorBoundary>
-            <ErrorBoundary>
+
+            {isWorkoutDeleteModalOpen && (
                 <WorkoutLibraryDeleteModal
                     workoutLibraryId={workoutLibraryId}
                     isOpen={isWorkoutDeleteModalOpen}
@@ -184,15 +185,13 @@ const WorkoutLibraryListView = () => {
                         closeWorkoutDeleteModal();
                     }}
                 />
-            </ErrorBoundary>
+            )}
 
-            <ErrorBoundary>
-                <WorkoutLibraryCreateFloatingActionButton
-                    onButtonClick={(workoutLibraryId: string) =>
-                        handleFloatingActionButtonClick(workoutLibraryId)
-                    }
-                />
-            </ErrorBoundary>
+            <WorkoutLibraryCreateFloatingActionButton
+                onButtonClick={(workoutLibraryId: string) =>
+                    handleFloatingActionButtonClick(workoutLibraryId)
+                }
+            />
         </Container>
     );
 };

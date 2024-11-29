@@ -86,23 +86,22 @@ const RoutineRecordListCalendarView = () => {
                     />
                 )}
             />
-            <ErrorBoundary>
-                {isRoutineRecordDeleteModalOpen && (
-                    <RoutineRecordDeleteModal
-                        isOpen={isRoutineRecordDeleteModalOpen}
-                        routineRecordId={routineRecordId}
-                        onBackdropClick={() => {
-                            closeRoutineRecordDeleteModal();
-                        }}
-                        onCancelButtonClick={() => {
-                            closeRoutineRecordDeleteModal();
-                        }}
-                        onConfirmButtonClick={() => {
-                            closeRoutineRecordDeleteModal();
-                        }}
-                    />
-                )}
-            </ErrorBoundary>
+
+            {isRoutineRecordDeleteModalOpen && (
+                <RoutineRecordDeleteModal
+                    isOpen={isRoutineRecordDeleteModalOpen}
+                    routineRecordId={routineRecordId}
+                    onBackdropClick={() => {
+                        closeRoutineRecordDeleteModal();
+                    }}
+                    onCancelButtonClick={() => {
+                        closeRoutineRecordDeleteModal();
+                    }}
+                    onConfirmButtonClick={() => {
+                        closeRoutineRecordDeleteModal();
+                    }}
+                />
+            )}
         </Container>
     );
 };

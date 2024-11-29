@@ -230,27 +230,23 @@ const RoutineConfigOneProgressView = () => {
                 />
             </Box>
 
-            <ErrorBoundary>
-                <Accordion.List<WorkoutConfig>
-                    data={routineConfigState.workoutConfigs}
-                    render={(item) => (
-                        <WorkoutConfigDetailProgressAccordion
-                            key={item._id}
-                            data={item}
-                            remainingTime={remainingTime}
-                            routineRecordId={routineRecordId}
-                            onSetCreate={handleSetCreate}
-                            onSetDelete={handleSetDelete}
-                            onSetComplete={handleSetComplete}
-                            onSetUpdate={handleSetUpdate}
-                            onCompletedSetIdsMutate={
-                                handleCompletedSetIdsMutate
-                            }
-                            onWorkoutDelete={handleWorkoutDelete}
-                        />
-                    )}
-                />
-            </ErrorBoundary>
+            <Accordion.List<WorkoutConfig>
+                data={routineConfigState.workoutConfigs}
+                render={(item) => (
+                    <WorkoutConfigDetailProgressAccordion
+                        key={item._id}
+                        data={item}
+                        remainingTime={remainingTime}
+                        routineRecordId={routineRecordId}
+                        onSetCreate={handleSetCreate}
+                        onSetDelete={handleSetDelete}
+                        onSetComplete={handleSetComplete}
+                        onSetUpdate={handleSetUpdate}
+                        onCompletedSetIdsMutate={handleCompletedSetIdsMutate}
+                        onWorkoutDelete={handleWorkoutDelete}
+                    />
+                )}
+            />
 
             <BottomBar>
                 <TimerTemplate>
@@ -280,110 +276,91 @@ const RoutineConfigOneProgressView = () => {
                 />
             )}
 
-            <ErrorBoundary>
-                {isCompletedModalOpen && (
-                    <CompletedModal
-                        isOpen={isCompletedModalOpen}
-                        onBackdropClick={() => handleCloseCompletedModal}
-                        onCancelButtonClick={async () => {
-                            const workoutEndTime = moment();
-                            const workoutTime = moment
-                                .duration(
-                                    workoutEndTime.diff(
-                                        workoutStartTime.current
-                                    )
-                                )
-                                .asSeconds();
-                            await throwError({
-                                fetchFn: async () =>
-                                    await updateRoutineRecordOneMutate({
-                                        routineRecordId,
-                                        workoutTime,
-                                    }),
-                                onSuccess: () => {
-                                    handleCloseCompletedModal();
-                                    showToast(
-                                        "루틴이 완료되었습니다.",
-                                        "success"
-                                    );
-                                    navigate(ROUTES.CONFIG.LIST.PATH, {
-                                        replace: true,
-                                    });
-                                    sendNativeMessage({ type: "vibrate" });
-                                },
-                            });
-                        }}
-                        onConfirmButtonClick={async () => {
-                            const workoutEndTime = moment();
-                            const workoutTime = moment
-                                .duration(
-                                    workoutEndTime.diff(
-                                        workoutStartTime.current
-                                    )
-                                )
-                                .asSeconds();
-                            await throwError({
-                                fetchFn: async () =>
-                                    await updateRoutineRecordOneMutate({
-                                        routineRecordId,
-                                        workoutTime,
-                                    }),
-                                onSuccess: () => {
-                                    handleCloseUncompletedModal();
-                                    showToast(
-                                        "루틴이 완료되었습니다.",
-                                        "success"
-                                    );
-                                    navigate(ROUTES.RECORD.LIST.PATH, {
-                                        replace: true,
-                                    });
-                                    sendNativeMessage({ type: "vibrate" });
-                                },
-                            });
-                        }}
-                    />
-                )}
-            </ErrorBoundary>
+            {isCompletedModalOpen && (
+                <CompletedModal
+                    isOpen={isCompletedModalOpen}
+                    onBackdropClick={() => handleCloseCompletedModal}
+                    onCancelButtonClick={async () => {
+                        const workoutEndTime = moment();
+                        const workoutTime = moment
+                            .duration(
+                                workoutEndTime.diff(workoutStartTime.current)
+                            )
+                            .asSeconds();
+                        await throwError({
+                            fetchFn: async () =>
+                                await updateRoutineRecordOneMutate({
+                                    routineRecordId,
+                                    workoutTime,
+                                }),
+                            onSuccess: () => {
+                                handleCloseCompletedModal();
+                                showToast("루틴이 완료되었습니다.", "success");
+                                navigate(ROUTES.CONFIG.LIST.PATH, {
+                                    replace: true,
+                                });
+                                sendNativeMessage({ type: "vibrate" });
+                            },
+                        });
+                    }}
+                    onConfirmButtonClick={async () => {
+                        const workoutEndTime = moment();
+                        const workoutTime = moment
+                            .duration(
+                                workoutEndTime.diff(workoutStartTime.current)
+                            )
+                            .asSeconds();
+                        await throwError({
+                            fetchFn: async () =>
+                                await updateRoutineRecordOneMutate({
+                                    routineRecordId,
+                                    workoutTime,
+                                }),
+                            onSuccess: () => {
+                                handleCloseUncompletedModal();
+                                showToast("루틴이 완료되었습니다.", "success");
+                                navigate(ROUTES.RECORD.LIST.PATH, {
+                                    replace: true,
+                                });
+                                sendNativeMessage({ type: "vibrate" });
+                            },
+                        });
+                    }}
+                />
+            )}
 
-            <ErrorBoundary>
-                {isUncompletedModalOpen && (
-                    <UncompletedModal
-                        isOpen={isUncompletedModalOpen}
-                        onBackdropClick={() => handleCloseUncompletedModal}
-                        onCancelButtonClick={() => {
-                            handleCloseUncompletedModal();
-                        }}
-                        onConfirmButtonClick={async () => {
-                            const workoutEndTime = moment();
-                            const workoutTime = moment
-                                .duration(
-                                    workoutEndTime.diff(
-                                        workoutStartTime.current
-                                    )
-                                )
-                                .asSeconds();
-                            await throwError({
-                                fetchFn: async () =>
-                                    await updateRoutineRecordOneMutate({
-                                        routineRecordId,
-                                        workoutTime,
-                                    }),
-                                onSuccess: () => {
-                                    handleCloseCompletedModal();
-                                    showToast(
-                                        "루틴이 완료되었습니다.",
-                                        "success"
-                                    );
-                                    navigate(ROUTES.RECORD.LIST.PATH, {
-                                        replace: true,
-                                    });
-                                    sendNativeMessage({ type: "vibrate" });
-                                },
-                            });
-                        }}
-                    />
-                )}
-            </ErrorBoundary>
+            {isUncompletedModalOpen && (
+                <UncompletedModal
+                    isOpen={isUncompletedModalOpen}
+                    onBackdropClick={() => handleCloseUncompletedModal}
+                    onCancelButtonClick={() => {
+                        handleCloseUncompletedModal();
+                    }}
+                    onConfirmButtonClick={async () => {
+                        const workoutEndTime = moment();
+                        const workoutTime = moment
+                            .duration(
+                                workoutEndTime.diff(workoutStartTime.current)
+                            )
+                            .asSeconds();
+                        await throwError({
+                            fetchFn: async () =>
+                                await updateRoutineRecordOneMutate({
+                                    routineRecordId,
+                                    workoutTime,
+                                }),
+                            onSuccess: () => {
+                                handleCloseCompletedModal();
+                                showToast("루틴이 완료되었습니다.", "success");
+                                navigate(ROUTES.RECORD.LIST.PATH, {
+                                    replace: true,
+                                });
+                                sendNativeMessage({ type: "vibrate" });
+                            },
+                        });
+                    }}
+                />
+            )}
         </Container>
     );
 };

@@ -5,7 +5,6 @@ import ROUTES from "constants/routes";
 import RoutineConfigCreateFloatingActionButton from "components/business/routine-config/RoutineConfigCreateFloatingActionButton";
 import RoutineConfigListView from "components/business/routine-config/RoutineConfigListView";
 import PageHeader from "components/content/PageHeader/PageHeader";
-// import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import { Suspense } from "react";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
@@ -25,15 +24,11 @@ const RoutineConfigListPage = () => {
             <ErrorBoundary>
                 <Suspense fallback={<CommonLoading />}>
                     <RoutineConfigListView />
+                    <RoutineConfigCreateFloatingActionButton />
                 </Suspense>
             </ErrorBoundary>
 
             <NavigationBottomBar defaultValue={ROUTES.CONFIG.LIST.PATH} />
-            <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
-                    <RoutineConfigCreateFloatingActionButton />
-                </Suspense>
-            </ErrorBoundary>
         </Container>
     );
 };

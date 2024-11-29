@@ -30,10 +30,19 @@ const SmallCardListContainer = styled.div`
     overflow-y: auto;
 `;
 
-const WorkoutLibraryListBottomSheet = () => {
+type WorkoutLibraryListBottomSheetProps = {
+    isOpen: boolean;
+    onBackdropClick: () => void;
+    onSubmitButtonClick: () => void;
+};
+
+const WorkoutLibraryListBottomSheet = ({
+    isOpen,
+    onBackdropClick,
+    onSubmitButtonClick,
+}: WorkoutLibraryListBottomSheetProps) => {
     const { routineConfigId } = useParams();
     const { throwError } = useThrowError();
-    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
     const { selectedValue, handleTabClick } = useTab(Category.ALL);
     const { selectedValues, handleCheckBoxClick, resetSelectedValues } =
         useCheckBox();
@@ -62,7 +71,7 @@ const WorkoutLibraryListBottomSheet = () => {
                 }),
             onSuccess: () => {
                 resetSelectedValues();
-                handleCloseModal();
+                onSubmitButtonClick();
             },
         });
     };
@@ -72,7 +81,7 @@ const WorkoutLibraryListBottomSheet = () => {
             <Modal>
                 <Modal.Backdrop
                     isOpen={isOpen}
-                    onBackdropClick={handleCloseModal}
+                    onBackdropClick={onBackdropClick}
                 />
                 <Modal.BottomSheet isOpen={isOpen}>
                     <Container>
@@ -165,7 +174,7 @@ const WorkoutLibraryListBottomSheet = () => {
                     </Container>
                 </Modal.BottomSheet>
             </Modal>
-            <FloatingActionButton onButtonClick={() => handleOpenModal()} />
+            {/* <FloatingActionButton onButtonClick={() => handleOpenModal()} /> */}
         </>
     );
 };

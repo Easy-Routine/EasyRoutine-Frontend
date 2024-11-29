@@ -5,7 +5,7 @@ import Graph from "components/content/Graph/Graph";
 import useTab from "hooks/client/useTab";
 import styled from "styled-components";
 import useModal from "hooks/client/useModal";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
 import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
@@ -14,6 +14,7 @@ import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
 import { WorkoutLibrary } from "types/model";
 import useThrowError from "hooks/client/useThrowError";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const Container = styled.div`
     display: flex;
@@ -117,15 +118,17 @@ const RoutineRecorListGraphView = () => {
                 </>
             )}
             <ErrorBoundary>
-                <WorkoutLibraryListGraphBottomSheet
-                    isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
-                    onBackdropClick={() =>
-                        closeWorkoutLibraryListGraphBottomSheet()
-                    }
-                    onSmallCardClick={(workoutLibraryId: string) =>
-                        handleSmallCardClick(workoutLibraryId)
-                    }
-                />
+                <Suspense fallback={<CommonLoading />}>
+                    <WorkoutLibraryListGraphBottomSheet
+                        isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
+                        onBackdropClick={() =>
+                            closeWorkoutLibraryListGraphBottomSheet()
+                        }
+                        onSmallCardClick={(workoutLibraryId: string) =>
+                            handleSmallCardClick(workoutLibraryId)
+                        }
+                    />
+                </Suspense>
             </ErrorBoundary>
 
             <Button onClick={handleButtonClick}>운동 선택하기</Button>
