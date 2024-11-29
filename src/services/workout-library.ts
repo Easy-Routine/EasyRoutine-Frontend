@@ -55,10 +55,10 @@ export const getWorkoutLibraryAll = async ({
 
 export const getWorkoutLibraryOne = async (
     workoutLibraryId: string
-): Promise<WorkoutLibrary | undefined> => {
+): Promise<WorkoutLibrary | undefined | null> => {
     try {
         if (!workoutLibraryId) {
-            return;
+            return null;
         }
 
         const workoutLibraryOne =

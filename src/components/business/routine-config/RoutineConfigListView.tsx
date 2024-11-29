@@ -78,21 +78,25 @@ const RoutineConfigListView = () => {
                 </Suspense>
             </ErrorBoundary>
 
-            {isRoutineConfigDeleteModalOpen && (
-                <RoutineConfigDeleteModal
-                    routineConfigId={routineConfigId}
-                    isOpen={isRoutineConfigDeleteModalOpen}
-                    onBackdropClick={() => {
-                        closeRoutineConfigDeleteModal();
-                    }}
-                    onCancelButtonClick={() => {
-                        closeRoutineConfigDeleteModal();
-                    }}
-                    onConfirmButtonClick={() => {
-                        closeRoutineConfigDeleteModal();
-                    }}
-                />
-            )}
+            <ErrorBoundary>
+                <Suspense fallback={<CommonLoading />}>
+                    {isRoutineConfigDeleteModalOpen && (
+                        <RoutineConfigDeleteModal
+                            routineConfigId={routineConfigId}
+                            isOpen={isRoutineConfigDeleteModalOpen}
+                            onBackdropClick={() => {
+                                closeRoutineConfigDeleteModal();
+                            }}
+                            onCancelButtonClick={() => {
+                                closeRoutineConfigDeleteModal();
+                            }}
+                            onConfirmButtonClick={() => {
+                                closeRoutineConfigDeleteModal();
+                            }}
+                        />
+                    )}
+                </Suspense>
+            </ErrorBoundary>
         </Container>
     );
 };

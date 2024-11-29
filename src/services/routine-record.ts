@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid"; // UUID 생성을 위한 라이브러리
 import { RoutineRecord } from "types/model";
 import { db } from "db";
 import { Color } from "types/enum";
-import { DotDataByDate } from "components/content/CustomCalendar/CustomCalendar";
+import { DotDataByDate } from "components/business/routine-record/RoutineRecordAllMonthlyCalendar";
 import moment from "moment";
 import api from "utils/axios";
 import { handleError } from "utils/handleError";

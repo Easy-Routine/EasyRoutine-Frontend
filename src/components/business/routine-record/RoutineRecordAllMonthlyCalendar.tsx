@@ -8,6 +8,7 @@ import { ReactComponent as CalendarArrowLeftIcon } from "assets/image/calendar-a
 import { ReactComponent as CalendarArrowRightIcon } from "assets/image/calendar-arrow-right.svg";
 import moment from "moment";
 import "moment/locale/ko";
+import useGetRoutineRecordAllMonthlyQuery from "hooks/server/useGetRoutineRecordAllMonthlyQuery";
 
 const CalendarArrowLeft = styled(CalendarArrowLeftIcon)`
     padding: 5px;
@@ -158,19 +159,26 @@ type CustomCalendarProps = {
     onPrevMonthButtonClick: (date: any) => void;
     onNextMonthButtnClick: (date: any) => void;
     onDateButtonClick: (date: any) => void;
-    dotDataByDate: DotDataByDate[];
+    // dotDataByDate: DotDataByDate[];
+    currentMonth: Date;
     dotDataKey: string;
 };
 
-const CustomCalendar = ({
+const RoutineRecordAllMonthlyCalendar = ({
     onPrevMonthButtonClick,
     onNextMonthButtnClick,
     onDateButtonClick,
-    dotDataByDate,
+    // dotDataByDate,
+    currentMonth,
     dotDataKey,
 }: CustomCalendarProps) => {
     const [date, setDate] = useState(new Date());
     const [activeStartDate, setActiveStartDate] = useState(new Date());
+
+    const { data: routineRecordAllMonthly } =
+        useGetRoutineRecordAllMonthlyQuery(currentMonth);
+
+    const dotDataByDate = routineRecordAllMonthly!;
 
     const handleDateButtonClick = (date: any) => {
         onDateButtonClick(date);
@@ -260,4 +268,4 @@ const CustomCalendar = ({
     );
 };
 
-export default CustomCalendar;
+export default RoutineRecordAllMonthlyCalendar;

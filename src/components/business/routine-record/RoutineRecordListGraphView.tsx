@@ -15,6 +15,7 @@ import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOn
 import { WorkoutLibrary } from "types/model";
 import useThrowError from "hooks/client/useThrowError";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 
 const Container = styled.div`
     display: flex;
@@ -32,21 +33,10 @@ const RoutineRecorListGraphView = () => {
     } = useModal();
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
-    const [workoutLibraryDetail, setWorkoutLibraryDetail] =
-        useState<WorkoutLibrary | null>();
 
-    // const { data: workoutLibraryDetail } =
-    //     useGetWorkoutLibraryOneQuery(workoutLibraryId);
-
-    const { mutateAsync: getWorkoutLibraryOneMutate } =
-        useGetWorkoutLibraryOneMutation();
-
-    const { data: workoutRecordSumListByDate } = useGetWorkoutRecordSumAllQuery(
-        {
-            workoutLibraryId,
-            period: selectedValue as Period,
-        }
-    );
+    const { data: workoutLibraryDetailData } =
+        useGetWorkoutLibraryOneQuery(workoutLibraryId);
+    const workoutLibraryDetail = workoutLibraryDetailData!;
 
     const handleButtonClick = async () => {
         openWorkoutLibraryListGraphBottomSheet();
@@ -54,13 +44,7 @@ const RoutineRecorListGraphView = () => {
 
     const handleSmallCardClick = async (_id: string) => {
         setWorkoutLibraryId(_id);
-        await throwError({
-            fetchFn: async () => await getWorkoutLibraryOneMutate(_id),
-            onSuccess: (response) => {
-                setWorkoutLibraryDetail(response);
-                closeWorkoutLibraryListGraphBottomSheet();
-            },
-        });
+        closeWorkoutLibraryListGraphBottomSheet();
     };
 
     return (
@@ -73,7 +57,8 @@ const RoutineRecorListGraphView = () => {
                     <Box>
                         <Graph
                             onDotClick={(data) => console.log(data)}
-                            data={workoutRecordSumListByDate!}
+                            workoutLibraryId={workoutLibraryId}
+                            selectedValue={selectedValue}
                             lineKey="key"
                             areaKey="value"
                         />
@@ -119,15 +104,17 @@ const RoutineRecorListGraphView = () => {
             )}
             <ErrorBoundary>
                 <Suspense fallback={<CommonLoading />}>
-                    <WorkoutLibraryListGraphBottomSheet
-                        isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
-                        onBackdropClick={() =>
-                            closeWorkoutLibraryListGraphBottomSheet()
-                        }
-                        onSmallCardClick={(workoutLibraryId: string) =>
-                            handleSmallCardClick(workoutLibraryId)
-                        }
-                    />
+                    {isWorkoutLibraryListGraphBottomSheetOpen && (
+                        <WorkoutLibraryListGraphBottomSheet
+                            isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
+                            onBackdropClick={() =>
+                                closeWorkoutLibraryListGraphBottomSheet()
+                            }
+                            onSmallCardClick={(workoutLibraryId: string) => {
+                                handleSmallCardClick(workoutLibraryId);
+                            }}
+                        />
+                    )}
                 </Suspense>
             </ErrorBoundary>
 

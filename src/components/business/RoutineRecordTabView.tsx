@@ -32,24 +32,24 @@ const RoutineRecordTabView = () => {
 
     return (
         <Container>
-            <Tab>
-                <Tab.Button
-                    value="calendar"
-                    selectedValue={selectedValue}
-                    onButtonClick={handleTabClick}
-                >
-                    캘린더
-                </Tab.Button>
-                <Tab.Button
-                    value="graph"
-                    selectedValue={selectedValue}
-                    onButtonClick={handleTabClick}
-                >
-                    통계
-                </Tab.Button>
-            </Tab>
             <ErrorBoundary>
                 <Suspense fallback={<CommonLoading />}>
+                    <Tab>
+                        <Tab.Button
+                            value="calendar"
+                            selectedValue={selectedValue}
+                            onButtonClick={handleTabClick}
+                        >
+                            캘린더
+                        </Tab.Button>
+                        <Tab.Button
+                            value="graph"
+                            selectedValue={selectedValue}
+                            onButtonClick={handleTabClick}
+                        >
+                            통계
+                        </Tab.Button>
+                    </Tab>
                     <SelectedView />
                 </Suspense>
             </ErrorBoundary>

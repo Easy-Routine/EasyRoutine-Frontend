@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { ReactComponent as MoonIcon } from "assets/image/moon.svg";
 import { ReactComponent as HumanIcon } from "assets/image/human2.svg";
 import Toggle from "components/content/Toggle/Toggle";
-import { useContext, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import { ThemeContext, ThemeContextType } from "context/ThemeContext";
 import useToast from "hooks/useToast";
 import syncData from "utils/syncData";
@@ -65,7 +65,7 @@ const SyncButton = styled.button`
 
 const UnderlineBoxWrapper = styled.div``;
 
-const MyPageContent = () => {
+const MyPageContentView = () => {
     const { themeMode, setThemeMode } = useContext(
         ThemeContext
     ) as ThemeContextType;
@@ -77,7 +77,9 @@ const MyPageContent = () => {
         handleOpenModal: openDataSyncModal,
         handleCloseModal: closeDataSyncModal,
     } = useModal();
-    const { data: userOne, isLoading } = useGetUserOneQuery();
+    const { data: userOneData } = useGetUserOneQuery();
+
+    const userOne = userOneData!;
 
     const [syncMode, setSyncMode] = useState(
         localStorage.getItem("syncMode") &&
@@ -123,26 +125,13 @@ const MyPageContent = () => {
 
     return (
         <Container>
-            <PageHeader>
-                <Logo />
-            </PageHeader>
-
-            {isLoading ? (
-                <CommonLoading />
-            ) : (
-                userOne && (
-                    <ProfileBox>
-                        <ProfileImage src={userOne.profileImage} />
-                        <UserName>{userOne.name}</UserName>
-                        <LogoutButton onClick={handleLogoutButtonClick}>
-                            로그아웃
-                        </LogoutButton>
-                    </ProfileBox>
-                )
-            )}
-
-            <NavigationBottomBar defaultValue={ROUTES.MY.PATH} />
-
+            <ProfileBox>
+                <ProfileImage src={userOne.profileImage} />
+                <UserName>{userOne.name}</UserName>
+                <LogoutButton onClick={handleLogoutButtonClick}>
+                    로그아웃
+                </LogoutButton>
+            </ProfileBox>
             <UnderlineBoxWrapper>
                 <UnderlineBox>
                     <UnderlineBox.TitleWrapper>
@@ -181,16 +170,26 @@ const MyPageContent = () => {
                 </UnderlineBox>
             </UnderlineBoxWrapper>
 
-            <DataSyncModal isOpen={isDataSyncModalOpen} />
+            {isDataSyncModalOpen && (
+                <DataSyncModal isOpen={isDataSyncModalOpen} />
+            )}
         </Container>
     );
 };
 
 const MyPage = () => {
     return (
-        <ErrorBoundary>
-            <MyPageContent />
-        </ErrorBoundary>
+        <>
+            <PageHeader>
+                <Logo />
+            </PageHeader>
+            <ErrorBoundary>
+                <Suspense fallback={<CommonLoading />}>
+                    <MyPageContentView />
+                </Suspense>
+            </ErrorBoundary>
+            <NavigationBottomBar defaultValue={ROUTES.MY.PATH} />
+        </>
     );
 };
 
