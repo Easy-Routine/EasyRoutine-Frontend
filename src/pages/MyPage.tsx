@@ -16,8 +16,10 @@ import DataSyncModal from "components/business/DataSyncModal";
 import { ReactComponent as SyncIcon } from "assets/image/sync.svg";
 import PageHeader from "components/content/PageHeader/PageHeader";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
-import useThrowError from "hooks/client/useThrowError";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import { CustomError } from "types/error";
+import { AxiosError } from "axios";
+import Dexie from "dexie";
 
 const Container = styled.div`
     display: flex;
@@ -70,7 +72,6 @@ const MyPageContentView = () => {
         ThemeContext
     ) as ThemeContextType;
     const { showToast } = useToast();
-    const { throwError } = useThrowError();
 
     const {
         isOpen: isDataSyncModalOpen,
@@ -98,23 +99,32 @@ const MyPageContentView = () => {
     };
 
     const handleSyncButtonClick = async () => {
-        let modalOpenTimeout: NodeJS.Timeout;
-        // 데이터 동기화 작업을 비동기로 시작합니다.
-        const syncPromise = syncData();
-        // 1초 후에 모달을 열도록 설정합니다.
-        modalOpenTimeout = setTimeout(() => {
-            openDataSyncModal();
-        }, 1000);
+        let modalOpenTimeout;
+        try {
+            // 데이터 동기화 작업을 비동기로 시작합니다.
+            const syncPromise = syncData();
 
-        await throwError({
-            fetchFn: async () => await syncPromise,
-            onSuccess: () => {
-                showToast("데이터를 동기화했습니다.", "success");
-                clearTimeout(modalOpenTimeout); // 모달 열기 타이머를 클리어
-                closeDataSyncModal(); // 모달 닫기
-            },
-        });
-        // showToast("로그인이 만료되었습니다.", "error");
+            // 1초 후에 모달을 열도록 설정합니다.
+            modalOpenTimeout = setTimeout(() => {
+                openDataSyncModal();
+            }, 1000);
+
+            // 데이터 동기화가 완료될 때까지 기다립니다.
+            await syncPromise;
+            showToast("데이터를 동기화했습니다.", "success");
+        } catch (e) {
+            if (
+                e instanceof Error ||
+                e instanceof CustomError ||
+                e instanceof AxiosError ||
+                e instanceof Dexie.DexieError
+            )
+                showToast(e.message, "error");
+        } finally {
+            // 데이터 동기화 후 모달을 닫습니다.
+            clearTimeout(modalOpenTimeout); // 모달 열기 타이머를 클리어
+            closeDataSyncModal(); // 모달 닫기
+        }
     };
 
     const handleLogoutButtonClick = () => {

@@ -4,7 +4,6 @@ import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
 import useDeleteRoutineRecordOneMutation from "hooks/server/useDeleteRoutineRecordOneMutation";
 import useNativeMessage from "hooks/client/useNativeMessage";
-import useThrowError from "hooks/client/useThrowError";
 
 type RoutineRecordDeleteModalProps = {
     isOpen: boolean;
@@ -27,21 +26,13 @@ const RoutineRecordDeleteModal = ({
     const { mutateAsync: deleteRoutineRecordOneMutate } =
         useDeleteRoutineRecordOneMutation();
 
-    const { throwError } = useThrowError();
-
     const handleRoutineRecordDeleteButtonClick = async (
         routineRecordId: string
     ) => {
-        await throwError({
-            fetchFn: async () =>
-                await deleteRoutineRecordOneMutate(routineRecordId),
-            onSuccess: () => {
-                showToast("운동 기록이 삭제되었습니다.", "success");
-                onConfirmButtonClick();
-                sendNativeMessage({ type: "vibrate" });
-            },
-        });
-        // showToast("루틴 기록 삭제 중 에러가 발생했습니다.", "error");
+        await deleteRoutineRecordOneMutate(routineRecordId);
+        showToast("운동 기록이 삭제되었습니다.", "success");
+        onConfirmButtonClick();
+        sendNativeMessage({ type: "vibrate" });
     };
 
     return (

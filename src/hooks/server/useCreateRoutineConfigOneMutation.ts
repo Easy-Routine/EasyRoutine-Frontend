@@ -1,9 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
+import useToast from "hooks/useToast";
 import { createRoutineConfigOne } from "services/routine-config";
 import { Color } from "types/enum";
 
 const useCreateRoutineConfigMutation = () => {
+    const { showToast } = useToast();
+
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
@@ -15,6 +18,10 @@ const useCreateRoutineConfigMutation = () => {
             color: Color;
             userId: string;
         }) => createRoutineConfigOne({ name, color, userId }),
+        onError: (error) => {
+            console.log(error);
+            showToast(error.message, "error");
+        },
         onSettled: () => {
             queryClient.invalidateQueries({
                 queryKey: [queryKey.getRoutineConfigAll],

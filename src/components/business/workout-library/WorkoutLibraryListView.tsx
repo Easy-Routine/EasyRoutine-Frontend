@@ -17,7 +17,6 @@ import { Category } from "types/enum";
 import useToast from "hooks/useToast";
 import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
-import useThrowError from "hooks/client/useThrowError";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const Container = styled.div`
@@ -31,7 +30,6 @@ const WorkoutLibraryListView = () => {
     const { value, handleInputChange, handleInputClear } = useInput();
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
     const { showToast } = useToast();
-    const { throwError } = useThrowError();
 
     const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery(
         value,
@@ -71,20 +69,16 @@ const WorkoutLibraryListView = () => {
     };
     // 긴 클릭
     const handleSmallCardLongPress = async (workoutLibraryId: string) => {
-        await throwError({
-            fetchFn: async () =>
-                await getWorkoutLibraryOneMutate(workoutLibraryId),
-            onSuccess: (response) => {
-                const isEditable = response?.isEditable;
+        const response = await getWorkoutLibraryOneMutate(workoutLibraryId);
 
-                if (isEditable) {
-                    setWorkoutLibraryId(workoutLibraryId);
-                    openWorkoutDeleteModal();
-                } else {
-                    showToast("기본 운동은 변경할 수 없습니다.", "error");
-                }
-            },
-        });
+        const isEditable = response?.isEditable;
+
+        if (isEditable) {
+            setWorkoutLibraryId(workoutLibraryId);
+            openWorkoutDeleteModal();
+        } else {
+            showToast("기본 운동은 변경할 수 없습니다.", "error");
+        }
     };
 
     return (

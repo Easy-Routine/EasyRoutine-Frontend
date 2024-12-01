@@ -5,17 +5,14 @@ import SmallCard from "components/content/SmallCard/SmallCard";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import useCheckBox from "hooks/client/useCheckBox";
 import useInput from "hooks/client/useInput";
-import useModal from "hooks/client/useModal";
 import useTab from "hooks/client/useTab";
 import SearchInput from "components/content/SearchInput/SearchInput";
-import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import styled from "styled-components";
 import { WorkoutLibrary } from "types/model";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import { useParams } from "react-router-dom";
 import { Category } from "types/enum";
-import useThrowError from "hooks/client/useThrowError";
 
 const Container = styled.div`
     display: flex;
@@ -42,7 +39,6 @@ const WorkoutLibraryListBottomSheet = ({
     onSubmitButtonClick,
 }: WorkoutLibraryListBottomSheetProps) => {
     const { routineConfigId } = useParams();
-    const { throwError } = useThrowError();
     const { selectedValue, handleTabClick } = useTab(Category.ALL);
     const { selectedValues, handleCheckBoxClick, resetSelectedValues } =
         useCheckBox();
@@ -63,17 +59,13 @@ const WorkoutLibraryListBottomSheet = ({
     };
 
     const handleSubmitButtonClick = async (values: string[]) => {
-        await throwError({
-            fetchFn: async () =>
-                await createWorkoutConfigAllMutation({
-                    workoutLibraryIds: values,
-                    routineConfigId: routineConfigId as string,
-                }),
-            onSuccess: () => {
-                resetSelectedValues();
-                onSubmitButtonClick();
-            },
+        await createWorkoutConfigAllMutation({
+            workoutLibraryIds: values,
+            routineConfigId: routineConfigId as string,
         });
+
+        resetSelectedValues();
+        onSubmitButtonClick();
     };
 
     return (

@@ -1,18 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
+import useToast from "hooks/useToast";
 import { uploadImage } from "services";
 const useUploadWorkoutLibraryImageMutation = () => {
+    const { showToast } = useToast();
     return useMutation({
         mutationFn: ({ formData }: { formData: FormData }) =>
             uploadImage(formData),
 
-        onSuccess: (response) => {
-            // console.log(response);
-        },
-        onSettled: () => {
-            // workoutLibraryId를 여기서 사용할 수 있습니다.
-            // queryClient.invalidateQueries({
-            //     queryKey: [queryKey.getWorkoutLibraryOne, workoutLibraryId],
-            // });
+        onError: (error) => {
+            console.log(error);
+            showToast(error.message, "error");
         },
     });
 };

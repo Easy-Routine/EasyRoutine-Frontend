@@ -25,9 +25,6 @@ import useUpdateRoutineRecordWorkoutEndAtMutation from "hooks/server/useUpdateRo
 import moment from "moment";
 
 import useNativeMessage from "hooks/client/useNativeMessage";
-import useThrowError from "hooks/client/useThrowError";
-import { RoutineRecord } from "types/model";
-import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 
 const Container = styled.div`
     display: flex;
@@ -50,7 +47,6 @@ const RoutineConfigOneProgressView = () => {
     const { sendNativeMessage } = useNativeMessage();
     const { routineConfigId } = useParams();
     const workoutStartTime = useRef(moment());
-    const { throwError } = useThrowError();
 
     const {
         isOpen: isTimerModalOpen,
@@ -94,17 +90,13 @@ const RoutineConfigOneProgressView = () => {
 
     useEffect(() => {
         (async () => {
-            await throwError<RoutineRecord | undefined>({
-                fetchFn: async () =>
-                    await createRoutineRecordOneMutate({
-                        name: routineConfigState.name,
-                        color: routineConfigState.color,
-                        userId: routineConfigState.userId,
-                    }),
-                onSuccess: (response) => {
-                    response && setRoutineRecordId(response._id);
-                },
+            const response = await createRoutineRecordOneMutate({
+                name: routineConfigState.name,
+                color: routineConfigState.color,
+                userId: routineConfigState.userId,
             });
+
+            response && setRoutineRecordId(response._id);
         })();
     }, [createRoutineRecordOneMutate]);
 
@@ -287,21 +279,17 @@ const RoutineConfigOneProgressView = () => {
                                 workoutEndTime.diff(workoutStartTime.current)
                             )
                             .asSeconds();
-                        await throwError({
-                            fetchFn: async () =>
-                                await updateRoutineRecordOneMutate({
-                                    routineRecordId,
-                                    workoutTime,
-                                }),
-                            onSuccess: () => {
-                                handleCloseCompletedModal();
-                                showToast("루틴이 완료되었습니다.", "success");
-                                navigate(ROUTES.CONFIG.LIST.PATH, {
-                                    replace: true,
-                                });
-                                sendNativeMessage({ type: "vibrate" });
-                            },
+                        await updateRoutineRecordOneMutate({
+                            routineRecordId,
+                            workoutTime,
                         });
+
+                        handleCloseCompletedModal();
+                        showToast("루틴이 완료되었습니다.", "success");
+                        navigate(ROUTES.CONFIG.LIST.PATH, {
+                            replace: true,
+                        });
+                        sendNativeMessage({ type: "vibrate" });
                     }}
                     onConfirmButtonClick={async () => {
                         const workoutEndTime = moment();
@@ -310,21 +298,16 @@ const RoutineConfigOneProgressView = () => {
                                 workoutEndTime.diff(workoutStartTime.current)
                             )
                             .asSeconds();
-                        await throwError({
-                            fetchFn: async () =>
-                                await updateRoutineRecordOneMutate({
-                                    routineRecordId,
-                                    workoutTime,
-                                }),
-                            onSuccess: () => {
-                                handleCloseUncompletedModal();
-                                showToast("루틴이 완료되었습니다.", "success");
-                                navigate(ROUTES.RECORD.LIST.PATH, {
-                                    replace: true,
-                                });
-                                sendNativeMessage({ type: "vibrate" });
-                            },
+                        await updateRoutineRecordOneMutate({
+                            routineRecordId,
+                            workoutTime,
                         });
+                        handleCloseUncompletedModal();
+                        showToast("루틴이 완료되었습니다.", "success");
+                        navigate(ROUTES.RECORD.LIST.PATH, {
+                            replace: true,
+                        });
+                        sendNativeMessage({ type: "vibrate" });
                     }}
                 />
             )}
@@ -343,21 +326,16 @@ const RoutineConfigOneProgressView = () => {
                                 workoutEndTime.diff(workoutStartTime.current)
                             )
                             .asSeconds();
-                        await throwError({
-                            fetchFn: async () =>
-                                await updateRoutineRecordOneMutate({
-                                    routineRecordId,
-                                    workoutTime,
-                                }),
-                            onSuccess: () => {
-                                handleCloseCompletedModal();
-                                showToast("루틴이 완료되었습니다.", "success");
-                                navigate(ROUTES.RECORD.LIST.PATH, {
-                                    replace: true,
-                                });
-                                sendNativeMessage({ type: "vibrate" });
-                            },
+                        await updateRoutineRecordOneMutate({
+                            routineRecordId,
+                            workoutTime,
                         });
+                        handleCloseCompletedModal();
+                        showToast("루틴이 완료되었습니다.", "success");
+                        navigate(ROUTES.RECORD.LIST.PATH, {
+                            replace: true,
+                        });
+                        sendNativeMessage({ type: "vibrate" });
                     }}
                 />
             )}

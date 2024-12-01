@@ -22,8 +22,6 @@ import useDeleteSetRecordOneMutation from "hooks/server/useDeleteSetRecordOneMut
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import moment from "moment";
 import { Type } from "types/enum";
-import useThrowError from "hooks/client/useThrowError";
-
 type TypeMapper = {
     [key: string]: string;
 };
@@ -69,7 +67,6 @@ const WorkoutConfigDetailProgressAccordion = ({
     const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
-    const { throwError } = useThrowError();
 
     const [currentSetId, setCurrentSetId] = useState(data.setConfigs[0]?._id);
     const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
@@ -91,16 +88,11 @@ const WorkoutConfigDetailProgressAccordion = ({
         // 컴포넌트가 마운트 될때 운동 기록 데이터를 생성  및 setCurrentWorkoutId하기
         if (routineRecordId && data) {
             (async () => {
-                await throwError({
-                    fetchFn: async () =>
-                        await createWorkoutRecordOneMutate({
-                            routineRecordId,
-                            workoutLibrary: data.workoutLibrary,
-                        }),
-                    onSuccess: (response) => {
-                        response && setCurrentWorkoutId(response._id);
-                    },
+                const response = await createWorkoutRecordOneMutate({
+                    routineRecordId,
+                    workoutLibrary: data.workoutLibrary,
                 });
+                response && setCurrentWorkoutId(response._id);
             })();
         }
     }, [createWorkoutRecordOneMutate, routineRecordId]);
@@ -125,13 +117,10 @@ const WorkoutConfigDetailProgressAccordion = ({
 
         if (currentSetConfig) {
             onSetComplete(currentSetConfig.restSec);
-            await throwError({
-                fetchFn: async () =>
-                    await createSetRecordOneMutate({
-                        routineRecordId: routineRecordId as string,
-                        workoutRecordId: currentWorkoutId,
-                        setConfig: currentSetConfig,
-                    }),
+            await createSetRecordOneMutate({
+                routineRecordId: routineRecordId as string,
+                workoutRecordId: currentWorkoutId,
+                setConfig: currentSetConfig,
             });
         }
     };
@@ -147,12 +136,9 @@ const WorkoutConfigDetailProgressAccordion = ({
         // currentWorkoutId에 세트 데이터 삭제하기 (삭제할때, 생성 순으로 가져온 후 마지막요소 삭제후 put 하기)
 
         if (completedSetIds.includes(poppedSetConfig?._id as string)) {
-            await throwError({
-                fetchFn: async () =>
-                    await deleteSetRecordOneMutate({
-                        routineRecordId: routineRecordId as string,
-                        workoutRecordId: currentWorkoutId,
-                    }),
+            await deleteSetRecordOneMutate({
+                routineRecordId: routineRecordId as string,
+                workoutRecordId: currentWorkoutId,
             });
         }
     };
@@ -185,16 +171,11 @@ const WorkoutConfigDetailProgressAccordion = ({
     };
 
     const handleDeleteWorkoutButtonClick = async (workoutRecordId: string) => {
-        await throwError({
-            fetchFn: async () =>
-                await deleteWorkoutRecordOneMutate({
-                    routineRecordId: routineRecordId as string,
-                    workoutRecordId,
-                }),
-            onSuccess: () => {
-                onWorkoutDelete(data._id);
-            },
+        await deleteWorkoutRecordOneMutate({
+            routineRecordId: routineRecordId as string,
+            workoutRecordId,
         });
+        onWorkoutDelete(data._id);
     };
 
     useEffect(() => {

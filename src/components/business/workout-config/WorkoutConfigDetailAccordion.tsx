@@ -1,9 +1,7 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
-
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import useAccordion from "hooks/client/useAccordion";
-import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import { ReactComponent as PlusIcon } from "assets/image/plus2.svg";
 import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
 import Table from "components/content/Table/Table";
@@ -15,7 +13,6 @@ import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMut
 import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
 import { useParams } from "react-router-dom";
 import { Type } from "types/enum";
-import useThrowError from "hooks/client/useThrowError";
 
 type TypeMapper = {
     [key: string]: string;
@@ -31,7 +28,6 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
     const { color, borderRadius } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
-    const { throwError } = useThrowError();
     const { routineConfigId } = useParams();
 
     const { mutateAsync: createSetConfigOneMutate } =
@@ -44,32 +40,23 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
         useDeleteWorkoutConfigOneMutation();
 
     const handleSetDeleteButtonClick = async (workoutConfigId: string) => {
-        await throwError({
-            fetchFn: async () =>
-                await deleteSetConfigOneMutate({
-                    routineConfigId: routineConfigId as string,
-                    workoutConfigId,
-                }),
+        await deleteSetConfigOneMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId,
         });
     };
 
     const handleSetCreateButtonClick = async (workoutConfigId: string) => {
-        await throwError({
-            fetchFn: async () =>
-                await createSetConfigOneMutate({
-                    routineConfigId: routineConfigId as string,
-                    workoutConfigId,
-                }),
+        await createSetConfigOneMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId,
         });
     };
 
     const handleWorkoutDeleteButtonClick = async (workoutConfigId: string) => {
-        await throwError({
-            fetchFn: async () =>
-                await deleteWorkoutConfigOneMutate({
-                    routineConfigId: routineConfigId as string,
-                    workoutConfigId,
-                }),
+        await deleteWorkoutConfigOneMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId,
         });
     };
 
@@ -78,15 +65,12 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
         key: string,
         value: string
     ) => {
-        await throwError({
-            fetchFn: async () =>
-                await updateSetConfigFieldMutate({
-                    routineConfigId: routineConfigId as string,
-                    workoutConfigId: data._id,
-                    setConfigId,
-                    key,
-                    value,
-                }),
+        await updateSetConfigFieldMutate({
+            routineConfigId: routineConfigId as string,
+            workoutConfigId: data._id,
+            setConfigId,
+            key,
+            value,
         });
     };
 

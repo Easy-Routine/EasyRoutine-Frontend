@@ -5,7 +5,6 @@ import useToast from "hooks/useToast";
 import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
 import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import useNativeMessage from "hooks/client/useNativeMessage";
-import useThrowError from "hooks/client/useThrowError";
 
 type RoutineConfigDeleteModalProps = {
     routineConfigId: string;
@@ -27,7 +26,6 @@ const RoutineConfigDeleteModal = ({
 
     const { mutateAsync: deleteRoutineConfigOne } =
         useDeleteRoutineConfigOneMutation();
-    const { throwError } = useThrowError();
 
     const { data: routineConfigOne } =
         useGetRoutineConfigOneQuery(routineConfigId);
@@ -35,14 +33,11 @@ const RoutineConfigDeleteModal = ({
     const handleRoutineConfigDeleteButtonClick = async (
         routineConfigId: string
     ) => {
-        throwError<boolean | undefined>({
-            fetchFn: async () => await deleteRoutineConfigOne(routineConfigId),
-            onSuccess: () => {
-                showToast("루틴이 삭제되었습니다.", "success");
-                onConfirmButtonClick();
-                sendNativeMessage({ type: "vibrate" });
-            },
-        });
+        await deleteRoutineConfigOne(routineConfigId);
+
+        showToast("루틴이 삭제되었습니다.", "success");
+        onConfirmButtonClick();
+        sendNativeMessage({ type: "vibrate" });
 
         // showToast("루틴 삭제 중 에러가 발생했습니다.", "error");
     };

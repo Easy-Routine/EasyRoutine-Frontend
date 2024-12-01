@@ -1,18 +1,16 @@
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
-import ROUTES from "constants/routes";
-import { useNavigate } from "react-router-dom";
 import EmptyBoundary from "../EmptyBoundary";
-import useToast from "hooks/useToast";
 import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
 import useGetRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 import { Color } from "types/enum";
-import useThrowError from "hooks/client/useThrowError";
-import { RoutineConfig } from "types/model";
+import { useNavigate } from "react-router-dom";
+import useToast from "hooks/useToast";
+import ROUTES from "constants/routes";
 
 const RoutineConfigCreateFloatingActionButton = () => {
-    const navigate = useNavigate();
     const { showToast } = useToast();
-    const { throwError } = useThrowError();
+    const navigate = useNavigate();
+
     const { mutateAsync: createRoutineConfigOneMutate } =
         useCreateRoutineConfigMutation();
 
@@ -21,19 +19,14 @@ const RoutineConfigCreateFloatingActionButton = () => {
     const handleButtonClick = async () => {
         const userId = localStorage.getItem("userId");
 
-        await throwError<RoutineConfig | undefined>({
-            fetchFn: async () =>
-                await createRoutineConfigOneMutate({
-                    name: "새 루틴",
-                    color: Color.VIOLET,
-                    userId: userId as string,
-                }),
-
-            onSuccess: (data) => {
-                showToast("루틴이 생성되었습니다.", "success");
-                navigate(ROUTES.CONFIG.DETAIL.PATH(data!._id));
-            },
+        const response = await createRoutineConfigOneMutate({
+            name: "새 루틴",
+            color: Color.VIOLET,
+            userId: userId as string,
         });
+
+        showToast("루틴이 생성되었습니다.", "success");
+        navigate(ROUTES.CONFIG.DETAIL.PATH(response!._id));
     };
 
     return (

@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import queryKey from "constants/queryKeys";
 import { SetConfig } from "types/model";
 import { createSetRecordOne } from "services/set-record";
+import useToast from "hooks/useToast";
 
 const useCreateSetRecordOneMutation = () => {
     const queryClient = useQueryClient();
+    const { showToast } = useToast();
     return useMutation({
         mutationFn: ({
             routineRecordId,
@@ -16,6 +17,10 @@ const useCreateSetRecordOneMutation = () => {
             setConfig: SetConfig;
         }) =>
             createSetRecordOne({ routineRecordId, workoutRecordId, setConfig }),
+        onError: (error) => {
+            console.log(error);
+            showToast(error.message, "error");
+        },
         onSettled: () => {
             // queryClient.invalidateQueries({
             //     queryKey: [queryKey.getRoutineConfigOne],

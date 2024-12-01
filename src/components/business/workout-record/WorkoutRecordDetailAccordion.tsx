@@ -1,15 +1,11 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import useAccordion from "hooks/client/useAccordion";
-import React from "react";
-import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
 import { WorkoutLibrary, WorkoutRecord } from "types/model";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import { useParams } from "react-router-dom";
-import { useTheme } from "styled-components";
 import { Type } from "types/enum";
-import useThrowError from "hooks/client/useThrowError";
 
 type TypeMapper = {
     [key: string]: string;
@@ -23,7 +19,6 @@ const typeMapper: TypeMapper = {
 
 const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
     const { routineRecordId } = useParams();
-    const { throwError } = useThrowError();
 
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
@@ -34,12 +29,9 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
     const handleWorkoutRecordDeleteButtonClick = async (
         workoutRecordId: string
     ) => {
-        await throwError({
-            fetchFn: async () =>
-                await deleteWorkoutRecordOneMutate({
-                    routineRecordId: routineRecordId as string,
-                    workoutRecordId,
-                }),
+        await deleteWorkoutRecordOneMutate({
+            routineRecordId: routineRecordId as string,
+            workoutRecordId,
         });
     };
 

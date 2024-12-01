@@ -8,12 +8,8 @@ import useModal from "hooks/client/useModal";
 import { Suspense, useState } from "react";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
-import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
 import { Period } from "types/enum";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
-import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
-import { WorkoutLibrary } from "types/model";
-import useThrowError from "hooks/client/useThrowError";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 
@@ -25,7 +21,6 @@ const Container = styled.div`
 
 const RoutineRecorListGraphView = () => {
     const { selectedValue, handleTabClick } = useTab(Period.Month);
-    const { throwError } = useThrowError();
     const {
         isOpen: isWorkoutLibraryListGraphBottomSheetOpen,
         handleOpenModal: openWorkoutLibraryListGraphBottomSheet,

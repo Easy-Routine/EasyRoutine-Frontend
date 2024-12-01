@@ -1,9 +1,8 @@
 import BottomBar from "components/box/BottomBar/BottomBar";
 import ColorTab from "components/box/BottomBar/ColorTab";
 import useTab from "hooks/client/useTab";
-import useThrowError from "hooks/client/useThrowError";
 import useUpdateRoutineConfigFieldMutation from "hooks/server/useUpdateRoutineConfigFieldMutation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Color } from "types/enum";
 
@@ -18,7 +17,6 @@ const RoutineConfigColorTabBottomBar = ({
 
     const { selectedValue, setSelectedValue, handleTabClick } =
         useTab(defaultValue);
-    const { throwError } = useThrowError();
 
     const { mutateAsync: updateRoutineConfigColor } =
         useUpdateRoutineConfigFieldMutation();
@@ -31,17 +29,12 @@ const RoutineConfigColorTabBottomBar = ({
         routineConfigId: string,
         value: Color
     ) => {
-        await throwError({
-            fetchFn: async () =>
-                await updateRoutineConfigColor({
-                    routineConfigId,
-                    key: "color",
-                    value,
-                }),
-            onSuccess: () => {
-                handleTabClick(value);
-            },
+        await updateRoutineConfigColor({
+            routineConfigId,
+            key: "color",
+            value,
         });
+        handleTabClick(value);
     };
 
     return (
