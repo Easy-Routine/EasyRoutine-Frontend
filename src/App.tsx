@@ -1,11 +1,12 @@
 import DataSyncModal from "components/business/DataSyncModal";
 import SideBanner from "components/content/SideBanner/SideBanner";
+import SplashScrren from "components/content/SplashScreen/SplashScreen";
 import { db } from "db";
 import useModal from "hooks/client/useModal";
 import useToast from "hooks/useToast";
 import moment from "moment";
 import AppRouter from "pages/AppRouter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { checkAccessToken, getBaseWorkout } from "services";
 import styled from "styled-components";
 import syncData from "utils/syncData";
@@ -24,6 +25,10 @@ const App = () => {
         handleCloseModal: closeDataSyncModal,
     } = useModal();
     const { showToast } = useToast();
+
+    const isSplashScreenShown = !!sessionStorage.getItem("isSplashScreenShown");
+    const { isOpen: isSplashScreenOpen, handleCloseModal: closeSplashScreen } =
+        useModal(isSplashScreenShown ? false : true);
 
     const syncDataPeriodically = async () => {
         try {
@@ -70,30 +75,44 @@ const App = () => {
 
     // handleAppMounted
     useEffect(() => {
+        let timer: NodeJS.Timer;
+
         (async () => {
             let modalOpenTimeout;
-            try {
-                const isAccessTokenFresh = await checkAccessToken();
-                await getBaseWorkoutAPI();
-                if (isAccessTokenFresh) {
-                    const syncPromise = syncDataPeriodically();
 
-                    modalOpenTimeout = setTimeout(() => {
-                        openDataSyncModal();
-                    }, 1000);
+            // 스크린이 열려있고, 스크린이 열렸던 적이 없으면 => 스크린이 열렸던적이 잇음 => 안닫힘
+            if (isSplashScreenOpen) {
+                timer = setTimeout(() => {
+                    sessionStorage.setItem("isSplashScreenShown", "true");
+                    closeSplashScreen();
+                }, 3000);
+            } else {
+                try {
+                    const isAccessTokenFresh = await checkAccessToken();
+                    await getBaseWorkoutAPI();
+                    if (isAccessTokenFresh) {
+                        const syncPromise = syncDataPeriodically();
 
-                    await syncPromise;
+                        modalOpenTimeout = setTimeout(() => {
+                            openDataSyncModal();
+                        }, 1000);
+
+                        await syncPromise;
+                    }
+                } catch (e) {
+                } finally {
+                    clearTimeout(modalOpenTimeout); // 모달 열기 타이머를 클리어
                 }
-            } catch (e) {
-            } finally {
-                clearTimeout(modalOpenTimeout); // 모달 열기 타이머를 클리어
                 closeDataSyncModal(); // 모달 닫기
             }
         })();
-    }, []);
+
+        return () => clearTimeout(timer);
+    }, [isSplashScreenOpen]);
 
     return (
         <MaxWidthWrapper id="wrap">
+            {isSplashScreenOpen && <SplashScrren />}
             <AppRouter />
             <DataSyncModal isOpen={isDataSyncModalOpen} />
             <SideBanner />
