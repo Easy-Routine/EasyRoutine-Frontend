@@ -18,11 +18,6 @@ const LottieContainer = styled.div`
 const CommonLoading = () => {
     return (
         <Modal>
-            <Modal.Backdrop
-                isOpen={true}
-                onBackdropClick={() => {}}
-                opacity={0}
-            />
             <LottieContainer>
                 <Lottie
                     animationData={loadingAnimation}
