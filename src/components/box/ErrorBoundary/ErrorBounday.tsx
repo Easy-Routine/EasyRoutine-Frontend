@@ -1,4 +1,4 @@
-import ErrorPage from "pages/ErrorPage";
+import ErrorScrren from "components/content/ErrorScreen/ErrorScreen";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component<
 
     render() {
         if (this.state.hasError) {
-            return <ErrorPage onReset={this.resetError} />;
+            return <ErrorScrren onReset={this.resetError} />;
         } else {
             return this.props.children;
         }

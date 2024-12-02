@@ -36,7 +36,7 @@ const Description = styled.div`
     color: ${({ theme }) => theme.color.gray.light};
 `;
 
-const ErrorPage = ({ onReset }: { onReset: () => void }) => {
+const ErrorScrren = ({ onReset }: { onReset: () => void }) => {
     return (
         <Container>
             <ErrorContent>
@@ -49,4 +49,4 @@ const ErrorPage = ({ onReset }: { onReset: () => void }) => {
     );
 };
 
-export default ErrorPage;
+export default ErrorScrren;
