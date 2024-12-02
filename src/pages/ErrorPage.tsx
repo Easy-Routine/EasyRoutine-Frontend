@@ -1,10 +1,6 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as EmptyImage } from "assets/image/empty.svg";
 import Button from "components/content/Button/Button";
 import Logo from "components/content/Logo/Logo";
-import ROUTES from "constants/routes";
 
 const Container = styled.div`
     display: flex;
@@ -16,7 +12,7 @@ const Container = styled.div`
     top: 0;
     left: 0;
     background-color: ${({ theme }) => theme.color.background.page};
-    z-index: 500;
+    z-index: ${({ theme }) => theme.zIndex.error};
 `;
 const ErrorContent = styled.div`
     position: absolute;

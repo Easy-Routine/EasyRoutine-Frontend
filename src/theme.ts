@@ -47,6 +47,7 @@ const commonTheme = {
         floatingActionButton: "300",
         backdrop: "400",
         modal: "500",
+        error: "600",
     },
 };
 
