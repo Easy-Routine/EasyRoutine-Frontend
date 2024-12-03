@@ -1,11 +1,19 @@
-import LoginPage from "pages/LoginPage";
-import MyPage from "pages/MyPage";
-import RoutineConfigDetailPage from "pages/RoutineConfigDetailPage";
-import RoutineConfigListPage from "pages/RoutineConfigListPage";
-import RoutineConfigOneProgressPage from "pages/RoutineConfigOneProgressPage";
-import RoutineRecordDetailPage from "pages/RoutineRecordDetailPage";
-import RoutineRecordListPage from "pages/RoutineRecordListPage";
-import WorkoutLibraryPage from "pages/WorkoutLibraryPage";
+import { lazy } from "react";
+
+const LoginPage = lazy(() => import("pages/LoginPage"));
+const MyPage = lazy(() => import("pages/MyPage"));
+const RoutineConfigDetailPage = lazy(
+    () => import("pages/RoutineConfigDetailPage")
+);
+const RoutineConfigListPage = lazy(() => import("pages/RoutineConfigListPage"));
+const RoutineConfigOneProgressPage = lazy(
+    () => import("pages/RoutineConfigOneProgressPage")
+);
+const RoutineRecordDetailPage = lazy(
+    () => import("pages/RoutineRecordDetailPage")
+);
+const RoutineRecordListPage = lazy(() => import("pages/RoutineRecordListPage"));
+const WorkoutLibraryPage = lazy(() => import("pages/WorkoutLibraryPage"));
 
 const ROUTES = {
     LOGIN: {
