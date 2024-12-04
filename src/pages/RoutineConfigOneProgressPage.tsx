@@ -1,3 +1,4 @@
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import RoutineConfigListProgressView from "components/business/routine-config/RoutineConfigOneProgressView";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
@@ -18,7 +19,13 @@ const RoutineConfigListProgressPage = () => {
                 <PageHeader.PageTitle>운동 진행</PageHeader.PageTitle>
             </PageHeader>
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     <RoutineConfigListProgressView />
                 </Suspense>
             </ErrorBoundary>

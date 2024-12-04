@@ -1,3 +1,4 @@
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import NavigationBottomBar from "components/business/NavigationBottomBar";
 import WorkoutLibraryListView from "components/business/workout-library/WorkoutLibraryListView";
@@ -21,7 +22,13 @@ const WorkoutLibraryPage = () => {
                 <Logo />
             </PageHeader>
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     <WorkoutLibraryListView />
                 </Suspense>
             </ErrorBoundary>

@@ -10,6 +10,7 @@ import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
 import useRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div``;
 
@@ -61,7 +62,13 @@ const RoutineConfigListView = () => {
             </EmptyBoundary>
 
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     {isRoutineProgressModalOpen && (
                         <RoutineConfigProgressModal
                             routineConfigId={routineConfigId}
@@ -79,7 +86,13 @@ const RoutineConfigListView = () => {
             </ErrorBoundary>
 
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     {isRoutineConfigDeleteModalOpen && (
                         <RoutineConfigDeleteModal
                             routineConfigId={routineConfigId}

@@ -12,6 +12,7 @@ import FloatingActionButton from "components/content/FloatingActionButton/Floati
 import useModal from "hooks/client/useModal";
 import { Suspense } from "react";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -48,7 +49,13 @@ const RoutineConfigDetailView = () => {
             />
 
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     {isWorkoutLibraryBottomSheetOpen && (
                         <WorkoutLibraryListBottomSheet
                             isOpen={isWorkoutLibraryBottomSheetOpen}

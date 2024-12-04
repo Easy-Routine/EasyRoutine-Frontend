@@ -6,6 +6,7 @@ import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import RoutineRecordAllDailyList from "./RoutineRecordAllDailyList";
 import RoutineRecordAllMonthlyCalendar from "./RoutineRecordAllMonthlyCalendar";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -38,7 +39,13 @@ const RoutineRecordListCalendarView = () => {
             />
 
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     <RoutineRecordAllDailyList
                         onRoutineRecordDeleteButtonClick={(
                             routineRecordId: string

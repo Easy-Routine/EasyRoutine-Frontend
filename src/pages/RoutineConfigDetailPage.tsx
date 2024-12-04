@@ -4,6 +4,7 @@ import ReturnPageHeader from "components/business/ReturnPageHeader";
 import { Suspense } from "react";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -16,7 +17,13 @@ const RoutineConfigDetailPage = () => {
         <Container>
             <ReturnPageHeader pageTitleText="루틴 생성" />
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     <RoutineConfigDetailView />
                 </Suspense>
             </ErrorBoundary>

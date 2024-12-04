@@ -1,3 +1,4 @@
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import PageTemplate from "components/box/PageTemplate/PageTemplate";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
@@ -55,7 +56,13 @@ const router = createBrowserRouter([
 
 const AppRouter = () => {
     return (
-        <Suspense fallback={<CommonLoading />}>
+        <Suspense
+            fallback={
+                <DefferredComponent>
+                    <CommonLoading />
+                </DefferredComponent>
+            }
+        >
             <RouterProvider router={router} />
         </Suspense>
     );

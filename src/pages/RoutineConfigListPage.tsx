@@ -8,6 +8,7 @@ import PageHeader from "components/content/PageHeader/PageHeader";
 import { Suspense } from "react";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -22,7 +23,15 @@ const RoutineConfigListPage = () => {
                 <Logo />
             </PageHeader>
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <DefferredComponent>
+                                <CommonLoading />
+                            </DefferredComponent>
+                        </DefferredComponent>
+                    }
+                >
                     <RoutineConfigListView />
                     <RoutineConfigCreateFloatingActionButton />
                 </Suspense>

@@ -1,3 +1,4 @@
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import ReturnPageHeader from "components/business/ReturnPageHeader";
 import RoutineRecordDetailView from "components/business/routine-record/RoutineRecordDetailView";
@@ -16,7 +17,13 @@ const RoutineRecordDetailPage = () => {
         <Container>
             <ReturnPageHeader pageTitleText="운동 기록" />
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     <RoutineRecordDetailView />
                 </Suspense>
             </ErrorBoundary>

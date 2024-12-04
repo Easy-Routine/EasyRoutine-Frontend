@@ -20,6 +20,7 @@ import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import { CustomError } from "types/error";
 import { AxiosError } from "axios";
 import Dexie from "dexie";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -194,7 +195,13 @@ const MyPage = () => {
                 <Logo />
             </PageHeader>
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     <MyPageContentView />
                 </Suspense>
             </ErrorBoundary>

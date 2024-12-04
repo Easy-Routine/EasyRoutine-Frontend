@@ -6,6 +6,7 @@ import RoutineRecordListGraphView from "./routine-record/RoutineRecordListGraphV
 import { Suspense } from "react";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -33,7 +34,13 @@ const RoutineRecordTabView = () => {
     return (
         <Container>
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     <Tab>
                         <Tab.Button
                             value="calendar"

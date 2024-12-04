@@ -18,6 +18,7 @@ import useToast from "hooks/useToast";
 import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -151,7 +152,13 @@ const WorkoutLibraryListView = () => {
                 )}
             />
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     {isWorkoutLibraryBottomSheetOpen && (
                         <WorkoutLibraryDetailBottomSheet
                             workoutLibraryId={workoutLibraryId}

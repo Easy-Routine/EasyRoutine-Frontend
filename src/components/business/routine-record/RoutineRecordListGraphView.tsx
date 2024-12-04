@@ -12,6 +12,7 @@ import { Period } from "types/enum";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
+import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
 const Container = styled.div`
     display: flex;
@@ -98,7 +99,13 @@ const RoutineRecorListGraphView = () => {
                 </>
             )}
             <ErrorBoundary>
-                <Suspense fallback={<CommonLoading />}>
+                <Suspense
+                    fallback={
+                        <DefferredComponent>
+                            <CommonLoading />
+                        </DefferredComponent>
+                    }
+                >
                     {isWorkoutLibraryListGraphBottomSheetOpen && (
                         <WorkoutLibraryListGraphBottomSheet
                             isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
