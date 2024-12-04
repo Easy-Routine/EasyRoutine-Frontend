@@ -3,6 +3,8 @@ import SummaryBox from "components/content/Summary/SummaryBox";
 import useGetRoutineRecordAllDailyQuery from "hooks/server/useGetRoutineRecordAllDailyQuery";
 import { WorkoutRecord } from "types/model";
 import RoutineRecordDetailAccordion from "./RoutineRecordDetailAccordion";
+import EmptyBoundary from "../EmptyBoundary";
+import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
 const RoutineRecordAllDailyList = ({
     selectedDate,
@@ -39,19 +41,28 @@ const RoutineRecordAllDailyList = ({
 
     return (
         <>
-            <SummaryBox seconds={totalSeconds} weight={totalWeight} />
-            <Accordion.List
-                data={routineRecordAllDaily!}
-                render={(item) => (
-                    <RoutineRecordDetailAccordion
-                        key={item._id}
-                        data={item}
-                        onRoutineRecordDeleteButtonClick={
-                            onRoutineRecordDeleteButtonClick
-                        }
-                    />
-                )}
-            />
+            <EmptyBoundary
+                data={routineRecordAllDaily}
+                fallback={
+                    <SimpleTextEmptyView>
+                        해당 날짜의 루틴 기록이 존재하지 않습니다.
+                    </SimpleTextEmptyView>
+                }
+            >
+                <SummaryBox seconds={totalSeconds} weight={totalWeight} />
+                <Accordion.List
+                    data={routineRecordAllDaily!}
+                    render={(item) => (
+                        <RoutineRecordDetailAccordion
+                            key={item._id}
+                            data={item}
+                            onRoutineRecordDeleteButtonClick={
+                                onRoutineRecordDeleteButtonClick
+                            }
+                        />
+                    )}
+                />
+            </EmptyBoundary>
         </>
     );
 };

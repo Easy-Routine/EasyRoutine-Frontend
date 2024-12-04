@@ -13,6 +13,8 @@ import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMut
 import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
 import { useParams } from "react-router-dom";
 import { Type } from "types/enum";
+import EmptyBoundary from "../EmptyBoundary";
+import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
 type TypeMapper = {
     [key: string]: string;
@@ -25,7 +27,7 @@ const typeMapper: TypeMapper = {
 };
 
 const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
-    const { color, borderRadius } = useTheme();
+    const { color } = useTheme();
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
     const { routineConfigId } = useParams();
@@ -109,88 +111,99 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                     </Accordion.Trigger>
                 </Accordion.Header>
                 <Accordion.Body isOpen={isOpen}>
-                    <Table>
-                        <Table.Column
-                            data={data.setConfigs}
-                            header={
-                                <Table.Row>
-                                    <Table.TitleText>세트</Table.TitleText>
-                                    {data.workoutLibrary.type.map((key) => (
-                                        <Table.TitleText key={key}>
-                                            {typeMapper[key]}
-                                        </Table.TitleText>
-                                    ))}
-                                    <Table.TitleText>휴식</Table.TitleText>
-                                </Table.Row>
-                            }
-                            render={(
-                                setConfig: SetConfig & { [key: string]: any },
-                                index: number
-                            ) => (
-                                <Table.Row key={setConfig._id}>
-                                    <Table.NumberPicker
-                                        value={index + 1}
-                                        disabled={true}
-                                    />
-                                    {isTypeExist(
-                                        data.workoutLibrary,
-                                        Type.WEIGHT
-                                    ) && (
-                                        <Table.WeightPicker
-                                            value={setConfig.weight}
-                                            onInputChange={(value) =>
-                                                handleSetInputChange(
-                                                    setConfig._id,
-                                                    Type.WEIGHT,
-                                                    value
-                                                )
-                                            }
-                                        />
-                                    )}
-                                    {isTypeExist(
-                                        data.workoutLibrary,
-                                        Type.REP
-                                    ) && (
+                    <EmptyBoundary
+                        data={data.setConfigs}
+                        fallback={
+                            <SimpleTextEmptyView>
+                                세트 설정이 없습니다.
+                            </SimpleTextEmptyView>
+                        }
+                    >
+                        <Table>
+                            <Table.Column
+                                data={data.setConfigs}
+                                header={
+                                    <Table.Row>
+                                        <Table.TitleText>세트</Table.TitleText>
+                                        {data.workoutLibrary.type.map((key) => (
+                                            <Table.TitleText key={key}>
+                                                {typeMapper[key]}
+                                            </Table.TitleText>
+                                        ))}
+                                        <Table.TitleText>휴식</Table.TitleText>
+                                    </Table.Row>
+                                }
+                                render={(
+                                    setConfig: SetConfig & {
+                                        [key: string]: any;
+                                    },
+                                    index: number
+                                ) => (
+                                    <Table.Row key={setConfig._id}>
                                         <Table.NumberPicker
-                                            value={setConfig.rep}
-                                            onInputChange={(value) =>
-                                                handleSetInputChange(
-                                                    setConfig._id,
-                                                    Type.REP,
-                                                    value
-                                                )
-                                            }
+                                            value={index + 1}
+                                            disabled={true}
                                         />
-                                    )}
-                                    {isTypeExist(
-                                        data.workoutLibrary,
-                                        Type.WORKOUT_SEC
-                                    ) && (
+                                        {isTypeExist(
+                                            data.workoutLibrary,
+                                            Type.WEIGHT
+                                        ) && (
+                                            <Table.WeightPicker
+                                                value={setConfig.weight}
+                                                onInputChange={(value) =>
+                                                    handleSetInputChange(
+                                                        setConfig._id,
+                                                        Type.WEIGHT,
+                                                        value
+                                                    )
+                                                }
+                                            />
+                                        )}
+                                        {isTypeExist(
+                                            data.workoutLibrary,
+                                            Type.REP
+                                        ) && (
+                                            <Table.NumberPicker
+                                                value={setConfig.rep}
+                                                onInputChange={(value) =>
+                                                    handleSetInputChange(
+                                                        setConfig._id,
+                                                        Type.REP,
+                                                        value
+                                                    )
+                                                }
+                                            />
+                                        )}
+                                        {isTypeExist(
+                                            data.workoutLibrary,
+                                            Type.WORKOUT_SEC
+                                        ) && (
+                                            <Table.TimePicker
+                                                value={setConfig.workoutSec.toString()}
+                                                onInputChange={(value) =>
+                                                    handleSetInputChange(
+                                                        setConfig._id,
+                                                        Type.WORKOUT_SEC,
+                                                        value
+                                                    )
+                                                }
+                                            />
+                                        )}
                                         <Table.TimePicker
-                                            value={setConfig.workoutSec.toString()}
+                                            value={setConfig.restSec.toString()}
                                             onInputChange={(value) =>
                                                 handleSetInputChange(
                                                     setConfig._id,
-                                                    Type.WORKOUT_SEC,
+                                                    "restSec",
                                                     value
                                                 )
                                             }
                                         />
-                                    )}
-                                    <Table.TimePicker
-                                        value={setConfig.restSec.toString()}
-                                        onInputChange={(value) =>
-                                            handleSetInputChange(
-                                                setConfig._id,
-                                                "restSec",
-                                                value
-                                            )
-                                        }
-                                    />
-                                </Table.Row>
-                            )}
-                        />
-                    </Table>
+                                    </Table.Row>
+                                )}
+                            />
+                        </Table>
+                    </EmptyBoundary>
                     <IconTextBox>
                         <IconTextBox.IconText
                             color={color.gray.dark}

@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
 import { RoutineConfig, WorkoutConfig } from "types/model";
+import EmptyBoundary from "../EmptyBoundary";
+import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
 type RoutineConfigDetailAccordionProps = {
     data: RoutineConfig;
@@ -57,25 +59,44 @@ const RoutineConfigDetailAccordion = ({
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Body isOpen={isOpen}>
-                        <SmallCardList<WorkoutConfig>
+                        <EmptyBoundary
                             data={data.workoutConfigs}
-                            render={(workoutConfig) => (
-                                <SmallCard key={workoutConfig._id}>
-                                    <SmallCard.ImageBox
-                                        src={workoutConfig.workoutLibrary.image}
-                                    />
-                                    <SmallCard.ColumnBox>
-                                        <SmallCard.BoldText>
-                                            {workoutConfig.workoutLibrary.name}
-                                        </SmallCard.BoldText>
-                                        <SmallCard.NormalText>
-                                            {workoutConfig.setConfigs.length}
-                                            세트
-                                        </SmallCard.NormalText>
-                                    </SmallCard.ColumnBox>
-                                </SmallCard>
-                            )}
-                        />
+                            fallback={
+                                <SimpleTextEmptyView>
+                                    운동 설정이 없습니다.
+                                </SimpleTextEmptyView>
+                            }
+                        >
+                            <SmallCardList<WorkoutConfig>
+                                data={data.workoutConfigs}
+                                render={(workoutConfig) => (
+                                    <SmallCard key={workoutConfig._id}>
+                                        <SmallCard.ImageBox
+                                            src={
+                                                workoutConfig.workoutLibrary
+                                                    .image
+                                            }
+                                        />
+                                        <SmallCard.ColumnBox>
+                                            <SmallCard.BoldText>
+                                                {
+                                                    workoutConfig.workoutLibrary
+                                                        .name
+                                                }
+                                            </SmallCard.BoldText>
+                                            <SmallCard.NormalText>
+                                                {
+                                                    workoutConfig.setConfigs
+                                                        .length
+                                                }
+                                                세트
+                                            </SmallCard.NormalText>
+                                        </SmallCard.ColumnBox>
+                                    </SmallCard>
+                                )}
+                            />
+                        </EmptyBoundary>
+
                         <IconTextBox>
                             <IconTextBox.IconText
                                 color={color.gray.dark}

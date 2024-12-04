@@ -6,6 +6,8 @@ import { WorkoutLibrary, WorkoutRecord } from "types/model";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import { useParams } from "react-router-dom";
 import { Type } from "types/enum";
+import EmptyBoundary from "../EmptyBoundary";
+import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
 type TypeMapper = {
     [key: string]: string;
@@ -69,62 +71,71 @@ const WorkoutRecordDetailAccordion = ({ data }: { data: WorkoutRecord }) => {
                     </Accordion.Trigger>
                 </Accordion.Header>
                 <Accordion.Body isOpen={isOpen}>
-                    <Table>
-                        <Table.Column
-                            data={data.setRecords}
-                            header={
-                                <Table.Row>
-                                    <Table.TitleText>세트</Table.TitleText>
-                                    {data.workoutLibrary.type.map((key) => (
-                                        <Table.TitleText>
-                                            {typeMapper[key]}
-                                        </Table.TitleText>
-                                    ))}
-                                    <Table.TitleText>휴식</Table.TitleText>
-                                </Table.Row>
-                            }
-                            render={(setRecord, index) => (
-                                <Table.Row>
-                                    <Table.NumberPicker
-                                        value={index + 1}
-                                        disabled={true}
-                                    />
-                                    {isTypeExist(
-                                        data.workoutLibrary,
-                                        Type.WEIGHT
-                                    ) && (
-                                        <Table.WeightPicker
-                                            value={setRecord.weight}
-                                            disabled={true}
-                                        />
-                                    )}
-                                    {isTypeExist(
-                                        data.workoutLibrary,
-                                        Type.REP
-                                    ) && (
+                    <EmptyBoundary
+                        data={data.setRecords}
+                        fallback={
+                            <SimpleTextEmptyView>
+                                세트 기록이 없습니다.
+                            </SimpleTextEmptyView>
+                        }
+                    >
+                        <Table>
+                            <Table.Column
+                                data={data.setRecords}
+                                header={
+                                    <Table.Row>
+                                        <Table.TitleText>세트</Table.TitleText>
+                                        {data.workoutLibrary.type.map((key) => (
+                                            <Table.TitleText>
+                                                {typeMapper[key]}
+                                            </Table.TitleText>
+                                        ))}
+                                        <Table.TitleText>휴식</Table.TitleText>
+                                    </Table.Row>
+                                }
+                                render={(setRecord, index) => (
+                                    <Table.Row>
                                         <Table.NumberPicker
-                                            value={setRecord.rep}
+                                            value={index + 1}
                                             disabled={true}
                                         />
-                                    )}
-                                    {isTypeExist(
-                                        data.workoutLibrary,
-                                        Type.WORKOUT_SEC
-                                    ) && (
-                                        <Table.TimePicker
-                                            value={setRecord.workoutSec.toString()}
-                                            disabled={true}
-                                        />
-                                    )}
+                                        {isTypeExist(
+                                            data.workoutLibrary,
+                                            Type.WEIGHT
+                                        ) && (
+                                            <Table.WeightPicker
+                                                value={setRecord.weight}
+                                                disabled={true}
+                                            />
+                                        )}
+                                        {isTypeExist(
+                                            data.workoutLibrary,
+                                            Type.REP
+                                        ) && (
+                                            <Table.NumberPicker
+                                                value={setRecord.rep}
+                                                disabled={true}
+                                            />
+                                        )}
+                                        {isTypeExist(
+                                            data.workoutLibrary,
+                                            Type.WORKOUT_SEC
+                                        ) && (
+                                            <Table.TimePicker
+                                                value={setRecord.workoutSec.toString()}
+                                                disabled={true}
+                                            />
+                                        )}
 
-                                    <Table.TimePicker
-                                        value={setRecord.restSec.toString()}
-                                        disabled={true}
-                                    />
-                                </Table.Row>
-                            )}
-                        />
-                    </Table>
+                                        <Table.TimePicker
+                                            value={setRecord.restSec.toString()}
+                                            disabled={true}
+                                        />
+                                    </Table.Row>
+                                )}
+                            />
+                        </Table>
+                    </EmptyBoundary>
                 </Accordion.Body>
                 <Accordion.DeleteButton
                     opacity={opacity}

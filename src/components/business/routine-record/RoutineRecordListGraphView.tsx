@@ -13,6 +13,7 @@ import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
+import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
 const Container = styled.div`
     display: flex;
@@ -45,7 +46,7 @@ const RoutineRecorListGraphView = () => {
 
     return (
         <Container>
-            {workoutLibraryId && (
+            {workoutLibraryId ? (
                 <>
                     <Box>
                         <TitleTextInput value={workoutLibraryDetail?.name} />
@@ -97,6 +98,10 @@ const RoutineRecorListGraphView = () => {
                         </ChipTab.Chip>
                     </ChipTab>
                 </>
+            ) : (
+                <SimpleTextEmptyView>
+                    현재 선택된 운동이 없습니다.
+                </SimpleTextEmptyView>
             )}
             <ErrorBoundary>
                 <Suspense

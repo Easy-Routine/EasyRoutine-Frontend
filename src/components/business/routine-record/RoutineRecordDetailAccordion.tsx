@@ -13,6 +13,8 @@ import ROUTES from "constants/routes";
 import { useTheme } from "styled-components";
 import { Color } from "types/enum";
 import { RoutineRecord } from "types/model";
+import EmptyBoundary from "../EmptyBoundary";
+import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
 type RoutineRecordDetailAccordionProps = {
     data: RoutineRecord;
@@ -28,7 +30,6 @@ const RoutineRecordDetailAccordion = ({
 
     const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
         useAccordion();
-    console.log("이게말이돼?", data);
 
     return (
         <Accordion>
@@ -52,24 +53,34 @@ const RoutineRecordDetailAccordion = ({
                     </Accordion.Trigger>
                 </Accordion.Header>
                 <Accordion.Body isOpen={isOpen}>
-                    <SmallCardList<any>
+                    <EmptyBoundary
                         data={data.workoutRecords}
-                        render={(item) => (
-                            <SmallCard key={item._id}>
-                                <SmallCard.ImageBox
-                                    src={item.workoutLibrary.image}
-                                />
-                                <SmallCard.ColumnBox>
-                                    <SmallCard.BoldText>
-                                        {item.workoutLibrary.name}
-                                    </SmallCard.BoldText>
-                                    <SmallCard.NormalText>
-                                        {item.setRecords.length}세트
-                                    </SmallCard.NormalText>
-                                </SmallCard.ColumnBox>
-                            </SmallCard>
-                        )}
-                    />
+                        fallback={
+                            <SimpleTextEmptyView>
+                                운동 기록이 없습니다
+                            </SimpleTextEmptyView>
+                        }
+                    >
+                        <SmallCardList<any>
+                            data={data.workoutRecords}
+                            render={(item) => (
+                                <SmallCard key={item._id}>
+                                    <SmallCard.ImageBox
+                                        src={item.workoutLibrary.image}
+                                    />
+                                    <SmallCard.ColumnBox>
+                                        <SmallCard.BoldText>
+                                            {item.workoutLibrary.name}
+                                        </SmallCard.BoldText>
+                                        <SmallCard.NormalText>
+                                            {item.setRecords.length}세트
+                                        </SmallCard.NormalText>
+                                    </SmallCard.ColumnBox>
+                                </SmallCard>
+                            )}
+                        />
+                    </EmptyBoundary>
+
                     <IconTextBox>
                         <IconTextBox.IconText
                             color={color.gray.dark}
