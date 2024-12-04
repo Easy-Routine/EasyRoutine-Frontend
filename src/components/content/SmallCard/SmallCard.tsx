@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import styled from "styled-components";
-import { useLongPress } from "use-long-press";
+import {useLongPress} from "use-long-press";
 
 const Container = styled.div`
     width: 100%;
@@ -8,6 +8,7 @@ const Container = styled.div`
     align-items: center;
     gap: 15px;
     cursor: pointer; // 클릭 가능한 느낌을 주기 위해 추가
+    height: 40px;
 `;
 const ImageBox = styled.img`
     display: flex;
@@ -16,8 +17,8 @@ const ImageBox = styled.img`
     min-width: 40px;
     width: 40px;
     height: 40px;
-    border-radius: ${({ theme }) => theme.borderRadius.xs};
-    border: 1px solid ${({ theme }) => theme.color.gray.light};
+    border-radius: ${({theme}) => theme.borderRadius.xs};
+    border: 1px solid ${({theme}) => theme.color.gray.light};
 `;
 const ColumnBox = styled.div`
     display: flex;
@@ -31,7 +32,7 @@ const BoldText = styled.div`
 const NormalText = styled.div`
     font-size: 13px;
     font-weight: 400;
-    color: ${(props) => props.theme.color.gray.normal};
+    color: ${props => props.theme.color.gray.normal};
     display: flex;
     align-items: center;
 `;
@@ -53,7 +54,7 @@ type SmallCardProps = React.HTMLProps<HTMLDivElement> & {
     onLongPress?: () => void;
 };
 
-const SmallCard = ({ children, onCardClick, onLongPress }: SmallCardProps) => {
+const SmallCard = ({children, onCardClick, onLongPress}: SmallCardProps) => {
     const isLongPress = useRef(false);
 
     const handleSmallCardClick = () => {
@@ -74,7 +75,7 @@ const SmallCard = ({ children, onCardClick, onLongPress }: SmallCardProps) => {
                 isLongPress.current = false;
                 console.log("onLongPressFinish", isLongPress.current);
             },
-        }
+        },
     );
 
     return (

@@ -8,11 +8,11 @@ import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import styled from "styled-components";
-import { WorkoutLibrary } from "types/model";
+import {WorkoutLibrary} from "types/model";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
-import { useParams } from "react-router-dom";
-import { Category } from "types/enum";
+import {useParams} from "react-router-dom";
+import {Category} from "types/enum";
 
 const Container = styled.div`
     display: flex;
@@ -38,17 +38,17 @@ const WorkoutLibraryListBottomSheet = ({
     onBackdropClick,
     onSubmitButtonClick,
 }: WorkoutLibraryListBottomSheetProps) => {
-    const { routineConfigId } = useParams();
-    const { selectedValue, handleTabClick } = useTab(Category.ALL);
-    const { selectedValues, handleCheckBoxClick, resetSelectedValues } =
+    const {routineConfigId} = useParams();
+    const {selectedValue, handleTabClick} = useTab(Category.ALL);
+    const {selectedValues, handleCheckBoxClick, resetSelectedValues} =
         useCheckBox();
-    const { value, handleInputChange, handleInputClear } = useInput();
+    const {value, handleInputChange, handleInputClear} = useInput();
 
-    const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery(
+    const {data: workoutLibraryAllData} = useGetWorkoutLibraryAllQuery(
         value,
-        selectedValue
+        selectedValue,
     );
-    const { mutateAsync: createWorkoutConfigAllMutation } =
+    const {mutateAsync: createWorkoutConfigAllMutation} =
         useCreateWorkoutConfigAllMutation();
 
     const workoutLibraryAll = workoutLibraryAllData!;
@@ -140,9 +140,12 @@ const WorkoutLibraryListBottomSheet = ({
                                     render={(item, index) => (
                                         <CheckBoxGroup.Wrapper key={item._id}>
                                             <SmallCard>
-                                                <SmallCard.ImageBox
-                                                    src={item.image}
-                                                />
+                                                {item.image && (
+                                                    <SmallCard.ImageBox
+                                                        src={item.image}
+                                                    />
+                                                )}
+
                                                 <SmallCard.NormalText>
                                                     {item.name}
                                                 </SmallCard.NormalText>

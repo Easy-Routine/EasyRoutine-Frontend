@@ -7,8 +7,8 @@ import useTab from "hooks/client/useTab";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
-import { WorkoutLibrary } from "types/model";
-import { Category } from "types/enum";
+import {WorkoutLibrary} from "types/model";
+import {Category} from "types/enum";
 
 const Container = styled.div`
     display: flex;
@@ -34,15 +34,15 @@ const WorkoutLibraryListGraphBottomSheet = ({
     onBackdropClick,
     onSmallCardClick,
 }: WorkoutLibraryListGraphBottomSheetProps) => {
-    const { value, handleInputChange, handleInputClear } = useInput();
+    const {value, handleInputChange, handleInputClear} = useInput();
     const {
         selectedValue: selectedChipTabValue,
         handleTabClick: handleChipTabClick,
     } = useTab(Category.ALL);
 
-    const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery(
+    const {data: workoutLibraryAllData} = useGetWorkoutLibraryAllQuery(
         value,
-        selectedChipTabValue
+        selectedChipTabValue,
     );
 
     const workoutLibraryAll = workoutLibraryAllData!;
@@ -112,12 +112,14 @@ const WorkoutLibraryListGraphBottomSheet = ({
                     <SmallCardListContainer>
                         <SmallCardList<WorkoutLibrary>
                             data={workoutLibraryAll}
-                            render={({ _id, name, image }) => (
+                            render={({_id, name, image}) => (
                                 <SmallCard
                                     onCardClick={() => onSmallCardClick(_id)}
                                     key={_id}
                                 >
-                                    <SmallCard.ImageBox src={image} />
+                                    {image && (
+                                        <SmallCard.ImageBox src={image} />
+                                    )}
                                     <SmallCard.NormalText>
                                         {name}
                                     </SmallCard.NormalText>
