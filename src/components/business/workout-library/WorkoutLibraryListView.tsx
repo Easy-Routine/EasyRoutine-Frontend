@@ -1,7 +1,7 @@
 import ChipTab from "components/content/ChipTab/ChipTab";
 
 import SmallCardList from "components/content/SmallCard/SmallCardList";
-import { Suspense, useState } from "react";
+import {Suspense, useState} from "react";
 import styled from "styled-components";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import useTab from "hooks/client/useTab";
@@ -12,8 +12,8 @@ import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
 import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
 import WorkoutLibraryDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
-import { WorkoutLibrary } from "types/model";
-import { Category } from "types/enum";
+import {WorkoutLibrary} from "types/model";
+import {Category} from "types/enum";
 import useToast from "hooks/useToast";
 import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
@@ -27,19 +27,19 @@ const Container = styled.div`
 `;
 
 const WorkoutLibraryListView = () => {
-    const { selectedValue, handleTabClick } = useTab(Category.ALL);
-    const { value, handleInputChange, handleInputClear } = useInput();
+    const {selectedValue, handleTabClick} = useTab(Category.ALL);
+    const {value, handleInputChange, handleInputClear} = useInput();
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
-    const { showToast } = useToast();
+    const {showToast} = useToast();
 
-    const { data: workoutLibraryAllData } = useGetWorkoutLibraryAllQuery(
+    const {data: workoutLibraryAllData} = useGetWorkoutLibraryAllQuery(
         value,
-        selectedValue
+        selectedValue,
     );
-    const { mutateAsync: getWorkoutLibraryOneMutate } =
+    const {mutateAsync: getWorkoutLibraryOneMutate} =
         useGetWorkoutLibraryOneMutation();
 
-    const workoutLibraryAll = workoutLibraryAllData!;
+    const workoutLibraryAll = workoutLibraryAllData ?? [];
 
     const {
         isOpen: isWorkoutDeleteModalOpen,

@@ -51,7 +51,7 @@ const WorkoutLibraryListBottomSheet = ({
     const {mutateAsync: createWorkoutConfigAllMutation} =
         useCreateWorkoutConfigAllMutation();
 
-    const workoutLibraryAll = workoutLibraryAllData!;
+    const workoutLibraryAll = workoutLibraryAllData ?? [];
 
     const handleWorkoutLibraryTabClick = (value: string) => {
         handleTabClick(value);
