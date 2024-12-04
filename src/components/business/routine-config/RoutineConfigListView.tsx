@@ -4,18 +4,20 @@ import EmptyBoundary from "../EmptyBoundary";
 import EmptyView from "components/content/EmptyView/EmptyView";
 import styled from "styled-components";
 import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
-import { Suspense, useState } from "react";
+import {Suspense, useState} from "react";
 import useModal from "hooks/client/useModal";
 import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
 import useRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
+import useToast from "hooks/useToast";
 
 const Container = styled.div``;
 
 const RoutineConfigListView = () => {
-    const { data: routineConfigAllData } = useRoutineConfigAllQuery();
+    const {data: routineConfigAllData} = useRoutineConfigAllQuery();
+    const {showToast} = useToast();
 
     const routineConfigAll = routineConfigAllData!;
 
@@ -40,18 +42,25 @@ const RoutineConfigListView = () => {
             >
                 <Accordion.List
                     data={routineConfigAll}
-                    render={(routineConfig) => (
+                    render={routineConfig => (
                         <RoutineConfigDetailAccordion
                             key={routineConfig._id}
                             data={routineConfig}
                             onRoutineConfigProgressButtonClick={(
-                                routineConfigId: string
+                                routineConfigId: string,
                             ) => {
+                                if (routineConfig.workoutConfigs.length === 0) {
+                                    showToast(
+                                        "진행 할 수 있는 운동이 없습니다.",
+                                        "error",
+                                    );
+                                    return;
+                                }
                                 setRoutineConfigId(routineConfigId);
                                 openRoutineProgressModal();
                             }}
                             onRoutineConfigDeleteButtonClick={(
-                                routineConfigId: string
+                                routineConfigId: string,
                             ) => {
                                 setRoutineConfigId(routineConfigId);
                                 openRoutineConfigDeleteModal();
