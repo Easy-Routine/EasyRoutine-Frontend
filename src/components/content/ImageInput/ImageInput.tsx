@@ -74,7 +74,7 @@ const ImageInput = ({value, onInputChange, disabled}: ImageInputProps) => {
             )}
             {disabled || <CameraCircle />}
 
-            {isImageLoading && (
+            {image && isImageLoading && (
                 <ImageLoading
                     animationData={loadingAnimation}
                     loop={true}
