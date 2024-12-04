@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
+import {useEffect, useRef} from "react";
 import styled from "styled-components";
 import LogoDescription from "../LogoDescription/LogoDescription";
-import { ReactComponent as PlayStoreIcon } from "assets/image/play-store.svg";
-import { ReactComponent as AppleIcon } from "assets/image/apple.svg";
+import {ReactComponent as PlayStoreIcon} from "assets/image/play-store.svg";
+import {ReactComponent as AppleIcon} from "assets/image/apple.svg";
 
 const Container = styled.div`
     position: fixed;
@@ -36,9 +36,9 @@ const ButtonBox = styled.div`
 `;
 
 const IntroText = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.md};
-    font-weight: ${({ theme }) => theme.fontWeight.bold};
-    color: ${({ theme }) => theme.color.text.black};
+    font-size: ${({theme}) => theme.fontSize.md};
+    font-weight: ${({theme}) => theme.fontWeight.bold};
+    color: ${({theme}) => theme.color.text.black};
 `;
 
 const Button = styled.div`
@@ -47,13 +47,13 @@ const Button = styled.div`
     box-sizing: border-box;
     padding: 10px 20px;
     padding: none;
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-    border: 1px solid ${({ theme }) => theme.color.gray.light};
-    font-size: ${({ theme }) => theme.fontSize.md};
+    border-radius: ${({theme}) => theme.borderRadius.md};
+    border: 1px solid ${({theme}) => theme.color.gray.light};
+    font-size: ${({theme}) => theme.fontSize.sm};
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${({ theme }) => theme.color.text.black};
+    color: ${({theme}) => theme.color.text.black};
 `;
 
 const AppleLogo = styled(AppleIcon)`
