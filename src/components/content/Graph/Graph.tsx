@@ -1,4 +1,6 @@
+import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
 import { useState, useEffect } from "react";
+import { TooltipProps } from "recharts";
 import {
     AreaChart,
     Area,
@@ -10,15 +12,34 @@ import {
     Dot,
 } from "recharts";
 import { useTheme } from "styled-components";
+import { Period } from "types/enum";
 
 type GraphProps = {
     onDotClick: (data: any) => void; // dot click event handler
-    data: any[];
+    // data: any[];
     lineKey: string;
     areaKey: string;
+    workoutLibraryId: string;
+    selectedValue: string;
 };
 
-const Graph = ({ onDotClick, data, lineKey, areaKey }: GraphProps) => {
+const Graph = ({
+    onDotClick,
+    // data,
+    lineKey,
+    areaKey,
+    workoutLibraryId,
+    selectedValue,
+}: GraphProps) => {
+    const { data: workoutRecordSumListByDate } = useGetWorkoutRecordSumAllQuery(
+        {
+            workoutLibraryId,
+            period: selectedValue as Period,
+        }
+    );
+
+    const data = workoutRecordSumListByDate!;
+
     const { color, fontSize } = useTheme();
     const [activeTick, setActiveTick] = useState(null); // 클릭된 tick을 저장
     const [tickSize, setTickSize] = useState({
@@ -50,7 +71,7 @@ const Graph = ({ onDotClick, data, lineKey, areaKey }: GraphProps) => {
                 <text
                     width={20}
                     x={0}
-                    y={0} // 텍스트의 Y 좌표는 그대로 유지
+                    y={20} // 텍스트의 Y 좌표는 그대로 유지
                     textAnchor="middle"
                     fill={isActive ? color.text.white : "#666"}
                     fontSize={tickSize.font} // 크기 조정
@@ -116,12 +137,12 @@ const Graph = ({ onDotClick, data, lineKey, areaKey }: GraphProps) => {
                     stroke={color.primary}
                     strokeWidth={3.5}
                     dot={<CustomDot onClick={handleDotClick} />}
-                    activeDot={{ r: 0 }}
-                    fillOpacity={1}
+                    activeDot={{ r: 7.5 }}
+                    fillOpacity={3}
                     fill="url(#gradient)"
                 />
 
-                <Tooltip />
+                <Tooltip content={CustomTooltip} />
             </AreaChart>
         </ResponsiveContainer>
     );
@@ -136,12 +157,32 @@ const CustomDot = (props: any) => {
             cy={cy}
             r={3} // 점의 반지름
             stroke={props.stroke}
-            strokeWidth={3.5}
+            strokeWidth={5}
             fill={props.fill}
             onClick={() => onClick({ cx, cy, value, onClick, payload })} // 클릭 시 데이터 포인트 정보 전달
             style={{ cursor: "pointer" }} // 포인터 커서 적용
         />
     );
+};
+
+interface CustomTooltipProps extends TooltipProps<number, string> {
+    // 특정 데이터 타입에 맞게 수정할 수 있습니다.
+}
+
+const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+        const value = payload[0].value; // 원하는 데이터 값을 가져옵니다.
+        const date = payload[0].payload.key; // 날짜 데이터를 가져옵니다.
+
+        return (
+            <div>
+                <p>{`날짜: ${date}`}</p>
+                <p>{`볼륨: ${value}`}</p>
+            </div>
+        );
+    }
+
+    return null;
 };
 
 export default Graph;
