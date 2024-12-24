@@ -2,6 +2,7 @@ import SmallCard from "components/content/SmallCard/SmallCard";
 import styled from "styled-components";
 import {ReactComponent as ArrowIcon} from "assets/image/arrow.svg";
 import {WorkoutLibrary} from "types/model";
+import DefaultImage from "assets/image/default-image.png";
 
 const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);
@@ -25,7 +26,7 @@ const WorkoutLibraryDetailSmallCard = ({
         >
             <SmallCard.Between>
                 <SmallCard.ImageText>
-                    {data.image && <SmallCard.ImageBox src={data.image} />}
+                    <SmallCard.ImageBox src={data.image || DefaultImage} />
                     <SmallCard.NormalText>{data.name}</SmallCard.NormalText>
                 </SmallCard.ImageText>
                 <RightArrowIcon />

@@ -12,9 +12,9 @@ import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQu
 import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
 import useUploadWorkoutLibraryImageMutation from "hooks/server/useUploadWorkoutLibraryImageMutation";
 import Lottie from "lottie-react";
-import { ChangeEvent, useEffect, useState } from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import styled from "styled-components";
-import { Category, Type } from "types/enum";
+import {Category, Type} from "types/enum";
 import loadingAnimation from "assets/image/loading.json"; // JSON 파일 경로
 const Container = styled.div`
     width: 100%;
@@ -24,7 +24,7 @@ const Container = styled.div`
 `;
 
 const CheckBoxItem = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.md};
+    font-size: ${({theme}) => theme.fontSize.md};
     display: flex;
     gap: 10px;
     align-items: center;
@@ -58,16 +58,15 @@ const WorkoutLibraryDetailBottomSheet = ({
 }: WorkoutLibraryBottomSheetProps) => {
     // TODO: workoutLibraryId로 상세 데이터 가져오기
 
-    const { data: workoutLibraryOneData } =
+    const {data: workoutLibraryOneData} =
         useGetWorkoutLibraryOneQuery(workoutLibraryId);
 
     const workoutLibraryOne = workoutLibraryOneData!;
 
     const isDisabled = !workoutLibraryOne.isEditable;
-    const { value: originImageInputValue, setValue: setOriginImageInputValue } =
+    const {value: originImageInputValue, setValue: setOriginImageInputValue} =
         useInput(workoutLibraryOne.originImage);
-
-    const [imageValue, setImageValue] = useState("");
+    const [imageValue, setImageValue] = useState(workoutLibraryOne.image);
 
     const {
         value: underlineInputValue,
@@ -79,10 +78,10 @@ const WorkoutLibraryDetailBottomSheet = ({
         setSelectedValue,
         handleTabClick: handleCategoryChipTabClick,
     } = useTab(workoutLibraryOne.category, isDisabled);
-    const { selectedValues, setSelectedValues, handleCheckBoxClick } =
+    const {selectedValues, setSelectedValues, handleCheckBoxClick} =
         useCheckBox(workoutLibraryOne.type, isDisabled);
 
-    const { mutateAsync: updateWorkoutLibraryOneMutate } =
+    const {mutateAsync: updateWorkoutLibraryOneMutate} =
         useUpdateWorkoutLibraryOneMutation();
 
     const {
@@ -92,6 +91,7 @@ const WorkoutLibraryDetailBottomSheet = ({
 
     useEffect(() => {
         setValue(workoutLibraryOne.name);
+        setImageValue(workoutLibraryOne.image);
         setOriginImageInputValue(workoutLibraryOne.originImage);
         setSelectedValue(workoutLibraryOne.category);
         setSelectedValues(workoutLibraryOne.type);
@@ -119,6 +119,7 @@ const WorkoutLibraryDetailBottomSheet = ({
 
             const data = response!.data;
             setOriginImageInputValue(data.original);
+            console.log("썸넬", data.thumbnail);
             setImageValue(data.thumbnail);
         }
     };

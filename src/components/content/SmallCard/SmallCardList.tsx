@@ -15,7 +15,6 @@ type SmallCardListProps<T> = {
 };
 
 const SmallCardList = <T,>({data, render}: SmallCardListProps<T>) => {
-    console.log(data, "data");
     return <Container>{data && data.map(render)}</Container>;
 };
 

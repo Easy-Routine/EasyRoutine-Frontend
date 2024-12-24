@@ -13,6 +13,7 @@ import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQu
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import {useParams} from "react-router-dom";
 import {Category} from "types/enum";
+import DefaultImage from "assets/image/default-image.png";
 
 const Container = styled.div`
     display: flex;
@@ -140,11 +141,12 @@ const WorkoutLibraryListBottomSheet = ({
                                     render={(item, index) => (
                                         <CheckBoxGroup.Wrapper key={item._id}>
                                             <SmallCard>
-                                                {item.image && (
-                                                    <SmallCard.ImageBox
-                                                        src={item.image}
-                                                    />
-                                                )}
+                                                <SmallCard.ImageBox
+                                                    src={
+                                                        item.image ||
+                                                        DefaultImage
+                                                    }
+                                                />
 
                                                 <SmallCard.NormalText>
                                                     {item.name}
