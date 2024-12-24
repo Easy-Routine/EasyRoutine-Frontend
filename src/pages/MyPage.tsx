@@ -3,22 +3,24 @@ import Logo from "components/content/Logo/Logo";
 import UnderlineBox from "components/content/UnderlineBox/UnderlineBox";
 import ROUTES from "constants/routes";
 import styled from "styled-components";
-import { ReactComponent as MoonIcon } from "assets/image/moon.svg";
-import { ReactComponent as HumanIcon } from "assets/image/human2.svg";
+import {ReactComponent as MoonIcon} from "assets/image/moon.svg";
+import {ReactComponent as MailIcon} from "assets/image/mail.svg";
+import {ReactComponent as AutoIcon} from "assets/image/auto.svg";
+import {ReactComponent as DiskIcon} from "assets/image/disk.svg";
 import Toggle from "components/content/Toggle/Toggle";
-import { Suspense, useContext, useState } from "react";
-import { ThemeContext, ThemeContextType } from "context/ThemeContext";
+import {Suspense, useContext, useState} from "react";
+import {ThemeContext, ThemeContextType} from "context/ThemeContext";
 import useToast from "hooks/useToast";
 import syncData from "utils/syncData";
 import useGetUserOneQuery from "hooks/server/useGetUserOneQuery";
 import useModal from "hooks/client/useModal";
 import DataSyncModal from "components/business/DataSyncModal";
-import { ReactComponent as SyncIcon } from "assets/image/sync.svg";
+import {ReactComponent as SyncIcon} from "assets/image/sync.svg";
 import PageHeader from "components/content/PageHeader/PageHeader";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
-import { CustomError } from "types/error";
-import { AxiosError } from "axios";
+import {CustomError} from "types/error";
+import {AxiosError} from "axios";
 import Dexie from "dexie";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 
@@ -35,8 +37,8 @@ const ProfileBox = styled.div`
     align-items: center;
 `;
 const UserName = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.md};
-    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    font-size: ${({theme}) => theme.fontSize.md};
+    font-weight: ${({theme}) => theme.fontWeight.regular};
 `;
 
 const ProfileImage = styled.img`
@@ -49,13 +51,13 @@ const LogoutButton = styled.button`
     height: 26px;
     box-sizing: border-box;
     border-radius: 24px;
-    background-color: ${({ theme }) => theme.color.background.box};
-    border: 1px solid ${({ theme }) => theme.color.gray.light};
-    color: ${({ theme }) => theme.color.text.black};
+    background-color: ${({theme}) => theme.color.background.box};
+    border: 1px solid ${({theme}) => theme.color.gray.light};
+    color: ${({theme}) => theme.color.text.black};
 `;
 
 const SyncButton = styled.button`
-    background-color: ${({ theme }) => theme.color.primary};
+    background-color: ${({theme}) => theme.color.primary};
     width: 44px;
     height: 24px;
     display: flex;
@@ -63,23 +65,23 @@ const SyncButton = styled.button`
     align-items: center;
     padding: none;
     border: none;
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
+    border-radius: ${({theme}) => theme.borderRadius.xl};
 `;
 
 const UnderlineBoxWrapper = styled.div``;
 
 const MyPageContentView = () => {
-    const { themeMode, setThemeMode } = useContext(
-        ThemeContext
+    const {themeMode, setThemeMode} = useContext(
+        ThemeContext,
     ) as ThemeContextType;
-    const { showToast } = useToast();
+    const {showToast} = useToast();
 
     const {
         isOpen: isDataSyncModalOpen,
         handleOpenModal: openDataSyncModal,
         handleCloseModal: closeDataSyncModal,
     } = useModal();
-    const { data: userOneData } = useGetUserOneQuery();
+    const {data: userOneData} = useGetUserOneQuery();
 
     const userOne = userOneData!;
 
@@ -87,7 +89,7 @@ const MyPageContentView = () => {
         localStorage.getItem("syncMode") &&
             localStorage.getItem("syncMode") === "on"
             ? true
-            : false
+            : false,
     );
 
     const handleDarkModeToggleClick = () => {
@@ -156,13 +158,13 @@ const MyPageContentView = () => {
                 </UnderlineBox>
                 <UnderlineBox>
                     <UnderlineBox.TitleWrapper>
-                        <HumanIcon />
+                        <MailIcon />
                         문의 사항
                     </UnderlineBox.TitleWrapper>
                 </UnderlineBox>
                 <UnderlineBox>
                     <UnderlineBox.TitleWrapper>
-                        <MoonIcon />
+                        <DiskIcon />
                         동기화
                     </UnderlineBox.TitleWrapper>
                     <SyncButton onClick={handleSyncButtonClick}>
@@ -171,7 +173,7 @@ const MyPageContentView = () => {
                 </UnderlineBox>
                 <UnderlineBox>
                     <UnderlineBox.TitleWrapper>
-                        <MoonIcon />
+                        <AutoIcon />
                         자동 동기화 설정
                     </UnderlineBox.TitleWrapper>
                     <Toggle
