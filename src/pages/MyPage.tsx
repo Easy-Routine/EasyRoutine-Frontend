@@ -7,6 +7,7 @@ import {ReactComponent as MoonIcon} from "assets/image/moon.svg";
 import {ReactComponent as MailIcon} from "assets/image/mail.svg";
 import {ReactComponent as AutoIcon} from "assets/image/auto.svg";
 import {ReactComponent as DiskIcon} from "assets/image/disk.svg";
+import {ReactComponent as ArrowIcon} from "assets/image/arrow.svg";
 import Toggle from "components/content/Toggle/Toggle";
 import {Suspense, useContext, useState} from "react";
 import {ThemeContext, ThemeContextType} from "context/ThemeContext";
@@ -23,6 +24,10 @@ import {CustomError} from "types/error";
 import {AxiosError} from "axios";
 import Dexie from "dexie";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
+
+const RightArrowIcon = styled(ArrowIcon)`
+    transform: rotate(-90deg);
+`;
 
 const Container = styled.div`
     display: flex;
@@ -136,6 +141,10 @@ const MyPageContentView = () => {
         window.dispatchEvent(new Event("accessTokenChanged"));
     };
 
+    const handleMailButtonClick = () => {
+        window.location.href = "mailto:doggopawer@gmail.com?subject=문의 사항"; // 이메일 주소와 제목을 설정
+    };
+
     return (
         <Container>
             <ProfileBox>
@@ -161,6 +170,7 @@ const MyPageContentView = () => {
                         <MailIcon />
                         문의 사항
                     </UnderlineBox.TitleWrapper>
+                    <RightArrowIcon onClick={handleMailButtonClick} />
                 </UnderlineBox>
                 <UnderlineBox>
                     <UnderlineBox.TitleWrapper>
