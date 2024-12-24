@@ -14,8 +14,9 @@ type SmallCardListProps<T> = {
     render: (value: T, key: number) => React.ReactNode;
 };
 
-const SmallCardList = <T,>({ data, render }: SmallCardListProps<T>) => {
-    return <Container>{data.map(render)}</Container>;
+const SmallCardList = <T,>({data, render}: SmallCardListProps<T>) => {
+    console.log(data, "data");
+    return <Container>{data && data.map(render)}</Container>;
 };
 
 export default SmallCardList;
