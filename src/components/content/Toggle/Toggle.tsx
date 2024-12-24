@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
-const Container = styled.div<{ isActive: boolean }>`
+const Container = styled.div<{isActive: boolean}>`
     width: 44px;
     height: 24px;
     border-radius: 50px;
-    background-color: ${({ isActive, theme }) =>
+    background-color: ${({isActive, theme}) =>
         isActive ? theme.color.primary : theme.color.gray.light};
     display: flex;
     align-items: center;
@@ -14,13 +14,13 @@ const Container = styled.div<{ isActive: boolean }>`
     transition: background-color 0.3s;
 `;
 
-const ToggleCircle = styled.div<{ isActive: boolean }>`
+const ToggleCircle = styled.div<{isActive: boolean}>`
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: white;
-    transform: ${({ isActive }) =>
-        isActive ? "translateX(20px)" : "translateX(0)"};
+    transform: ${({isActive}) =>
+        isActive ? "translateX(20px)" : "translateX(2.5px)"};
     transition: transform 0.3s;
 `;
 
@@ -29,11 +29,11 @@ type ToggleProps = {
     defaultValue: boolean;
 };
 
-const Toggle = ({ defaultValue, onToggleChange }: ToggleProps) => {
+const Toggle = ({defaultValue, onToggleChange}: ToggleProps) => {
     const [isActive, setIsActive] = useState(defaultValue);
 
     const handleToggle = () => {
-        setIsActive((prev) => !prev);
+        setIsActive(prev => !prev);
 
         onToggleChange && onToggleChange();
     };
