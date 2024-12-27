@@ -1,9 +1,9 @@
-import { SetConfig } from "types/model";
-import { db } from "db";
+import {SetConfig} from "types/model";
+import {db} from "db";
 import moment from "moment";
-import { CustomError, ErrorDefinitions } from "types/error";
-import { handleError } from "utils/handleError";
-import { v4 as uuidv4 } from "uuid";
+import {CustomError, ErrorDefinitions} from "types/error";
+import {handleError} from "utils/handleError";
+import {v4 as uuidv4} from "uuid";
 
 // 확인: 완료
 export const createSetConfigOne = async ({
@@ -14,26 +14,30 @@ export const createSetConfigOne = async ({
     workoutConfigId: string;
 }): Promise<SetConfig | undefined> => {
     try {
-        const newSetConfig: SetConfig = {
-            _id: uuidv4(),
-            workoutConfigId,
-            rep: 0,
-            weight: 0,
-            restSec: 0,
-            workoutSec: 0,
-            createdAt: moment().toISOString(),
-            updatedAt: moment().toISOString(),
-        };
         const routineConfigOne = await db.routineConfigs.get(routineConfigId);
 
         if (!routineConfigOne)
             throw new CustomError(ErrorDefinitions.NOT_FOUND);
 
         const workoutConfigOne = routineConfigOne.workoutConfigs.find(
-            (workoutConfig) => workoutConfig._id === workoutConfigId
+            workoutConfig => workoutConfig._id === workoutConfigId,
         );
         if (!workoutConfigOne)
             throw new CustomError(ErrorDefinitions.NOT_FOUND);
+
+        const lastSetConfigOne =
+            workoutConfigOne.setConfigs[workoutConfigOne.setConfigs.length - 1];
+
+        const newSetConfig: SetConfig = {
+            _id: uuidv4(),
+            workoutConfigId,
+            rep: lastSetConfigOne.rep,
+            weight: lastSetConfigOne.weight,
+            restSec: lastSetConfigOne.restSec,
+            workoutSec: lastSetConfigOne.workoutSec,
+            createdAt: moment().toISOString(),
+            updatedAt: moment().toISOString(),
+        };
 
         workoutConfigOne.setConfigs.push(newSetConfig);
 
@@ -66,14 +70,14 @@ export const updateSetConfigField = async ({
             throw new CustomError(ErrorDefinitions.NOT_FOUND);
 
         const workoutConfigOne = routineConfigOne.workoutConfigs.find(
-            (workoutConfig) => workoutConfig._id === workoutConfigId
+            workoutConfig => workoutConfig._id === workoutConfigId,
         );
 
         if (!workoutConfigOne)
             throw new CustomError(ErrorDefinitions.NOT_FOUND);
 
         const setConfigOne = workoutConfigOne.setConfigs.find(
-            (setConfig) => setConfig._id === setConfigId
+            setConfig => setConfig._id === setConfigId,
         );
 
         if (setConfigOne) {
@@ -103,7 +107,7 @@ export const deleteSetConfigOne = async ({
             throw new CustomError(ErrorDefinitions.NOT_FOUND);
 
         const workoutConfigOne = routineConfigOne.workoutConfigs.find(
-            (workoutConfig) => workoutConfig._id === workoutConfigId
+            workoutConfig => workoutConfig._id === workoutConfigId,
         );
 
         if (!workoutConfigOne)
@@ -111,12 +115,12 @@ export const deleteSetConfigOne = async ({
 
         const latestSetConfigOne = workoutConfigOne.setConfigs.sort(
             (a, b) =>
-                moment(a.createdAt).valueOf() - moment(b.createdAt).valueOf()
+                moment(a.createdAt).valueOf() - moment(b.createdAt).valueOf(),
         )[workoutConfigOne.setConfigs.length - 1];
 
         // 최신 setConfig 삭제
         const newSetConfigs = workoutConfigOne.setConfigs.filter(
-            (setConfig) => setConfig._id !== latestSetConfigOne._id
+            setConfig => setConfig._id !== latestSetConfigOne._id,
         );
         workoutConfigOne.setConfigs = newSetConfigs;
 

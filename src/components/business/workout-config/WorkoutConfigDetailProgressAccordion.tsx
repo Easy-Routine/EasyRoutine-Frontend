@@ -7,21 +7,21 @@ import {
     WorkoutConfig,
     WorkoutLibrary,
 } from "types/model";
-import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
+import {ReactComponent as ArrowIcon} from "assets/image/arrow.svg";
 import Table from "components/content/Table/Table";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import PaddingY from "components/box/PaddingY/PaddingY";
 import Button from "components/content/Button/Button";
-import { ReactComponent as PenIcon } from "assets/image/pen.svg";
-import { ReactComponent as RunIcon } from "assets/image/run.svg";
-import { useEffect, useState } from "react";
-import { useTheme } from "styled-components";
+import {ReactComponent as PenIcon} from "assets/image/pen.svg";
+import {ReactComponent as RunIcon} from "assets/image/run.svg";
+import {useEffect, useState} from "react";
+import {useTheme} from "styled-components";
 import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutRecordOneMutation";
 import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMutation";
 import useDeleteSetRecordOneMutation from "hooks/server/useDeleteSetRecordOneMutation";
 import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
 import moment from "moment";
-import { Type } from "types/enum";
+import {Type} from "types/enum";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 type TypeMapper = {
@@ -40,16 +40,16 @@ type WorkoutConfigDetailProgressAccordionProps = {
     remainingTime: number;
     onSetCreate: (
         workoutConfigId: string,
-        newSetConfigs: WorkoutConfig["setConfigs"]
+        newSetConfigs: WorkoutConfig["setConfigs"],
     ) => void;
     onSetDelete: (
         workoutConfigId: string,
-        newSetConfigs: WorkoutConfig["setConfigs"]
+        newSetConfigs: WorkoutConfig["setConfigs"],
     ) => void;
     onSetComplete: (restSec: number) => void;
     onSetUpdate: (
         workoutConfigId: string,
-        newSetConfigs: WorkoutConfig["setConfigs"]
+        newSetConfigs: WorkoutConfig["setConfigs"],
     ) => void;
     onCompletedSetIdsMutate: (completedSetIds: string[]) => void;
     onWorkoutDelete: (workoutConfigId: string) => void;
@@ -66,24 +66,24 @@ const WorkoutConfigDetailProgressAccordion = ({
     onCompletedSetIdsMutate,
     onWorkoutDelete,
 }: WorkoutConfigDetailProgressAccordionProps) => {
-    const { color } = useTheme();
-    const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
+    const {color} = useTheme();
+    const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
         useAccordion();
 
     const [currentSetId, setCurrentSetId] = useState(data.setConfigs[0]?._id);
     const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
     const [currentWorkoutId, setCurrentWorkoutId] = useState("");
 
-    const { mutateAsync: createWorkoutRecordOneMutate } =
+    const {mutateAsync: createWorkoutRecordOneMutate} =
         useCreateWorkoutRecordOneMutation();
 
-    const { mutateAsync: createSetRecordOneMutate } =
+    const {mutateAsync: createSetRecordOneMutate} =
         useCreateSetRecordOneMutation();
 
-    const { mutateAsync: deleteSetRecordOneMutate } =
+    const {mutateAsync: deleteSetRecordOneMutate} =
         useDeleteSetRecordOneMutation();
 
-    const { mutateAsync: deleteWorkoutRecordOneMutate } =
+    const {mutateAsync: deleteWorkoutRecordOneMutate} =
         useDeleteWorkoutRecordOneMutation();
 
     useEffect(() => {
@@ -114,7 +114,7 @@ const WorkoutConfigDetailProgressAccordion = ({
         setCurrentSetId(data.setConfigs[newCompletedSetIds.length]?._id);
 
         const currentSetConfig = data.setConfigs.find(
-            (setConfig) => setConfig._id === currentSetId
+            setConfig => setConfig._id === currentSetId,
         );
 
         if (currentSetConfig) {
@@ -131,7 +131,7 @@ const WorkoutConfigDetailProgressAccordion = ({
         const newSetConfigs = structuredClone(data.setConfigs);
         const poppedSetConfig = newSetConfigs.pop();
         const filteredCompletedSetIds = completedSetIds.filter(
-            (_id) => _id !== poppedSetConfig?._id
+            _id => _id !== poppedSetConfig?._id,
         );
         setCompletedSetIds(filteredCompletedSetIds);
         onSetDelete(data._id, newSetConfigs);
@@ -147,12 +147,14 @@ const WorkoutConfigDetailProgressAccordion = ({
 
     const handleCreateSetButtonClick = () => {
         const newSetConfigs = structuredClone(data.setConfigs);
+        const tail = newSetConfigs.length - 1;
+
         newSetConfigs.push({
             _id: (newSetConfigs.length + 1).toString(),
-            weight: 0,
-            rep: 0,
-            restSec: 0,
-            workoutSec: 0,
+            weight: newSetConfigs[tail].weight,
+            rep: newSetConfigs[tail].rep,
+            restSec: newSetConfigs[tail].restSec,
+            workoutSec: newSetConfigs[tail].restSec,
             createdAt: moment().toISOString(),
             updatedAt: moment().toISOString(),
             workoutConfigId: "1",
@@ -164,7 +166,7 @@ const WorkoutConfigDetailProgressAccordion = ({
     const handleUpdateSetInputChange = (
         index: number,
         key: string,
-        value: string
+        value: string,
     ) => {
         const newSetConfigs = structuredClone(data.setConfigs);
         newSetConfigs[index][key] = value;
@@ -227,7 +229,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                                 header={
                                     <Table.Row>
                                         <Table.TitleText>세트</Table.TitleText>
-                                        {data.workoutLibrary.type.map((key) => (
+                                        {data.workoutLibrary.type.map(key => (
                                             <Table.TitleText>
                                                 {typeMapper[key]}
                                             </Table.TitleText>
@@ -239,10 +241,10 @@ const WorkoutConfigDetailProgressAccordion = ({
                                     <Table.Row
                                         key={setConfig._id}
                                         isGrayLine={isCompletedSet(
-                                            setConfig._id
+                                            setConfig._id,
                                         )}
                                         isPrimaryLine={isCurrentSet(
-                                            setConfig._id
+                                            setConfig._id,
                                         )}
                                     >
                                         <Table.NumberPicker
@@ -251,70 +253,70 @@ const WorkoutConfigDetailProgressAccordion = ({
                                         />
                                         {isTypeExist(
                                             data.workoutLibrary,
-                                            Type.WEIGHT
+                                            Type.WEIGHT,
                                         ) && (
                                             <Table.WeightPicker
                                                 value={setConfig.weight}
-                                                onInputChange={(value) =>
+                                                onInputChange={value =>
                                                     handleUpdateSetInputChange(
                                                         index,
                                                         Type.WEIGHT,
-                                                        value
+                                                        value,
                                                     )
                                                 }
                                                 disabled={isCompletedSet(
-                                                    setConfig._id
+                                                    setConfig._id,
                                                 )}
                                             />
                                         )}
                                         {isTypeExist(
                                             data.workoutLibrary,
-                                            Type.REP
+                                            Type.REP,
                                         ) && (
                                             <Table.NumberPicker
                                                 value={setConfig.rep}
-                                                onInputChange={(value) =>
+                                                onInputChange={value =>
                                                     handleUpdateSetInputChange(
                                                         index,
                                                         Type.REP,
-                                                        value
+                                                        value,
                                                     )
                                                 }
                                                 disabled={isCompletedSet(
-                                                    setConfig._id
+                                                    setConfig._id,
                                                 )}
                                             />
                                         )}
                                         {isTypeExist(
                                             data.workoutLibrary,
-                                            Type.WORKOUT_SEC
+                                            Type.WORKOUT_SEC,
                                         ) && (
                                             <Table.TimePicker
                                                 value={setConfig.workoutSec.toString()}
-                                                onInputChange={(value) =>
+                                                onInputChange={value =>
                                                     handleUpdateSetInputChange(
                                                         index,
                                                         Type.WORKOUT_SEC,
-                                                        value
+                                                        value,
                                                     )
                                                 }
                                                 disabled={isCompletedSet(
-                                                    setConfig._id
+                                                    setConfig._id,
                                                 )}
                                             />
                                         )}
 
                                         <Table.TimePicker
                                             value={setConfig.restSec.toString()}
-                                            onInputChange={(value) =>
+                                            onInputChange={value =>
                                                 handleUpdateSetInputChange(
                                                     index,
                                                     "restSec",
-                                                    value
+                                                    value,
                                                 )
                                             }
                                             disabled={isCompletedSet(
-                                                setConfig._id
+                                                setConfig._id,
                                             )}
                                         />
                                     </Table.Row>
