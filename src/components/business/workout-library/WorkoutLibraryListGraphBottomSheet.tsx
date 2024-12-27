@@ -9,6 +9,7 @@ import SmallCard from "components/content/SmallCard/SmallCard";
 import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
 import {WorkoutLibrary} from "types/model";
 import {Category} from "types/enum";
+import DefaultImage from "assets/image/default-image.png";
 
 const Container = styled.div`
     display: flex;
@@ -115,11 +116,11 @@ const WorkoutLibraryListGraphBottomSheet = ({
                             render={({_id, name, image}) => (
                                 <SmallCard
                                     onCardClick={() => onSmallCardClick(_id)}
-                                    key={_id}
                                 >
-                                    {image && (
-                                        <SmallCard.ImageBox src={image} />
-                                    )}
+                                    <SmallCard.ImageBox
+                                        src={image || DefaultImage}
+                                    />
+
                                     <SmallCard.NormalText>
                                         {name}
                                     </SmallCard.NormalText>
