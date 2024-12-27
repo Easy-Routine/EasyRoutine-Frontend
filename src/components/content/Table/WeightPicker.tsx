@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import useModal from "hooks/client/useModal";
 import Modal from "components/box/Modal/Modal";
 import ScrollPicker from "../ScrollPicker/ScrollPicker";
 import Input from "./Input";
 
-const Container = styled.div<{ disabled: boolean }>`
+const Container = styled.div<{disabled: boolean}>`
     flex: 1;
     display: inline-block;
     justify-content: center;
@@ -18,14 +18,14 @@ const Container = styled.div<{ disabled: boolean }>`
     text-align: center;
     box-sizing: border-box;
     background-color: inherit;
-    font-size: ${({ theme }) => theme.fontSize.xs};
-    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    font-size: ${({theme}) => theme.fontSize.xs};
+    font-weight: ${({theme}) => theme.fontWeight.regular};
     border-bottom: 2px solid
-        ${({ theme, disabled }) => (disabled ? "none" : theme.color.gray.light)};
+        ${({theme, disabled}) => (disabled ? "none" : theme.color.gray.light)};
     text-align: center;
-    color: ${({ theme }) => theme.color.text.black};
+    color: ${({theme}) => theme.color.text.black};
     &:focus {
-        border-color: ${({ theme }) => theme.color.primary};
+        border-color: ${({theme}) => theme.color.primary};
     }
 `;
 
@@ -33,6 +33,7 @@ const Flex = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
+    width: 80%;
 `;
 
 type WeightPickerProps = {
@@ -52,7 +53,7 @@ const WeightPicker = ({
 
     const [integer, setInteger] = useState(Math.floor(value));
     const [float, setFloat] = useState(value - Math.floor(value));
-    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+    const {isOpen, handleOpenModal, handleCloseModal} = useModal();
 
     const handleWeightPickerClose = () => {
         const totalWeight = integer + float;
@@ -97,7 +98,7 @@ const WeightPicker = ({
                         }}
                         opacity={0.1}
                     />
-                    <Modal.BottomSheet isOpen={isOpen}>
+                    <Modal.Content isOpen={isOpen}>
                         <Flex>
                             <Input
                                 width={50}
@@ -118,7 +119,7 @@ const WeightPicker = ({
                                 <ScrollPicker.HighlightArea />
                             </ScrollPicker.Container>
                         </Flex>
-                    </Modal.BottomSheet>
+                    </Modal.Content>
                 </Modal.Portal>
             )}
         </>

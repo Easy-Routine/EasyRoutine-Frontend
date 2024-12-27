@@ -1,26 +1,29 @@
-import { useState } from "react";
+import {useState} from "react";
 import styled from "styled-components";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {Swiper, SwiperSlide} from "swiper/react";
 import Container from "./Container";
 import Label from "./Label";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import { FreeMode } from "swiper/modules";
+import {FreeMode} from "swiper/modules";
 import HighlightArea from "./HightLightArea";
 
 const StyledSwiper = styled(Swiper)`
     height: 100px;
+    width: 100%;
 `;
 const StyledSwiperSlide = styled(SwiperSlide)`
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-size: ${({ theme }) => theme.fontSize.xxl};
-    font-weight: ${({ theme }) => theme.fontWeight.semibold}
+    font-size: ${({theme}) => theme.fontSize.xxl};
+    font-weight: ${({theme}) => theme.fontWeight.semibold}
     transition: transform 0.3s;
     // padding: 0 10px;
+    width: 100%;
+    text-align: center;
 `;
 
 const ScrollPicker = ({
@@ -36,7 +39,7 @@ const ScrollPicker = ({
 }) => {
     const values = pickerData;
     const [selectedValue, setSelectedValue] = useState(
-        values.findIndex((v: number) => v === value)
+        values.findIndex((v: number) => v === value),
     );
 
     const handlePickerChange = (swiper: any) => {
@@ -65,7 +68,7 @@ const ScrollPicker = ({
                 initialSlide={selectedValue}
                 modules={[FreeMode]}
             >
-                {values.map((value) => (
+                {values.map(value => (
                     <StyledSwiperSlide key={value}>{value}</StyledSwiperSlide>
                 ))}
             </StyledSwiper>

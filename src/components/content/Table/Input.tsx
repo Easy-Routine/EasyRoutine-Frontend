@@ -1,25 +1,25 @@
-import React, { ChangeEvent, useState } from "react";
+import React, {ChangeEvent, useState} from "react";
 import styled from "styled-components";
 
-const Container = styled.input<{ width: number; disabled?: boolean }>`
-    width: ${({ width }) => `${width}px`};
+const Container = styled.input<{width: number; disabled?: boolean}>`
+    width: ${({width}) => `${width}px`};
     height: 22px;
     outline: none;
     border: none;
     padding: 15px 0;
     border-radius: 0;
     border-bottom: 2px solid
-        ${({ theme, disabled }) => (disabled ? "none" : theme.color.gray.light)};
+        ${({theme, disabled}) => (disabled ? "none" : theme.color.gray.light)};
     box-sizing: border-box;
     background-color: inherit;
-    font-size: ${({ theme }) => theme.fontSize.xxl};
-    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    font-size: ${({theme}) => theme.fontSize.xxl};
+    font-weight: ${({theme}) => theme.fontWeight.regular};
     &:focus {
-        border-color: ${({ theme }) => theme.color.primary};
+        border-color: ${({theme}) => theme.color.primary};
     }
     text-align: center;
-    color: ${({ theme }) => theme.color.text.black};
-    flex: 1;
+    color: ${({theme}) => theme.color.text.black};
+    // flex: 1;
     z-index: 1;
 `;
 

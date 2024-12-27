@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import useModal from "hooks/client/useModal";
 import Modal from "components/box/Modal/Modal";
 import ScrollPicker from "../ScrollPicker/ScrollPicker";
 
-const Container = styled.div<{ disabled: boolean }>`
+const Container = styled.div<{disabled: boolean}>`
     flex: 1;
     display: inline-block;
     justify-content: center;
@@ -17,14 +17,14 @@ const Container = styled.div<{ disabled: boolean }>`
     text-align: center;
     box-sizing: border-box;
     background-color: inherit;
-    font-size: ${({ theme }) => theme.fontSize.xxs};
-    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    font-size: ${({theme}) => theme.fontSize.xxs};
+    font-weight: ${({theme}) => theme.fontWeight.regular};
     border-bottom: 2px solid
-        ${({ theme, disabled }) => (disabled ? "none" : theme.color.gray.light)};
+        ${({theme, disabled}) => (disabled ? "none" : theme.color.gray.light)};
     text-align: center;
-    color: ${({ theme }) => theme.color.text.black};
+    color: ${({theme}) => theme.color.text.black};
     &:focus {
-        border-color: ${({ theme }) => theme.color.primary};
+        border-color: ${({theme}) => theme.color.primary};
     }
     white-space: nowrap; /* 텍스트를 한 줄로 고정 */
     text-overflow: ellipsis; /* 넘치는 내용이 있을 경우 '...'으로 표시 */
@@ -42,10 +42,10 @@ const TimePicker = ({
     onInputChange,
     disabled = false,
 }: TimePickerProps) => {
-    const timeData = Array.from({ length: 60 }, (_, i) => i);
+    const timeData = Array.from({length: 60}, (_, i) => i);
     const [minutes, setMinutes] = useState(Math.floor(Number(value) / 60));
     const [seconds, setSeconds] = useState(Number(value) % 60);
-    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+    const {isOpen, handleOpenModal, handleCloseModal} = useModal();
 
     const handleTimePickerClose = () => {
         const totalSeconds = minutes * 60 + seconds;
@@ -90,7 +90,7 @@ const TimePicker = ({
                         }}
                         opacity={0.1}
                     />
-                    <Modal.BottomSheet isOpen={isOpen}>
+                    <Modal.Content isOpen={isOpen}>
                         <ScrollPicker.Container>
                             <ScrollPicker
                                 pickerData={timeData}
@@ -108,7 +108,7 @@ const TimePicker = ({
                             <ScrollPicker.Label>초</ScrollPicker.Label>
                             <ScrollPicker.HighlightArea />
                         </ScrollPicker.Container>
-                    </Modal.BottomSheet>
+                    </Modal.Content>
                 </Modal.Portal>
             )}
         </>
