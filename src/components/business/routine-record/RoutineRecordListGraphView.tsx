@@ -5,10 +5,10 @@ import Graph from "components/content/Graph/Graph";
 import useTab from "hooks/client/useTab";
 import styled from "styled-components";
 import useModal from "hooks/client/useModal";
-import { Suspense, useState } from "react";
+import {Suspense, useState} from "react";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
-import { Period } from "types/enum";
+import {Period} from "types/enum";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 
 const RoutineRecorListGraphView = () => {
-    const { selectedValue, handleTabClick } = useTab(Period.Month);
+    const {selectedValue, handleTabClick} = useTab(Period.Month);
     const {
         isOpen: isWorkoutLibraryListGraphBottomSheetOpen,
         handleOpenModal: openWorkoutLibraryListGraphBottomSheet,
@@ -31,7 +31,7 @@ const RoutineRecorListGraphView = () => {
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 
-    const { data: workoutLibraryDetailData } =
+    const {data: workoutLibraryDetailData} =
         useGetWorkoutLibraryOneQuery(workoutLibraryId);
     const workoutLibraryDetail = workoutLibraryDetailData!;
 
@@ -53,7 +53,7 @@ const RoutineRecorListGraphView = () => {
                     </Box>
                     <Box>
                         <Graph
-                            onDotClick={(data) => console.log(data)}
+                            onDotClick={data => console.log(data)}
                             workoutLibraryId={workoutLibraryId}
                             selectedValue={selectedValue}
                             lineKey="key"
@@ -101,6 +101,7 @@ const RoutineRecorListGraphView = () => {
             ) : (
                 <SimpleTextEmptyView>
                     현재 선택된 운동이 없습니다.
+                    <br /> 통계를 보고싶은 운동 종목을 선택해주세요.
                 </SimpleTextEmptyView>
             )}
             <ErrorBoundary>
