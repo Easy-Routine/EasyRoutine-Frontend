@@ -13,7 +13,6 @@ type AccordionProps = {
     children: React.ReactNode;
     css?: RuleSet<object>;
     isCurrentAccordion?: boolean;
-    onClick?: () => void;
 };
 
 const Container = styled.div`
@@ -25,12 +24,7 @@ const Container = styled.div`
     box-shadow: ${({theme}) => theme.boxShadow};
 `;
 
-const Accordion = ({
-    children,
-    css,
-    isCurrentAccordion,
-    onClick,
-}: AccordionProps) => {
+const Accordion = ({children, css, isCurrentAccordion}: AccordionProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [x, setX] = useState(0);
     const [opacity, setOpacity] = useState(0);
@@ -62,7 +56,7 @@ const Accordion = ({
         <AccordionProvider
             value={{isOpen, handleToggleAccordion, handleDragEnd, opacity, x}}
         >
-            <Container onClick={onClick}>{children}</Container>
+            <Container>{children}</Container>
         </AccordionProvider>
     );
 };

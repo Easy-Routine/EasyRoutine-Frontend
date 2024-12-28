@@ -32,7 +32,7 @@ const RoutineRecordDetailAccordion = ({
         useAccordion();
 
     return (
-        <Accordion onClick={handleToggleAccordion}>
+        <Accordion>
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
                     <Card>

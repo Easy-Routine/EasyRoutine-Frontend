@@ -190,7 +190,7 @@ const WorkoutConfigDetailProgressAccordion = ({
         workoutLibrary.type.includes(type);
 
     return (
-        <Accordion onClick={handleToggleAccordion}>
+        <Accordion>
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
                     <Card>

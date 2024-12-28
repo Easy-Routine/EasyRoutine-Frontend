@@ -81,7 +81,7 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
 
     // 비동기 작업 추가
     return (
-        <Accordion onClick={handleToggleAccordion}>
+        <Accordion>
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
                     <Card>
