@@ -4,14 +4,14 @@ import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import useAccordion from "hooks/client/useAccordion";
-import { ReactComponent as FireIcon } from "assets/image/fire.svg";
-import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
-import { ReactComponent as PenIcon } from "assets/image/pen.svg";
-import { ReactComponent as RunIcon } from "assets/image/run.svg";
-import { useNavigate } from "react-router-dom";
+import {ReactComponent as FireIcon} from "assets/image/fire.svg";
+import {ReactComponent as ArrowIcon} from "assets/image/arrow.svg";
+import {ReactComponent as PenIcon} from "assets/image/pen.svg";
+import {ReactComponent as RunIcon} from "assets/image/run.svg";
+import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
-import { useTheme } from "styled-components";
-import { RoutineConfig, WorkoutConfig } from "types/model";
+import {useTheme} from "styled-components";
+import {RoutineConfig, WorkoutConfig} from "types/model";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
@@ -26,9 +26,9 @@ const RoutineConfigDetailAccordion = ({
     onRoutineConfigProgressButtonClick,
     onRoutineConfigDeleteButtonClick,
 }: RoutineConfigDetailAccordionProps) => {
-    const { color } = useTheme();
+    const {color} = useTheme();
     const navigate = useNavigate();
-    const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
+    const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
         useAccordion();
 
     const handleRoutineUpdateButtonClick = (routineConfigId: string) => {
@@ -38,12 +38,12 @@ const RoutineConfigDetailAccordion = ({
     // 비동기 작업 추가
     return (
         <>
-            <Accordion>
+            <Accordion onClick={handleToggleAccordion}>
                 <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                     <Accordion.Header>
                         <Card>
                             <Card.ImageBox $backgroundColor={data.color}>
-                                <FireIcon style={{ color: data.color }} />
+                                <FireIcon style={{color: data.color}} />
                             </Card.ImageBox>
                             <Card.Column>
                                 <Card.Title>{data.name}</Card.Title>
@@ -69,7 +69,7 @@ const RoutineConfigDetailAccordion = ({
                         >
                             <SmallCardList<WorkoutConfig>
                                 data={data.workoutConfigs}
-                                render={(workoutConfig) => (
+                                render={workoutConfig => (
                                     <SmallCard key={workoutConfig._id}>
                                         <SmallCard.ImageBox
                                             src={
@@ -111,7 +111,7 @@ const RoutineConfigDetailAccordion = ({
                                 color={color.primary}
                                 onIconTextClick={() => {
                                     onRoutineConfigProgressButtonClick(
-                                        data._id
+                                        data._id,
                                     );
                                 }}
                             >

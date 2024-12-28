@@ -1,9 +1,9 @@
 import AccordionProvider from "context/AccordionContext";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Body from "./Body";
 import Trigger from "./Trigger";
 import Arrow from "./Arrow";
-import styled, { RuleSet } from "styled-components";
+import styled, {RuleSet} from "styled-components";
 import Header from "./Header";
 import Motion from "./Motion";
 import DeleteButton from "./DeleteButton";
@@ -13,6 +13,7 @@ type AccordionProps = {
     children: React.ReactNode;
     css?: RuleSet<object>;
     isCurrentAccordion?: boolean;
+    onClick?: () => void;
 };
 
 const Container = styled.div`
@@ -20,11 +21,16 @@ const Container = styled.div`
     margin: -5px;
     padding: 5px;
     overflow: hidden;
-    border-radius: ${(props) => props.theme.borderRadius.md};
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    border-radius: ${props => props.theme.borderRadius.md};
+    box-shadow: ${({theme}) => theme.boxShadow};
 `;
 
-const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
+const Accordion = ({
+    children,
+    css,
+    isCurrentAccordion,
+    onClick,
+}: AccordionProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [x, setX] = useState(0);
     const [opacity, setOpacity] = useState(0);
@@ -36,7 +42,7 @@ const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
         }
     }, [isCurrentAccordion]);
 
-    const handleDragEnd = (_: any, info: { offset: { x: number } }) => {
+    const handleDragEnd = (_: any, info: {offset: {x: number}}) => {
         if (info.offset.x > 0) {
             // 오른쪽으로 드래그
             setX(0); // 원래 위치로 돌아가기
@@ -54,9 +60,9 @@ const Accordion = ({ children, css, isCurrentAccordion }: AccordionProps) => {
 
     return (
         <AccordionProvider
-            value={{ isOpen, handleToggleAccordion, handleDragEnd, opacity, x }}
+            value={{isOpen, handleToggleAccordion, handleDragEnd, opacity, x}}
         >
-            <Container>{children}</Container>
+            <Container onClick={onClick}>{children}</Container>
         </AccordionProvider>
     );
 };

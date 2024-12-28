@@ -1,18 +1,18 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import useAccordion from "hooks/client/useAccordion";
-import { ReactComponent as FireIcon } from "assets/image/fire.svg";
-import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
-import { ReactComponent as PenIcon } from "assets/image/pen.svg";
-import { ReactComponent as RunIcon } from "assets/image/run.svg";
+import {ReactComponent as FireIcon} from "assets/image/fire.svg";
+import {ReactComponent as ArrowIcon} from "assets/image/arrow.svg";
+import {ReactComponent as PenIcon} from "assets/image/pen.svg";
+import {ReactComponent as RunIcon} from "assets/image/run.svg";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
-import { useTheme } from "styled-components";
-import { Color } from "types/enum";
-import { RoutineRecord } from "types/model";
+import {useTheme} from "styled-components";
+import {Color} from "types/enum";
+import {RoutineRecord} from "types/model";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
@@ -26,13 +26,13 @@ const RoutineRecordDetailAccordion = ({
     onRoutineRecordDeleteButtonClick,
 }: RoutineRecordDetailAccordionProps) => {
     const navigate = useNavigate();
-    const { color } = useTheme();
+    const {color} = useTheme();
 
-    const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
+    const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
         useAccordion();
 
     return (
-        <Accordion>
+        <Accordion onClick={handleToggleAccordion}>
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
                     <Card>
@@ -63,7 +63,7 @@ const RoutineRecordDetailAccordion = ({
                     >
                         <SmallCardList<any>
                             data={data.workoutRecords}
-                            render={(item) => (
+                            render={item => (
                                 <SmallCard key={item._id}>
                                     <SmallCard.ImageBox
                                         src={item.workoutLibrary.image}

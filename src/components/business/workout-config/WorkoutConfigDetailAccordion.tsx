@@ -2,17 +2,17 @@ import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import useAccordion from "hooks/client/useAccordion";
-import { ReactComponent as PlusIcon } from "assets/image/plus2.svg";
-import { ReactComponent as MinusIcon } from "assets/image/minus.svg";
+import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
+import {ReactComponent as MinusIcon} from "assets/image/minus.svg";
 import Table from "components/content/Table/Table";
-import { useTheme } from "styled-components";
-import { SetConfig, WorkoutConfig, WorkoutLibrary } from "types/model";
+import {useTheme} from "styled-components";
+import {SetConfig, WorkoutConfig, WorkoutLibrary} from "types/model";
 import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMutation";
 import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
 import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";
 import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
-import { useParams } from "react-router-dom";
-import { Type } from "types/enum";
+import {useParams} from "react-router-dom";
+import {Type} from "types/enum";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 
@@ -26,19 +26,19 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
-    const { color } = useTheme();
-    const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
+const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
+    const {color} = useTheme();
+    const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
         useAccordion();
-    const { routineConfigId } = useParams();
+    const {routineConfigId} = useParams();
 
-    const { mutateAsync: createSetConfigOneMutate } =
+    const {mutateAsync: createSetConfigOneMutate} =
         useCreateSetConfigOneMutation();
-    const { mutateAsync: updateSetConfigFieldMutate } =
+    const {mutateAsync: updateSetConfigFieldMutate} =
         useUpdateSetConfigFieldMutation();
-    const { mutateAsync: deleteSetConfigOneMutate } =
+    const {mutateAsync: deleteSetConfigOneMutate} =
         useDeleteSetConfigOneMutation();
-    const { mutateAsync: deleteWorkoutConfigOneMutate } =
+    const {mutateAsync: deleteWorkoutConfigOneMutate} =
         useDeleteWorkoutConfigOneMutation();
 
     const handleSetDeleteButtonClick = async (workoutConfigId: string) => {
@@ -65,7 +65,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
     const handleSetInputChange = async (
         setConfigId: string,
         key: string,
-        value: string
+        value: string,
     ) => {
         await updateSetConfigFieldMutate({
             routineConfigId: routineConfigId as string,
@@ -81,7 +81,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
 
     // 비동기 작업 추가
     return (
-        <Accordion>
+        <Accordion onClick={handleToggleAccordion}>
             <Accordion.Motion x={x} onDragEnd={handleDragEnd}>
                 <Accordion.Header>
                     <Card>
@@ -125,7 +125,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                 header={
                                     <Table.Row>
                                         <Table.TitleText>세트</Table.TitleText>
-                                        {data.workoutLibrary.type.map((key) => (
+                                        {data.workoutLibrary.type.map(key => (
                                             <Table.TitleText key={key}>
                                                 {typeMapper[key]}
                                             </Table.TitleText>
@@ -137,7 +137,7 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                     setConfig: SetConfig & {
                                         [key: string]: any;
                                     },
-                                    index: number
+                                    index: number,
                                 ) => (
                                     <Table.Row key={setConfig._id}>
                                         <Table.NumberPicker
@@ -146,56 +146,56 @@ const WorkoutConfigDetailAccordion = ({ data }: { data: WorkoutConfig }) => {
                                         />
                                         {isTypeExist(
                                             data.workoutLibrary,
-                                            Type.WEIGHT
+                                            Type.WEIGHT,
                                         ) && (
                                             <Table.WeightPicker
                                                 value={setConfig.weight}
-                                                onInputChange={(value) =>
+                                                onInputChange={value =>
                                                     handleSetInputChange(
                                                         setConfig._id,
                                                         Type.WEIGHT,
-                                                        value
+                                                        value,
                                                     )
                                                 }
                                             />
                                         )}
                                         {isTypeExist(
                                             data.workoutLibrary,
-                                            Type.REP
+                                            Type.REP,
                                         ) && (
                                             <Table.NumberPicker
                                                 value={setConfig.rep}
-                                                onInputChange={(value) =>
+                                                onInputChange={value =>
                                                     handleSetInputChange(
                                                         setConfig._id,
                                                         Type.REP,
-                                                        value
+                                                        value,
                                                     )
                                                 }
                                             />
                                         )}
                                         {isTypeExist(
                                             data.workoutLibrary,
-                                            Type.WORKOUT_SEC
+                                            Type.WORKOUT_SEC,
                                         ) && (
                                             <Table.TimePicker
                                                 value={setConfig.workoutSec.toString()}
-                                                onInputChange={(value) =>
+                                                onInputChange={value =>
                                                     handleSetInputChange(
                                                         setConfig._id,
                                                         Type.WORKOUT_SEC,
-                                                        value
+                                                        value,
                                                     )
                                                 }
                                             />
                                         )}
                                         <Table.TimePicker
                                             value={setConfig.restSec.toString()}
-                                            onInputChange={(value) =>
+                                            onInputChange={value =>
                                                 handleSetInputChange(
                                                     setConfig._id,
                                                     "restSec",
-                                                    value
+                                                    value,
                                                 )
                                             }
                                         />

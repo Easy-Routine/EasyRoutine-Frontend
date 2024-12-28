@@ -140,7 +140,13 @@ const WorkoutLibraryListBottomSheet = ({
                                     data={workoutLibraryAll}
                                     render={(item, index) => (
                                         <CheckBoxGroup.Wrapper key={item._id}>
-                                            <SmallCard>
+                                            <SmallCard
+                                                onCardClick={() =>
+                                                    handleCheckBoxClick(
+                                                        item._id.toString(),
+                                                    )
+                                                }
+                                            >
                                                 <SmallCard.ImageBox
                                                     src={
                                                         item.image ||
