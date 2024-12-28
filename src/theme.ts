@@ -9,7 +9,7 @@ const commonTheme = {
     },
     boxShadow: `0 4px 16px 0 rgba(0,0,0,.04)`,
     color: {
-        primary: "#40E0D0",
+        primary: "#82B1FF",
         warning: "#FF0000",
         background: {
             page: "",
