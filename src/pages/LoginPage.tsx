@@ -1,9 +1,9 @@
 import Logo from "components/content/Logo/Logo";
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
-import { ReactComponent as GoogleLogoIcon } from "assets/image/google-logo.svg";
-import { ReactComponent as KaKaoLogoIcon } from "assets/image/kakao-logo.svg";
-import { useLocation } from "react-router-dom";
+import {ReactComponent as GoogleLogoIcon} from "assets/image/google-logo.svg";
+import {ReactComponent as KaKaoLogoIcon} from "assets/image/kakao-logo.svg";
+import {useLocation} from "react-router-dom";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import LogoDescription from "components/content/LogoDescription/LogoDescription";
 
@@ -31,7 +31,7 @@ const TitleBox = styled.div`
 const Description = styled.div`
     text-align: center;
     line-height: 16px;
-    font-size: ${({ theme }) => theme.fontSize.md};
+    font-size: ${({theme}) => theme.fontSize.md};
 `;
 
 const ButtonBox = styled.div`
@@ -52,7 +52,7 @@ const Button = styled.button`
     background-color: #fff;
     border-radius: 4px;
     position: relative;
-    font-size: ${({ theme }) => theme.fontSize.md};
+    font-size: ${({theme}) => theme.fontSize.md};
 `;
 
 const KaKaoButton = styled(Button)`
@@ -105,10 +105,10 @@ const LoginPage = () => {
                 </TitleBox>
 
                 <ButtonBox>
-                    <KaKaoButton>
+                    {/* <KaKaoButton>
                         <KaKaoLogo />
                         카카오계정으로 시작하기
-                    </KaKaoButton>
+                    </KaKaoButton> */}
                     <GoogleButton onClick={handleGoogleLoginButtonClick}>
                         <GoogleLogo />
                         구글계정으로 시작하기

@@ -8,13 +8,14 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     gap: 20px;
 `;
 
 const Description = styled.div`
     text-align: center;
     line-height: 16px;
-    font-size: ${({ theme }) => theme.fontSize.md};
+    font-size: ${({theme}) => theme.fontSize.md};
 `;
 
 const LogoDescription = () => {
