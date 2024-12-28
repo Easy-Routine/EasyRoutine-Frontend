@@ -151,10 +151,10 @@ const WorkoutConfigDetailProgressAccordion = ({
 
         newSetConfigs.push({
             _id: (newSetConfigs.length + 1).toString(),
-            weight: newSetConfigs[tail].weight,
-            rep: newSetConfigs[tail].rep,
-            restSec: newSetConfigs[tail].restSec,
-            workoutSec: newSetConfigs[tail].restSec,
+            weight: newSetConfigs[tail]?.weight || 0,
+            rep: newSetConfigs[tail]?.rep || 0,
+            restSec: newSetConfigs[tail]?.restSec || 0,
+            workoutSec: newSetConfigs[tail]?.restSec || 0,
             createdAt: moment().toISOString(),
             updatedAt: moment().toISOString(),
             workoutConfigId: "1",

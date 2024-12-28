@@ -31,10 +31,10 @@ export const createSetConfigOne = async ({
         const newSetConfig: SetConfig = {
             _id: uuidv4(),
             workoutConfigId,
-            rep: lastSetConfigOne.rep,
-            weight: lastSetConfigOne.weight,
-            restSec: lastSetConfigOne.restSec,
-            workoutSec: lastSetConfigOne.workoutSec,
+            rep: lastSetConfigOne?.rep || 0,
+            weight: lastSetConfigOne?.weight || 0,
+            restSec: lastSetConfigOne?.restSec || 0,
+            workoutSec: lastSetConfigOne?.workoutSec || 0,
             createdAt: moment().toISOString(),
             updatedAt: moment().toISOString(),
         };
