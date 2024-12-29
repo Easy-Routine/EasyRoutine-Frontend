@@ -1,7 +1,7 @@
-import { AxiosError } from "axios";
-import { User } from "types/model";
+import {AxiosError} from "axios";
+import {User} from "types/model";
 import api from "utils/axios";
-import { handleError } from "utils/handleError";
+import {handleError} from "utils/handleError";
 
 export const checkAccessToken = async (): Promise<boolean> => {
     try {
@@ -35,7 +35,7 @@ type ImageResponse = {
 };
 
 export const uploadImage = async (
-    formData: FormData
+    formData: FormData,
 ): Promise<ImageResponse | undefined> => {
     try {
         const response = await api.post<any>("/upload-image", formData, {
@@ -45,7 +45,6 @@ export const uploadImage = async (
         });
         return response.data;
     } catch (e) {
-        console.log("야야~~");
         handleError(e);
     }
 };
@@ -58,7 +57,7 @@ export const sendPushAlarm = async ({
     body: string;
 }): Promise<any> => {
     try {
-        const response = await api.post<{ Location: string }>("/send_alarm", {
+        const response = await api.post<{Location: string}>("/send_alarm", {
             title,
             body,
         });
@@ -79,5 +78,14 @@ export const getBaseWorkout = async (): Promise<any> => {
     } catch (error) {
         console.error("Error uploading file:", error);
         throw new Error("Error uploading file:");
+    }
+};
+
+export const signOut = async (): Promise<any> => {
+    try {
+        const response = await api.post("/signout");
+        return response.data;
+    } catch (error) {
+        throw new Error("");
     }
 };

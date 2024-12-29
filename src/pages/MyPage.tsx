@@ -24,6 +24,8 @@ import {CustomError} from "types/error";
 import {AxiosError} from "axios";
 import Dexie from "dexie";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
+import {signOut} from "services";
+import SignOutModal from "components/business/SignOutModal";
 
 const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);
@@ -73,6 +75,11 @@ const SyncButton = styled.button`
     border-radius: ${({theme}) => theme.borderRadius.xl};
 `;
 
+const SignOutButton = styled.div`
+    font-size: ${({theme}) => theme.fontSize.xxs};
+    color: ${({theme}) => theme.color.gray.light};
+`;
+
 const UnderlineBoxWrapper = styled.div``;
 
 const MyPageContentView = () => {
@@ -87,6 +94,11 @@ const MyPageContentView = () => {
         handleCloseModal: closeDataSyncModal,
     } = useModal();
     const {data: userOneData} = useGetUserOneQuery();
+    const {
+        isOpen: isSignOutModalOpen,
+        handleOpenModal: openSignOutModal,
+        handleCloseModal: closeSignOutModal,
+    } = useModal();
 
     const userOne = userOneData!;
 
@@ -145,6 +157,10 @@ const MyPageContentView = () => {
         window.location.href = "mailto:doggopawer@gmail.com?subject=문의 사항"; // 이메일 주소와 제목을 설정
     };
 
+    const handleSignOutButtonClick = async () => {
+        openSignOutModal();
+    };
+
     return (
         <Container>
             <ProfileBox>
@@ -153,6 +169,9 @@ const MyPageContentView = () => {
                 <LogoutButton onClick={handleLogoutButtonClick}>
                     로그아웃
                 </LogoutButton>
+                <SignOutButton onClick={handleSignOutButtonClick}>
+                    회원탈퇴
+                </SignOutButton>
             </ProfileBox>
             <UnderlineBoxWrapper>
                 <UnderlineBox>
@@ -195,6 +214,22 @@ const MyPageContentView = () => {
 
             {isDataSyncModalOpen && (
                 <DataSyncModal isOpen={isDataSyncModalOpen} />
+            )}
+
+            {isSignOutModalOpen && (
+                <SignOutModal
+                    isOpen={isSignOutModalOpen}
+                    onBackdropClick={() => {
+                        closeSignOutModal();
+                    }}
+                    onCancelButtonClick={() => {
+                        closeSignOutModal();
+                    }}
+                    onConfirmButtonClick={() => {
+                        closeSignOutModal();
+                        handleLogoutButtonClick();
+                    }}
+                />
             )}
         </Container>
     );
