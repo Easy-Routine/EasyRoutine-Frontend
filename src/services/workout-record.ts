@@ -1,10 +1,10 @@
-import { v4 as uuidv4 } from "uuid"; // UUID 생성을 위한 라이브러리
-import { WorkoutRecord, WorkoutLibrary } from "types/model"; // WorkoutRecord 타입의 경로를 설정하세요.
-import { db } from "db";
+import {v4 as uuidv4} from "uuid"; // UUID 생성을 위한 라이브러리
+import {WorkoutRecord, WorkoutLibrary} from "types/model"; // WorkoutRecord 타입의 경로를 설정하세요.
+import {db} from "db";
 import moment from "moment";
-import { Period } from "types/enum";
-import { handleError } from "utils/handleError";
-import { CustomError, ErrorDefinitions } from "types/error";
+import {Period} from "types/enum";
+import {handleError} from "utils/handleError";
+import {CustomError, ErrorDefinitions} from "types/error";
 
 type CreateWorkoutRecordOneParams = {
     routineRecordId: string;
@@ -34,7 +34,7 @@ export const createWorkoutRecordOne = async ({
             }
 
             const newWorkoutRecords = structuredClone(
-                routineRecordOne.workoutRecords
+                routineRecordOne.workoutRecords,
             );
             newWorkoutRecords.push(newWorkoutRecordOne);
             await db.routineRecords.update(routineRecordId, {
@@ -62,7 +62,7 @@ export const deleteWorkoutRecordOne = async ({
             throw new CustomError(ErrorDefinitions.NOT_FOUND);
 
         const newWorkoutRecords = routineRecordOne.workoutRecords.filter(
-            (workoutRecord) => workoutRecord._id !== workoutRecordId
+            workoutRecord => workoutRecord._id !== workoutRecordId,
         );
         routineRecordOne.workoutRecords = newWorkoutRecords;
         await db.routineRecords.put(routineRecordOne);
@@ -79,68 +79,64 @@ export const getWorkoutRecordSumAll = async ({
 }: {
     workoutLibraryId: string;
     period: Period;
-}): Promise<{ key: string; value: number }[] | undefined> => {
+}): Promise<{key: string; value: number}[] | undefined> => {
     try {
         let startDate: moment.Moment;
         const endDate = moment(); // 현재 날짜
 
+        console.log("피리오드", period);
         switch (period) {
             case Period.Month:
-                startDate = endDate
-                    .clone()
-                    .subtract(1, "months")
-                    .startOf("month"); // 최근 1달
+                startDate = endDate.clone().subtract(1, "months");
                 break;
             case Period.Quarter:
-                startDate = endDate
-                    .clone()
-                    .subtract(3, "months")
-                    .startOf("month"); // 최근 3달
+                startDate = endDate.clone().subtract(3, "months");
                 break;
             case Period.Half:
-                startDate = endDate
-                    .clone()
-                    .subtract(6, "months")
-                    .startOf("month"); // 최근 3달
+                startDate = endDate.clone().subtract(6, "months");
                 break;
-
             case Period.Year:
-                startDate = endDate
-                    .clone()
-                    .subtract(1, "years")
-                    .startOf("year"); // 최근 1년
+                startDate = endDate.clone().subtract(1, "years");
                 break;
             case Period.All:
-                startDate = moment(0); // Unix epoch 시작일
+                startDate = moment(0);
                 break;
             default:
                 throw new Error("Invalid type");
         }
 
+        console.log("시작날짜", startDate);
+
         const routineRecords = await db.routineRecords.toArray();
 
         // workoutRecords를 가져오고, workoutLibrary.id로 필터링
-        const workoutRecords = routineRecords.flatMap((routineRecord) =>
+        const workoutRecords = routineRecords.flatMap(routineRecord =>
             routineRecord.workoutRecords.filter(
-                (workoutRecord) =>
-                    workoutRecord.workoutLibrary._id === workoutLibraryId
-            )
+                workoutRecord =>
+                    workoutRecord.workoutLibrary._id === workoutLibraryId,
+            ),
         );
 
         // 결과 데이터 형식으로 변환
-        const workoutRecordByDateList: { key: string; value: number }[] = [];
+        const workoutRecordByDateList: {key: string; value: number}[] = [];
 
         // 데이터 집계
-        const groupedData: { [key: string]: number } = {};
+        const groupedData: {[key: string]: number} = {};
 
-        workoutRecords.forEach((record) => {
+        workoutRecords.forEach(record => {
             // 로컬 타임으로 변환
             const recordDate = moment(record.createdAt);
             if (recordDate.isBetween(startDate, endDate, null, "[]")) {
+                console.log(
+                    "이상함함",
+                    recordDate.isBetween(startDate, endDate, null, "[]"),
+                    startDate,
+                );
                 const dateKey = recordDate.format("MM.DD"); // 날짜 형식 설정
+                console.log("데이트키", dateKey);
                 const setValue = record.setRecords.reduce(
                     (setSum, set) => setSum + set.weight * set.rep,
-                    0
+                    0,
                 );
 
                 if (!groupedData[dateKey]) {
@@ -151,7 +147,7 @@ export const getWorkoutRecordSumAll = async ({
         });
 
         // 결과를 배열로 변환 및 정렬
-        Object.keys(groupedData).forEach((date) => {
+        Object.keys(groupedData).forEach(date => {
             workoutRecordByDateList.push({
                 key: date,
                 value: groupedData[date],
