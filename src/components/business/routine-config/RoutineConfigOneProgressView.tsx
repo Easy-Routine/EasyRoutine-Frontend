@@ -82,6 +82,10 @@ const RoutineConfigOneProgressView = () => {
 
     const routineConfigDetail = routineConfigDetailData!;
 
+    const [currentWorkoutId, setCurrentWorkoutId] = useState(
+        routineConfigDetail.workoutConfigs[0]._id,
+    );
+
     const [routineConfigState, setRoutineConfigState] =
         useState(routineConfigDetail);
     const [totalCompletedSetIds, setTotalCompletdSetIds] = useState(new Set());
@@ -129,7 +133,25 @@ const RoutineConfigOneProgressView = () => {
         setRoutineConfigState(newRoutineConfigState);
     };
 
-    const handleSetComplete = (restSec: number) => {
+    const handleSetComplete = (restSec: number, isLastSet: boolean) => {
+        if (isLastSet) {
+            const nextWorkoutConfigIndex =
+                routineConfigDetail.workoutConfigs.findIndex(
+                    item => item._id === currentWorkoutId,
+                );
+            // 다음 인덱스가 존재한다면면
+            if (
+                nextWorkoutConfigIndex + 1 <
+                routineConfigDetail.workoutConfigs.length
+            ) {
+                setCurrentWorkoutId(
+                    routineConfigDetail.workoutConfigs[
+                        nextWorkoutConfigIndex + 1
+                    ]._id,
+                );
+            }
+        }
+
         startTimer(restSec);
         handleOpenTimerModal();
     };
@@ -227,6 +249,7 @@ const RoutineConfigOneProgressView = () => {
                     <WorkoutConfigDetailProgressAccordion
                         key={item._id}
                         data={item}
+                        isCurrentWorkoutConfig={item._id === currentWorkoutId}
                         remainingTime={remainingTime}
                         routineRecordId={routineRecordId}
                         onSetCreate={handleSetCreate}

@@ -36,6 +36,7 @@ const typeMapper: TypeMapper = {
 
 type WorkoutConfigDetailProgressAccordionProps = {
     data: WorkoutConfig;
+    isCurrentWorkoutConfig: boolean;
     routineRecordId: string;
     remainingTime: number;
     onSetCreate: (
@@ -46,7 +47,7 @@ type WorkoutConfigDetailProgressAccordionProps = {
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"],
     ) => void;
-    onSetComplete: (restSec: number) => void;
+    onSetComplete: (restSec: number, isLastSet: boolean) => void;
     onSetUpdate: (
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"],
@@ -57,6 +58,7 @@ type WorkoutConfigDetailProgressAccordionProps = {
 
 const WorkoutConfigDetailProgressAccordion = ({
     data,
+    isCurrentWorkoutConfig,
     routineRecordId,
     remainingTime,
     onSetCreate,
@@ -99,6 +101,12 @@ const WorkoutConfigDetailProgressAccordion = ({
         }
     }, [createWorkoutRecordOneMutate, routineRecordId]);
 
+    useEffect(() => {
+        if (isCurrentWorkoutConfig) {
+            handleToggleAccordion();
+        }
+    }, [isCurrentWorkoutConfig]);
+
     const isCurrentSet = (setId: string) => setId === currentSetId;
     const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
     const isWorkoutCompleted =
@@ -117,8 +125,11 @@ const WorkoutConfigDetailProgressAccordion = ({
             setConfig => setConfig._id === currentSetId,
         );
 
+        const isLastSet =
+            currentSetId === data.setConfigs[data.setConfigs.length - 1]._id;
+
         if (currentSetConfig) {
-            onSetComplete(currentSetConfig.restSec);
+            onSetComplete(currentSetConfig.restSec, isLastSet);
             await createSetRecordOneMutate({
                 routineRecordId: routineRecordId as string,
                 workoutRecordId: currentWorkoutId,
