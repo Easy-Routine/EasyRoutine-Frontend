@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import {useEffect, useRef} from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -13,17 +13,18 @@ const Container = styled.div`
     justify-content: space-around;
     align-items: center;
     gap: 10px;
-    background-color: ${({ theme }) => theme.color.background.box};
-    border-top-left-radius: ${({ theme }) => theme.borderRadius.lg};
-    border-top-right-radius: ${({ theme }) => theme.borderRadius.lg};
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    background-color: ${({theme}) => theme.color.background.box};
+    border-top-left-radius: ${({theme}) => theme.borderRadius.lg};
+    border-top-right-radius: ${({theme}) => theme.borderRadius.lg};
+    box-shadow: ${({theme}) => theme.boxShadow};
+    z-index: ${({theme}) => theme.zIndex.header};
 `;
 
 type BottomBarProps = {
     children?: React.ReactNode;
 };
 
-const BottomBar = ({ children }: BottomBarProps) => {
+const BottomBar = ({children}: BottomBarProps) => {
     const bottomBarRef = useRef<HTMLDivElement>(null);
 
     const updateBottomBarPosition = () => {
