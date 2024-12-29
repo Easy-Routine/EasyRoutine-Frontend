@@ -1,7 +1,7 @@
 import Accordion from "components/box/Accordion/Accordion";
 import styled from "styled-components";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import useTimer from "hooks/client/useTimer";
 import Modal from "components/box/Modal/Modal";
 import useModal from "hooks/client/useModal";
@@ -10,15 +10,15 @@ import BottomBar from "components/box/BottomBar/BottomBar";
 import TimerTemplate from "components/box/BottomBar/TimerTemplate";
 import Button from "components/content/Button/Button";
 import formatTime from "utils/formatTime";
-import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
-import { ReactComponent as QuestionIcon } from "assets/image/question.svg";
-import { ReactComponent as CompleteIcon } from "assets/image/complete.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import {ReactComponent as ClockIcon} from "assets/image/clock.svg";
+import {ReactComponent as QuestionIcon} from "assets/image/question.svg";
+import {ReactComponent as CompleteIcon} from "assets/image/complete.svg";
+import {useNavigate, useParams} from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
 import WorkoutConfigDetailProgressAccordion from "../workout-config/WorkoutConfigDetailProgressAccordion";
 import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
-import { SetConfig, WorkoutConfig } from "types/model";
+import {SetConfig, WorkoutConfig} from "types/model";
 import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
 import Box from "components/box/Box/Box";
 import useUpdateRoutineRecordWorkoutEndAtMutation from "hooks/server/useUpdateRoutineRecordWorkoutEndAtMutation";
@@ -32,10 +32,10 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const TimerText = styled.div<{ seconds: number }>`
+const TimerText = styled.div<{seconds: number}>`
     font-size: 40px;
-    font-weight: ${({ theme }) => theme.fontWeight.semibold};
-    color: ${({ theme, seconds }) =>
+    font-weight: ${({theme}) => theme.fontWeight.semibold};
+    color: ${({theme, seconds}) =>
         seconds <= 9 && seconds >= 1
             ? theme.color.warning
             : theme.color.text.black};
@@ -43,9 +43,9 @@ const TimerText = styled.div<{ seconds: number }>`
 
 const RoutineConfigOneProgressView = () => {
     const navigate = useNavigate();
-    const { showToast } = useToast();
-    const { sendNativeMessage } = useNativeMessage();
-    const { routineConfigId } = useParams();
+    const {showToast} = useToast();
+    const {sendNativeMessage} = useNativeMessage();
+    const {routineConfigId} = useParams();
     const workoutStartTime = useRef(moment());
 
     const {
@@ -64,21 +64,20 @@ const RoutineConfigOneProgressView = () => {
         handleCloseModal: handleCloseUncompletedModal,
     } = useModal();
 
-    const { endTime, startTimer, isActive, skipTimer, remainingTime } =
-        useTimer(
-            useCallback(() => {
-                handleCloseTimerModal();
-                sendNativeMessage({ type: "vibrate" });
-            }, [])
-        );
-
-    const { data: routineConfigDetailData } = useGetRoutineConfigOneQuery(
-        routineConfigId as string
+    const {endTime, startTimer, isActive, skipTimer, remainingTime} = useTimer(
+        useCallback(() => {
+            handleCloseTimerModal();
+            sendNativeMessage({type: "vibrate"});
+        }, []),
     );
 
-    const { mutateAsync: createRoutineRecordOneMutate } =
+    const {data: routineConfigDetailData} = useGetRoutineConfigOneQuery(
+        routineConfigId as string,
+    );
+
+    const {mutateAsync: createRoutineRecordOneMutate} =
         useCreateRoutineRecordOneMutation();
-    const { mutateAsync: updateRoutineRecordOneMutate } =
+    const {mutateAsync: updateRoutineRecordOneMutate} =
         useUpdateRoutineRecordWorkoutEndAtMutation();
 
     const routineConfigDetail = routineConfigDetailData!;
@@ -102,12 +101,12 @@ const RoutineConfigOneProgressView = () => {
 
     const handleSetCreate = (
         workoutConfigId: string,
-        setConfigs: SetConfig[]
+        setConfigs: SetConfig[],
     ) => {
         const newRoutineConfigState = structuredClone(routineConfigState);
         const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig._id === workoutConfigId
+                workoutConfig._id === workoutConfigId,
         );
         if (selectedWorkoutConfig) {
             selectedWorkoutConfig.setConfigs = setConfigs;
@@ -117,12 +116,12 @@ const RoutineConfigOneProgressView = () => {
 
     const handleSetDelete = (
         workoutConfigId: string,
-        setConfigs: SetConfig[]
+        setConfigs: SetConfig[],
     ) => {
         const newRoutineConfigState = structuredClone(routineConfigState);
         const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig._id === workoutConfigId
+                workoutConfig._id === workoutConfigId,
         );
         if (selectedWorkoutConfig) {
             selectedWorkoutConfig.setConfigs = setConfigs;
@@ -137,12 +136,12 @@ const RoutineConfigOneProgressView = () => {
 
     const handleSetUpdate = (
         workoutConfigId: string,
-        setConfigs: SetConfig[]
+        setConfigs: SetConfig[],
     ) => {
         const newRoutineConfigState = structuredClone(routineConfigState);
         const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig._id === workoutConfigId
+                workoutConfig._id === workoutConfigId,
         );
 
         if (selectedWorkoutConfig) {
@@ -157,13 +156,13 @@ const RoutineConfigOneProgressView = () => {
         const newTotalCompletedSetIds = structuredClone(totalCompletedSetIds);
         const workoutConfigOne = newRoutineConfigState.workoutConfigs.find(
             (workoutConfig: WorkoutConfig) =>
-                workoutConfig._id === workoutConfigId
+                workoutConfig._id === workoutConfigId,
         );
 
         newRoutineConfigState.workoutConfigs =
             newRoutineConfigState.workoutConfigs.filter(
                 (workoutConfig: WorkoutConfig) =>
-                    workoutConfig._id !== workoutConfigId
+                    workoutConfig._id !== workoutConfigId,
             );
 
         workoutConfigOne?.setConfigs.forEach((setConfig: SetConfig) => {
@@ -179,9 +178,9 @@ const RoutineConfigOneProgressView = () => {
     };
 
     const handleCompletedSetIdsMutate = (completedSetIds: string[]) => {
-        setTotalCompletdSetIds((prevState) => {
+        setTotalCompletdSetIds(prevState => {
             const newSet = new Set(prevState);
-            completedSetIds.forEach((value) => newSet.add(value));
+            completedSetIds.forEach(value => newSet.add(value));
             return newSet;
         });
     };
@@ -197,8 +196,8 @@ const RoutineConfigOneProgressView = () => {
         const totalSetIds = new Set();
 
         // 모든 세트 ID를 routineConfigState에서 수집
-        routineConfigState.workoutConfigs.forEach((workoutConfig) => {
-            workoutConfig.setConfigs.forEach((setConfig) => {
+        routineConfigState.workoutConfigs.forEach(workoutConfig => {
+            workoutConfig.setConfigs.forEach(setConfig => {
                 totalSetIds.add(setConfig._id); // 세트 _id 추가
             });
         });
@@ -224,7 +223,7 @@ const RoutineConfigOneProgressView = () => {
 
             <Accordion.List<WorkoutConfig>
                 data={routineConfigState.workoutConfigs}
-                render={(item) => (
+                render={item => (
                     <WorkoutConfigDetailProgressAccordion
                         key={item._id}
                         data={item}
@@ -273,41 +272,25 @@ const RoutineConfigOneProgressView = () => {
                     isOpen={isCompletedModalOpen}
                     onBackdropClick={() => handleCloseCompletedModal}
                     onCancelButtonClick={async () => {
-                        const workoutEndTime = moment();
-                        const workoutTime = moment
-                            .duration(
-                                workoutEndTime.diff(workoutStartTime.current)
-                            )
-                            .asSeconds();
-                        await updateRoutineRecordOneMutate({
-                            routineRecordId,
-                            workoutTime,
-                        });
-
                         handleCloseCompletedModal();
-                        showToast("루틴이 완료되었습니다.", "success");
-                        navigate(ROUTES.CONFIG.LIST.PATH, {
-                            replace: true,
-                        });
-                        sendNativeMessage({ type: "vibrate" });
                     }}
                     onConfirmButtonClick={async () => {
                         const workoutEndTime = moment();
                         const workoutTime = moment
                             .duration(
-                                workoutEndTime.diff(workoutStartTime.current)
+                                workoutEndTime.diff(workoutStartTime.current),
                             )
                             .asSeconds();
                         await updateRoutineRecordOneMutate({
                             routineRecordId,
                             workoutTime,
                         });
-                        handleCloseUncompletedModal();
+                        handleCloseCompletedModal();
                         showToast("루틴이 완료되었습니다.", "success");
                         navigate(ROUTES.RECORD.LIST.PATH, {
                             replace: true,
                         });
-                        sendNativeMessage({ type: "vibrate" });
+                        sendNativeMessage({type: "vibrate"});
                     }}
                 />
             )}
@@ -323,7 +306,7 @@ const RoutineConfigOneProgressView = () => {
                         const workoutEndTime = moment();
                         const workoutTime = moment
                             .duration(
-                                workoutEndTime.diff(workoutStartTime.current)
+                                workoutEndTime.diff(workoutStartTime.current),
                             )
                             .asSeconds();
                         await updateRoutineRecordOneMutate({
@@ -335,7 +318,7 @@ const RoutineConfigOneProgressView = () => {
                         navigate(ROUTES.RECORD.LIST.PATH, {
                             replace: true,
                         });
-                        sendNativeMessage({ type: "vibrate" });
+                        sendNativeMessage({type: "vibrate"});
                     }}
                 />
             )}
@@ -418,7 +401,7 @@ const CompletedModal = ({
                         </Confirm.Description>
                     </Confirm.ContentBox>
                     <Confirm.ButtonBox
-                        cancelLabel="홈으로 가기"
+                        cancelLabel="취소"
                         confirmLabel="기록 페이지로 가기"
                         onCancelButtonClick={onCancelButtonClick}
                         onConfirmButtonClick={onConfirmButtonClick}
