@@ -127,7 +127,13 @@ export const getWorkoutRecordSumAll = async ({
             // 로컬 타임으로 변환
             const recordDate = moment(record.createdAt);
             if (recordDate.isBetween(startDate, endDate, null, "[]")) {
+                console.log(
+                    "이상함함",
+                    recordDate.isBetween(startDate, endDate, null, "[]"),
+                    startDate,
+                );
                 const dateKey = recordDate.format("MM.DD"); // 날짜 형식 설정
+                console.log("데이트키", dateKey);
                 const setValue = record.setRecords.reduce(
                     (setSum, set) => setSum + set.weight * set.rep,
                     0,
