@@ -1,8 +1,8 @@
 import Logo from "components/content/Logo/Logo";
 import React, {useEffect} from "react";
-import styled from "styled-components";
+import styled, {useTheme} from "styled-components";
 import {ReactComponent as GoogleLogoIcon} from "assets/image/google-logo.svg";
-import {ReactComponent as KaKaoLogoIcon} from "assets/image/kakao-logo.svg";
+import {ReactComponent as AppleLogoIcon} from "assets/image/apple.svg";
 import {useLocation} from "react-router-dom";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import LogoDescription from "components/content/LogoDescription/LogoDescription";
@@ -55,18 +55,22 @@ const Button = styled.button`
     font-size: ${({theme}) => theme.fontSize.md};
 `;
 
-const KaKaoButton = styled(Button)`
+const AppleButton = styled(Button)`
     border: none;
-    background-color: #fee103;
+    color: ${({theme}) => theme.color.text.white};
+    background-color: ${({theme}) => theme.color.text.black};
 `;
 
 const GoogleButton = styled(Button)`
     border: 1px solid #bfbfbf;
 `;
 
-const KaKaoLogo = styled(KaKaoLogoIcon)`
+const AppleLogo = styled(AppleLogoIcon)`
+    width: 20px;
+    height: 20px;
     position: absolute;
     left: 16px;
+    fill: ${({theme}) => theme.color.text.white};
 `;
 
 const GoogleLogo = styled(GoogleLogoIcon)`
@@ -78,6 +82,8 @@ const LoginPage = () => {
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };
+
+    const {} = useTheme();
 
     const query = useQuery();
 
@@ -96,6 +102,9 @@ const LoginPage = () => {
     const handleGoogleLoginButtonClick = () => {
         window.open(`${process.env.REACT_APP_API_URL}/login`, "_self");
     };
+    const handleAppleLoginButtonClick = () => {
+        window.open(`${process.env.REACT_APP_API_URL}/login/apple`, "_self");
+    };
 
     return (
         <PublicRoute>
@@ -105,10 +114,10 @@ const LoginPage = () => {
                 </TitleBox>
 
                 <ButtonBox>
-                    {/* <KaKaoButton>
-                        <KaKaoLogo />
-                        카카오계정으로 시작하기
-                    </KaKaoButton> */}
+                    <AppleButton onClick={handleAppleLoginButtonClick}>
+                        <AppleLogo />
+                        애플계정으로 시작하기
+                    </AppleButton>
                     <GoogleButton onClick={handleGoogleLoginButtonClick}>
                         <GoogleLogo />
                         구글계정으로 시작하기
