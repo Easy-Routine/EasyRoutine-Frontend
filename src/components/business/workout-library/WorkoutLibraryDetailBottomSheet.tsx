@@ -16,6 +16,7 @@ import {ChangeEvent, useEffect, useState} from "react";
 import styled from "styled-components";
 import {Category, Type} from "types/enum";
 import loadingAnimation from "assets/image/loading.json"; // JSON 파일 경로
+import ToolTip from "components/content/ToolTip/ToolTip";
 const Container = styled.div`
     width: 100%;
     display: flex;
@@ -25,6 +26,12 @@ const Container = styled.div`
 
 const CheckBoxItem = styled.div`
     font-size: ${({theme}) => theme.fontSize.md};
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`;
+
+const Flex = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
@@ -205,7 +212,18 @@ const WorkoutLibraryDetailBottomSheet = ({
                             </ChipTab.Chip>
                         </ChipTab>
                     </LabelBox>
-                    <LabelBox labelText="타입" gap="20px">
+                    <LabelBox
+                        labelText={
+                            <Flex>
+                                <div>타입</div>
+                                <ToolTip
+                                    text="선택한 타입에 따라, 해당 운동 종목의 세부 설정 항목이 달라집니다."
+                                    toolTipPosition="right"
+                                />
+                            </Flex>
+                        }
+                        gap="20px"
+                    >
                         <CheckBoxGroup>
                             <CheckBoxGroup.Wrapper>
                                 <CheckBoxItem>

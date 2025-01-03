@@ -26,6 +26,7 @@ import Dexie from "dexie";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import {signOut} from "services";
 import SignOutModal from "components/business/SignOutModal";
+import ToolTip from "components/content/ToolTip/ToolTip";
 
 const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);
@@ -195,6 +196,10 @@ const MyPageContentView = () => {
                     <UnderlineBox.TitleWrapper>
                         <DiskIcon />
                         동기화
+                        <ToolTip
+                            text="동기화는 운동 기록과 데이터를 안전하게 서버에 저장하고, 이를 다른 기기나 앱에서 불러올 수 있게 해주는 기능입니다. 이를 통해 최신 정보로 유지되며, 데이터 손실 없이 언제든지 복원할 수 있습니다."
+                            toolTipPosition="right"
+                        />
                     </UnderlineBox.TitleWrapper>
                     <SyncButton onClick={handleSyncButtonClick}>
                         <SyncIcon />
