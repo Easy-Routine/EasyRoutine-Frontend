@@ -139,7 +139,7 @@ const RoutineConfigOneProgressView = () => {
                 routineConfigDetail.workoutConfigs.findIndex(
                     item => item._id === currentWorkoutId,
                 );
-            // 다음 인덱스가 존재한다면면
+            // 다음 인덱스가 존재한다면
             if (
                 nextWorkoutConfigIndex + 1 <
                 routineConfigDetail.workoutConfigs.length
@@ -152,8 +152,25 @@ const RoutineConfigOneProgressView = () => {
             }
         }
 
-        startTimer(restSec);
-        handleOpenTimerModal();
+        const totalSetIds = new Set();
+
+        // 모든 세트 ID를 routineConfigState에서 수집
+        routineConfigState.workoutConfigs.forEach(workoutConfig => {
+            workoutConfig.setConfigs.forEach(setConfig => {
+                totalSetIds.add(setConfig._id); // 세트 _id 추가
+            });
+        });
+
+        // totalCompletedSetIds와 totalSetIds 비교
+        const isAllCompleted =
+            totalSetIds.size === totalCompletedSetIds.size + 1;
+
+        if (isAllCompleted) {
+            handleOpenCompletedModal();
+        } else {
+            startTimer(restSec);
+            handleOpenTimerModal();
+        }
     };
 
     const handleSetUpdate = (
@@ -418,13 +435,13 @@ const CompletedModal = ({
                         </Confirm.IconBox>
                         <Confirm.Title>루틴 완료</Confirm.Title>
                         <Confirm.Description>
-                            루틴이 완료되었습니다.
-                            <br /> 운동 기록을 확인하시려면 기록 페이지로 이동해
-                            주세요.
+                            설정한 루틴이 모두 완료되었습니다. <br />
+                            운동 기록을 확인하려면 기록 페이지로 이동해 주세요.
+                            남아서 운동을 계속하려면 '계속하기'를 눌러주세요.
                         </Confirm.Description>
                     </Confirm.ContentBox>
                     <Confirm.ButtonBox
-                        cancelLabel="취소"
+                        cancelLabel="계속하기"
                         confirmLabel="기록 페이지로 가기"
                         onCancelButtonClick={onCancelButtonClick}
                         onConfirmButtonClick={onConfirmButtonClick}
