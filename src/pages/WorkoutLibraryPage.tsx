@@ -29,7 +29,7 @@ const WorkoutLibraryPage = () => {
                     <Logo />
                     <ToolTip
                         text="삭제를 원하시면 2~3초 동안 운동 종목을 길게 눌러주세요."
-                        toolTipPosition="right"
+                        toolTipPosition="left"
                     />
                 </Flex>
             </PageHeader>
