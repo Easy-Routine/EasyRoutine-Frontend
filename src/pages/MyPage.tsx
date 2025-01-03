@@ -27,6 +27,7 @@ import DefferredComponent from "components/box/DefferedComponent/DefferedCompone
 import {signOut} from "services";
 import SignOutModal from "components/business/SignOutModal";
 import ToolTip from "components/content/ToolTip/ToolTip";
+import DefaultImage from "assets/image/default-image.png";
 
 const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);
@@ -165,7 +166,7 @@ const MyPageContentView = () => {
     return (
         <Container>
             <ProfileBox>
-                <ProfileImage src={userOne.profileImage} />
+                <ProfileImage src={userOne.profileImage || DefaultImage} />
                 <UserName>{userOne.name}</UserName>
                 <LogoutButton onClick={handleLogoutButtonClick}>
                     로그아웃
