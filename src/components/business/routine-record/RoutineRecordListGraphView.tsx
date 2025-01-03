@@ -100,8 +100,7 @@ const RoutineRecorListGraphView = () => {
                 </>
             ) : (
                 <SimpleTextEmptyView>
-                    현재 선택된 운동이 없습니다.
-                    <br /> 통계를 보고싶은 운동 종목을 선택해주세요.
+                    통계를 보고싶은 운동 종목을 선택해주세요.
                 </SimpleTextEmptyView>
             )}
             <ErrorBoundary>
