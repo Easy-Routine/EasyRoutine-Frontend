@@ -19,6 +19,8 @@ import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOn
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
+import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -52,6 +54,21 @@ const WorkoutLibraryListView = () => {
         handleOpenModal: openWorkoutLibraryDetailBottomSheet,
         handleCloseModal: closeWorkoutLibraryDetailBottomSheet,
     } = useModal();
+
+    const navigate = useNavigate();
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            if (isWorkoutDeleteModalOpen) {
+                closeWorkoutDeleteModal();
+                return;
+            }
+            if (isWorkoutLibraryBottomSheetOpen) {
+                closeWorkoutLibraryDetailBottomSheet();
+                return;
+            }
+            navigate(-1);
+        },
+    });
 
     const handleFloatingActionButtonClick = (workoutLibraryId: string) => {
         setWorkoutLibraryId(workoutLibraryId);

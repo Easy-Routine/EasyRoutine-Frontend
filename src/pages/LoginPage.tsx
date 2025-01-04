@@ -80,11 +80,6 @@ const GoogleLogo = styled(GoogleLogoIcon)`
 `;
 
 const LoginPage = () => {
-    useHardwareBackPress({
-        onNativeBackButtonClick: () => {
-            window.alert("정상작동 화이팅!!!");
-        },
-    });
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };

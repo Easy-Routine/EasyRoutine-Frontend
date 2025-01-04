@@ -3,7 +3,7 @@ import Box from "components/box/Box/Box";
 import RoutineConfigColorTabBottomBar from "./RoutineConfigUpdateColorTabBottomBar";
 import styled from "styled-components";
 import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailAccordion";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import useRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import RoutineConfigUpdateNameTitleText from "./RoutineConfigUpdateNameTitleText";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
@@ -14,6 +14,7 @@ import {Suspense} from "react";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import EmptyBoundary from "../EmptyBoundary";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 
 const Container = styled.div`
     display: flex;
@@ -26,11 +27,22 @@ const RoutineConfigDetailView = () => {
     const {data: routineConfigDetail} = useRoutineConfigOneQuery(
         routineConfigId as string,
     );
+    const navigate = useNavigate();
     const {
         isOpen: isWorkoutLibraryBottomSheetOpen,
         handleOpenModal: openWorkoutLibraryListBottomSheet,
         handleCloseModal: closeWorkoutLibraryListBottomSheet,
     } = useModal();
+
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            if (isWorkoutLibraryBottomSheetOpen) {
+                closeWorkoutLibraryListBottomSheet();
+                return;
+            }
+            navigate(-1);
+        },
+    });
 
     return (
         <Container>

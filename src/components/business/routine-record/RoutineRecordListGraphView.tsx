@@ -14,6 +14,8 @@ import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
+import {useNavigate} from "react-router-dom";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 
 const Container = styled.div`
     display: flex;
@@ -28,6 +30,16 @@ const RoutineRecorListGraphView = () => {
         handleOpenModal: openWorkoutLibraryListGraphBottomSheet,
         handleCloseModal: closeWorkoutLibraryListGraphBottomSheet,
     } = useModal();
+    const navigate = useNavigate();
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            if (isWorkoutLibraryListGraphBottomSheetOpen) {
+                closeWorkoutLibraryListGraphBottomSheet();
+                return;
+            }
+            navigate(-1);
+        },
+    });
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 

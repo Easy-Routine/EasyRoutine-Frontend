@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Suspense, useState } from "react";
+import {Suspense, useState} from "react";
 import RoutineRecordDeleteModal from "./RoutineRecordDeleteModal";
 import useModal from "hooks/client/useModal";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
@@ -7,6 +7,8 @@ import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import RoutineRecordAllDailyList from "./RoutineRecordAllDailyList";
 import RoutineRecordAllMonthlyCalendar from "./RoutineRecordAllMonthlyCalendar";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
+import {useNavigate} from "react-router-dom";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 
 const Container = styled.div`
     display: flex;
@@ -24,13 +26,23 @@ const RoutineRecordListCalendarView = () => {
         handleOpenModal: openRoutineRecordDeleteModal,
         handleCloseModal: closeRoutineRecordDeleteModal,
     } = useModal();
+    const navigate = useNavigate();
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            if (isRoutineRecordDeleteModalOpen) {
+                closeRoutineRecordDeleteModal();
+                return;
+            }
+            navigate(-1);
+        },
+    });
 
     return (
         <Container>
             <RoutineRecordAllMonthlyCalendar
-                onNextMonthButtnClick={(date) => setCurrentMonth(date)}
-                onPrevMonthButtonClick={(date) => setCurrentMonth(date)}
-                onDateButtonClick={(date) => {
+                onNextMonthButtnClick={date => setCurrentMonth(date)}
+                onPrevMonthButtonClick={date => setCurrentMonth(date)}
+                onDateButtonClick={date => {
                     console.log(date, "해당 날짜의 운동 기록 가져오기");
                     setSelectedDate(date);
                 }}
@@ -48,7 +60,7 @@ const RoutineRecordListCalendarView = () => {
                 >
                     <RoutineRecordAllDailyList
                         onRoutineRecordDeleteButtonClick={(
-                            routineRecordId: string
+                            routineRecordId: string,
                         ) => {
                             setRoutineRecordId(routineRecordId);
                             openRoutineRecordDeleteModal();

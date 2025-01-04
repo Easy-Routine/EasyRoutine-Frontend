@@ -25,6 +25,7 @@ import useUpdateRoutineRecordWorkoutEndAtMutation from "hooks/server/useUpdateRo
 import moment from "moment";
 
 import useNativeMessage from "hooks/client/useNativeMessage";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 
 const Container = styled.div`
     display: flex;
@@ -63,6 +64,24 @@ const RoutineConfigOneProgressView = () => {
         handleOpenModal: handleOpenUncompletedModal,
         handleCloseModal: handleCloseUncompletedModal,
     } = useModal();
+
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            if (isTimerModalOpen) {
+                handleCloseTimerModal();
+                return;
+            }
+            if (isCompletedModalOpen) {
+                handleCloseTimerModal();
+                return;
+            }
+            if (isUncompletedModalOpen) {
+                handleCloseTimerModal();
+                return;
+            }
+            navigate(-1);
+        },
+    });
 
     const {endTime, startTimer, isActive, skipTimer, remainingTime} = useTimer(
         useCallback(() => {

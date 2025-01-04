@@ -12,12 +12,28 @@ import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import useToast from "hooks/useToast";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
+import {useNavigate} from "react-router-dom";
 
 const Container = styled.div``;
 
 const RoutineConfigListView = () => {
+    const navigate = useNavigate();
     const {data: routineConfigAllData} = useRoutineConfigAllQuery();
     const {showToast} = useToast();
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            if (isRoutineProgressModalOpen) {
+                closeRoutineProgressModal();
+                return;
+            }
+            if (isRoutineConfigDeleteModalOpen) {
+                closeRoutineConfigDeleteModal();
+                return;
+            }
+            navigate(-1);
+        },
+    });
 
     const routineConfigAll = routineConfigAllData!;
 

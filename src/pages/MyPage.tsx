@@ -28,6 +28,8 @@ import {signOut} from "services";
 import SignOutModal from "components/business/SignOutModal";
 import ToolTip from "components/content/ToolTip/ToolTip";
 import DefaultImage from "assets/image/default-image.png";
+import {useNavigate} from "react-router-dom";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 
 const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);
@@ -101,6 +103,21 @@ const MyPageContentView = () => {
         handleOpenModal: openSignOutModal,
         handleCloseModal: closeSignOutModal,
     } = useModal();
+
+    const navigate = useNavigate();
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            if (isDataSyncModalOpen) {
+                closeDataSyncModal();
+                return;
+            }
+            if (isSignOutModalOpen) {
+                closeSignOutModal();
+                return;
+            }
+            navigate(-1);
+        },
+    });
 
     const userOne = userOneData!;
 
