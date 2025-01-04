@@ -6,6 +6,7 @@ import {ReactComponent as AppleLogoIcon} from "assets/image/apple.svg";
 import {useLocation} from "react-router-dom";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import LogoDescription from "components/content/LogoDescription/LogoDescription";
+import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 
 // const Logo = styled.div``;
 
@@ -79,6 +80,11 @@ const GoogleLogo = styled(GoogleLogoIcon)`
 `;
 
 const LoginPage = () => {
+    useHardwareBackPress({
+        onNativeBackButtonClick: () => {
+            window.alert("정상작동 화이팅!!!");
+        },
+    });
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };
