@@ -79,7 +79,7 @@ const RoutineConfigOneProgressView = () => {
                 handleCloseTimerModal();
                 return;
             }
-            navigate(-1);
+            handleRoutineCompleteButtonClick();
         },
         dependencies: [
             isTimerModalOpen,
