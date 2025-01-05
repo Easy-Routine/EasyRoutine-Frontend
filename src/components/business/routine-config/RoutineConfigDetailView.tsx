@@ -42,6 +42,7 @@ const RoutineConfigDetailView = () => {
             }
             navigate(-1);
         },
+        dependencies: [isWorkoutLibraryBottomSheetOpen],
     });
 
     return (

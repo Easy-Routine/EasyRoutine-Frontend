@@ -117,6 +117,7 @@ const MyPageContentView = () => {
             }
             navigate(-1);
         },
+        dependencies: [isDataSyncModalOpen, isSignOutModalOpen],
     });
 
     const userOne = userOneData!;

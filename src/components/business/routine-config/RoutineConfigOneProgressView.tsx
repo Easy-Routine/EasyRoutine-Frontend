@@ -81,6 +81,11 @@ const RoutineConfigOneProgressView = () => {
             }
             navigate(-1);
         },
+        dependencies: [
+            isTimerModalOpen,
+            isCompletedModalOpen,
+            isUncompletedModalOpen,
+        ],
     });
 
     const {endTime, startTimer, isActive, skipTimer, remainingTime} = useTimer(

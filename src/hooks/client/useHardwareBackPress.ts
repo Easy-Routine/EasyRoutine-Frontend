@@ -2,9 +2,11 @@ import React, {useEffect} from "react";
 
 type useHardwareBackPressParams = {
     onNativeBackButtonClick: () => void;
+    dependencies: any[];
 };
 const useHardwareBackPress = ({
     onNativeBackButtonClick,
+    dependencies,
 }: useHardwareBackPressParams) => {
     // 컴포
     useEffect(() => {
@@ -16,7 +18,7 @@ const useHardwareBackPress = ({
                 onNativeBackButtonClick,
             ); // 정리
         };
-    }, []);
+    }, dependencies);
 };
 
 export default useHardwareBackPress;

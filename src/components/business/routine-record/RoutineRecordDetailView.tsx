@@ -27,6 +27,7 @@ const RoutineRecordDetailView = () => {
         onNativeBackButtonClick: () => {
             navigate(-1);
         },
+        dependencies: [],
     });
 
     const totalWeight = routineRecordDetail!.workoutRecords.reduce(

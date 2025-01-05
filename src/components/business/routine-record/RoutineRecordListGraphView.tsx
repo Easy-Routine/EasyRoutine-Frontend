@@ -39,6 +39,7 @@ const RoutineRecorListGraphView = () => {
             }
             navigate(-1);
         },
+        dependencies: [isWorkoutLibraryListGraphBottomSheetOpen],
     });
 
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");

@@ -68,6 +68,10 @@ const WorkoutLibraryListView = () => {
             }
             navigate(-1);
         },
+        dependencies: [
+            isWorkoutDeleteModalOpen,
+            isWorkoutLibraryBottomSheetOpen,
+        ],
     });
 
     const handleFloatingActionButtonClick = (workoutLibraryId: string) => {

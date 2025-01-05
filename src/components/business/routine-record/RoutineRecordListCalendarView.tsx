@@ -35,6 +35,7 @@ const RoutineRecordListCalendarView = () => {
             }
             navigate(-1);
         },
+        dependencies: [isRoutineRecordDeleteModalOpen],
     });
 
     return (

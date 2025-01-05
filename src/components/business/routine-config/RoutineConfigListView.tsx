@@ -21,6 +21,16 @@ const RoutineConfigListView = () => {
     const navigate = useNavigate();
     const {data: routineConfigAllData} = useRoutineConfigAllQuery();
     const {showToast} = useToast();
+    const {
+        isOpen: isRoutineProgressModalOpen,
+        handleOpenModal: openRoutineProgressModal,
+        handleCloseModal: closeRoutineProgressModal,
+    } = useModal();
+    const {
+        isOpen: isRoutineConfigDeleteModalOpen,
+        handleOpenModal: openRoutineConfigDeleteModal,
+        handleCloseModal: closeRoutineConfigDeleteModal,
+    } = useModal();
     useHardwareBackPress({
         onNativeBackButtonClick: () => {
             if (isRoutineProgressModalOpen) {
@@ -33,20 +43,13 @@ const RoutineConfigListView = () => {
             }
             navigate(-1);
         },
+        dependencies: [
+            isRoutineProgressModalOpen,
+            isRoutineConfigDeleteModalOpen,
+        ],
     });
 
     const routineConfigAll = routineConfigAllData!;
-
-    const {
-        isOpen: isRoutineProgressModalOpen,
-        handleOpenModal: openRoutineProgressModal,
-        handleCloseModal: closeRoutineProgressModal,
-    } = useModal();
-    const {
-        isOpen: isRoutineConfigDeleteModalOpen,
-        handleOpenModal: openRoutineConfigDeleteModal,
-        handleCloseModal: closeRoutineConfigDeleteModal,
-    } = useModal();
 
     const [routineConfigId, setRoutineConfigId] = useState("");
 
