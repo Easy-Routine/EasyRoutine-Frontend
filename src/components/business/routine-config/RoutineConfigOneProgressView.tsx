@@ -76,6 +76,26 @@ const RoutineConfigOneProgressView = () => {
         routineConfigDetail.workoutConfigs[0]._id,
     );
 
+    const handleRoutineCompleteButtonClick = () => {
+        const totalSetIds = new Set();
+
+        // 모든 세트 ID를 routineConfigState에서 수집
+        routineConfigState.workoutConfigs.forEach(workoutConfig => {
+            workoutConfig.setConfigs.forEach(setConfig => {
+                totalSetIds.add(setConfig._id); // 세트 _id 추가
+            });
+        });
+
+        // totalCompletedSetIds와 totalSetIds 비교
+        const isAllCompleted = totalSetIds.size === totalCompletedSetIds.size;
+
+        if (isAllCompleted) {
+            handleOpenCompletedModal();
+        } else {
+            handleOpenUncompletedModal();
+        }
+    };
+
     useHardwareBackPress({
         onNativeBackButtonClick: () => {
             if (isTimerModalOpen) {
@@ -96,8 +116,7 @@ const RoutineConfigOneProgressView = () => {
             isTimerModalOpen,
             isCompletedModalOpen,
             isUncompletedModalOpen,
-            totalCompletedSetIds,
-            routineConfigState,
+            handleRoutineCompleteButtonClick,
         ],
     });
 
@@ -253,26 +272,6 @@ const RoutineConfigOneProgressView = () => {
             return;
         }
         handleOpenTimerModal();
-    };
-
-    const handleRoutineCompleteButtonClick = () => {
-        const totalSetIds = new Set();
-
-        // 모든 세트 ID를 routineConfigState에서 수집
-        routineConfigState.workoutConfigs.forEach(workoutConfig => {
-            workoutConfig.setConfigs.forEach(setConfig => {
-                totalSetIds.add(setConfig._id); // 세트 _id 추가
-            });
-        });
-
-        // totalCompletedSetIds와 totalSetIds 비교
-        const isAllCompleted = totalSetIds.size === totalCompletedSetIds.size;
-
-        if (isAllCompleted) {
-            handleOpenCompletedModal();
-        } else {
-            handleOpenUncompletedModal();
-        }
     };
 
     return (
