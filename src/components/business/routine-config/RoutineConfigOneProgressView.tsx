@@ -49,6 +49,10 @@ const RoutineConfigOneProgressView = () => {
     const {routineConfigId} = useParams();
     const workoutStartTime = useRef(moment());
 
+    const {data: routineConfigDetailData} = useGetRoutineConfigOneQuery(
+        routineConfigId as string,
+    );
+    const routineConfigDetail = routineConfigDetailData!;
     const {
         isOpen: isTimerModalOpen,
         handleOpenModal: handleOpenTimerModal,
@@ -64,6 +68,13 @@ const RoutineConfigOneProgressView = () => {
         handleOpenModal: handleOpenUncompletedModal,
         handleCloseModal: handleCloseUncompletedModal,
     } = useModal();
+    const [totalCompletedSetIds, setTotalCompletdSetIds] = useState(new Set());
+    const [routineConfigState, setRoutineConfigState] =
+        useState(routineConfigDetail);
+
+    const [currentWorkoutId, setCurrentWorkoutId] = useState(
+        routineConfigDetail.workoutConfigs[0]._id,
+    );
 
     useHardwareBackPress({
         onNativeBackButtonClick: () => {
@@ -85,6 +96,8 @@ const RoutineConfigOneProgressView = () => {
             isTimerModalOpen,
             isCompletedModalOpen,
             isUncompletedModalOpen,
+            totalCompletedSetIds,
+            routineConfigState,
         ],
     });
 
@@ -95,24 +108,11 @@ const RoutineConfigOneProgressView = () => {
         }, []),
     );
 
-    const {data: routineConfigDetailData} = useGetRoutineConfigOneQuery(
-        routineConfigId as string,
-    );
-
     const {mutateAsync: createRoutineRecordOneMutate} =
         useCreateRoutineRecordOneMutation();
     const {mutateAsync: updateRoutineRecordOneMutate} =
         useUpdateRoutineRecordWorkoutEndAtMutation();
 
-    const routineConfigDetail = routineConfigDetailData!;
-
-    const [currentWorkoutId, setCurrentWorkoutId] = useState(
-        routineConfigDetail.workoutConfigs[0]._id,
-    );
-
-    const [routineConfigState, setRoutineConfigState] =
-        useState(routineConfigDetail);
-    const [totalCompletedSetIds, setTotalCompletdSetIds] = useState(new Set());
     const [routineRecordId, setRoutineRecordId] = useState("");
 
     useEffect(() => {
