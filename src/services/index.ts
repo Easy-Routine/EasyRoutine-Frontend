@@ -38,6 +38,7 @@ export const uploadImage = async (
     formData: FormData,
 ): Promise<ImageResponse | undefined> => {
     try {
+        console.log("formData", formData);
         const response = await api.post<any>("/upload-image", formData, {
             headers: {
                 "Content-Type": "multipart/form-data", // FormData로 전송 시 이 헤더가 필요
@@ -45,6 +46,7 @@ export const uploadImage = async (
         });
         return response.data;
     } catch (e) {
+        console.log("에러", e);
         handleError(e);
     }
 };
