@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type {Meta, StoryObj} from "@storybook/react";
 import CheckBoxGroup from "components/content/CheckBoxGroup/CheckBoxGroup";
 import ChipTab from "components/content/ChipTab/ChipTab";
 import BottomSheet from "components/box/Modal/BottomSheet";
@@ -24,7 +24,7 @@ type Story = StoryObj<any>;
 
 export const DefaultBottomSheet: Story = {
     render: () => {
-        const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+        const {isOpen, handleOpenModal, handleCloseModal} = useModal();
         return (
             <>
                 <Modal>
@@ -44,10 +44,10 @@ export const DefaultBottomSheet: Story = {
 
 export const WorkoutLibraryBottomSheet: Story = {
     render: () => {
-        const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-        const { selectedValue, handleTabClick } = useTab("가슴");
-        const { selectedValues, handleCheckBoxClick } = useCheckBox();
-        const { value, handleInputChange, handleInputClear } = useInput();
+        const {isOpen, handleOpenModal, handleCloseModal} = useModal();
+        const {selectedValue, handleTabClick} = useTab("가슴");
+        const {selectedValues, handleCheckBoxClick} = useCheckBox();
+        const {value, handleInputChange, handleInputClear} = useInput();
         return (
             <>
                 <Modal>
@@ -132,7 +132,7 @@ export const WorkoutLibraryBottomSheet: Story = {
                                 )}
                             />
                             <CheckBoxGroup.SubmitButton
-                                onButtonClick={(selectedValues) =>
+                                onButtonClick={selectedValues =>
                                     console.log(selectedValues)
                                 }
                                 selectedValues={selectedValues}
