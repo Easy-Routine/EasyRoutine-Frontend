@@ -1,12 +1,12 @@
-import type {Meta, StoryObj} from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import Accordion from "components/box/Accordion/Accordion";
 import SmallCard from "components/content/SmallCard/SmallCard";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SeatedRowImage from "assets/image/seated-row.png";
-import {ReactComponent as FireIcon} from "assets/image/fire.svg";
-import {ReactComponent as ArrowIcon} from "assets/image/arrow.svg";
-import {ReactComponent as PenIcon} from "assets/image/pen.svg";
-import {ReactComponent as RunIcon} from "assets/image/run.svg";
+import { ReactComponent as FireIcon } from "assets/image/fire.svg";
+import { ReactComponent as ArrowIcon } from "assets/image/arrow.svg";
+import { ReactComponent as PenIcon } from "assets/image/pen.svg";
+import { ReactComponent as RunIcon } from "assets/image/run.svg";
 import React from "react";
 import useAccordion from "hooks/client/useAccordion";
 import Table from "components/content/Table/Table";
@@ -14,7 +14,7 @@ import Button from "components/content/Button/Button";
 import Card from "components/content/Card/Card";
 import IconTextBox from "components/content/IconTextBox/IconTextBox";
 import PaddingY from "components/box/PaddingY/PaddingY";
-import {Color} from "types/enum";
+import { Color } from "types/enum";
 
 type AccordionProps = React.ComponentProps<typeof Accordion>;
 
@@ -66,7 +66,7 @@ export const RoutineConfigAccordionCard: Story = {
             ],
         };
 
-        const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
+        const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
             useAccordion();
 
         return (
@@ -93,7 +93,7 @@ export const RoutineConfigAccordionCard: Story = {
                     <Accordion.Body isOpen={isOpen}>
                         <SmallCardList<any>
                             data={args.workoutConfigs}
-                            render={item => (
+                            render={(item) => (
                                 <SmallCard key={item._id}>
                                     <SmallCard.ImageBox src={item.image} />
                                     <SmallCard.ColumnBox>
@@ -168,7 +168,7 @@ export const WorkoutConfigAccordionCard: Story = {
             ],
         };
 
-        const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
+        const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
             useAccordion();
 
         return (
@@ -208,29 +208,29 @@ export const WorkoutConfigAccordionCard: Story = {
                                         <Table.TitleText>휴식</Table.TitleText>
                                     </Table.Row>
                                 }
-                                render={setConfig => (
+                                render={(setConfig) => (
                                     <Table.Row>
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />
@@ -299,7 +299,7 @@ export const WorkoutProgressAccordionCard: Story = {
             ],
         };
 
-        const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
+        const { isOpen, handleToggleAccordion, handleDragEnd, opacity, x } =
             useAccordion();
 
         return (
@@ -343,32 +343,32 @@ export const WorkoutProgressAccordionCard: Story = {
                                         <Table.TitleText>휴식</Table.TitleText>
                                     </Table.Row>
                                 }
-                                render={setConfig => (
+                                render={(setConfig) => (
                                     <Table.Row
                                         isGrayLine={setConfig._id === 1}
                                         isPrimaryLine={setConfig._id === 2}
                                     >
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />
                                         <Table.Input
                                             value={setConfig.order.toString()}
-                                            onInputChange={value =>
+                                            onInputChange={(value) =>
                                                 console.log(value)
                                             }
                                         />

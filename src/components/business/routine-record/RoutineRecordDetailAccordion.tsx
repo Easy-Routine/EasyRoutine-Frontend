@@ -15,7 +15,6 @@ import {Color} from "types/enum";
 import {RoutineRecord} from "types/model";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
-import DefaultImage from "assets/image/default-image.png";
 
 type RoutineRecordDetailAccordionProps = {
     data: RoutineRecord;
@@ -67,10 +66,7 @@ const RoutineRecordDetailAccordion = ({
                             render={item => (
                                 <SmallCard key={item._id}>
                                     <SmallCard.ImageBox
-                                        src={
-                                            item.workoutLibrary.image ||
-                                            DefaultImage
-                                        }
+                                        src={item.workoutLibrary.image}
                                     />
                                     <SmallCard.ColumnBox>
                                         <SmallCard.BoldText>

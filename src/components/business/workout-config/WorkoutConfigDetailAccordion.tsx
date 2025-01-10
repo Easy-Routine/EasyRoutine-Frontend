@@ -15,8 +15,6 @@ import {useParams} from "react-router-dom";
 import {Type} from "types/enum";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
-import DefaultImage from "assets/image/default-image.png";
-import {Default} from "stories/EmptyView.stories";
 
 type TypeMapper = {
     [key: string]: string;
@@ -97,9 +95,7 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                                     height: "100%",
                                 }}
                             /> */}
-                            <Card.Image
-                                src={data.workoutLibrary.image || DefaultImage}
-                            />
+                            <Card.Image src={data.workoutLibrary.image} />
                         </Card.ImageBox>
                         <Card.Column>
                             <Card.Title>{data.workoutLibrary.name}</Card.Title>

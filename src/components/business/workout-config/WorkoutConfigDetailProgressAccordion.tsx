@@ -24,8 +24,6 @@ import moment from "moment";
 import {Type} from "types/enum";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
-import DefaultImage from "assets/image/default-image.png";
-
 type TypeMapper = {
     [key: string]: string;
 };
@@ -208,9 +206,7 @@ const WorkoutConfigDetailProgressAccordion = ({
                 <Accordion.Header>
                     <Card>
                         <Card.ImageBox>
-                            <Card.Image
-                                src={data.workoutLibrary.image || DefaultImage}
-                            />
+                            <Card.Image src={data.workoutLibrary.image} />
                         </Card.ImageBox>
                         <Card.Column>
                             <Card.Title>{data.workoutLibrary.name}</Card.Title>
