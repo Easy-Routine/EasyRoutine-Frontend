@@ -14,6 +14,7 @@ import {useTheme} from "styled-components";
 import {RoutineConfig, WorkoutConfig} from "types/model";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
+import DefaultImage from "assets/image/default-image.png";
 
 type RoutineConfigDetailAccordionProps = {
     data: RoutineConfig;
@@ -74,7 +75,7 @@ const RoutineConfigDetailAccordion = ({
                                         <SmallCard.ImageBox
                                             src={
                                                 workoutConfig.workoutLibrary
-                                                    .image
+                                                    .image || DefaultImage
                                             }
                                         />
                                         <SmallCard.ColumnBox>
