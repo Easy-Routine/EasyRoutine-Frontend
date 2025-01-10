@@ -48,17 +48,17 @@ type WorkoutConfigDetailProgressAccordionProps = {
     onSetDelete: (
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"],
+        poppedSetConfigId: string,
     ) => void;
     onSetComplete: (
         restSec: number,
         isLastSet: boolean,
-        completedIds: string[],
+        currentSetId: string,
     ) => void;
     onSetUpdate: (
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"],
     ) => void;
-    onCompletedSetIdsMutate: (completedSetIds: string[]) => void;
     onWorkoutDelete: (workoutConfigId: string) => void;
 };
 
@@ -71,7 +71,6 @@ const WorkoutConfigDetailProgressAccordion = ({
     onSetDelete,
     onSetComplete,
     onSetUpdate,
-    onCompletedSetIdsMutate,
     onWorkoutDelete,
 }: WorkoutConfigDetailProgressAccordionProps) => {
     const {color} = useTheme();
@@ -135,11 +134,7 @@ const WorkoutConfigDetailProgressAccordion = ({
             currentSetId === data.setConfigs[data.setConfigs.length - 1]._id;
 
         if (currentSetConfig) {
-            onSetComplete(
-                currentSetConfig.restSec,
-                isLastSet,
-                newCompletedSetIds,
-            );
+            onSetComplete(currentSetConfig.restSec, isLastSet, currentSetId);
             await createSetRecordOneMutate({
                 routineRecordId: routineRecordId as string,
                 workoutRecordId: currentWorkoutId,
@@ -150,12 +145,12 @@ const WorkoutConfigDetailProgressAccordion = ({
 
     const handleDeleteSetButtonClick = async () => {
         const newSetConfigs = structuredClone(data.setConfigs);
-        const poppedSetConfig = newSetConfigs.pop();
+        const poppedSetConfig = newSetConfigs.pop() as SetConfig;
         const filteredCompletedSetIds = completedSetIds.filter(
             _id => _id !== poppedSetConfig?._id,
         );
         setCompletedSetIds(filteredCompletedSetIds);
-        onSetDelete(data._id, newSetConfigs);
+        onSetDelete(data._id, newSetConfigs, poppedSetConfig._id);
         // currentWorkoutId에 세트 데이터 삭제하기 (삭제할때, 생성 순으로 가져온 후 마지막요소 삭제후 put 하기)
 
         if (completedSetIds.includes(poppedSetConfig?._id as string)) {
@@ -202,10 +197,6 @@ const WorkoutConfigDetailProgressAccordion = ({
         });
         onWorkoutDelete(data._id);
     };
-
-    useEffect(() => {
-        onCompletedSetIdsMutate(completedSetIds);
-    }, [completedSetIds]);
 
     const isTypeExist = (workoutLibrary: WorkoutLibrary, type: Type) =>
         workoutLibrary.type.includes(type);

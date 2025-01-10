@@ -164,6 +164,7 @@ const RoutineConfigOneProgressView = () => {
     const handleSetDelete = (
         workoutConfigId: string,
         setConfigs: SetConfig[],
+        poppedSetConfigId: string,
     ) => {
         const newRoutineConfigState = structuredClone(routineConfigState);
         const selectedWorkoutConfig = newRoutineConfigState.workoutConfigs.find(
@@ -173,13 +174,16 @@ const RoutineConfigOneProgressView = () => {
         if (selectedWorkoutConfig) {
             selectedWorkoutConfig.setConfigs = setConfigs;
         }
+        const newTotalCompletedSetIds = new Set(totalCompletedSetIds);
+        newTotalCompletedSetIds.delete(poppedSetConfigId);
+        setTotalCompletdSetIds(newTotalCompletedSetIds);
         setRoutineConfigState(newRoutineConfigState);
     };
 
     const handleSetComplete = (
         restSec: number,
         isLastSet: boolean,
-        completedSetIds: string[],
+        currentSetId: string,
     ) => {
         if (isLastSet) {
             const nextWorkoutConfigIndex =
@@ -208,11 +212,13 @@ const RoutineConfigOneProgressView = () => {
             });
         });
         // 각 운동에서 가져온 완료된 세트 아이디를 현재 루틴 세트완료 아이디 배열에 넣는다.
-        const newSet = new Set(totalCompletedSetIds);
-        completedSetIds.forEach(value => newSet.add(value));
+        const newTotalCompletedSetIds = totalCompletedSetIds.add(currentSetId);
 
         // totalCompletedSetIds와 totalSetIds 비교
-        const isAllCompleted = totalSetIds.size === newSet.size;
+        const isAllCompleted =
+            totalSetIds.size === newTotalCompletedSetIds.size;
+
+        setTotalCompletdSetIds(newTotalCompletedSetIds);
 
         if (isAllCompleted) {
             handleOpenCompletedModal();
@@ -266,6 +272,7 @@ const RoutineConfigOneProgressView = () => {
     };
 
     const handleCompletedSetIdsMutate = (completedSetIds: string[]) => {
+        console.log("발동");
         setTotalCompletdSetIds(prevState => {
             const newSet = new Set(prevState);
             completedSetIds.forEach(value => newSet.add(value));
@@ -302,7 +309,6 @@ const RoutineConfigOneProgressView = () => {
                         onSetDelete={handleSetDelete}
                         onSetComplete={handleSetComplete}
                         onSetUpdate={handleSetUpdate}
-                        onCompletedSetIdsMutate={handleCompletedSetIdsMutate}
                         onWorkoutDelete={handleWorkoutDelete}
                     />
                 )}
