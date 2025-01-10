@@ -14,7 +14,7 @@ import PaddingY from "components/box/PaddingY/PaddingY";
 import Button from "components/content/Button/Button";
 import {ReactComponent as PenIcon} from "assets/image/pen.svg";
 import {ReactComponent as RunIcon} from "assets/image/run.svg";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useTheme} from "styled-components";
 import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutRecordOneMutation";
 import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMutation";
@@ -49,7 +49,11 @@ type WorkoutConfigDetailProgressAccordionProps = {
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"],
     ) => void;
-    onSetComplete: (restSec: number, isLastSet: boolean) => void;
+    onSetComplete: (
+        restSec: number,
+        isLastSet: boolean,
+        completedIds: string[],
+    ) => void;
     onSetUpdate: (
         workoutConfigId: string,
         newSetConfigs: WorkoutConfig["setConfigs"],
@@ -131,7 +135,11 @@ const WorkoutConfigDetailProgressAccordion = ({
             currentSetId === data.setConfigs[data.setConfigs.length - 1]._id;
 
         if (currentSetConfig) {
-            onSetComplete(currentSetConfig.restSec, isLastSet);
+            onSetComplete(
+                currentSetConfig.restSec,
+                isLastSet,
+                newCompletedSetIds,
+            );
             await createSetRecordOneMutate({
                 routineRecordId: routineRecordId as string,
                 workoutRecordId: currentWorkoutId,

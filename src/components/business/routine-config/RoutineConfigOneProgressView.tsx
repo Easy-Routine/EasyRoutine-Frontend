@@ -176,7 +176,11 @@ const RoutineConfigOneProgressView = () => {
         setRoutineConfigState(newRoutineConfigState);
     };
 
-    const handleSetComplete = (restSec: number, isLastSet: boolean) => {
+    const handleSetComplete = (
+        restSec: number,
+        isLastSet: boolean,
+        completedSetIds: string[],
+    ) => {
         if (isLastSet) {
             const nextWorkoutConfigIndex =
                 routineConfigDetail.workoutConfigs.findIndex(
@@ -203,10 +207,12 @@ const RoutineConfigOneProgressView = () => {
                 totalSetIds.add(setConfig._id); // 세트 _id 추가
             });
         });
+        // 각 운동에서 가져온 완료된 세트 아이디를 현재 루틴 세트완료 아이디 배열에 넣는다.
+        const newSet = new Set(totalCompletedSetIds);
+        completedSetIds.forEach(value => newSet.add(value));
 
         // totalCompletedSetIds와 totalSetIds 비교
-        const isAllCompleted =
-            totalSetIds.size === totalCompletedSetIds.size + 1;
+        const isAllCompleted = totalSetIds.size === newSet.size;
 
         if (isAllCompleted) {
             handleOpenCompletedModal();
