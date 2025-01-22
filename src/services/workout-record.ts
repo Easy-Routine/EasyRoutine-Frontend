@@ -132,7 +132,7 @@ export const getWorkoutRecordSumAll = async ({
                     recordDate.isBetween(startDate, endDate, null, "[]"),
                     startDate,
                 );
-                const dateKey = recordDate.format("MM.DD"); // 날짜 형식 설정
+                const dateKey = recordDate.format("YYYY-MM-DD"); // 날짜 형식 설정
                 console.log("데이트키", dateKey);
                 const setValue = record.setRecords.reduce(
                     (setSum, set) => setSum + set.weight * set.rep,
@@ -156,13 +156,18 @@ export const getWorkoutRecordSumAll = async ({
 
         // 날짜 기준으로 정렬
         workoutRecordByDateList.sort((a, b) => {
-            const dateA = moment(a.key, "MM.DD");
-            const dateB = moment(b.key, "MM.DD");
-            return dateA.diff(dateB);
+            return moment(a.key).diff(moment(b.key)); // YYYY-MM-DD 형식으로 비교
         });
 
-        return workoutRecordByDateList;
+        // 결과를 MM.DD 형식으로 변환
+        const formattedResult = workoutRecordByDateList.map(record => ({
+            key: moment(record.key).format("MM.DD"), // MM.DD 형식으로 변환
+            value: record.value,
+        }));
+
+        return formattedResult;
     } catch (e) {
         handleError(e);
     }
 };
+
