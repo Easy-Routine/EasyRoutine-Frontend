@@ -88,6 +88,7 @@ const RoutineConfigOneProgressView = () => {
 
         // totalCompletedSetIds와 totalSetIds 비교
         const isAllCompleted = totalSetIds.size === totalCompletedSetIds.size;
+        console.log("도대체 왜", totalSetIds, totalCompletedSetIds);
 
         if (isAllCompleted) {
             handleOpenCompletedModal();
@@ -208,6 +209,7 @@ const RoutineConfigOneProgressView = () => {
         // 모든 세트 ID를 routineConfigState에서 수집
         routineConfigState.workoutConfigs.forEach(workoutConfig => {
             workoutConfig.setConfigs.forEach(setConfig => {
+                console.log("새로추가되는 세트", setConfig._id);
                 totalSetIds.add(setConfig._id); // 세트 _id 추가
             });
         });
@@ -217,6 +219,9 @@ const RoutineConfigOneProgressView = () => {
         // totalCompletedSetIds와 totalSetIds 비교
         const isAllCompleted =
             totalSetIds.size === newTotalCompletedSetIds.size;
+
+        console.log("ㅅㅂ",totalSetIds, newTotalCompletedSetIds);
+
 
         setTotalCompletdSetIds(newTotalCompletedSetIds);
 

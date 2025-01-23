@@ -25,6 +25,7 @@ import {Type} from "types/enum";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 import DefaultImage from "assets/image/default-image.png";
+import {v4 as uuidv4} from "uuid";
 
 type TypeMapper = {
     [key: string]: string;
@@ -166,7 +167,7 @@ const WorkoutConfigDetailProgressAccordion = ({
         const tail = newSetConfigs.length - 1;
 
         newSetConfigs.push({
-            _id: (newSetConfigs.length + 1).toString(),
+            _id: uuidv4(),
             weight: newSetConfigs[tail]?.weight || 0,
             rep: newSetConfigs[tail]?.rep || 0,
             restSec: newSetConfigs[tail]?.restSec || 0,
