@@ -441,7 +441,7 @@ const TimerModal = ({
                     </Confirm.ContentBox>
                     <Confirm.ButtonBox
                         cancelLabel="잠시 닫기"
-                        confirmLabel="휴식 건너띄기"
+                        confirmLabel="휴식 건너뛰기"
                         onCancelButtonClick={onCancelButtonClick}
                         onConfirmButtonClick={onConfirmButtonClick}
                     />

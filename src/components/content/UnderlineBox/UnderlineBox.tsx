@@ -14,10 +14,11 @@ const Container = styled.div`
 
 type UnderlineBoxProps = {
     children: React.ReactNode;
+    onClick?: () => void;
 };
 
-const UnderlineBox = ({ children }: UnderlineBoxProps) => {
-    return <Container>{children}</Container>;
+const UnderlineBox = ({ children, onClick }: UnderlineBoxProps) => {
+    return <Container onClick={onClick}>{children}</Container>;
 };
 
 export default UnderlineBox;

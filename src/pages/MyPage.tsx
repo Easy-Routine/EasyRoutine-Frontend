@@ -204,12 +204,12 @@ const MyPageContentView = () => {
                         onToggleChange={handleDarkModeToggleClick}
                     />
                 </UnderlineBox>
-                <UnderlineBox>
+                <UnderlineBox onClick={handleMailButtonClick} >
                     <UnderlineBox.TitleWrapper>
                         <MailIcon />
                         문의 사항
                     </UnderlineBox.TitleWrapper>
-                    <RightArrowIcon onClick={handleMailButtonClick} />
+                    <RightArrowIcon/>
                 </UnderlineBox>
                 <UnderlineBox>
                     <UnderlineBox.TitleWrapper>
