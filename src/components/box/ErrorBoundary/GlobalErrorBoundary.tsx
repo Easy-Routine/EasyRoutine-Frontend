@@ -22,18 +22,18 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // 에러 리포팅 서비스에 에러를 기록할 수 있습니다.
     console.log(error, errorInfo);
+    
+    // 에러 발생 시 1초 후에 자동으로 새로고침
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   }
-
-  handleRefresh = () => {
-    window.location.reload();
-  };
 
   render() {
     if (this.state.hasError) {
       return (
         <div>
-          <h1>문제가 발생했습니다.</h1>
-          <button onClick={this.handleRefresh}>새로고침</button>
+          <h1>문제가 발생했습니다. 3초 후에 새로고침됩니다.</h1>
         </div>
       );
     }
