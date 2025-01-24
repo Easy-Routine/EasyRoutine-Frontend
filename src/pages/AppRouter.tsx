@@ -1,4 +1,5 @@
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
+import GlobalErrorBoundary from "components/box/ErrorBoundary/GlobalErrorBoundary";
 import PageTemplate from "components/box/PageTemplate/PageTemplate";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
@@ -56,15 +57,17 @@ const router = createBrowserRouter([
 
 const AppRouter = () => {
     return (
-        <Suspense
-            fallback={
-                <DefferredComponent>
-                    <CommonLoading />
-                </DefferredComponent>
-            }
-        >
-            <RouterProvider router={router} />
-        </Suspense>
+        <GlobalErrorBoundary>
+            <Suspense
+                fallback={
+                    <DefferredComponent>
+                        <CommonLoading />
+                    </DefferredComponent>
+                }
+            >
+                <RouterProvider router={router} />
+            </Suspense>
+        </GlobalErrorBoundary>
     );
 };
 
