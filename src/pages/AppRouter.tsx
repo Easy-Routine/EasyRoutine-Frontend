@@ -4,6 +4,7 @@ import PageTemplate from "components/box/PageTemplate/PageTemplate";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import ROUTES from "constants/routes";
+import useRouteChangeTracker from "hooks/client/useRouteChangeTracker";
 import { Suspense } from "react";
 import {
     createBrowserRouter,
@@ -56,6 +57,9 @@ const router = createBrowserRouter([
 ]);
 
 const AppRouter = () => {
+
+    useRouteChangeTracker();
+
     return (
         <GlobalErrorBoundary>
             <Suspense
