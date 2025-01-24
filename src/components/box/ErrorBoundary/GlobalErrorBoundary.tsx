@@ -1,0 +1,45 @@
+import React, { Component, ErrorInfo, ReactNode } from 'react';
+
+interface ErrorBoundaryProps {
+  children: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    // 다음 렌더링에서 fallback UI를 표시합니다.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // 에러 리포팅 서비스에 에러를 기록할 수 있습니다.
+    console.log(error, errorInfo);
+  }
+
+  handleRefresh = () => {
+    window.location.reload();
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+          <h1>문제가 발생했습니다.</h1>
+          <button onClick={this.handleRefresh}>새로고침</button>
+        </div>
+      );
+    }
+
+    return this.props.children; 
+  }
+}
+
+export default ErrorBoundary;
