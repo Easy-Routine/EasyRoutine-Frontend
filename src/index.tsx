@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "style/GlobalFont.css";
 import { RecoilRoot } from "recoil";
 import APIProvider from "context/APIProvider";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -21,7 +22,10 @@ root.render(
                 <ToastProvider>
                     <APIProvider>
                         <GlobalStyle />
-                        <App />
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                        
                     </APIProvider>
                 </ToastProvider>
             </ThemeProvider>

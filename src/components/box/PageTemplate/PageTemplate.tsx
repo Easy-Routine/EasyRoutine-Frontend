@@ -14,7 +14,7 @@ const PageTemplate = () => {
     return (
         <PrivateRoute>
             <Container>
-                <ScrollRestoration />
+                {/* <ScrollRestoration /> */}
                 <Outlet />
             </Container>
         </PrivateRoute>
