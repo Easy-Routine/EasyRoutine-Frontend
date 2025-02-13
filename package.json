@@ -4,6 +4,8 @@
     "private": true,
     "dependencies": {
         "@babel/core": "^7.16.0",
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
         "@nkduy/preload-webpack-plugin": "^2.0.0",
         "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
         "@svgr/webpack": "^5.5.0",
