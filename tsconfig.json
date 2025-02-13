@@ -17,5 +17,5 @@
         "noEmit": true,
         "jsx": "react-jsx"
     },
-    "include": ["src", "declarations.d.ts"]
+    "include": ["src", "declarations.d.ts", "theme.d.ts"] // types 폴더를 추가했습니다.
 }
