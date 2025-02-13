@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import App from "App";
 import StyledThemeProvider from "context/ThemeContext";
-// import {GlobalStyle} from "style/GlobalStyle";
+import {GlobalStyle} from "style/GlobalStyle";
 import ToastProvider from "context/ToastContext";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import "style/GlobalFont.css";
@@ -10,7 +10,7 @@ import APIProvider from "context/APIProvider";
 import {BrowserRouter} from "react-router-dom";
 import {ThemeProvider} from "@emotion/react";
 import {lightTheme} from "theme";
-import GlobalStyle from "components/GlobalStyle";
+import GlobalStyles from "components/GlobalStyle";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement,
@@ -26,6 +26,7 @@ root.render(
                     <ToastProvider>
                         <APIProvider>
                             <GlobalStyle />
+                            <GlobalStyles />
                             <BrowserRouter>
                                 <App />
                             </BrowserRouter>
