@@ -6,9 +6,15 @@ type CircleButtonProps = {
     children: React.ReactNode;
     width: number;
     height: number;
+    onCircleButtonClick?: () => void;
 };
 
-const CircleButton = ({children, width, height}: CircleButtonProps) => {
+const CircleButton = ({
+    children,
+    width,
+    height,
+    onCircleButtonClick,
+}: CircleButtonProps) => {
     const theme = useTheme();
 
     const basicButtonStyle = css`
@@ -25,7 +31,11 @@ const CircleButton = ({children, width, height}: CircleButtonProps) => {
         border: none;
     `;
 
-    return <button css={basicButtonStyle}>{children}</button>;
+    return (
+        <button css={basicButtonStyle} onClick={onCircleButtonClick}>
+            {children}
+        </button>
+    );
 };
 
 export default CircleButton;
