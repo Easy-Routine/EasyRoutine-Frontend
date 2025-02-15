@@ -5,9 +5,14 @@ import React from "react";
 type BasicButtonProps = {
     disabled?: boolean;
     children: React.ReactNode;
+    onBasicButtonClick?: () => void;
 };
 
-const BasicButton = ({disabled, children}: BasicButtonProps) => {
+const BasicButton = ({
+    disabled,
+    children,
+    onBasicButtonClick,
+}: BasicButtonProps) => {
     const theme = useTheme();
 
     const basicButtonStyle = css`
@@ -25,7 +30,11 @@ const BasicButton = ({disabled, children}: BasicButtonProps) => {
         align-items: center;
     `;
 
-    return <button css={basicButtonStyle}>{children}</button>;
+    return (
+        <button css={basicButtonStyle} onClick={onBasicButtonClick}>
+            {children}
+        </button>
+    );
 };
 
 export default BasicButton;
