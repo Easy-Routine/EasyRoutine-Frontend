@@ -12,6 +12,7 @@ const ImageTextTextRegular = ({children}: ImageTextTextRegularProps) => {
     const imageTextTextRegularStyle = css`
         font-size: ${theme.fontSize.xs};
         font-weight: ${theme.fontWeight.regular};
+        text-align: left;
     `;
 
     return <div css={imageTextTextRegularStyle}>{children}</div>;
