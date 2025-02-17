@@ -1,6 +1,4 @@
 import {css} from "@emotion/react";
-import ImageText from "headful/ImageText/ImageText";
-import ImageTextText from "headful/ImageText/ImageTextText/ImageTextText";
 import CheckboxGroup, {
     useCheckboxGroup,
 } from "headless/CheckboxGroup/CheckboxGroup";
