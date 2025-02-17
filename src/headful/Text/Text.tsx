@@ -7,16 +7,23 @@ type TextProps = {
     color?: string;
     fontSize?: string;
     fontWeight?: string;
+    textAlign?: string;
 };
 
-const Text = ({children, color, fontSize, fontWeight}: TextProps) => {
+const Text = ({
+    children,
+    color,
+    fontSize,
+    fontWeight,
+    textAlign,
+}: TextProps) => {
     const theme = useTheme();
 
     const imageTextTextBoldStyle = css`
         font-size: ${fontSize ?? theme.fontSize.md};
         font-weight: ${fontWeight ?? theme.fontWeight.regular};
         color: ${color ?? theme.color.text.black};
-        text-align: left;
+        text-align: ${textAlign ?? "left"};
     `;
 
     return <div css={imageTextTextBoldStyle}>{children}</div>;
