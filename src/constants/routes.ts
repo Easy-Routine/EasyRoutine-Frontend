@@ -1,16 +1,18 @@
-import { lazy } from "react";
+import {lazy} from "react";
 
 const LoginPage = lazy(() => import("pages/LoginPage"));
 const MyPage = lazy(() => import("pages/MyPage"));
 const RoutineConfigDetailPage = lazy(
-    () => import("pages/RoutineConfigDetailPage")
+    () => import("pages/RoutineConfigDetailPage"),
 );
-const RoutineConfigListPage = lazy(() => import("pages/RoutineConfigListPage"));
+const RoutineConfigListPage = lazy(
+    () => import("pages/RoutineConfigListPage/RoutineConfigListPage"),
+);
 const RoutineConfigOneProgressPage = lazy(
-    () => import("pages/RoutineConfigOneProgressPage")
+    () => import("pages/RoutineConfigOneProgressPage"),
 );
 const RoutineRecordDetailPage = lazy(
-    () => import("pages/RoutineRecordDetailPage")
+    () => import("pages/RoutineRecordDetailPage"),
 );
 const RoutineRecordListPage = lazy(() => import("pages/RoutineRecordListPage"));
 const WorkoutLibraryPage = lazy(() => import("pages/WorkoutLibraryPage"));
