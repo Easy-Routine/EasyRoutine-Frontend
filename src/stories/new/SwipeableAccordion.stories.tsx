@@ -3,8 +3,6 @@ import React from "react";
 import type {Meta, StoryObj} from "@storybook/react";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import {css} from "@emotion/react";
-import ImageText from "headful/ImageText/ImageText";
-import ImageTextText from "headful/ImageText/ImageTextText/ImageTextText";
 
 type SwipeableAccordionProps = React.ComponentProps<typeof SwipeableAccordion>;
 
@@ -27,7 +25,8 @@ export const DefaultSwipeableAccordion: Story = {
             <SwipeableAccordion>
                 <SwipeableAccordion.Box>
                     <SwipeableAccordion.Visible>
-                        <ImageText>
+                        dd
+                        {/* <ImageText>
                             <ImageText.Image
                                 width={60}
                                 height={60}
@@ -41,7 +40,7 @@ export const DefaultSwipeableAccordion: Story = {
                                     Regular Text
                                 </ImageTextText.Regular>
                             </ImageText.Text>
-                        </ImageText>
+                        </ImageText> */}
                     </SwipeableAccordion.Visible>
                     <SwipeableAccordion.Hidden>
                         <div>히든</div>
