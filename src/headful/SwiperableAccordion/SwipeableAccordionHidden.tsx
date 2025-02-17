@@ -13,11 +13,10 @@ const SwipeableAccordionHidden = ({
     const theme = useTheme();
 
     const swipeableAccordionHiddenStyle = css`
-        overflow: hidden;
         transition: height 0.5s ease-in-out;
         display: flex;
+        gap: 15px;
         flex-direction: column;
-        align-items: center;
         justify-content: space-between;
     `;
 
