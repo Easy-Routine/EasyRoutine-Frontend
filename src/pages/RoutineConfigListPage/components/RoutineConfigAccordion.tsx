@@ -1,0 +1,68 @@
+import {useTheme} from "@emotion/react";
+import FireColorBox from "headful/FireColorBox/FireColorBox";
+import FlexBox from "headful/FlexBox/FlexBox";
+import Image from "headful/Image/Image";
+import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
+import Text from "headful/Text/Text";
+import {RoutineConfig, WorkoutConfig} from "types/model";
+import RoutineConfigUpdateButton from "./RoutineConfigUpdateButton";
+import RoutineConfigProgressButton from "./RoutineConfigProgressButton";
+import WorkoutConfigFlexBoxList from "./WorkoutConfigFlexBoxList";
+
+type RoutineConfigAccordionProps = {
+    routineConfig: RoutineConfig;
+};
+
+const RoutineConfigAccordion = ({
+    routineConfig,
+}: RoutineConfigAccordionProps) => {
+    const theme = useTheme();
+    const {name, color, workoutConfigs} = routineConfig;
+
+    return (
+        <SwipeableAccordion>
+            <SwipeableAccordion.Box>
+                <SwipeableAccordion.Visible>
+                    <FlexBox gap={16}>
+                        <FireColorBox color={color} />
+                        <FlexBox
+                            flexDirection="column"
+                            justifyContent="space-around"
+                        >
+                            <Text
+                                fontSize={theme.fontSize.lg}
+                                fontWeight={theme.fontWeight.semibold}
+                            >
+                                {name}
+                            </Text>
+                            <Text
+                                fontSize={theme.fontSize.sm}
+                                fontWeight={theme.fontWeight.regular}
+                            >
+                                {workoutConfigs.length}종목
+                            </Text>
+                        </FlexBox>
+                    </FlexBox>
+                </SwipeableAccordion.Visible>
+                <SwipeableAccordion.Hidden>
+                    <WorkoutConfigFlexBoxList workoutConfigs={workoutConfigs} />
+                    <FlexBox
+                        padding={{top: 10, bottom: 10}}
+                        justifyContent="space-around"
+                    >
+                        <RoutineConfigUpdateButton
+                            routineConfigId={routineConfig._id}
+                        />
+                        <RoutineConfigProgressButton
+                            routineConfigName={routineConfig.name}
+                            routineConfigId={routineConfig._id}
+                        />
+                    </FlexBox>
+                </SwipeableAccordion.Hidden>
+                <SwipeableAccordion.DeleteButton />
+            </SwipeableAccordion.Box>
+        </SwipeableAccordion>
+    );
+};
+
+export default RoutineConfigAccordion;
