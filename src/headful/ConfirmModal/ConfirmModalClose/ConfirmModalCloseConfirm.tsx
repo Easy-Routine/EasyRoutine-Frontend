@@ -4,12 +4,18 @@ import React from "react";
 
 type ConfirmModalCloseConfirmProps = {
     children: React.ReactNode;
+    onConfirmButtonClick?: () => void;
 };
 
 const ConfirmModalCloseConfirm = ({
     children,
+    onConfirmButtonClick,
 }: ConfirmModalCloseConfirmProps) => {
     const theme = useTheme();
+
+    const handleConfirmButtonClick = () => {
+        onConfirmButtonClick && onConfirmButtonClick();
+    };
 
     const confirmModalCloseConfirmStyle = css`
         width: 100%;
@@ -22,7 +28,14 @@ const ConfirmModalCloseConfirm = ({
         border-bottom-right-radius: ${theme.borderRadius.lg};
     `;
 
-    return <div css={confirmModalCloseConfirmStyle}>{children}</div>;
+    return (
+        <div
+            onClick={handleConfirmButtonClick}
+            css={confirmModalCloseConfirmStyle}
+        >
+            {children}
+        </div>
+    );
 };
 
 export default ConfirmModalCloseConfirm;
