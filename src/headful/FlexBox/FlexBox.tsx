@@ -9,7 +9,7 @@ type Spacing = {
     left?: number;
 };
 
-export type FlexBoxProps = {
+export type FlexBoxProps = React.ButtonHTMLAttributes<HTMLDivElement> & {
     children: React.ReactNode;
     padding?: Spacing | number;
     margin?: Spacing | number;
@@ -35,6 +35,7 @@ const FlexBox = ({
     justifyContent = "flex-start",
     gap = 0,
     flexWrap = "nowrap",
+    ...props
 }: FlexBoxProps) => {
     // padding과 margin을 숫자 또는 객체로 처리하는 함수
     const spacingToString = (spacing?: Spacing | number) => {
@@ -58,7 +59,11 @@ const FlexBox = ({
         margin: ${spacingToString(margin)};
     `;
 
-    return <div css={flexBoxStyle}>{children}</div>;
+    return (
+        <div {...props} css={flexBoxStyle}>
+            {children}
+        </div>
+    );
 };
 
 export default FlexBox;
