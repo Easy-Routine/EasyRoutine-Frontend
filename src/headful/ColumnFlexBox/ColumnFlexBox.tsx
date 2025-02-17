@@ -10,7 +10,7 @@ const ColumnFlexBox = ({children}: ColumnFlexBoxProps) => {
         display: flex;
         flex-direction: column;
         gap: 12px;
-        padding-top: 10px;
+        padding: 10px 0;
     `;
 
     return <div css={columnFlexBoxStyle}>{children}</div>;
