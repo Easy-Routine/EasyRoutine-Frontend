@@ -10,6 +10,7 @@ import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
 import CircleButton from "headful/CircleButton/CircleButton";
 import {ReactComponent as FireIcon} from "assets/image/fire.svg";
+import Portal from "headless/Portal/Portal";
 
 type RoutineConfigProgressButtonButtonProps = {
     routineConfigName: string;
@@ -42,47 +43,52 @@ const RoutineConfigProgressButton = ({
                         <Text color={theme.color.primary}>루틴 시작하기</Text>
                     </FlexBox>
                 </ConfirmModal.Trigger>
-                <ConfirmModal.Backdrop />
-                <ConfirmModal.Content>
-                    <FlexBox
-                        padding={20}
-                        flexDirection="column"
-                        alignItems="center"
-                        gap={20}
-                    >
-                        <CircleButton width={65} height={65}>
-                            <FireIcon
-                                style={{
-                                    color: "white",
-                                    width: "30px",
-                                    height: "30px",
-                                }}
-                            />
-                        </CircleButton>
-                        <Text
-                            fontSize={theme.fontSize.xl}
-                            fontWeight={theme.fontWeight.semibold}
+                <Portal>
+                    <ConfirmModal.Backdrop />
+                    <ConfirmModal.Content>
+                        <FlexBox
+                            padding={20}
+                            flexDirection="column"
+                            alignItems="center"
+                            gap={20}
                         >
-                            루틴 진행
-                        </Text>
-                        <Text fontSize={theme.fontSize.md} textAlign="center">
-                            '{routineConfigName}'으로
-                            <br /> 운동을 시작하시겠습니까?
-                        </Text>
-                    </FlexBox>
-                    <ConfirmModal.Close>
-                        <ConfirmModalClose.Cancel>
-                            취소
-                        </ConfirmModalClose.Cancel>
-                        <ConfirmModalClose.Confirm
-                            onConfirmButtonClick={
-                                handleRoutineProgressModalConfirmButtonClick
-                            }
-                        >
-                            확인
-                        </ConfirmModalClose.Confirm>
-                    </ConfirmModal.Close>
-                </ConfirmModal.Content>
+                            <CircleButton width={65} height={65}>
+                                <FireIcon
+                                    style={{
+                                        color: "white",
+                                        width: "30px",
+                                        height: "30px",
+                                    }}
+                                />
+                            </CircleButton>
+                            <Text
+                                fontSize={theme.fontSize.xl}
+                                fontWeight={theme.fontWeight.semibold}
+                            >
+                                루틴 진행
+                            </Text>
+                            <Text
+                                fontSize={theme.fontSize.md}
+                                textAlign="center"
+                            >
+                                '{routineConfigName}'으로
+                                <br /> 운동을 시작하시겠습니까?
+                            </Text>
+                        </FlexBox>
+                        <ConfirmModal.Close>
+                            <ConfirmModalClose.Cancel>
+                                취소
+                            </ConfirmModalClose.Cancel>
+                            <ConfirmModalClose.Confirm
+                                onConfirmButtonClick={
+                                    handleRoutineProgressModalConfirmButtonClick
+                                }
+                            >
+                                확인
+                            </ConfirmModalClose.Confirm>
+                        </ConfirmModal.Close>
+                    </ConfirmModal.Content>
+                </Portal>
             </div>
         </ConfirmModal>
     );
