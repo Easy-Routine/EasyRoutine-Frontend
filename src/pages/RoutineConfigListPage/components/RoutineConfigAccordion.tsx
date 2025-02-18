@@ -8,6 +8,7 @@ import {RoutineConfig, WorkoutConfig} from "types/model";
 import RoutineConfigUpdateButton from "./RoutineConfigUpdateButton";
 import RoutineConfigProgressButton from "./RoutineConfigProgressButton";
 import WorkoutConfigFlexBoxList from "./WorkoutConfigFlexBoxList";
+import RoutineConfigDeleteButton from "./RoutineConfigDeleteButton";
 
 type RoutineConfigAccordionProps = {
     routineConfig: RoutineConfig;
@@ -59,7 +60,10 @@ const RoutineConfigAccordion = ({
                         />
                     </FlexBox>
                 </SwipeableAccordion.Hidden>
-                <SwipeableAccordion.DeleteButton />
+                <RoutineConfigDeleteButton
+                    routineConfigName={routineConfig.name}
+                    routineConfigId={routineConfig._id}
+                />
             </SwipeableAccordion.Box>
         </SwipeableAccordion>
     );
