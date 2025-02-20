@@ -3,7 +3,7 @@ import {lazy} from "react";
 const LoginPage = lazy(() => import("pages/LoginPage"));
 const MyPage = lazy(() => import("pages/MyPage"));
 const RoutineConfigDetailPage = lazy(
-    () => import("pages/RoutineConfigDetailPage"),
+    () => import("pages/RoutineConfigDetailPage/RoutineConfigDetailPage"),
 );
 const RoutineConfigListPage = lazy(
     () => import("pages/RoutineConfigListPage/RoutineConfigListPage"),
