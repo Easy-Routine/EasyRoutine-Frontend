@@ -1,0 +1,22 @@
+@import "theme"; // 절대경로 설정 시, 예: @import 'theme';
+
+.bottomSheetModalContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--background-box);
+    padding: 25px;
+    box-sizing: border-box;
+    border-top-left-radius: var(--borderRadius-lg);
+    border-top-right-radius: var(--borderRadius-lg);
+    z-index: var(--zIndex-modal);
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    box-shadow: var(--boxShadow);
+    transform: translateY(-100%);
+}

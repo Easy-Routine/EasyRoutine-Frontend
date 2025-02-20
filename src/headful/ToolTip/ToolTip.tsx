@@ -1,62 +1,6 @@
-/** @jsxImportSource @emotion/react */
 import React, {useState} from "react";
-import styled from "styled-components";
 import {ReactComponent as QuestionIcon} from "assets/image/tooltip-question.svg";
-import {css, useTheme} from "@emotion/react";
-
-const ToolTipBox = styled.div<{
-    isActive: boolean;
-    toolTipPosition: "left" | "right";
-}>`
-    width: 120px;
-    max-width: 120px;
-    max-height: 80px;
-    position: absolute;
-    ${({toolTipPosition}) =>
-        toolTipPosition === "left" ? "left: -145px;" : "right: -145px"};
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: ${({theme}) => theme.color.primary};
-    opacity: ${({isActive}) => (isActive ? 1 : 0)};
-    font-size: 8px;
-    padding: 7px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: ${({theme}) => theme.fontWeight.bold};
-    color: ${({theme}) => theme.color.text.white};
-    line-height: 12px;
-    border-radius: ${({theme}) => theme.borderRadius.xs};
-    transition: all 0.3s ease-in-out;
-
-    &::before {
-        content: "";
-        position: absolute;
-        right: 100%;
-        top: 50%;
-        transform: translateY(-50%);
-        border-width: 6px;
-        border-style: solid;
-        border-color: transparent ${({theme}) => theme.color.primary}
-            transparent transparent;
-        display: ${({toolTipPosition}) =>
-            toolTipPosition === "right" ? "block" : "none"};
-    }
-
-    &::after {
-        content: "";
-        position: absolute;
-        left: 100%;
-        top: 50%;
-        transform: translateY(-50%);
-        border-width: 6px;
-        border-style: solid;
-        border-color: transparent transparent transparent
-            ${({theme}) => theme.color.primary};
-        display: ${({toolTipPosition}) =>
-            toolTipPosition === "left" ? "block" : "none"};
-    }
-`;
+import styles from "./ToolTip.module.scss";
 
 type ToolTipProps = {
     text: string;
@@ -64,7 +8,6 @@ type ToolTipProps = {
 };
 
 const ToolTip = ({text, toolTipPosition}: ToolTipProps) => {
-    const theme = useTheme();
     const [isActive, setIsActive] = useState(false);
 
     const handleToolTipClick = () => {
@@ -75,71 +18,25 @@ const ToolTip = ({text, toolTipPosition}: ToolTipProps) => {
         e.stopPropagation(); // 클릭 이벤트 전파 방지
     };
 
-    const toolTipStyle = css`
-        width: 24px;
-        height: 24px;
-        background-color: #ffd700;
-        border-radius: 50%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    `;
+    // 동적으로 변화하는 opacity는 인라인 스타일로 처리합니다.
+    const tooltipBoxStyle: React.CSSProperties = {
+        opacity: isActive ? 1 : 0,
+    };
 
-    const toolTipBoxStyle = css`
-        width: 120px;
-        max-width: 120px;
-        max-height: 80px;
-        position: absolute;
-        ${toolTipPosition === "left" ? "left: -145px;" : "right: -145px"};
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: ${theme.color.primary};
-        opacity: ${isActive ? 1 : 0};
-        font-size: 8px;
-        padding: 7px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: ${theme.fontWeight.bold};
-        color: ${theme.color.text.white};
-        line-height: 12px;
-        border-radius: ${theme.borderRadius.xs};
-        transition: all 0.3s ease-in-out;
-
-        &::before {
-            content: "";
-            position: absolute;
-            right: 100%;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 6px;
-            border-style: solid;
-            border-color: transparent ${theme.color.primary} transparent
-                transparent;
-            display: ${toolTipPosition === "right" ? "block" : "none"};
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            left: 100%;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 6px;
-            border-style: solid;
-            border-color: transparent transparent transparent
-                ${theme.color.primary};
-            display: ${toolTipPosition === "left" ? "block" : "none"};
-        }
-    `;
+    // 위치에 따른 modifier 클래스 적용
+    const tooltipBoxClassName = `${styles.tooltipBox} ${
+        toolTipPosition === "left"
+            ? styles["tooltipBox--left"]
+            : styles["tooltipBox--right"]
+    }`;
 
     return (
-        <div css={toolTipStyle} onClick={handleToolTipClick}>
+        <div className={styles.tooltip} onClick={handleToolTipClick}>
             <QuestionIcon />
             <div
-                css={toolTipBoxStyle}
-                onClick={handleToolTipBoxClick} // ToolTipBox 클릭 이벤트
+                className={tooltipBoxClassName}
+                style={tooltipBoxStyle}
+                onClick={handleToolTipBoxClick}
             >
                 {text}
             </div>

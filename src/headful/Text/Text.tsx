@@ -1,13 +1,12 @@
-/** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
 import React from "react";
+import styles from "./Text.module.scss";
 
 type TextProps = {
     children: React.ReactNode;
     color?: string;
     fontSize?: string;
     fontWeight?: string;
-    textAlign?: string;
+    textAlign?: React.CSSProperties["textAlign"];
 };
 
 const Text = ({
@@ -17,16 +16,19 @@ const Text = ({
     fontWeight,
     textAlign,
 }: TextProps) => {
-    const theme = useTheme();
+    // 기본값은 CSS 변수로 설정된 값으로 대체할 수 있습니다.
+    const dynamicStyle: React.CSSProperties = {
+        fontSize: fontSize || "var(--fontSize-md)",
+        fontWeight: fontWeight || "var(--fontWeight-regular)",
+        color: color || "var(--color-text-black)",
+        textAlign: textAlign || "left",
+    };
 
-    const imageTextTextBoldStyle = css`
-        font-size: ${fontSize ?? theme.fontSize.md};
-        font-weight: ${fontWeight ?? theme.fontWeight.regular};
-        color: ${color ?? theme.color.text.black};
-        text-align: ${textAlign ?? "left"};
-    `;
-
-    return <div css={imageTextTextBoldStyle}>{children}</div>;
+    return (
+        <div className={styles.text} style={dynamicStyle}>
+            {children}
+        </div>
+    );
 };
 
 export default Text;

@@ -1,0 +1,17 @@
+@import "theme"; // 절대경로에 _theme.scss가 있다면, 예: @import "theme";
+
+.swipeableAccordionDeleteButton {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 80px;
+    background-color: var(--color-warning);
+    opacity: 0.7;
+    color: white;
+    border-radius: var(--borderRadius-md);
+    transition: transform 0.3s;
+}

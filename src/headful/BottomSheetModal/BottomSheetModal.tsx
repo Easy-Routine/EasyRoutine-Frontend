@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "headless/Modal/Modal";
 import BottomSheetModalBackdrop from "./BottomSheetModalBackdrop";
-import BottomSheetModalContent from "./BottomSheetModalContent";
+import BottomSheetModalContent from "./BottomSheetModalContent/BottomSheetModalContent";
 import BottomSheetModalTrigger from "./BottomSheetModalTrigger";
 
 type BottomSheetModalProps = {

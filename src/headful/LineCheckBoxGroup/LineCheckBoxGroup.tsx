@@ -1,23 +1,17 @@
-/** @jsxImportSource @emotion/react */
 import CheckboxGroup from "headless/CheckboxGroup/CheckboxGroup";
 import React from "react";
-import LineCheckBoxGroupItem from "./LineCheckBoxGroupItem";
-import LineCheckBoxGroupCheck from "./LineCheckBoxGroupCheck";
-import {css} from "@emotion/react";
+import LineCheckBoxGroupItem from "./LineCheckBoxGroupItem/LineCheckBoxGroupItem";
+import LineCheckBoxGroupCheck from "./LineCheckBoxGroupCheck/LineCheckBoxGroupCheck";
+import styles from "./LineCheckBoxGroup.module.scss";
 
 type CheckboxGroupProps = {
     children: React.ReactNode;
 };
 
 const LineCheckBoxGroup = ({children}: CheckboxGroupProps) => {
-    const lineCheckBoxGroupStyle = css`
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    `;
     return (
         <CheckboxGroup>
-            <div css={lineCheckBoxGroupStyle}>{children}</div>
+            <div className={styles.lineCheckBoxGroup}>{children}</div>
         </CheckboxGroup>
     );
 };

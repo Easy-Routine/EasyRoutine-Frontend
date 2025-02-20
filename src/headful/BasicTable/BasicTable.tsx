@@ -1,31 +1,23 @@
-/** @jsxImportSource @emotion/react */
-import {css} from "@emotion/react";
 import React from "react";
-import BasicTableHeader from "./BasicTableHeader";
-import BasicTableRow from "./BasicTableRow";
-import BasicTableCell from "./BasicTableCell";
+import styles from "./BasicTable.module.scss";
+import BasicTableHeader from "./BasicTableHeader/BasicTableHeader";
+import BasicTableRow from "./BasicTableRow/BasicTableRow";
+import BasicTableCell from "./BasicTableCell/BasicTableCell";
 import BasicTableBody from "./BasicTableBody";
-import BasicTableInput from "./BasicTableInput";
+import BasicTableInput from "./BasicTableInput/BasicTableInput";
 
 type BasicTableProps = {
     children: React.ReactNode;
-    // custom style prop for the table element
 };
 
 const BasicTable = ({children}: BasicTableProps) => {
-    const basicTableStyle = css`
-        width: 100%;
-        border-collapse: separate; /* 변경 */
-        border-spacing: 0 5px; /* 셀 간 간격 0 */
-        table-layout: fixed; /* 셀 크기 균일화 */
-    `;
-
     return (
-        <table onClick={e => e.stopPropagation()} css={basicTableStyle}>
+        <table onClick={e => e.stopPropagation()} className={styles.basicTable}>
             {children}
         </table>
     );
 };
+
 export default BasicTable;
 
 BasicTable.Header = BasicTableHeader;

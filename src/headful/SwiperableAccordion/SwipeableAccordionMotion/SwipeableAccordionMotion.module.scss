@@ -1,0 +1,11 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.swipeableAccordionMotion {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    cursor: grab;
+    background-color: var(--background-box);
+    border-radius: var(--borderRadius-md);
+    box-shadow: var(--boxShadow);
+}

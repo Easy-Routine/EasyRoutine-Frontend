@@ -1,0 +1,24 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+// 기본 스타일
+.basicTableCell {
+    padding: 5px;
+    display: table-cell;
+    vertical-align: top; /* 수직 정렬: 위쪽 */
+    word-wrap: break-word; /* 긴 단어 줄바꿈 */
+    word-break: break-word; /* 단어가 길 때 강제로 줄바꿈 */
+    white-space: normal; /* 텍스트가 셀 너비를 초과하면 줄바꿈 */
+    overflow-wrap: break-word; /* CSS3 기준 */
+    font-size: var(--fontSize-sm);
+}
+
+// text-align modifier 클래스
+.alignLeft {
+    text-align: left;
+}
+.alignCenter {
+    text-align: center;
+}
+.alignRight {
+    text-align: right;
+}

@@ -1,7 +1,6 @@
-/** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
-import CircleButton from "headful/CircleButton/CircleButton";
 import React, {useEffect, useState} from "react";
+import CircleButton from "headful/CircleButton/CircleButton";
+import styles from "./FloatingCircleButton.module.scss";
 
 type FloatingCircleButtonProps = {
     children: React.ReactNode;
@@ -16,16 +15,15 @@ const FloatingCircleButton = ({
     width,
     height,
 }: FloatingCircleButtonProps) => {
-    const theme = useTheme();
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
     const handleScroll = () => {
         if (window.scrollY > lastScrollY) {
-            // 스크롤 다운
+            // 스크롤 다운: 버튼 숨김
             setIsVisible(false);
         } else {
-            // 스크롤 업
+            // 스크롤 업: 버튼 보임
             setIsVisible(true);
         }
         setLastScrollY(window.scrollY);
@@ -33,33 +31,18 @@ const FloatingCircleButton = ({
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
+        return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
-    const floatingCircleButtonStyle = css`
-        position: fixed;
-        bottom: ${isVisible ? "80px" : "-80px"};
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: ${theme.zIndex.floatingActionButton};
-        transition: bottom 0.3s ease-in-out;
-
-        border-radius: ${theme.borderRadius.circle};
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        color: ${theme.color.text.white};
-    `;
+    // 동적으로 변경되는 bottom 값은 인라인 스타일로 처리합니다.
+    const dynamicStyle = {
+        bottom: isVisible ? "80px" : "-80px",
+    };
 
     return (
         <span
-            css={floatingCircleButtonStyle}
+            className={styles.floatingCircleButton}
+            style={dynamicStyle}
             onClick={onFloatingCircleButtonClick}
         >
             <CircleButton width={width} height={height}>

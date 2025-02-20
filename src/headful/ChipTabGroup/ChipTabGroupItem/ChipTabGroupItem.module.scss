@@ -1,0 +1,22 @@
+@import "theme"; // _theme.scss가 절대경로에 있을 경우
+
+.chipTabGroupItem {
+    flex: 1;
+    font-size: var(--fontSize-md);
+    font-weight: var(--fontWeight-regular);
+    border-radius: var(--borderRadius-lg);
+    border: 1px solid var(--color-gray-light); // 기본 테두리 (원래 코드에서 border 속성만 있었으므로 1px solid 처리)
+    padding: 8px 10px;
+    color: var(--color-gray-light);
+    background-color: inherit;
+    text-align: center;
+    box-sizing: border-box;
+    min-width: 50px;
+}
+
+.chipTabGroupItemActive {
+    font-weight: var(--fontWeight-bold);
+    border: 1px solid var(--color-primary);
+    color: var(--text-white);
+    background-color: var(--color-primary);
+}

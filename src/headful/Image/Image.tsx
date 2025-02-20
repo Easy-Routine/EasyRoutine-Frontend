@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
 import React from "react";
+import styles from "./Image.module.scss";
 
 type ImageProps = {
     width: number;
@@ -9,15 +8,14 @@ type ImageProps = {
 };
 
 const Image = ({width, height, src}: ImageProps) => {
-    const theme = useTheme();
-    const ImageStyle = css`
-        width: ${width}px;
-        height: ${height}px;
-        border: 1px solid ${theme.color.gray.light};
-        border-radius: ${theme.borderRadius.xs};
-    `;
-
-    return <img css={ImageStyle} src={src} />;
+    return (
+        <img
+            className={styles.image}
+            style={{width: `${width}px`, height: `${height}px`}}
+            src={src}
+            alt=""
+        />
+    );
 };
 
 export default Image;

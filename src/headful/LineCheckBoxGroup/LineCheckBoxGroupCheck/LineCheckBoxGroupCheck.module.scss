@@ -1,0 +1,18 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.lineCheckBoxGroupCheck {
+    width: 21px;
+    height: 20px;
+    border-radius: var(--borderRadius-xs);
+    border: 1px solid var(--color-gray-light);
+    background-color: var(--background-box);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.lineCheckBoxGroupCheckChecked {
+    border: none;
+    background-color: var(--color-primary);
+}

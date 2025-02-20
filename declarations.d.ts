@@ -19,11 +19,15 @@ declare module "*.ttf" {
 
 // declarations.d.ts
 declare module "moment-duration-format" {
-    import { Duration } from "moment";
+    import {Duration} from "moment";
 
     interface Duration {
         format(format: string, options?: any): string;
     }
+}
+declare module "*.module.scss" {
+    const classes: {[key: string]: string};
+    export default classes;
 }
 
 // global.d.ts

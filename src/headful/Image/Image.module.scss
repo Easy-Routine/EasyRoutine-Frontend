@@ -1,0 +1,6 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.image {
+    border: 1px solid var(--color-gray-light);
+    border-radius: var(--borderRadius-xs);
+}

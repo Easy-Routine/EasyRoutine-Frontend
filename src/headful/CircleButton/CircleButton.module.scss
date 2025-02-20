@@ -1,0 +1,12 @@
+@import "theme"; // _theme.scss가 절대경로에 있다면, 예: @import "theme";
+
+.circleButton {
+    border-radius: var(--borderRadius-circle);
+    background-color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--boxShadow);
+    color: var(--color-text-white);
+    border: none;
+}

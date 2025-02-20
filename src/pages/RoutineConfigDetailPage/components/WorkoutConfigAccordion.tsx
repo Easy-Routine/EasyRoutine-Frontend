@@ -1,9 +1,7 @@
-import {useTheme} from "@emotion/react";
 import FlexBox from "headful/FlexBox/FlexBox";
 import Image from "headful/Image/Image";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
-import React from "react";
 import {WorkoutConfig} from "types/model";
 import SetConfigTable from "./SetConfigUpdateTable";
 import WorkoutConfigDeleteButton from "./WorkoutConfigDeleteButton";
@@ -17,7 +15,6 @@ type WorkoutConfigAccordionProps = {
 const WorkoutConfigAccordion = ({
     workoutConfig,
 }: WorkoutConfigAccordionProps) => {
-    const theme = useTheme();
     const {workoutLibrary, setConfigs} = workoutConfig;
 
     return (
@@ -34,16 +31,10 @@ const WorkoutConfigAccordion = ({
                             flexDirection="column"
                             justifyContent="space-around"
                         >
-                            <Text
-                                fontSize={theme.fontSize.lg}
-                                fontWeight={theme.fontWeight.semibold}
-                            >
+                            <Text fontSize={"16px"} fontWeight={"600"}>
                                 {workoutLibrary.name}
                             </Text>
-                            <Text
-                                fontSize={theme.fontSize.sm}
-                                fontWeight={theme.fontWeight.regular}
-                            >
+                            <Text fontSize={"13px"} fontWeight={"13px"}>
                                 {setConfigs.length}종목
                             </Text>
                         </FlexBox>

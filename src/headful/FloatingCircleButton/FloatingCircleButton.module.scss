@@ -1,0 +1,16 @@
+@import "theme"; // _theme.scss가 절대경로에 있다면, 예: @import "theme";
+
+.floatingCircleButton {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--zIndex-floatingActionButton);
+    transition: bottom 0.3s ease-in-out;
+    border-radius: var(--borderRadius-circle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--color-text-white);
+}

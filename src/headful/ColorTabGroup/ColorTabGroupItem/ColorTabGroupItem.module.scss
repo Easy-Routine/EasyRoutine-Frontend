@@ -1,0 +1,15 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+// 기본 스타일
+.colorTabGroupItem {
+    width: 35px;
+    height: 35px;
+    border-radius: var(--borderRadius-circle);
+    border: none;
+    box-sizing: border-box;
+}
+
+// 활성(active) 상태일 때의 스타일
+.colorTabGroupItemActive {
+    border: 5px solid var(--color-primary);
+}

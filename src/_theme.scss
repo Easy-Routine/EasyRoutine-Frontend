@@ -1,0 +1,56 @@
+// _theme.scss
+
+:root {
+    /* 공통 변수 */
+    --borderRadius-xs: 4px;
+    --borderRadius-sm: 8px;
+    --borderRadius-md: 12px;
+    --borderRadius-lg: 16px;
+    --borderRadius-xl: 20px;
+    --borderRadius-circle: 50%;
+
+    --boxShadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
+
+    --color-primary: #82b1ff;
+    --color-warning: #ff0000;
+
+    --color-gray-lighter: #f4f4f4;
+    --color-gray-light: #c7c7c7;
+    --color-gray-normal: #a8a8a8;
+    --color-gray-dark: #7d7d7d;
+
+    --fontSize-xxs: 10px;
+    --fontSize-xs: 12px;
+    --fontSize-sm: 13px;
+    --fontSize-md: 14px;
+    --fontSize-lg: 16px;
+    --fontSize-xl: 18px;
+    --fontSize-xxl: 24px;
+    --fontSize-xxxl: 36px;
+
+    --fontWeight-bold: 700;
+    --fontWeight-semibold: 600;
+    --fontWeight-regular: 400;
+
+    --zIndex-header: 200;
+    --zIndex-floatingActionButton: 300;
+    --zIndex-backdrop: 400;
+    --zIndex-modal: 500;
+    --zIndex-error: 600;
+}
+
+/* Light Theme */
+.theme-light {
+    --background-page: #f8f9fa;
+    --background-box: #ffffff;
+    --text-black: #2d2d2d;
+    --text-white: #ffffff;
+}
+
+/* Dark Theme */
+.theme-dark {
+    --background-page: #121212;
+    --background-box: #1e1e1e;
+    --text-black: #ffffff;
+    --text-white: #2d2d2d;
+}

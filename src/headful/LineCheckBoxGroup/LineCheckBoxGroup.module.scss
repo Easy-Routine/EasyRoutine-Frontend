@@ -1,0 +1,7 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.lineCheckBoxGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

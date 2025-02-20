@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
 import React from "react";
+import styles from "./BasicButton.module.scss";
 
 type BasicButtonProps = {
     disabled?: boolean;
@@ -13,25 +12,18 @@ const BasicButton = ({
     children,
     onBasicButtonClick,
 }: BasicButtonProps) => {
-    const theme = useTheme();
-
-    const basicButtonStyle = css`
-        width: 100%;
-        height: 40px;
-        min-height: 40px;
-        border: none;
-        background-color: ${theme.color.primary};
-        color: ${theme.color.text.white};
-        border-radius: ${theme.borderRadius.xs};
-        font-family: "Noto Sans Korean", sans-serif;
-        opacity: ${disabled ? "0.5" : "1"};
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    `;
+    // 동적으로 변경되는 opacity는 인라인 스타일로 처리합니다.
+    const dynamicStyle: React.CSSProperties = {
+        opacity: disabled ? "0.5" : "1",
+    };
 
     return (
-        <button css={basicButtonStyle} onClick={onBasicButtonClick}>
+        <button
+            className={styles.basicButton}
+            onClick={onBasicButtonClick}
+            disabled={disabled}
+            style={dynamicStyle}
+        >
             {children}
         </button>
     );

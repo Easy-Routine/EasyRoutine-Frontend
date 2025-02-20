@@ -1,10 +1,7 @@
-/** @jsxImportSource @emotion/react */
-
 import React from "react";
-
-import {css} from "@emotion/react";
 import TabGroup from "headless/TabGroup/TabGroup";
-import LineTabGroupItem from "./LineTabGroupItem";
+import LineTabGroupItem from "./LineTabGroupItem/LineTabGroupItem";
+import styles from "./LineTabGroup.module.scss";
 
 type LineTabGroupProps = {
     defaultValue: string;
@@ -12,14 +9,9 @@ type LineTabGroupProps = {
 };
 
 const LineTabGroup = ({defaultValue, children}: LineTabGroupProps) => {
-    const lineTabGroupStyle = css`
-        display: flex;
-        width: 100%;
-    `;
-
     return (
         <TabGroup defaultValue={defaultValue}>
-            <div css={[lineTabGroupStyle]}>{children}</div>
+            <div className={styles.lineTabGroup}>{children}</div>
         </TabGroup>
     );
 };

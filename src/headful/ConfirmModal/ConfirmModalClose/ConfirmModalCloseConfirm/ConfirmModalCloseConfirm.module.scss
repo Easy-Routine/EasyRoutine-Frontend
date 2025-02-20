@@ -1,0 +1,12 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.confirmModalCloseConfirm {
+    width: 100%;
+    height: 100%;
+    color: var(--color-text-white);
+    background-color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-right-radius: var(--borderRadius-lg);
+}

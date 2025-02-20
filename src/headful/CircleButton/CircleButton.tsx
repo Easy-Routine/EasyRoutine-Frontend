@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
 import React from "react";
+import styles from "./CircleButton.module.scss";
 
 type CircleButtonProps = {
     children: React.ReactNode;
@@ -15,24 +14,19 @@ const CircleButton = ({
     height,
     onCircleButtonClick,
 }: CircleButtonProps) => {
-    const theme = useTheme();
-
-    const basicButtonStyle = css`
-        width: ${width}px;
-        height: ${height}px;
-        min-width: ${width}px;
-        border-radius: ${theme.borderRadius.circle};
-        background-color: ${theme.color.primary};
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: ${theme.boxShadow};
-        color: ${theme.color.text.white};
-        border: none;
-    `;
+    // 동적인 width, height, minWidth 값은 인라인 스타일로 처리합니다.
+    const dynamicStyle: React.CSSProperties = {
+        width: `${width}px`,
+        height: `${height}px`,
+        minWidth: `${width}px`,
+    };
 
     return (
-        <button css={basicButtonStyle} onClick={onCircleButtonClick}>
+        <button
+            className={styles.circleButton}
+            style={dynamicStyle}
+            onClick={onCircleButtonClick}
+        >
             {children}
         </button>
     );

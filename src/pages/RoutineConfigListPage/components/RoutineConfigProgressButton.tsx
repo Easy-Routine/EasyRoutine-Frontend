@@ -1,8 +1,6 @@
 import FlexBox from "headful/FlexBox/FlexBox";
-import React, {MouseEventHandler} from "react";
-import {ReactComponent as PenIcon} from "assets/image/pen.svg";
+import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
-import {useTheme} from "@emotion/react";
 import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
 import {ReactComponent as RunIcon} from "assets/image/run.svg";
@@ -21,7 +19,6 @@ const RoutineConfigProgressButton = ({
     routineConfigName,
     routineConfigId,
 }: RoutineConfigProgressButtonButtonProps) => {
-    const theme = useTheme();
     const navigate = useNavigate();
 
     const handleRoutineProgressButtonClick: MouseEventHandler<
@@ -39,8 +36,8 @@ const RoutineConfigProgressButton = ({
             <div onClick={handleRoutineProgressButtonClick}>
                 <ConfirmModal.Trigger>
                     <FlexBox gap={16} alignItems="center">
-                        <RunIcon color={theme.color.primary} />
-                        <Text color={theme.color.primary}>루틴 시작하기</Text>
+                        <RunIcon color={"#82B1FF"} />
+                        <Text color={"#82B1FF"}>루틴 시작하기</Text>
                     </FlexBox>
                 </ConfirmModal.Trigger>
                 <Portal>
@@ -61,16 +58,10 @@ const RoutineConfigProgressButton = ({
                                     }}
                                 />
                             </CircleButton>
-                            <Text
-                                fontSize={theme.fontSize.xl}
-                                fontWeight={theme.fontWeight.semibold}
-                            >
+                            <Text fontSize={"18px"} fontWeight={"600"}>
                                 루틴 진행
                             </Text>
-                            <Text
-                                fontSize={theme.fontSize.md}
-                                textAlign="center"
-                            >
+                            <Text fontSize={"14px"} textAlign="center">
                                 '{routineConfigName}'으로
                                 <br /> 운동을 시작하시겠습니까?
                             </Text>

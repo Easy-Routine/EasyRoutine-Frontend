@@ -1,0 +1,10 @@
+@import "theme"; // 절대경로에 _theme.scss가 있다면 예: @import "theme";
+
+.swipeableAccordionBox {
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--borderRadius-md);
+    box-shadow: var(--boxShadow);
+}

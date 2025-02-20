@@ -1,0 +1,5 @@
+@import "theme"; // _theme.scss가 절대경로에 있다면, 예: @import "theme";
+
+.basicTableHeader {
+    font-weight: var(--fontWeight-semibold);
+}

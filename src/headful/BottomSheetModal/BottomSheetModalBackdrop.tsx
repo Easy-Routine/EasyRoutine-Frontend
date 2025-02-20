@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import Modal from "headless/Modal/Modal";
 
 const BottomSheetModalBackdrop = () => {

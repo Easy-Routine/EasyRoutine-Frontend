@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import {css} from "@emotion/react";
 import React from "react";
 
 type Spacing = {
@@ -48,19 +46,20 @@ const FlexBox = ({
         return "0";
     };
 
-    const flexBoxStyle = css`
-        display: flex;
-        flex-direction: ${flexDirection};
-        align-items: ${alignItems};
-        justify-content: ${justifyContent};
-        flex-wrap: ${flexWrap};
-        gap: ${gap}px;
-        padding: ${spacingToString(padding)};
-        margin: ${spacingToString(margin)};
-    `;
+    // 동적 스타일은 인라인 스타일 객체로 생성합니다.
+    const dynamicStyle: React.CSSProperties = {
+        display: "flex",
+        flexDirection,
+        alignItems,
+        justifyContent,
+        flexWrap,
+        gap: `${gap}px`,
+        padding: spacingToString(padding),
+        margin: spacingToString(margin),
+    };
 
     return (
-        <div {...props} css={flexBoxStyle}>
+        <div {...props} style={dynamicStyle}>
             {children}
         </div>
     );

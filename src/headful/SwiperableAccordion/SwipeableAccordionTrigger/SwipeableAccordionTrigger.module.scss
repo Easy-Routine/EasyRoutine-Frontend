@@ -1,0 +1,9 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.swipeableAccordionTrigger {
+    width: 100%;
+    border: none;
+    padding: 10px 20px;
+    background-color: inherit;
+    border-radius: var(--borderRadius-md);
+}

@@ -1,0 +1,16 @@
+@import "theme"; // _theme.scss가 절대경로에 있다면, 예: @import "theme";
+
+.dialogModalContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background-box);
+    border-radius: var(--borderRadius-lg);
+    z-index: var(--zIndex-modal);
+    width: 80%;
+}

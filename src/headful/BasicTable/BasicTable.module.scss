@@ -1,0 +1,6 @@
+.basicTable {
+    width: 100%;
+    border-collapse: separate; /* 변경 */
+    border-spacing: 0 5px; /* 셀 간 간격 0 */
+    table-layout: fixed; /* 셀 크기 균일화 */
+}

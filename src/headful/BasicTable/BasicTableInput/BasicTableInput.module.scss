@@ -1,0 +1,24 @@
+@import "theme"; // _theme.scss가 절대경로에 있다면, 예: @import "theme";
+
+.basicTableInputWrapper {
+    width: 100%;
+    height: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--color-gray-light);
+    &:focus-within {
+        border-bottom: 2px solid var(--color-primary);
+    }
+}
+
+.basicTableInput {
+    width: 100%;
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    background-color: inherit;
+    font-size: var(--fontSize-sm);
+    color: var(--color-text-black);
+    text-align: center;
+}

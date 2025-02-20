@@ -1,0 +1,66 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+// 기본 Tooltip 버튼 스타일
+.tooltip {
+    width: 24px;
+    height: 24px;
+    background-color: #ffd700;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 기본 Tooltip Box 스타일 */
+.tooltipBox {
+    width: 120px;
+    max-width: 120px;
+    max-height: 80px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--color-primary);
+    font-size: 8px;
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--fontWeight-bold);
+    color: var(--color-text-white);
+    line-height: 12px;
+    border-radius: var(--borderRadius-xs);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Modifier 클래스: 왼쪽에 위치할 때 */
+.tooltipBox--left {
+    left: -145px;
+}
+
+.tooltipBox--left::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--color-primary);
+}
+
+/* Modifier 클래스: 오른쪽에 위치할 때 */
+.tooltipBox--right {
+    right: -145px;
+}
+
+.tooltipBox--right::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent var(--color-primary) transparent transparent;
+}

@@ -1,7 +1,5 @@
-import {useTheme} from "@emotion/react";
 import FireColorBox from "headful/FireColorBox/FireColorBox";
 import FlexBox from "headful/FlexBox/FlexBox";
-import Image from "headful/Image/Image";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {RoutineConfig, WorkoutConfig} from "types/model";
@@ -17,7 +15,6 @@ type RoutineConfigAccordionProps = {
 const RoutineConfigAccordion = ({
     routineConfig,
 }: RoutineConfigAccordionProps) => {
-    const theme = useTheme();
     const {name, color, workoutConfigs} = routineConfig;
 
     return (
@@ -30,16 +27,10 @@ const RoutineConfigAccordion = ({
                             flexDirection="column"
                             justifyContent="space-around"
                         >
-                            <Text
-                                fontSize={theme.fontSize.lg}
-                                fontWeight={theme.fontWeight.semibold}
-                            >
+                            <Text fontSize={"16px"} fontWeight={"600"}>
                                 {name}
                             </Text>
-                            <Text
-                                fontSize={theme.fontSize.sm}
-                                fontWeight={theme.fontWeight.regular}
-                            >
+                            <Text fontSize={"13px"} fontWeight={"400"}>
                                 {workoutConfigs.length}종목
                             </Text>
                         </FlexBox>

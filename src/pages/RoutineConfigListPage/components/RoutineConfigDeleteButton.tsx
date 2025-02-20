@@ -3,10 +3,7 @@ import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import FlexBox from "headful/FlexBox/FlexBox";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
-
-import React from "react";
 import Text from "headful/Text/Text";
-import {useTheme} from "@emotion/react";
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
 import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
 import Portal from "headless/Portal/Portal";
@@ -20,7 +17,6 @@ const RoutineConfigDeleteButton = ({
     routineConfigName,
     routineConfigId,
 }: RoutineConfigDeleteButtonProps) => {
-    const theme = useTheme();
     const {mutateAsync: deleteRoutineConfigOne} =
         useDeleteRoutineConfigOneMutation();
 
@@ -52,16 +48,10 @@ const RoutineConfigDeleteButton = ({
                                     }}
                                 />
                             </CircleButton>
-                            <Text
-                                fontSize={theme.fontSize.xl}
-                                fontWeight={theme.fontWeight.semibold}
-                            >
+                            <Text fontSize={"18px"} fontWeight={"600"}>
                                 루틴 삭제
                             </Text>
-                            <Text
-                                fontSize={theme.fontSize.md}
-                                textAlign="center"
-                            >
+                            <Text fontSize={"14px"} textAlign="center">
                                 '{routineConfigName}'을
                                 <br /> 삭제하시겠습니까?
                             </Text>

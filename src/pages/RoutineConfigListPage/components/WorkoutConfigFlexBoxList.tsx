@@ -1,8 +1,6 @@
-import {useTheme} from "@emotion/react";
 import FlexBox from "headful/FlexBox/FlexBox";
 import Image from "headful/Image/Image";
 import Text from "headful/Text/Text";
-import React from "react";
 import {WorkoutConfig} from "types/model";
 
 type WorkoutConfigFlexBoxListProps = {
@@ -12,8 +10,6 @@ type WorkoutConfigFlexBoxListProps = {
 const WorkoutConfigFlexBoxList = ({
     workoutConfigs,
 }: WorkoutConfigFlexBoxListProps) => {
-    const theme = useTheme();
-
     return (
         <FlexBox
             padding={{top: 10, bottom: 10}}
@@ -31,16 +27,10 @@ const WorkoutConfigFlexBoxList = ({
                             flexDirection="column"
                             justifyContent="space-around"
                         >
-                            <Text
-                                fontSize={theme.fontSize.sm}
-                                fontWeight={theme.fontWeight.semibold}
-                            >
+                            <Text fontSize={"13px"} fontWeight={"600"}>
                                 {name}
                             </Text>
-                            <Text
-                                fontSize={theme.fontSize.sm}
-                                fontWeight={theme.fontWeight.regular}
-                            >
+                            <Text fontSize={"13px"} fontWeight={"400"}>
                                 {setConfigs.length}
                                 세트
                             </Text>

@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import {css} from "@emotion/react";
 import React from "react";
 
 type BasicTableBodyProps = {
@@ -7,9 +5,7 @@ type BasicTableBodyProps = {
 };
 
 const BasicTableBody = ({children}: BasicTableBodyProps) => {
-    const basicTableBodyStyle = css``;
-
-    return <tbody css={basicTableBodyStyle}>{children}</tbody>;
+    return <tbody>{children}</tbody>;
 };
 
 export default BasicTableBody;

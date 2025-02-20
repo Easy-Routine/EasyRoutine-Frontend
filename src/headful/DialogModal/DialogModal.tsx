@@ -1,6 +1,6 @@
 import React from "react";
 import DialogModalBackdrop from "./DialogModalBackdrop";
-import DialogModalContent from "./DialogModalContent";
+import DialogModalContent from "./DialogModalContent/DialogModalContent";
 import DialogModalTrigger from "./DialogModalTrigger";
 import Modal from "headless/Modal/Modal";
 

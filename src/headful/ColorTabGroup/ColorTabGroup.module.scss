@@ -1,0 +1,7 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.colorTabGroup {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}

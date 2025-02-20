@@ -1,0 +1,10 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.fireColorBox {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--borderRadius-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,10 +1,7 @@
-/** @jsxImportSource @emotion/react */
-
 import React from "react";
-
-import {css} from "@emotion/react";
 import TabGroup from "headless/TabGroup/TabGroup";
-import ColorTabGroupItem from "./ColorTabGroupItem";
+import ColorTabGroupItem from "./ColorTabGroupItem/ColorTabGroupItem";
+import styles from "./ColorTabGroup.module.scss";
 
 type ColorTabGroupProps = {
     defaultValue: string;
@@ -12,15 +9,9 @@ type ColorTabGroupProps = {
 };
 
 const ColorTabGroup = ({defaultValue, children}: ColorTabGroupProps) => {
-    const colorTabGroupStyle = css`
-        display: flex;
-        justify-content: space-between;
-        width: 80%;
-    `;
-
     return (
         <TabGroup defaultValue={defaultValue}>
-            <div css={[colorTabGroupStyle]}>{children}</div>
+            <div className={styles.colorTabGroup}>{children}</div>
         </TabGroup>
     );
 };
