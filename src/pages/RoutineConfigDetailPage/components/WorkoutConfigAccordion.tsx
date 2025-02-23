@@ -9,10 +9,12 @@ import SetConfigDeleteButton from "./SetConfigDeleteButton";
 import SetConfigCreateButton from "./SetConfigCreateButton";
 
 type WorkoutConfigAccordionProps = {
+    routineConfigId: string;
     workoutConfig: WorkoutConfig;
 };
 
 const WorkoutConfigAccordion = ({
+    routineConfigId,
     workoutConfig,
 }: WorkoutConfigAccordionProps) => {
     const {workoutLibrary, setConfigs} = workoutConfig;
@@ -31,10 +33,18 @@ const WorkoutConfigAccordion = ({
                             flexDirection="column"
                             justifyContent="space-around"
                         >
-                            <Text fontSize={"16px"} fontWeight={"600"}>
+                            <Text
+                                fontSize={"var(--fontSize-lg)"}
+                                fontWeight={"var(--fontWeight-semibold)"}
+                                color={"var(--text-black)"}
+                            >
                                 {workoutLibrary.name}
                             </Text>
-                            <Text fontSize={"13px"} fontWeight={"13px"}>
+                            <Text
+                                fontSize={"var(--fontSize-sm)"}
+                                fontWeight={"var(--fontWeight-regular)"}
+                                color={"var(--text-black)"}
+                            >
                                 {setConfigs.length}종목
                             </Text>
                         </FlexBox>
@@ -50,9 +60,14 @@ const WorkoutConfigAccordion = ({
                         padding={{top: 10, bottom: 10}}
                         justifyContent="space-around"
                     >
-                        하단
-                        <SetConfigDeleteButton />
-                        <SetConfigCreateButton />
+                        <SetConfigDeleteButton
+                            routineConfigId={routineConfigId}
+                            workoutConfigId={workoutConfig._id}
+                        />
+                        <SetConfigCreateButton
+                            routineConfigId={routineConfigId}
+                            workoutConfigId={workoutConfig._id}
+                        />
                     </FlexBox>
                 </SwipeableAccordion.Hidden>
                 <WorkoutConfigDeleteButton />

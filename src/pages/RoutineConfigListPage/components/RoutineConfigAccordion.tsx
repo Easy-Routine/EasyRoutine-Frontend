@@ -2,7 +2,7 @@ import FireColorBox from "headful/FireColorBox/FireColorBox";
 import FlexBox from "headful/FlexBox/FlexBox";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
-import {RoutineConfig, WorkoutConfig} from "types/model";
+import {RoutineConfig} from "types/model";
 import RoutineConfigUpdateButton from "./RoutineConfigUpdateButton";
 import RoutineConfigProgressButton from "./RoutineConfigProgressButton";
 import WorkoutConfigFlexBoxList from "./WorkoutConfigFlexBoxList";
@@ -27,10 +27,18 @@ const RoutineConfigAccordion = ({
                             flexDirection="column"
                             justifyContent="space-around"
                         >
-                            <Text fontSize={"16px"} fontWeight={"600"}>
+                            <Text
+                                fontSize={"var(--fontSize-lg)"}
+                                fontWeight={"var(--fontWeight-semibold)"}
+                                color={"var(--text-black)"}
+                            >
                                 {name}
                             </Text>
-                            <Text fontSize={"13px"} fontWeight={"400"}>
+                            <Text
+                                fontSize={"var(--fontSize-sm)"}
+                                fontWeight={"var(--fontWeight-regular)"}
+                                color={"var(--text-black)"}
+                            >
                                 {workoutConfigs.length}종목
                             </Text>
                         </FlexBox>

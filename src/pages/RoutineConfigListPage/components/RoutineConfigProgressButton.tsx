@@ -37,7 +37,9 @@ const RoutineConfigProgressButton = ({
                 <ConfirmModal.Trigger>
                     <FlexBox gap={16} alignItems="center">
                         <RunIcon color={"#82B1FF"} />
-                        <Text color={"#82B1FF"}>루틴 시작하기</Text>
+                        <Text color={"var(--color-primary)"}>
+                            루틴 시작하기
+                        </Text>
                     </FlexBox>
                 </ConfirmModal.Trigger>
                 <Portal>
@@ -58,10 +60,18 @@ const RoutineConfigProgressButton = ({
                                     }}
                                 />
                             </CircleButton>
-                            <Text fontSize={"18px"} fontWeight={"600"}>
+                            <Text
+                                fontSize={"var(--fontSize-xl)"}
+                                fontWeight={"var(--fontWeight-semibold)"}
+                                color={"var(--text-black)"}
+                            >
                                 루틴 진행
                             </Text>
-                            <Text fontSize={"14px"} textAlign="center">
+                            <Text
+                                fontSize={"var(--fontSize-md)"}
+                                fontWeight={"var(--fontWeight-regular)"}
+                                color={"var(--text-black)"}
+                            >
                                 '{routineConfigName}'으로
                                 <br /> 운동을 시작하시겠습니까?
                             </Text>

@@ -27,10 +27,18 @@ const WorkoutConfigFlexBoxList = ({
                             flexDirection="column"
                             justifyContent="space-around"
                         >
-                            <Text fontSize={"13px"} fontWeight={"600"}>
+                            <Text
+                                fontSize={"var(--fontSize-sm)"}
+                                fontWeight={"var(--fontWeight-semibold)"}
+                                color={"var(--text-black)"}
+                            >
                                 {name}
                             </Text>
-                            <Text fontSize={"13px"} fontWeight={"400"}>
+                            <Text
+                                fontSize={"var(--fontSize-sm)"}
+                                fontWeight={"var(--fontWeight-regular)"}
+                                color={"var(--text-black)"}
+                            >
                                 {setConfigs.length}
                                 세트
                             </Text>

@@ -48,10 +48,19 @@ const RoutineConfigDeleteButton = ({
                                     }}
                                 />
                             </CircleButton>
-                            <Text fontSize={"18px"} fontWeight={"600"}>
+                            <Text
+                                fontSize={"var(--fontSize-xl)"}
+                                fontWeight={"var(--fontWeight-semibold)"}
+                                color={"var(--text-black)"}
+                            >
                                 루틴 삭제
                             </Text>
-                            <Text fontSize={"14px"} textAlign="center">
+                            <Text
+                                fontSize={"var(--fontSize-md)"}
+                                fontWeight={"var(--fontWeight-regular)"}
+                                color={"var(--text-black)"}
+                                textAlign="center"
+                            >
                                 '{routineConfigName}'을
                                 <br /> 삭제하시겠습니까?
                             </Text>
