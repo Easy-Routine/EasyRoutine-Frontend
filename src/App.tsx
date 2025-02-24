@@ -6,6 +6,7 @@ import AppRouter from "pages/AppRouter";
 import {useEffect, useState} from "react";
 import {getBaseWorkout} from "services";
 import styled from "styled-components";
+// import "./_theme.scss";
 
 const MaxWidthWrapper = styled.div`
     max-width: 640px;
