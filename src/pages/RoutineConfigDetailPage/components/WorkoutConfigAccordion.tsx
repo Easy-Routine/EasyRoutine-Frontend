@@ -3,7 +3,7 @@ import Image from "headful/Image/Image";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {WorkoutConfig} from "types/model";
-import SetConfigTable from "./SetConfigUpdateTable";
+import SetConfigUpdateTable from "./SetConfigUpdateTable";
 import WorkoutConfigDeleteButton from "./WorkoutConfigDeleteButton";
 import SetConfigDeleteButton from "./SetConfigDeleteButton";
 import SetConfigCreateButton from "./SetConfigCreateButton";
@@ -51,7 +51,7 @@ const WorkoutConfigAccordion = ({
                     </FlexBox>
                 </SwipeableAccordion.Visible>
                 <SwipeableAccordion.Hidden>
-                    <SetConfigTable
+                    <SetConfigUpdateTable
                         workoutLibraryType={workoutLibrary.type}
                         workoutConfigId={workoutConfig._id}
                         setConfigs={setConfigs}
@@ -70,7 +70,10 @@ const WorkoutConfigAccordion = ({
                         />
                     </FlexBox>
                 </SwipeableAccordion.Hidden>
-                <WorkoutConfigDeleteButton />
+                <WorkoutConfigDeleteButton
+                    routineConfigId={routineConfigId}
+                    workoutConfigId={workoutConfig._id}
+                />
             </SwipeableAccordion.Box>
         </SwipeableAccordion>
     );
