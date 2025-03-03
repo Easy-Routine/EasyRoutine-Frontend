@@ -20,7 +20,7 @@ const Text = ({
     const dynamicStyle: React.CSSProperties = {
         fontSize: fontSize || "var(--fontSize-md)",
         fontWeight: fontWeight || "var(--fontWeight-regular)",
-        color: color || "var(--color-text-black)",
+        color: color || "var(--text-black)",
         textAlign: textAlign || "left",
     };
 
