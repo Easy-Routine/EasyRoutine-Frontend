@@ -17,9 +17,10 @@ type Story = StoryObj<LineCheckBoxGroupProps>;
 export const DefaultLineCheckBoxGroup: Story = {
     render: () => (
         <LineCheckBoxGroup>
-            <LineCheckBoxGroup.Item value="item1">1</LineCheckBoxGroup.Item>
+            dd
+            {/* <LineCheckBoxGroup.Item  value="item1">1</LineCheckBoxGroup.Item>
             <LineCheckBoxGroup.Item value="item2">2</LineCheckBoxGroup.Item>
-            <LineCheckBoxGroup.Item value="item3">3</LineCheckBoxGroup.Item>
+            <LineCheckBoxGroup.Item value="item3">3</LineCheckBoxGroup.Item> */}
         </LineCheckBoxGroup>
     ),
 };

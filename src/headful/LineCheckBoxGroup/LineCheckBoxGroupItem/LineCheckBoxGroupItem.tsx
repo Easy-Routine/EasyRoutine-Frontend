@@ -3,22 +3,14 @@ import CheckboxGroup from "headless/CheckboxGroup/CheckboxGroup";
 import styles from "./LineCheckBoxGroupItem.module.scss";
 import LineCheckBoxGroup from "../LineCheckBoxGroup";
 
-type LineCheckBoxGroupItemProps = {
-    value: string;
-    children: React.ReactNode;
-};
-
-const LineCheckBoxGroupItem = ({
-    value,
-    children,
-}: LineCheckBoxGroupItemProps) => {
+type LineCheckBoxGroupItemProps = React.ComponentProps<
+    typeof CheckboxGroup.Item
+>;
+const LineCheckBoxGroupItem = ({...props}: LineCheckBoxGroupItemProps) => {
     return (
-        <CheckboxGroup.Item
-            value={value}
-            className={styles.lineCheckBoxGroupItem}
-        >
-            {children}
-            <LineCheckBoxGroup.Check value={value} />
+        <CheckboxGroup.Item className={styles.lineCheckBoxGroupItem} {...props}>
+            {props.children}
+            <LineCheckBoxGroup.Check value={props.value} />
         </CheckboxGroup.Item>
     );
 };

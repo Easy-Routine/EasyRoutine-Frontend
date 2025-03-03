@@ -3,23 +3,16 @@ import React from "react";
 import styles from "./ChipTabGroupItem.module.scss";
 import {useTabGroup} from "headless/TabGroup/TabGroup";
 
-type ChipTabGroupItemProps = {
-    value: string;
-    children: React.ReactNode;
-};
+type ChipTagGroupItemProps = React.ComponentProps<typeof TabGroupItem>;
 
-const ChipTabGroupItem = ({value, children}: ChipTabGroupItemProps) => {
+const ChipTabGroupItem = (props: ChipTagGroupItemProps) => {
     const {tabGroupValue} = useTabGroup();
 
-    const isCurrentItem = tabGroupValue === value;
+    const isCurrentItem = tabGroupValue === props.value;
 
     const combinedStyles = `${styles.chipTabGroupItem} ${isCurrentItem && styles.chipTabGroupItemActive}`;
 
-    return (
-        <TabGroupItem value={value} className={combinedStyles}>
-            {children}
-        </TabGroupItem>
-    );
+    return <TabGroupItem {...props} className={combinedStyles} />;
 };
 
 export default ChipTabGroupItem;

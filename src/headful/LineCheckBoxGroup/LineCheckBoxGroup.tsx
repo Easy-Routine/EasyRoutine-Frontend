@@ -4,9 +4,7 @@ import LineCheckBoxGroupItem from "./LineCheckBoxGroupItem/LineCheckBoxGroupItem
 import LineCheckBoxGroupCheck from "./LineCheckBoxGroupCheck/LineCheckBoxGroupCheck";
 import styles from "./LineCheckBoxGroup.module.scss";
 
-type CheckboxGroupProps = {
-    children: React.ReactNode;
-};
+type CheckboxGroupProps = React.ComponentProps<typeof CheckboxGroup>;
 
 const LineCheckBoxGroup = ({children}: CheckboxGroupProps) => {
     return (
