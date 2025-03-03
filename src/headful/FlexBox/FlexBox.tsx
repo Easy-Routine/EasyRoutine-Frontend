@@ -59,7 +59,7 @@ const FlexBox = ({
     };
 
     return (
-        <div {...props} style={dynamicStyle}>
+        <div {...props} style={{...dynamicStyle, ...props.style}}>
             {children}
         </div>
     );
