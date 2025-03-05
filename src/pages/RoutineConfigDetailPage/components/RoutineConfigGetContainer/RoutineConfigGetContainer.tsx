@@ -1,5 +1,4 @@
 import FlexBox from "headful/FlexBox/FlexBox";
-import WorkoutConfigAccordion from "./WorkoutConfigAccordion";
 import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import WorkoutConfigAccordionList from "./WorkoutConfigAccordionList";
 

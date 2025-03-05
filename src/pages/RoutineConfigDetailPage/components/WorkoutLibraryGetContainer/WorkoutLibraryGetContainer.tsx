@@ -4,7 +4,7 @@ import {ChangeEventHandler, useState} from "react";
 import SearchInput from "headful/SearchInput/SearchInput";
 import ChipTabGroup from "headful/ChipTabGroup/ChipTabGroup";
 import {Category} from "types/enum";
-import WorkoutLibraryCreateContainer from "./WorkoutLibraryCreateContainer/WorkoutLibraryCreateContainer";
+import WorkoutLibraryCreateContainer from "../WorkoutLibraryCreateContainer/WorkoutLibraryCreateContainer";
 
 type WorkoutLibraryGetContainerProps = {
     routineConfigId: string;

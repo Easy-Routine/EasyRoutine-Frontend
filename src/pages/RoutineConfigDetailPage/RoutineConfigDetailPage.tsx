@@ -1,9 +1,9 @@
 import {useParams} from "react-router-dom";
-import RoutineConfigGetContainer from "./components/RoutineConfigGetContainer";
 import BottomSheetModal from "headful/BottomSheetModal/BottomSheetModal";
 import FloatingCircleButton from "headful/FloatingCircleButton/FloatingCircleButton";
 import {ReactComponent as PlusIcon} from "assets/image/plus.svg";
-import WorkoutLibraryGetContainer from "./components/WorkoutLibraryGetContainer";
+import RoutineConfigGetContainer from "./components/RoutineConfigGetContainer/RoutineConfigGetContainer";
+import WorkoutLibraryGetContainer from "./components/WorkoutLibraryGetContainer/WorkoutLibraryGetContainer";
 
 const RoutineConfigDetailPage = () => {
     const {routineConfigId} = useParams();

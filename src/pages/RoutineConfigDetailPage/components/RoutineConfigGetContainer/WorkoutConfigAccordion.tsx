@@ -4,9 +4,9 @@ import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {WorkoutConfig} from "types/model";
 import SetConfigUpdateTable from "./SetConfigUpdateTable";
-import WorkoutConfigDeleteButton from "./WorkoutConfigDeleteButton";
 import SetConfigDeleteButton from "./SetConfigDeleteButton";
 import SetConfigCreateButton from "./SetConfigCreateButton";
+import WorkoutConfigDeleteButton from "./WorkoutConfigDeleteButton";
 
 type WorkoutConfigAccordionProps = {
     routineConfigId: string;

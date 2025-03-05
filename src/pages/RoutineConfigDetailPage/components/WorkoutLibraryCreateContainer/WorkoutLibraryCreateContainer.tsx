@@ -1,8 +1,8 @@
 import LineCheckBoxGroup from "headful/LineCheckBoxGroup/LineCheckBoxGroup";
 import React, {useEffect, useState} from "react";
-import WorkoutLibraryCheckBoxItemList from "../WorkoutLibraryCheckBoxItemList";
+import WorkoutLibraryCheckBoxItemList from "./WorkoutLibraryCheckBoxItemList";
 import {WorkoutLibrary} from "types/model";
-import WorkoutConfigCreateButton from "../WorkoutConfigCreateButton";
+import WorkoutConfigCreateButton from "./WorkoutConfigCreateButton";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import {useModal} from "headless/Modal/Modal";
 
