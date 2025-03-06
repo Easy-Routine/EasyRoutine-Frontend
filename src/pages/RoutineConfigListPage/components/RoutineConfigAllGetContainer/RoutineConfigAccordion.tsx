@@ -3,10 +3,10 @@ import FlexBox from "headful/FlexBox/FlexBox";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {RoutineConfig} from "types/model";
-import RoutineConfigUpdateButton from "./RoutineConfigUpdateButton";
-import RoutineConfigProgressButton from "./RoutineConfigProgressButton";
-import WorkoutConfigFlexBoxList from "./WorkoutConfigFlexBoxList";
-import RoutineConfigDeleteButton from "./RoutineConfigDeleteButton";
+import WorkoutConfigFlexBoxList from "../WorkoutConfigFlexBoxList";
+import RoutineConfigUpdateButton from "../RoutineConfigUpdateButton";
+import RoutineConfigProgressButton from "../RoutineConfigProgressButton";
+import RoutineConfigDeleteButton from "../RoutineConfigDeleteButton";
 
 type RoutineConfigAccordionProps = {
     routineConfig: RoutineConfig;

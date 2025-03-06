@@ -1,20 +1,20 @@
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import EmptyBoundary from "../EmptyBoundary";
 import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
-import useGetRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
-import { Color } from "types/enum";
-import { useNavigate } from "react-router-dom";
+import useGetRoutineConfigAllQuery from "hooks/server/useRoutineConfigAllGetQuery";
+import {Color} from "types/enum";
+import {useNavigate} from "react-router-dom";
 import useToast from "hooks/useToast";
 import ROUTES from "constants/routes";
 
 const RoutineConfigCreateFloatingActionButton = () => {
-    const { showToast } = useToast();
+    const {showToast} = useToast();
     const navigate = useNavigate();
 
-    const { mutateAsync: createRoutineConfigOneMutate } =
+    const {mutateAsync: createRoutineConfigOneMutate} =
         useCreateRoutineConfigMutation();
 
-    const { data: routineConfigAllData } = useGetRoutineConfigAllQuery();
+    const {data: routineConfigAllData} = useGetRoutineConfigAllQuery();
 
     const handleButtonClick = async () => {
         const userId = localStorage.getItem("userId");

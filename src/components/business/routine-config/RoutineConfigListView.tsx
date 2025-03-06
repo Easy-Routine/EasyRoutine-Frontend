@@ -7,7 +7,7 @@ import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
 import {Suspense, useState} from "react";
 import useModal from "hooks/client/useModal";
 import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
-import useRoutineConfigAllQuery from "hooks/server/useGetRoutineConfigAllQuery";
+import useRoutineConfigAllQuery from "hooks/server/useRoutineConfigAllGetQuery";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
