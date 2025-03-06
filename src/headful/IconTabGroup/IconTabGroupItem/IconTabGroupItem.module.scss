@@ -1,0 +1,14 @@
+.IconTabGroupItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    flex: 1;
+    background-color: inherit;
+    border: none;
+    color: var(--color-gray-light);
+
+    &.Active {
+        color: var(--color-primary);
+    }
+}
