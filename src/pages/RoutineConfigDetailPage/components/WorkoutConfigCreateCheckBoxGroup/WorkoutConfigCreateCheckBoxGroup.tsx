@@ -6,15 +6,15 @@ import WorkoutConfigCreateButton from "./WorkoutConfigCreateButton";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import {useModal} from "headless/Modal/Modal";
 
-type WorkoutLibraryCreateContainerProps = {
+type WorkoutConfigCreateCheckBoxGroupProps = {
     workoutLibraries: WorkoutLibrary[];
     routineConfigId: string;
 };
 
-const WorkoutLibraryCreateContainer = ({
+const WorkoutConfigCreateCheckBoxGroup = ({
     workoutLibraries,
     routineConfigId,
-}: WorkoutLibraryCreateContainerProps) => {
+}: WorkoutConfigCreateCheckBoxGroupProps) => {
     const [workoutLibraryIds, setWorkoutLibraryIds] = useState<string[]>([]);
     const {closeModal} = useModal();
 
@@ -45,4 +45,4 @@ const WorkoutLibraryCreateContainer = ({
     );
 };
 
-export default WorkoutLibraryCreateContainer;
+export default WorkoutConfigCreateCheckBoxGroup;

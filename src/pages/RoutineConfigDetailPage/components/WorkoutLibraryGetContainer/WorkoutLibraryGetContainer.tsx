@@ -4,7 +4,7 @@ import {ChangeEventHandler, useState} from "react";
 import SearchInput from "headful/SearchInput/SearchInput";
 import ChipTabGroup from "headful/ChipTabGroup/ChipTabGroup";
 import {Category} from "types/enum";
-import WorkoutLibraryCreateContainer from "../WorkoutLibraryCreateContainer/WorkoutLibraryCreateContainer";
+import WorkoutConfigCreateCheckBoxGroup from "../WorkoutConfigCreateCheckBoxGroup/WorkoutConfigCreateCheckBoxGroup";
 
 type WorkoutLibraryGetContainerProps = {
     routineConfigId: string;
@@ -85,7 +85,7 @@ const WorkoutLibraryGetContainer = ({
                     기타
                 </ChipTabGroup.Item>
             </ChipTabGroup>
-            <WorkoutLibraryCreateContainer
+            <WorkoutConfigCreateCheckBoxGroup
                 workoutLibraries={workoutLibraries}
                 routineConfigId={routineConfigId}
             />

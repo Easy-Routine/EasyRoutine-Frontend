@@ -59,7 +59,8 @@ const RoutineConfigListView = () => {
                 fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
                 data={routineConfigAll}
             >
-                <Accordion.List
+                임시 주석처리
+                {/* <Accordion.List
                     data={routineConfigAll}
                     render={routineConfig => (
                         <RoutineConfigDetailAccordion
@@ -86,7 +87,7 @@ const RoutineConfigListView = () => {
                             }}
                         />
                     )}
-                />
+                /> */}
             </EmptyBoundary>
 
             <ErrorBoundary>
