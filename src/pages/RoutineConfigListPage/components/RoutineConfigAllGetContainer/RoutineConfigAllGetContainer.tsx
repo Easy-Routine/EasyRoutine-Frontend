@@ -7,7 +7,11 @@ const RoutineConfigAllGetContainer = () => {
 
     const routineConfigs = data.routineConfigs!;
 
-    return <RoutineConfigAccordionList routineConfigs={routineConfigs} />;
+    return (
+        <FlexBox flexDirection="column" gap={20}>
+            <RoutineConfigAccordionList routineConfigs={routineConfigs} />
+        </FlexBox>
+    );
 };
 
 export default RoutineConfigAllGetContainer;

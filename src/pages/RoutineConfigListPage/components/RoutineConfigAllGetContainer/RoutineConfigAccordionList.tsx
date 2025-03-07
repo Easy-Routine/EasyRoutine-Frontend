@@ -11,14 +11,14 @@ const RoutineConfigAccordionList = ({
     routineConfigs,
 }: RoutineConfigAccordionListProps) => {
     return (
-        <FlexBox flexDirection="column" gap={20}>
+        <>
             {routineConfigs.map(routineConfig => (
                 <RoutineConfigAccordion
                     key={routineConfig._id}
                     routineConfig={routineConfig}
                 />
             ))}
-        </FlexBox>
+        </>
     );
 };
 
