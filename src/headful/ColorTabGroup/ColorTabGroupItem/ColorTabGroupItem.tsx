@@ -2,23 +2,24 @@ import TabGroupItem from "headless/TabGroup/TabGroupItem";
 import React from "react";
 import styles from "./ColorTabGroupItem.module.scss";
 import {useTabGroup} from "headless/TabGroup/TabGroup";
+import classNames from "classnames";
+import {Color} from "types/enum";
 
-type ColorTabGroupItemProps = {
-    value: string;
-};
+type ColorTabGroupItemProps = React.ComponentProps<typeof TabGroupItem>;
 
-const ColorTabGroupItem = ({value}: ColorTabGroupItemProps) => {
+const ColorTabGroupItem = (props: ColorTabGroupItemProps) => {
     const {tabGroupValue} = useTabGroup();
-    const isCurrentItem = tabGroupValue === value;
-    const combinedStyles = `${styles.colorTabGroupItem} ${isCurrentItem ? styles.colorTabGroupItemActive : ""}`;
+    const isCurrentItem = tabGroupValue === props.value;
+    const combinedStyles = classNames(styles.colorTabGroupItem, {
+        [styles.Active]: isCurrentItem,
+        [styles.Violet]: props.value === Color.VIOLET,
+        [styles.Orange]: props.value === Color.ORANGE,
+        [styles.Green]: props.value === Color.GREEN,
+        [styles.Blue]: props.value === Color.BLUE,
+        [styles.Pink]: props.value === Color.PINK,
+    });
 
-    return (
-        <TabGroupItem
-            value={value}
-            className={combinedStyles}
-            style={{backgroundColor: value}}
-        />
-    );
+    return <TabGroupItem {...props} className={combinedStyles} />;
 };
 
 export default ColorTabGroupItem;

@@ -47,7 +47,7 @@ const RoutineConfigDetailView = () => {
 
     return (
         <Container>
-            <Box>
+            {/* <Box>
                 <RoutineConfigUpdateNameTitleText
                     defaultValue={routineConfigDetail!.name}
                 />
@@ -60,7 +60,7 @@ const RoutineConfigDetailView = () => {
                         key={workoutConfig._id}
                     />
                 )}
-            />
+            /> */}
 
             <ErrorBoundary>
                 <Suspense
@@ -88,7 +88,7 @@ const RoutineConfigDetailView = () => {
                 onButtonClick={() => openWorkoutLibraryListBottomSheet()}
             />
 
-            <EmptyBoundary
+            {/* <EmptyBoundary
                 data={routineConfigDetail?.workoutConfigs}
                 fallback={
                     <FloatingActionButton
@@ -107,11 +107,11 @@ const RoutineConfigDetailView = () => {
                 <FloatingActionButton
                     onButtonClick={() => openWorkoutLibraryListBottomSheet()}
                 />
-            </EmptyBoundary>
+            </EmptyBoundary> */}
 
-            <RoutineConfigColorTabBottomBar
+            {/* <RoutineConfigColorTabBottomBar
                 defaultValue={routineConfigDetail!.color}
-            />
+            /> */}
         </Container>
     );
 };

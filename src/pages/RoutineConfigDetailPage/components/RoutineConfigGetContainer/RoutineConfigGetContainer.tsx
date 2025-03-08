@@ -9,12 +9,11 @@ type RoutineConfigGetContainerProps = {
 const RoutineConfigGetContainer = ({
     routineConfigId,
 }: RoutineConfigGetContainerProps) => {
-    const {data: routineConfigOneData} =
-        useGetRoutineConfigOneQuery(routineConfigId);
+    const {data} = useGetRoutineConfigOneQuery(routineConfigId);
 
-    const routineConfigOne = routineConfigOneData!;
+    const routineConfig = data.routineConfig!;
 
-    const workoutConfigs = routineConfigOne.workoutConfigs;
+    const workoutConfigs = routineConfig.workoutConfigs;
 
     return (
         <FlexBox flexDirection="column" gap={20}>

@@ -7,9 +7,24 @@
     border-radius: var(--borderRadius-circle);
     border: none;
     box-sizing: border-box;
-}
 
-// 활성(active) 상태일 때의 스타일
-.colorTabGroupItemActive {
-    border: 5px solid var(--color-primary);
+    &.Active {
+        border: 5px solid var(--color-primary);
+    }
+
+    &.Violet {
+        background-color: #855cf8;
+    }
+    &.Orange {
+        background-color: #f26b2c;
+    }
+    &.Green {
+        background-color: #2daf2d;
+    }
+    &.Blue {
+        background-color: #455a64;
+    }
+    &.Pink {
+        background-color: #dd408f;
+    }
 }

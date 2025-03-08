@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import RoutineConfigGetContainer from "./components/RoutineConfigGetContainer/RoutineConfigGetContainer";
 import WorkoutLibraryModalButton from "./components/WorkoutLibraryModalButton/WorkoutLibraryModalButton";
+import RoutineConfigColorUpdateBottomBox from "./components/RoutineConfigColorUpdateBottomBox/RoutineConfigColorUpdateBottomBox";
 
 const RoutineConfigDetailPage = () => {
     const {routineConfigId} = useParams();
@@ -11,6 +12,9 @@ const RoutineConfigDetailPage = () => {
                 routineConfigId={routineConfigId as string}
             />
             <WorkoutLibraryModalButton
+                routineConfigId={routineConfigId as string}
+            />
+            <RoutineConfigColorUpdateBottomBox
                 routineConfigId={routineConfigId as string}
             />
         </>
