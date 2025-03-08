@@ -17,7 +17,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
 import WorkoutConfigDetailProgressAccordion from "../workout-config/WorkoutConfigDetailProgressAccordion";
-import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
+import useGetRoutineConfigOneQuery from "hooks/server/useRoutineConfigGetQuery";
 import {SetConfig, WorkoutConfig} from "types/model";
 import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
 import Box from "components/box/Box/Box";
@@ -220,8 +220,7 @@ const RoutineConfigOneProgressView = () => {
         const isAllCompleted =
             totalSetIds.size === newTotalCompletedSetIds.size;
 
-        console.log("ㅅㅂ",totalSetIds, newTotalCompletedSetIds);
-
+        console.log("ㅅㅂ", totalSetIds, newTotalCompletedSetIds);
 
         setTotalCompletdSetIds(newTotalCompletedSetIds);
 

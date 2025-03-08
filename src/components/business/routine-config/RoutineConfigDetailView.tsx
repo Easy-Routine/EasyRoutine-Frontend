@@ -4,7 +4,7 @@ import RoutineConfigColorTabBottomBar from "./RoutineConfigUpdateColorTabBottomB
 import styled from "styled-components";
 import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailAccordion";
 import {useNavigate, useParams} from "react-router-dom";
-import useRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
+import useRoutineConfigOneQuery from "hooks/server/useRoutineConfigGetQuery";
 import RoutineConfigUpdateNameTitleText from "./RoutineConfigUpdateNameTitleText";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import WorkoutLibraryListBottomSheet from "../workout-library/WorkoutLibraryListBottomSheet";

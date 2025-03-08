@@ -1,6 +1,6 @@
 import BottomBox from "headful/BottomBox/BottomBox";
 import ColorTabGroup from "headful/ColorTabGroup/ColorTabGroup";
-import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
+import useRoutineConfigGetQuery from "hooks/server/useRoutineConfigGetQuery";
 import useUpdateRoutineConfigFieldMutation from "hooks/server/useUpdateRoutineConfigFieldMutation";
 import {Color} from "types/enum";
 
@@ -11,7 +11,7 @@ type RoutineConfigColorUpdateBottomBoxProps = {
 const RoutineConfigColorUpdateBottomBox = ({
     routineConfigId,
 }: RoutineConfigColorUpdateBottomBoxProps) => {
-    const {data} = useGetRoutineConfigOneQuery(routineConfigId);
+    const {data} = useRoutineConfigGetQuery(routineConfigId);
 
     const routineConfig = data.routineConfig!;
 

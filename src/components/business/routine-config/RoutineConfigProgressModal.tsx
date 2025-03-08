@@ -1,10 +1,10 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
-import { ReactComponent as FireIcon } from "assets/image/fire.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import {ReactComponent as FireIcon} from "assets/image/fire.svg";
+import {useNavigate, useParams} from "react-router-dom";
 import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
-import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
+import useGetRoutineConfigOneQuery from "hooks/server/useRoutineConfigGetQuery";
 import useNativeMessage from "hooks/client/useNativeMessage";
 
 type RoutineProgressModalProps = {
@@ -23,10 +23,10 @@ const RoutineConfigProgressModal = ({
     onConfirmButtonClick,
 }: RoutineProgressModalProps) => {
     const navigate = useNavigate();
-    const { showToast } = useToast();
-    const { sendNativeMessage } = useNativeMessage();
+    const {showToast} = useToast();
+    const {sendNativeMessage} = useNativeMessage();
 
-    const { data: routineConfigOneData } =
+    const {data: routineConfigOneData} =
         useGetRoutineConfigOneQuery(routineConfigId);
 
     const routineConfigOne = routineConfigOneData!;
@@ -35,7 +35,7 @@ const RoutineConfigProgressModal = ({
         // TODO: API 호출
         showToast("루틴이 시작되었습니다.", "success");
         onConfirmButtonClick();
-        sendNativeMessage({ type: "vibrate" });
+        sendNativeMessage({type: "vibrate"});
         navigate(ROUTES.PROGRESS.PATH(routineConfigOne._id));
     };
 

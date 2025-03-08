@@ -2,7 +2,7 @@ import {useSuspenseQuery} from "@tanstack/react-query";
 import {getRoutineConfigOne} from "services/routine-config";
 import queryKey from "constants/queryKeys";
 
-const useGetRoutineConfigOneQuery = (routineConfigId: string) => {
+const useRoutineConfigGetQuery = (routineConfigId: string) => {
     return useSuspenseQuery({
         queryKey: [queryKey.getRoutineConfigOne, routineConfigId],
         queryFn: async () => {
@@ -15,4 +15,4 @@ const useGetRoutineConfigOneQuery = (routineConfigId: string) => {
     });
 };
 
-export default useGetRoutineConfigOneQuery;
+export default useRoutineConfigGetQuery;

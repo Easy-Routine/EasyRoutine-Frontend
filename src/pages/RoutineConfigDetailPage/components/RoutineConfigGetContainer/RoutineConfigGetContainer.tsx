@@ -1,6 +1,6 @@
 import FlexBox from "headful/FlexBox/FlexBox";
-import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
 import WorkoutConfigAccordionList from "./WorkoutConfigAccordionList/WorkoutConfigAccordionList";
+import useRoutineConfigGetQuery from "hooks/server/useRoutineConfigGetQuery";
 
 type RoutineConfigGetContainerProps = {
     routineConfigId: string;
@@ -9,7 +9,7 @@ type RoutineConfigGetContainerProps = {
 const RoutineConfigGetContainer = ({
     routineConfigId,
 }: RoutineConfigGetContainerProps) => {
-    const {data} = useGetRoutineConfigOneQuery(routineConfigId);
+    const {data} = useRoutineConfigGetQuery(routineConfigId);
 
     const routineConfig = data.routineConfig!;
 
