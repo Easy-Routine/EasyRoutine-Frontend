@@ -1,6 +1,6 @@
 import FlexBox from "headful/FlexBox/FlexBox";
 import useGetRoutineConfigOneQuery from "hooks/server/useGetRoutineConfigOneQuery";
-import WorkoutConfigAccordionList from "./WorkoutConfigAccordionList";
+import WorkoutConfigAccordionList from "./WorkoutConfigAccordionList/WorkoutConfigAccordionList";
 
 type RoutineConfigGetContainerProps = {
     routineConfigId: string;

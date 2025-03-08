@@ -1,6 +1,6 @@
 import React from "react";
 import {WorkoutConfig} from "types/model";
-import WorkoutConfigAccordion from "./WorkoutConfigAccordion";
+import WorkoutConfigAccordion from "./WorkoutConfigAccordion/WorkoutConfigAccordion";
 
 type WorkoutConfigAccordionListProps = {
     workoutConfigs: WorkoutConfig[];
