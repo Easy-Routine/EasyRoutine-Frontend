@@ -1,39 +1,33 @@
 import FlexBox from "headful/FlexBox/FlexBox";
-import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
-import {useNavigate} from "react-router-dom";
-import ROUTES from "constants/routes";
 import {ReactComponent as RunIcon} from "assets/image/run.svg";
 import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
 import CircleButton from "headful/CircleButton/CircleButton";
 import {ReactComponent as FireIcon} from "assets/image/fire.svg";
 import Portal from "headless/Portal/Portal";
+import RoutineStartButton from "./RoutineConfigStartButton";
 
-type RoutineConfigProgressButtonButtonProps = {
+/*
+    루틴 시작 페이지로 이동을 확인하는 모달을 여는 버튼
+*/
+
+type RoutineConfigStartModalButtonProps = {
     routineConfigName: string;
     routineConfigId: string;
 };
 
-const RoutineConfigProgressButton = ({
+const RoutineConfigStartModalButton = ({
     routineConfigName,
     routineConfigId,
-}: RoutineConfigProgressButtonButtonProps) => {
-    const navigate = useNavigate();
-
-    const handleRoutineProgressButtonClick: MouseEventHandler<
-        HTMLDivElement
-    > = e => {
-        e.stopPropagation();
-    };
-
-    const handleRoutineProgressModalConfirmButtonClick = () => {
-        navigate(ROUTES.PROGRESS.PATH(routineConfigId));
-    };
-
+}: RoutineConfigStartModalButtonProps) => {
     return (
         <ConfirmModal>
-            <div onClick={handleRoutineProgressButtonClick}>
+            <div
+                onClick={e => {
+                    e.stopPropagation();
+                }}
+            >
                 <ConfirmModal.Trigger>
                     <FlexBox gap={16} alignItems="center">
                         <RunIcon color={"#82B1FF"} />
@@ -80,13 +74,9 @@ const RoutineConfigProgressButton = ({
                             <ConfirmModalClose.Cancel>
                                 취소
                             </ConfirmModalClose.Cancel>
-                            <ConfirmModalClose.Confirm
-                                onConfirmButtonClick={
-                                    handleRoutineProgressModalConfirmButtonClick
-                                }
-                            >
-                                확인
-                            </ConfirmModalClose.Confirm>
+                            <RoutineStartButton
+                                routineConfigId={routineConfigId}
+                            />
                         </ConfirmModal.Close>
                     </ConfirmModal.Content>
                 </Portal>
@@ -95,4 +85,4 @@ const RoutineConfigProgressButton = ({
     );
 };
 
-export default RoutineConfigProgressButton;
+export default RoutineConfigStartModalButton;

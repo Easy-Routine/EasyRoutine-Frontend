@@ -1,16 +1,16 @@
 import {useLocation} from "react-router-dom";
-import NavigateContainer from "components/NavigateContainer";
 import RoutineConfigAllGetContainer from "./components/RoutineConfigAllGetContainer/RoutineConfigAllGetContainer";
+import RoutineConfigCreateButton from "./components/RoutineConfigCreateButton/RoutineConfigCreateButton";
+import NavigateBottomBox from "components/NavigateBottomBox";
 
 const RoutineConfigListPage = () => {
     const location = useLocation();
 
-    console.log("location: " + location);
-
     return (
         <>
             <RoutineConfigAllGetContainer />
-            <NavigateContainer path={location.pathname} />
+            <RoutineConfigCreateButton />
+            <NavigateBottomBox path={location.pathname} />
         </>
     );
 };

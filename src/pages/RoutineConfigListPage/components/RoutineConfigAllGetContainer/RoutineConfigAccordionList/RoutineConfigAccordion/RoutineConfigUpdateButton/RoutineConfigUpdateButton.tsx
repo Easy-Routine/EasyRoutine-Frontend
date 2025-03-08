@@ -5,6 +5,10 @@ import Text from "headful/Text/Text";
 import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
 
+/*
+    루틴 설정을 수정하는 페이지로 이동하는 버튼
+*/
+
 type RoutineConfigUpdateButtonButtonProps = {
     routineConfigId: string;
 };

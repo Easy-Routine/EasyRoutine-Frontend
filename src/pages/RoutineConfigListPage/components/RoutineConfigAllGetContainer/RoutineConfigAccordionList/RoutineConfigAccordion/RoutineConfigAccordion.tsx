@@ -3,10 +3,10 @@ import FlexBox from "headful/FlexBox/FlexBox";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {RoutineConfig} from "types/model";
-import WorkoutConfigFlexBoxList from "../WorkoutConfigFlexBoxList";
-import RoutineConfigUpdateButton from "../RoutineConfigUpdateButton";
-import RoutineConfigProgressButton from "../RoutineConfigProgressButton";
-import RoutineConfigDeleteButton from "../RoutineConfigDeleteButton";
+import WorkoutConfigFlexBoxList from "./WorkoutConfigFlexBoxList/WorkoutConfigFlexBoxList";
+import RoutineConfigUpdateButton from "./RoutineConfigUpdateButton/RoutineConfigUpdateButton";
+import RoutineConfigDeleteModalButton from "./RoutineConfigDeleteModalButton/RoutineConfigDeleteModalButton";
+import RoutineConfigStartModalButton from "./RoutineConfigStartModalButton/RoutineConfigStartModalButton";
 
 type RoutineConfigAccordionProps = {
     routineConfig: RoutineConfig;
@@ -53,13 +53,13 @@ const RoutineConfigAccordion = ({
                         <RoutineConfigUpdateButton
                             routineConfigId={routineConfig._id}
                         />
-                        <RoutineConfigProgressButton
+                        <RoutineConfigStartModalButton
                             routineConfigName={routineConfig.name}
                             routineConfigId={routineConfig._id}
                         />
                     </FlexBox>
                 </SwipeableAccordion.Hidden>
-                <RoutineConfigDeleteButton
+                <RoutineConfigDeleteModalButton
                     routineConfigName={routineConfig.name}
                     routineConfigId={routineConfig._id}
                 />

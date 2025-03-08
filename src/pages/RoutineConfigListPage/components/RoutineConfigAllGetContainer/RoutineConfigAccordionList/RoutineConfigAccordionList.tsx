@@ -1,7 +1,5 @@
-import FlexBox from "headful/FlexBox/FlexBox";
-import React from "react";
 import {RoutineConfig} from "types/model";
-import RoutineConfigAccordion from "./RoutineConfigAccordion";
+import RoutineConfigAccordion from "./RoutineConfigAccordion/RoutineConfigAccordion";
 
 type RoutineConfigAccordionListProps = {
     routineConfigs: RoutineConfig[];

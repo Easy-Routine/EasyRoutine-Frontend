@@ -5,25 +5,22 @@ import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
 import Text from "headful/Text/Text";
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
-import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
 import Portal from "headless/Portal/Portal";
+import RoutineConfigDeleteButton from "./RoutineConfigDeleteButton";
 
-type RoutineConfigDeleteButtonProps = {
+type RoutineConfigDeleteModalButtonProps = {
     routineConfigName: string;
     routineConfigId: string;
 };
 
-const RoutineConfigDeleteButton = ({
+/*
+    루틴 설정을 삭제하는 모달을 여는 버튼 
+*/
+
+const RoutineConfigDeleteModalButton = ({
     routineConfigName,
     routineConfigId,
-}: RoutineConfigDeleteButtonProps) => {
-    const {mutateAsync: deleteRoutineConfigOne} =
-        useDeleteRoutineConfigOneMutation();
-
-    const handleRoutineConfigDeleteButtonClick = async () => {
-        await deleteRoutineConfigOne(routineConfigId);
-    };
-
+}: RoutineConfigDeleteModalButtonProps) => {
     return (
         <ConfirmModal>
             <div onClick={e => e.stopPropagation()}>
@@ -69,13 +66,9 @@ const RoutineConfigDeleteButton = ({
                             <ConfirmModalClose.Cancel>
                                 취소
                             </ConfirmModalClose.Cancel>
-                            <ConfirmModalClose.Confirm
-                                onConfirmButtonClick={
-                                    handleRoutineConfigDeleteButtonClick
-                                }
-                            >
-                                확인
-                            </ConfirmModalClose.Confirm>
+                            <RoutineConfigDeleteButton
+                                routineConfigId={routineConfigId}
+                            />
                         </ConfirmModal.Close>
                     </ConfirmModal.Content>
                 </Portal>
@@ -84,4 +77,4 @@ const RoutineConfigDeleteButton = ({
     );
 };
 
-export default RoutineConfigDeleteButton;
+export default RoutineConfigDeleteModalButton;

@@ -1,6 +1,6 @@
 import FlexBox from "headful/FlexBox/FlexBox";
-import RoutineConfigAccordionList from "./RoutineConfigAccordionList";
 import useRoutineConfigAllGetQuery from "hooks/server/useRoutineConfigAllGetQuery";
+import RoutineConfigAccordion from "./RoutineConfigAccordionList/RoutineConfigAccordion/RoutineConfigAccordion";
 
 const RoutineConfigAllGetContainer = () => {
     const {data} = useRoutineConfigAllGetQuery();
@@ -9,7 +9,12 @@ const RoutineConfigAllGetContainer = () => {
 
     return (
         <FlexBox flexDirection="column" gap={20}>
-            <RoutineConfigAccordionList routineConfigs={routineConfigs} />
+            {routineConfigs.map(routineConfig => (
+                <RoutineConfigAccordion
+                    key={routineConfig._id}
+                    routineConfig={routineConfig}
+                />
+            ))}
         </FlexBox>
     );
 };

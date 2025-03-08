@@ -1,20 +1,17 @@
 import BottomBox from "headful/BottomBox/BottomBox";
-import React from "react";
 import {ReactComponent as HomeIcon} from "assets/image/home.svg";
 import {ReactComponent as GraphIcon} from "assets/image/graph.svg";
 import {ReactComponent as TileIcon} from "assets/image/tile.svg";
 import {ReactComponent as UserIcon} from "assets/image/user.svg";
-import TabGroup from "headless/TabGroup/TabGroup";
 import ROUTES from "constants/routes";
 import {useNavigate} from "react-router-dom";
-import FlexBox from "headful/FlexBox/FlexBox";
 import IconTabGroup from "headful/IconTabGroup/IconTabGroup";
 
-type NaviationBoxProps = {
+type NaviationBottomBoxProps = {
     path: string;
 };
 
-const NavigateContainer = ({path}: NaviationBoxProps) => {
+const NavigateBottomBox = ({path}: NaviationBottomBoxProps) => {
     const navigate = useNavigate();
 
     const handleNavigationItemClick = (value: string) => {
@@ -53,4 +50,4 @@ const NavigateContainer = ({path}: NaviationBoxProps) => {
     );
 };
 
-export default NavigateContainer;
+export default NavigateBottomBox;
