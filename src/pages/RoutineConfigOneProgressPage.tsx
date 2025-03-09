@@ -1,6 +1,6 @@
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
-// import RoutineConfigListProgressView from "components/business/routine-config/RoutineConfigOneProgressView";
+import RoutineConfigOneProgressView from "components/business/routine-config/RoutineConfigOneProgressView";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import PageHeader from "components/content/PageHeader/PageHeader";
 import ToolTip from "components/content/ToolTip/ToolTip";
@@ -31,7 +31,7 @@ const RoutineConfigListProgressPage = () => {
                         </DefferredComponent>
                     }
                 >
-                    {/* <RoutineConfigListProgressView /> */}
+                    <RoutineConfigOneProgressView />
                 </Suspense>
             </ErrorBoundary>
         </Container>

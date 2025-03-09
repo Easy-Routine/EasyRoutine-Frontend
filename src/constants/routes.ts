@@ -1,3 +1,4 @@
+import RoutineProgressPage from "pages/RoutineProgressPage/RoutineProgressPage";
 import {lazy} from "react";
 
 const LoginPage = lazy(() => import("pages/LoginPage"));
@@ -47,7 +48,7 @@ const ROUTES = {
     PROGRESS: {
         PATH: (routineRecordId: string) =>
             `/routine-progress/${routineRecordId}`,
-        COMPONENT: RoutineConfigOneProgressPage,
+        COMPONENT: RoutineProgressPage,
     },
     LIBRARY: {
         PATH: "/workout-library",

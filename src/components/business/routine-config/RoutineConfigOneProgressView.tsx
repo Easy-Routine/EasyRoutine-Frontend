@@ -49,10 +49,8 @@ const RoutineConfigOneProgressView = () => {
     const {routineConfigId} = useParams();
     const workoutStartTime = useRef(moment());
 
-    const {data: routineConfigDetailData} = useGetRoutineConfigOneQuery(
-        routineConfigId as string,
-    );
-    const routineConfigDetail = routineConfigDetailData!;
+    const {data} = useGetRoutineConfigOneQuery(routineConfigId as string);
+    const routineConfigDetail = data.routineConfig!;
     const {
         isOpen: isTimerModalOpen,
         handleOpenModal: handleOpenTimerModal,
