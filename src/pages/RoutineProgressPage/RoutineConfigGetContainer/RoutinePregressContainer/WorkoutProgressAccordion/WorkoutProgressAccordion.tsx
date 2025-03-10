@@ -10,6 +10,8 @@ import {useEffect, useState} from "react";
 import SetProgressDeleteButton from "./SetProgressDeleteButton/SetProgressDeleteButton";
 import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutRecordOneMutation";
 import SetProgressUpdateTable from "./SetProgressUpdateTable/SetProgressUpdateTable";
+import BasicButton from "headful/BasicButton/BasicButton";
+import SetProgressCompleteButton from "./SetProgressCompleteButton/SetProgressCompleteButton";
 
 type WorkoutProgressAccordionProps = {
     routineConfigId: string;
@@ -29,6 +31,12 @@ type WorkoutProgressAccordionProps = {
         workoutConfigId: string,
         setConfigs: SetConfig[],
     ) => void;
+
+    onSetCompleteButtonClick: (
+        workoutConfigId: string,
+        setConfigs: SetConfig[],
+        currentSetId: string,
+    ) => void;
 };
 
 const WorkoutProgressAccordion = ({
@@ -38,6 +46,7 @@ const WorkoutProgressAccordion = ({
     onSetCreateButtonClick,
     onSetDeleteButtonClick,
     onSetUpdateTableChange,
+    onSetCompleteButtonClick,
 }: WorkoutProgressAccordionProps) => {
     const {workoutLibrary, setConfigs} = workoutConfig;
     const [workoutRecord, setWorkoutRecord] = useState<WorkoutRecord>(
@@ -85,13 +94,36 @@ const WorkoutProgressAccordion = ({
             _id => _id !== poppedSetConfigId,
         );
         setCompletedSetIds(filteredCompletedSetIds);
-
+        // 완료된 세트 아이디 배열에 팝된 세트 아이디가 존재한다면 세트기록에 있는걸로 간주한다.
         return completedSetIds.includes(poppedSetConfigId);
     };
 
     const handleSetUpdateTableChange = (setConfigs: SetConfig[]) => {
         onSetUpdateTableChange(workoutConfig._id, setConfigs);
     };
+
+    const handleSetCompleteButtonClick = (setConfigs: SetConfig[]) => {
+        // 완료된 세트 아이디 배열에 현재 세트 아이디를 넣는다.
+        const newCompletedSetIds = structuredClone(completedSetIds);
+        newCompletedSetIds.push(currentSetId);
+        setCompletedSetIds(newCompletedSetIds);
+        // 현재 세트 아이디는 완료한 세트 보다 다음 이 되어야 한다.
+
+        console.log(setConfigs, completedSetIds.length);
+        setCurrentSetId(setConfigs[newCompletedSetIds.length]?._id);
+
+        // 현재 완료한 세트의아이디를 통해 현재 세트 설정을 찾는다.
+        const currentSetConfig = setConfigs.find(
+            setConfig => setConfig._id === currentSetId,
+        ) as SetConfig;
+
+        onSetCompleteButtonClick(workoutConfig._id, setConfigs, currentSetId);
+
+        return currentSetConfig;
+    };
+
+    const isCurrentSet = (setId: string) => setId === currentSetId;
+    const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
 
     const workoutRecordId = workoutRecord?._id;
 
@@ -130,8 +162,9 @@ const WorkoutProgressAccordion = ({
                     <SetProgressUpdateTable
                         onSetUpdateTableChange={handleSetUpdateTableChange}
                         workoutLibraryType={workoutLibrary.type}
-                        workoutConfigId={workoutConfig._id}
                         setConfigs={setConfigs}
+                        isCurrentSet={isCurrentSet}
+                        isCompleteSet={isCompletedSet}
                     />
                     <FlexBox
                         padding={{top: 10, bottom: 10}}
@@ -152,6 +185,14 @@ const WorkoutProgressAccordion = ({
                             }
                         />
                     </FlexBox>
+                    <SetProgressCompleteButton
+                        routineRecordId={routineRecordId}
+                        workoutRecordId={workoutRecordId}
+                        setConfigs={setConfigs}
+                        onSetProgressCompleteButtonClick={
+                            handleSetCompleteButtonClick
+                        }
+                    />
                 </SwipeableAccordion.Hidden>
                 <WorkoutConfigDeleteButton
                     routineConfigId={routineConfigId}

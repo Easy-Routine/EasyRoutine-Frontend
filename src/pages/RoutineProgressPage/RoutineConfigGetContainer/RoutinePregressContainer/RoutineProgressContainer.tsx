@@ -22,6 +22,9 @@ const RoutineProgressContainer = ({
     const [routineRecord, setRoutineRecord] = useState<RoutineRecord>(
         {} as RoutineRecord,
     );
+    const [currentWorkoutId, setCurrentWorkoutId] = useState(
+        routineProgress.workoutConfigs[0]._id,
+    );
 
     const {mutateAsync: createRoutineRecordOneMutate} =
         useCreateRoutineRecordOneMutation();
@@ -90,6 +93,66 @@ const RoutineProgressContainer = ({
         setRoutineProgress(newRoutineProgress);
     };
 
+    const handleSetCompleteButtonClick = (
+        workoutConfigId: string,
+        setConfigs: SetConfig[],
+        currentSetId: string,
+    ) => {
+        const isLastSet =
+            currentSetId === setConfigs[setConfigs.length - 1]._id;
+
+        // 현재 완료한 세트가 마지막 세트라면
+        if (isLastSet) {
+            const newRoutineProgress = structuredClone(routineProgress);
+
+            const currentWorkoutConfigIndex =
+                newRoutineProgress.workoutConfigs.findIndex(
+                    (workoutConfig: WorkoutConfig) =>
+                        workoutConfig._id === workoutConfigId,
+                );
+            // 다음 운동이 존재한다면
+            const hasNextWorkout =
+                currentWorkoutConfigIndex + 1 <
+                newRoutineProgress.workoutConfigs.length;
+            if (hasNextWorkout) {
+                setCurrentWorkoutId(
+                    newRoutineProgress.workoutConfigs[
+                        currentWorkoutConfigIndex + 1
+                    ]._id,
+                );
+            }
+        }
+
+        const totalSetIds = new Set();
+
+        // 모든 세트 ID를 routineConfigState에서 수집
+        routineProgress.workoutConfigs.forEach(workoutConfig => {
+            workoutConfig.setConfigs.forEach(setConfig => {
+                console.log("새로추가되는 세트", setConfig._id);
+                totalSetIds.add(setConfig._id); // 세트 _id 추가
+            });
+        });
+        // 각 운동에서 가져온 완료된 세트 아이디에 현재 세트완료 아이디를 넣는다.
+        const newTotalCompletedSetIds = totalCompletedSetIds.add(currentSetId);
+
+        // totalCompletedSetIds와 totalSetIds 비교
+        const isAllCompleted =
+            totalSetIds.size === newTotalCompletedSetIds.size;
+
+        console.log("ㅅㅂ", totalSetIds, newTotalCompletedSetIds);
+
+        setTotalCompletdSetIds(newTotalCompletedSetIds);
+
+        if (isAllCompleted) {
+            console.log("모든 세트 완료");
+            // handleOpenCompletedModal();
+        } else {
+            console.log("모든 세트 미완료");
+            // startTimer(restSec);
+            // handleOpenTimerModal();
+        }
+    };
+
     const workoutConfigs = routineProgress.workoutConfigs;
     const routineConfigId = routineProgress._id;
     const routineRecordId = routineRecord?._id;
@@ -110,6 +173,7 @@ const RoutineProgressContainer = ({
                         onSetCreateButtonClick={handleSetCreateButtonClick}
                         onSetDeleteButtonClick={handleSetDeleteButtonClick}
                         onSetUpdateTableChange={handleSetUpdateTableChange}
+                        onSetCompleteButtonClick={handleSetCompleteButtonClick}
                     />
                 )}
             />
