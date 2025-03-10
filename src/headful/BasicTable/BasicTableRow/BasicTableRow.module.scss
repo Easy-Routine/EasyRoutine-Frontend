@@ -1,3 +1,9 @@
 .basicTableRow {
     /* 필요에 따라 기본 스타일 추가 */
+    &.PrimaryLine {
+        background-color: var(--color-primary);
+    }
+    &.GrayLine {
+        background-color: var(--color-gray-normal);
+    }
 }

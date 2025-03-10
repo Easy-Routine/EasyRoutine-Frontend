@@ -16,8 +16,8 @@ const BasicTableRow = ({
     isPrimaryLine,
 }: BasicTableRowProps) => {
     const rowClassName = classNames(styles.basicTableRow, {
-        [styles.primaryLine]: isPrimaryLine,
-        [styles.grayLine]: isGrayLine && !isPrimaryLine, // primaryLine이 우선 적용되도록 함
+        [styles.PrimaryLine]: isPrimaryLine,
+        [styles.GrayLine]: isGrayLine && !isPrimaryLine, // primaryLine이 우선 적용되도록 함
     });
 
     return <tr className={rowClassName}>{children}</tr>;
