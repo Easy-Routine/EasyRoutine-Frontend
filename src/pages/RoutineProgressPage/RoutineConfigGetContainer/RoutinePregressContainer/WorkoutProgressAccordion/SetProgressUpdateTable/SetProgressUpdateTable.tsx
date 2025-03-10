@@ -6,9 +6,10 @@ import {SetConfig} from "types/model";
 
 type SetProgressUpdateTableProps = {
     workoutLibraryType: string[];
-    workoutConfigId: string;
     setConfigs: SetConfig[];
     onSetUpdateTableChange: (setConfigs: SetConfig[]) => void;
+    isCurrentSet: (setId: string) => boolean;
+    isCompleteSet: (setId: string) => boolean;
 };
 
 type TypeMapper = {
@@ -23,12 +24,11 @@ const typeMapper: TypeMapper = {
 
 const SetProgressUpdateTable = ({
     workoutLibraryType,
-    workoutConfigId,
     setConfigs,
     onSetUpdateTableChange,
+    isCurrentSet,
+    isCompleteSet,
 }: SetProgressUpdateTableProps) => {
-    const {routineConfigId} = useParams();
-
     const handleSetInputChange = async (
         setConfigId: string,
         key: string,
@@ -58,7 +58,10 @@ const SetProgressUpdateTable = ({
             </BasicTable.Header>
             <BasicTable.Body>
                 {setConfigs.map((setConfig, index) => (
-                    <BasicTable.Row>
+                    <BasicTable.Row
+                        isGrayLine={isCompleteSet(setConfig._id)}
+                        isPrimaryLine={isCurrentSet(setConfig._id)}
+                    >
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
                         {workoutLibraryType.map(type => (
                             <BasicTable.Cell key={type}>
