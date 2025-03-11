@@ -12,11 +12,13 @@ import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutReco
 import SetProgressUpdateTable from "./SetProgressUpdateTable/SetProgressUpdateTable";
 import BasicButton from "headful/BasicButton/BasicButton";
 import SetProgressCompleteButton from "./SetProgressCompleteButton/SetProgressCompleteButton";
+import WorkoutProgressReactiveTrigger from "./WorkoutProgressReactiveTrigger/WorkoutProgressReactiveTrigger";
 
 type WorkoutProgressAccordionProps = {
     routineConfigId: string;
     routineRecordId: string;
     workoutConfig: WorkoutConfig;
+    currentWorkoutConfigId: string;
     onSetCreateButtonClick: (
         workoutConfigId: string,
         setConfigs: SetConfig[],
@@ -37,16 +39,19 @@ type WorkoutProgressAccordionProps = {
         setConfigs: SetConfig[],
         currentSetId: string,
     ) => void;
+    onWorkoutProgressReactiveTriggerClick: (workoutConfigId: string) => void;
 };
 
 const WorkoutProgressAccordion = ({
     routineConfigId,
     routineRecordId,
     workoutConfig,
+    currentWorkoutConfigId,
     onSetCreateButtonClick,
     onSetDeleteButtonClick,
     onSetUpdateTableChange,
     onSetCompleteButtonClick,
+    onWorkoutProgressReactiveTriggerClick,
 }: WorkoutProgressAccordionProps) => {
     const {workoutLibrary, setConfigs} = workoutConfig;
     const [workoutRecord, setWorkoutRecord] = useState<WorkoutRecord>(
@@ -121,6 +126,9 @@ const WorkoutProgressAccordion = ({
 
         return currentSetConfig;
     };
+    const handleWorkoutProgressReactiveTriggerClick = () => {
+        onWorkoutProgressReactiveTriggerClick(workoutConfig._id);
+    };
 
     const isCurrentSet = (setId: string) => setId === currentSetId;
     const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
@@ -130,74 +138,80 @@ const WorkoutProgressAccordion = ({
     return (
         <SwipeableAccordion>
             <SwipeableAccordion.Box>
-                <SwipeableAccordion.Visible>
-                    <FlexBox gap={16}>
-                        <Image
-                            width={60}
-                            height={60}
-                            src={workoutLibrary.image}
+                <WorkoutProgressReactiveTrigger
+                    currentWorkoutConfigId={currentWorkoutConfigId}
+                    workoutConfigId={workoutConfig._id}
+                    onTriggerClick={handleWorkoutProgressReactiveTriggerClick}
+                >
+                    <SwipeableAccordion.Visible>
+                        <FlexBox gap={16}>
+                            <Image
+                                width={60}
+                                height={60}
+                                src={workoutLibrary.image}
+                            />
+                            <FlexBox
+                                flexDirection="column"
+                                justifyContent="space-around"
+                            >
+                                <Text
+                                    fontSize={"var(--fontSize-lg)"}
+                                    fontWeight={"var(--fontWeight-semibold)"}
+                                    color={"var(--text-black)"}
+                                >
+                                    {workoutLibrary.name}
+                                </Text>
+                                <Text
+                                    fontSize={"var(--fontSize-sm)"}
+                                    fontWeight={"var(--fontWeight-regular)"}
+                                    color={"var(--text-black)"}
+                                >
+                                    {setConfigs.length}종목
+                                </Text>
+                            </FlexBox>
+                        </FlexBox>
+                    </SwipeableAccordion.Visible>
+                    <SwipeableAccordion.Hidden>
+                        <SetProgressUpdateTable
+                            onSetUpdateTableChange={handleSetUpdateTableChange}
+                            workoutLibraryType={workoutLibrary.type}
+                            setConfigs={setConfigs}
+                            isCurrentSet={isCurrentSet}
+                            isCompleteSet={isCompletedSet}
                         />
                         <FlexBox
-                            flexDirection="column"
+                            padding={{top: 10, bottom: 10}}
                             justifyContent="space-around"
                         >
-                            <Text
-                                fontSize={"var(--fontSize-lg)"}
-                                fontWeight={"var(--fontWeight-semibold)"}
-                                color={"var(--text-black)"}
-                            >
-                                {workoutLibrary.name}
-                            </Text>
-                            <Text
-                                fontSize={"var(--fontSize-sm)"}
-                                fontWeight={"var(--fontWeight-regular)"}
-                                color={"var(--text-black)"}
-                            >
-                                {setConfigs.length}종목
-                            </Text>
+                            <SetProgressDeleteButton
+                                routineRecordId={routineRecordId}
+                                workoutRecordId={workoutRecordId}
+                                setConfigs={setConfigs}
+                                onSetProgressDeleteButtonClick={
+                                    handleSetDeleteButtonClick
+                                }
+                            />
+                            <SetProgressCreateButton
+                                setConfigs={setConfigs}
+                                onSetProgressCreateButtonClick={
+                                    handleSetCreateButtonClick
+                                }
+                            />
                         </FlexBox>
-                    </FlexBox>
-                </SwipeableAccordion.Visible>
-                <SwipeableAccordion.Hidden>
-                    <SetProgressUpdateTable
-                        onSetUpdateTableChange={handleSetUpdateTableChange}
-                        workoutLibraryType={workoutLibrary.type}
-                        setConfigs={setConfigs}
-                        isCurrentSet={isCurrentSet}
-                        isCompleteSet={isCompletedSet}
-                    />
-                    <FlexBox
-                        padding={{top: 10, bottom: 10}}
-                        justifyContent="space-around"
-                    >
-                        <SetProgressDeleteButton
+                        <SetProgressCompleteButton
                             routineRecordId={routineRecordId}
                             workoutRecordId={workoutRecordId}
                             setConfigs={setConfigs}
-                            onSetProgressDeleteButtonClick={
-                                handleSetDeleteButtonClick
+                            onSetProgressCompleteButtonClick={
+                                handleSetCompleteButtonClick
                             }
                         />
-                        <SetProgressCreateButton
-                            setConfigs={setConfigs}
-                            onSetProgressCreateButtonClick={
-                                handleSetCreateButtonClick
-                            }
-                        />
-                    </FlexBox>
-                    <SetProgressCompleteButton
-                        routineRecordId={routineRecordId}
-                        workoutRecordId={workoutRecordId}
-                        setConfigs={setConfigs}
-                        onSetProgressCompleteButtonClick={
-                            handleSetCompleteButtonClick
-                        }
+                    </SwipeableAccordion.Hidden>
+                    <WorkoutConfigDeleteButton
+                        routineConfigId={routineConfigId}
+                        workoutConfigId={workoutConfig._id}
                     />
-                </SwipeableAccordion.Hidden>
-                <WorkoutConfigDeleteButton
-                    routineConfigId={routineConfigId}
-                    workoutConfigId={workoutConfig._id}
-                />
+                </WorkoutProgressReactiveTrigger>
             </SwipeableAccordion.Box>
         </SwipeableAccordion>
     );

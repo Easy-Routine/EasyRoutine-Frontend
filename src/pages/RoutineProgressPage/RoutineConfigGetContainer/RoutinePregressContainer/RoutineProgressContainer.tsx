@@ -22,7 +22,7 @@ const RoutineProgressContainer = ({
     const [routineRecord, setRoutineRecord] = useState<RoutineRecord>(
         {} as RoutineRecord,
     );
-    const [currentWorkoutId, setCurrentWorkoutId] = useState(
+    const [currentWorkoutConfigId, setCurrentWorkoutConfigId] = useState(
         routineProgress.workoutConfigs[0]._id,
     );
 
@@ -115,7 +115,7 @@ const RoutineProgressContainer = ({
                 currentWorkoutConfigIndex + 1 <
                 newRoutineProgress.workoutConfigs.length;
             if (hasNextWorkout) {
-                setCurrentWorkoutId(
+                setCurrentWorkoutConfigId(
                     newRoutineProgress.workoutConfigs[
                         currentWorkoutConfigIndex + 1
                     ]._id,
@@ -153,6 +153,12 @@ const RoutineProgressContainer = ({
         }
     };
 
+    const handleWorkoutProgressReactiveTriggerClick = (
+        workoutConfigId: string,
+    ) => {
+        setCurrentWorkoutConfigId(workoutConfigId);
+    };
+
     const workoutConfigs = routineProgress.workoutConfigs;
     const routineConfigId = routineProgress._id;
     const routineRecordId = routineRecord?._id;
@@ -170,10 +176,14 @@ const RoutineProgressContainer = ({
                         routineConfigId={routineConfigId}
                         routineRecordId={routineRecordId}
                         workoutConfig={workoutConfig}
+                        currentWorkoutConfigId={currentWorkoutConfigId}
                         onSetCreateButtonClick={handleSetCreateButtonClick}
                         onSetDeleteButtonClick={handleSetDeleteButtonClick}
                         onSetUpdateTableChange={handleSetUpdateTableChange}
                         onSetCompleteButtonClick={handleSetCompleteButtonClick}
+                        onWorkoutProgressReactiveTriggerClick={
+                            handleWorkoutProgressReactiveTriggerClick
+                        }
                     />
                 )}
             />

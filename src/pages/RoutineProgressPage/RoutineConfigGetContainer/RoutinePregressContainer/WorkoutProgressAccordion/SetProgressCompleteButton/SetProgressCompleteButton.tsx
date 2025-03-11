@@ -1,6 +1,6 @@
 import BasicButton from "headful/BasicButton/BasicButton";
 import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMutation";
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import {SetConfig} from "types/model";
 
 type SetProgressCompleteButtonProps = {
@@ -19,7 +19,11 @@ const SetProgressCompleteButton = ({
     const {mutateAsync: createSetRecordMutate} =
         useCreateSetRecordOneMutation();
 
-    const handleSetProgressCompleteButtonClick = async () => {
+    const handleSetProgressCompleteButtonClick: MouseEventHandler<
+        HTMLButtonElement
+    > = async e => {
+        e.stopPropagation();
+
         const newSetConfigs = structuredClone(setConfigs);
 
         const currentSetConfig =
