@@ -139,8 +139,6 @@ const RoutineProgressContainer = ({
         const isAllCompleted =
             totalSetIds.size === newTotalCompletedSetIds.size;
 
-        console.log("ㅅㅂ", totalSetIds, newTotalCompletedSetIds);
-
         setTotalCompletdSetIds(newTotalCompletedSetIds);
 
         if (isAllCompleted) {

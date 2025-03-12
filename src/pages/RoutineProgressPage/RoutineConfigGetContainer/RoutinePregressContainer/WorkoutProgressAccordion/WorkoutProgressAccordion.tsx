@@ -61,10 +61,12 @@ const WorkoutProgressAccordion = ({
     const {mutateAsync: createWorkoutRecordOneMutate} =
         useCreateWorkoutRecordOneMutation();
 
-    const [currentSetId, setCurrentSetId] = useState(
+    const [currentSetConfigId, setCurrentSetConfigId] = useState(
         workoutConfig.setConfigs[0]?._id,
     );
-    const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
+    const [completedSetConfigIds, setCompletedSetConfigIds] = useState<
+        string[]
+    >([]);
 
     useEffect(() => {
         // 컴포넌트가 마운트 될때 운동 기록 데이터를 생성
@@ -81,7 +83,7 @@ const WorkoutProgressAccordion = ({
 
     const handleSetCreateButtonClick = (setConfigs: SetConfig[]) => {
         onSetCreateButtonClick(workoutConfig._id, setConfigs);
-        setCurrentSetId(setConfigs[completedSetIds.length]._id);
+        setCurrentSetConfigId(setConfigs[completedSetConfigIds.length]._id);
     };
 
     const handleSetDeleteButtonClick = (
@@ -95,12 +97,12 @@ const WorkoutProgressAccordion = ({
         );
 
         // 완료 세트에서 팝된 세트설정id를 삭제한다.
-        const filteredCompletedSetIds = completedSetIds.filter(
+        const filteredCompletedSetIds = completedSetConfigIds.filter(
             _id => _id !== poppedSetConfigId,
         );
-        setCompletedSetIds(filteredCompletedSetIds);
+        setCompletedSetConfigIds(filteredCompletedSetIds);
         // 완료된 세트 아이디 배열에 팝된 세트 아이디가 존재한다면 세트기록에 있는걸로 간주한다.
-        return completedSetIds.includes(poppedSetConfigId);
+        return completedSetConfigIds.includes(poppedSetConfigId);
     };
 
     const handleSetUpdateTableChange = (setConfigs: SetConfig[]) => {
@@ -109,29 +111,30 @@ const WorkoutProgressAccordion = ({
 
     const handleSetCompleteButtonClick = (setConfigs: SetConfig[]) => {
         // 완료된 세트 아이디 배열에 현재 세트 아이디를 넣는다.
-        const newCompletedSetIds = structuredClone(completedSetIds);
-        newCompletedSetIds.push(currentSetId);
-        setCompletedSetIds(newCompletedSetIds);
+        const newCompletedSetIds = structuredClone(completedSetConfigIds);
+        newCompletedSetIds.push(currentSetConfigId);
+        setCompletedSetConfigIds(newCompletedSetIds);
         // 현재 세트 아이디는 완료한 세트 보다 다음 이 되어야 한다.
 
-        console.log(setConfigs, completedSetIds.length);
-        setCurrentSetId(setConfigs[newCompletedSetIds.length]?._id);
+        console.log(setConfigs, completedSetConfigIds.length);
+        setCurrentSetConfigId(setConfigs[newCompletedSetIds.length]?._id);
 
         // 현재 완료한 세트의아이디를 통해 현재 세트 설정을 찾는다.
         const currentSetConfig = setConfigs.find(
-            setConfig => setConfig._id === currentSetId,
+            setConfig => setConfig._id === currentSetConfigId,
         ) as SetConfig;
 
-        onSetCompleteButtonClick(workoutConfig._id, setConfigs, currentSetId);
+        onSetCompleteButtonClick(
+            workoutConfig._id,
+            setConfigs,
+            currentSetConfigId,
+        );
 
         return currentSetConfig;
     };
     const handleWorkoutProgressReactiveTriggerClick = () => {
         onWorkoutProgressReactiveTriggerClick(workoutConfig._id);
     };
-
-    const isCurrentSet = (setId: string) => setId === currentSetId;
-    const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
 
     const workoutRecordId = workoutRecord?._id;
 
@@ -176,8 +179,8 @@ const WorkoutProgressAccordion = ({
                             onSetUpdateTableChange={handleSetUpdateTableChange}
                             workoutLibraryType={workoutLibrary.type}
                             setConfigs={setConfigs}
-                            isCurrentSet={isCurrentSet}
-                            isCompleteSet={isCompletedSet}
+                            currentSetConfigId={currentSetConfigId}
+                            completedSetConfigIds={completedSetConfigIds}
                         />
                         <FlexBox
                             padding={{top: 10, bottom: 10}}
@@ -202,6 +205,7 @@ const WorkoutProgressAccordion = ({
                             routineRecordId={routineRecordId}
                             workoutRecordId={workoutRecordId}
                             setConfigs={setConfigs}
+                            completedSetConfigIds={completedSetConfigIds}
                             onSetProgressCompleteButtonClick={
                                 handleSetCompleteButtonClick
                             }

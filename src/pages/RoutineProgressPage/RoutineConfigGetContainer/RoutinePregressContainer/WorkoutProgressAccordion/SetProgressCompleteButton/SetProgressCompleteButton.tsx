@@ -7,6 +7,7 @@ type SetProgressCompleteButtonProps = {
     routineRecordId: string;
     workoutRecordId: string;
     setConfigs: SetConfig[];
+    completedSetConfigIds: string[];
     onSetProgressCompleteButtonClick: (setConfigs: SetConfig[]) => SetConfig;
 };
 
@@ -14,6 +15,7 @@ const SetProgressCompleteButton = ({
     routineRecordId,
     workoutRecordId,
     setConfigs,
+    completedSetConfigIds,
     onSetProgressCompleteButtonClick,
 }: SetProgressCompleteButtonProps) => {
     const {mutateAsync: createSetRecordMutate} =
@@ -36,8 +38,14 @@ const SetProgressCompleteButton = ({
         });
     };
 
+    const isWorkoutCompleted =
+        completedSetConfigIds.length === setConfigs.length;
+
     return (
-        <BasicButton onClick={handleSetProgressCompleteButtonClick}>
+        <BasicButton
+            disabled={isWorkoutCompleted}
+            onClick={handleSetProgressCompleteButtonClick}
+        >
             세트 완료
         </BasicButton>
     );

@@ -7,9 +7,9 @@ import {SetConfig} from "types/model";
 type SetProgressUpdateTableProps = {
     workoutLibraryType: string[];
     setConfigs: SetConfig[];
+    currentSetConfigId: string;
+    completedSetConfigIds: string[];
     onSetUpdateTableChange: (setConfigs: SetConfig[]) => void;
-    isCurrentSet: (setId: string) => boolean;
-    isCompleteSet: (setId: string) => boolean;
 };
 
 type TypeMapper = {
@@ -25,9 +25,9 @@ const typeMapper: TypeMapper = {
 const SetProgressUpdateTable = ({
     workoutLibraryType,
     setConfigs,
+    currentSetConfigId,
+    completedSetConfigIds,
     onSetUpdateTableChange,
-    isCurrentSet,
-    isCompleteSet,
 }: SetProgressUpdateTableProps) => {
     const handleSetInputChange = async (
         setConfigId: string,
@@ -45,6 +45,11 @@ const SetProgressUpdateTable = ({
         onSetUpdateTableChange(newSetConfigs);
     };
 
+    const isCurrentSetConfig = (setConfigId: string) =>
+        setConfigId === currentSetConfigId;
+    const isCompletedSetConfig = (setConfigId: string) =>
+        completedSetConfigIds.includes(setConfigId);
+
     return (
         <BasicTable>
             <BasicTable.Header>
@@ -59,8 +64,8 @@ const SetProgressUpdateTable = ({
             <BasicTable.Body>
                 {setConfigs.map((setConfig, index) => (
                     <BasicTable.Row
-                        isGrayLine={isCompleteSet(setConfig._id)}
-                        isPrimaryLine={isCurrentSet(setConfig._id)}
+                        isGrayLine={isCurrentSetConfig(setConfig._id)}
+                        isPrimaryLine={isCompletedSetConfig(setConfig._id)}
                     >
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
                         {workoutLibraryType.map(type => (
