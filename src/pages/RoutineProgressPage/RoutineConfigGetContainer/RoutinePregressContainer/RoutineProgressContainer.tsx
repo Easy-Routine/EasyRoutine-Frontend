@@ -157,22 +157,14 @@ const RoutineProgressContainer = ({
         setCurrentWorkoutConfigId(workoutConfigId);
     };
 
-    const workoutConfigs = routineProgress.workoutConfigs;
-    const routineConfigId = routineProgress._id;
-    const routineRecordId = routineRecord?._id;
-
-    useEffect(() => {
-        console.log("routineProgress", routineProgress);
-    }, [routineProgress]);
-
     return (
         <FlexBox flexDirection="column" gap={20}>
             <List<WorkoutConfig>
-                data={workoutConfigs}
+                data={routineProgress.workoutConfigs}
                 render={workoutConfig => (
                     <WorkoutProgressAccordion
-                        routineConfigId={routineConfigId}
-                        routineRecordId={routineRecordId}
+                        routineConfigId={routineConfig._id}
+                        routineRecordId={routineRecord._id}
                         workoutConfig={workoutConfig}
                         currentWorkoutConfigId={currentWorkoutConfigId}
                         onSetCreateButtonClick={handleSetCreateButtonClick}
