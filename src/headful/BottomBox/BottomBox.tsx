@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from "react";
 import styles from "./BottomBox.module.scss";
 
 type BottomBoxProps = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 const BottomBox = ({children}: BottomBoxProps) => {
@@ -27,7 +27,7 @@ const BottomBox = ({children}: BottomBoxProps) => {
     }, []);
 
     return (
-        <div ref={bottomBoxRef} className={styles.bottomBox}>
+        <div id="bottom-box" ref={bottomBoxRef} className={styles.bottomBox}>
             {children}
         </div>
     );
