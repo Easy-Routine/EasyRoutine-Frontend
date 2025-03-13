@@ -1,4 +1,4 @@
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import useRoutineConfigAllGetQuery from "hooks/server/useRoutineConfigAllGetQuery";
 import RoutineConfigAccordion from "./RoutineConfigAccordionList/RoutineConfigAccordion/RoutineConfigAccordion";
 

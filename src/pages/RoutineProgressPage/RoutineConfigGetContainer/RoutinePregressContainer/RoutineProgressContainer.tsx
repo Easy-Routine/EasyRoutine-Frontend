@@ -1,4 +1,4 @@
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import {useEffect, useState} from "react";
 import {
     RoutineConfig,
@@ -9,6 +9,8 @@ import {
 import List from "components/box/Accordion/List";
 import WorkoutProgressAccordion from "./WorkoutProgressAccordion/WorkoutProgressAccordion";
 import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
+import BottomBox from "headful/BottomBox/BottomBox";
+import BottomBoxPortal from "components/BottomBoxPortal/BottomBoxPortal";
 
 type RoutineProgressContainerProps = {
     routineConfig: RoutineConfig;
@@ -158,26 +160,31 @@ const RoutineProgressContainer = ({
     };
 
     return (
-        <FlexBox flexDirection="column" gap={20}>
-            <List<WorkoutConfig>
-                data={routineProgress.workoutConfigs}
-                render={workoutConfig => (
-                    <WorkoutProgressAccordion
-                        routineConfigId={routineConfig._id}
-                        routineRecordId={routineRecord._id}
-                        workoutConfig={workoutConfig}
-                        currentWorkoutConfigId={currentWorkoutConfigId}
-                        onSetCreateButtonClick={handleSetCreateButtonClick}
-                        onSetDeleteButtonClick={handleSetDeleteButtonClick}
-                        onSetUpdateTableChange={handleSetUpdateTableChange}
-                        onSetCompleteButtonClick={handleSetCompleteButtonClick}
-                        onWorkoutProgressReactiveTriggerClick={
-                            handleWorkoutProgressReactiveTriggerClick
-                        }
-                    />
-                )}
-            />
-        </FlexBox>
+        <>
+            <FlexBox flexDirection="column" gap={20}>
+                <List<WorkoutConfig>
+                    data={routineProgress.workoutConfigs}
+                    render={workoutConfig => (
+                        <WorkoutProgressAccordion
+                            routineConfigId={routineConfig._id}
+                            routineRecordId={routineRecord._id}
+                            workoutConfig={workoutConfig}
+                            currentWorkoutConfigId={currentWorkoutConfigId}
+                            onSetCreateButtonClick={handleSetCreateButtonClick}
+                            onSetDeleteButtonClick={handleSetDeleteButtonClick}
+                            onSetUpdateTableChange={handleSetUpdateTableChange}
+                            onSetCompleteButtonClick={
+                                handleSetCompleteButtonClick
+                            }
+                            onWorkoutProgressReactiveTriggerClick={
+                                handleWorkoutProgressReactiveTriggerClick
+                            }
+                        />
+                    )}
+                />
+            </FlexBox>
+            <BottomBoxPortal>타이머</BottomBoxPortal>
+        </>
     );
 };
 

@@ -1,4 +1,4 @@
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import Text from "headful/Text/Text";
 import {ReactComponent as RunIcon} from "assets/image/run.svg";
 import ConfirmModal from "headful/ConfirmModal/ConfirmModal";

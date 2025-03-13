@@ -1,4 +1,4 @@
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";

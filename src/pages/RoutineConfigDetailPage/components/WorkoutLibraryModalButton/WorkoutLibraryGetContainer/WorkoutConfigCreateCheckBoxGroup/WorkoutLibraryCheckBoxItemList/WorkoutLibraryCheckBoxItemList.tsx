@@ -1,4 +1,4 @@
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import Image from "headful/Image/Image";
 import LineCheckBoxGroup from "headful/LineCheckBoxGroup/LineCheckBoxGroup";
 import Text from "headful/Text/Text";

@@ -1,6 +1,6 @@
 import CircleButton from "headful/CircleButton/CircleButton";
 import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
 import Text from "headful/Text/Text";

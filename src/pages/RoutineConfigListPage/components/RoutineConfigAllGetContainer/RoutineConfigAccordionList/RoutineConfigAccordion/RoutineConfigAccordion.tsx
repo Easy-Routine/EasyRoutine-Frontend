@@ -1,5 +1,5 @@
 import FireColorBox from "headful/FireColorBox/FireColorBox";
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {RoutineConfig} from "types/model";

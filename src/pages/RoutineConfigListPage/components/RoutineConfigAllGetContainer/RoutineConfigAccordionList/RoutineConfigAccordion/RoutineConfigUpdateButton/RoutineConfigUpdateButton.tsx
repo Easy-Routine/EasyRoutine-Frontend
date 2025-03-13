@@ -1,4 +1,4 @@
-import FlexBox from "headful/FlexBox/FlexBox";
+import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import {ReactComponent as PenIcon} from "assets/image/pen.svg";
 import Text from "headful/Text/Text";

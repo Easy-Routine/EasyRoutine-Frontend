@@ -1,0 +1,13 @@
+/* Flex.module.scss */
+.flex {
+    display: flex;
+    padding: var(--flex-padding, 0);
+    margin: var(--flex-margin, 0);
+    flex-direction: var(--flex-direction, row);
+    align-items: var(--flex-align-items, stretch);
+    justify-content: var(--flex-justify-content, flex-start);
+    flex-wrap: var(--flex-wrap, nowrap);
+    gap: var(--flex-gap, 0);
+    width: var(--flex-width, auto);
+    height: var(--flex-height, auto);
+}
