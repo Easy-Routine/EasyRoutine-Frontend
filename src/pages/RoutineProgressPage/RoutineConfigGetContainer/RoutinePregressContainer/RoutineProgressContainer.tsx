@@ -11,6 +11,10 @@ import WorkoutProgressAccordion from "./WorkoutProgressAccordion/WorkoutProgress
 import useCreateRoutineRecordOneMutation from "hooks/server/useCreateRoutineRecordOneMutation";
 import BottomBox from "headful/BottomBox/BottomBox";
 import BottomBoxPortal from "components/BottomBoxPortal/BottomBoxPortal";
+import Flex from "headful/Flex/Flex";
+import BasicTimer from "headful/BasicTimer/BasicTimer";
+import useTimer from "hooks/client/useTimer";
+import WorkoutRestSecTimer from "./WorkoutRestSecTimer/WorkoutRestSecTimer";
 
 type RoutineProgressContainerProps = {
     routineConfig: RoutineConfig;
@@ -27,6 +31,9 @@ const RoutineProgressContainer = ({
     const [currentWorkoutConfigId, setCurrentWorkoutConfigId] = useState(
         routineProgress.workoutConfigs[0]._id,
     );
+
+    const {endTime, startTimer, isActive, skipTimer, remainingTime} =
+        useTimer();
 
     const {mutateAsync: createRoutineRecordOneMutate} =
         useCreateRoutineRecordOneMutation();
@@ -148,7 +155,12 @@ const RoutineProgressContainer = ({
             // handleOpenCompletedModal();
         } else {
             console.log("모든 세트 미완료");
-            // startTimer(restSec);
+
+            const currentSetConfig = setConfigs.find(
+                setConfig => setConfig._id === currentSetId,
+            );
+            console.log("커런트", currentSetConfig?.restSec);
+            startTimer(currentSetConfig?.restSec as number);
             // handleOpenTimerModal();
         }
     };
@@ -183,7 +195,11 @@ const RoutineProgressContainer = ({
                     )}
                 />
             </FlexBox>
-            <BottomBoxPortal>타이머</BottomBoxPortal>
+            <BottomBoxPortal>
+                <Flex>
+                    <WorkoutRestSecTimer remainingTime={remainingTime} />
+                </Flex>
+            </BottomBoxPortal>
         </>
     );
 };
