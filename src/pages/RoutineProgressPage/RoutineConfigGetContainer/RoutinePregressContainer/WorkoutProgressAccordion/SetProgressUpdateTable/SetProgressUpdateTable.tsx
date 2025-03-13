@@ -83,7 +83,16 @@ const SetProgressUpdateTable = ({
                             </BasicTable.Cell>
                         ))}
                         <BasicTable.Cell>
-                            <BasicTable.Input value={setConfig.restSec} />
+                            <BasicTable.Input
+                                value={setConfig.restSec}
+                                onChange={e =>
+                                    handleSetInputChange(
+                                        setConfig._id,
+                                        "restSec",
+                                        e.target.value,
+                                    )
+                                }
+                            />
                         </BasicTable.Cell>
                     </BasicTable.Row>
                 ))}
