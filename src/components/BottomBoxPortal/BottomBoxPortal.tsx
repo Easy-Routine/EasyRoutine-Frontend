@@ -7,22 +7,25 @@ type BottomBoxPortalProps = {
 
 const BottomBoxPortal = ({children}: BottomBoxPortalProps) => {
     const portalRoot = document.getElementById("bottom-box");
-    const portalElement = useRef(document.createElement("div")); // useRef로 portalElement 관리
+    const portalElement = useRef(document.createElement("div"));
 
     useEffect(() => {
         if (portalRoot) {
-            portalRoot.appendChild(portalElement.current); // 현재 portalElement를 추가
+            portalRoot.appendChild(portalElement.current);
         }
-
         return () => {
+            portalElement.current.style.width = "100%";
             if (portalRoot) {
-                portalRoot.removeChild(portalElement.current); // 클린업 시 현재 portalElement 제거
+                portalRoot.removeChild(portalElement.current);
             }
         };
     }, [portalRoot]);
 
     return portalRoot
-        ? ReactDOM.createPortal(children, portalElement.current)
+        ? ReactDOM.createPortal(
+              <React.Fragment>{children}</React.Fragment>,
+              portalElement.current,
+          )
         : null;
 };
 
