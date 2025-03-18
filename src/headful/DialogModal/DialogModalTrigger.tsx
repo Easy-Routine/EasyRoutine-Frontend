@@ -1,12 +1,12 @@
 import Modal from "headless/Modal/Modal";
-import React from "react";
+import React, {HTMLAttributes} from "react";
 
-type DialogModalTriggerProps = {
+type DialogModalTriggerProps = HTMLAttributes<HTMLSpanElement> & {
     children: React.ReactNode;
 };
 
-const DialogModalTrigger = ({children}: DialogModalTriggerProps) => {
-    return <Modal.Trigger>{children}</Modal.Trigger>;
+const DialogModalTrigger = ({children, ...props}: DialogModalTriggerProps) => {
+    return <Modal.Trigger {...props}>{children}</Modal.Trigger>;
 };
 
 export default DialogModalTrigger;
