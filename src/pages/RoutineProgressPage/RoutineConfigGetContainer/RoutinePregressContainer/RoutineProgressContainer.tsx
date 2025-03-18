@@ -15,6 +15,8 @@ import Flex from "headful/Flex/Flex";
 import BasicTimer from "headful/BasicTimer/BasicTimer";
 import useTimer from "hooks/client/useTimer";
 import WorkoutRestSecTimer from "./WorkoutRestSecTimer/WorkoutRestSecTimer";
+import BasicButton from "headful/BasicButton/BasicButton";
+import TimerModalTrigger from "./TimerModalTrigger/TimerModalTrigger";
 
 type RoutineProgressContainerProps = {
     routineConfig: RoutineConfig;
@@ -196,8 +198,12 @@ const RoutineProgressContainer = ({
                 />
             </FlexBox>
             <BottomBoxPortal>
-                <Flex>
-                    <WorkoutRestSecTimer remainingTime={remainingTime} />
+                <Flex width="100%" justifyContent="space-between" gap={16}>
+                    <TimerModalTrigger remainingTime={remainingTime}>
+                        <WorkoutRestSecTimer remainingTime={remainingTime} />
+                    </TimerModalTrigger>
+
+                    <BasicButton>루틴완료</BasicButton>
                 </Flex>
             </BottomBoxPortal>
         </>
