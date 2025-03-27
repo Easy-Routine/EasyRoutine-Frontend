@@ -6,7 +6,6 @@ import styled from "styled-components";
 import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
 import {Suspense, useState} from "react";
 import useModal from "hooks/client/useModal";
-import RoutineConfigProgressModal from "./RoutineConfigProgressModal";
 import useRoutineConfigAllQuery from "hooks/server/useRoutineConfigAllGetQuery";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
@@ -98,7 +97,7 @@ const RoutineConfigListView = () => {
                         </DefferredComponent>
                     }
                 >
-                    {isRoutineProgressModalOpen && (
+                    {/* {isRoutineProgressModalOpen && (
                         <RoutineConfigProgressModal
                             routineConfigId={routineConfigId}
                             isOpen={isRoutineProgressModalOpen}
@@ -110,7 +109,7 @@ const RoutineConfigListView = () => {
                                 closeRoutineProgressModal();
                             }}
                         />
-                    )}
+                    )} */}
                 </Suspense>
             </ErrorBoundary>
 

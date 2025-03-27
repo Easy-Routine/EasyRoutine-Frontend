@@ -1,5 +1,6 @@
 import useRoutineConfigGetQuery from "hooks/server/useRoutineConfigGetQuery";
 import RoutineProgressContainer from "./RoutinePregressContainer/RoutineProgressContainer";
+import RoutineProgressProvider from "./RoutinePregressContainer/RoutineProgressProvider";
 
 type RoutineConfigGetContainerProps = {
     routineConfigId: string;
@@ -11,11 +12,11 @@ const RoutineConfigGetContainer = ({
     const {data} = useRoutineConfigGetQuery(routineConfigId);
     const routineConfig = data.routineConfig!;
 
-    const workoutConfigs = routineConfig.workoutConfigs;
-
     return (
         <>
-            <RoutineProgressContainer routineConfig={routineConfig} />
+            <RoutineProgressProvider routineConfig={routineConfig}>
+                <RoutineProgressContainer />
+            </RoutineProgressProvider>
         </>
     );
 };

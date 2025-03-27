@@ -2,14 +2,15 @@ import BasicTable from "headful/BasicTable/BasicTable";
 import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
 import React from "react";
 import {useParams} from "react-router-dom";
-import {SetConfig} from "types/model";
+import {SetConfig, WorkoutConfig} from "types/model";
+import {useRoutineProgress} from "../../RoutineProgressProvider";
 
 type SetProgressUpdateTableProps = {
-    workoutLibraryType: string[];
-    setConfigs: SetConfig[];
-    currentSetConfigId: string;
-    completedSetConfigIds: string[];
-    onSetUpdateTableChange: (setConfigs: SetConfig[]) => void;
+    // workoutLibraryType: string[];
+    // setConfigs: SetConfig[];
+    // currentSetConfigId: string;
+    // completedSetConfigIds: string[];
+    // onSetUpdateTableChange: (setConfigs: SetConfig[]) => void;
 };
 
 type TypeMapper = {
@@ -22,33 +23,52 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-const SetProgressUpdateTable = ({
-    workoutLibraryType,
-    setConfigs,
-    currentSetConfigId,
-    completedSetConfigIds,
-    onSetUpdateTableChange,
-}: SetProgressUpdateTableProps) => {
+const SetProgressUpdateTable = ({}: SetProgressUpdateTableProps) => {
+    const {
+        routineProgress,
+        setConfigs,
+        currentWorkoutId,
+        currentSetId,
+        completedSetIds,
+        currentWorkoutConfig,
+        setRoutineProgress,
+    } = useRoutineProgress();
+
+    const workoutLibraryType = currentWorkoutConfig?.workoutLibrary?.type ?? [];
+
     const handleSetInputChange = async (
         setConfigId: string,
         key: string,
         value: string,
     ) => {
-        const newSetConfigs = structuredClone(setConfigs);
+        const newRoutineProgress = structuredClone(routineProgress);
+        const currentWorkoutConfig = newRoutineProgress.workoutConfigs.find(
+            (workoutConfig: WorkoutConfig) =>
+                workoutConfig._id === currentWorkoutId,
+        ) as WorkoutConfig;
 
-        const currentSetConfig = newSetConfigs.find(
-            setConfig => setConfig._id === setConfigId,
+        const currentSetConfig = currentWorkoutConfig.setConfigs.find(
+            (setConfig: SetConfig) => setConfig._id === setConfigId,
         ) as SetConfig;
 
         currentSetConfig[key] = value;
 
-        onSetUpdateTableChange(newSetConfigs);
+        // console.log("routineProgress", newRoutineProgress);
+
+        setRoutineProgress(newRoutineProgress);
     };
 
-    const isCurrentSetConfig = (setConfigId: string) =>
-        setConfigId === currentSetConfigId;
+    const isCurrentSetConfig = (setConfigId: string) => {
+        console.log("데이터 구조", routineProgress);
+        console.log("현재 세트 아이디", currentSetId);
+        console.log("이 세트의 아이디", setConfigId);
+        return setConfigId === currentSetId;
+    };
+
     const isCompletedSetConfig = (setConfigId: string) =>
-        completedSetConfigIds.includes(setConfigId);
+        completedSetIds.includes(setConfigId);
+
+    // console.log(completedSetIds, "completedSetIds");
 
     return (
         <BasicTable>

@@ -2,147 +2,59 @@ import FlexBox from "headful/Flex/Flex";
 import Image from "headful/Image/Image";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
-import {SetConfig, WorkoutConfig, WorkoutRecord} from "types/model";
-import SetConfigUpdateTable from "./SetProgressUpdateTable/SetProgressUpdateTable";
+import {WorkoutConfig} from "types/model";
 import WorkoutConfigDeleteButton from "./WorkoutConfigDeleteButton/WorkoutConfigDeleteButton";
 import SetProgressCreateButton from "./SetProgressCreateButton/SetProgressCreateButton";
-import {useEffect, useState} from "react";
 import SetProgressDeleteButton from "./SetProgressDeleteButton/SetProgressDeleteButton";
-import useCreateWorkoutRecordOneMutation from "hooks/server/useCreateWorkoutRecordOneMutation";
 import SetProgressUpdateTable from "./SetProgressUpdateTable/SetProgressUpdateTable";
-import BasicButton from "headful/BasicButton/BasicButton";
 import SetProgressCompleteButton from "./SetProgressCompleteButton/SetProgressCompleteButton";
 import WorkoutProgressReactiveTrigger from "./WorkoutProgressReactiveTrigger/WorkoutProgressReactiveTrigger";
+import RoutineProgressCompleteModalTrigger from "./RoutineProgressCompleteModalTrigger/RoutineProgressCompleteModalTrigger";
+import {useRoutineProgress} from "../RoutineProgressProvider";
 
 type WorkoutProgressAccordionProps = {
-    routineConfigId: string;
-    routineRecordId: string;
     workoutConfig: WorkoutConfig;
-    currentWorkoutConfigId: string;
-    onSetCreateButtonClick: (
-        workoutConfigId: string,
-        setConfigs: SetConfig[],
-    ) => void;
-    onSetDeleteButtonClick: (
-        workoutConfigId: string,
-        setConfigs: SetConfig[],
-        poppedSetConfigId: string,
-    ) => void;
-
-    onSetUpdateTableChange: (
-        workoutConfigId: string,
-        setConfigs: SetConfig[],
-    ) => void;
-
-    onSetCompleteButtonClick: (
-        workoutConfigId: string,
-        setConfigs: SetConfig[],
-        currentSetId: string,
-    ) => void;
-    onWorkoutProgressReactiveTriggerClick: (workoutConfigId: string) => void;
 };
 
 const WorkoutProgressAccordion = ({
-    routineConfigId,
-    routineRecordId,
     workoutConfig,
-    currentWorkoutConfigId,
-    onSetCreateButtonClick,
-    onSetDeleteButtonClick,
-    onSetUpdateTableChange,
-    onSetCompleteButtonClick,
-    onWorkoutProgressReactiveTriggerClick,
 }: WorkoutProgressAccordionProps) => {
     const {workoutLibrary, setConfigs} = workoutConfig;
-    const [workoutRecord, setWorkoutRecord] = useState<WorkoutRecord>(
-        {} as WorkoutRecord,
-    );
+    const {
+        routineProgress,
+        currentWorkoutId,
+        completedSetIds,
+        setCurrentWorkoutId,
+        setCurrentSetId,
+    } = useRoutineProgress();
 
-    const {mutateAsync: createWorkoutRecordOneMutate} =
-        useCreateWorkoutRecordOneMutation();
-
-    const [currentSetConfigId, setCurrentSetConfigId] = useState(
-        workoutConfig.setConfigs[0]?._id,
-    );
-    const [completedSetConfigIds, setCompletedSetConfigIds] = useState<
-        string[]
-    >([]);
-
-    useEffect(() => {
-        // 컴포넌트가 마운트 될때 운동 기록 데이터를 생성
-        if (routineRecordId && workoutConfig) {
-            (async () => {
-                const response = await createWorkoutRecordOneMutate({
-                    routineRecordId,
-                    workoutLibrary,
-                });
-                response && setWorkoutRecord(response);
-            })();
-        }
-    }, [createWorkoutRecordOneMutate, routineRecordId]);
-
-    const handleSetCreateButtonClick = (setConfigs: SetConfig[]) => {
-        onSetCreateButtonClick(workoutConfig._id, setConfigs);
-        setCurrentSetConfigId(setConfigs[completedSetConfigIds.length]._id);
-    };
-
-    const handleSetDeleteButtonClick = (
-        setConfigs: SetConfig[],
-        poppedSetConfigId: string,
-    ) => {
-        onSetDeleteButtonClick(
-            workoutConfig._id,
-            setConfigs,
-            poppedSetConfigId,
-        );
-
-        // 완료 세트에서 팝된 세트설정id를 삭제한다.
-        const filteredCompletedSetIds = completedSetConfigIds.filter(
-            _id => _id !== poppedSetConfigId,
-        );
-        setCompletedSetConfigIds(filteredCompletedSetIds);
-        // 완료된 세트 아이디 배열에 팝된 세트 아이디가 존재한다면 세트기록에 있는걸로 간주한다.
-        return completedSetConfigIds.includes(poppedSetConfigId);
-    };
-
-    const handleSetUpdateTableChange = (setConfigs: SetConfig[]) => {
-        onSetUpdateTableChange(workoutConfig._id, setConfigs);
-    };
-
-    const handleSetCompleteButtonClick = (setConfigs: SetConfig[]) => {
-        // 완료된 세트 아이디 배열에 현재 세트 아이디를 넣는다.
-        const newCompletedSetIds = structuredClone(completedSetConfigIds);
-        newCompletedSetIds.push(currentSetConfigId);
-        setCompletedSetConfigIds(newCompletedSetIds);
-        // 현재 세트 아이디는 완료한 세트 보다 다음 이 되어야 한다.
-
-        console.log(setConfigs, completedSetConfigIds.length);
-        setCurrentSetConfigId(setConfigs[newCompletedSetIds.length]?._id);
-
-        // 현재 완료한 세트의아이디를 통해 현재 세트 설정을 찾는다.
-        const currentSetConfig = setConfigs.find(
-            setConfig => setConfig._id === currentSetConfigId,
-        ) as SetConfig;
-
-        onSetCompleteButtonClick(
-            workoutConfig._id,
-            setConfigs,
-            currentSetConfigId,
-        );
-
-        return currentSetConfig;
-    };
     const handleWorkoutProgressReactiveTriggerClick = () => {
-        onWorkoutProgressReactiveTriggerClick(workoutConfig._id);
-    };
+        setCurrentWorkoutId(workoutConfig._id);
 
-    const workoutRecordId = workoutRecord?._id;
+        // 현재 세트를 구하기
+        // 완료된 세트 목록을 가져오기
+
+        // 현재 운동의 세트 목록을 가져온다.
+        const currentSetIds = setConfigs.map(setConfig => setConfig._id);
+
+        // 완료된 세트 배열(completedSetIds)에서 현재 세트 설정의 아이디배열과 겹치는 아이디를 구한다.
+        const currentWorkoutCompletedSetIds = currentSetIds.filter(id =>
+            completedSetIds.includes(id),
+        );
+
+        // 현재 운동의 완료된 세트 배열의 길이를 구한다.(그게 현재 진행해야하는 세트의 인덱스)
+        const currentSetIndex = currentWorkoutCompletedSetIds.length;
+
+        const newCurrentSetId = setConfigs[currentSetIndex]?._id ?? "";
+
+        setCurrentSetId(newCurrentSetId);
+    };
 
     return (
         <SwipeableAccordion>
             <SwipeableAccordion.Box>
                 <WorkoutProgressReactiveTrigger
-                    currentWorkoutConfigId={currentWorkoutConfigId}
+                    currentWorkoutConfigId={currentWorkoutId}
                     workoutConfigId={workoutConfig._id}
                     onTriggerClick={handleWorkoutProgressReactiveTriggerClick}
                 >
@@ -175,44 +87,21 @@ const WorkoutProgressAccordion = ({
                         </FlexBox>
                     </SwipeableAccordion.Visible>
                     <SwipeableAccordion.Hidden>
-                        <SetProgressUpdateTable
-                            onSetUpdateTableChange={handleSetUpdateTableChange}
-                            workoutLibraryType={workoutLibrary.type}
-                            setConfigs={setConfigs}
-                            currentSetConfigId={currentSetConfigId}
-                            completedSetConfigIds={completedSetConfigIds}
-                        />
+                        <SetProgressUpdateTable />
                         <FlexBox
                             padding={{top: 10, bottom: 10}}
                             justifyContent="space-around"
                         >
-                            <SetProgressDeleteButton
-                                routineRecordId={routineRecordId}
-                                workoutRecordId={workoutRecordId}
-                                setConfigs={setConfigs}
-                                onSetProgressDeleteButtonClick={
-                                    handleSetDeleteButtonClick
-                                }
-                            />
-                            <SetProgressCreateButton
-                                setConfigs={setConfigs}
-                                onSetProgressCreateButtonClick={
-                                    handleSetCreateButtonClick
-                                }
-                            />
+                            <SetProgressDeleteButton />
+                            <SetProgressCreateButton />
                         </FlexBox>
-                        <SetProgressCompleteButton
-                            routineRecordId={routineRecordId}
-                            workoutRecordId={workoutRecordId}
-                            setConfigs={setConfigs}
-                            completedSetConfigIds={completedSetConfigIds}
-                            onSetProgressCompleteButtonClick={
-                                handleSetCompleteButtonClick
-                            }
-                        />
+
+                        <RoutineProgressCompleteModalTrigger>
+                            <SetProgressCompleteButton />
+                        </RoutineProgressCompleteModalTrigger>
                     </SwipeableAccordion.Hidden>
                     <WorkoutConfigDeleteButton
-                        routineConfigId={routineConfigId}
+                        routineConfigId={routineProgress._id}
                         workoutConfigId={workoutConfig._id}
                     />
                 </WorkoutProgressReactiveTrigger>

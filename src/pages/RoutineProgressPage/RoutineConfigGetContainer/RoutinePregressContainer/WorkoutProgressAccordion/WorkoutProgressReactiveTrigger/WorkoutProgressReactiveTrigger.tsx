@@ -19,6 +19,7 @@ const WorkoutProgressReactiveTrigger = ({
     useEffect(() => {
         if (workoutConfigId === currentWorkoutConfigId) {
             showAccordion();
+            onTriggerClick();
         } else {
             console.log("hide", workoutConfigId, currentWorkoutConfigId);
             hideAccordion();

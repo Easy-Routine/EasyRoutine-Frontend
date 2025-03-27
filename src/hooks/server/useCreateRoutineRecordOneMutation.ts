@@ -1,36 +1,35 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
-import ROUTES from "constants/routes";
 import useToast from "hooks/useToast";
-import { useNavigate } from "react-router-dom";
-import { createRoutineRecordOne } from "services/routine-record";
-import { Color } from "types/enum";
+import {createRoutineRecordOne} from "services/routine-record";
+import {Color} from "types/enum";
 
-const useCreateRoutineRecordOneMutation = () => {
-    const { showToast } = useToast();
-    const navigate = useNavigate();
-
+const useCreateRoutineRecordMutation = () => {
+    const {showToast} = useToast();
     const queryClient = useQueryClient();
+
     return useMutation({
         mutationFn: ({
+            id,
             name,
             color,
             userId,
         }: {
+            id: string;
             name: string;
             color: Color;
             userId: string;
-        }) => createRoutineRecordOne({ name, color, userId }),
-        onError: (error) => {
+        }) => createRoutineRecordOne({id, name, color, userId}),
+        onError: (error: any) => {
             console.log(error);
             showToast(error.message, "error");
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineRecordAll],
+                queryKey: [queryKey.getRoutineConfigAll],
             });
         },
     });
 };
 
-export default useCreateRoutineRecordOneMutation;
+export default useCreateRoutineRecordMutation;

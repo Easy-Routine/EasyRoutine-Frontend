@@ -1,36 +1,38 @@
-import { v4 as uuidv4 } from "uuid"; // UUID 생성을 위한 라이브러리
-import { RoutineRecord } from "types/model";
-import { db } from "db";
-import { Color } from "types/enum";
-import { DotDataByDate } from "components/business/routine-record/RoutineRecordAllMonthlyCalendar";
+import {v4 as uuidv4} from "uuid"; // UUID 생성을 위한 라이브러리
+import {RoutineRecord} from "types/model";
+import {db} from "db";
+import {Color} from "types/enum";
+import {DotDataByDate} from "components/business/routine-record/RoutineRecordAllMonthlyCalendar";
 import moment from "moment";
 import api from "utils/axios";
-import { handleError } from "utils/handleError";
-import { CustomError, ErrorDefinitions } from "types/error";
+import {handleError} from "utils/handleError";
+import {CustomError, ErrorDefinitions} from "types/error";
 
 // 확인: 완료
 export const createRoutineRecordOne = async ({
+    id,
     name,
     color,
     userId,
 }: {
-    name: string; // 루틴 구성 _id
-    color: Color; // 사용자 _id
-    userId: string; // 루틴 수행 날짜
+    id: string;
+    name: string;
+    color: Color;
+    userId: string;
 }): Promise<RoutineRecord | undefined> => {
     try {
         const newRoutineRecord: RoutineRecord = {
-            _id: uuidv4(), // UUID로 _id 생성
+            _id: id, // 외부에서 전달받은 id 사용
             name,
             color,
-            createdAt: moment().toISOString(), // 현재 날짜
-            updatedAt: moment().toISOString(), // 현재 날짜
+            createdAt: moment().toISOString(),
+            updatedAt: moment().toISOString(),
             workoutTime: 0,
             userId,
-            workoutRecords: [], // 초기값은 빈 배열
+            workoutRecords: [],
         };
-        await db.routineRecords.add(newRoutineRecord); // 데이터베이스에 추가
-        return newRoutineRecord; // 생성된 루틴 기록 반환
+        await db.routineRecords.add(newRoutineRecord);
+        return newRoutineRecord;
     } catch (e) {
         handleError(e);
     }
@@ -49,15 +51,15 @@ export const getRoutineRecordAllMonthly = async ({
         const routineRecords = await db.routineRecords
             .where("createdAt")
             .between(startDate, endDate, true, true) // 시작일과 종료일 사이의 레코드
-            .and((record) => record.userId === userId) // userId로 필터링
+            .and(record => record.userId === userId) // userId로 필터링
             .toArray();
 
         console.log(routineRecords, "응아");
 
         // 날짜별로 루틴 기록 그룹화
-        const groupedRecords: { [key: string]: any[] } = {};
+        const groupedRecords: {[key: string]: any[]} = {};
 
-        routineRecords.forEach((record) => {
+        routineRecords.forEach(record => {
             const localDate = moment(record.createdAt);
             const recordDate = localDate.format("YYYY-MM-DD");
 
@@ -68,7 +70,7 @@ export const getRoutineRecordAllMonthly = async ({
         });
 
         // 요구하는 형식으로 변환
-        const result = Object.keys(groupedRecords).map((recordDate) => ({
+        const result = Object.keys(groupedRecords).map(recordDate => ({
             date: recordDate,
             routineRecords: groupedRecords[recordDate],
         }));
@@ -95,7 +97,7 @@ export const getRoutineRecordAllDaily = async ({
         const routineRecords = await db.routineRecords
             .where("createdAt")
             .between(startDate, endDate, true, true) // 날짜 범위에 해당하는 레코드
-            .and((record) => record.userId === userId) // userId로 필터링
+            .and(record => record.userId === userId) // userId로 필터링
             .toArray();
 
         return routineRecords;
@@ -106,7 +108,7 @@ export const getRoutineRecordAllDaily = async ({
 
 // 확인: 완료
 export const getRoutineRecordOne = async (
-    routineRecordId: string
+    routineRecordId: string,
 ): Promise<RoutineRecord | undefined> => {
     try {
         const routineRecord = await db.routineRecords.get(routineRecordId);
@@ -122,7 +124,7 @@ export const getRoutineRecordOne = async (
 };
 // 확인: 완료
 export const deleteRoutineRecordOne = async (
-    routineRecordId: string
+    routineRecordId: string,
 ): Promise<boolean | undefined> => {
     try {
         await api.delete(`/routine-record/${routineRecordId}`);

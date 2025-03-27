@@ -14,7 +14,11 @@ const LineTabGroupItem = ({value, children}: LineTabGroupItemProps) => {
     const combinedStyles = `${styles.lineTabGroupItem} ${isCurrentItem ? styles.lineTabGroupItemActive : ""}`;
 
     return (
-        <TabGroupItem value={value} className={combinedStyles}>
+        <TabGroupItem
+            onTabGroupItemClick={() => {}}
+            value={value}
+            className={combinedStyles}
+        >
             {children}
         </TabGroupItem>
     );

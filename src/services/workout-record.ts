@@ -8,31 +8,31 @@ import {CustomError, ErrorDefinitions} from "types/error";
 
 type CreateWorkoutRecordOneParams = {
     routineRecordId: string;
-    workoutLibrary: WorkoutLibrary; // 연결된 ����� 구성
+    workoutLibrary: WorkoutLibrary;
+    workoutRecordId: string;
 };
-// 확인: 완료
+
 export const createWorkoutRecordOne = async ({
     routineRecordId,
     workoutLibrary,
+    workoutRecordId,
 }: CreateWorkoutRecordOneParams): Promise<WorkoutRecord | undefined> => {
     try {
         const newWorkoutRecordOne: WorkoutRecord = {
-            _id: uuidv4(), // UUID로 _id 생성
-            routineRecordId, // 연결된 루틴 기록 _id
+            _id: workoutRecordId, // 외부에서 전달받은 workoutRecordId 사용
+            routineRecordId, // 연결된 루틴 기록의 _id
             createdAt: moment().toISOString(), // 현재 날짜
             updatedAt: moment().toISOString(), // 현재 날짜
             setRecords: [],
-            workoutLibrary: workoutLibrary, // 연결된 운동 라이브러리
+            workoutLibrary, // 연결된 운동 라이브러리
         };
         // 트랜잭션을 사용하여 데이터베이스 작업 수행
         await db.transaction("rw", db.routineRecords, async () => {
             const routineRecordOne =
                 await db.routineRecords.get(routineRecordId);
-
             if (!routineRecordOne) {
                 throw new CustomError(ErrorDefinitions.NOT_FOUND);
             }
-
             const newWorkoutRecords = structuredClone(
                 routineRecordOne.workoutRecords,
             );
@@ -170,4 +170,3 @@ export const getWorkoutRecordSumAll = async ({
         handleError(e);
     }
 };
-

@@ -136,6 +136,7 @@ const RoutineConfigOneProgressView = () => {
     useEffect(() => {
         (async () => {
             const response = await createRoutineRecordOneMutate({
+                id: routineConfigState._id,
                 name: routineConfigState.name,
                 color: routineConfigState.color,
                 userId: routineConfigState.userId,

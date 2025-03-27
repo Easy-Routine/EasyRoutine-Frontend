@@ -1,19 +1,26 @@
-import { useMutation } from "@tanstack/react-query";
-import { WorkoutLibrary } from "types/model";
-import { createWorkoutRecordOne } from "services/workout-record";
+import {useMutation} from "@tanstack/react-query";
+import {WorkoutLibrary} from "types/model";
+import {createWorkoutRecordOne} from "services/workout-record";
 import useToast from "hooks/useToast";
 
 const useCreateWorkoutRecordOneMutation = () => {
-    const { showToast } = useToast();
+    const {showToast} = useToast();
     return useMutation({
         mutationFn: ({
             routineRecordId,
             workoutLibrary,
+            workoutRecordId,
         }: {
             routineRecordId: string;
             workoutLibrary: WorkoutLibrary;
-        }) => createWorkoutRecordOne({ routineRecordId, workoutLibrary }),
-        onError: (error) => {
+            workoutRecordId: string;
+        }) =>
+            createWorkoutRecordOne({
+                routineRecordId,
+                workoutLibrary,
+                workoutRecordId,
+            }),
+        onError: (error: any) => {
             console.log(error);
             showToast(error.message, "error");
         },
