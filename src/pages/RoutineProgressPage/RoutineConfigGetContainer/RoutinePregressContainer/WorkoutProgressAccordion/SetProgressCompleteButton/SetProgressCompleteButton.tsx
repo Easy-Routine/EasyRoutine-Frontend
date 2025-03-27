@@ -23,6 +23,7 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
         setCompletedSetIds,
         setCurrentWorkoutId,
         setCurrentSetId,
+        startTimer,
     } = useRoutineProgress();
 
     const handleSetProgressCompleteButtonClick: MouseEventHandler<
@@ -141,7 +142,7 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
         } else {
             console.log("모든 세트 미완료");
 
-            // startTimer(currentSetConfig?.restSec as number);
+            startTimer(currentSetConfig?.restSec as number);
             // handleOpenTimerModal();
         }
     };

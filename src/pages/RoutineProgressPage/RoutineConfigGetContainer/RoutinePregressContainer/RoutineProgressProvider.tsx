@@ -1,3 +1,5 @@
+import useTimer from "hooks/client/useTimer";
+import moment, {Moment} from "moment";
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {
     RoutineConfig,
@@ -21,6 +23,12 @@ type RoutineProgressContextType = {
     setCurrentWorkoutId: React.Dispatch<React.SetStateAction<string>>;
     setCurrentSetId: React.Dispatch<React.SetStateAction<string>>;
     setCompletedSetIds: React.Dispatch<React.SetStateAction<string[]>>;
+    // 타이머 관련 프로퍼티
+    endTime: Moment | null;
+    isActive: boolean;
+    startTimer: (initialSeconds: number) => void;
+    skipTimer: () => void;
+    remainingTime: number;
 };
 
 const RoutineProgressContext = createContext<RoutineProgressContextType>({
@@ -38,6 +46,12 @@ const RoutineProgressContext = createContext<RoutineProgressContextType>({
     setCurrentWorkoutId: () => {},
     setCurrentSetId: () => {},
     setCompletedSetIds: () => {},
+    // 기본 타이머 값
+    endTime: moment(),
+    isActive: false,
+    startTimer: () => {},
+    skipTimer: () => {},
+    remainingTime: 0,
 });
 
 type RoutineProgressProps = {
@@ -56,6 +70,8 @@ const RoutineProgressProvider = ({
     const [currentWorkoutId, setCurrentWorkoutId] = useState("");
     const [currentSetId, setCurrentSetId] = useState("");
     const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
+    const {endTime, isActive, startTimer, skipTimer, remainingTime} =
+        useTimer();
 
     const {workoutConfigs} = routineProgress;
     const currentWorkoutConfig =
@@ -90,6 +106,11 @@ const RoutineProgressProvider = ({
                 setCurrentWorkoutId,
                 setCurrentSetId,
                 setCompletedSetIds,
+                endTime,
+                isActive,
+                startTimer,
+                skipTimer,
+                remainingTime,
             }}
         >
             {children}
@@ -97,8 +118,6 @@ const RoutineProgressProvider = ({
     );
 };
 
-export const useRoutineProgress = () => {
-    return useContext(RoutineProgressContext);
-};
+export const useRoutineProgress = () => useContext(RoutineProgressContext);
 
 export default RoutineProgressProvider;
