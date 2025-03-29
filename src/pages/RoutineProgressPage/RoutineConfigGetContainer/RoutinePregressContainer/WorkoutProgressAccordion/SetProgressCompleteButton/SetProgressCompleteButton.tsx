@@ -1,7 +1,6 @@
 import BasicButton from "headful/BasicButton/BasicButton";
-import useCreateSetRecordOneMutation from "hooks/server/useCreateSetRecordOneMutation";
-import React, {MouseEventHandler} from "react";
-import {SetConfig, SetRecord, WorkoutConfig} from "types/model";
+import {MouseEventHandler} from "react";
+import {WorkoutConfig} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {v4 as uuidv4} from "uuid";
 import moment from "moment";
@@ -71,8 +70,6 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
 
         const newRoutineRecord = structuredClone(routineRecord);
 
-        console.log("뭐지이거", newRoutineRecord);
-
         if (!newRoutineRecord._id) {
             newRoutineRecord._id = uuidv4();
             newRoutineRecord.color = routineProgress.color;
@@ -85,13 +82,6 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
         let currentWorkoutRecord = newRoutineRecord.workoutRecords.find(
             workoutRecord => workoutRecord.workoutConfigId === currentWorkoutId,
         );
-
-        console.log(
-            "여기까지는",
-            currentWorkoutRecord,
-            newRoutineRecord.workoutRecords,
-        );
-
         // 없으면
         if (!currentWorkoutRecord) {
             const newWorkoutRecord = {
@@ -107,8 +97,6 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
             newRoutineRecord.workoutRecords.push(newWorkoutRecord);
             currentWorkoutRecord = newWorkoutRecord;
         }
-
-        console.log("과연?", newRoutineRecord);
         // 있으면? 세트를 넣으면 되겠지?
 
         // 현재 운동 객체의 세트 기록 배열에 현재 배열이 있는지 확인? 확인할 필요가 없지 왜냐하면 그냥 완료한걸 넣으면 되니까
@@ -153,8 +141,6 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
     const commonSetIds = currentSetIds.filter(id =>
         completedSetIds.includes(id),
     );
-    console.log("현재운동의 세트 목록", currentSetIds);
-    console.log("현재 운동의 완료된 세트 목록", completedSetIds);
 
     const isWorkoutCompleted =
         commonSetIds?.length === currentWorkoutConfig?.setConfigs?.length;

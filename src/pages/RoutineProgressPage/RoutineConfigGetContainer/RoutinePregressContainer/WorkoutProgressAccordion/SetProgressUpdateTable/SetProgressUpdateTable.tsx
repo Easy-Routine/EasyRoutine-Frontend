@@ -59,9 +59,6 @@ const SetProgressUpdateTable = ({}: SetProgressUpdateTableProps) => {
     };
 
     const isCurrentSetConfig = (setConfigId: string) => {
-        console.log("데이터 구조", routineProgress);
-        console.log("현재 세트 아이디", currentSetId);
-        console.log("이 세트의 아이디", setConfigId);
         return setConfigId === currentSetId;
     };
 
