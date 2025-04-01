@@ -95,10 +95,7 @@ const WorkoutProgressAccordion = ({
                             <SetProgressDeleteButton />
                             <SetProgressCreateButton />
                         </FlexBox>
-
-                        <RoutineProgressCompleteModalTrigger>
-                            <SetProgressCompleteButton />
-                        </RoutineProgressCompleteModalTrigger>
+                        <SetProgressCompleteButton />
                     </SwipeableAccordion.Hidden>
                     <WorkoutConfigDeleteButton
                         routineConfigId={routineProgress._id}
