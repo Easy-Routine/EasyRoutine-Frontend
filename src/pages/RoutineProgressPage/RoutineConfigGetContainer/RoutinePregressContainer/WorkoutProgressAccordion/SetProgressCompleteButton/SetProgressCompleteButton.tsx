@@ -4,6 +4,10 @@ import {WorkoutConfig} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {v4 as uuidv4} from "uuid";
 import moment from "moment";
+import {useModal} from "headless/Modal/Modal";
+import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
+import TimerModalContent from "../../TimerModalContent/TimerModalContent";
+import CompleteModalContent from "../../CompleteModalContent/CompleteModalContent";
 
 type SetProgressCompleteButtonProps = {};
 
@@ -24,6 +28,8 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
         setCurrentSetId,
         startTimer,
     } = useRoutineProgress();
+
+    const {openModal} = useModal();
 
     const handleSetProgressCompleteButtonClick: MouseEventHandler<
         HTMLButtonElement
@@ -124,15 +130,9 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
 
         const isAllCompleted = totalSetIds.length === newCompletedSetIds.length;
 
-        if (isAllCompleted) {
-            console.log("모든 세트 완료");
-            // handleOpenCompletedModal();
-        } else {
-            console.log("모든 세트 미완료");
-
-            startTimer(currentSetConfig?.restSec as number);
-            // handleOpenTimerModal();
-        }
+        startTimer(currentSetConfig?.restSec as number);
+        // 타이머 모달 열기
+        openModal();
     };
 
     const currentSetIds = setConfigs.map(setConfig => setConfig._id);
@@ -155,4 +155,30 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
     );
 };
 
-export default SetProgressCompleteButton;
+// type WithTimerModalProps<P extends object> = {
+//     WrappedComponent: React.ComponentType<P>;
+// };
+
+function withModal<P extends object>(WrappedComponent: React.ComponentType<P>) {
+    const WithModal: React.FC<P> = props => {
+        const {isAllCompleted} = useRoutineProgress();
+
+        const modalContent = isAllCompleted ? (
+            <CompleteModalContent />
+        ) : (
+            <TimerModalContent />
+        );
+
+        return (
+            <ConfirmModal>
+                <ConfirmModal.Backdrop />
+                <ConfirmModal.Content>{modalContent}</ConfirmModal.Content>
+                <WrappedComponent {...props} />
+            </ConfirmModal>
+        );
+    };
+
+    return WithModal;
+}
+
+export default withModal(SetProgressCompleteButton);
