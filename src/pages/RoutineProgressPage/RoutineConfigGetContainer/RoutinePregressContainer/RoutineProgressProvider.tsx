@@ -1,3 +1,4 @@
+import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import useTimer from "hooks/client/useTimer";
 import moment, {Moment} from "moment";
 import React, {createContext, useContext, useEffect, useState} from "react";
@@ -29,6 +30,7 @@ type RoutineProgressContextType = {
     startTimer: (initialSeconds: number) => void;
     skipTimer: () => void;
     remainingTime: number;
+    isAllCompleted: boolean;
 };
 
 const RoutineProgressContext = createContext<RoutineProgressContextType>({
@@ -52,6 +54,7 @@ const RoutineProgressContext = createContext<RoutineProgressContextType>({
     startTimer: () => {},
     skipTimer: () => {},
     remainingTime: 0,
+    isAllCompleted: false,
 });
 
 type RoutineProgressProps = {
@@ -85,9 +88,11 @@ const RoutineProgressProvider = ({
         setConfigs.find(setConfig => setConfig._id === currentSetId) ||
         ({} as SetConfig);
 
-    useEffect(() => {
-        console.log(routineRecord, "데이터 변경");
-    }, [routineRecord]);
+    const totalSetIds = workoutConfigs.flatMap(workoutConfig =>
+        workoutConfig.setConfigs.map(setConfig => setConfig._id),
+    );
+
+    const isAllCompleted = totalSetIds.length === completedSetIds.length;
 
     return (
         <RoutineProgressContext.Provider
@@ -111,6 +116,7 @@ const RoutineProgressProvider = ({
                 startTimer,
                 skipTimer,
                 remainingTime,
+                isAllCompleted,
             }}
         >
             {children}
