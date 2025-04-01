@@ -1,0 +1,39 @@
+import CircleButton from "headful/CircleButton/CircleButton";
+import Flex from "headful/Flex/Flex";
+import Text from "headful/Text/Text";
+import {ReactComponent as ClockIcon} from "assets/image/clock.svg";
+import {useRoutineProgress} from "../RoutineProgressProvider";
+import formatTime from "utils/formatTime";
+
+const TimerModalContent = () => {
+    const {remainingTime} = useRoutineProgress();
+    return (
+        <Flex padding={20} flexDirection="column" alignItems="center" gap={20}>
+            <CircleButton width={65} height={65}>
+                <ClockIcon
+                    style={{
+                        color: "white",
+                        width: "30px",
+                        height: "30px",
+                    }}
+                />
+            </CircleButton>
+            <Text
+                fontSize={"var(--fontSize-xl)"}
+                fontWeight={"var(--fontWeight-semibold)"}
+                color={"var(--text-black)"}
+            >
+                휴식 타이머
+            </Text>
+            <Text
+                fontSize={"var(--fontSize-md)"}
+                fontWeight={"var(--fontWeight-regular)"}
+                color={"var(--text-black)"}
+            >
+                {formatTime(remainingTime)}
+            </Text>
+        </Flex>
+    );
+};
+
+export default TimerModalContent;
