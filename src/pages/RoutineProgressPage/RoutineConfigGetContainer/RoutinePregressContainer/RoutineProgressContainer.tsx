@@ -8,6 +8,7 @@ import WorkoutRestSecTimer from "./WorkoutRestSecTimer/WorkoutRestSecTimer";
 import BasicButton from "headful/BasicButton/BasicButton";
 import TimerModalTrigger from "./TimerModalTrigger/TimerModalTrigger";
 import {useRoutineProgress} from "./RoutineProgressProvider";
+import RoutineProgressCompleteButton from "./RoutineProgressCompleteButton/RoutineProgressCompleteButton";
 
 type RoutineProgressContainerProps = {};
 
@@ -32,7 +33,7 @@ const RoutineProgressContainer = ({}: RoutineProgressContainerProps) => {
                         <WorkoutRestSecTimer remainingTime={remainingTime} />
                     </TimerModalTrigger>
 
-                    <BasicButton>루틴완료</BasicButton>
+                    <RoutineProgressCompleteButton />
                 </Flex>
             </BottomBoxPortal>
         </>
