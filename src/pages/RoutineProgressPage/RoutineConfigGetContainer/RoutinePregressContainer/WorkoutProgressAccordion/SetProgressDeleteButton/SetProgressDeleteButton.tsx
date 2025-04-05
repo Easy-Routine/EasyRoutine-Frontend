@@ -61,7 +61,7 @@ const SetProgressDeleteButton = ({}: SetProgressDeleteButtonProps) => {
 
             // 루틴 기록의 운동 목록에서 현재 아이디의 운동을 선택한다.(객체의 주소는 동일하다.)
             const currentWorkoutRecord = newRoutineRecord.workoutRecords.find(
-                workoutRecord =>
+                (workoutRecord: WorkoutRecord) =>
                     workoutRecord.workoutConfigId === currentWorkoutId,
             ) as WorkoutRecord;
 

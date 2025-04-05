@@ -1,6 +1,6 @@
 import BasicButton from "headful/BasicButton/BasicButton";
 import {MouseEventHandler} from "react";
-import {WorkoutConfig} from "types/model";
+import {SetRecord, WorkoutConfig, WorkoutRecord} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {v4 as uuidv4} from "uuid";
 import moment from "moment";
@@ -86,7 +86,8 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
 
         // 새로운 객체에 운동기록 배열에 현재 운동의 아이디가 있는지 탐색
         let currentWorkoutRecord = newRoutineRecord.workoutRecords.find(
-            workoutRecord => workoutRecord.workoutConfigId === currentWorkoutId,
+            (workoutRecord: WorkoutRecord) =>
+                workoutRecord.workoutConfigId === currentWorkoutId,
         );
         // 없으면
         if (!currentWorkoutRecord) {
@@ -107,7 +108,7 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
 
         // 현재 운동 객체의 세트 기록 배열에 현재 배열이 있는지 확인? 확인할 필요가 없지 왜냐하면 그냥 완료한걸 넣으면 되니까
         let currentSetRecord = currentWorkoutRecord.setRecords.find(
-            setRecord => setRecord.setConfigId === currentSetId,
+            (setRecord: SetRecord) => setRecord.setConfigId === currentSetId,
         );
 
         // if (!currentSetRecord) {

@@ -10,7 +10,7 @@ const useRoutineConfigAllGetQuery = () => {
             return response;
         },
         select: response => ({
-            routineConfigs: response,
+            routineConfigs: response ?? [],
         }),
     });
 };
