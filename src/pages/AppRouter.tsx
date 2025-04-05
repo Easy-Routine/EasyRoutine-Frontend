@@ -4,6 +4,8 @@ import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 import PublicRoute from "components/PublicRoute/PublicRoute";
 import ROUTES from "constants/routes";
+import PrivatePageTemplate from "headful/PrivatePageTemplate/PrivatePageTemplate";
+import PublicPageTemplate from "headful/PublicPageTemplate/PublicPageTemplate";
 import useRouteChangeTracker from "hooks/client/useRouteChangeTracker";
 import {Suspense} from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
@@ -65,13 +67,15 @@ const AppRouter = () => {
             >
                 <Routes>
                     <Route element={<PublicRoute />}>
-                        <Route
-                            path={ROUTES.LOGIN.PATH}
-                            element={<ROUTES.LOGIN.COMPONENT />}
-                        />
+                        <Route element={<PublicPageTemplate />}>
+                            <Route
+                                path={ROUTES.LOGIN.PATH}
+                                element={<ROUTES.LOGIN.COMPONENT />}
+                            />
+                        </Route>
                     </Route>
                     <Route element={<PrivateRoute />}>
-                        <Route element={<PageTemplate />}>
+                        <Route element={<PrivatePageTemplate />}>
                             <Route
                                 path={ROUTES.MY.PATH}
                                 element={<ROUTES.MY.COMPONENT />}

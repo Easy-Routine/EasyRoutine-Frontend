@@ -4,8 +4,6 @@ import {ReactComponent as GoogleLogoIcon} from "assets/image/google-logo.svg";
 import {ReactComponent as AppleLogoIcon} from "assets/image/apple.svg";
 import {useLocation} from "react-router-dom";
 import PublicRoute from "components/box/PublicRoute/PublicRoute";
-import LogoDescription from "components/content/LogoDescription/LogoDescription";
-import AuthButton from "headful/AuthButton/AuthButton";
 import GoogleButton from "./components/GoogleButton/GoogleButton";
 import AppleButton from "./components/AppleButton/AppleButton";
 import KaKaoButton from "./components/KakaoButton/KakaoButton";
@@ -71,33 +69,13 @@ import NaverButton from "./components/NaverButton/NaverButton";
 // `;
 
 const LoginPage = () => {
-    const useQuery = () => {
-        return new URLSearchParams(useLocation().search);
-    };
-
-    const {} = useTheme();
-
-    const query = useQuery();
-
-    // useEffect(() => {
-    //     const accessToken = query.get("token");
-    //     const userId = query.get("id");
-
-    //     if (accessToken) {
-    //         console.log("셋토큰");
-    //         localStorage.setItem("accessToken", accessToken as string);
-    //         localStorage.setItem("userId", userId as string);
-    //         window.dispatchEvent(new Event("accessTokenChanged")); // 이벤트 발생
-    //     }
-    // }, []);
-
     return (
-        <PublicRoute>
+        <>
             <GoogleButton>로그인</GoogleButton>
             <AppleButton>로그인</AppleButton>
             <KaKaoButton>로그인 </KaKaoButton>
             <NaverButton>로그인</NaverButton>
-        </PublicRoute>
+        </>
     );
 };
 
