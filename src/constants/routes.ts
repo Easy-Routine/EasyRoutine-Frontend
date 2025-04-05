@@ -1,27 +1,37 @@
-import RoutineProgressPage from "pages/RoutineProgressPage/RoutineProgressPage";
 import {lazy} from "react";
 
-const LoginPage = lazy(() => import("pages/LoginPage"));
-const MyPage = lazy(() => import("pages/MyPage"));
+const LoginPage = lazy(() => import("pages/LoginPage/LoginPage"));
+const MyPage = lazy(() => import("pages/MyPage/MyPage"));
 const RoutineConfigDetailPage = lazy(
     () => import("pages/RoutineConfigDetailPage/RoutineConfigDetailPage"),
 );
 const RoutineConfigListPage = lazy(
     () => import("pages/RoutineConfigListPage/RoutineConfigListPage"),
 );
-const RoutineConfigOneProgressPage = lazy(
-    () => import("pages/RoutineConfigOneProgressPage"),
+const RoutineProgressPage = lazy(
+    () => import("pages/RoutineProgressPage/RoutineProgressPage"),
+);
+const RoutineRecordCalendarPage = lazy(
+    () => import("pages/RoutineRecordCalendarPage/RoutineRecordCalendarPage"),
+);
+const RoutineRecordChartPage = lazy(
+    () => import("pages/RoutineRecordChartPage/RoutineRecordChartPage"),
 );
 const RoutineRecordDetailPage = lazy(
-    () => import("pages/RoutineRecordDetailPage"),
+    () => import("pages/RoutineRecordDetailPage/RoutineRecordDetailPage"),
 );
-const RoutineRecordListPage = lazy(() => import("pages/RoutineRecordListPage"));
-const WorkoutLibraryPage = lazy(() => import("pages/WorkoutLibraryPage"));
+const WorkoutLibraryPage = lazy(
+    () => import("pages/WorkoutLibraryPage/WorkoutLibraryPage"),
+);
 
 const ROUTES = {
     LOGIN: {
         PATH: "/login",
         COMPONENT: LoginPage,
+    },
+    MY: {
+        PATH: "/my",
+        COMPONENT: MyPage,
     },
     CONFIG: {
         LIST: {
@@ -34,10 +44,19 @@ const ROUTES = {
             COMPONENT: RoutineConfigDetailPage,
         },
     },
+    PROGRESS: {
+        PATH: (routineRecordId: string) =>
+            `/routine-progress/${routineRecordId}`,
+        COMPONENT: RoutineProgressPage,
+    },
     RECORD: {
-        LIST: {
-            PATH: "/routine-record/list",
-            COMPONENT: RoutineRecordListPage,
+        CALENDAR: {
+            PATH: "/routine-record/calendar",
+            COMPONENT: RoutineRecordCalendarPage,
+        },
+        CHART: {
+            PATH: "/routine-record/chart",
+            COMPONENT: RoutineRecordChartPage,
         },
         DETAIL: {
             PATH: (routineRecordId: string) =>
@@ -45,18 +64,9 @@ const ROUTES = {
             COMPONENT: RoutineRecordDetailPage,
         },
     },
-    PROGRESS: {
-        PATH: (routineRecordId: string) =>
-            `/routine-progress/${routineRecordId}`,
-        COMPONENT: RoutineProgressPage,
-    },
     LIBRARY: {
         PATH: "/workout-library",
         COMPONENT: WorkoutLibraryPage,
-    },
-    MY: {
-        PATH: "/my",
-        COMPONENT: MyPage,
     },
 } as const;
 

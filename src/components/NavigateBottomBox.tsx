@@ -28,7 +28,7 @@ const NavigateBottomBox = ({path}: NaviationBottomBoxProps) => {
                     label="홈"
                 />
                 <IconTabGroup.Item
-                    value={ROUTES.RECORD.LIST.PATH}
+                    value={ROUTES.RECORD.CALENDAR.PATH}
                     onTabGroupItemClick={handleNavigationItemClick}
                     icon={<GraphIcon />}
                     label="기록"

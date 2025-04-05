@@ -1,14 +1,15 @@
 import NavigateBottomBox from "components/NavigateBottomBox";
+import React from "react";
 import {useLocation} from "react-router-dom";
 
-const RoutineRecordCalendarPage = () => {
+const RoutineRecordChartPage = () => {
     const location = useLocation();
     return (
         <>
-            RoutineRecordCalendarPage
+            RoutineRecordChartPage
             <NavigateBottomBox path={location.pathname} />
         </>
     );
 };
 
-export default RoutineRecordCalendarPage;
+export default RoutineRecordChartPage;

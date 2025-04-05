@@ -1,18 +1,10 @@
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
-import GlobalErrorBoundary from "components/box/ErrorBoundary/GlobalErrorBoundary";
 import PageTemplate from "components/box/PageTemplate/PageTemplate";
-import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import ROUTES from "constants/routes";
 import useRouteChangeTracker from "hooks/client/useRouteChangeTracker";
 import {Suspense} from "react";
-import {
-    createBrowserRouter,
-    Navigate,
-    Route,
-    RouterProvider,
-    Routes,
-} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 
 // const router = createBrowserRouter([
 //     {
@@ -74,36 +66,40 @@ const AppRouter = () => {
                         path={ROUTES.LOGIN.PATH}
                         element={<ROUTES.LOGIN.COMPONENT />}
                     />
-
                     <Route element={<PageTemplate />}>
                         <Route
-                            path={ROUTES.CONFIG.LIST.PATH}
-                            element={<ROUTES.CONFIG.LIST.COMPONENT />}
+                            path={ROUTES.MY.PATH}
+                            element={<ROUTES.MY.COMPONENT />}
                         />
                         <Route
                             path={ROUTES.CONFIG.DETAIL.PATH(":routineConfigId")}
                             element={<ROUTES.CONFIG.DETAIL.COMPONENT />}
                         />
                         <Route
-                            path={ROUTES.RECORD.LIST.PATH}
-                            element={<ROUTES.RECORD.LIST.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.RECORD.DETAIL.PATH(":routineRecordId")}
-                            element={<ROUTES.RECORD.DETAIL.COMPONENT />}
+                            path={ROUTES.CONFIG.LIST.PATH}
+                            element={<ROUTES.CONFIG.LIST.COMPONENT />}
                         />
                         <Route
                             path={ROUTES.PROGRESS.PATH(":routineConfigId")}
                             element={<ROUTES.PROGRESS.COMPONENT />}
                         />
                         <Route
+                            path={ROUTES.RECORD.CALENDAR.PATH}
+                            element={<ROUTES.RECORD.CALENDAR.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.RECORD.CHART.PATH}
+                            element={<ROUTES.RECORD.CHART.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.RECORD.DETAIL.PATH(":routineRecordId")}
+                            element={<ROUTES.RECORD.DETAIL.COMPONENT />}
+                        />
+                        <Route
                             path={ROUTES.LIBRARY.PATH}
                             element={<ROUTES.LIBRARY.COMPONENT />}
                         />
-                        <Route
-                            path={ROUTES.MY.PATH}
-                            element={<ROUTES.MY.COMPONENT />}
-                        />
+
                         <Route
                             path="*"
                             element={
@@ -115,7 +111,6 @@ const AppRouter = () => {
                         />
                     </Route>
                 </Routes>
-                {/* <RouterProvider router={router} /> */}
             </Suspense>
         </>
     );
