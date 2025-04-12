@@ -29,9 +29,7 @@ root.render(
                             <GlobalStyle />
                             <GlobalStyles />
                             <BrowserRouter>
-                                {/* <div className="theme-light"> */}
-                                    <App />
-                                {/* </div> */}
+                                <App />
                             </BrowserRouter>
                         </APIProvider>
                     </ToastProvider>
