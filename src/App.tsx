@@ -46,11 +46,11 @@ const App = () => {
     }, [isSplashScreenOpen]);
 
     return (
-        <MaxWidthWrapper id="wrap">
+        <>
             {isSplashScreenOpen && <SplashScrren />}
             <AppRouter />
             <SideBanner />
-        </MaxWidthWrapper>
+        </>
     );
 };
 

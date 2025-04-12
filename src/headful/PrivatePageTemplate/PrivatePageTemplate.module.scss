@@ -1,6 +1,12 @@
 .PrivatePageTemplate {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 75px;
-    padding-bottom: 85px;
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+
+    width: 100%;
+    max-width: 640px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: visible; 
 }

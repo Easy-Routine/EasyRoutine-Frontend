@@ -1,11 +1,15 @@
 import React from "react";
-import {Outlet} from "react-router-dom";
 import styles from "./PrivatePageTemplate.module.scss";
 
-const PrivatePageTemplate = () => {
+
+type PrivatePageTemplateProps = {
+    children: React.ReactNode;
+}
+
+const PrivatePageTemplate = ({children}: PrivatePageTemplateProps) => {
     return (
         <div className={styles.PrivatePageTemplate}>
-            <Outlet />
+           {children}
         </div>
     );
 };
