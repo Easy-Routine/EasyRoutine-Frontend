@@ -8,5 +8,7 @@
     max-width: 640px;
     height: 100%;
     overflow-y: auto;
-    overflow-x: visible; 
+    overflow-x: visible;
+
+    scrollbar-width: none;
 }
