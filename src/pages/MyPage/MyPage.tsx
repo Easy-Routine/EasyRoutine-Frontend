@@ -1,4 +1,5 @@
 import NavigateBottomBox from "components/NavigateBottomBox";
+import LogoArea from "headful/LogoArea/LogoArea";
 import Footer from "headful/PrivatePageTemplate/Footer/Footer";
 import Header from "headful/PrivatePageTemplate/Header/Header";
 import Main from "headful/PrivatePageTemplate/Main/Main";
@@ -10,7 +11,7 @@ const MyPage = () => {
     return (
         <PrivatePageTemplate>
             <Header>
-                헤더
+                <LogoArea />
             </Header>
             <Main>
                 <div>메인</div>
@@ -79,14 +80,11 @@ const MyPage = () => {
                 <div>메인</div>
                 <div>메인</div>
                 <div>메인</div>
-                
-
             </Main>
             <Footer>
                 {/* 푸터 */}
                 <NavigateBottomBox path={location.pathname} />
             </Footer>
-            
         </PrivatePageTemplate>
     );
 };
