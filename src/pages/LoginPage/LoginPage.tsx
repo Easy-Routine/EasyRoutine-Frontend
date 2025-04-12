@@ -3,11 +3,8 @@ import AppleButton from "./components/AppleButton/AppleButton";
 import KaKaoButton from "./components/KakaoButton/KakaoButton";
 import NaverButton from "./components/NaverButton/NaverButton";
 import Logo from "components/content/Logo/Logo";
-import styles from "./LoginPage.module.scss";
 import Flex from "headful/Flex/Flex";
 import Text from "headful/Text/Text";
-import GoogleIcon from "assets/image/google-logo.svg";
-import AppleIcon from "assets/image/apple-white.svg";
 
 // const Container = styled.div`
 //     display: flex;
@@ -85,10 +82,10 @@ const LoginPage = () => {
             </Flex>
 
             <Flex flexDirection="column" padding={40} gap={16}>
-                <GoogleButton iconSrc={GoogleIcon}>로그인</GoogleButton>
-                <AppleButton iconSrc={AppleIcon}>로그인</AppleButton>
-                <KaKaoButton iconSrc="">로그인 </KaKaoButton>
-                <NaverButton iconSrc="">로그인</NaverButton>
+                <GoogleButton/>
+                <AppleButton />
+                <KaKaoButton/>
+                <NaverButton/>
             </Flex>
         </Flex>
     );

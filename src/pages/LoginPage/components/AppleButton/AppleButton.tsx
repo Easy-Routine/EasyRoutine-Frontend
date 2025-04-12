@@ -1,10 +1,10 @@
 import AuthButton from "headful/AuthButton/AuthButton";
 import React from "react";
 import styles from "./AppleButton.module.scss";
+import AppleIcon from "assets/image/apple-white.svg";
 
-type AppleButtonProps = React.ComponentProps<typeof AuthButton>;
 
-const AppleButton = (props: AppleButtonProps) => {
+const AppleButton = () => {
     const handleAppleLoginButtonClick = () => {
         window.open(
             `${process.env.REACT_APP_API_URL}/oauth2/authorization/apple`,
@@ -14,10 +14,12 @@ const AppleButton = (props: AppleButtonProps) => {
 
     return (
         <AuthButton
-            {...props}
             onClick={handleAppleLoginButtonClick}
             className={styles.AppleButton}
-        />
+            iconSrc={AppleIcon}
+        >
+            애플계정으로 시작하기
+            </AuthButton>
     );
 };
 

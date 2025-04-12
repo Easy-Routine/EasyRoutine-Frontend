@@ -1,10 +1,9 @@
 import AuthButton from "headful/AuthButton/AuthButton";
 import React from "react";
 import styles from "./KakaoButton.module.scss";
+import KaKaoIcon from "assets/image/kakao-logo.svg";
 
-type KakaoButtonProps = React.ComponentProps<typeof AuthButton>;
-
-const KakaoButton = (props: KakaoButtonProps) => {
+const KakaoButton = () => {
     const handleKakaoLoginButtonClick = () => {
         window.open(
             `${process.env.REACT_APP_API_URL}/oauth2/authorization/kakao`,
@@ -14,10 +13,12 @@ const KakaoButton = (props: KakaoButtonProps) => {
 
     return (
         <AuthButton
-            {...props}
             onClick={handleKakaoLoginButtonClick}
             className={styles.KakaoButton}
-        />
+            iconSrc={KaKaoIcon}
+        >
+            카카오계정으로 시작하기
+            </AuthButton>
     );
 };
 
