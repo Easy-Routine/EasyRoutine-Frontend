@@ -1,19 +1,11 @@
 import SideBanner from "components/content/SideBanner/SideBanner";
 import SplashScrren from "components/content/SplashScreen/SplashScreen";
 import {db} from "db";
+import MaxWidthWrapper from "headful/MaxWidthWrapper/MaxWidthWrapper";
 import useModal from "hooks/client/useModal";
 import AppRouter from "pages/AppRouter";
 import {useEffect, useState} from "react";
 import {getBaseWorkout} from "services";
-import styled from "styled-components";
-// import "./_theme.scss";
-
-const MaxWidthWrapper = styled.div`
-    max-width: 640px;
-    margin: 0 auto;
-    position: relative;
-    width: 100%;
-`;
 
 const App = () => {
     const isSplashScreenShown = !!sessionStorage.getItem("isSplashScreenShown");

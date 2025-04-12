@@ -6,7 +6,10 @@ type GoogleButtonProps = React.ComponentProps<typeof AuthButton>;
 
 const GoogleButton = (props: GoogleButtonProps) => {
     const handleGoogleLoginButtonClick = () => {
-        window.open(`${process.env.REACT_APP_API_URL}/login`, "_self");
+        window.open(
+            `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`,
+            "_self",
+        );
     };
 
     return (

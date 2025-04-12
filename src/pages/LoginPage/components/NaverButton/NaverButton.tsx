@@ -6,7 +6,10 @@ type NaverButtonProps = React.ComponentProps<typeof AuthButton>;
 
 const NaverButton = (props: NaverButtonProps) => {
     const handleNaverLoginButtonClick = () => {
-        window.open(`${process.env.REACT_APP_API_URL}/login`, "_self");
+        window.open(
+            `${process.env.REACT_APP_API_URL}/oauth2/authorization/naver`,
+            "_self",
+        );
     };
 
     return (

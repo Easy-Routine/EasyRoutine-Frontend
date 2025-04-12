@@ -1,7 +1,5 @@
-import React from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import styled from "styled-components";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const Container = styled.div`
     padding-left: 20px;
@@ -12,12 +10,10 @@ const Container = styled.div`
 
 const PageTemplate = () => {
     return (
-        <PrivateRoute>
-            <Container>
-                {/* <ScrollRestoration /> */}
-                <Outlet />
-            </Container>
-        </PrivateRoute>
+        <Container>
+            {/* <ScrollRestoration /> */}
+            <Outlet />
+        </Container>
     );
 };
 

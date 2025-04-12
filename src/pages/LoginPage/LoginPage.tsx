@@ -1,13 +1,13 @@
-import {useEffect} from "react";
-import styled, {useTheme} from "styled-components";
-import {ReactComponent as GoogleLogoIcon} from "assets/image/google-logo.svg";
-import {ReactComponent as AppleLogoIcon} from "assets/image/apple.svg";
-import {useLocation} from "react-router-dom";
-import PublicRoute from "components/box/PublicRoute/PublicRoute";
 import GoogleButton from "./components/GoogleButton/GoogleButton";
 import AppleButton from "./components/AppleButton/AppleButton";
 import KaKaoButton from "./components/KakaoButton/KakaoButton";
 import NaverButton from "./components/NaverButton/NaverButton";
+import Logo from "components/content/Logo/Logo";
+import styles from "./LoginPage.module.scss";
+import Flex from "headful/Flex/Flex";
+import Text from "headful/Text/Text";
+import GoogleIcon from "assets/image/google-logo.svg";
+import AppleIcon from "assets/image/apple-white.svg";
 
 // const Container = styled.div`
 //     display: flex;
@@ -70,12 +70,27 @@ import NaverButton from "./components/NaverButton/NaverButton";
 
 const LoginPage = () => {
     return (
-        <>
-            <GoogleButton>로그인</GoogleButton>
-            <AppleButton>로그인</AppleButton>
-            <KaKaoButton>로그인 </KaKaoButton>
-            <NaverButton>로그인</NaverButton>
-        </>
+        <Flex
+            flexDirection="column"
+            height="100%"
+            justifyContent="center"
+            gap={240}
+        >
+            <Flex flexDirection="column" alignItems="center">
+                <Logo type="large" />
+                <Text>
+                    간단하고 편리한 운동을 위한
+                    <br /> 당신의 헬스 메이트
+                </Text>
+            </Flex>
+
+            <Flex flexDirection="column" padding={40} gap={16}>
+                <GoogleButton iconSrc={GoogleIcon}>로그인</GoogleButton>
+                <AppleButton iconSrc={AppleIcon}>로그인</AppleButton>
+                <KaKaoButton iconSrc="">로그인 </KaKaoButton>
+                <NaverButton iconSrc="">로그인</NaverButton>
+            </Flex>
+        </Flex>
     );
 };
 

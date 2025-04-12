@@ -1,7 +1,8 @@
 .PublicPageTemplate {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: 100vh;
-    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 640px;
+
+    position: fixed;
+    top: 0;
 }

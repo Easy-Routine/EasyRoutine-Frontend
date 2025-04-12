@@ -6,7 +6,10 @@ type AppleButtonProps = React.ComponentProps<typeof AuthButton>;
 
 const AppleButton = (props: AppleButtonProps) => {
     const handleAppleLoginButtonClick = () => {
-        window.open(`${process.env.REACT_APP_API_URL}/login`, "_self");
+        window.open(
+            `${process.env.REACT_APP_API_URL}/oauth2/authorization/apple`,
+            "_self",
+        );
     };
 
     return (

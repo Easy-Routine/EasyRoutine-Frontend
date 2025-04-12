@@ -6,7 +6,10 @@ type KakaoButtonProps = React.ComponentProps<typeof AuthButton>;
 
 const KakaoButton = (props: KakaoButtonProps) => {
     const handleKakaoLoginButtonClick = () => {
-        window.open(`${process.env.REACT_APP_API_URL}/login`, "_self");
+        window.open(
+            `${process.env.REACT_APP_API_URL}/oauth2/authorization/kakao`,
+            "_self",
+        );
     };
 
     return (
