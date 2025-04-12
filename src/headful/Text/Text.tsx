@@ -4,7 +4,7 @@ import styles from "./Text.module.scss";
 type TextProps = {
     children: React.ReactNode;
     color?: string;
-    fontSize?: string;
+    fontSize?: string | number;
     fontWeight?: string;
     textAlign?: React.CSSProperties["textAlign"];
 };
