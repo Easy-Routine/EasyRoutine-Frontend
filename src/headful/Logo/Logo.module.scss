@@ -1,0 +1,12 @@
+.Logo {
+    font-weight: var(--fontWeight-semibold);
+    color: var(--color-primary);
+
+    &.Medium {
+        font-size: var(--fontSize-xxl);
+    }
+
+    &.Large {
+        font-size: var(--fontSize-xxxl);
+    }
+}
