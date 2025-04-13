@@ -23,61 +23,54 @@ const AppRouter = () => {
             >
                 <Routes>
                     <Route element={<PublicRoute />}>
-                        <Route element={<PublicPageTemplate />}>
-                            <Route
-                                path={ROUTES.LOGIN.PATH}
-                                element={<ROUTES.LOGIN.COMPONENT />}
-                            />
-                        </Route>
+                        {/* <Route element={<PublicPageTemplate />}> */}
+                        <Route
+                            path={ROUTES.LOGIN.PATH}
+                            element={<ROUTES.LOGIN.COMPONENT />}
+                        />
+                        {/* </Route> */}
                     </Route>
                     <Route element={<PrivateRoute />}>
                         {/* <Route element={<PrivatePageTemplate />}> */}
-                            <Route
-                                path={ROUTES.MY.PATH}
-                                element={<ROUTES.MY.COMPONENT />}
-                            />
-                            <Route
-                                path={ROUTES.CONFIG.DETAIL.PATH(
-                                    ":routineConfigId",
-                                )}
-                                element={<ROUTES.CONFIG.DETAIL.COMPONENT />}
-                            />
-                            <Route
-                                path={ROUTES.CONFIG.LIST.PATH}
-                                element={<ROUTES.CONFIG.LIST.COMPONENT />}
-                            />
-                            <Route
-                                path={ROUTES.PROGRESS.PATH(":routineConfigId")}
-                                element={<ROUTES.PROGRESS.COMPONENT />}
-                            />
-                            <Route
-                                path={ROUTES.RECORD.CALENDAR.PATH}
-                                element={<ROUTES.RECORD.CALENDAR.COMPONENT />}
-                            />
-                            <Route
-                                path={ROUTES.RECORD.CHART.PATH}
-                                element={<ROUTES.RECORD.CHART.COMPONENT />}
-                            />
-                            <Route
-                                path={ROUTES.RECORD.DETAIL.PATH(
-                                    ":routineRecordId",
-                                )}
-                                element={<ROUTES.RECORD.DETAIL.COMPONENT />}
-                            />
-                            <Route
-                                path={ROUTES.LIBRARY.PATH}
-                                element={<ROUTES.LIBRARY.COMPONENT />}
-                            />
-                        </Route>
                         <Route
-                            path="*"
-                            element={
-                                <Navigate
-                                    to={ROUTES.CONFIG.LIST.PATH}
-                                    replace
-                                />
-                            }
+                            path={ROUTES.MY.PATH}
+                            element={<ROUTES.MY.COMPONENT />}
                         />
+                        <Route
+                            path={ROUTES.CONFIG.DETAIL.PATH(":routineConfigId")}
+                            element={<ROUTES.CONFIG.DETAIL.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.CONFIG.LIST.PATH}
+                            element={<ROUTES.CONFIG.LIST.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.PROGRESS.PATH(":routineConfigId")}
+                            element={<ROUTES.PROGRESS.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.RECORD.CALENDAR.PATH}
+                            element={<ROUTES.RECORD.CALENDAR.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.RECORD.CHART.PATH}
+                            element={<ROUTES.RECORD.CHART.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.RECORD.DETAIL.PATH(":routineRecordId")}
+                            element={<ROUTES.RECORD.DETAIL.COMPONENT />}
+                        />
+                        <Route
+                            path={ROUTES.LIBRARY.PATH}
+                            element={<ROUTES.LIBRARY.COMPONENT />}
+                        />
+                    </Route>
+                    <Route
+                        path="*"
+                        element={
+                            <Navigate to={ROUTES.CONFIG.LIST.PATH} replace />
+                        }
+                    />
                     {/* </Route> */}
                 </Routes>
             </Suspense>
