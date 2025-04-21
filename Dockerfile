@@ -17,3 +17,7 @@ COPY . .
 CMD ["npm", "run","build"]
 
 # 빌드된 결과물은 /app/build 디렉토리에 생성된다.
+
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
