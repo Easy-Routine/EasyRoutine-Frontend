@@ -3,13 +3,13 @@ pipeline {
 
   environment {
     REPO_NAME = "easyroutine-frontend"
-    CONTAINER_NAME = "frontend-container"
+    CONTAINER_NAME = "easyroutine-frontend-container"
   }
 
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/your-org/frontend-repo.git', branch: 'main'
+        git url: 'https://github.com/Easy-Routine/EasyRoutine-Frontend.git', branch: 'main'
       }
     }
 
