@@ -8,7 +8,158 @@ export const getRoutineConfigAll = async (): Promise<
     RoutineConfig[] | undefined
 > => {
     try {
-        return [];
+        return [
+            {
+                _id: "1",
+                name: "Morning Routine",
+                color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
+                createdAt: "2025-04-01T00:00:00Z",
+                updatedAt: "2025-04-01T00:00:00Z",
+                workoutConfigs: [
+                    {
+                        _id: "1",
+                        createdAt: "2025-04-01T00:00:00Z",
+                        updatedAt: "2025-04-01T00:00:00Z",
+                        routineConfigId: "1",
+                        setConfigs: [
+                            {
+                                _id: "1",
+                                weight: 50,
+                                rep: 10,
+                                restSec: 60,
+                                workoutSec: 30,
+                                createdAt: "2025-04-01T00:00:00Z",
+                                updatedAt: "2025-04-01T00:00:00Z",
+                                workoutConfigId: "1",
+                            },
+                        ],
+                        workoutLibrary: {
+                            _id: "1",
+                            name: "Squat",
+                            image: "squat.jpg",
+                            originImage: "squat_origin.jpg",
+                            category: "Leg",
+                            type: ["strength", "core"],
+                            isEditable: true,
+                            createdAt: "2025-04-01T00:00:00Z",
+                            updatedAt: "2025-04-01T00:00:00Z",
+                            userId: "1",
+                        },
+                    },
+                    {
+                        _id: "2",
+                        createdAt: "2025-04-01T00:00:00Z",
+                        updatedAt: "2025-04-01T00:00:00Z",
+                        routineConfigId: "1",
+                        setConfigs: [
+                            {
+                                _id: "1",
+                                weight: 50,
+                                rep: 10,
+                                restSec: 60,
+                                workoutSec: 30,
+                                createdAt: "2025-04-01T00:00:00Z",
+                                updatedAt: "2025-04-01T00:00:00Z",
+                                workoutConfigId: "1",
+                            },
+                        ],
+                        workoutLibrary: {
+                            _id: "1",
+                            name: "Squat",
+                            image: "squat.jpg",
+                            originImage: "squat_origin.jpg",
+                            category: "Leg",
+                            type: ["strength", "core"],
+                            isEditable: true,
+                            createdAt: "2025-04-01T00:00:00Z",
+                            updatedAt: "2025-04-01T00:00:00Z",
+                            userId: "1",
+                        },
+                    },
+                ],
+                userId: "1",
+            },
+            {
+                _id: "2",
+                name: "Evening Routine",
+                color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
+                createdAt: "2025-04-02T00:00:00Z",
+                updatedAt: "2025-04-02T00:00:00Z",
+                workoutConfigs: [
+                    {
+                        _id: "2",
+                        createdAt: "2025-04-02T00:00:00Z",
+                        updatedAt: "2025-04-02T00:00:00Z",
+                        routineConfigId: "2",
+                        setConfigs: [
+                            {
+                                _id: "2",
+                                weight: 60,
+                                rep: 8,
+                                restSec: 90,
+                                workoutSec: 40,
+                                createdAt: "2025-04-02T00:00:00Z",
+                                updatedAt: "2025-04-02T00:00:00Z",
+                                workoutConfigId: "2",
+                            },
+                        ],
+                        workoutLibrary: {
+                            _id: "2",
+                            name: "Push-up",
+                            image: "pushup.jpg",
+                            originImage: "pushup_origin.jpg",
+                            category: "Chest",
+                            type: ["strength", "endurance"],
+                            isEditable: false,
+                            createdAt: "2025-04-02T00:00:00Z",
+                            updatedAt: "2025-04-02T00:00:00Z",
+                            userId: "2",
+                        },
+                    },
+                ],
+                userId: "2",
+            },
+            {
+                _id: "3",
+                name: "Cardio Routine",
+                color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
+                createdAt: "2025-04-03T00:00:00Z",
+                updatedAt: "2025-04-03T00:00:00Z",
+                workoutConfigs: [
+                    {
+                        _id: "3",
+                        createdAt: "2025-04-03T00:00:00Z",
+                        updatedAt: "2025-04-03T00:00:00Z",
+                        routineConfigId: "3",
+                        setConfigs: [
+                            {
+                                _id: "3",
+                                weight: 0,
+                                rep: 0,
+                                restSec: 0,
+                                workoutSec: 300,
+                                createdAt: "2025-04-03T00:00:00Z",
+                                updatedAt: "2025-04-03T00:00:00Z",
+                                workoutConfigId: "3",
+                            },
+                        ],
+                        workoutLibrary: {
+                            _id: "3",
+                            name: "Running",
+                            image: "running.jpg",
+                            originImage: "running_origin.jpg",
+                            category: "Cardio",
+                            type: ["endurance", "cardio"],
+                            isEditable: true,
+                            createdAt: "2025-04-03T00:00:00Z",
+                            updatedAt: "2025-04-03T00:00:00Z",
+                            userId: "3",
+                        },
+                    },
+                ],
+                userId: "3",
+            },
+        ];
     } catch (e) {
         handleError(e);
     }

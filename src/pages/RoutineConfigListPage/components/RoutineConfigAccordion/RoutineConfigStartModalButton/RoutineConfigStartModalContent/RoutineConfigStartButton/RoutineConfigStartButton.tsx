@@ -2,18 +2,21 @@ import ROUTES from "constants/routes";
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import {RoutineConfig} from "types/model";
 
 type RoutineConfigStartButtonProps = {
-    routineConfigId: string;
+    routineConfig: RoutineConfig;
 };
 
 const RoutineConfigStartButton = ({
-    routineConfigId,
+    routineConfig,
 }: RoutineConfigStartButtonProps) => {
+    const {_id} = routineConfig;
+
     const navigate = useNavigate();
 
     const handleRoutineProgressModalConfirmButtonClick = () => {
-        navigate(ROUTES.PROGRESS.PATH(routineConfigId));
+        navigate(ROUTES.PROGRESS.PATH(_id));
     };
 
     return (

@@ -6,11 +6,11 @@ import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
 import Text from "headful/Text/Text";
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
 import Portal from "headless/Portal/Portal";
-import RoutineConfigDeleteButton from "./RoutineConfigDeleteButton";
+import RoutineConfigDeleteButton from "./RoutineConfigDeleteButton/RoutineConfigDeleteButton";
+import {RoutineConfig} from "types/model";
 
 type RoutineConfigDeleteModalButtonProps = {
-    routineConfigName: string;
-    routineConfigId: string;
+    routineConfig: RoutineConfig;
 };
 
 /*
@@ -18,9 +18,10 @@ type RoutineConfigDeleteModalButtonProps = {
 */
 
 const RoutineConfigDeleteModalButton = ({
-    routineConfigName,
-    routineConfigId,
+    routineConfig,
 }: RoutineConfigDeleteModalButtonProps) => {
+    const {name} = routineConfig;
+
     return (
         <ConfirmModal>
             <div onClick={e => e.stopPropagation()}>
@@ -58,7 +59,7 @@ const RoutineConfigDeleteModalButton = ({
                                 color={"var(--text-black)"}
                                 textAlign="center"
                             >
-                                '{routineConfigName}'을
+                                '{name}'을
                                 <br /> 삭제하시겠습니까?
                             </Text>
                         </FlexBox>
@@ -67,7 +68,7 @@ const RoutineConfigDeleteModalButton = ({
                                 취소
                             </ConfirmModalClose.Cancel>
                             <RoutineConfigDeleteButton
-                                routineConfigId={routineConfigId}
+                                routineConfig={routineConfig}
                             />
                         </ConfirmModal.Close>
                     </ConfirmModal.Content>

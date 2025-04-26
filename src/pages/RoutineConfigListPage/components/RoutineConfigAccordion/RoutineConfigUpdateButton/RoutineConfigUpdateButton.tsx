@@ -4,25 +4,28 @@ import {ReactComponent as PenIcon} from "assets/image/pen.svg";
 import Text from "headful/Text/Text";
 import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
+import {RoutineConfig} from "types/model";
 
 /*
     루틴 설정을 수정하는 페이지로 이동하는 버튼
 */
 
 type RoutineConfigUpdateButtonButtonProps = {
-    routineConfigId: string;
+    routineConfig: RoutineConfig;
 };
 
 const RoutineConfigUpdateButton = ({
-    routineConfigId,
+    routineConfig,
 }: RoutineConfigUpdateButtonButtonProps) => {
+    const {_id} = routineConfig;
+
     const navigate = useNavigate();
 
     const handleRoutineUpdateButtonClick: MouseEventHandler<
         HTMLDivElement
     > = e => {
         e.stopPropagation();
-        navigate(ROUTES.CONFIG.DETAIL.PATH(routineConfigId));
+        navigate(ROUTES.CONFIG.DETAIL.PATH(_id));
     };
 
     return (

@@ -1,18 +1,21 @@
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
 import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
+import {RoutineConfig} from "types/model";
 
 type RoutineConfigDeleteButtonProps = {
-    routineConfigId: string;
+    routineConfig: RoutineConfig;
 };
 
 const RoutineConfigDeleteButton = ({
-    routineConfigId,
+    routineConfig,
 }: RoutineConfigDeleteButtonProps) => {
+    const {_id} = routineConfig;
+
     const {mutateAsync: deleteRoutineConfigOne} =
         useDeleteRoutineConfigOneMutation();
 
     const handleRoutineConfigDeleteModalButtonButtonClick = async () => {
-        await deleteRoutineConfigOne(routineConfigId);
+        await deleteRoutineConfigOne(_id);
     };
 
     return (

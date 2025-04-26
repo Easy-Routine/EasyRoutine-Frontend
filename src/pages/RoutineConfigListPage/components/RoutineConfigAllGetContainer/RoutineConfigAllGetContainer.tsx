@@ -1,22 +1,20 @@
 import FlexBox from "headful/Flex/Flex";
 import useRoutineConfigAllGetQuery from "hooks/server/useRoutineConfigAllGetQuery";
-import RoutineConfigAccordion from "./RoutineConfigAccordionList/RoutineConfigAccordion/RoutineConfigAccordion";
+import RoutineConfigAccordion from "../RoutineConfigAccordion/RoutineConfigAccordion";
+import {RoutineConfig} from "types/model";
 
-const RoutineConfigAllGetContainer = () => {
+type RoutineConfigAllGetContainerProps = {
+    children: (routineConfigs: RoutineConfig[]) => React.ReactNode;
+};
+
+const RoutineConfigAllGetContainer = ({
+    children,
+}: RoutineConfigAllGetContainerProps) => {
     const {data} = useRoutineConfigAllGetQuery();
 
     const routineConfigs = data.routineConfigs!;
 
-    return (
-        <FlexBox flexDirection="column" gap={20}>
-            {routineConfigs.map(routineConfig => (
-                <RoutineConfigAccordion
-                    key={routineConfig._id}
-                    routineConfig={routineConfig}
-                />
-            ))}
-        </FlexBox>
-    );
+    return <>{children(routineConfigs)}</>;
 };
 
 export default RoutineConfigAllGetContainer;
