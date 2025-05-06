@@ -4,24 +4,18 @@ import styles from "./Text.module.scss";
 type TextProps = {
     children: React.ReactNode;
     color?: string;
-    fontSize?: string | number;
-    fontWeight?: string;
-    textAlign?: React.CSSProperties["textAlign"];
+    size?: string | number;
+    weight?: string;
+    align?: React.CSSProperties["textAlign"];
 };
 
-const Text = ({
-    children,
-    color,
-    fontSize,
-    fontWeight,
-    textAlign,
-}: TextProps) => {
+const Text = ({children, color, size, weight, align}: TextProps) => {
     // 기본값은 CSS 변수로 설정된 값으로 대체할 수 있습니다.
     const dynamicStyle: React.CSSProperties = {
-        fontSize: fontSize || "var(--fontSize-md)",
-        fontWeight: fontWeight || "var(--fontWeight-regular)",
+        fontSize: size || "var(--fontSize-md)",
+        fontWeight: weight || "var(--fontWeight-regular)",
         color: color || "var(--text-black)",
-        textAlign: textAlign || "left",
+        textAlign: align || "left",
     };
 
     return (

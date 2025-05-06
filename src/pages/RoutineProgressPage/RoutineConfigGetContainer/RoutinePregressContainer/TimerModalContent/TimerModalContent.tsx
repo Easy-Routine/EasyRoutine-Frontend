@@ -8,7 +8,7 @@ import formatTime from "utils/formatTime";
 const TimerModalContent = () => {
     const {remainingTime} = useRoutineProgress();
     return (
-        <Flex padding={20} flexDirection="column" alignItems="center" gap={20}>
+        <Flex padding={20} direction="column" align="center" gap={20}>
             <CircleButton width={65} height={65}>
                 <ClockIcon
                     style={{
@@ -19,15 +19,15 @@ const TimerModalContent = () => {
                 />
             </CircleButton>
             <Text
-                fontSize={"var(--fontSize-xl)"}
-                fontWeight={"var(--fontWeight-semibold)"}
+                size={"var(--fontSize-xl)"}
+                weight={"var(--fontWeight-semibold)"}
                 color={"var(--text-black)"}
             >
                 휴식 타이머
             </Text>
             <Text
-                fontSize={"var(--fontSize-md)"}
-                fontWeight={"var(--fontWeight-regular)"}
+                size={"var(--fontSize-md)"}
+                weight={"var(--fontWeight-regular)"}
                 color={"var(--text-black)"}
             >
                 {formatTime(remainingTime)}

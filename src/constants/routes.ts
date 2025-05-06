@@ -38,6 +38,10 @@ const ROUTES = {
             PATH: "/",
             COMPONENT: RoutineConfigListPage,
         },
+        CREATE: {
+            PATH: `/routine-config/create`,
+            COMPONENT: RoutineConfigDetailPage,
+        },
         DETAIL: {
             PATH: (routineConfigId: string) =>
                 `/routine-config/${routineConfigId}`,

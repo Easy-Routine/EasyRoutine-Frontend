@@ -17,17 +17,17 @@ const WorkoutConfigFlex = ({workoutConfig}: WorkoutConfigFlexProps) => {
     return (
         <Flex gap={16}>
             <Image width={40} height={40} src={image} />
-            <Flex flexDirection="column" justifyContent="space-around">
+            <Flex direction="column" justify="space-around">
                 <Text
-                    fontSize={"var(--fontSize-sm)"}
-                    fontWeight={"var(--fontWeight-semibold)"}
+                    size={"var(--fontSize-sm)"}
+                    weight={"var(--fontWeight-semibold)"}
                     color={"var(--text-black)"}
                 >
                     {name}
                 </Text>
                 <Text
-                    fontSize={"var(--fontSize-sm)"}
-                    fontWeight={"var(--fontWeight-regular)"}
+                    size={"var(--fontSize-sm)"}
+                    weight={"var(--fontWeight-regular)"}
                     color={"var(--text-black)"}
                 >
                     {setConfigs.length}

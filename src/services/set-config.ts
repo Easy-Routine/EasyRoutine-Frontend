@@ -3,10 +3,8 @@ import {handleError} from "utils/handleError";
 
 // 확인: 완료
 export const createSetConfigOne = async ({
-    routineConfigId,
     workoutConfigId,
 }: {
-    routineConfigId: string;
     workoutConfigId: string;
 }): Promise<SetConfig | undefined> => {
     try {
@@ -39,10 +37,8 @@ export const updateSetConfigField = async ({
 
 // 확인: 완료
 export const deleteSetConfigOne = async ({
-    routineConfigId,
     workoutConfigId,
 }: {
-    routineConfigId: string;
     workoutConfigId: string;
 }): Promise<boolean | undefined> => {
     try {

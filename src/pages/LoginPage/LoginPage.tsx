@@ -10,25 +10,17 @@ import PublicPageTemplate from "headful/PublicPageTemplate/PublicPageTemplate";
 const LoginPage = () => {
     return (
         <PublicPageTemplate>
-            <Flex
-                flexDirection="column"
-                height="100%"
-                justifyContent="flex-end"
-            >
-                <Flex
-                    flexDirection="column"
-                    height="70%"
-                    justifyContent="space-around"
-                >
-                    <Flex flexDirection="column" alignItems="center">
+            <Flex direction="column" height="100%" justify="flex-end">
+                <Flex direction="column" height="70%" justify="space-around">
+                    <Flex direction="column" align="center">
                         <Logo type="large" />
-                        <Text fontSize={14} textAlign="center">
+                        <Text size={14} align="center">
                             간단하고 편리한 운동을 위한
                             <br /> 당신의 헬스 메이트
                         </Text>
                     </Flex>
 
-                    <Flex flexDirection="column" padding={40} gap={16}>
+                    <Flex direction="column" padding={40} gap={16}>
                         <GoogleButton />
                         <AppleButton />
                         <KaKaoButton />

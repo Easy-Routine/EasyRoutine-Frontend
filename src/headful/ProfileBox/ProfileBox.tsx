@@ -10,7 +10,7 @@ type ProfileBoxProps = {
 
 const ProfileBox = ({imageSrc, name}: ProfileBoxProps) => {
     return (
-        <Flex flexDirection="column" gap={20} alignItems="center">
+        <Flex direction="column" gap={20} align="center">
             <Image src={imageSrc} width={100} height={100} borderRadius="50%" />
             <Text>{name}</Text>
         </Flex>

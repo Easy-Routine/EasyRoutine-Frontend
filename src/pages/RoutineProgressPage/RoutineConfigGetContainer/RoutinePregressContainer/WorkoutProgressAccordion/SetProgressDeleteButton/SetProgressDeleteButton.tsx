@@ -79,11 +79,7 @@ const SetProgressDeleteButton = ({}: SetProgressDeleteButtonProps) => {
     };
 
     return (
-        <FlexBox
-            gap={16}
-            alignItems="center"
-            onClick={handleSetDeleteButtonClick}
-        >
+        <FlexBox gap={16} align="center" onClick={handleSetDeleteButtonClick}>
             <MinusIcon color={"var(--color-gray-dark)"} />
             <Text color={"var(--color-gray-dark)"}>세트 삭제하기</Text>
         </FlexBox>

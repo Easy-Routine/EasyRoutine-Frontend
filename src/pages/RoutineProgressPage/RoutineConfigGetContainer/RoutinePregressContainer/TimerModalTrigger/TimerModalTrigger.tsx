@@ -37,12 +37,7 @@ const TimerModalTrigger = ({
             <ConfirmModal.Backdrop />
 
             <ConfirmModal.Content>
-                <Flex
-                    padding={20}
-                    flexDirection="column"
-                    alignItems="center"
-                    gap={20}
-                >
+                <Flex padding={20} direction="column" align="center" gap={20}>
                     <CircleButton width={65} height={65}>
                         <ClockIcon
                             style={{
@@ -53,17 +48,17 @@ const TimerModalTrigger = ({
                         />
                     </CircleButton>
                     <Text
-                        fontSize={"var(--fontSize-xl)"}
-                        fontWeight={"var(--fontWeight-semibold)"}
+                        size={"var(--fontSize-xl)"}
+                        weight={"var(--fontWeight-semibold)"}
                         color={"var(--text-black)"}
                     >
                         루틴 삭제
                     </Text>
                     <Text
-                        fontSize={"var(--fontSize-md)"}
-                        fontWeight={"var(--fontWeight-regular)"}
+                        size={"var(--fontSize-md)"}
+                        weight={"var(--fontWeight-regular)"}
                         color={"var(--text-black)"}
-                        textAlign="center"
+                        align="center"
                     >
                         {formattedTime}
                     </Text>

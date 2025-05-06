@@ -33,8 +33,8 @@ const RoutineConfigDeleteModalButton = ({
                     <ConfirmModal.Content>
                         <FlexBox
                             padding={20}
-                            flexDirection="column"
-                            alignItems="center"
+                            direction="column"
+                            align="center"
                             gap={20}
                         >
                             <CircleButton width={65} height={65}>
@@ -47,17 +47,17 @@ const RoutineConfigDeleteModalButton = ({
                                 />
                             </CircleButton>
                             <Text
-                                fontSize={"var(--fontSize-xl)"}
-                                fontWeight={"var(--fontWeight-semibold)"}
+                                size={"var(--fontSize-xl)"}
+                                weight={"var(--fontWeight-semibold)"}
                                 color={"var(--text-black)"}
                             >
                                 루틴 삭제
                             </Text>
                             <Text
-                                fontSize={"var(--fontSize-md)"}
-                                fontWeight={"var(--fontWeight-regular)"}
+                                size={"var(--fontSize-md)"}
+                                weight={"var(--fontWeight-regular)"}
                                 color={"var(--text-black)"}
-                                textAlign="center"
+                                align="center"
                             >
                                 '{name}'을
                                 <br /> 삭제하시겠습니까?

@@ -22,7 +22,7 @@ const RoutineConfigStartModalButton = ({
                 }}
             >
                 <ConfirmModal.Trigger>
-                    <FlexBox gap={16} alignItems="center">
+                    <FlexBox gap={16} align="center">
                         <RunIcon color={"#82B1FF"} />
                         <Text color={"var(--color-primary)"}>
                             루틴 시작하기

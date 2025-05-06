@@ -17,7 +17,7 @@ const RoutineProgressContainer = ({}: RoutineProgressContainerProps) => {
 
     return (
         <>
-            <FlexBox flexDirection="column" gap={20}>
+            <FlexBox direction="column" gap={20}>
                 <List<WorkoutConfig>
                     data={routineProgress.workoutConfigs}
                     render={workoutConfig => (
@@ -28,7 +28,7 @@ const RoutineProgressContainer = ({}: RoutineProgressContainerProps) => {
                 />
             </FlexBox>
             <BottomBoxPortal>
-                <Flex width="100%" justifyContent="space-between" gap={16}>
+                <Flex width="100%" justify="space-between" gap={16}>
                     <TimerModalTrigger remainingTime={remainingTime}>
                         <WorkoutRestSecTimer remainingTime={remainingTime} />
                     </TimerModalTrigger>

@@ -2,59 +2,49 @@ import React from "react";
 import classNames from "classnames";
 import styles from "./Flex.module.scss";
 
-type Spacing = {
-    top?: number;
-    right?: number;
-    bottom?: number;
-    left?: number;
-};
+type PaddingSize =
+    | number
+    | {
+          x?: number;
+          y?: number;
+          l?: number;
+          r?: number;
+          t?: number;
+          b?: number;
+      };
 
 export type FlexProps = React.HTMLAttributes<HTMLDivElement> & {
     children: React.ReactNode;
-    padding?: Spacing | number;
-    margin?: Spacing | number;
-    flexDirection?: "row" | "row-reverse" | "column" | "column-reverse";
-    alignItems?: "stretch" | "center" | "flex-start" | "flex-end" | "baseline";
-    justifyContent?:
-        | "flex-start"
-        | "flex-end"
+    direction?: "row" | "row-reverse" | "column" | "column-reverse";
+    align?: "stretch" | "center" | "start" | "end" | "baseline";
+    justify?:
+        | "start"
+        | "end"
         | "center"
         | "space-between"
         | "space-around"
         | "space-evenly";
     gap?: number;
-    flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
+    wrap?: "nowrap" | "wrap" | "wrap-reverse";
     width?: number | string;
     height?: number | string;
+    padding?: PaddingSize;
 };
 
 const Flex = ({
     children,
-    padding,
-    margin,
-    flexDirection = "row",
-    alignItems = "stretch",
-    justifyContent = "flex-start",
+    direction = "row",
+    align = "stretch",
+    justify = "start",
     gap = 0,
-    flexWrap = "nowrap",
+    wrap = "nowrap",
     width,
     height,
+    padding,
     style,
     className,
     ...props
 }: FlexProps) => {
-    // 숫자 또는 객체 형태의 spacing을 문자열로 변환하는 함수
-    const spacingToString = (spacing?: Spacing | number): string => {
-        if (typeof spacing === "number") {
-            return `${spacing}px`;
-        }
-        if (spacing) {
-            return `${spacing.top ?? 0}px ${spacing.right ?? 0}px ${spacing.bottom ?? 0}px ${spacing.left ?? 0}px`;
-        }
-        return "0";
-    };
-
-    // width와 height가 숫자면 px 단위를 붙이고, 문자열이면 그대로 사용
     const dimensionToString = (dim?: number | string): string => {
         if (typeof dim === "number") {
             return `${dim}px`;
@@ -62,23 +52,45 @@ const Flex = ({
         return dim || "auto";
     };
 
-    // CSS 변수로 동적 값 전달
+    const spacingToString = (padding: PaddingSize | number = 0): string => {
+        // now padding is always number/string/object
+
+        if (typeof padding === "number" || typeof padding === "string") {
+            return dimensionToString(padding as number);
+        }
+
+        // object: start with x/y defaults
+        const px = padding.x != null ? dimensionToString(padding.x) : "0px";
+        const py = padding.y != null ? dimensionToString(padding.y) : "0px";
+
+        let top = py;
+        let bottom = py;
+        let left = px;
+        let right = px;
+
+        if (padding.t != null) top = dimensionToString(padding.t);
+        if (padding.b != null) bottom = dimensionToString(padding.b);
+        if (padding.l != null) left = dimensionToString(padding.l);
+        if (padding.r != null) right = dimensionToString(padding.r);
+
+        return `${top} ${right} ${bottom} ${left}`;
+    };
+
     const cssVariables: React.CSSProperties = {
-        "--flex-padding": spacingToString(padding),
-        "--flex-margin": spacingToString(margin),
-        "--flex-direction": flexDirection,
-        "--flex-align-items": alignItems,
-        "--flex-justify-content": justifyContent,
-        "--flex-wrap": flexWrap,
-        "--flex-gap": `${gap}px`,
-        "--flex-width": dimensionToString(width),
-        "--flex-height": dimensionToString(height),
+        "--flex-direction": direction,
+        "--align-items": align,
+        "--justify-content": justify,
+        "--wrap": wrap,
+        "--gap": `${gap}px`,
+        "--width": dimensionToString(width),
+        "--height": dimensionToString(height),
+        "--padding": spacingToString(padding),
     } as React.CSSProperties;
 
     return (
         <div
             {...props}
-            className={classNames(styles.flex, className)}
+            className={classNames(styles.Flex, className)}
             style={{...cssVariables, ...style}}
         >
             {children}

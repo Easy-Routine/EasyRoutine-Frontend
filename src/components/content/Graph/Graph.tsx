@@ -1,6 +1,6 @@
 import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
-import { useState, useEffect } from "react";
-import { TooltipProps } from "recharts";
+import {useState, useEffect} from "react";
+import {TooltipProps} from "recharts";
 import {
     AreaChart,
     Area,
@@ -11,8 +11,8 @@ import {
     CartesianGrid,
     Dot,
 } from "recharts";
-import { useTheme } from "styled-components";
-import { Period } from "types/enum";
+import {useTheme} from "styled-components";
+import {Period} from "types/enum";
 
 type GraphProps = {
     onDotClick: (data: any) => void; // dot click event handler
@@ -31,16 +31,14 @@ const Graph = ({
     workoutLibraryId,
     selectedValue,
 }: GraphProps) => {
-    const { data: workoutRecordSumListByDate } = useGetWorkoutRecordSumAllQuery(
-        {
-            workoutLibraryId,
-            period: selectedValue as Period,
-        }
-    );
+    const {data: workoutRecordSumListByDate} = useGetWorkoutRecordSumAllQuery({
+        workoutLibraryId,
+        period: selectedValue as Period,
+    });
 
     const data = workoutRecordSumListByDate!;
 
-    const { color, fontSize } = useTheme();
+    const {color, fontSize} = useTheme();
     const [activeTick, setActiveTick] = useState(null); // 클릭된 tick을 저장
     const [tickSize, setTickSize] = useState({
         width: 42,
@@ -53,7 +51,7 @@ const Graph = ({
         setActiveTick(data.payload.month); // 클릭한 tick의 월을 상태로 설정
     };
 
-    const CustomTick = ({ x, y, payload }: any) => {
+    const CustomTick = ({x, y, payload}: any) => {
         const isActive = payload.value === activeTick; // 현재 tick이 활성화된 tick인지 확인
 
         return (
@@ -74,7 +72,7 @@ const Graph = ({
                     y={20} // 텍스트의 Y 좌표는 그대로 유지
                     textAnchor="middle"
                     fill={isActive ? color.text.white : "#666"}
-                    fontSize={tickSize.font} // 크기 조정
+                    size={tickSize.font} // 크기 조정
                 >
                     {payload.value}
                 </text>
@@ -87,7 +85,7 @@ const Graph = ({
         const width = window.innerWidth < 360 ? 30 : 42; // 화면 크기에 따라 너비 조정
         const height = window.innerWidth < 360 ? 18 : 22; // 화면 크기에 따라 높이 조정
         const font = window.innerWidth < 360 ? fontSize.xxs : fontSize.xs;
-        setTickSize({ width, height, font });
+        setTickSize({width, height, font});
     };
 
     useEffect(() => {
@@ -102,7 +100,7 @@ const Graph = ({
         <ResponsiveContainer width="100%" height={300}>
             <AreaChart
                 data={data}
-                margin={{ top: 60, right: 40, left: 40, bottom: 20 }}
+                margin={{top: 60, right: 40, left: 40, bottom: 20}}
             >
                 <CartesianGrid
                     horizontal={false}
@@ -137,7 +135,7 @@ const Graph = ({
                     stroke={color.primary}
                     strokeWidth={3.5}
                     dot={<CustomDot onClick={handleDotClick} />}
-                    activeDot={{ r: 7.5 }}
+                    activeDot={{r: 7.5}}
                     fillOpacity={3}
                     fill="url(#gradient)"
                 />
@@ -149,7 +147,7 @@ const Graph = ({
 };
 
 const CustomDot = (props: any) => {
-    const { cx, cy, value, onClick, payload } = props;
+    const {cx, cy, value, onClick, payload} = props;
 
     return (
         <Dot
@@ -159,8 +157,8 @@ const CustomDot = (props: any) => {
             stroke={props.stroke}
             strokeWidth={5}
             fill={props.fill}
-            onClick={() => onClick({ cx, cy, value, onClick, payload })} // 클릭 시 데이터 포인트 정보 전달
-            style={{ cursor: "pointer" }} // 포인터 커서 적용
+            onClick={() => onClick({cx, cy, value, onClick, payload})} // 클릭 시 데이터 포인트 정보 전달
+            style={{cursor: "pointer"}} // 포인터 커서 적용
         />
     );
 };
@@ -169,7 +167,7 @@ interface CustomTooltipProps extends TooltipProps<number, string> {
     // 특정 데이터 타입에 맞게 수정할 수 있습니다.
 }
 
-const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
+const CustomTooltip: React.FC<CustomTooltipProps> = ({active, payload}) => {
     if (active && payload && payload.length) {
         const value = payload[0].value; // 원하는 데이터 값을 가져옵니다.
         const date = payload[0].payload.key; // 날짜 데이터를 가져옵니다.

@@ -65,20 +65,17 @@ const WorkoutProgressAccordion = ({
                                 height={60}
                                 src={workoutLibrary.image}
                             />
-                            <FlexBox
-                                flexDirection="column"
-                                justifyContent="space-around"
-                            >
+                            <FlexBox direction="column" justify="space-around">
                                 <Text
-                                    fontSize={"var(--fontSize-lg)"}
-                                    fontWeight={"var(--fontWeight-semibold)"}
+                                    size={"var(--fontSize-lg)"}
+                                    weight={"var(--fontWeight-semibold)"}
                                     color={"var(--text-black)"}
                                 >
                                     {workoutLibrary.name}
                                 </Text>
                                 <Text
-                                    fontSize={"var(--fontSize-sm)"}
-                                    fontWeight={"var(--fontWeight-regular)"}
+                                    size={"var(--fontSize-sm)"}
+                                    weight={"var(--fontWeight-regular)"}
                                     color={"var(--text-black)"}
                                 >
                                     {setConfigs.length}종목
@@ -90,7 +87,7 @@ const WorkoutProgressAccordion = ({
                         <SetProgressUpdateTable />
                         <FlexBox
                             padding={{top: 10, bottom: 10}}
-                            justifyContent="space-around"
+                            justify="space-around"
                         >
                             <SetProgressDeleteButton />
                             <SetProgressCreateButton />

@@ -21,22 +21,18 @@ export type RoutineConfig = {
 
 export type WorkoutConfig = {
     _id: string;
-    createdAt: string;
-    updatedAt: string;
-    routineConfigId: string;
     setConfigs: SetConfig[];
     workoutLibrary: WorkoutLibrary;
 };
 
 export type SetConfig = {
     _id: string;
-    weight: number;
-    rep: number;
+    weight?: number;
+    rep?: number;
+    workoutSec?: number;
     restSec: number;
-    workoutSec: number;
     createdAt: string;
     updatedAt: string;
-    workoutConfigId: string;
     [key: string]: any;
 };
 
@@ -50,8 +46,6 @@ export type WorkoutLibrary = {
     isEditable: boolean;
     createdAt: string;
     updatedAt: string;
-    userId: string;
-    [key: string]: any;
 };
 
 export type RoutineRecord = {

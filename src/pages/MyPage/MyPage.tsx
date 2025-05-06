@@ -21,17 +21,14 @@ const MyPage = () => {
                 <LogoArea />
             </Header>
             <Main>
-                <Flex padding={20} flexDirection="column" gap={30}>
+                <Flex padding={20} direction="column" gap={30}>
                     <ProfileBox imageSrc="" name="김동현" />
                     <OutlinedButton style={{alignSelf: "center"}}>
                         로그아웃
                     </OutlinedButton>
                     <UnderlineItem>
-                        <Flex
-                            justifyContent="space-between"
-                            alignItems="center"
-                        >
-                            <Flex gap={10} alignItems="center">
+                        <Flex justify="space-between" align="center">
+                            <Flex gap={10} align="center">
                                 <CiUser size={24} />
                                 <Text>문의사항</Text>
                             </Flex>

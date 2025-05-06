@@ -14,10 +14,8 @@ export const createWorkoutConfigAll = async (
 };
 // 확인: 완료
 export const deleteWorkoutConfigOne = async ({
-    routineConfigId,
     workoutConfigId,
 }: {
-    routineConfigId: string;
     workoutConfigId: string;
 }): Promise<boolean | undefined> => {
     try {

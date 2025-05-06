@@ -19,12 +19,7 @@ const RoutineConfigStartModalContent = ({
 
     return (
         <>
-            <Flex
-                padding={20}
-                flexDirection="column"
-                alignItems="center"
-                gap={20}
-            >
+            <Flex padding={20} direction="column" align="center" gap={20}>
                 <CircleButton width={65} height={65}>
                     <FireIcon
                         style={{
@@ -35,15 +30,15 @@ const RoutineConfigStartModalContent = ({
                     />
                 </CircleButton>
                 <Text
-                    fontSize={"var(--fontSize-xl)"}
-                    fontWeight={"var(--fontWeight-semibold)"}
+                    size={"var(--fontSize-xl)"}
+                    weight={"var(--fontWeight-semibold)"}
                     color={"var(--text-black)"}
                 >
                     루틴 진행
                 </Text>
                 <Text
-                    fontSize={"var(--fontSize-md)"}
-                    fontWeight={"var(--fontWeight-regular)"}
+                    size={"var(--fontSize-md)"}
+                    weight={"var(--fontWeight-regular)"}
                     color={"var(--text-black)"}
                 >
                     '{name}'으로

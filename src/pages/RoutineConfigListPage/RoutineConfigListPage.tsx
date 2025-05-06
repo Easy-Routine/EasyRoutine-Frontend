@@ -9,6 +9,8 @@ import Main from "headful/PrivatePageTemplate/Main/Main";
 import Footer from "headful/PrivatePageTemplate/Footer/Footer";
 import Flex from "headful/Flex/Flex";
 import RoutineConfigAccordion from "./components/RoutineConfigAccordion/RoutineConfigAccordion";
+import List from "headless/List/List";
+import {RoutineConfig} from "types/model";
 
 const RoutineConfigListPage = () => {
     const location = useLocation();
@@ -19,16 +21,18 @@ const RoutineConfigListPage = () => {
                 <LogoArea />
             </Header>
             <Main>
-                <Flex flexDirection="column" gap={20}>
+                <Flex direction="column" gap={20}>
                     <RoutineConfigAllGetContainer>
-                        {routineConfigs =>
-                            routineConfigs.map(routineConfig => (
-                                <RoutineConfigAccordion
-                                    key={routineConfig._id}
-                                    routineConfig={routineConfig}
-                                />
-                            ))
-                        }
+                        {routineConfigs => (
+                            <List<RoutineConfig>
+                                data={routineConfigs}
+                                item={routineConfig => (
+                                    <RoutineConfigAccordion
+                                        routineConfig={routineConfig}
+                                    />
+                                )}
+                            />
+                        )}
                     </RoutineConfigAllGetContainer>
                 </Flex>
                 <RoutineConfigCreateButton />

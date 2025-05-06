@@ -1,4 +1,4 @@
-import WorkoutConfigAccordion from "pages/RoutineConfigDetailPage/components/RoutineConfigGetContainer/WorkoutConfigAccordionList/WorkoutConfigAccordion/WorkoutConfigAccordion";
+import WorkoutConfigAccordion from "pages/RoutineConfigDetailPage/components/WorkoutConfigAccordion/WorkoutConfigAccordion";
 import {WorkoutConfig} from "types/model";
 
 type WorkoutConfigAccordionListProps = {

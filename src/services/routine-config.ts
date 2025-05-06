@@ -169,8 +169,97 @@ export const getRoutineConfigAll = async (): Promise<
 export const getRoutineConfigOne = async (
     routineConfigId: string,
 ): Promise<RoutineConfig | undefined> => {
+    const routineConfig = {
+        _id: "routine1",
+        name: "Morning Workout",
+        color: Color.BLUE, // Color 타입에 정의된 색상 값
+        createdAt: "2025-05-06T08:00:00Z",
+        updatedAt: "2025-05-06T08:30:00Z",
+        workoutConfigs: [
+            {
+                _id: "workout1",
+                createdAt: "2025-05-06T08:10:00Z",
+                updatedAt: "2025-05-06T08:20:00Z",
+                routineConfigId: "routine1",
+                setConfigs: [
+                    {
+                        _id: "set1",
+                        weight: 50,
+                        rep: 10,
+                        restSec: 60,
+                        workoutSec: 30,
+                        createdAt: "2025-05-06T08:10:00Z",
+                        updatedAt: "2025-05-06T08:15:00Z",
+                        workoutConfigId: "workout1",
+                    },
+                    {
+                        _id: "set2",
+                        weight: 60,
+                        rep: 8,
+                        restSec: 90,
+                        workoutSec: 40,
+                        createdAt: "2025-05-06T08:15:00Z",
+                        updatedAt: "2025-05-06T08:20:00Z",
+                        workoutConfigId: "workout1",
+                    },
+                ],
+                workoutLibrary: {
+                    _id: "workoutLibrary1",
+                    name: "Push Up",
+                    image: "https://example.com/push-up.jpg",
+                    originImage: "https://example.com/push-up-origin.jpg",
+                    category: "Strength",
+                    type: ["weight", "rep", "workoutSec"],
+                    isEditable: true,
+                    createdAt: "2025-05-06T08:00:00Z",
+                    updatedAt: "2025-05-06T08:10:00Z",
+                    userId: "1",
+                },
+            },
+            {
+                _id: "workout2",
+                createdAt: "2025-05-06T08:10:00Z",
+                updatedAt: "2025-05-06T08:20:00Z",
+                routineConfigId: "routine1",
+                setConfigs: [
+                    {
+                        _id: "set1",
+                        weight: 50,
+                        rep: 10,
+                        restSec: 60,
+                        createdAt: "2025-05-06T08:10:00Z",
+                        updatedAt: "2025-05-06T08:15:00Z",
+                        workoutConfigId: "workout1",
+                    },
+                    {
+                        _id: "set2",
+                        weight: 60,
+                        rep: 8,
+                        restSec: 90,
+                        createdAt: "2025-05-06T08:15:00Z",
+                        updatedAt: "2025-05-06T08:20:00Z",
+                        workoutConfigId: "workout1",
+                    },
+                ],
+                workoutLibrary: {
+                    _id: "workoutLibrary1",
+                    name: "Push Up",
+                    image: "https://example.com/push-up.jpg",
+                    originImage: "https://example.com/push-up-origin.jpg",
+                    category: "Strength",
+                    type: ["weight", "rep"],
+                    isEditable: true,
+                    createdAt: "2025-05-06T08:00:00Z",
+                    updatedAt: "2025-05-06T08:10:00Z",
+                    userId: "1",
+                },
+            },
+        ],
+        userId: "1",
+    };
+
     try {
-        return undefined;
+        return routineConfig;
     } catch (e) {
         handleError(e);
     }

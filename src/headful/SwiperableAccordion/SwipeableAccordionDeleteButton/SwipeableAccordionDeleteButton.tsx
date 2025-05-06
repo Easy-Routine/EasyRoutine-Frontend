@@ -1,18 +1,16 @@
-import React from "react";
+import React, {HTMLAttributes} from "react";
 import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
 import styles from "./SwipeableAccordionDeleteButton.module.scss";
 
-type SwipeableAccordionDeleteButtonProps = {
-    onSwipeableAccordionDeleteButtonClick?: () => void;
-};
+type SwipeableAccordionDeleteButtonProps = HTMLAttributes<HTMLDivElement> & {};
 
 const SwipeableAccordionDeleteButton = ({
-    onSwipeableAccordionDeleteButtonClick,
+    ...props
 }: SwipeableAccordionDeleteButtonProps) => {
     return (
         <div
             className={styles.swipeableAccordionDeleteButton}
-            onClick={onSwipeableAccordionDeleteButtonClick}
+            onClick={props.onClick}
         >
             <TrashIcon />
         </div>

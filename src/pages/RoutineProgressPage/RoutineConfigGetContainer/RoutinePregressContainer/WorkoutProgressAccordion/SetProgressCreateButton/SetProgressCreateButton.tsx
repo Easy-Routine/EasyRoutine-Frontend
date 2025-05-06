@@ -77,7 +77,7 @@ const SetProgressCreateButton = (
     return (
         <FlexBox
             gap={16}
-            alignItems="center"
+            align="center"
             onClick={handleSetProgressCreateButtonClick}
         >
             <PlusIcon color={"var(--color-primary)"} />

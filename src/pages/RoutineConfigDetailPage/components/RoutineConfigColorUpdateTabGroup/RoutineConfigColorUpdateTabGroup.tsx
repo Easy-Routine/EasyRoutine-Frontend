@@ -1,33 +1,22 @@
-import BottomBox from "headful/BottomBox/BottomBox";
 import ColorTabGroup from "headful/ColorTabGroup/ColorTabGroup";
-import useRoutineConfigGetQuery from "hooks/server/useRoutineConfigGetQuery";
-import useUpdateRoutineConfigFieldMutation from "hooks/server/useUpdateRoutineConfigFieldMutation";
 import {Color} from "types/enum";
+import {useRoutineConfigUpdateParams} from "../RoutineConfigUpdateParamsProvider/RoutineConfigUpdateParamsProvider";
+import {TabValue} from "headless/TabGroup/TabGroup";
 
-type RoutineConfigColorUpdateBottomBoxProps = {
-    routineConfigId: string;
-};
+type RoutineConfigColorUpdateTabGroupProps = {};
 
-const RoutineConfigColorUpdateBottomBox = ({
-    routineConfigId,
-}: RoutineConfigColorUpdateBottomBoxProps) => {
-    const {data} = useRoutineConfigGetQuery(routineConfigId);
+const RoutineConfigColorUpdateTabGroup =
+    ({}: RoutineConfigColorUpdateTabGroupProps) => {
+        const {routineConfig, setRoutineConfig} =
+            useRoutineConfigUpdateParams();
 
-    const routineConfig = data.routineConfig!;
+        const handleColorTabItemClick = (value: TabValue) => {
+            const newRoutineConfig = structuredClone(routineConfig);
+            newRoutineConfig.color = value as Color;
+            setRoutineConfig(newRoutineConfig);
+        };
 
-    const {mutateAsync: updateRoutineConfigColor} =
-        useUpdateRoutineConfigFieldMutation();
-
-    const handleColorTabItemClick = async (value: string) => {
-        await updateRoutineConfigColor({
-            routineConfigId,
-            key: "color",
-            value,
-        });
-    };
-
-    return (
-        <BottomBox>
+        return (
             <ColorTabGroup defaultValue={routineConfig.color}>
                 <ColorTabGroup.Item
                     value={Color.VIOLET}
@@ -50,8 +39,7 @@ const RoutineConfigColorUpdateBottomBox = ({
                     onTabGroupItemClick={handleColorTabItemClick}
                 />
             </ColorTabGroup>
-        </BottomBox>
-    );
-};
+        );
+    };
 
-export default RoutineConfigColorUpdateBottomBox;
+export default RoutineConfigColorUpdateTabGroup;

@@ -31,7 +31,7 @@ const RoutineConfigUpdateButton = ({
     return (
         <FlexBox
             gap={16}
-            alignItems="center"
+            align="center"
             onClick={handleRoutineUpdateButtonClick}
         >
             <PenIcon color={"#7D7D7D"} />

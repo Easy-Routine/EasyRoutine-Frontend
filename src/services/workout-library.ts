@@ -1,6 +1,5 @@
 import {WorkoutLibrary} from "types/model";
-import {db} from "db";
-import api from "utils/axios";
+
 import {handleError} from "utils/handleError";
 
 export const getWorkoutLibraryAll = async ({
@@ -11,7 +10,41 @@ export const getWorkoutLibraryAll = async ({
     category?: string;
 }): Promise<WorkoutLibrary[] | undefined> => {
     try {
-        return undefined; // 필터링된 운동 배열 반환
+        return [
+            {
+                _id: "lib01",
+                name: "바벨 스쿼트",
+                image: "https://example.com/images/barbell-squat-thumb.jpg",
+                originImage: "https://example.com/images/barbell-squat.jpg",
+                category: "하체",
+                type: ["weight", "rep"],
+                isEditable: true,
+                createdAt: "2025-01-15T09:30:00.000Z",
+                updatedAt: "2025-04-10T14:45:00.000Z",
+            },
+            {
+                _id: "lib02",
+                name: "플랭크",
+                image: "https://example.com/images/plank-thumb.jpg",
+                originImage: "https://example.com/images/plank.jpg",
+                category: "가슴",
+                type: ["weight", "rep"],
+                isEditable: false,
+                createdAt: "2024-12-05T12:00:00.000Z",
+                updatedAt: "2025-02-20T08:15:00.000Z",
+            },
+            {
+                _id: "lib03",
+                name: "케틀벨 스윙",
+                image: "https://example.com/images/kettlebell-swing-thumb.jpg",
+                originImage: "https://example.com/images/kettlebell-swing.jpg",
+                category: "등",
+                type: ["weight", "rep"],
+                isEditable: true,
+                createdAt: "2025-03-22T16:20:00.000Z",
+                updatedAt: "2025-05-01T10:05:00.000Z",
+            },
+        ]; // 필터링된 운동 배열 반환
     } catch (e) {
         handleError(e);
     }

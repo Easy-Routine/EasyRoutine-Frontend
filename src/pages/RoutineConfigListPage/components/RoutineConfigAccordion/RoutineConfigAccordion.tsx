@@ -23,18 +23,15 @@ const RoutineConfigAccordion = ({
                 <SwipeableAccordion.Visible>
                     <Flex gap={16}>
                         <FireColorBox color={color} />
-                        <Flex
-                            flexDirection="column"
-                            justifyContent="space-around"
-                        >
+                        <Flex direction="column" justify="space-around">
                             <NameText routineConfig={routineConfig} />
                             <LengthText routineConfig={routineConfig} />
                         </Flex>
                     </Flex>
                 </SwipeableAccordion.Visible>
                 <SwipeableAccordion.Hidden>
-                    <Flex padding={{top: 20}} flexDirection="column">
-                        <Flex flexDirection="column" gap={10}>
+                    <Flex padding={{top: 20}} direction="column">
+                        <Flex direction="column" gap={10}>
                             {workoutConfigs.map(
                                 (workoutConfig: WorkoutConfig) => (
                                     <WorkoutConfigFlex
@@ -45,7 +42,7 @@ const RoutineConfigAccordion = ({
                         </Flex>
                         <Flex
                             padding={{top: 20, bottom: 10}}
-                            justifyContent="space-around"
+                            justify="space-around"
                         >
                             <RoutineConfigUpdateButton
                                 routineConfig={routineConfig}
@@ -66,8 +63,8 @@ export default RoutineConfigAccordion;
 
 const NameText = ({routineConfig}: {routineConfig: RoutineConfig}) => (
     <Text
-        fontSize={"var(--fontSize-lg)"}
-        fontWeight={"var(--fontWeight-semibold)"}
+        size={"var(--fontSize-lg)"}
+        weight={"var(--fontWeight-semibold)"}
         color={"var(--text-black)"}
     >
         {routineConfig.name}
@@ -76,8 +73,8 @@ const NameText = ({routineConfig}: {routineConfig: RoutineConfig}) => (
 
 const LengthText = ({routineConfig}: {routineConfig: RoutineConfig}) => (
     <Text
-        fontSize={"var(--fontSize-sm)"}
-        fontWeight={"var(--fontWeight-regular)"}
+        size={"var(--fontSize-sm)"}
+        weight={"var(--fontWeight-regular)"}
         color={"var(--text-black)"}
     >
         {routineConfig.workoutConfigs.length}종목

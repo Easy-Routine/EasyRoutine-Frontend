@@ -5,7 +5,7 @@ import {ReactComponent as QuestionIcon} from "assets/image/question.svg";
 
 const UnCompleteModalContent = () => {
     return (
-        <Flex padding={20} flexDirection="column" alignItems="center" gap={20}>
+        <Flex padding={20} direction="column" align="center" gap={20}>
             <CircleButton width={65} height={65}>
                 <QuestionIcon
                     style={{
@@ -16,15 +16,15 @@ const UnCompleteModalContent = () => {
                 />
             </CircleButton>
             <Text
-                fontSize={"var(--fontSize-xl)"}
-                fontWeight={"var(--fontWeight-semibold)"}
+                size={"var(--fontSize-xl)"}
+                weight={"var(--fontWeight-semibold)"}
                 color={"var(--text-black)"}
             >
                 루틴 미완료
             </Text>
             <Text
-                fontSize={"var(--fontSize-md)"}
-                fontWeight={"var(--fontWeight-regular)"}
+                size={"var(--fontSize-md)"}
+                weight={"var(--fontWeight-regular)"}
                 color={"var(--text-black)"}
             >
                 이 페이지를 벗어나면 지금까지 진행한 운동만 캘린더에 저장됩니다.
