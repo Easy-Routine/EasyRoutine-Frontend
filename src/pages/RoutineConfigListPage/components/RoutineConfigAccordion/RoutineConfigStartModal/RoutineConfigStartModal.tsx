@@ -1,19 +1,16 @@
-import FlexBox from "headful/Flex/Flex";
-import Text from "headful/Text/Text";
-import {ReactComponent as RunIcon} from "assets/image/run.svg";
 import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
+import React from "react";
 import Portal from "headless/Portal/Portal";
-import {RoutineConfig} from "types/model";
-import RoutineConfigStartModalContent from "./RoutineConfigStartModalContent/RoutineConfigStartModalContent";
 
-type RoutineConfigStartModalButtonProps = {
-    routineConfig: RoutineConfig;
+type RoutineConfigStartModalProps = {
+    trigger: React.ReactNode;
+    content: React.ReactNode;
 };
 
-const RoutineConfigStartModalButton = ({
-    routineConfig,
-}: RoutineConfigStartModalButtonProps) => {
-    const {name} = routineConfig;
+const RoutineConfigStartModal = ({
+    trigger,
+    content,
+}: RoutineConfigStartModalProps) => {
     return (
         <ConfirmModal>
             <div
@@ -22,19 +19,21 @@ const RoutineConfigStartModalButton = ({
                 }}
             >
                 <ConfirmModal.Trigger>
-                    <FlexBox gap={16} align="center">
+                    {trigger}
+                    {/* <Flex gap={16} align="center">
                         <RunIcon color={"#82B1FF"} />
                         <Text color={"var(--color-primary)"}>
                             루틴 시작하기
                         </Text>
-                    </FlexBox>
+                    </Flex> */}
                 </ConfirmModal.Trigger>
                 <Portal>
                     <ConfirmModal.Backdrop />
                     <ConfirmModal.Content>
-                        <RoutineConfigStartModalContent
+                        {content}
+                        {/* <RoutineConfigStartModalContent
                             routineConfig={routineConfig}
-                        />
+                        /> */}
                     </ConfirmModal.Content>
                 </Portal>
             </div>
@@ -42,4 +41,4 @@ const RoutineConfigStartModalButton = ({
     );
 };
 
-export default RoutineConfigStartModalButton;
+export default RoutineConfigStartModal;

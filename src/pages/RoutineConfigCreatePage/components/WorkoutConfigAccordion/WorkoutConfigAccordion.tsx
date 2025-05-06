@@ -18,10 +18,10 @@ const WorkoutConfigAccordion = ({
 
     // children를 배열로 변환한 뒤, 순서대로 분해
     const [
-        updateTable, // 0: <SetConfigUpdateTable .../>
-        setConfigDeleteBtn, // 1: <SetConfigDeleteButton .../>
-        setConfigCreateBtn, // 2: <SetConfigCreateButton .../>
-        workoutDeleteBtn, // 3: <WorkoutConfigDeleteButton .../>
+        setConfigUpdateTable, // 0: <SetConfigUpdateTable .../>
+        setConfigDeleteButton, // 1: <SetConfigDeleteButton .../>
+        setConfigCreateButton, // 2: <SetConfigCreateButton .../>
+        workoutDeleteButton, // 3: <WorkoutConfigDeleteButton .../>
     ] = React.Children.toArray(children) as React.ReactElement[];
 
     return (
@@ -55,16 +55,16 @@ const WorkoutConfigAccordion = ({
 
                 {/* 확장됐을 때 보이는 영역 */}
                 <SwipeableAccordion.Hidden>
-                    {updateTable}
+                    {setConfigUpdateTable}
 
                     <Flex padding={{t: 10, b: 10}} justify="space-around">
-                        {setConfigDeleteBtn}
-                        {setConfigCreateBtn}
+                        {setConfigDeleteButton}
+                        {setConfigCreateButton}
                     </Flex>
                 </SwipeableAccordion.Hidden>
 
                 {/* 항상 보이는 삭제 버튼 */}
-                {workoutDeleteBtn}
+                {workoutDeleteButton}
             </SwipeableAccordion.Box>
         </SwipeableAccordion>
     );

@@ -5,18 +5,19 @@ import Text from "headful/Text/Text";
 import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
 import {RoutineConfig} from "types/model";
+import Flex from "headful/Flex/Flex";
 
 /*
     루틴 설정을 수정하는 페이지로 이동하는 버튼
 */
 
-type RoutineConfigUpdateButtonButtonProps = {
+type RoutineConfigUpdateMoveButtonProps = {
     routineConfig: RoutineConfig;
 };
 
-const RoutineConfigUpdateButton = ({
+const RoutineConfigUpdateMoveButton = ({
     routineConfig,
-}: RoutineConfigUpdateButtonButtonProps) => {
+}: RoutineConfigUpdateMoveButtonProps) => {
     const {_id} = routineConfig;
 
     const navigate = useNavigate();
@@ -29,15 +30,11 @@ const RoutineConfigUpdateButton = ({
     };
 
     return (
-        <FlexBox
-            gap={16}
-            align="center"
-            onClick={handleRoutineUpdateButtonClick}
-        >
+        <Flex gap={16} align="center" onClick={handleRoutineUpdateButtonClick}>
             <PenIcon color={"#7D7D7D"} />
             <Text color={"#7D7D7D"}>루틴 수정하기</Text>
-        </FlexBox>
+        </Flex>
     );
 };
 
-export default RoutineConfigUpdateButton;
+export default RoutineConfigUpdateMoveButton;

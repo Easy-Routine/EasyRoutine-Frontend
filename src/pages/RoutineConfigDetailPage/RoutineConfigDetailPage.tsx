@@ -65,11 +65,7 @@ const RoutineConfigDetailPage = () => {
 
                     <WorkoutLibraryModal
                         trigger={
-                            <FloatingCircleButton
-                                width={64}
-                                height={64}
-                                onFloatingCircleButtonClick={() => {}}
-                            >
+                            <FloatingCircleButton width={64} height={64}>
                                 <PlusIcon color={"var(--text-white)"} />
                             </FloatingCircleButton>
                         }

@@ -3,19 +3,26 @@ import Flex from "headful/Flex/Flex";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {RoutineConfig, WorkoutConfig} from "types/model";
-import RoutineConfigUpdateButton from "./RoutineConfigUpdateButton/RoutineConfigUpdateButton";
 import RoutineConfigDeleteModalButton from "./RoutineConfigDeleteModalButton/RoutineConfigDeleteModalButton";
-import RoutineConfigStartModalButton from "./RoutineConfigStartModalButton/RoutineConfigStartModalButton";
 import WorkoutConfigFlex from "./WorkoutConfigFlex/WorkoutConfigFlex";
+import RoutineConfigStartModal from "./RoutineConfigStartModal/RoutineConfigStartModal";
+import RoutineConfigStartModalContent from "./RoutineConfigStartModal/RoutineConfigStartModalContent/RoutineConfigStartModalContent";
+import React from "react";
+import RoutineConfigStartButton from "./RoutineConfigStartModal/RoutineConfigStartModalContent/RoutineConfigStartButton/RoutineConfigStartButton";
 
 type RoutineConfigAccordionProps = {
     routineConfig: RoutineConfig;
+    children: React.ReactNode;
 };
 
 const RoutineConfigAccordion = ({
     routineConfig,
+    children,
 }: RoutineConfigAccordionProps) => {
     const {name, color, workoutConfigs} = routineConfig;
+
+    const [routineConfigUpdateMoveButton, routineConfigStartModalButton] =
+        React.Children.toArray(children) as React.ReactElement[];
 
     return (
         <SwipeableAccordion>
@@ -41,11 +48,18 @@ const RoutineConfigAccordion = ({
                             )}
                         </Flex>
                         <Flex padding={{t: 20, b: 10}} justify="space-around">
-                            <RoutineConfigUpdateButton
-                                routineConfig={routineConfig}
-                            />
-                            <RoutineConfigStartModalButton
-                                routineConfig={routineConfig}
+                            {routineConfigUpdateMoveButton}
+                            <RoutineConfigStartModal
+                                trigger={routineConfigStartModalButton}
+                                content={
+                                    <RoutineConfigStartModalContent
+                                        routineConfig={routineConfig}
+                                    >
+                                        <RoutineConfigStartButton
+                                            routineConfig={routineConfig}
+                                        />
+                                    </RoutineConfigStartModalContent>
+                                }
                             />
                         </Flex>
                     </Flex>

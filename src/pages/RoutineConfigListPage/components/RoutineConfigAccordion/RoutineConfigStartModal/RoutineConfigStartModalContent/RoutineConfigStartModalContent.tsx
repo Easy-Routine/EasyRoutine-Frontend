@@ -10,12 +10,18 @@ import {ReactComponent as FireIcon} from "assets/image/fire.svg";
 
 type RoutineConfigStartModalContentProps = {
     routineConfig: RoutineConfig;
+    children: React.ReactNode;
 };
 
 const RoutineConfigStartModalContent = ({
     routineConfig,
+    children,
 }: RoutineConfigStartModalContentProps) => {
     const {name} = routineConfig;
+
+    const [routineConfigStartButton] = React.Children.toArray(
+        children,
+    ) as React.ReactElement[];
 
     return (
         <>
@@ -47,7 +53,7 @@ const RoutineConfigStartModalContent = ({
             </Flex>
             <ConfirmModal.Close>
                 <ConfirmModalClose.Cancel>취소</ConfirmModalClose.Cancel>
-                <RoutineConfigStartButton routineConfig={routineConfig} />
+                {routineConfigStartButton}
             </ConfirmModal.Close>
         </>
     );

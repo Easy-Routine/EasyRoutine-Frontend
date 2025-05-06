@@ -4,7 +4,7 @@ import styles from "./FloatingCircleButton.module.scss";
 
 type FloatingCircleButtonProps = {
     children: React.ReactNode;
-    onFloatingCircleButtonClick: () => void;
+    onFloatingCircleButtonClick?: () => void;
     width: number;
     height: number;
 };
