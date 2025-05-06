@@ -2,6 +2,10 @@ import {lazy} from "react";
 
 const LoginPage = lazy(() => import("pages/LoginPage/LoginPage"));
 const MyPage = lazy(() => import("pages/MyPage/MyPage"));
+
+const RoutineConfigCreatePage = lazy(
+    () => import("pages/RoutineConfigCreatePage/RoutineConfigCreatePage"),
+);
 const RoutineConfigDetailPage = lazy(
     () => import("pages/RoutineConfigDetailPage/RoutineConfigDetailPage"),
 );
@@ -40,7 +44,7 @@ const ROUTES = {
         },
         CREATE: {
             PATH: `/routine-config/create`,
-            COMPONENT: RoutineConfigDetailPage,
+            COMPONENT: RoutineConfigCreatePage,
         },
         DETAIL: {
             PATH: (routineConfigId: string) =>

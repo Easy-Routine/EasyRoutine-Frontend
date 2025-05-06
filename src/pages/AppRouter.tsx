@@ -37,6 +37,10 @@ const AppRouter = () => {
                             element={<ROUTES.MY.COMPONENT />}
                         />
                         <Route
+                            path={ROUTES.CONFIG.CREATE.PATH}
+                            element={<ROUTES.CONFIG.CREATE.COMPONENT />}
+                        />
+                        <Route
                             path={ROUTES.CONFIG.DETAIL.PATH(":routineConfigId")}
                             element={<ROUTES.CONFIG.DETAIL.COMPONENT />}
                         />

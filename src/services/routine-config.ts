@@ -18,9 +18,6 @@ export const getRoutineConfigAll = async (): Promise<
                 workoutConfigs: [
                     {
                         _id: "1",
-                        createdAt: "2025-04-01T00:00:00Z",
-                        updatedAt: "2025-04-01T00:00:00Z",
-                        routineConfigId: "1",
                         setConfigs: [
                             {
                                 _id: "1",
@@ -43,14 +40,10 @@ export const getRoutineConfigAll = async (): Promise<
                             isEditable: true,
                             createdAt: "2025-04-01T00:00:00Z",
                             updatedAt: "2025-04-01T00:00:00Z",
-                            userId: "1",
                         },
                     },
                     {
                         _id: "2",
-                        createdAt: "2025-04-01T00:00:00Z",
-                        updatedAt: "2025-04-01T00:00:00Z",
-                        routineConfigId: "1",
                         setConfigs: [
                             {
                                 _id: "1",
@@ -73,7 +66,6 @@ export const getRoutineConfigAll = async (): Promise<
                             isEditable: true,
                             createdAt: "2025-04-01T00:00:00Z",
                             updatedAt: "2025-04-01T00:00:00Z",
-                            userId: "1",
                         },
                     },
                 ],
@@ -88,9 +80,6 @@ export const getRoutineConfigAll = async (): Promise<
                 workoutConfigs: [
                     {
                         _id: "2",
-                        createdAt: "2025-04-02T00:00:00Z",
-                        updatedAt: "2025-04-02T00:00:00Z",
-                        routineConfigId: "2",
                         setConfigs: [
                             {
                                 _id: "2",
@@ -113,7 +102,6 @@ export const getRoutineConfigAll = async (): Promise<
                             isEditable: false,
                             createdAt: "2025-04-02T00:00:00Z",
                             updatedAt: "2025-04-02T00:00:00Z",
-                            userId: "2",
                         },
                     },
                 ],
@@ -128,9 +116,6 @@ export const getRoutineConfigAll = async (): Promise<
                 workoutConfigs: [
                     {
                         _id: "3",
-                        createdAt: "2025-04-03T00:00:00Z",
-                        updatedAt: "2025-04-03T00:00:00Z",
-                        routineConfigId: "3",
                         setConfigs: [
                             {
                                 _id: "3",
@@ -153,7 +138,6 @@ export const getRoutineConfigAll = async (): Promise<
                             isEditable: true,
                             createdAt: "2025-04-03T00:00:00Z",
                             updatedAt: "2025-04-03T00:00:00Z",
-                            userId: "3",
                         },
                     },
                 ],

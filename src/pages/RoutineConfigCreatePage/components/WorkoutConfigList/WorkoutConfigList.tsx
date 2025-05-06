@@ -1,13 +1,13 @@
 import React from "react";
 import {WorkoutConfig} from "types/model";
-import {useRoutineConfigUpdateParams} from "../RoutineConfigUpdateParamsProvider/RoutineConfigUpdateParamsProvider";
+import {useRoutineConfigCreate} from "../RoutineConfigCreateProvider/RoutineConfigCreateProvider";
 
 type WorkoutConfigListProps = {
     component: (value: WorkoutConfig, key: number) => React.ReactNode;
 };
 
 const WorkoutConfigList = ({component}: WorkoutConfigListProps) => {
-    const {routineConfig} = useRoutineConfigUpdateParams();
+    const {routineConfig} = useRoutineConfigCreate();
 
     return <>{routineConfig.workoutConfigs.map(component)}</>;
 };

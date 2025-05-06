@@ -11,6 +11,7 @@ import Flex from "headful/Flex/Flex";
 import RoutineConfigAccordion from "./components/RoutineConfigAccordion/RoutineConfigAccordion";
 import List from "headless/List/List";
 import {RoutineConfig} from "types/model";
+import RoutineConfigList from "./components/RoutineConfigList/RoutineConfigList";
 
 const RoutineConfigListPage = () => {
     const location = useLocation();
@@ -22,18 +23,13 @@ const RoutineConfigListPage = () => {
             </Header>
             <Main>
                 <Flex direction="column" gap={20}>
-                    <RoutineConfigAllGetContainer>
-                        {routineConfigs => (
-                            <List<RoutineConfig>
-                                data={routineConfigs}
-                                item={routineConfig => (
-                                    <RoutineConfigAccordion
-                                        routineConfig={routineConfig}
-                                    />
-                                )}
+                    <RoutineConfigList
+                        component={routineConfig => (
+                            <RoutineConfigAccordion
+                                routineConfig={routineConfig}
                             />
                         )}
-                    </RoutineConfigAllGetContainer>
+                    />
                 </Flex>
                 <RoutineConfigCreateButton />
             </Main>

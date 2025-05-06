@@ -12,7 +12,7 @@ const RoutineConfigUpdateButton = () => {
 
     return (
         <BasicButton onClick={handleButtonClick}>
-            <Text color="var(--text-white)">루틴 저장하기</Text>
+            <Text color="var(--text-white)">루틴 수정하기</Text>
         </BasicButton>
     );
 };

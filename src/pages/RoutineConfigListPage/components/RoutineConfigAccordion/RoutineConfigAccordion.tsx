@@ -30,7 +30,7 @@ const RoutineConfigAccordion = ({
                     </Flex>
                 </SwipeableAccordion.Visible>
                 <SwipeableAccordion.Hidden>
-                    <Flex padding={{top: 20}} direction="column">
+                    <Flex padding={{t: 20}} direction="column">
                         <Flex direction="column" gap={10}>
                             {workoutConfigs.map(
                                 (workoutConfig: WorkoutConfig) => (
@@ -40,10 +40,7 @@ const RoutineConfigAccordion = ({
                                 ),
                             )}
                         </Flex>
-                        <Flex
-                            padding={{top: 20, bottom: 10}}
-                            justify="space-around"
-                        >
+                        <Flex padding={{t: 20, b: 10}} justify="space-around">
                             <RoutineConfigUpdateButton
                                 routineConfig={routineConfig}
                             />
