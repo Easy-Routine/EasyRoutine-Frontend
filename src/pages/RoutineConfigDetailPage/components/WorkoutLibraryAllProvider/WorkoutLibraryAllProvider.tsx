@@ -1,4 +1,4 @@
-import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
+import usegetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
 import React, {createContext, useContext, useState} from "react";
 import {Category} from "types/enum";
 import {WorkoutLibrary} from "types/model";
@@ -29,7 +29,7 @@ const WorkoutLibraryAllProvider = ({
     const [category, setCategory] = useState(Category.ALL);
     const [name, setName] = useState("");
 
-    const {data: workoutLibraryAllData} = useGetWorkoutLibraryAllQuery(
+    const {data: workoutLibraryAllData} = usegetExerciseAllQuery(
         name,
         category,
     );

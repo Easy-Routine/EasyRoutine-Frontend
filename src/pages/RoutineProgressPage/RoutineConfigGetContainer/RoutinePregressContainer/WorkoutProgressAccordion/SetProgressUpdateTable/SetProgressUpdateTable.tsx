@@ -6,6 +6,7 @@ import {SetConfig, WorkoutConfig} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 
 type SetProgressUpdateTableProps = {
+    workoutConfig: WorkoutConfig;
     // workoutLibraryType: string[];
     // setConfigs: SetConfig[];
     // currentSetConfigId: string;
@@ -23,16 +24,22 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-const SetProgressUpdateTable = ({}: SetProgressUpdateTableProps) => {
+const SetProgressUpdateTable = ({
+    workoutConfig,
+}: SetProgressUpdateTableProps) => {
+    const {workoutLibrary, _id, setConfigs} = workoutConfig;
+    const {type} = workoutLibrary;
+
+    //TODO: useRoutineProgress 다시 정의하기
     const {
         routineProgress,
-        setConfigs,
+        // setConfigs,
         currentWorkoutId,
         currentSetId,
         completedSetIds,
         currentWorkoutConfig,
         setRoutineProgress,
-    } = useRoutineProgress();
+    } = useRoutineProgress(); // useRoutineConfigProgress
 
     const workoutLibraryType = currentWorkoutConfig?.workoutLibrary?.type ?? [];
 
@@ -41,21 +48,17 @@ const SetProgressUpdateTable = ({}: SetProgressUpdateTableProps) => {
         key: string,
         value: string,
     ) => {
-        const newRoutineProgress = structuredClone(routineProgress);
-        const currentWorkoutConfig = newRoutineProgress.workoutConfigs.find(
-            (workoutConfig: WorkoutConfig) =>
-                workoutConfig._id === currentWorkoutId,
-        ) as WorkoutConfig;
-
-        const currentSetConfig = currentWorkoutConfig.setConfigs.find(
-            (setConfig: SetConfig) => setConfig._id === setConfigId,
-        ) as SetConfig;
-
-        currentSetConfig[key] = value;
-
-        // console.log("routineProgress", newRoutineProgress);
-
-        setRoutineProgress(newRoutineProgress);
+        // const newRoutineProgress = structuredClone(routineProgress);
+        // const currentWorkoutConfig = newRoutineProgress.workoutConfigs.find(
+        //     (workoutConfig: WorkoutConfig) =>
+        //         workoutConfig._id === currentWorkoutId,
+        // ) as WorkoutConfig;
+        // const currentSetConfig = currentWorkoutConfig.setConfigs.find(
+        //     (setConfig: SetConfig) => setConfig._id === setConfigId,
+        // ) as SetConfig;
+        // currentSetConfig[key] = value;
+        // // console.log("routineProgress", newRoutineProgress);
+        // setRoutineProgress(newRoutineProgress);
     };
 
     const isCurrentSetConfig = (setConfigId: string) => {

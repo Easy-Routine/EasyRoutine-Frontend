@@ -1,9 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 import useToast from "hooks/useToast";
-import { updateRoutineRecordWorkoutEndAt } from "services/routine-record";
+import {updateRoutineRecordWorkoutEndAt} from "services/routine-history";
 
 const useUpdateRoutineRecordWorkoutEndAtMutation = () => {
-    const { showToast } = useToast();
+    const {showToast} = useToast();
 
     return useMutation({
         mutationFn: ({
@@ -12,8 +12,8 @@ const useUpdateRoutineRecordWorkoutEndAtMutation = () => {
         }: {
             routineRecordId: string;
             workoutTime: number;
-        }) => updateRoutineRecordWorkoutEndAt({ routineRecordId, workoutTime }),
-        onError: (error) => {
+        }) => updateRoutineRecordWorkoutEndAt({routineRecordId, workoutTime}),
+        onError: error => {
             console.log(error);
             showToast(error.message, "error");
         },

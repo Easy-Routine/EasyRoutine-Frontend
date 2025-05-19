@@ -3,7 +3,7 @@ import Box from "components/box/Box/Box";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import Accordion from "components/box/Accordion/Accordion";
 import {WorkoutRecord} from "types/model";
-import useGetRoutineRecordOneQuery from "hooks/server/useGetRoutineRecordOneMutation";
+import usegetRoutineHistoryOneQuery from "hooks/server/usegetRoutineHistoryOneMutation";
 import {useNavigate, useParams} from "react-router-dom";
 import WorkoutRecordDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";
 import SummaryBox from "components/content/Summary/SummaryBox";
@@ -18,7 +18,7 @@ const Container = styled.div`
 const RoutineRecordDetailView = () => {
     const {routineRecordId} = useParams();
 
-    const {data: routineRecordDetail} = useGetRoutineRecordOneQuery(
+    const {data: routineRecordDetail} = usegetRoutineHistoryOneQuery(
         routineRecordId as string,
     );
 

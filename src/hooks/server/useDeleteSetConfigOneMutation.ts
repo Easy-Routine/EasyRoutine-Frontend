@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
-import {deleteSetConfigOne} from "services/set-config";
+import {deleteSetConfigOne} from "services/set";
 
 const useDeleteSetConfigOneMutation = () => {
     const {showToast} = useToast();
@@ -18,7 +18,7 @@ const useDeleteSetConfigOneMutation = () => {
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineConfigOne],
+                queryKey: [queryKey.getRoutineOne],
             });
         },
     });

@@ -8,7 +8,7 @@ import UnderlineInput from "components/content/UnderlineInput/UnderlineInput";
 import useCheckBox from "hooks/client/useCheckBox";
 import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
-import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
+import usegetExerciseOneQuery from "hooks/server/usegetExerciseOneQuery";
 import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
 import useUploadWorkoutLibraryImageMutation from "hooks/server/useUploadWorkoutLibraryImageMutation";
 import Lottie from "lottie-react";
@@ -66,7 +66,7 @@ const WorkoutLibraryDetailBottomSheet = ({
     // TODO: workoutLibraryId로 상세 데이터 가져오기
 
     const {data: workoutLibraryOneData} =
-        useGetWorkoutLibraryOneQuery(workoutLibraryId);
+        usegetExerciseOneQuery(workoutLibraryId);
 
     const workoutLibraryOne = workoutLibraryOneData!;
 

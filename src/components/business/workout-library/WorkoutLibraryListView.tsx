@@ -11,11 +11,11 @@ import WorkoutLibraryDetailBottomSheet from "./WorkoutLibraryDetailBottomSheet";
 import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
 import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
 import WorkoutLibraryDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
-import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
+import usegetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
 import {WorkoutLibrary} from "types/model";
 import {Category} from "types/enum";
 import useToast from "hooks/useToast";
-import useGetWorkoutLibraryOneMutation from "hooks/server/useGetWorkoutLibraryOneMutation";
+import usegetExerciseOneMutation from "hooks/server/usegetExerciseOneMutation";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
@@ -34,12 +34,11 @@ const WorkoutLibraryListView = () => {
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
     const {showToast} = useToast();
 
-    const {data: workoutLibraryAllData} = useGetWorkoutLibraryAllQuery(
+    const {data: workoutLibraryAllData} = usegetExerciseAllQuery(
         value,
         selectedValue,
     );
-    const {mutateAsync: getWorkoutLibraryOneMutate} =
-        useGetWorkoutLibraryOneMutation();
+    const {mutateAsync: getExerciseOneMutate} = usegetExerciseOneMutation();
 
     const workoutLibraryAll = workoutLibraryAllData ?? [];
 
@@ -91,7 +90,7 @@ const WorkoutLibraryListView = () => {
     };
     // 긴 클릭
     const handleSmallCardLongPress = async (workoutLibraryId: string) => {
-        const response = await getWorkoutLibraryOneMutate(workoutLibraryId);
+        const response = await getExerciseOneMutate(workoutLibraryId);
 
         const isEditable = response?.isEditable;
 

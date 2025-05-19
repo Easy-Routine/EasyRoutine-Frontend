@@ -1,11 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
-import { updateRoutineConfigField } from "services/routine-config";
-import { Color } from "types/enum";
+import {updateRoutineConfigField} from "services/routine";
+import {Color} from "types/enum";
 
 const useUpdateRoutineConfigFieldMutation = () => {
-    const { showToast } = useToast();
+    const {showToast} = useToast();
 
     const queryClient = useQueryClient();
     return useMutation({
@@ -19,12 +19,12 @@ const useUpdateRoutineConfigFieldMutation = () => {
             value: string | Color;
         }) => updateRoutineConfigField(routineConfigId, key, value),
 
-        onError: (error) => {
+        onError: error => {
             showToast(error.message, "error");
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineConfigOne],
+                queryKey: [queryKey.getRoutineOne],
             });
         },
     });

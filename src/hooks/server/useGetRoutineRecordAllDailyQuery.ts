@@ -1,16 +1,16 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {useSuspenseQuery} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import moment from "moment";
-import { getRoutineRecordAllDaily } from "services/routine-record";
+import {getRoutineHistoryAllDaily} from "services/routine-history";
 
-const useGetRoutineRecordAllDailyQuery = (date: Date) => {
+const usegetRoutineHistoryAllDailyQuery = (date: Date) => {
     return useSuspenseQuery({
         queryKey: [
-            queryKey.getRoutineRecordAllDaily,
+            queryKey.getRoutineHistoryAllDaily,
             moment(date).startOf("day"),
         ],
         queryFn: async () => {
-            const data = await getRoutineRecordAllDaily({
+            const data = await getRoutineHistoryAllDaily({
                 date,
             });
             return data;
@@ -18,4 +18,4 @@ const useGetRoutineRecordAllDailyQuery = (date: Date) => {
     });
 };
 
-export default useGetRoutineRecordAllDailyQuery;
+export default usegetRoutineHistoryAllDailyQuery;

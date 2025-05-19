@@ -1,25 +1,25 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
-import { deleteRoutineRecordOne } from "services/routine-record";
+import {deleteRoutineRecordOne} from "services/routine-history";
 
 const useDeleteRoutineRecordOneMutation = () => {
-    const { showToast } = useToast();
+    const {showToast} = useToast();
 
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (routineRecordId: string) =>
             deleteRoutineRecordOne(routineRecordId),
-        onError: (error) => {
+        onError: error => {
             console.log(error);
             showToast(error.message, "error");
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineRecordAllMonthly],
+                queryKey: [queryKey.getRoutineHistoryAllMonthly],
             });
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineRecordAllDaily],
+                queryKey: [queryKey.getRoutineHistoryAllDaily],
             });
         },
     });

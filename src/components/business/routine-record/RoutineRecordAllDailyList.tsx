@@ -1,7 +1,7 @@
 import Accordion from "components/box/Accordion/Accordion";
 import SummaryBox from "components/content/Summary/SummaryBox";
-import useGetRoutineRecordAllDailyQuery from "hooks/server/useGetRoutineRecordAllDailyQuery";
-import { WorkoutRecord } from "types/model";
+import usegetRoutineHistoryAllDailyQuery from "hooks/server/usegetRoutineHistoryAllDailyQuery";
+import {WorkoutRecord} from "types/model";
 import RoutineRecordDetailAccordion from "./RoutineRecordDetailAccordion";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
@@ -13,8 +13,8 @@ const RoutineRecordAllDailyList = ({
     selectedDate: Date;
     onRoutineRecordDeleteButtonClick: (routineRecordId: string) => void;
 }) => {
-    const { data: routineRecordAllDaily } =
-        useGetRoutineRecordAllDailyQuery(selectedDate);
+    const {data: routineRecordAllDaily} =
+        usegetRoutineHistoryAllDailyQuery(selectedDate);
 
     const totalWeight = routineRecordAllDaily!.reduce((acc, record) => {
         return (
@@ -30,7 +30,7 @@ const RoutineRecordAllDailyList = ({
                         }, 0)
                     );
                 },
-                0
+                0,
             )
         );
     }, 0);
@@ -52,7 +52,7 @@ const RoutineRecordAllDailyList = ({
                 <SummaryBox seconds={totalSeconds} weight={totalWeight} />
                 <Accordion.List
                     data={routineRecordAllDaily!}
-                    render={(item) => (
+                    render={item => (
                         <RoutineRecordDetailAccordion
                             key={item._id}
                             data={item}

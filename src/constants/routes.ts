@@ -4,7 +4,7 @@ const LoginPage = lazy(() => import("pages/LoginPage/LoginPage"));
 const MyPage = lazy(() => import("pages/MyPage/MyPage"));
 
 const RoutineConfigCreatePage = lazy(
-    () => import("pages/RoutineConfigCreatePage/RoutineConfigCreatePage"),
+    () => import("pages/RoutineCreatePage/RoutineCreatePage"),
 );
 const RoutineConfigDetailPage = lazy(
     () => import("pages/RoutineConfigDetailPage/RoutineConfigDetailPage"),

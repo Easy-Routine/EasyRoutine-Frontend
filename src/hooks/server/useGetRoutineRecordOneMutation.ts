@@ -1,15 +1,15 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {useSuspenseQuery} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
-import { getRoutineRecordOne } from "services/routine-record";
+import {getRoutineHistoryOne} from "services/routine-history";
 
-const useGetRoutineRecordOneQuery = (routineRecordId: string) => {
+const usegetRoutineHistoryOneQuery = (routineRecordId: string) => {
     return useSuspenseQuery({
-        queryKey: [queryKey.getRoutineRecordOne, routineRecordId],
+        queryKey: [queryKey.getRoutineHistoryOne, routineRecordId],
         queryFn: async () => {
-            const data = await getRoutineRecordOne(routineRecordId);
+            const data = await getRoutineHistoryOne(routineRecordId);
             return data;
         },
     });
 };
 
-export default useGetRoutineRecordOneQuery;
+export default usegetRoutineHistoryOneQuery;

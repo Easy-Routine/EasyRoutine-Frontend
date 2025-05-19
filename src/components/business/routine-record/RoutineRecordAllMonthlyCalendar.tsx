@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 // import "./CalendarStyle.css";
 import Box from "components/box/Box/Box";
 import styled from "styled-components";
-import { ReactComponent as CalendarArrowLeftIcon } from "assets/image/calendar-arrow-left.svg";
-import { ReactComponent as CalendarArrowRightIcon } from "assets/image/calendar-arrow-right.svg";
+import {ReactComponent as CalendarArrowLeftIcon} from "assets/image/calendar-arrow-left.svg";
+import {ReactComponent as CalendarArrowRightIcon} from "assets/image/calendar-arrow-right.svg";
 import moment from "moment";
 import "moment/locale/ko";
-import useGetRoutineRecordAllMonthlyQuery from "hooks/server/useGetRoutineRecordAllMonthlyQuery";
+import usegetRoutineHistoryAllMonthlyQuery from "hooks/server/usegetRoutineHistoryAllMonthlyQuery";
 
 const CalendarArrowLeft = styled(CalendarArrowLeftIcon)`
     padding: 5px;
@@ -33,12 +33,12 @@ const Container = styled.div`
     .react-calendar {
         width: 100%;
         border: none;
-        background-color: ${({ theme }) => theme.color.background.box};
+        background-color: ${({theme}) => theme.color.background.box};
         font-family: "Noto Sans Korean";
     }
 
     .react-calendar__month-view__weekdays {
-        font-size: ${({ theme }) => theme.fontSize.lg};
+        font-size: ${({theme}) => theme.fontSize.lg};
     }
 
     abbr[title] {
@@ -50,15 +50,15 @@ const Container = styled.div`
         align-items: center;
         justify-content: center;
         font-size: 16px;
-        color: ${({ theme }) => theme.color.text.black};
+        color: ${({theme}) => theme.color.text.black};
         transition: background-color 0.2s;
         box-sizing: border-box; /* 패딩과 마진 포함 */
     }
     .react-calendar__month-view__days__day--weekend {
-        color: ${({ theme }) => theme.color.warning};
+        color: ${({theme}) => theme.color.warning};
     }
     .react-calendar__month-view__days__day--neighboringMonth {
-        color: ${({ theme }) => theme.color.gray.light};
+        color: ${({theme}) => theme.color.gray.light};
     }
 
     .react-calendar__tile--active:enabled:hover,
@@ -73,7 +73,7 @@ const Container = styled.div`
         justify-content: space-between;
         gap: 5px;
         padding: 5px 0;
-        // color: ${({ theme }) => theme.color.text.black};
+        // color: ${({theme}) => theme.color.text.black};
     }
 
     .react-calendar__tile abbr {
@@ -112,16 +112,15 @@ const NavigationButtonWrapper = styled.div`
     width: 60px;
 `;
 
-const Circle = styled.div<{ isActive: boolean; isToday: boolean }>`
+const Circle = styled.div<{isActive: boolean; isToday: boolean}>`
     width: 75%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: ${({ theme, isToday }) =>
+    background-color: ${({theme, isToday}) =>
         isToday ? theme.color.gray.light : null};
-    background-color: ${({ theme, isActive }) =>
+    background-color: ${({theme, isActive}) =>
         isActive ? theme.color.primary : null};
-    color: ${({ theme, isActive }) =>
-        isActive ? theme.color.text.white : null};
+    color: ${({theme, isActive}) => (isActive ? theme.color.text.white : null)};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,11 +137,11 @@ const DotWrapper = styled.div`
     overflow: visible;
 `;
 
-const Dot = styled.div<{ backgroundColor: string }>`
+const Dot = styled.div<{backgroundColor: string}>`
     width: 5px;
     height: 5px;
     border-radius: 5px;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({backgroundColor}) => backgroundColor};
 `;
 
 type DotData = {
@@ -175,8 +174,8 @@ const RoutineRecordAllMonthlyCalendar = ({
     const [date, setDate] = useState(new Date());
     const [activeStartDate, setActiveStartDate] = useState(new Date());
 
-    const { data: routineRecordAllMonthly } =
-        useGetRoutineRecordAllMonthlyQuery(currentMonth);
+    const {data: routineRecordAllMonthly} =
+        usegetRoutineHistoryAllMonthlyQuery(currentMonth);
 
     const dotDataByDate = routineRecordAllMonthly!;
 
@@ -189,7 +188,7 @@ const RoutineRecordAllMonthlyCalendar = ({
         const previousMonth = new Date(
             activeStartDate.getFullYear(),
             activeStartDate.getMonth() - 1,
-            1
+            1,
         );
         onPrevMonthButtonClick(previousMonth);
         setActiveStartDate(previousMonth); // 이전 달로 설정
@@ -199,7 +198,7 @@ const RoutineRecordAllMonthlyCalendar = ({
         const nextMonth = new Date(
             activeStartDate.getFullYear(),
             activeStartDate.getMonth() + 1,
-            1
+            1,
         );
         onNextMonthButtnClick(nextMonth); // 다음 ��로 설정
         setActiveStartDate(nextMonth); // 다음 달로 설정
@@ -212,13 +211,11 @@ const RoutineRecordAllMonthlyCalendar = ({
 
     const getDotDataForDate = (date: Date, dotDataKey: string) => {
         const formattedDate = moment(date).format("YYYY-MM-DD");
-        const record = dotDataByDate.find(
-            (item) => item.date === formattedDate
-        );
+        const record = dotDataByDate.find(item => item.date === formattedDate);
         return record ? record[dotDataKey] : [];
     };
 
-    const tileContent = ({ date: tileDate }: { date: Date }) => {
+    const tileContent = ({date: tileDate}: {date: Date}) => {
         const isActive = moment(date).isSame(moment(tileDate), "day");
         const isToday = moment(tileDate).isSame(moment(), "day");
         const dotData = getDotDataForDate(tileDate, dotDataKey);
@@ -230,7 +227,7 @@ const RoutineRecordAllMonthlyCalendar = ({
                 <DotWrapper>
                     {Array.isArray(dotData) &&
                         dotData
-                            .map((item) => (
+                            .map(item => (
                                 <Dot
                                     key={item._id}
                                     backgroundColor={item.color}

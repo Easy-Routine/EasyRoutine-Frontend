@@ -9,9 +9,14 @@ import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import TimerModalContent from "../../TimerModalContent/TimerModalContent";
 import CompleteModalContent from "../../CompleteModalContent/CompleteModalContent";
 
-type SetProgressCompleteButtonProps = {};
+type SetProgressCompleteButtonProps = {
+    workoutConfig: WorkoutConfig;
+};
 
-const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
+const SetProgressCompleteButton = ({
+    workoutConfig,
+}: SetProgressCompleteButtonProps) => {
+    const {_id} = workoutConfig;
     const {
         routineRecord,
         setRoutineRecord,
@@ -35,105 +40,105 @@ const SetProgressCompleteButton = ({}: SetProgressCompleteButtonProps) => {
         HTMLButtonElement
     > = async e => {
         e.stopPropagation();
-        const isLastSetConfig =
-            currentSetConfig._id === setConfigs[setConfigs.length - 1]._id;
+        // const isLastSetConfig =
+        //     currentSetConfig._id === setConfigs[setConfigs.length - 1]._id;
 
-        if (isLastSetConfig) {
-            const currentWorkoutConfigIndex = workoutConfigs.findIndex(
-                (workoutConfig: WorkoutConfig) =>
-                    workoutConfig._id === currentWorkoutConfig._id,
-            );
-            // 다음 운동이 존재한다면
-            const nextWorkoutConfigIndex = currentWorkoutConfigIndex + 1;
-            const hasNextWorkout =
-                nextWorkoutConfigIndex < workoutConfigs.length;
-            if (hasNextWorkout) {
-                setCurrentWorkoutId(workoutConfigs[nextWorkoutConfigIndex]._id);
-            }
-        }
-
-        const totalSetIds = workoutConfigs.flatMap(workoutConfig =>
-            workoutConfig.setConfigs.map(setConfig => setConfig._id),
-        );
-
-        const newCompletedSetIds = structuredClone(completedSetIds);
-        // 완료된 세트 목록에 현재 세트를 추가한다.
-        newCompletedSetIds.push(currentSetId);
-        setCompletedSetIds(newCompletedSetIds);
-
-        // 현재 운동의 완료된 세트 목록을 구한다.
-        const currentWorkoutCompletedSetIds = currentSetIds.filter(id =>
-            newCompletedSetIds.includes(id),
-        );
-
-        const currentSetIndex = currentWorkoutCompletedSetIds.length;
-
-        const newCurrentSetId = setConfigs[currentSetIndex]?._id ?? "";
-
-        setCurrentSetId(newCurrentSetId);
-
-        // 여기부터 운동 기록
-
-        const newRoutineRecord = structuredClone(routineRecord);
-
-        if (!newRoutineRecord._id) {
-            newRoutineRecord._id = uuidv4();
-            newRoutineRecord.color = routineProgress.color;
-            newRoutineRecord.name = routineProgress.name;
-            newRoutineRecord.userId = routineProgress.userId;
-            newRoutineRecord.workoutRecords = [];
-        }
-
-        // 새로운 객체에 운동기록 배열에 현재 운동의 아이디가 있는지 탐색
-        let currentWorkoutRecord = newRoutineRecord.workoutRecords.find(
-            (workoutRecord: WorkoutRecord) =>
-                workoutRecord.workoutConfigId === currentWorkoutId,
-        );
-        // 없으면
-        if (!currentWorkoutRecord) {
-            const newWorkoutRecord = {
-                _id: uuidv4(),
-                workoutConfigId: currentWorkoutId,
-                createdAt: moment().toISOString(),
-                updatedAt: moment().toISOString(),
-                routineRecordId: newRoutineRecord._id,
-                setRecords: [],
-                workoutLibrary: currentWorkoutConfig.workoutLibrary,
-            };
-            // 새로운 운동 기록 객체를 만들고 운동 기록 배열에 삽입
-            newRoutineRecord.workoutRecords.push(newWorkoutRecord);
-            currentWorkoutRecord = newWorkoutRecord;
-        }
-        // 있으면? 세트를 넣으면 되겠지?
-
-        // 현재 운동 객체의 세트 기록 배열에 현재 배열이 있는지 확인? 확인할 필요가 없지 왜냐하면 그냥 완료한걸 넣으면 되니까
-        let currentSetRecord = currentWorkoutRecord.setRecords.find(
-            (setRecord: SetRecord) => setRecord.setConfigId === currentSetId,
-        );
-
-        // if (!currentSetRecord) {
-        const newCurrentSetRecord = {
-            _id: uuidv4(),
-            setConfigId: currentSetId,
-            weight: currentSetConfig.weight,
-            rep: currentSetConfig.rep,
-            restSec: currentSetConfig.restSec,
-            workoutSec: currentSetConfig.workoutSec,
-            createdAt: moment().toISOString(),
-            updatedAt: moment().toISOString(),
-            workoutRecordId: currentWorkoutRecord._id,
-        };
-        currentWorkoutRecord.setRecords.push(newCurrentSetRecord);
-        currentSetRecord = newCurrentSetRecord;
+        // if (isLastSetConfig) {
+        //     const currentWorkoutConfigIndex = workoutConfigs.findIndex(
+        //         (workoutConfig: WorkoutConfig) =>
+        //             workoutConfig._id === currentWorkoutConfig._id,
+        //     );
+        //     // 다음 운동이 존재한다면
+        //     const nextWorkoutConfigIndex = currentWorkoutConfigIndex + 1;
+        //     const hasNextWorkout =
+        //         nextWorkoutConfigIndex < workoutConfigs.length;
+        //     if (hasNextWorkout) {
+        //         setCurrentWorkoutId(workoutConfigs[nextWorkoutConfigIndex]._id);
+        //     }
         // }
 
-        setRoutineRecord(newRoutineRecord);
+        // const totalSetIds = workoutConfigs.flatMap(workoutConfig =>
+        //     workoutConfig.setConfigs.map(setConfig => setConfig._id),
+        // );
 
-        const isAllCompleted = totalSetIds.length === newCompletedSetIds.length;
+        // const newCompletedSetIds = structuredClone(completedSetIds);
+        // // 완료된 세트 목록에 현재 세트를 추가한다.
+        // newCompletedSetIds.push(currentSetId);
+        // setCompletedSetIds(newCompletedSetIds);
 
-        startTimer(currentSetConfig?.restSec as number);
-        // 타이머 모달 열기
-        openModal();
+        // // 현재 운동의 완료된 세트 목록을 구한다.
+        // const currentWorkoutCompletedSetIds = currentSetIds.filter(id =>
+        //     newCompletedSetIds.includes(id),
+        // );
+
+        // const currentSetIndex = currentWorkoutCompletedSetIds.length;
+
+        // const newCurrentSetId = setConfigs[currentSetIndex]?._id ?? "";
+
+        // setCurrentSetId(newCurrentSetId);
+
+        // // 여기부터 운동 기록
+
+        // const newRoutineRecord = structuredClone(routineRecord);
+
+        // if (!newRoutineRecord._id) {
+        //     newRoutineRecord._id = uuidv4();
+        //     newRoutineRecord.color = routineProgress.color;
+        //     newRoutineRecord.name = routineProgress.name;
+        //     newRoutineRecord.userId = routineProgress.userId;
+        //     newRoutineRecord.workoutRecords = [];
+        // }
+
+        // // 새로운 객체에 운동기록 배열에 현재 운동의 아이디가 있는지 탐색
+        // let currentWorkoutRecord = newRoutineRecord.workoutRecords.find(
+        //     (workoutRecord: WorkoutRecord) =>
+        //         workoutRecord.workoutConfigId === currentWorkoutId,
+        // );
+        // // 없으면
+        // if (!currentWorkoutRecord) {
+        //     const newWorkoutRecord = {
+        //         _id: uuidv4(),
+        //         workoutConfigId: currentWorkoutId,
+        //         createdAt: moment().toISOString(),
+        //         updatedAt: moment().toISOString(),
+        //         routineRecordId: newRoutineRecord._id,
+        //         setRecords: [],
+        //         workoutLibrary: currentWorkoutConfig.workoutLibrary,
+        //     };
+        //     // 새로운 운동 기록 객체를 만들고 운동 기록 배열에 삽입
+        //     newRoutineRecord.workoutRecords.push(newWorkoutRecord);
+        //     currentWorkoutRecord = newWorkoutRecord;
+        // }
+        // // 있으면? 세트를 넣으면 되겠지?
+
+        // // 현재 운동 객체의 세트 기록 배열에 현재 배열이 있는지 확인? 확인할 필요가 없지 왜냐하면 그냥 완료한걸 넣으면 되니까
+        // let currentSetRecord = currentWorkoutRecord.setRecords.find(
+        //     (setRecord: SetRecord) => setRecord.setConfigId === currentSetId,
+        // );
+
+        // // if (!currentSetRecord) {
+        // const newCurrentSetRecord = {
+        //     _id: uuidv4(),
+        //     setConfigId: currentSetId,
+        //     weight: currentSetConfig.weight,
+        //     rep: currentSetConfig.rep,
+        //     restSec: currentSetConfig.restSec,
+        //     workoutSec: currentSetConfig.workoutSec,
+        //     createdAt: moment().toISOString(),
+        //     updatedAt: moment().toISOString(),
+        //     workoutRecordId: currentWorkoutRecord._id,
+        // };
+        // currentWorkoutRecord.setRecords.push(newCurrentSetRecord);
+        // currentSetRecord = newCurrentSetRecord;
+        // // }
+
+        // setRoutineRecord(newRoutineRecord);
+
+        // const isAllCompleted = totalSetIds.length === newCompletedSetIds.length;
+
+        // startTimer(currentSetConfig?.restSec as number);
+        // // 타이머 모달 열기
+        // openModal();
     };
 
     const currentSetIds = setConfigs.map(setConfig => setConfig._id);

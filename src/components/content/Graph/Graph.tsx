@@ -1,4 +1,4 @@
-import useGetWorkoutRecordSumAllQuery from "hooks/server/useGetWorkoutRecordSumAllQuery";
+import usegetExerciseSumAllQuery from "hooks/server/usegetExerciseSumAllQuery";
 import {useState, useEffect} from "react";
 import {TooltipProps} from "recharts";
 import {
@@ -31,7 +31,7 @@ const Graph = ({
     workoutLibraryId,
     selectedValue,
 }: GraphProps) => {
-    const {data: workoutRecordSumListByDate} = useGetWorkoutRecordSumAllQuery({
+    const {data: workoutRecordSumListByDate} = usegetExerciseSumAllQuery({
         workoutLibraryId,
         period: selectedValue as Period,
     });

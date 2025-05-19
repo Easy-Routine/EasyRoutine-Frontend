@@ -1,9 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 import useToast from "hooks/useToast";
-import { deleteSetRecordOne } from "services/set-record";
+import {deleteSetRecordOne} from "services/set-record";
 
 const useDeleteSetRecordOneMutation = () => {
-    const { showToast } = useToast();
+    const {showToast} = useToast();
     return useMutation({
         mutationFn: ({
             routineRecordId,
@@ -17,13 +17,13 @@ const useDeleteSetRecordOneMutation = () => {
                 workoutRecordId,
             }),
 
-        onError: (error) => {
+        onError: error => {
             console.log(error);
             showToast(error.message, "error");
         },
         onSettled: () => {
             // queryClient.invalidateQueries({
-            //     queryKey: [queryKey.getRoutineConfigOne],
+            //     queryKey: [queryKey.getRoutineOne],
             // });
         },
     });

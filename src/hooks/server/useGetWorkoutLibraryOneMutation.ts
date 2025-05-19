@@ -1,19 +1,19 @@
-import { useMutation } from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 import useToast from "hooks/useToast";
-import { getWorkoutLibraryOne } from "services/workout-library";
+import {getExerciseOne} from "services/exercise";
 
-const useGetWorkoutLibraryOneMutation = () => {
-    const { showToast } = useToast();
+const usegetExerciseOneMutation = () => {
+    const {showToast} = useToast();
     return useMutation({
         mutationFn: async (workoutLibraryId: string) => {
-            const data = await getWorkoutLibraryOne(workoutLibraryId);
+            const data = await getExerciseOne(workoutLibraryId);
             return data;
         },
-        onError: (error) => {
+        onError: error => {
             console.log(error);
             showToast(error.message, "error");
         },
     });
 };
 
-export default useGetWorkoutLibraryOneMutation;
+export default usegetExerciseOneMutation;

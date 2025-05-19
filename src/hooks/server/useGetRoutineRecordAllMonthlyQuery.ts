@@ -1,16 +1,16 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {useSuspenseQuery} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import moment from "moment";
-import { getRoutineRecordAllMonthly } from "services/routine-record";
+import {getRoutineHistoryAllMonthly} from "services/routine-history";
 
-const useGetRoutineRecordAllMonthlyQuery = (date: Date) => {
+const usegetRoutineHistoryAllMonthlyQuery = (date: Date) => {
     return useSuspenseQuery({
         queryKey: [
-            queryKey.getRoutineRecordAllMonthly,
+            queryKey.getRoutineHistoryAllMonthly,
             moment(date).startOf("month"),
         ],
         queryFn: async () => {
-            const data = await getRoutineRecordAllMonthly({
+            const data = await getRoutineHistoryAllMonthly({
                 date,
             });
             return data;
@@ -18,4 +18,4 @@ const useGetRoutineRecordAllMonthlyQuery = (date: Date) => {
     });
 };
 
-export default useGetRoutineRecordAllMonthlyQuery;
+export default usegetRoutineHistoryAllMonthlyQuery;

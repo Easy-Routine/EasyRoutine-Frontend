@@ -1,15 +1,15 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {useSuspenseQuery} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
-import { getWorkoutLibraryOne } from "services/workout-library";
+import {getExerciseOne} from "services/exercise";
 
-const useGetWorkoutLibraryOneQuery = (workoutLibraryId: string) => {
+const usegetExerciseOneQuery = (workoutLibraryId: string) => {
     return useSuspenseQuery({
-        queryKey: [queryKey.getWorkoutLibraryOne, workoutLibraryId],
+        queryKey: [queryKey.getExerciseOne, workoutLibraryId],
         queryFn: async () => {
-            const data = await getWorkoutLibraryOne(workoutLibraryId);
+            const data = await getExerciseOne(workoutLibraryId);
             return data;
         },
     });
 };
 
-export default useGetWorkoutLibraryOneQuery;
+export default usegetExerciseOneQuery;

@@ -9,7 +9,7 @@ import useTab from "hooks/client/useTab";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import styled from "styled-components";
 import {WorkoutLibrary} from "types/model";
-import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
+import usegetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
 import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
 import {useParams} from "react-router-dom";
 import {Category} from "types/enum";
@@ -45,7 +45,7 @@ const WorkoutLibraryListBottomSheet = ({
         useCheckBox();
     const {value, handleInputChange, handleInputClear} = useInput();
 
-    const {data: workoutLibraryAllData} = useGetWorkoutLibraryAllQuery(
+    const {data: workoutLibraryAllData} = usegetExerciseAllQuery(
         value,
         selectedValue,
     );

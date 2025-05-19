@@ -34,7 +34,7 @@ export const deleteWorkoutRecordOne = async ({
     }
 };
 // 확인: 완료
-export const getWorkoutRecordSumAll = async ({
+export const getExerciseSumAll = async ({
     workoutLibraryId,
     period,
 }: {

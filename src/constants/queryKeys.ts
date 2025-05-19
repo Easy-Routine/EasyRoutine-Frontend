@@ -1,14 +1,14 @@
 const queryKey = {
     getContext: "getContext",
-    getRoutineConfigAll: "getRoutineConfigAll",
-    getRoutineConfigOne: "getRoutineConfigOne",
-    getWorkoutLibraryAll: "getWorkoutLibraryAll",
-    getWorkoutLibraryOne: "getWorkoutLibraryOne",
-    getRoutineRecordAll: "getRoutineRecordAll",
-    getRoutineRecordOne: "getRoutineRecordOne",
-    getRoutineRecordAllMonthly: "getRoutineRecordAllMonthly",
-    getRoutineRecordAllDaily: "getRoutineRecordAllDaily",
-    getWorkoutRecordSumAll: "getWorkoutRecordSumAll",
+    getRoutineAll: "getRoutineAll",
+    getRoutineOne: "getRoutineOne",
+    getExerciseAll: "getExerciseAll",
+    getExerciseOne: "getExerciseOne",
+    getRoutineHistoryAll: "getRoutineHistoryAll",
+    getRoutineHistoryOne: "getRoutineHistoryOne",
+    getRoutineHistoryAllMonthly: "getRoutineHistoryAllMonthly",
+    getRoutineHistoryAllDaily: "getRoutineHistoryAllDaily",
+    getExerciseSumAll: "getExerciseSumAll",
     getUserOne: "getUserOne",
 } as const;
 

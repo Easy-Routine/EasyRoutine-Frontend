@@ -6,7 +6,7 @@ import ChipTab from "components/content/ChipTab/ChipTab";
 import useTab from "hooks/client/useTab";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
-import useGetWorkoutLibraryAllQuery from "hooks/server/useGetWorkoutLibraryAllQuery";
+import usegetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
 import {WorkoutLibrary} from "types/model";
 import {Category} from "types/enum";
 import DefaultImage from "assets/image/default-image.png";
@@ -41,7 +41,7 @@ const WorkoutLibraryListGraphBottomSheet = ({
         handleTabClick: handleChipTabClick,
     } = useTab(Category.ALL);
 
-    const {data: workoutLibraryAllData} = useGetWorkoutLibraryAllQuery(
+    const {data: workoutLibraryAllData} = usegetExerciseAllQuery(
         value,
         selectedChipTabValue,
     );

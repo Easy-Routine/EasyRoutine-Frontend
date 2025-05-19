@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
-import {createRoutineRecordOne} from "services/routine-record";
+import {createRoutineRecordOne} from "services/routine-history";
 import {Color} from "types/enum";
 
 const useCreateRoutineRecordMutation = () => {
@@ -26,7 +26,7 @@ const useCreateRoutineRecordMutation = () => {
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineConfigAll],
+                queryKey: [queryKey.getRoutineAll],
             });
         },
     });

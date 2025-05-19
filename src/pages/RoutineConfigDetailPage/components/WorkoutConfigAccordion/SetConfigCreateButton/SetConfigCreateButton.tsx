@@ -1,20 +1,17 @@
 import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
-import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMutation";
 import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
-import {SetConfig, WorkoutConfig} from "types/model";
 import {useRoutineConfigUpdateParams} from "../../RoutineConfigUpdateParamsProvider/RoutineConfigUpdateParamsProvider";
 import {v4 as uuid} from "uuid";
+import {Exercise} from "types/model";
 
-type SetConfigCreateButtonButtonProps = {
-    workoutConfig: WorkoutConfig;
+type SetCreateButtonButtonProps = {
+    exercise: Exercise;
 };
 
-const SetConfigCreateButton = ({
-    workoutConfig,
-}: SetConfigCreateButtonButtonProps) => {
-    const {_id} = workoutConfig;
+const SetCreateButton = ({exercise}: SetCreateButtonButtonProps) => {
+    const {id} = exercise;
     const {routineConfig, setRoutineConfig} = useRoutineConfigUpdateParams();
 
     const handleSetCreateButtonClick: MouseEventHandler<
@@ -39,8 +36,6 @@ const SetConfigCreateButton = ({
 
         const newSet: SetConfig = {
             _id: uuid(),
-            createdAt: now,
-            updatedAt: now,
             // optional fields: 이전 값이 있으면 그걸, 없으면 0
             ...(type.includes("weight") && {weight: last?.weight ?? 0}),
 

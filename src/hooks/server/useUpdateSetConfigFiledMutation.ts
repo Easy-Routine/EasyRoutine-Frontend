@@ -1,11 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
-import { updateSetConfigField } from "services/set-config";
+import {updateSetConfigField} from "services/set";
 
 const useUpdateSetConfigFieldMutation = () => {
     const queryClient = useQueryClient();
-    const { showToast } = useToast();
+    const {showToast} = useToast();
     return useMutation({
         mutationFn: ({
             routineConfigId,
@@ -28,13 +28,13 @@ const useUpdateSetConfigFieldMutation = () => {
                 value,
             }),
 
-        onError: (error) => {
+        onError: error => {
             console.log(error);
             showToast(error.message, "error");
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineConfigOne],
+                queryKey: [queryKey.getRoutineOne],
             });
         },
     });

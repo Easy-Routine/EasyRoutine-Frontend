@@ -3,7 +3,7 @@ import Confirm from "components/content/Confirm/Confirm";
 import {ReactComponent as ClockIcon} from "assets/image/clock.svg";
 import useToast from "hooks/useToast";
 import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
-import useGetRoutineConfigOneQuery from "hooks/server/useRoutineConfigGetQuery";
+import usegetRoutineOneQuery from "hooks/server/useRoutineConfigGetQuery";
 import useNativeMessage from "hooks/client/useNativeMessage";
 
 type RoutineConfigDeleteModalProps = {
@@ -27,8 +27,7 @@ const RoutineConfigDeleteModal = ({
     const {mutateAsync: deleteRoutineConfigOne} =
         useDeleteRoutineConfigOneMutation();
 
-    const {data: routineConfigOne} =
-        useGetRoutineConfigOneQuery(routineConfigId);
+    const {data: routineConfigOne} = usegetRoutineOneQuery(routineConfigId);
 
     const handleRoutineConfigDeleteButtonClick = async (
         routineConfigId: string,

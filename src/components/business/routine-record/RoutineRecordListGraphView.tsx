@@ -11,7 +11,7 @@ import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibrar
 import {Period} from "types/enum";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
-import useGetWorkoutLibraryOneQuery from "hooks/server/useGetWorkoutLibraryOneQuery";
+import usegetExerciseOneQuery from "hooks/server/usegetExerciseOneQuery";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 import {useNavigate} from "react-router-dom";
@@ -45,7 +45,7 @@ const RoutineRecorListGraphView = () => {
     const [workoutLibraryId, setWorkoutLibraryId] = useState("");
 
     const {data: workoutLibraryDetailData} =
-        useGetWorkoutLibraryOneQuery(workoutLibraryId);
+        usegetExerciseOneQuery(workoutLibraryId);
     const workoutLibraryDetail = workoutLibraryDetailData!;
 
     const handleButtonClick = async () => {

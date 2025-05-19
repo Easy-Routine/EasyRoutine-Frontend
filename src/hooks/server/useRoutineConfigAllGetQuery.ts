@@ -1,12 +1,12 @@
 import {useSuspenseQuery} from "@tanstack/react-query";
-import {getRoutineConfigAll} from "services/routine-config";
+import {getRoutineAll} from "services/routine";
 import queryKey from "constants/queryKeys";
 
 const useRoutineConfigAllGetQuery = () => {
     return useSuspenseQuery({
-        queryKey: [queryKey.getRoutineConfigAll],
+        queryKey: [queryKey.getRoutineAll],
         queryFn: async () => {
-            const response = await getRoutineConfigAll();
+            const response = await getRoutineAll();
             return response;
         },
         select: response => ({

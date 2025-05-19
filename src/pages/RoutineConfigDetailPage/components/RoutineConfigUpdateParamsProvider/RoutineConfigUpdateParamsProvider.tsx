@@ -1,45 +1,45 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
-import {RoutineConfig} from "types/model";
+import {Routine} from "types/model";
 
-type RoutineConfigUpdateParamsContextType = {
-    routineConfig: RoutineConfig;
-    setRoutineConfig: React.Dispatch<React.SetStateAction<RoutineConfig>>;
+type RoutineUpdateParamsContextType = {
+    routine: Routine;
+    setRoutine: React.Dispatch<React.SetStateAction<Routine>>;
 };
 
-const RoutineConfigUpdateParamsContext =
-    createContext<RoutineConfigUpdateParamsContextType>({
-        routineConfig: {} as RoutineConfig,
-        setRoutineConfig: () => {},
+const RoutineUpdateParamsContext =
+    createContext<RoutineUpdateParamsContextType>({
+        routine: {} as Routine,
+        setRoutine: () => {},
     });
 
-type RoutineConfigUpdateParamsProviderProps = {
-    defaultValue: RoutineConfig;
+type RoutineUpdateParamsProviderProps = {
+    defaultValue: Routine;
     children: React.ReactNode;
 };
 
-const RoutineConfigUpdateParamsProvider = ({
+const RoutineUpdateParamsProvider = ({
     defaultValue,
     children,
-}: RoutineConfigUpdateParamsProviderProps) => {
-    const [routineConfig, setRoutineConfig] = useState(defaultValue);
+}: RoutineUpdateParamsProviderProps) => {
+    const [routine, setRoutine] = useState(defaultValue);
 
     useEffect(() => {
-        console.log("루틴 설정 상태", routineConfig);
-    }, [routineConfig]);
+        console.log("루틴 설정 상태", routine);
+    }, [routine]);
 
     return (
-        <RoutineConfigUpdateParamsContext.Provider
+        <RoutineUpdateParamsContext.Provider
             value={{
-                routineConfig,
-                setRoutineConfig,
+                routine,
+                setRoutine,
             }}
         >
             {children}
-        </RoutineConfigUpdateParamsContext.Provider>
+        </RoutineUpdateParamsContext.Provider>
     );
 };
 
-export const useRoutineConfigUpdateParams = () =>
-    useContext(RoutineConfigUpdateParamsContext);
+export const useRoutineUpdateParams = () =>
+    useContext(RoutineUpdateParamsContext);
 
-export default RoutineConfigUpdateParamsProvider;
+export default RoutineUpdateParamsProvider;
