@@ -1,24 +1,24 @@
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
-import useCreateWorkoutLibraryOneMutation from "hooks/server/useCreateWorkoutLibraryOneMutation";
+import useCreateExerciseOneMutation from "hooks/server/useCreateExerciseOneMutation";
 import useToast from "hooks/useToast";
-import { Category, Type } from "types/enum";
+import {Category, Type} from "types/enum";
 
-type WorkoutLibraryCreateFloatingActionButtonProps = {
-    onButtonClick: (workoutLibraryId: string) => void;
+type ExerciseCreateFloatingActionButtonProps = {
+    onButtonClick: (exerciseId: string) => void;
 };
 
-const WorkoutLibraryCreateFloatingActionButton = ({
+const ExerciseCreateFloatingActionButton = ({
     onButtonClick,
-}: WorkoutLibraryCreateFloatingActionButtonProps) => {
-    const { showToast } = useToast();
+}: ExerciseCreateFloatingActionButtonProps) => {
+    const {showToast} = useToast();
 
-    const { mutateAsync: createWorkoutLibraryOneMutate } =
-        useCreateWorkoutLibraryOneMutation();
+    const {mutateAsync: createExerciseOneMutate} =
+        useCreateExerciseOneMutation();
 
     const handleButtonClick = async () => {
         // TODO: 워크아웃 라이브러리 생성 API 연결
         const userId = localStorage.getItem("userId");
-        const response = await createWorkoutLibraryOneMutate({
+        const response = await createExerciseOneMutate({
             name: "새 종목",
             image: "",
             category: Category.CHEST,
@@ -30,11 +30,11 @@ const WorkoutLibraryCreateFloatingActionButton = ({
         showToast("운동 종목이 추가되었습니다.", "success");
 
         if (response) {
-            onButtonClick(response._id);
+            onButtonClick(response.id);
         }
     };
 
     return <FloatingActionButton onButtonClick={handleButtonClick} />;
 };
 
-export default WorkoutLibraryCreateFloatingActionButton;
+export default ExerciseCreateFloatingActionButton;

@@ -1,24 +1,23 @@
 import Accordion from "components/box/Accordion/Accordion";
-import RoutineConfigDetailAccordion from "./RoutineConfigDetailAccordion";
 import EmptyBoundary from "../EmptyBoundary";
 import EmptyView from "components/content/EmptyView/EmptyView";
 import styled from "styled-components";
-import RoutineConfigDeleteModal from "./RoutineConfigDeleteModal";
 import {Suspense, useState} from "react";
 import useModal from "hooks/client/useModal";
-import useRoutineConfigAllQuery from "hooks/server/useRoutineConfigAllGetQuery";
+import useRoutineAllQuery from "hooks/server/useRoutineAllGetQuery";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import useToast from "hooks/useToast";
 import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 import {useNavigate} from "react-router-dom";
+import RoutineDeleteModal from "./RoutineConfigDeleteModal";
 
 const Container = styled.div``;
 
-const RoutineConfigListView = () => {
+const RoutineListView = () => {
     const navigate = useNavigate();
-    const {data: routineConfigAllData} = useRoutineConfigAllQuery();
+    const {data: routineAllData} = useRoutineAllQuery();
     const {showToast} = useToast();
     const {
         isOpen: isRoutineProgressModalOpen,
@@ -26,9 +25,9 @@ const RoutineConfigListView = () => {
         handleCloseModal: closeRoutineProgressModal,
     } = useModal();
     const {
-        isOpen: isRoutineConfigDeleteModalOpen,
-        handleOpenModal: openRoutineConfigDeleteModal,
-        handleCloseModal: closeRoutineConfigDeleteModal,
+        isOpen: isRoutineDeleteModalOpen,
+        handleOpenModal: openRoutineDeleteModal,
+        handleCloseModal: closeRoutineDeleteModal,
     } = useModal();
     useHardwareBackPress({
         onNativeBackButtonClick: () => {
@@ -36,53 +35,50 @@ const RoutineConfigListView = () => {
                 closeRoutineProgressModal();
                 return;
             }
-            if (isRoutineConfigDeleteModalOpen) {
-                closeRoutineConfigDeleteModal();
+            if (isRoutineDeleteModalOpen) {
+                closeRoutineDeleteModal();
                 return;
             }
             navigate(-1);
         },
-        dependencies: [
-            isRoutineProgressModalOpen,
-            isRoutineConfigDeleteModalOpen,
-        ],
+        dependencies: [isRoutineProgressModalOpen, isRoutineDeleteModalOpen],
     });
 
-    const routineConfigAll = routineConfigAllData!;
+    const routineAll = routineAllData!;
 
-    const [routineConfigId, setRoutineConfigId] = useState("");
+    const [routineId, setRoutineId] = useState("");
 
     return (
         <Container>
             <EmptyBoundary
                 fallback={<EmptyView emptyText="현재 루틴이 없습니다." />}
-                data={routineConfigAll}
+                data={routineAll}
             >
                 임시 주석처리
                 {/* <Accordion.List
-                    data={routineConfigAll}
-                    render={routineConfig => (
-                        <RoutineConfigDetailAccordion
-                            key={routineConfig._id}
-                            data={routineConfig}
-                            onRoutineConfigProgressButtonClick={(
-                                routineConfigId: string,
+                    data={routineAll}
+                    render={routine => (
+                        <RoutineDetailAccordion
+                            key={routine.id}
+                            data={routine}
+                            onRoutineProgressButtonClick={(
+                                routineId: string,
                             ) => {
-                                if (routineConfig.workoutConfigs.length === 0) {
+                                if (routine.routineExercises.length === 0) {
                                     showToast(
                                         "진행 할 수 있는 운동이 없습니다.",
                                         "error",
                                     );
                                     return;
                                 }
-                                setRoutineConfigId(routineConfigId);
+                                setRoutineId(routineId);
                                 openRoutineProgressModal();
                             }}
-                            onRoutineConfigDeleteButtonClick={(
-                                routineConfigId: string,
+                            onRoutineDeleteButtonClick={(
+                                routineId: string,
                             ) => {
-                                setRoutineConfigId(routineConfigId);
-                                openRoutineConfigDeleteModal();
+                                setRoutineId(routineId);
+                                openRoutineDeleteModal();
                             }}
                         />
                     )}
@@ -98,8 +94,8 @@ const RoutineConfigListView = () => {
                     }
                 >
                     {/* {isRoutineProgressModalOpen && (
-                        <RoutineConfigProgressModal
-                            routineConfigId={routineConfigId}
+                        <RoutineProgressModal
+                            routineId={routineId}
                             isOpen={isRoutineProgressModalOpen}
                             onBackdropClick={() => closeRoutineProgressModal()}
                             onCancelButtonClick={() =>
@@ -121,18 +117,18 @@ const RoutineConfigListView = () => {
                         </DefferredComponent>
                     }
                 >
-                    {isRoutineConfigDeleteModalOpen && (
-                        <RoutineConfigDeleteModal
-                            routineConfigId={routineConfigId}
-                            isOpen={isRoutineConfigDeleteModalOpen}
+                    {isRoutineDeleteModalOpen && (
+                        <RoutineDeleteModal
+                            routineId={routineId}
+                            isOpen={isRoutineDeleteModalOpen}
                             onBackdropClick={() => {
-                                closeRoutineConfigDeleteModal();
+                                closeRoutineDeleteModal();
                             }}
                             onCancelButtonClick={() => {
-                                closeRoutineConfigDeleteModal();
+                                closeRoutineDeleteModal();
                             }}
                             onConfirmButtonClick={() => {
-                                closeRoutineConfigDeleteModal();
+                                closeRoutineDeleteModal();
                             }}
                         />
                     )}
@@ -142,4 +138,4 @@ const RoutineConfigListView = () => {
     );
 };
 
-export default RoutineConfigListView;
+export default RoutineListView;

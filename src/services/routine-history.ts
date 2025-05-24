@@ -1,10 +1,9 @@
-import {RoutineRecord} from "types/model";
+import {RoutineHistory} from "types/model";
 import {Color} from "types/enum";
-import {DotDataByDate} from "components/business/routine-record/RoutineRecordAllMonthlyCalendar";
 import {handleError} from "utils/handleError";
 
 // 확인: 완료
-export const createRoutineRecordOne = async ({
+export const createRoutineHistoryOne = async ({
     id,
     name,
     color,
@@ -14,7 +13,7 @@ export const createRoutineRecordOne = async ({
     name: string;
     color: Color;
     userId: string;
-}): Promise<RoutineRecord | undefined> => {
+}): Promise<RoutineHistory | undefined> => {
     try {
         return undefined;
     } catch (e) {
@@ -26,7 +25,7 @@ export const getRoutineHistoryAllMonthly = async ({
     date,
 }: {
     date: Date;
-}): Promise<DotDataByDate[] | undefined> => {
+}): Promise<any[] | undefined> => {
     try {
         return undefined;
     } catch (e) {
@@ -39,7 +38,7 @@ export const getRoutineHistoryAllDaily = async ({
     date,
 }: {
     date: Date;
-}): Promise<RoutineRecord[] | undefined> => {
+}): Promise<RoutineHistory[] | undefined> => {
     try {
         return undefined;
     } catch (error) {
@@ -49,8 +48,8 @@ export const getRoutineHistoryAllDaily = async ({
 
 // 확인: 완료
 export const getRoutineHistoryOne = async (
-    routineRecordId: string,
-): Promise<RoutineRecord | undefined> => {
+    routineHistoryId: string,
+): Promise<RoutineHistory | undefined> => {
     try {
         return undefined;
     } catch (e) {
@@ -58,8 +57,8 @@ export const getRoutineHistoryOne = async (
     }
 };
 // 확인: 완료
-export const deleteRoutineRecordOne = async (
-    routineRecordId: string,
+export const deleteRoutineHistoryOne = async (
+    routineHistoryId: string,
 ): Promise<boolean | undefined> => {
     try {
         return true;
@@ -68,16 +67,16 @@ export const deleteRoutineRecordOne = async (
     }
 };
 
-type UpdateRoutineRecordWorkoutEndAtParmas = {
-    routineRecordId: string;
+type UpdateRoutineHistoryWorkoutEndAtParmas = {
+    routineHistoryId: string;
     workoutTime: number;
 };
 // 확인: 완료
-export const updateRoutineRecordWorkoutEndAt = async ({
-    routineRecordId,
+export const updateRoutineHistoryWorkoutEndAt = async ({
+    routineHistoryId,
     workoutTime,
-}: UpdateRoutineRecordWorkoutEndAtParmas): Promise<
-    RoutineRecord | undefined
+}: UpdateRoutineHistoryWorkoutEndAtParmas): Promise<
+    RoutineHistory | undefined
 > => {
     try {
         return undefined; // 업데이트된 루틴 기록 반환

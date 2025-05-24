@@ -1,31 +1,27 @@
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import useInput from "hooks/client/useInput";
-import useUpdateRoutineConfigFieldMutation from "hooks/server/useUpdateRoutineConfigFieldMutation";
+import useUpdateRoutineFieldMutation from "hooks/server/useUpdateRoutineFieldMutation";
 
-import { ChangeEvent, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import {ChangeEvent, useEffect} from "react";
+import {useParams} from "react-router-dom";
 
-const RoutineConfigUpdateNameTitleText = ({
-    defaultValue,
-}: {
-    defaultValue: string;
-}) => {
-    const { routineConfigId } = useParams();
-    const { value, setValue, handleInputChange } = useInput(defaultValue);
+const RoutineUpdateNameTitleText = ({defaultValue}: {defaultValue: string}) => {
+    const {routineId} = useParams();
+    const {value, setValue, handleInputChange} = useInput(defaultValue);
 
     useEffect(() => {
         setValue(defaultValue);
     }, [defaultValue, setValue]);
 
-    const { mutateAsync: updateRoutineConfigFieldMutate } =
-        useUpdateRoutineConfigFieldMutation();
+    const {mutateAsync: updateRoutineFieldMutate} =
+        useUpdateRoutineFieldMutation();
 
     const handleTitleTextChange = async (e: ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
         handleInputChange(e);
 
-        await updateRoutineConfigFieldMutate({
-            routineConfigId: routineConfigId as string,
+        await updateRoutineFieldMutate({
+            routineId: routineId as string,
             key: "name",
             value: newValue,
         });
@@ -40,4 +36,4 @@ const RoutineConfigUpdateNameTitleText = ({
     );
 };
 
-export default RoutineConfigUpdateNameTitleText;
+export default RoutineUpdateNameTitleText;

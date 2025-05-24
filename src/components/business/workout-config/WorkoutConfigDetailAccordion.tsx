@@ -6,11 +6,11 @@ import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
 import {ReactComponent as MinusIcon} from "assets/image/minus.svg";
 import Table from "components/content/Table/Table";
 import {useTheme} from "styled-components";
-import {SetConfig, WorkoutConfig, WorkoutLibrary} from "types/model";
-import useCreateSetConfigOneMutation from "hooks/server/useCreateSetConfigOneMutation";
-import useUpdateSetConfigFieldMutation from "hooks/server/useUpdateSetConfigFiledMutation";
-import useDeleteSetConfigOneMutation from "hooks/server/useDeleteSetConfigOneMutation";
-import useDeleteWorkoutConfigOneMutation from "hooks/server/useDeleteWorkoutConfigOneMutation";
+import {Set, RoutineExercise, Exercise} from "types/model";
+import useCreateSetOneMutation from "hooks/server/useCreateSetOneMutation";
+import useUpdateSetFieldMutation from "hooks/server/useUpdateSetFiledMutation";
+import useDeleteSetOneMutation from "hooks/server/useDeleteSetOneMutation";
+import useDeleteRoutineExerciseOneMutation from "hooks/server/useDeleteRoutineExerciseOneMutation";
 import {useParams} from "react-router-dom";
 import {Type} from "types/enum";
 import EmptyBoundary from "../EmptyBoundary";
@@ -27,58 +27,57 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
+const RoutineExerciseDetailAccordion = ({data}: {data: RoutineExercise}) => {
     const {color} = useTheme();
     const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
         useAccordion();
-    const {routineConfigId} = useParams();
+    const {routineId} = useParams();
 
-    const {mutateAsync: createSetConfigOneMutate} =
-        useCreateSetConfigOneMutation();
-    const {mutateAsync: updateSetConfigFieldMutate} =
-        useUpdateSetConfigFieldMutation();
-    const {mutateAsync: deleteSetConfigOneMutate} =
-        useDeleteSetConfigOneMutation();
-    const {mutateAsync: deleteWorkoutConfigOneMutate} =
-        useDeleteWorkoutConfigOneMutation();
+    const {mutateAsync: createSetOneMutate} = useCreateSetOneMutation();
+    const {mutateAsync: updateSetFieldMutate} = useUpdateSetFieldMutation();
+    const {mutateAsync: deleteSetOneMutate} = useDeleteSetOneMutation();
+    const {mutateAsync: deleteRoutineExerciseOneMutate} =
+        useDeleteRoutineExerciseOneMutation();
 
-    const handleSetDeleteButtonClick = async (workoutConfigId: string) => {
-        await deleteSetConfigOneMutate({
-            routineConfigId: routineConfigId as string,
-            workoutConfigId,
+    const handleSetDeleteButtonClick = async (routineExerciseId: string) => {
+        await deleteSetOneMutate({
+            // routineId: routineId as string,
+            routineExerciseId,
         });
     };
 
-    const handleSetCreateButtonClick = async (workoutConfigId: string) => {
-        await createSetConfigOneMutate({
-            routineConfigId: routineConfigId as string,
-            workoutConfigId,
+    const handleSetCreateButtonClick = async (routineExerciseId: string) => {
+        await createSetOneMutate({
+            // routineId: routineId as string,
+            routineExerciseId,
         });
     };
 
-    const handleWorkoutDeleteButtonClick = async (workoutConfigId: string) => {
-        await deleteWorkoutConfigOneMutate({
-            routineConfigId: routineConfigId as string,
-            workoutConfigId,
+    const handleWorkoutDeleteButtonClick = async (
+        routineExerciseId: string,
+    ) => {
+        await deleteRoutineExerciseOneMutate({
+            // routineId: routineId as string,
+            routineExerciseId,
         });
     };
 
     const handleSetInputChange = async (
-        setConfigId: string,
+        setId: string,
         key: string,
         value: string,
     ) => {
-        await updateSetConfigFieldMutate({
-            routineConfigId: routineConfigId as string,
-            workoutConfigId: data._id,
-            setConfigId,
+        await updateSetFieldMutate({
+            routineId: routineId as string,
+            routineExerciseId: data.id,
+            setId,
             key,
             value,
         });
     };
 
-    const isTypeExist = (workoutLibrary: WorkoutLibrary, type: Type) =>
-        workoutLibrary.type.includes(type);
+    const isTypeExist = (exercise: Exercise, type: Type) =>
+        exercise.type.includes(type);
 
     // 비동기 작업 추가
     return (
@@ -88,7 +87,7 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                     <Card>
                         <Card.ImageBox>
                             {/* <img
-                                src={data.workoutLibrary.image}
+                                src={data.exercise.image}
                                 alt=""
                                 style={{
                                     borderRadius: borderRadius.md,
@@ -97,13 +96,13 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                                 }}
                             /> */}
                             <Card.Image
-                                src={data.workoutLibrary.image || DefaultImage}
+                                src={data.exercise.image || DefaultImage}
                             />
                         </Card.ImageBox>
                         <Card.Column>
-                            <Card.Title>{data.workoutLibrary.name}</Card.Title>
+                            <Card.Title>{data.exercise.name}</Card.Title>
                             <Card.Description>
-                                {data.setConfigs.length}세트
+                                {data.sets.length}세트
                             </Card.Description>
                         </Card.Column>
                     </Card>
@@ -115,7 +114,7 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                 </Accordion.Header>
                 <Accordion.Body isOpen={isOpen}>
                     <EmptyBoundary
-                        data={data.setConfigs}
+                        data={data.sets}
                         fallback={
                             <SimpleTextEmptyView>
                                 세트 설정이 없습니다.
@@ -124,11 +123,11 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                     >
                         <Table>
                             <Table.Column
-                                data={data.setConfigs}
+                                data={data.sets}
                                 header={
                                     <Table.Row>
                                         <Table.TitleText>세트</Table.TitleText>
-                                        {data.workoutLibrary.type.map(key => (
+                                        {data.exercise.type.map(key => (
                                             <Table.TitleText key={key}>
                                                 {typeMapper[key]}
                                             </Table.TitleText>
@@ -137,25 +136,25 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                                     </Table.Row>
                                 }
                                 render={(
-                                    setConfig: SetConfig & {
+                                    set: Set & {
                                         [key: string]: any;
                                     },
                                     index: number,
                                 ) => (
-                                    <Table.Row key={setConfig._id}>
+                                    <Table.Row key={set.id}>
                                         <Table.NumberPicker
                                             value={index + 1}
                                             disabled={true}
                                         />
                                         {isTypeExist(
-                                            data.workoutLibrary,
+                                            data.exercise,
                                             Type.WEIGHT,
                                         ) && (
                                             <Table.WeightPicker
-                                                value={setConfig.weight}
+                                                value={set.weight as number}
                                                 onInputChange={value =>
                                                     handleSetInputChange(
-                                                        setConfig._id,
+                                                        set.id,
                                                         Type.WEIGHT,
                                                         value,
                                                     )
@@ -163,14 +162,14 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                                             />
                                         )}
                                         {isTypeExist(
-                                            data.workoutLibrary,
+                                            data.exercise,
                                             Type.REP,
                                         ) && (
                                             <Table.NumberPicker
-                                                value={setConfig.rep}
+                                                value={set.rep as number}
                                                 onInputChange={value =>
                                                     handleSetInputChange(
-                                                        setConfig._id,
+                                                        set.id,
                                                         Type.REP,
                                                         value,
                                                     )
@@ -178,14 +177,16 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                                             />
                                         )}
                                         {isTypeExist(
-                                            data.workoutLibrary,
+                                            data.exercise,
                                             Type.WORKOUT_SEC,
                                         ) && (
                                             <Table.TimePicker
-                                                value={setConfig.workoutSec.toString()}
+                                                value={(
+                                                    set.workoutSec as number
+                                                ).toString()}
                                                 onInputChange={value =>
                                                     handleSetInputChange(
-                                                        setConfig._id,
+                                                        set.id,
                                                         Type.WORKOUT_SEC,
                                                         value,
                                                     )
@@ -193,10 +194,10 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                                             />
                                         )}
                                         <Table.TimePicker
-                                            value={setConfig.restSec.toString()}
+                                            value={set.restSec.toString()}
                                             onInputChange={value =>
                                                 handleSetInputChange(
-                                                    setConfig._id,
+                                                    set.id,
                                                     "restSec",
                                                     value,
                                                 )
@@ -211,7 +212,7 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                         <IconTextBox.IconText
                             color={color.gray.dark}
                             onIconTextClick={() =>
-                                handleSetDeleteButtonClick(data._id)
+                                handleSetDeleteButtonClick(data.id)
                             }
                         >
                             <MinusIcon />
@@ -220,7 +221,7 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                         <IconTextBox.IconText
                             color={color.primary}
                             onIconTextClick={() =>
-                                handleSetCreateButtonClick(data._id)
+                                handleSetCreateButtonClick(data.id)
                             }
                         >
                             <PlusIcon />
@@ -231,7 +232,7 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
                 <Accordion.DeleteButton
                     opacity={opacity}
                     onDeleteButtonClick={() =>
-                        handleWorkoutDeleteButtonClick(data._id)
+                        handleWorkoutDeleteButtonClick(data.id)
                     }
                 />
             </Accordion.Motion>
@@ -239,4 +240,4 @@ const WorkoutConfigDetailAccordion = ({data}: {data: WorkoutConfig}) => {
     );
 };
 
-export default WorkoutConfigDetailAccordion;
+export default RoutineExerciseDetailAccordion;

@@ -1,38 +1,38 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
-import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
+import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
-import useDeleteWorkoutLibraryOneMutation from "hooks/server/useDeleteWorkoutLibraryOneMutation";
+import useDeleteExerciseOneMutation from "hooks/server/useDeleteExerciseOneMutation";
 import useNativeMessage from "hooks/client/useNativeMessage";
 
-type WorkoutLibraryDeleteModalProps = {
-    workoutLibraryId: string;
+type ExerciseDeleteModalProps = {
+    exerciseId: string;
     isOpen: boolean;
     onBackdropClick: () => void;
     onCancelButtonClick: () => void;
     onConfirmButtonClick: () => void;
 };
 
-const WorkoutLibraryDeleteModal = ({
-    workoutLibraryId,
+const ExerciseDeleteModal = ({
+    exerciseId,
     isOpen,
     onBackdropClick,
     onCancelButtonClick,
     onConfirmButtonClick,
-}: WorkoutLibraryDeleteModalProps) => {
-    const { showToast } = useToast();
-    const { sendNativeMessage } = useNativeMessage();
+}: ExerciseDeleteModalProps) => {
+    const {showToast} = useToast();
+    const {sendNativeMessage} = useNativeMessage();
     // const [promise, setPromise] =
 
-    const { mutateAsync: deleteWorkoutLibraryOneMutate } =
-        useDeleteWorkoutLibraryOneMutation();
+    const {mutateAsync: deleteExerciseOneMutate} =
+        useDeleteExerciseOneMutation();
 
-    const handleConfirmButtonClick = async (workoutLibraryId: string) => {
-        await deleteWorkoutLibraryOneMutate(workoutLibraryId);
+    const handleConfirmButtonClick = async (exerciseId: string) => {
+        await deleteExerciseOneMutate(exerciseId);
 
         showToast("운동 종목이 삭제되었습니다.", "success");
         onConfirmButtonClick();
-        sendNativeMessage({ type: "vibrate" });
+        sendNativeMessage({type: "vibrate"});
 
         // showToast("운동 종목 삭제 중 에러가 발생했습니다.", "error");
     };
@@ -57,7 +57,7 @@ const WorkoutLibraryDeleteModal = ({
                         confirmLabel="삭제하기"
                         onCancelButtonClick={onCancelButtonClick}
                         onConfirmButtonClick={() =>
-                            handleConfirmButtonClick(workoutLibraryId)
+                            handleConfirmButtonClick(exerciseId)
                         }
                     />
                 </Confirm>
@@ -66,4 +66,4 @@ const WorkoutLibraryDeleteModal = ({
     );
 };
 
-export default WorkoutLibraryDeleteModal;
+export default ExerciseDeleteModal;

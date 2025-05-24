@@ -50,7 +50,7 @@ export const getExerciseAll = async ({
 };
 
 export const getExerciseOne = async (
-    workoutLibraryId: string,
+    exerciseId: string,
 ): Promise<Exercise | undefined | null> => {
     try {
         return undefined;
@@ -59,8 +59,8 @@ export const getExerciseOne = async (
     }
 };
 
-export const createWorkoutLibraryOne = async (
-    workoutData: Omit<Exercise, "_id" | "createdAt" | "updatedAt">,
+export const createExerciseOne = async (
+    workoutData: Omit<Exercise, "id" | "createdAt" | "updatedAt">,
 ): Promise<Exercise | undefined> => {
     try {
         return undefined; // 생성된 운동 구성 반환
@@ -69,8 +69,8 @@ export const createWorkoutLibraryOne = async (
     }
 };
 
-export const updateWorkoutLibraryField = async (
-    workoutLibraryId: string,
+export const updateExerciseField = async (
+    exerciseId: string,
     key: string,
     value: string | number,
 ): Promise<Exercise | undefined> => {
@@ -81,8 +81,8 @@ export const updateWorkoutLibraryField = async (
     }
 };
 
-export const updateWorkoutLibraryOne = async (
-    workoutLibraryId: string,
+export const updateExerciseOne = async (
+    exerciseId: string,
     updatedData: Partial<Exercise>, // 업데이트할 데이터
 ): Promise<boolean | undefined> => {
     try {
@@ -92,8 +92,8 @@ export const updateWorkoutLibraryOne = async (
     }
 };
 
-export const deleteWorkoutLibraryOne = async (
-    workoutLibraryId: string,
+export const deleteExerciseOne = async (
+    exerciseId: string,
 ): Promise<boolean | undefined> => {
     try {
         return true; // 삭제 성공

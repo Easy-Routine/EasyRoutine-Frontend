@@ -1,18 +1,18 @@
-import {WorkoutRecord, WorkoutLibrary} from "types/model"; // WorkoutRecord 타입의 경로를 설정하세요.
+import {RoutineExercise, Exercise} from "types/model"; // RoutineExercise 타입의 경로를 설정하세요.
 import {Period} from "types/enum";
 import {handleError} from "utils/handleError";
 
-type CreateWorkoutRecordOneParams = {
-    routineRecordId: string;
-    workoutLibrary: WorkoutLibrary;
-    workoutRecordId: string;
+type CreateRoutineExerciseOneParams = {
+    routineHistoryId: string;
+    exercise: Exercise;
+    routineExerciseId: string;
 };
 
-export const createWorkoutRecordOne = async ({
-    routineRecordId,
-    workoutLibrary,
-    workoutRecordId,
-}: CreateWorkoutRecordOneParams): Promise<WorkoutRecord | undefined> => {
+export const createRoutineExerciseOne = async ({
+    routineHistoryId,
+    exercise,
+    routineExerciseId,
+}: CreateRoutineExerciseOneParams): Promise<RoutineExercise | undefined> => {
     try {
         return undefined;
     } catch (error) {
@@ -20,12 +20,12 @@ export const createWorkoutRecordOne = async ({
     }
 };
 // 확인: 완료
-export const deleteWorkoutRecordOne = async ({
-    routineRecordId,
-    workoutRecordId,
+export const deleteRoutineExerciseOne = async ({
+    routineHistoryId,
+    routineExerciseId,
 }: {
-    routineRecordId: string;
-    workoutRecordId: string;
+    routineHistoryId: string;
+    routineExerciseId: string;
 }): Promise<boolean | undefined> => {
     try {
         return undefined;
@@ -35,10 +35,10 @@ export const deleteWorkoutRecordOne = async ({
 };
 // 확인: 완료
 export const getExerciseSumAll = async ({
-    workoutLibraryId,
+    exerciseId,
     period,
 }: {
-    workoutLibraryId: string;
+    exerciseId: string;
     period: Period;
 }): Promise<{key: string; value: number}[] | undefined> => {
     try {

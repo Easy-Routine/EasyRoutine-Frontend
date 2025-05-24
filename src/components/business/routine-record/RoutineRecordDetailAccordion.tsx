@@ -12,20 +12,20 @@ import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
 import {useTheme} from "styled-components";
 import {Color} from "types/enum";
-import {RoutineRecord} from "types/model";
+import {RoutineHistory} from "types/model";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 import DefaultImage from "assets/image/default-image.png";
 
-type RoutineRecordDetailAccordionProps = {
-    data: RoutineRecord;
-    onRoutineRecordDeleteButtonClick: (routineRecordId: string) => void;
+type RoutineHistoryDetailAccordionProps = {
+    data: RoutineHistory;
+    onRoutineHistoryDeleteButtonClick: (routineHistoryId: string) => void;
 };
 
-const RoutineRecordDetailAccordion = ({
+const RoutineHistoryDetailAccordion = ({
     data,
-    onRoutineRecordDeleteButtonClick,
-}: RoutineRecordDetailAccordionProps) => {
+    onRoutineHistoryDeleteButtonClick,
+}: RoutineHistoryDetailAccordionProps) => {
     const navigate = useNavigate();
     const {color} = useTheme();
 
@@ -43,7 +43,7 @@ const RoutineRecordDetailAccordion = ({
                         <Card.Column>
                             <Card.Title>{data.name}</Card.Title>
                             <Card.Description>
-                                {data.workoutRecords.length}종목
+                                {data.routineExercises.length}종목
                             </Card.Description>
                         </Card.Column>
                     </Card>
@@ -55,7 +55,7 @@ const RoutineRecordDetailAccordion = ({
                 </Accordion.Header>
                 <Accordion.Body isOpen={isOpen}>
                     <EmptyBoundary
-                        data={data.workoutRecords}
+                        data={data.routineExercises}
                         fallback={
                             <SimpleTextEmptyView>
                                 운동 기록이 없습니다
@@ -63,21 +63,20 @@ const RoutineRecordDetailAccordion = ({
                         }
                     >
                         <SmallCardList<any>
-                            data={data.workoutRecords}
+                            data={data.routineExercises}
                             render={item => (
-                                <SmallCard key={item._id}>
+                                <SmallCard key={item.id}>
                                     <SmallCard.ImageBox
                                         src={
-                                            item.workoutLibrary.image ||
-                                            DefaultImage
+                                            item.exercise.image || DefaultImage
                                         }
                                     />
                                     <SmallCard.ColumnBox>
                                         <SmallCard.BoldText>
-                                            {item.workoutLibrary.name}
+                                            {item.exercise.name}
                                         </SmallCard.BoldText>
                                         <SmallCard.NormalText>
-                                            {item.setRecords.length}세트
+                                            {item.sets.length}세트
                                         </SmallCard.NormalText>
                                     </SmallCard.ColumnBox>
                                 </SmallCard>
@@ -89,7 +88,7 @@ const RoutineRecordDetailAccordion = ({
                         <IconTextBox.IconText
                             color={color.gray.dark}
                             onIconTextClick={() =>
-                                navigate(ROUTES.RECORD.DETAIL.PATH(data._id))
+                                navigate(ROUTES.RECORD.DETAIL.PATH(data.id))
                             }
                         >
                             <PenIcon />
@@ -98,7 +97,7 @@ const RoutineRecordDetailAccordion = ({
                         <IconTextBox.IconText
                             color={color.warning}
                             onIconTextClick={() =>
-                                onRoutineRecordDeleteButtonClick(data._id)
+                                onRoutineHistoryDeleteButtonClick(data.id)
                             }
                         >
                             <RunIcon />
@@ -109,7 +108,7 @@ const RoutineRecordDetailAccordion = ({
                 <Accordion.DeleteButton
                     opacity={opacity}
                     onDeleteButtonClick={() =>
-                        onRoutineRecordDeleteButtonClick(data._id)
+                        onRoutineHistoryDeleteButtonClick(data.id)
                     }
                 />
             </Accordion.Motion>
@@ -117,4 +116,4 @@ const RoutineRecordDetailAccordion = ({
     );
 };
 
-export default RoutineRecordDetailAccordion;
+export default RoutineHistoryDetailAccordion;

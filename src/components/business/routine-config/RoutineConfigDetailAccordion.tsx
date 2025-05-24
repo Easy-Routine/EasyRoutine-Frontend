@@ -11,29 +11,29 @@ import {ReactComponent as RunIcon} from "assets/image/run.svg";
 import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
 import {useTheme} from "styled-components";
-import {RoutineConfig, WorkoutConfig} from "types/model";
+import {Routine, RoutineExercise} from "types/model";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 import DefaultImage from "assets/image/default-image.png";
 
-type RoutineConfigDetailAccordionProps = {
-    data: RoutineConfig;
-    onRoutineConfigDeleteButtonClick: (routineConfigId: string) => void;
-    onRoutineConfigProgressButtonClick: (routineConfigId: string) => void;
+type RoutineDetailAccordionProps = {
+    data: Routine;
+    onRoutineDeleteButtonClick: (routineId: string) => void;
+    onRoutineProgressButtonClick: (routineId: string) => void;
 };
 
-const RoutineConfigDetailAccordion = ({
+const RoutineDetailAccordion = ({
     data,
-    onRoutineConfigProgressButtonClick,
-    onRoutineConfigDeleteButtonClick,
-}: RoutineConfigDetailAccordionProps) => {
+    onRoutineProgressButtonClick,
+    onRoutineDeleteButtonClick,
+}: RoutineDetailAccordionProps) => {
     const {color} = useTheme();
     const navigate = useNavigate();
     const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
         useAccordion();
 
-    const handleRoutineUpdateButtonClick = (routineConfigId: string) => {
-        navigate(ROUTES.CONFIG.DETAIL.PATH(routineConfigId));
+    const handleRoutineUpdateButtonClick = (routineId: string) => {
+        navigate(ROUTES.CONFIG.DETAIL.PATH(routineId));
     };
 
     // 비동기 작업 추가
@@ -49,7 +49,7 @@ const RoutineConfigDetailAccordion = ({
                             <Card.Column>
                                 <Card.Title>{data.name}</Card.Title>
                                 <Card.Description>
-                                    {data.workoutConfigs?.length}종목
+                                    {data.routineExercises?.length}종목
                                 </Card.Description>
                             </Card.Column>
                         </Card>
@@ -61,35 +61,29 @@ const RoutineConfigDetailAccordion = ({
                     </Accordion.Header>
                     <Accordion.Body isOpen={isOpen}>
                         <EmptyBoundary
-                            data={data.workoutConfigs}
+                            data={data.routineExercises}
                             fallback={
                                 <SimpleTextEmptyView>
                                     운동 설정이 없습니다.
                                 </SimpleTextEmptyView>
                             }
                         >
-                            <SmallCardList<WorkoutConfig>
-                                data={data.workoutConfigs}
-                                render={workoutConfig => (
-                                    <SmallCard key={workoutConfig._id}>
+                            <SmallCardList<RoutineExercise>
+                                data={data.routineExercises}
+                                render={routineExercise => (
+                                    <SmallCard key={routineExercise.id}>
                                         <SmallCard.ImageBox
                                             src={
-                                                workoutConfig.workoutLibrary
+                                                routineExercise.exercise
                                                     .image || DefaultImage
                                             }
                                         />
                                         <SmallCard.ColumnBox>
                                             <SmallCard.BoldText>
-                                                {
-                                                    workoutConfig.workoutLibrary
-                                                        .name
-                                                }
+                                                {routineExercise.exercise.name}
                                             </SmallCard.BoldText>
                                             <SmallCard.NormalText>
-                                                {
-                                                    workoutConfig.setConfigs
-                                                        .length
-                                                }
+                                                {routineExercise.sets.length}
                                                 세트
                                             </SmallCard.NormalText>
                                         </SmallCard.ColumnBox>
@@ -102,7 +96,7 @@ const RoutineConfigDetailAccordion = ({
                             <IconTextBox.IconText
                                 color={color.gray.dark}
                                 onIconTextClick={() => {
-                                    handleRoutineUpdateButtonClick(data._id);
+                                    handleRoutineUpdateButtonClick(data.id);
                                 }}
                             >
                                 <PenIcon />
@@ -111,9 +105,7 @@ const RoutineConfigDetailAccordion = ({
                             <IconTextBox.IconText
                                 color={color.primary}
                                 onIconTextClick={() => {
-                                    onRoutineConfigProgressButtonClick(
-                                        data._id,
-                                    );
+                                    onRoutineProgressButtonClick(data.id);
                                 }}
                             >
                                 <RunIcon />
@@ -124,7 +116,7 @@ const RoutineConfigDetailAccordion = ({
                     <Accordion.DeleteButton
                         opacity={opacity}
                         onDeleteButtonClick={() =>
-                            onRoutineConfigDeleteButtonClick(data._id)
+                            onRoutineDeleteButtonClick(data.id)
                         }
                     />
                 </Accordion.Motion>
@@ -133,4 +125,4 @@ const RoutineConfigDetailAccordion = ({
     );
 };
 
-export default RoutineConfigDetailAccordion;
+export default RoutineDetailAccordion;

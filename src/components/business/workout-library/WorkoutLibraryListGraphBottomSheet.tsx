@@ -6,8 +6,8 @@ import ChipTab from "components/content/ChipTab/ChipTab";
 import useTab from "hooks/client/useTab";
 import SmallCardList from "components/content/SmallCard/SmallCardList";
 import SmallCard from "components/content/SmallCard/SmallCard";
-import usegetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
-import {WorkoutLibrary} from "types/model";
+import useGetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
+import {Exercise} from "types/model";
 import {Category} from "types/enum";
 import DefaultImage from "assets/image/default-image.png";
 
@@ -24,29 +24,29 @@ const SmallCardListContainer = styled.div`
     overflow-y: auto;
 `;
 
-type WorkoutLibraryListGraphBottomSheetProps = {
+type ExerciseListGraphBottomSheetProps = {
     isOpen: boolean;
     onBackdropClick: () => void;
-    onSmallCardClick: (workoutLibraryId: string) => void;
+    onSmallCardClick: (exerciseId: string) => void;
 };
 
-const WorkoutLibraryListGraphBottomSheet = ({
+const ExerciseListGraphBottomSheet = ({
     isOpen,
     onBackdropClick,
     onSmallCardClick,
-}: WorkoutLibraryListGraphBottomSheetProps) => {
+}: ExerciseListGraphBottomSheetProps) => {
     const {value, handleInputChange, handleInputClear} = useInput();
     const {
         selectedValue: selectedChipTabValue,
         handleTabClick: handleChipTabClick,
     } = useTab(Category.ALL);
 
-    const {data: workoutLibraryAllData} = usegetExerciseAllQuery(
+    const {data: exerciseAllData} = useGetExerciseAllQuery(
         value,
         selectedChipTabValue,
     );
 
-    const workoutLibraryAll = workoutLibraryAllData!;
+    const exerciseAll = exerciseAllData!;
 
     return (
         <Modal>
@@ -111,11 +111,11 @@ const WorkoutLibraryListGraphBottomSheet = ({
                     </ChipTab>
 
                     <SmallCardListContainer>
-                        <SmallCardList<WorkoutLibrary>
-                            data={workoutLibraryAll}
-                            render={({_id, name, image}) => (
+                        <SmallCardList<Exercise>
+                            data={exerciseAll}
+                            render={({id, name, image}) => (
                                 <SmallCard
-                                    onCardClick={() => onSmallCardClick(_id)}
+                                    onCardClick={() => onSmallCardClick(id)}
                                 >
                                     <SmallCard.ImageBox
                                         src={image || DefaultImage}
@@ -134,4 +134,4 @@ const WorkoutLibraryListGraphBottomSheet = ({
     );
 };
 
-export default WorkoutLibraryListGraphBottomSheet;
+export default ExerciseListGraphBottomSheet;

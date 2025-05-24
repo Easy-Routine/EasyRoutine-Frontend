@@ -1,7 +1,7 @@
 import {Color} from "./enum";
 
 export type User = {
-    _id: number;
+    id: number;
     provider: string;
     providerId: string;
     name: string;
@@ -49,24 +49,24 @@ export type Exercise = {
     updatedAt: string;
 };
 
-// export type WorkoutRecord = {
-//     _id: string;
-//     workoutConfigId: string;
+// export type RoutineExercise = {
+//     id: string;
+//     routineExerciseId: string;
 //     createdAt: string;
 //     updatedAt: string;
-//     routineRecordId: string;
-//     setRecords: SetRecord[];
-//     workoutLibrary: WorkoutLibrary;
+//     routineHistoryId: string;
+//     sets: Set[];
+//     exercise: Exercise;
 // };
 
-// export type SetRecord = {
-//     _id: string;
+// export type Set = {
+//     id: string;
 //     weight: number;
 //     rep: number;
 //     restSec: number;
 //     workoutSec: number;
 //     createdAt: string;
 //     updatedAt: string;
-//     workoutRecordId: string;
+//     routineExerciseId: string;
 //     [key: string]: any;
 // };

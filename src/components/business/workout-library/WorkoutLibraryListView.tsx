@@ -7,20 +7,20 @@ import SearchInput from "components/content/SearchInput/SearchInput";
 import useTab from "hooks/client/useTab";
 import useInput from "hooks/client/useInput";
 import useModal from "hooks/client/useModal";
-import WorkoutLibraryDetailBottomSheet from "./WorkoutLibraryDetailBottomSheet";
-import WorkoutLibraryDeleteModal from "./WorkoutLibraryDeleteModal";
-import WorkoutLibraryCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
-import WorkoutLibraryDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
-import usegetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
-import {WorkoutLibrary} from "types/model";
+import useGetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
+import {Exercise} from "types/model";
 import {Category} from "types/enum";
 import useToast from "hooks/useToast";
-import usegetExerciseOneMutation from "hooks/server/usegetExerciseOneMutation";
+import useGetExerciseOneMutation from "hooks/server/useGetExerciseOneMutation";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import useHardwareBackPress from "hooks/client/useHardwareBackPress";
 import {useNavigate} from "react-router-dom";
+import ExerciseDetailSmallCard from "./WorkoutLibraryDetailSmallCard";
+import ExerciseDetailBottomSheet from "./WorkoutLibraryDetailBottomSheet";
+import ExerciseDeleteModal from "./WorkoutLibraryDeleteModal";
+import ExerciseCreateFloatingActionButton from "./WorkoutLibraryCreateFloatingActionButton";
 
 const Container = styled.div`
     display: flex;
@@ -28,19 +28,19 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const WorkoutLibraryListView = () => {
+const ExerciseListView = () => {
     const {selectedValue, handleTabClick} = useTab(Category.ALL);
     const {value, handleInputChange, handleInputClear} = useInput();
-    const [workoutLibraryId, setWorkoutLibraryId] = useState("");
+    const [exerciseId, setExerciseId] = useState("");
     const {showToast} = useToast();
 
-    const {data: workoutLibraryAllData} = usegetExerciseAllQuery(
+    const {data: exerciseAllData} = useGetExerciseAllQuery(
         value,
         selectedValue,
     );
-    const {mutateAsync: getExerciseOneMutate} = usegetExerciseOneMutation();
+    const {mutateAsync: getExerciseOneMutate} = useGetExerciseOneMutation();
 
-    const workoutLibraryAll = workoutLibraryAllData ?? [];
+    const exerciseAll = exerciseAllData ?? [];
 
     const {
         isOpen: isWorkoutDeleteModalOpen,
@@ -49,9 +49,9 @@ const WorkoutLibraryListView = () => {
     } = useModal();
 
     const {
-        isOpen: isWorkoutLibraryBottomSheetOpen,
-        handleOpenModal: openWorkoutLibraryDetailBottomSheet,
-        handleCloseModal: closeWorkoutLibraryDetailBottomSheet,
+        isOpen: isExerciseBottomSheetOpen,
+        handleOpenModal: openExerciseDetailBottomSheet,
+        handleCloseModal: closeExerciseDetailBottomSheet,
     } = useModal();
 
     const navigate = useNavigate();
@@ -61,41 +61,38 @@ const WorkoutLibraryListView = () => {
                 closeWorkoutDeleteModal();
                 return;
             }
-            if (isWorkoutLibraryBottomSheetOpen) {
-                closeWorkoutLibraryDetailBottomSheet();
+            if (isExerciseBottomSheetOpen) {
+                closeExerciseDetailBottomSheet();
                 return;
             }
             navigate(-1);
         },
-        dependencies: [
-            isWorkoutDeleteModalOpen,
-            isWorkoutLibraryBottomSheetOpen,
-        ],
+        dependencies: [isWorkoutDeleteModalOpen, isExerciseBottomSheetOpen],
     });
 
-    const handleFloatingActionButtonClick = (workoutLibraryId: string) => {
-        setWorkoutLibraryId(workoutLibraryId);
-        openWorkoutLibraryDetailBottomSheet();
+    const handleFloatingActionButtonClick = (exerciseId: string) => {
+        setExerciseId(exerciseId);
+        openExerciseDetailBottomSheet();
     };
 
     // 짧은 클릭
-    const handleSmallCardClick = async (workoutLibraryId: string) => {
+    const handleSmallCardClick = async (exerciseId: string) => {
         // TODO: 운동 라이브러리 하나 가져오기
 
         // isEditable이 true라면 아래 로직 실행하기
-        // const isEditable = workoutLibraryOne?.isEditable;
+        // const isEditable = exerciseOne?.isEditable;
 
-        setWorkoutLibraryId(workoutLibraryId);
-        openWorkoutLibraryDetailBottomSheet();
+        setExerciseId(exerciseId);
+        openExerciseDetailBottomSheet();
     };
     // 긴 클릭
-    const handleSmallCardLongPress = async (workoutLibraryId: string) => {
-        const response = await getExerciseOneMutate(workoutLibraryId);
+    const handleSmallCardLongPress = async (exerciseId: string) => {
+        const response = await getExerciseOneMutate(exerciseId);
 
         const isEditable = response?.isEditable;
 
         if (isEditable) {
-            setWorkoutLibraryId(workoutLibraryId);
+            setExerciseId(exerciseId);
             openWorkoutDeleteModal();
         } else {
             showToast("기본 운동은 변경할 수 없습니다.", "error");
@@ -160,12 +157,12 @@ const WorkoutLibraryListView = () => {
                     기타
                 </ChipTab.Chip>
             </ChipTab>
-            <SmallCardList<WorkoutLibrary>
-                data={workoutLibraryAll}
-                render={(workoutLibrary, index) => (
-                    <WorkoutLibraryDetailSmallCard
-                        key={workoutLibrary._id}
-                        data={workoutLibrary}
+            <SmallCardList<Exercise>
+                data={exerciseAll}
+                render={(exercise, index) => (
+                    <ExerciseDetailSmallCard
+                        key={exercise.id}
+                        data={exercise}
                         onSmallCardClick={handleSmallCardClick}
                         onSmallCardLongPress={handleSmallCardLongPress}
                     />
@@ -179,15 +176,15 @@ const WorkoutLibraryListView = () => {
                         </DefferredComponent>
                     }
                 >
-                    {isWorkoutLibraryBottomSheetOpen && (
-                        <WorkoutLibraryDetailBottomSheet
-                            workoutLibraryId={workoutLibraryId}
-                            isOpen={isWorkoutLibraryBottomSheetOpen}
+                    {isExerciseBottomSheetOpen && (
+                        <ExerciseDetailBottomSheet
+                            exerciseId={exerciseId}
+                            isOpen={isExerciseBottomSheetOpen}
                             onBackdropClick={() =>
-                                closeWorkoutLibraryDetailBottomSheet()
+                                closeExerciseDetailBottomSheet()
                             }
                             onSubmitButtonClick={() =>
-                                closeWorkoutLibraryDetailBottomSheet()
+                                closeExerciseDetailBottomSheet()
                             }
                         />
                     )}
@@ -195,8 +192,8 @@ const WorkoutLibraryListView = () => {
             </ErrorBoundary>
 
             {isWorkoutDeleteModalOpen && (
-                <WorkoutLibraryDeleteModal
-                    workoutLibraryId={workoutLibraryId}
+                <ExerciseDeleteModal
+                    exerciseId={exerciseId}
                     isOpen={isWorkoutDeleteModalOpen}
                     onBackdropClick={() => closeWorkoutDeleteModal()}
                     onCancelButtonClick={() => {
@@ -208,13 +205,13 @@ const WorkoutLibraryListView = () => {
                 />
             )}
 
-            <WorkoutLibraryCreateFloatingActionButton
-                onButtonClick={(workoutLibraryId: string) =>
-                    handleFloatingActionButtonClick(workoutLibraryId)
+            <ExerciseCreateFloatingActionButton
+                onButtonClick={(exerciseId: string) =>
+                    handleFloatingActionButtonClick(exerciseId)
                 }
             />
         </Container>
     );
 };
 
-export default WorkoutLibraryListView;
+export default ExerciseListView;

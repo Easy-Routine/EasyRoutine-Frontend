@@ -1,35 +1,30 @@
 // db.ts 파일에서 import
-import {RoutineConfig} from "types/model"; // 경로에 맞게 수정
+import {Routine} from "types/model"; // 경로에 맞게 수정
 import {Color} from "types/enum";
 import {handleError} from "utils/handleError";
 
 // 확인: 완료
-export const getRoutineAll = async (): Promise<RoutineConfig[] | undefined> => {
+export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
     try {
         return [
             {
-                _id: "1",
+                id: "1",
                 name: "Morning Routine",
                 color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
-                createdAt: "2025-04-01T00:00:00Z",
-                updatedAt: "2025-04-01T00:00:00Z",
-                workoutConfigs: [
+                routineExercises: [
                     {
-                        _id: "1",
-                        setConfigs: [
+                        id: "1",
+                        sets: [
                             {
-                                _id: "1",
+                                id: "1",
                                 weight: 50,
                                 rep: 10,
                                 restSec: 60,
                                 workoutSec: 30,
-                                createdAt: "2025-04-01T00:00:00Z",
-                                updatedAt: "2025-04-01T00:00:00Z",
-                                workoutConfigId: "1",
                             },
                         ],
-                        workoutLibrary: {
-                            _id: "1",
+                        exercise: {
+                            id: "1",
                             name: "Squat",
                             image: "squat.jpg",
                             originImage: "squat_origin.jpg",
@@ -41,21 +36,18 @@ export const getRoutineAll = async (): Promise<RoutineConfig[] | undefined> => {
                         },
                     },
                     {
-                        _id: "2",
-                        setConfigs: [
+                        id: "2",
+                        sets: [
                             {
-                                _id: "1",
+                                id: "1",
                                 weight: 50,
                                 rep: 10,
                                 restSec: 60,
                                 workoutSec: 30,
-                                createdAt: "2025-04-01T00:00:00Z",
-                                updatedAt: "2025-04-01T00:00:00Z",
-                                workoutConfigId: "1",
                             },
                         ],
-                        workoutLibrary: {
-                            _id: "1",
+                        exercise: {
+                            id: "1",
                             name: "Squat",
                             image: "squat.jpg",
                             originImage: "squat_origin.jpg",
@@ -67,31 +59,25 @@ export const getRoutineAll = async (): Promise<RoutineConfig[] | undefined> => {
                         },
                     },
                 ],
-                userId: "1",
             },
             {
-                _id: "2",
+                id: "2",
                 name: "Evening Routine",
                 color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
-                createdAt: "2025-04-02T00:00:00Z",
-                updatedAt: "2025-04-02T00:00:00Z",
-                workoutConfigs: [
+                routineExercises: [
                     {
-                        _id: "2",
-                        setConfigs: [
+                        id: "2",
+                        sets: [
                             {
-                                _id: "2",
+                                id: "2",
                                 weight: 60,
                                 rep: 8,
                                 restSec: 90,
                                 workoutSec: 40,
-                                createdAt: "2025-04-02T00:00:00Z",
-                                updatedAt: "2025-04-02T00:00:00Z",
-                                workoutConfigId: "2",
                             },
                         ],
-                        workoutLibrary: {
-                            _id: "2",
+                        exercise: {
+                            id: "2",
                             name: "Push-up",
                             image: "pushup.jpg",
                             originImage: "pushup_origin.jpg",
@@ -103,31 +89,25 @@ export const getRoutineAll = async (): Promise<RoutineConfig[] | undefined> => {
                         },
                     },
                 ],
-                userId: "2",
             },
             {
-                _id: "3",
+                id: "3",
                 name: "Cardio Routine",
                 color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
-                createdAt: "2025-04-03T00:00:00Z",
-                updatedAt: "2025-04-03T00:00:00Z",
-                workoutConfigs: [
+                routineExercises: [
                     {
-                        _id: "3",
-                        setConfigs: [
+                        id: "3",
+                        sets: [
                             {
-                                _id: "3",
+                                id: "3",
                                 weight: 0,
                                 rep: 0,
                                 restSec: 0,
                                 workoutSec: 300,
-                                createdAt: "2025-04-03T00:00:00Z",
-                                updatedAt: "2025-04-03T00:00:00Z",
-                                workoutConfigId: "3",
                             },
                         ],
-                        workoutLibrary: {
-                            _id: "3",
+                        exercise: {
+                            id: "3",
                             name: "Running",
                             image: "running.jpg",
                             originImage: "running_origin.jpg",
@@ -139,7 +119,6 @@ export const getRoutineAll = async (): Promise<RoutineConfig[] | undefined> => {
                         },
                     },
                 ],
-                userId: "3",
             },
         ];
     } catch (e) {
@@ -149,44 +128,44 @@ export const getRoutineAll = async (): Promise<RoutineConfig[] | undefined> => {
 
 // 확인: 완료
 export const getRoutineOne = async (
-    routineConfigId: string,
-): Promise<RoutineConfig | undefined> => {
-    const routineConfig = {
-        _id: "routine1",
+    routineId: string,
+): Promise<Routine | undefined> => {
+    const routine = {
+        id: "routine1",
         name: "Morning Workout",
         color: Color.BLUE, // Color 타입에 정의된 색상 값
         createdAt: "2025-05-06T08:00:00Z",
         updatedAt: "2025-05-06T08:30:00Z",
-        workoutConfigs: [
+        routineExercises: [
             {
-                _id: "workout1",
+                id: "workout1",
                 createdAt: "2025-05-06T08:10:00Z",
                 updatedAt: "2025-05-06T08:20:00Z",
-                routineConfigId: "routine1",
-                setConfigs: [
+                routineId: "routine1",
+                sets: [
                     {
-                        _id: "set1",
+                        id: "set1",
                         weight: 50,
                         rep: 10,
                         restSec: 60,
                         workoutSec: 30,
                         createdAt: "2025-05-06T08:10:00Z",
                         updatedAt: "2025-05-06T08:15:00Z",
-                        workoutConfigId: "workout1",
+                        routineExerciseId: "workout1",
                     },
                     {
-                        _id: "set2",
+                        id: "set2",
                         weight: 60,
                         rep: 8,
                         restSec: 90,
                         workoutSec: 40,
                         createdAt: "2025-05-06T08:15:00Z",
                         updatedAt: "2025-05-06T08:20:00Z",
-                        workoutConfigId: "workout1",
+                        routineExerciseId: "workout1",
                     },
                 ],
-                workoutLibrary: {
-                    _id: "workoutLibrary1",
+                exercise: {
+                    id: "exercise1",
                     name: "Push Up",
                     image: "https://example.com/push-up.jpg",
                     originImage: "https://example.com/push-up-origin.jpg",
@@ -199,32 +178,32 @@ export const getRoutineOne = async (
                 },
             },
             {
-                _id: "workout2",
+                id: "workout2",
                 createdAt: "2025-05-06T08:10:00Z",
                 updatedAt: "2025-05-06T08:20:00Z",
-                routineConfigId: "routine1",
-                setConfigs: [
+                routineId: "routine1",
+                sets: [
                     {
-                        _id: "set1",
+                        id: "set1",
                         weight: 50,
                         rep: 10,
                         restSec: 60,
                         createdAt: "2025-05-06T08:10:00Z",
                         updatedAt: "2025-05-06T08:15:00Z",
-                        workoutConfigId: "workout1",
+                        routineExerciseId: "workout1",
                     },
                     {
-                        _id: "set2",
+                        id: "set2",
                         weight: 60,
                         rep: 8,
                         restSec: 90,
                         createdAt: "2025-05-06T08:15:00Z",
                         updatedAt: "2025-05-06T08:20:00Z",
-                        workoutConfigId: "workout1",
+                        routineExerciseId: "workout1",
                     },
                 ],
-                workoutLibrary: {
-                    _id: "workoutLibrary1",
+                exercise: {
+                    id: "exercise1",
                     name: "Push Up",
                     image: "https://example.com/push-up.jpg",
                     originImage: "https://example.com/push-up-origin.jpg",
@@ -241,13 +220,13 @@ export const getRoutineOne = async (
     };
 
     try {
-        return routineConfig;
+        return routine;
     } catch (e) {
         handleError(e);
     }
 };
 // 확인: 완료
-export const createRoutineConfigOne = async ({
+export const createRoutineOne = async ({
     name,
     color,
     userId,
@@ -255,7 +234,7 @@ export const createRoutineConfigOne = async ({
     name: string;
     color: Color;
     userId: string;
-}): Promise<RoutineConfig | undefined> => {
+}): Promise<Routine | undefined> => {
     try {
         return undefined;
     } catch (e) {
@@ -263,8 +242,8 @@ export const createRoutineConfigOne = async ({
     }
 };
 // 확인: 완료
-export const deleteRoutineConfigOne = async (
-    routineConfigId: string,
+export const deleteRoutineOne = async (
+    routineId: string,
 ): Promise<boolean | undefined> => {
     try {
         return true;
@@ -274,11 +253,11 @@ export const deleteRoutineConfigOne = async (
 };
 
 // 확인: 완료
-export const updateRoutineConfigField = async (
-    routineConfigId: string,
+export const updateRoutineField = async (
+    routineId: string,
     key: string,
     value: string | Color,
-): Promise<RoutineConfig | undefined> => {
+): Promise<Routine | undefined> => {
     try {
         return undefined;
     } catch (e) {

@@ -2,12 +2,12 @@ import styled from "styled-components";
 import Box from "components/box/Box/Box";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
 import Accordion from "components/box/Accordion/Accordion";
-import {WorkoutRecord} from "types/model";
-import usegetRoutineHistoryOneQuery from "hooks/server/usegetRoutineHistoryOneMutation";
+import {RoutineExercise} from "types/model";
 import {useNavigate, useParams} from "react-router-dom";
-import WorkoutRecordDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";
 import SummaryBox from "components/content/Summary/SummaryBox";
 import useHardwareBackPress from "hooks/client/useHardwareBackPress";
+import useGetRoutineHistoryOneQuery from "hooks/server/useGetRoutineHistoryOneMutation";
+import RoutineExerciseDetailAccordion from "../workout-record/WorkoutRecordDetailAccordion";
 
 const Container = styled.div`
     display: flex;
@@ -15,11 +15,11 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const RoutineRecordDetailView = () => {
-    const {routineRecordId} = useParams();
+const RoutineHistoryDetailView = () => {
+    const {routineHistoryId} = useParams();
 
-    const {data: routineRecordDetail} = usegetRoutineHistoryOneQuery(
-        routineRecordId as string,
+    const {data: routineHistoryDetail} = useGetRoutineHistoryOneQuery(
+        routineHistoryId as string,
     );
 
     const navigate = useNavigate();
@@ -30,12 +30,12 @@ const RoutineRecordDetailView = () => {
         dependencies: [],
     });
 
-    const totalWeight = routineRecordDetail!.workoutRecords.reduce(
-        (innerAcc: number, workoutRecord: WorkoutRecord) => {
+    const totalWeight = routineHistoryDetail!.routineExercises.reduce(
+        (innerAcc: number, routineExercise: RoutineExercise) => {
             return (
                 innerAcc +
-                workoutRecord.setRecords.reduce((setAcc, setRecord) => {
-                    return setAcc + (setRecord.weight * setRecord.rep || 0); // weight를 합산
+                routineExercise.sets.reduce((setAcc, set) => {
+                    return setAcc + (set.weight * set.rep || 0); // weight를 합산
                 }, 0)
             );
         },
@@ -45,18 +45,18 @@ const RoutineRecordDetailView = () => {
     return (
         <Container>
             <Box>
-                <TitleTextInput value={routineRecordDetail!.name} />
+                <TitleTextInput value={routineHistoryDetail!.name} />
             </Box>
             <SummaryBox
-                seconds={routineRecordDetail!.workoutTime}
+                seconds={routineHistoryDetail!.workoutTime}
                 weight={totalWeight}
             />
             <Accordion.List
-                data={routineRecordDetail!.workoutRecords}
-                render={(workoutRecord: WorkoutRecord) => (
-                    <WorkoutRecordDetailAccordion
-                        key={workoutRecord._id}
-                        data={workoutRecord}
+                data={routineHistoryDetail!.routineExercises}
+                render={(routineExercise: RoutineExercise) => (
+                    <RoutineExerciseDetailAccordion
+                        key={routineExercise.id}
+                        data={routineExercise}
                     />
                 )}
             />
@@ -64,4 +64,4 @@ const RoutineRecordDetailView = () => {
     );
 };
 
-export default RoutineRecordDetailView;
+export default RoutineHistoryDetailView;

@@ -1,28 +1,28 @@
 import SmallCard from "components/content/SmallCard/SmallCard";
 import styled from "styled-components";
 import {ReactComponent as ArrowIcon} from "assets/image/arrow.svg";
-import {WorkoutLibrary} from "types/model";
+import {Exercise} from "types/model";
 import DefaultImage from "assets/image/default-image.png";
 
 const RightArrowIcon = styled(ArrowIcon)`
     transform: rotate(-90deg);
 `;
 
-type WorkoutLibraryDetailSmallCardProps = {
-    data: WorkoutLibrary;
-    onSmallCardClick: (workoutLibraryId: string) => void;
-    onSmallCardLongPress: (workoutLibraryId: string) => void;
+type ExerciseDetailSmallCardProps = {
+    data: Exercise;
+    onSmallCardClick: (exerciseId: string) => void;
+    onSmallCardLongPress: (exerciseId: string) => void;
 };
 
-const WorkoutLibraryDetailSmallCard = ({
+const ExerciseDetailSmallCard = ({
     data,
     onSmallCardClick,
     onSmallCardLongPress,
-}: WorkoutLibraryDetailSmallCardProps) => {
+}: ExerciseDetailSmallCardProps) => {
     return (
         <SmallCard
-            onCardClick={() => onSmallCardClick(data._id)}
-            onLongPress={() => onSmallCardLongPress(data._id)}
+            onCardClick={() => onSmallCardClick(data.id)}
+            onLongPress={() => onSmallCardLongPress(data.id)}
         >
             <SmallCard.Between>
                 <SmallCard.ImageText>
@@ -35,4 +35,4 @@ const WorkoutLibraryDetailSmallCard = ({
     );
 };
 
-export default WorkoutLibraryDetailSmallCard;
+export default ExerciseDetailSmallCard;

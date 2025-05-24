@@ -1,12 +1,12 @@
-import {SetConfig} from "types/model";
+import {Set} from "types/model";
 import {handleError} from "utils/handleError";
 
 // 확인: 완료
-export const createSetConfigOne = async ({
-    workoutConfigId,
+export const createSetOne = async ({
+    routineExerciseId,
 }: {
-    workoutConfigId: string;
-}): Promise<SetConfig | undefined> => {
+    routineExerciseId: string;
+}): Promise<Set | undefined> => {
     try {
         return undefined;
     } catch (error) {
@@ -15,16 +15,16 @@ export const createSetConfigOne = async ({
 };
 
 // 확인: 완료
-export const updateSetConfigField = async ({
-    routineConfigId,
-    workoutConfigId,
-    setConfigId,
+export const updateSetField = async ({
+    routineId,
+    routineExerciseId,
+    setId,
     key,
     value,
 }: {
-    routineConfigId: string;
-    workoutConfigId: string;
-    setConfigId: string;
+    routineId: string;
+    routineExerciseId: string;
+    setId: string;
     key: string;
     value: string;
 }): Promise<boolean | undefined> => {
@@ -36,10 +36,10 @@ export const updateSetConfigField = async ({
 };
 
 // 확인: 완료
-export const deleteSetConfigOne = async ({
-    workoutConfigId,
+export const deleteSetOne = async ({
+    routineExerciseId,
 }: {
-    workoutConfigId: string;
+    routineExerciseId: string;
 }): Promise<boolean | undefined> => {
     try {
         return true;

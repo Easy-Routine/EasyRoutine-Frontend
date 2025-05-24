@@ -4,52 +4,53 @@ import Header from "headful/PrivatePageTemplate/Header/Header";
 import LogoArea from "headful/LogoArea/LogoArea";
 import Main from "headful/PrivatePageTemplate/Main/Main";
 import Footer from "headful/PrivatePageTemplate/Footer/Footer";
-import useRoutineConfigGetQuery from "hooks/server/useRoutineConfigGetQuery";
-import RoutineProgressProvider from "./RoutineConfigGetContainer/RoutinePregressContainer/RoutineProgressProvider";
+import useRoutineGetQuery from "hooks/server/useRoutineGetQuery";
+import RoutineProgressProvider from "./RoutinePregressContainer/RoutineProgressProvider";
 import Flex from "headful/Flex/Flex";
-import WorkoutConfigList from "./components/WorkoutConfigList/WorkoutConfigList";
-import WorkoutProgressAccordion from "./RoutineConfigGetContainer/RoutinePregressContainer/WorkoutProgressAccordion/WorkoutProgressAccordion";
-import SetProgressUpdateTable from "./RoutineConfigGetContainer/RoutinePregressContainer/WorkoutProgressAccordion/SetProgressUpdateTable/SetProgressUpdateTable";
-import SetProgressDeleteButton from "./RoutineConfigGetContainer/RoutinePregressContainer/WorkoutProgressAccordion/SetProgressDeleteButton/SetProgressDeleteButton";
-import SetProgressCreateButton from "./RoutineConfigGetContainer/RoutinePregressContainer/WorkoutProgressAccordion/SetProgressCreateButton/SetProgressCreateButton";
-import SetProgressCompleteButton from "./RoutineConfigGetContainer/RoutinePregressContainer/WorkoutProgressAccordion/SetProgressCompleteButton/SetProgressCompleteButton";
-import WorkoutConfigDeleteButton from "./RoutineConfigGetContainer/RoutinePregressContainer/WorkoutProgressAccordion/WorkoutConfigDeleteButton/WorkoutConfigDeleteButton";
+import RoutineExerciseList from "./components/RoutineExerciseList/RoutineExerciseList";
+import RoutineExerciseAccordion from "./RoutinePregressContainer/RoutineExerciseAccordion/RoutineExerciseAccordion";
+import SetDeleteButton from "./RoutinePregressContainer/RoutineExerciseAccordion/SetDeleteButton/SetDeleteButton";
+import SetCreateButton from "./RoutinePregressContainer/RoutineExerciseAccordion/SetCreateButton/SetCreateButton";
+import SetCompleteButton from "./RoutinePregressContainer/RoutineExerciseAccordion/SetCompleteButton/SetCompleteButton";
+import RoutineExerciseDeleteButton from "./RoutinePregressContainer/RoutineExerciseAccordion/RoutineExerciseDeleteButton/RoutineExerciseDeleteButton";
+import SetUpdateTable from "./RoutinePregressContainer/RoutineExerciseAccordion/SetUpdateTable/SetUpdateTable";
+import RoutineExerciseAccordionList from "./RoutinePregressContainer/RoutineExerciseAccordionList/RoutineExerciseAccordionList";
 
 const RoutineProgressPage = () => {
-    const {routineConfigId} = useParams();
-    const {data} = useRoutineConfigGetQuery(routineConfigId as string);
-    const routineConfig = data.routineConfig!;
+    const {routineId} = useParams();
+    const {data} = useRoutineGetQuery(routineId as string);
+    const routine = data.routine!;
 
     return (
         <PrivatePageTemplate>
             <Header>
                 <LogoArea />
             </Header>
-            <RoutineProgressProvider routineConfig={routineConfig}>
+            <RoutineProgressProvider routine={routine}>
                 <Main>
                     <Flex direction="column" gap={20}>
-                        <WorkoutConfigList
-                            component={workoutConfig => (
-                                <WorkoutProgressAccordion
-                                    key={workoutConfig._id}
-                                    workoutConfig={workoutConfig}
+                        <RoutineExerciseList
+                            component={routineExercise => (
+                                <RoutineExerciseAccordion
+                                    key={routineExercise.id}
+                                    routineExercise={routineExercise}
                                 >
-                                    <SetProgressUpdateTable
-                                        workoutConfig={workoutConfig}
+                                    <SetUpdateTable
+                                        routineExercise={routineExercise}
                                     />
-                                    <SetProgressDeleteButton
-                                        workoutConfig={workoutConfig}
+                                    <SetDeleteButton
+                                        routineExercise={routineExercise}
                                     />
-                                    <SetProgressCreateButton
-                                        workoutConfig={workoutConfig}
+                                    <SetCreateButton
+                                        routineExercise={routineExercise}
                                     />
-                                    <SetProgressCompleteButton
-                                        workoutConfig={workoutConfig}
+                                    <SetCompleteButton
+                                        routineExercise={routineExercise}
                                     />
-                                    <WorkoutConfigDeleteButton
-                                        workoutConfig={workoutConfig}
+                                    <RoutineExerciseDeleteButton
+                                        routineExercise={routineExercise}
                                     />
-                                </WorkoutProgressAccordion>
+                                </RoutineExerciseAccordion>
                             )}
                         />
                     </Flex>

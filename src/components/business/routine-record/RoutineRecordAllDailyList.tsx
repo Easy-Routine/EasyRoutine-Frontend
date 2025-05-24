@@ -1,32 +1,30 @@
 import Accordion from "components/box/Accordion/Accordion";
 import SummaryBox from "components/content/Summary/SummaryBox";
-import usegetRoutineHistoryAllDailyQuery from "hooks/server/usegetRoutineHistoryAllDailyQuery";
-import {WorkoutRecord} from "types/model";
-import RoutineRecordDetailAccordion from "./RoutineRecordDetailAccordion";
+import {RoutineExercise} from "types/model";
 import EmptyBoundary from "../EmptyBoundary";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
+import useGetRoutineHistoryAllDailyQuery from "hooks/server/useGetRoutineHistoryAllDailyQuery";
+import RoutineHistoryDetailAccordion from "./RoutineRecordDetailAccordion";
 
-const RoutineRecordAllDailyList = ({
+const RoutineHistoryAllDailyList = ({
     selectedDate,
-    onRoutineRecordDeleteButtonClick,
+    onRoutineHistoryDeleteButtonClick,
 }: {
     selectedDate: Date;
-    onRoutineRecordDeleteButtonClick: (routineRecordId: string) => void;
+    onRoutineHistoryDeleteButtonClick: (routineHistoryId: string) => void;
 }) => {
-    const {data: routineRecordAllDaily} =
-        usegetRoutineHistoryAllDailyQuery(selectedDate);
+    const {data: routineHistoryAllDaily} =
+        useGetRoutineHistoryAllDailyQuery(selectedDate);
 
-    const totalWeight = routineRecordAllDaily!.reduce((acc, record) => {
+    const totalWeight = routineHistoryAllDaily!.reduce((acc, record) => {
         return (
             acc +
-            record.workoutRecords.reduce(
-                (innerAcc: number, workoutRecord: WorkoutRecord) => {
+            record.routineExercises.reduce(
+                (innerAcc: number, routineExercise: RoutineExercise) => {
                     return (
                         innerAcc +
-                        workoutRecord.setRecords.reduce((setAcc, setRecord) => {
-                            return (
-                                setAcc + (setRecord.weight * setRecord.rep || 0)
-                            ); // weight를 합산
+                        routineExercise.sets.reduce((setAcc, set) => {
+                            return setAcc + (set?.weight * set?.rep || 0); // weight를 합산
                         }, 0)
                     );
                 },
@@ -35,14 +33,14 @@ const RoutineRecordAllDailyList = ({
         );
     }, 0);
 
-    const totalSeconds = routineRecordAllDaily!.reduce((acc, record) => {
+    const totalSeconds = routineHistoryAllDaily!.reduce((acc, record) => {
         return acc + record.workoutTime;
     }, 0);
 
     return (
         <>
             <EmptyBoundary
-                data={routineRecordAllDaily}
+                data={routineHistoryAllDaily}
                 fallback={
                     <SimpleTextEmptyView>
                         해당 날짜의 루틴 기록이 존재하지 않습니다.
@@ -51,13 +49,13 @@ const RoutineRecordAllDailyList = ({
             >
                 <SummaryBox seconds={totalSeconds} weight={totalWeight} />
                 <Accordion.List
-                    data={routineRecordAllDaily!}
+                    data={routineHistoryAllDaily!}
                     render={item => (
-                        <RoutineRecordDetailAccordion
-                            key={item._id}
+                        <RoutineHistoryDetailAccordion
+                            key={item.id}
                             data={item}
-                            onRoutineRecordDeleteButtonClick={
-                                onRoutineRecordDeleteButtonClick
+                            onRoutineHistoryDeleteButtonClick={
+                                onRoutineHistoryDeleteButtonClick
                             }
                         />
                     )}
@@ -67,4 +65,4 @@ const RoutineRecordAllDailyList = ({
     );
 };
 
-export default RoutineRecordAllDailyList;
+export default RoutineHistoryAllDailyList;

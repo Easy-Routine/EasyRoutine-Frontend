@@ -6,6 +6,7 @@ import {ReactComponent as UserIcon} from "assets/image/user.svg";
 import ROUTES from "constants/routes";
 import {useNavigate} from "react-router-dom";
 import IconTabGroup from "headful/IconTabGroup/IconTabGroup";
+import {TabValue} from "headless/TabGroup/TabGroup";
 
 type NaviationBottomBoxProps = {
     path: string;
@@ -14,8 +15,8 @@ type NaviationBottomBoxProps = {
 const NavigateBottomBox = ({path}: NaviationBottomBoxProps) => {
     const navigate = useNavigate();
 
-    const handleNavigationItemClick = (value: string) => {
-        navigate(value);
+    const handleNavigationItemClick = (value: TabValue) => {
+        navigate(value as string);
     };
 
     return (

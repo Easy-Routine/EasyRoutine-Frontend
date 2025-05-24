@@ -8,7 +8,7 @@ import {ReactComponent as CalendarArrowLeftIcon} from "assets/image/calendar-arr
 import {ReactComponent as CalendarArrowRightIcon} from "assets/image/calendar-arrow-right.svg";
 import moment from "moment";
 import "moment/locale/ko";
-import usegetRoutineHistoryAllMonthlyQuery from "hooks/server/usegetRoutineHistoryAllMonthlyQuery";
+import useGetRoutineHistoryAllMonthlyQuery from "hooks/server/useGetRoutineHistoryAllMonthlyQuery";
 
 const CalendarArrowLeft = styled(CalendarArrowLeftIcon)`
     padding: 5px;
@@ -145,7 +145,7 @@ const Dot = styled.div<{backgroundColor: string}>`
 `;
 
 type DotData = {
-    _id: number;
+    id: number;
     color: string; // 색상은 문자열로 가정
 };
 
@@ -163,7 +163,7 @@ type CustomCalendarProps = {
     dotDataKey: string;
 };
 
-const RoutineRecordAllMonthlyCalendar = ({
+const RoutineHistoryAllMonthlyCalendar = ({
     onPrevMonthButtonClick,
     onNextMonthButtnClick,
     onDateButtonClick,
@@ -174,10 +174,10 @@ const RoutineRecordAllMonthlyCalendar = ({
     const [date, setDate] = useState(new Date());
     const [activeStartDate, setActiveStartDate] = useState(new Date());
 
-    const {data: routineRecordAllMonthly} =
-        usegetRoutineHistoryAllMonthlyQuery(currentMonth);
+    const {data: routineHistoryAllMonthly} =
+        useGetRoutineHistoryAllMonthlyQuery(currentMonth);
 
-    const dotDataByDate = routineRecordAllMonthly!;
+    const dotDataByDate = routineHistoryAllMonthly!;
 
     const handleDateButtonClick = (date: any) => {
         onDateButtonClick(date);
@@ -229,7 +229,7 @@ const RoutineRecordAllMonthlyCalendar = ({
                         dotData
                             .map(item => (
                                 <Dot
-                                    key={item._id}
+                                    key={item.id}
                                     backgroundColor={item.color}
                                 />
                             ))
@@ -265,4 +265,4 @@ const RoutineRecordAllMonthlyCalendar = ({
     );
 };
 
-export default RoutineRecordAllMonthlyCalendar;
+export default RoutineHistoryAllMonthlyCalendar;

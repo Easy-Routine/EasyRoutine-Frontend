@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import {Suspense, useState} from "react";
-import RoutineRecordDeleteModal from "./RoutineRecordDeleteModal";
 import useModal from "hooks/client/useModal";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
-import RoutineRecordAllDailyList from "./RoutineRecordAllDailyList";
-import RoutineRecordAllMonthlyCalendar from "./RoutineRecordAllMonthlyCalendar";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import {useNavigate} from "react-router-dom";
 import useHardwareBackPress from "hooks/client/useHardwareBackPress";
+import RoutineHistoryAllMonthlyCalendar from "./RoutineRecordAllMonthlyCalendar";
+import RoutineHistoryAllDailyList from "./RoutineRecordAllDailyList";
+import RoutineHistoryDeleteModal from "./RoutineRecordDeleteModal";
 
 const Container = styled.div`
     display: flex;
@@ -16,31 +16,31 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const RoutineRecordListCalendarView = () => {
+const RoutineHistoryListCalendarView = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentMonth, setCurrentMonth] = useState(new Date());
-    const [routineRecordId, setRoutineRecordId] = useState("");
+    const [routineHistoryId, setRoutineHistoryId] = useState("");
 
     const {
-        isOpen: isRoutineRecordDeleteModalOpen,
-        handleOpenModal: openRoutineRecordDeleteModal,
-        handleCloseModal: closeRoutineRecordDeleteModal,
+        isOpen: isRoutineHistoryDeleteModalOpen,
+        handleOpenModal: openRoutineHistoryDeleteModal,
+        handleCloseModal: closeRoutineHistoryDeleteModal,
     } = useModal();
     const navigate = useNavigate();
     useHardwareBackPress({
         onNativeBackButtonClick: () => {
-            if (isRoutineRecordDeleteModalOpen) {
-                closeRoutineRecordDeleteModal();
+            if (isRoutineHistoryDeleteModalOpen) {
+                closeRoutineHistoryDeleteModal();
                 return;
             }
             navigate(-1);
         },
-        dependencies: [isRoutineRecordDeleteModalOpen],
+        dependencies: [isRoutineHistoryDeleteModalOpen],
     });
 
     return (
         <Container>
-            <RoutineRecordAllMonthlyCalendar
+            <RoutineHistoryAllMonthlyCalendar
                 onNextMonthButtnClick={date => setCurrentMonth(date)}
                 onPrevMonthButtonClick={date => setCurrentMonth(date)}
                 onDateButtonClick={date => {
@@ -48,7 +48,7 @@ const RoutineRecordListCalendarView = () => {
                     setSelectedDate(date);
                 }}
                 currentMonth={currentMonth}
-                dotDataKey={"routineRecords"}
+                dotDataKey={"routineHistorys"}
             />
 
             <ErrorBoundary>
@@ -59,30 +59,30 @@ const RoutineRecordListCalendarView = () => {
                         </DefferredComponent>
                     }
                 >
-                    <RoutineRecordAllDailyList
-                        onRoutineRecordDeleteButtonClick={(
-                            routineRecordId: string,
+                    <RoutineHistoryAllDailyList
+                        onRoutineHistoryDeleteButtonClick={(
+                            routineHistoryId: string,
                         ) => {
-                            setRoutineRecordId(routineRecordId);
-                            openRoutineRecordDeleteModal();
+                            setRoutineHistoryId(routineHistoryId);
+                            openRoutineHistoryDeleteModal();
                         }}
                         selectedDate={selectedDate}
                     />
                 </Suspense>
             </ErrorBoundary>
 
-            {isRoutineRecordDeleteModalOpen && (
-                <RoutineRecordDeleteModal
-                    isOpen={isRoutineRecordDeleteModalOpen}
-                    routineRecordId={routineRecordId}
+            {isRoutineHistoryDeleteModalOpen && (
+                <RoutineHistoryDeleteModal
+                    isOpen={isRoutineHistoryDeleteModalOpen}
+                    routineHistoryId={routineHistoryId}
                     onBackdropClick={() => {
-                        closeRoutineRecordDeleteModal();
+                        closeRoutineHistoryDeleteModal();
                     }}
                     onCancelButtonClick={() => {
-                        closeRoutineRecordDeleteModal();
+                        closeRoutineHistoryDeleteModal();
                     }}
                     onConfirmButtonClick={() => {
-                        closeRoutineRecordDeleteModal();
+                        closeRoutineHistoryDeleteModal();
                     }}
                 />
             )}
@@ -90,4 +90,4 @@ const RoutineRecordListCalendarView = () => {
     );
 };
 
-export default RoutineRecordListCalendarView;
+export default RoutineHistoryListCalendarView;

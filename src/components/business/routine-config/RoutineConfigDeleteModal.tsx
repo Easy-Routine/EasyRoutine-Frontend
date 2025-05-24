@@ -2,37 +2,34 @@ import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import {ReactComponent as ClockIcon} from "assets/image/clock.svg";
 import useToast from "hooks/useToast";
-import useDeleteRoutineConfigOneMutation from "hooks/server/useDeleteRoutineConfigOneMutation";
-import usegetRoutineOneQuery from "hooks/server/useRoutineConfigGetQuery";
+import useDeleteRoutineOneMutation from "hooks/server/useDeleteRoutineOneMutation";
+import useGetRoutineOneQuery from "hooks/server/useRoutineGetQuery";
 import useNativeMessage from "hooks/client/useNativeMessage";
 
-type RoutineConfigDeleteModalProps = {
-    routineConfigId: string;
+type RoutineDeleteModalProps = {
+    routineId: string;
     isOpen: boolean;
     onBackdropClick: () => void;
     onCancelButtonClick: () => void;
     onConfirmButtonClick: () => void;
 };
 
-const RoutineConfigDeleteModal = ({
-    routineConfigId,
+const RoutineDeleteModal = ({
+    routineId,
     isOpen,
     onBackdropClick,
     onCancelButtonClick,
     onConfirmButtonClick,
-}: RoutineConfigDeleteModalProps) => {
+}: RoutineDeleteModalProps) => {
     const {showToast} = useToast();
     const {sendNativeMessage} = useNativeMessage();
 
-    const {mutateAsync: deleteRoutineConfigOne} =
-        useDeleteRoutineConfigOneMutation();
+    const {mutateAsync: deleteRoutineOne} = useDeleteRoutineOneMutation();
 
-    const {data: routineConfigOne} = usegetRoutineOneQuery(routineConfigId);
+    const {data: routineOne} = useGetRoutineOneQuery(routineId);
 
-    const handleRoutineConfigDeleteButtonClick = async (
-        routineConfigId: string,
-    ) => {
-        await deleteRoutineConfigOne(routineConfigId);
+    const handleRoutineDeleteButtonClick = async (routineId: string) => {
+        await deleteRoutineOne(routineId);
 
         showToast("루틴이 삭제되었습니다.", "success");
         onConfirmButtonClick();
@@ -52,7 +49,7 @@ const RoutineConfigDeleteModal = ({
                         </Confirm.IconBox>
                         <Confirm.Title>루틴 삭제</Confirm.Title>
                         {/* <Confirm.Description>
-                            '{routineConfigOne!.name}'을
+                            '{routineOne!.name}'을
                             <br /> 삭제하시겠습니까?
                         </Confirm.Description> */}
                     </Confirm.ContentBox>
@@ -61,9 +58,7 @@ const RoutineConfigDeleteModal = ({
                         confirmLabel="삭제하기"
                         onCancelButtonClick={onCancelButtonClick}
                         onConfirmButtonClick={() =>
-                            handleRoutineConfigDeleteButtonClick(
-                                routineConfigId,
-                            )
+                            handleRoutineDeleteButtonClick(routineId)
                         }
                     />
                 </Confirm>
@@ -72,4 +67,4 @@ const RoutineConfigDeleteModal = ({
     );
 };
 
-export default RoutineConfigDeleteModal;
+export default RoutineDeleteModal;

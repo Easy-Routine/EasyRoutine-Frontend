@@ -1,13 +1,9 @@
 import Accordion from "components/box/Accordion/Accordion";
 import Box from "components/box/Box/Box";
-import RoutineConfigColorTabBottomBar from "./RoutineConfigUpdateColorTabBottomBar";
 import styled from "styled-components";
-import WorkoutConfigDetailAccordion from "../workout-config/WorkoutConfigDetailAccordion";
 import {useNavigate, useParams} from "react-router-dom";
-import useRoutineConfigOneQuery from "hooks/server/useRoutineConfigGetQuery";
-import RoutineConfigUpdateNameTitleText from "./RoutineConfigUpdateNameTitleText";
+import useRoutineOneQuery from "hooks/server/useRoutineGetQuery";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
-import WorkoutLibraryListBottomSheet from "../workout-library/WorkoutLibraryListBottomSheet";
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import useModal from "hooks/client/useModal";
 import {Suspense} from "react";
@@ -15,6 +11,7 @@ import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import EmptyBoundary from "../EmptyBoundary";
 import useHardwareBackPress from "hooks/client/useHardwareBackPress";
+import ExerciseListBottomSheet from "../workout-library/WorkoutLibraryListBottomSheet";
 
 const Container = styled.div`
     display: flex;
@@ -22,42 +19,40 @@ const Container = styled.div`
     gap: 20px;
 `;
 
-const RoutineConfigDetailView = () => {
-    const {routineConfigId} = useParams();
-    const {data: routineConfigDetail} = useRoutineConfigOneQuery(
-        routineConfigId as string,
-    );
+const RoutineDetailView = () => {
+    const {routineId} = useParams();
+    const {data: routineDetail} = useRoutineOneQuery(routineId as string);
     const navigate = useNavigate();
     const {
-        isOpen: isWorkoutLibraryBottomSheetOpen,
-        handleOpenModal: openWorkoutLibraryListBottomSheet,
-        handleCloseModal: closeWorkoutLibraryListBottomSheet,
+        isOpen: isExerciseBottomSheetOpen,
+        handleOpenModal: openExerciseListBottomSheet,
+        handleCloseModal: closeExerciseListBottomSheet,
     } = useModal();
 
     useHardwareBackPress({
         onNativeBackButtonClick: () => {
-            if (isWorkoutLibraryBottomSheetOpen) {
-                closeWorkoutLibraryListBottomSheet();
+            if (isExerciseBottomSheetOpen) {
+                closeExerciseListBottomSheet();
                 return;
             }
             navigate(-1);
         },
-        dependencies: [isWorkoutLibraryBottomSheetOpen],
+        dependencies: [isExerciseBottomSheetOpen],
     });
 
     return (
         <Container>
             {/* <Box>
-                <RoutineConfigUpdateNameTitleText
-                    defaultValue={routineConfigDetail!.name}
+                <RoutineUpdateNameTitleText
+                    defaultValue={routineDetail!.name}
                 />
             </Box>
             <Accordion.List
-                data={routineConfigDetail!.workoutConfigs}
-                render={workoutConfig => (
-                    <WorkoutConfigDetailAccordion
-                        data={workoutConfig}
-                        key={workoutConfig._id}
+                data={routineDetail!.routineExercises}
+                render={routineExercise => (
+                    <RoutineExerciseDetailAccordion
+                        data={routineExercise}
+                        key={routineExercise.id}
                     />
                 )}
             /> */}
@@ -70,14 +65,14 @@ const RoutineConfigDetailView = () => {
                         </DefferredComponent>
                     }
                 >
-                    {isWorkoutLibraryBottomSheetOpen && (
-                        <WorkoutLibraryListBottomSheet
-                            isOpen={isWorkoutLibraryBottomSheetOpen}
+                    {isExerciseBottomSheetOpen && (
+                        <ExerciseListBottomSheet
+                            isOpen={isExerciseBottomSheetOpen}
                             onBackdropClick={() =>
-                                closeWorkoutLibraryListBottomSheet()
+                                closeExerciseListBottomSheet()
                             }
                             onSubmitButtonClick={() =>
-                                closeWorkoutLibraryListBottomSheet()
+                                closeExerciseListBottomSheet()
                             }
                         />
                     )}
@@ -85,11 +80,11 @@ const RoutineConfigDetailView = () => {
             </ErrorBoundary>
 
             <FloatingActionButton
-                onButtonClick={() => openWorkoutLibraryListBottomSheet()}
+                onButtonClick={() => openExerciseListBottomSheet()}
             />
 
             {/* <EmptyBoundary
-                data={routineConfigDetail?.workoutConfigs}
+                data={routineDetail?.routineExercises}
                 fallback={
                     <FloatingActionButton
                         text={
@@ -99,21 +94,21 @@ const RoutineConfigDetailView = () => {
                             </>
                         }
                         onButtonClick={() =>
-                            openWorkoutLibraryListBottomSheet()
+                            openExerciseListBottomSheet()
                         }
                     />
                 }
             >
                 <FloatingActionButton
-                    onButtonClick={() => openWorkoutLibraryListBottomSheet()}
+                    onButtonClick={() => openExerciseListBottomSheet()}
                 />
             </EmptyBoundary> */}
 
-            {/* <RoutineConfigColorTabBottomBar
-                defaultValue={routineConfigDetail!.color}
+            {/* <RoutineColorTabBottomBar
+                defaultValue={routineDetail!.color}
             /> */}
         </Container>
     );
 };
 
-export default RoutineConfigDetailView;
+export default RoutineDetailView;

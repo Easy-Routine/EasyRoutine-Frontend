@@ -6,13 +6,11 @@ import {v4 as uuid} from "uuid";
 import {useRoutineCreate} from "../../RoutineCreateProvider/RoutineCreateProvider";
 import {Exercise, RoutineExercise, Set} from "types/model";
 
-type SetConfigCreateButtonButtonProps = {
+type SetCreateButtonButtonProps = {
     routineExercise: RoutineExercise;
 };
 
-const SetConfigCreateButton = ({
-    routineExercise,
-}: SetConfigCreateButtonButtonProps) => {
+const SetCreateButton = ({routineExercise}: SetCreateButtonButtonProps) => {
     const {id} = routineExercise;
     const {routine, setRoutine} = useRoutineCreate();
 
@@ -41,10 +39,10 @@ const SetConfigCreateButton = ({
             // optional fields: 이전 값이 있으면 그걸, 없으면 0
             ...(type.includes("weight") && {weight: last?.weight ?? 0}),
 
-            // workoutLibrary.type 에 "rep" 가 있고, last.rep 가 있을 때만 포함
+            // exercise.type 에 "rep" 가 있고, last.rep 가 있을 때만 포함
             ...(type.includes("rep") && {rep: last?.rep ?? 0}),
 
-            // workoutLibrary.type 에 "workoutSec" 가 있고, last.workoutSec 가 있을 때만 포함
+            // exercise.type 에 "workoutSec" 가 있고, last.workoutSec 가 있을 때만 포함
             ...(type.includes("workoutSec") && {
                 workoutSec: last?.workoutSec ?? 0,
             }),
@@ -67,4 +65,4 @@ const SetConfigCreateButton = ({
     );
 };
 
-export default SetConfigCreateButton;
+export default SetCreateButton;

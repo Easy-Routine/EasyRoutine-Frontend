@@ -7,15 +7,15 @@ import styled from "styled-components";
 import useModal from "hooks/client/useModal";
 import {Suspense, useState} from "react";
 import TitleTextInput from "components/content/TitleTextInput/TitleTextInput";
-import WorkoutLibraryListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
 import {Period} from "types/enum";
 import ErrorBoundary from "components/box/ErrorBoundary/ErrorBounday";
 import CommonLoading from "components/content/CommonLoading/CommonLoading";
-import usegetExerciseOneQuery from "hooks/server/usegetExerciseOneQuery";
+import useGetExerciseOneQuery from "hooks/server/useGetExerciseOneQuery";
 import DefferredComponent from "components/box/DefferedComponent/DefferedComponent";
 import SimpleTextEmptyView from "components/content/EmptyView/SimpleTextEmptyView";
 import {useNavigate} from "react-router-dom";
 import useHardwareBackPress from "hooks/client/useHardwareBackPress";
+import ExerciseListGraphBottomSheet from "../workout-library/WorkoutLibraryListGraphBottomSheet";
 
 const Container = styled.div`
     display: flex;
@@ -26,48 +26,47 @@ const Container = styled.div`
 const RoutineRecorListGraphView = () => {
     const {selectedValue, handleTabClick} = useTab(Period.Month);
     const {
-        isOpen: isWorkoutLibraryListGraphBottomSheetOpen,
-        handleOpenModal: openWorkoutLibraryListGraphBottomSheet,
-        handleCloseModal: closeWorkoutLibraryListGraphBottomSheet,
+        isOpen: isExerciseListGraphBottomSheetOpen,
+        handleOpenModal: openExerciseListGraphBottomSheet,
+        handleCloseModal: closeExerciseListGraphBottomSheet,
     } = useModal();
     const navigate = useNavigate();
     useHardwareBackPress({
         onNativeBackButtonClick: () => {
-            if (isWorkoutLibraryListGraphBottomSheetOpen) {
-                closeWorkoutLibraryListGraphBottomSheet();
+            if (isExerciseListGraphBottomSheetOpen) {
+                closeExerciseListGraphBottomSheet();
                 return;
             }
             navigate(-1);
         },
-        dependencies: [isWorkoutLibraryListGraphBottomSheetOpen],
+        dependencies: [isExerciseListGraphBottomSheetOpen],
     });
 
-    const [workoutLibraryId, setWorkoutLibraryId] = useState("");
+    const [exerciseId, setExerciseId] = useState("");
 
-    const {data: workoutLibraryDetailData} =
-        usegetExerciseOneQuery(workoutLibraryId);
-    const workoutLibraryDetail = workoutLibraryDetailData!;
+    const {data: exerciseDetailData} = useGetExerciseOneQuery(exerciseId);
+    const exerciseDetail = exerciseDetailData!;
 
     const handleButtonClick = async () => {
-        openWorkoutLibraryListGraphBottomSheet();
+        openExerciseListGraphBottomSheet();
     };
 
-    const handleSmallCardClick = async (_id: string) => {
-        setWorkoutLibraryId(_id);
-        closeWorkoutLibraryListGraphBottomSheet();
+    const handleSmallCardClick = async (id: string) => {
+        setExerciseId(id);
+        closeExerciseListGraphBottomSheet();
     };
 
     return (
         <Container>
-            {workoutLibraryId ? (
+            {exerciseId ? (
                 <>
                     <Box>
-                        <TitleTextInput value={workoutLibraryDetail?.name} />
+                        <TitleTextInput value={exerciseDetail?.name} />
                     </Box>
                     <Box>
                         <Graph
                             onDotClick={data => console.log(data)}
-                            workoutLibraryId={workoutLibraryId}
+                            exerciseId={exerciseId}
                             selectedValue={selectedValue}
                             lineKey="key"
                             areaKey="value"
@@ -124,14 +123,14 @@ const RoutineRecorListGraphView = () => {
                         </DefferredComponent>
                     }
                 >
-                    {isWorkoutLibraryListGraphBottomSheetOpen && (
-                        <WorkoutLibraryListGraphBottomSheet
-                            isOpen={isWorkoutLibraryListGraphBottomSheetOpen}
+                    {isExerciseListGraphBottomSheetOpen && (
+                        <ExerciseListGraphBottomSheet
+                            isOpen={isExerciseListGraphBottomSheetOpen}
                             onBackdropClick={() =>
-                                closeWorkoutLibraryListGraphBottomSheet()
+                                closeExerciseListGraphBottomSheet()
                             }
-                            onSmallCardClick={(workoutLibraryId: string) => {
-                                handleSmallCardClick(workoutLibraryId);
+                            onSmallCardClick={(exerciseId: string) => {
+                                handleSmallCardClick(exerciseId);
                             }}
                         />
                     )}

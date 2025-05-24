@@ -2,8 +2,8 @@ import Accordion from "components/box/Accordion/Accordion";
 import Card from "components/content/Card/Card";
 import useAccordion from "hooks/client/useAccordion";
 import Table from "components/content/Table/Table";
-import {WorkoutLibrary, WorkoutRecord} from "types/model";
-import useDeleteWorkoutRecordOneMutation from "hooks/server/useDeleteWorkoutRecordOneMutation";
+import {Exercise, RoutineExercise} from "types/model";
+import useDeleteRoutineExerciseOneMutation from "hooks/server/useDeleteRoutineExerciseOneMutation";
 import {useParams} from "react-router-dom";
 import {Type} from "types/enum";
 import EmptyBoundary from "../EmptyBoundary";
@@ -20,26 +20,26 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
-    const {routineRecordId} = useParams();
+const RoutineExerciseDetailAccordion = ({data}: {data: RoutineExercise}) => {
+    const {routineHistoryId} = useParams();
 
     const {isOpen, handleToggleAccordion, handleDragEnd, opacity, x} =
         useAccordion();
 
-    const {mutateAsync: deleteWorkoutRecordOneMutate} =
-        useDeleteWorkoutRecordOneMutation();
+    const {mutateAsync: deleteRoutineExerciseOneMutate} =
+        useDeleteRoutineExerciseOneMutation();
 
-    const handleWorkoutRecordDeleteButtonClick = async (
-        workoutRecordId: string,
+    const handleRoutineExerciseDeleteButtonClick = async (
+        routineExerciseId: string,
     ) => {
-        await deleteWorkoutRecordOneMutate({
-            routineRecordId: routineRecordId as string,
-            workoutRecordId,
+        await deleteRoutineExerciseOneMutate({
+            // routineHistoryId: routineHistoryId as string,
+            routineExerciseId,
         });
     };
 
-    const isTypeExist = (workoutLibrary: WorkoutLibrary, type: Type) =>
-        workoutLibrary.type.includes(type);
+    const isTypeExist = (exercise: Exercise, type: Type) =>
+        exercise.type.includes(type);
 
     return (
         <Accordion>
@@ -48,7 +48,7 @@ const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
                     <Card>
                         <Card.ImageBox>
                             {/* <img
-                                src={data.workoutLibrary.image}
+                                src={data.exercise.image}
                                 alt=""
                                 style={{
                                     borderRadius: borderRadius.md,
@@ -57,13 +57,13 @@ const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
                                 }}
                             /> */}
                             <Card.Image
-                                src={data.workoutLibrary.image || DefaultImage}
+                                src={data.exercise.image || DefaultImage}
                             />
                         </Card.ImageBox>
                         <Card.Column>
-                            <Card.Title>{data.workoutLibrary.name}</Card.Title>
+                            <Card.Title>{data.exercise.name}</Card.Title>
                             <Card.Description>
-                                {data.setRecords.length}세트
+                                {data.sets.length}세트
                             </Card.Description>
                         </Card.Column>
                     </Card>
@@ -75,7 +75,7 @@ const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
                 </Accordion.Header>
                 <Accordion.Body isOpen={isOpen}>
                     <EmptyBoundary
-                        data={data.setRecords}
+                        data={data.sets}
                         fallback={
                             <SimpleTextEmptyView>
                                 세트 기록이 없습니다.
@@ -84,11 +84,11 @@ const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
                     >
                         <Table>
                             <Table.Column
-                                data={data.setRecords}
+                                data={data.sets}
                                 header={
                                     <Table.Row>
                                         <Table.TitleText>세트</Table.TitleText>
-                                        {data.workoutLibrary.type.map(key => (
+                                        {data.exercise.type.map(key => (
                                             <Table.TitleText>
                                                 {typeMapper[key]}
                                             </Table.TitleText>
@@ -96,42 +96,44 @@ const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
                                         <Table.TitleText>휴식</Table.TitleText>
                                     </Table.Row>
                                 }
-                                render={(setRecord, index) => (
+                                render={(set, index) => (
                                     <Table.Row>
                                         <Table.NumberPicker
                                             value={index + 1}
                                             disabled={true}
                                         />
                                         {isTypeExist(
-                                            data.workoutLibrary,
+                                            data.exercise,
                                             Type.WEIGHT,
                                         ) && (
                                             <Table.WeightPicker
-                                                value={setRecord.weight}
+                                                value={set.weight as number}
                                                 disabled={true}
                                             />
                                         )}
                                         {isTypeExist(
-                                            data.workoutLibrary,
+                                            data.exercise,
                                             Type.REP,
                                         ) && (
                                             <Table.NumberPicker
-                                                value={setRecord.rep}
+                                                value={set.rep as number}
                                                 disabled={true}
                                             />
                                         )}
                                         {isTypeExist(
-                                            data.workoutLibrary,
+                                            data.exercise,
                                             Type.WORKOUT_SEC,
                                         ) && (
                                             <Table.TimePicker
-                                                value={setRecord.workoutSec.toString()}
+                                                value={(
+                                                    set.workoutSec as number
+                                                ).toString()}
                                                 disabled={true}
                                             />
                                         )}
 
                                         <Table.TimePicker
-                                            value={setRecord.restSec.toString()}
+                                            value={set.restSec.toString()}
                                             disabled={true}
                                         />
                                     </Table.Row>
@@ -143,7 +145,7 @@ const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
                 <Accordion.DeleteButton
                     opacity={opacity}
                     onDeleteButtonClick={() =>
-                        handleWorkoutRecordDeleteButtonClick(data._id)
+                        handleRoutineExerciseDeleteButtonClick(data.id)
                     }
                 />
             </Accordion.Motion>
@@ -151,4 +153,4 @@ const WorkoutRecordDetailAccordion = ({data}: {data: WorkoutRecord}) => {
     );
 };
 
-export default WorkoutRecordDetailAccordion;
+export default RoutineExerciseDetailAccordion;

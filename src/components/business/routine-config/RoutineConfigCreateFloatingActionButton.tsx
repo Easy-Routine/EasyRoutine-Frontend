@@ -1,37 +1,36 @@
 import FloatingActionButton from "components/content/FloatingActionButton/FloatingActionButton";
 import EmptyBoundary from "../EmptyBoundary";
-import useCreateRoutineConfigMutation from "hooks/server/useCreateRoutineConfigOneMutation";
-import usegetRoutineAllQuery from "hooks/server/useRoutineConfigAllGetQuery";
+import useCreateRoutineMutation from "hooks/server/useCreateRoutineOneMutation";
+import useGetRoutineAllQuery from "hooks/server/useRoutineAllGetQuery";
 import {Color} from "types/enum";
 import {useNavigate} from "react-router-dom";
 import useToast from "hooks/useToast";
 import ROUTES from "constants/routes";
 
-const RoutineConfigCreateFloatingActionButton = () => {
+const RoutineCreateFloatingActionButton = () => {
     const {showToast} = useToast();
     const navigate = useNavigate();
 
-    const {mutateAsync: createRoutineConfigOneMutate} =
-        useCreateRoutineConfigMutation();
+    const {mutateAsync: createRoutineOneMutate} = useCreateRoutineMutation();
 
-    const {data: routineConfigAllData} = usegetRoutineAllQuery();
+    const {data: routineAllData} = useGetRoutineAllQuery();
 
     const handleButtonClick = async () => {
         const userId = localStorage.getItem("userId");
 
-        const response = await createRoutineConfigOneMutate({
+        const response = await createRoutineOneMutate({
             name: "새 루틴",
             color: Color.VIOLET,
             userId: userId as string,
         });
 
         showToast("루틴이 생성되었습니다.", "success");
-        navigate(ROUTES.CONFIG.DETAIL.PATH(response!._id));
+        navigate(ROUTES.CONFIG.DETAIL.PATH(response!.id));
     };
 
     return (
         <EmptyBoundary
-            data={routineConfigAllData}
+            data={routineAllData}
             fallback={
                 <FloatingActionButton
                     onButtonClick={handleButtonClick}
@@ -48,4 +47,4 @@ const RoutineConfigCreateFloatingActionButton = () => {
     );
 };
 
-export default RoutineConfigCreateFloatingActionButton;
+export default RoutineCreateFloatingActionButton;

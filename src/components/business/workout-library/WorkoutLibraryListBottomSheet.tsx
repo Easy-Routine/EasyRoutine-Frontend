@@ -8,9 +8,9 @@ import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
 import SearchInput from "components/content/SearchInput/SearchInput";
 import styled from "styled-components";
-import {WorkoutLibrary} from "types/model";
-import usegetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
-import useCreateWorkoutConfigAllMutation from "hooks/server/useCreateWorkoutConfigAllMutation";
+import {Exercise} from "types/model";
+import useGetExerciseAllQuery from "hooks/server/useExerciseAllGetQuery";
+import useCreateRoutineExerciseAllMutation from "hooks/server/useCreateRoutineExerciseAllMutation";
 import {useParams} from "react-router-dom";
 import {Category} from "types/enum";
 import DefaultImage from "assets/image/default-image.png";
@@ -28,41 +28,41 @@ const SmallCardListContainer = styled.div`
     overflow-y: auto;
 `;
 
-type WorkoutLibraryListBottomSheetProps = {
+type ExerciseListBottomSheetProps = {
     isOpen: boolean;
     onBackdropClick: () => void;
     onSubmitButtonClick: () => void;
 };
 
-const WorkoutLibraryListBottomSheet = ({
+const ExerciseListBottomSheet = ({
     isOpen,
     onBackdropClick,
     onSubmitButtonClick,
-}: WorkoutLibraryListBottomSheetProps) => {
-    const {routineConfigId} = useParams();
+}: ExerciseListBottomSheetProps) => {
+    const {routineId} = useParams();
     const {selectedValue, handleTabClick} = useTab(Category.ALL);
     const {selectedValues, handleCheckBoxClick, resetSelectedValues} =
         useCheckBox();
     const {value, handleInputChange, handleInputClear} = useInput();
 
-    const {data: workoutLibraryAllData} = usegetExerciseAllQuery(
+    const {data: exerciseAllData} = useGetExerciseAllQuery(
         value,
         selectedValue,
     );
-    const {mutateAsync: createWorkoutConfigAllMutation} =
-        useCreateWorkoutConfigAllMutation();
+    const {mutateAsync: createRoutineExerciseAllMutation} =
+        useCreateRoutineExerciseAllMutation();
 
-    const workoutLibraryAll = workoutLibraryAllData ?? [];
+    const exerciseAll = exerciseAllData ?? [];
 
-    const handleWorkoutLibraryTabClick = (value: string) => {
+    const handleExerciseTabClick = (value: string) => {
         handleTabClick(value);
         // TODO: API 교체
     };
 
     const handleSubmitButtonClick = async (values: string[]) => {
-        await createWorkoutConfigAllMutation({
-            workoutLibraryIds: values,
-            routineConfigId: routineConfigId as string,
+        await createRoutineExerciseAllMutation({
+            exerciseIds: values,
+            routineId: routineId as string,
         });
 
         resetSelectedValues();
@@ -87,63 +87,63 @@ const WorkoutLibraryListBottomSheet = ({
                             <ChipTab.Chip
                                 value={Category.ALL}
                                 selectedValue={selectedValue}
-                                onTabClick={handleWorkoutLibraryTabClick}
+                                onTabClick={handleExerciseTabClick}
                             >
                                 전체
                             </ChipTab.Chip>
                             <ChipTab.Chip
                                 value={Category.CHEST}
                                 selectedValue={selectedValue}
-                                onTabClick={handleWorkoutLibraryTabClick}
+                                onTabClick={handleExerciseTabClick}
                             >
                                 가슴
                             </ChipTab.Chip>
                             <ChipTab.Chip
                                 value={Category.BACK}
                                 selectedValue={selectedValue}
-                                onTabClick={handleWorkoutLibraryTabClick}
+                                onTabClick={handleExerciseTabClick}
                             >
                                 등
                             </ChipTab.Chip>
                             <ChipTab.Chip
                                 value={Category.SHOULDER}
                                 selectedValue={selectedValue}
-                                onTabClick={handleWorkoutLibraryTabClick}
+                                onTabClick={handleExerciseTabClick}
                             >
                                 어깨
                             </ChipTab.Chip>
                             <ChipTab.Chip
                                 value={Category.LEG}
                                 selectedValue={selectedValue}
-                                onTabClick={handleWorkoutLibraryTabClick}
+                                onTabClick={handleExerciseTabClick}
                             >
                                 하체
                             </ChipTab.Chip>
                             <ChipTab.Chip
                                 value={Category.ARM}
                                 selectedValue={selectedValue}
-                                onTabClick={handleWorkoutLibraryTabClick}
+                                onTabClick={handleExerciseTabClick}
                             >
                                 팔
                             </ChipTab.Chip>
                             <ChipTab.Chip
                                 value={Category.ETC}
                                 selectedValue={selectedValue}
-                                onTabClick={handleWorkoutLibraryTabClick}
+                                onTabClick={handleExerciseTabClick}
                             >
                                 기타
                             </ChipTab.Chip>
                         </ChipTab>
                         <CheckBoxGroup>
                             <SmallCardListContainer>
-                                <SmallCardList<WorkoutLibrary>
-                                    data={workoutLibraryAll}
+                                <SmallCardList<Exercise>
+                                    data={exerciseAll}
                                     render={(item, index) => (
-                                        <CheckBoxGroup.Wrapper key={item._id}>
+                                        <CheckBoxGroup.Wrapper key={item.id}>
                                             <SmallCard
                                                 onCardClick={() =>
                                                     handleCheckBoxClick(
-                                                        item._id.toString(),
+                                                        item.id.toString(),
                                                     )
                                                 }
                                             >
@@ -159,7 +159,7 @@ const WorkoutLibraryListBottomSheet = ({
                                                 </SmallCard.NormalText>
                                             </SmallCard>
                                             <CheckBoxGroup.CheckBox
-                                                value={item._id.toString()}
+                                                value={item.id.toString()}
                                                 selectedValues={selectedValues}
                                                 onCheckBoxClick={
                                                     handleCheckBoxClick
@@ -182,4 +182,4 @@ const WorkoutLibraryListBottomSheet = ({
     );
 };
 
-export default WorkoutLibraryListBottomSheet;
+export default ExerciseListBottomSheet;

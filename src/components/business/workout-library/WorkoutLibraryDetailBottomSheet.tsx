@@ -8,9 +8,9 @@ import UnderlineInput from "components/content/UnderlineInput/UnderlineInput";
 import useCheckBox from "hooks/client/useCheckBox";
 import useInput from "hooks/client/useInput";
 import useTab from "hooks/client/useTab";
-import usegetExerciseOneQuery from "hooks/server/usegetExerciseOneQuery";
-import useUpdateWorkoutLibraryOneMutation from "hooks/server/useUpdateWorkoutLibraryOneMutation";
-import useUploadWorkoutLibraryImageMutation from "hooks/server/useUploadWorkoutLibraryImageMutation";
+import useGetExerciseOneQuery from "hooks/server/useGetExerciseOneQuery";
+import useUpdateExerciseOneMutation from "hooks/server/useUpdateExerciseOneMutation";
+import useUploadExerciseImageMutation from "hooks/server/useUploadExerciseImageMutation";
 import Lottie from "lottie-react";
 import {ChangeEvent, useEffect, useState} from "react";
 import styled from "styled-components";
@@ -37,15 +37,15 @@ const Flex = styled.div`
     align-items: center;
 `;
 
-type WorkoutLibraryBottomSheetProps = {
+type ExerciseBottomSheetProps = {
     isOpen: boolean;
     onBackdropClick: () => void;
     onSubmitButtonClick: () => void;
-    workoutLibraryId: string;
+    exerciseId: string;
 };
 
-// const initialWorkoutLibraryOne: WorkoutLibrary = {
-//     _id: "",
+// const initialExerciseOne: Exercise = {
+//     id: "",
 //     name: "",
 //     image: "",
 //     originImage: "",
@@ -57,53 +57,52 @@ type WorkoutLibraryBottomSheetProps = {
 //     userId: "",
 // };
 
-const WorkoutLibraryDetailBottomSheet = ({
+const ExerciseDetailBottomSheet = ({
     isOpen,
     onBackdropClick,
     onSubmitButtonClick,
-    workoutLibraryId,
-}: WorkoutLibraryBottomSheetProps) => {
-    // TODO: workoutLibraryId로 상세 데이터 가져오기
+    exerciseId,
+}: ExerciseBottomSheetProps) => {
+    // TODO: exerciseId로 상세 데이터 가져오기
 
-    const {data: workoutLibraryOneData} =
-        usegetExerciseOneQuery(workoutLibraryId);
+    const {data: exerciseOneData} = useGetExerciseOneQuery(exerciseId);
 
-    const workoutLibraryOne = workoutLibraryOneData!;
+    const exerciseOne = exerciseOneData!;
 
-    const isDisabled = !workoutLibraryOne.isEditable;
+    const isDisabled = !exerciseOne.isEditable;
     const {value: originImageInputValue, setValue: setOriginImageInputValue} =
-        useInput(workoutLibraryOne.originImage);
-    const [imageValue, setImageValue] = useState(workoutLibraryOne.image);
+        useInput(exerciseOne.originImage);
+    const [imageValue, setImageValue] = useState(exerciseOne.image);
 
     const {
         value: underlineInputValue,
         setValue,
         handleInputChange: handleUnderlineInputChange,
-    } = useInput(workoutLibraryOne.name);
+    } = useInput(exerciseOne.name);
     const {
         selectedValue: selectedCategory,
         setSelectedValue,
         handleTabClick: handleCategoryChipTabClick,
-    } = useTab(workoutLibraryOne.category, isDisabled);
+    } = useTab(exerciseOne.category, isDisabled);
     const {selectedValues, setSelectedValues, handleCheckBoxClick} =
-        useCheckBox(workoutLibraryOne.type, isDisabled);
+        useCheckBox(exerciseOne.type, isDisabled);
 
-    const {mutateAsync: updateWorkoutLibraryOneMutate} =
-        useUpdateWorkoutLibraryOneMutation();
+    const {mutateAsync: updateExerciseOneMutate} =
+        useUpdateExerciseOneMutation();
 
     const {
-        mutateAsync: uploadWorkoutLibraryImageMutation,
-        isPending: isUploadWorkoutLibraryImagePending,
-    } = useUploadWorkoutLibraryImageMutation();
+        mutateAsync: uploadExerciseImageMutation,
+        isPending: isUploadExerciseImagePending,
+    } = useUploadExerciseImageMutation();
 
     useEffect(() => {
-        setValue(workoutLibraryOne.name);
-        setImageValue(workoutLibraryOne.image);
-        setOriginImageInputValue(workoutLibraryOne.originImage);
-        setSelectedValue(workoutLibraryOne.category);
-        setSelectedValues(workoutLibraryOne.type);
+        setValue(exerciseOne.name);
+        setImageValue(exerciseOne.image);
+        setOriginImageInputValue(exerciseOne.originImage);
+        setSelectedValue(exerciseOne.category);
+        setSelectedValues(exerciseOne.type);
     }, [
-        workoutLibraryOne,
+        exerciseOne,
         setValue,
         setOriginImageInputValue,
         setSelectedValue,
@@ -120,7 +119,7 @@ const WorkoutLibraryDetailBottomSheet = ({
         const formData = new FormData();
         if (file) {
             formData.append("image", file);
-            const response = await uploadWorkoutLibraryImageMutation({
+            const response = await uploadExerciseImageMutation({
                 formData,
             });
 
@@ -131,9 +130,9 @@ const WorkoutLibraryDetailBottomSheet = ({
         }
     };
 
-    const handleWorkoutLibraryUpdateButtonClick = async () => {
-        await updateWorkoutLibraryOneMutate({
-            workoutLibraryId,
+    const handleExerciseUpdateButtonClick = async () => {
+        await updateExerciseOneMutate({
+            exerciseId,
             updatedData: {
                 image: imageValue,
                 originImage: originImageInputValue,
@@ -254,12 +253,10 @@ const WorkoutLibraryDetailBottomSheet = ({
                         </CheckBoxGroup>
                     </LabelBox>
                     <Button
-                        disabled={
-                            isDisabled || isUploadWorkoutLibraryImagePending
-                        }
-                        onClick={handleWorkoutLibraryUpdateButtonClick}
+                        disabled={isDisabled || isUploadExerciseImagePending}
+                        onClick={handleExerciseUpdateButtonClick}
                     >
-                        {isUploadWorkoutLibraryImagePending ? (
+                        {isUploadExerciseImagePending ? (
                             <Lottie
                                 animationData={loadingAnimation}
                                 loop={true}
@@ -279,4 +276,4 @@ const WorkoutLibraryDetailBottomSheet = ({
     );
 };
 
-export default WorkoutLibraryDetailBottomSheet;
+export default ExerciseDetailBottomSheet;

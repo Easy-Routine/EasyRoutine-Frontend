@@ -10,7 +10,7 @@ import PublicPageTemplate from "headful/PublicPageTemplate/PublicPageTemplate";
 const LoginPage = () => {
     return (
         <PublicPageTemplate>
-            <Flex direction="column" height="100%" justify="flex-end">
+            <Flex direction="column" height="100%" justify="end">
                 <Flex direction="column" height="70%" justify="space-around">
                     <Flex direction="column" align="center">
                         <Logo type="large" />

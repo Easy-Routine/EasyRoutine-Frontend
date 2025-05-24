@@ -2,7 +2,7 @@ import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
 import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
-import useDeleteRoutineRecordOneMutation from "hooks/server/useDeleteRoutineRecordOneMutation";
+import useDeleteRoutineHistoryOneMutation from "hooks/server/useDeleteRoutineHistoryOneMutation";
 import useNativeMessage from "hooks/client/useNativeMessage";
 import {signOut} from "services";
 
@@ -22,8 +22,8 @@ const SignOutModal = ({
     const {showToast} = useToast();
     const {sendNativeMessage} = useNativeMessage();
 
-    const {mutateAsync: deleteRoutineRecordOneMutate} =
-        useDeleteRoutineRecordOneMutation();
+    const {mutateAsync: deleteRoutineHistoryOneMutate} =
+        useDeleteRoutineHistoryOneMutation();
 
     const handleSignOutButtonClick = async () => {
         await signOut();

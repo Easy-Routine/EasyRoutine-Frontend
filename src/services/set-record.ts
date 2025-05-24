@@ -1,17 +1,17 @@
-import {SetConfig, SetRecord} from "types/model";
+import {Set} from "types/model";
 import {handleError} from "utils/handleError";
 
-type CreateSetRecordOneParams = {
-    routineRecordId: string;
-    workoutRecordId: string;
-    setConfig: SetConfig;
+type CreateSetOneParams = {
+    routineHistoryId: string;
+    routineExerciseId: string;
+    set: Set;
 };
 // 확인: 완료
-export const createSetRecordOne = async ({
-    routineRecordId,
-    workoutRecordId,
-    setConfig,
-}: CreateSetRecordOneParams): Promise<SetRecord | undefined> => {
+export const createSetOne = async ({
+    routineHistoryId,
+    routineExerciseId,
+    set,
+}: CreateSetOneParams): Promise<Set | undefined> => {
     try {
         return undefined;
     } catch (e) {
@@ -19,15 +19,15 @@ export const createSetRecordOne = async ({
     }
 };
 
-type deleteSetRecordOneParams = {
-    routineRecordId: string;
-    workoutRecordId: string;
+type deleteSetOneParams = {
+    routineHistoryId: string;
+    routineExerciseId: string;
 };
 // 확인: 완료
-export const deleteSetRecordOne = async ({
-    routineRecordId,
-    workoutRecordId,
-}: deleteSetRecordOneParams): Promise<boolean | undefined> => {
+export const deleteSetOne = async ({
+    routineHistoryId,
+    routineExerciseId,
+}: deleteSetOneParams): Promise<boolean | undefined> => {
     try {
         return true;
     } catch (e) {

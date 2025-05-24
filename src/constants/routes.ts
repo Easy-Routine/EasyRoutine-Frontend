@@ -3,30 +3,28 @@ import {lazy} from "react";
 const LoginPage = lazy(() => import("pages/LoginPage/LoginPage"));
 const MyPage = lazy(() => import("pages/MyPage/MyPage"));
 
-const RoutineConfigCreatePage = lazy(
+const RoutineCreatePage = lazy(
     () => import("pages/RoutineCreatePage/RoutineCreatePage"),
 );
-const RoutineConfigDetailPage = lazy(
-    () => import("pages/RoutineConfigDetailPage/RoutineConfigDetailPage"),
+const RoutineDetailPage = lazy(
+    () => import("pages/RoutineDetailPage/RoutineDetailPage"),
 );
-const RoutineConfigListPage = lazy(
-    () => import("pages/RoutineConfigListPage/RoutineConfigListPage"),
+const RoutineListPage = lazy(
+    () => import("pages/RoutineListPage/RoutineListPage"),
 );
 const RoutineProgressPage = lazy(
     () => import("pages/RoutineProgressPage/RoutineProgressPage"),
 );
-const RoutineRecordCalendarPage = lazy(
-    () => import("pages/RoutineRecordCalendarPage/RoutineRecordCalendarPage"),
+const RoutineHistoryCalendarPage = lazy(
+    () => import("pages/RoutineHistoryCalendarPage/RoutineHistoryCalendarPage"),
 );
-const RoutineRecordChartPage = lazy(
-    () => import("pages/RoutineRecordChartPage/RoutineRecordChartPage"),
+const RoutineHistoryChartPage = lazy(
+    () => import("pages/RoutineHistoryChartPage/RoutineHistoryChartPage"),
 );
-const RoutineRecordDetailPage = lazy(
-    () => import("pages/RoutineRecordDetailPage/RoutineRecordDetailPage"),
+const RoutineHistoryDetailPage = lazy(
+    () => import("pages/RoutineHistoryDetailPage/RoutineHistoryDetailPage"),
 );
-const WorkoutLibraryPage = lazy(
-    () => import("pages/WorkoutLibraryPage/WorkoutLibraryPage"),
-);
+const ExercisePage = lazy(() => import("pages/ExercisePage/ExercisePage"));
 
 const ROUTES = {
     LOGIN: {
@@ -40,41 +38,40 @@ const ROUTES = {
     CONFIG: {
         LIST: {
             PATH: "/",
-            COMPONENT: RoutineConfigListPage,
+            COMPONENT: RoutineListPage,
         },
         CREATE: {
             PATH: `/routine-config/create`,
-            COMPONENT: RoutineConfigCreatePage,
+            COMPONENT: RoutineCreatePage,
         },
         DETAIL: {
-            PATH: (routineConfigId: string) =>
-                `/routine-config/${routineConfigId}`,
-            COMPONENT: RoutineConfigDetailPage,
+            PATH: (routineId: string) => `/routine-config/${routineId}`,
+            COMPONENT: RoutineDetailPage,
         },
     },
     PROGRESS: {
-        PATH: (routineRecordId: string) =>
-            `/routine-progress/${routineRecordId}`,
+        PATH: (routineHistoryId: string) =>
+            `/routine-progress/${routineHistoryId}`,
         COMPONENT: RoutineProgressPage,
     },
     RECORD: {
         CALENDAR: {
             PATH: "/routine-record/calendar",
-            COMPONENT: RoutineRecordCalendarPage,
+            COMPONENT: RoutineHistoryCalendarPage,
         },
         CHART: {
             PATH: "/routine-record/chart",
-            COMPONENT: RoutineRecordChartPage,
+            COMPONENT: RoutineHistoryChartPage,
         },
         DETAIL: {
-            PATH: (routineRecordId: string) =>
-                `/routine-record/${routineRecordId}`,
-            COMPONENT: RoutineRecordDetailPage,
+            PATH: (routineHistoryId: string) =>
+                `/routine-record/${routineHistoryId}`,
+            COMPONENT: RoutineHistoryDetailPage,
         },
     },
     LIBRARY: {
         PATH: "/workout-library",
-        COMPONENT: WorkoutLibraryPage,
+        COMPONENT: ExercisePage,
     },
 } as const;
 

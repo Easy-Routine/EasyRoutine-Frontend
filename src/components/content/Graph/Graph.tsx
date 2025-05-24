@@ -1,4 +1,4 @@
-import usegetExerciseSumAllQuery from "hooks/server/usegetExerciseSumAllQuery";
+import useGetRoutineExerciseHistorySumAllQuery from "hooks/server/useGetRoutineExerciseHistorySumAllQuery";
 import {useState, useEffect} from "react";
 import {TooltipProps} from "recharts";
 import {
@@ -19,7 +19,7 @@ type GraphProps = {
     // data: any[];
     lineKey: string;
     areaKey: string;
-    workoutLibraryId: string;
+    exerciseId: string;
     selectedValue: string;
 };
 
@@ -28,15 +28,16 @@ const Graph = ({
     // data,
     lineKey,
     areaKey,
-    workoutLibraryId,
+    exerciseId,
     selectedValue,
 }: GraphProps) => {
-    const {data: workoutRecordSumListByDate} = usegetExerciseSumAllQuery({
-        workoutLibraryId,
-        period: selectedValue as Period,
-    });
+    const {data: routineExerciseSumListByDate} =
+        useGetRoutineExerciseHistorySumAllQuery({
+            exerciseId,
+            period: selectedValue as Period,
+        });
 
-    const data = workoutRecordSumListByDate!;
+    const data = routineExerciseSumListByDate!;
 
     const {color, fontSize} = useTheme();
     const [activeTick, setActiveTick] = useState(null); // 클릭된 tick을 저장

@@ -1,38 +1,38 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
-import { ReactComponent as TrashIcon } from "assets/image/trash.svg";
+import {ReactComponent as TrashIcon} from "assets/image/trash.svg";
 import useToast from "hooks/useToast";
-import useDeleteRoutineRecordOneMutation from "hooks/server/useDeleteRoutineRecordOneMutation";
+import useDeleteRoutineHistoryOneMutation from "hooks/server/useDeleteRoutineHistoryOneMutation";
 import useNativeMessage from "hooks/client/useNativeMessage";
 
-type RoutineRecordDeleteModalProps = {
+type RoutineHistoryDeleteModalProps = {
     isOpen: boolean;
-    routineRecordId: string;
+    routineHistoryId: string;
     onBackdropClick: () => void;
     onCancelButtonClick: () => void;
     onConfirmButtonClick: () => void;
 };
 
-const RoutineRecordDeleteModal = ({
+const RoutineHistoryDeleteModal = ({
     isOpen,
-    routineRecordId,
+    routineHistoryId,
     onBackdropClick,
     onCancelButtonClick,
     onConfirmButtonClick,
-}: RoutineRecordDeleteModalProps) => {
-    const { showToast } = useToast();
-    const { sendNativeMessage } = useNativeMessage();
+}: RoutineHistoryDeleteModalProps) => {
+    const {showToast} = useToast();
+    const {sendNativeMessage} = useNativeMessage();
 
-    const { mutateAsync: deleteRoutineRecordOneMutate } =
-        useDeleteRoutineRecordOneMutation();
+    const {mutateAsync: deleteRoutineHistoryOneMutate} =
+        useDeleteRoutineHistoryOneMutation();
 
-    const handleRoutineRecordDeleteButtonClick = async (
-        routineRecordId: string
+    const handleRoutineHistoryDeleteButtonClick = async (
+        routineHistoryId: string,
     ) => {
-        await deleteRoutineRecordOneMutate(routineRecordId);
+        await deleteRoutineHistoryOneMutate(routineHistoryId);
         showToast("운동 기록이 삭제되었습니다.", "success");
         onConfirmButtonClick();
-        sendNativeMessage({ type: "vibrate" });
+        sendNativeMessage({type: "vibrate"});
     };
 
     return (
@@ -55,8 +55,8 @@ const RoutineRecordDeleteModal = ({
                         confirmLabel="삭제하기"
                         onCancelButtonClick={onCancelButtonClick}
                         onConfirmButtonClick={() =>
-                            handleRoutineRecordDeleteButtonClick(
-                                routineRecordId
+                            handleRoutineHistoryDeleteButtonClick(
+                                routineHistoryId,
                             )
                         }
                     />
@@ -66,4 +66,4 @@ const RoutineRecordDeleteModal = ({
     );
 };
 
-export default RoutineRecordDeleteModal;
+export default RoutineHistoryDeleteModal;

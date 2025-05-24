@@ -1,6 +1,6 @@
 import Modal from "components/box/Modal/Modal";
 import Confirm from "components/content/Confirm/Confirm";
-import { ReactComponent as ClockIcon } from "assets/image/clock.svg";
+import {ReactComponent as ClockIcon} from "assets/image/clock.svg";
 import LoadingCircle from "components/content/LoadingCircle/LoadingCircle";
 
 type DataSyncModalProps = {
@@ -34,8 +34,8 @@ const DataSyncModal = ({
                         confirmLabel="삭제하기"
                         onCancelButtonClick={onCancelButtonClick}
                         onConfirmButtonClick={() =>
-                            handleRoutineConfigDeleteButtonClick(
-                                routineConfigId
+                            handleRoutineDeleteButtonClick(
+                                routineId
                             )
                         }
                     /> */}
