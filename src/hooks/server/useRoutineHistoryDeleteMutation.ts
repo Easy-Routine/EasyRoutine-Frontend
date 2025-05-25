@@ -3,7 +3,7 @@ import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
 import {deleteRoutineHistoryOne} from "services/routine-history";
 
-const useDeleteRoutineHistoryOneMutation = () => {
+const useRoutineHistoryDeleteMutation = () => {
     const {showToast} = useToast();
 
     const queryClient = useQueryClient();
@@ -25,4 +25,4 @@ const useDeleteRoutineHistoryOneMutation = () => {
     });
 };
 
-export default useDeleteRoutineHistoryOneMutation;
+export default useRoutineHistoryDeleteMutation;

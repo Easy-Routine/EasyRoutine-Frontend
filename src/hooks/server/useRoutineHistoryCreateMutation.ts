@@ -4,7 +4,7 @@ import useToast from "hooks/useToast";
 import {createRoutineHistoryOne} from "services/routine-history";
 import {Color} from "types/enum";
 
-const useCreateRoutineHistoryMutation = () => {
+const useRoutineHistoryCreateMutation = () => {
     const {showToast} = useToast();
     const queryClient = useQueryClient();
 
@@ -32,4 +32,4 @@ const useCreateRoutineHistoryMutation = () => {
     });
 };
 
-export default useCreateRoutineHistoryMutation;
+export default useRoutineHistoryCreateMutation;

@@ -4,7 +4,6 @@ import Footer from "headful/PrivatePageTemplate/Footer/Footer";
 import Header from "headful/PrivatePageTemplate/Header/Header";
 import Main from "headful/PrivatePageTemplate/Main/Main";
 import PrivatePageTemplate from "headful/PrivatePageTemplate/PrivatePageTemplate";
-import React from "react";
 
 const RoutineHistoryDetailPage = () => {
     return (
@@ -14,7 +13,8 @@ const RoutineHistoryDetailPage = () => {
             </Header>
             <Main>캘린더</Main>
             <Footer>
-                <NavigateBottomBox path={location.pathname} />
+                dd
+                {/* <NavigateBottomBox path={location.pathname} /> */}
             </Footer>
         </PrivatePageTemplate>
     );

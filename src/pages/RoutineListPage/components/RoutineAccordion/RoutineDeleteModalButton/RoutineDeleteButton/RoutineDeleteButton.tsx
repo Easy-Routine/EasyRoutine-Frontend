@@ -1,5 +1,5 @@
 import ConfirmModalClose from "headful/ConfirmModal/ConfirmModalClose/ConfirmModalClose";
-import useDeleteRoutineOneMutation from "hooks/server/useDeleteRoutineOneMutation";
+import useDeleteRoutineOneMutation from "hooks/server/useRoutineDeleteMutation";
 import {Routine} from "types/model";
 
 type RoutineDeleteButtonProps = {

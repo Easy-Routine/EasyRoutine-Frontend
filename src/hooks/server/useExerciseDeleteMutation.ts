@@ -1,25 +1,23 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
-import {createSetOne} from "services/set";
+import {deleteExerciseOne} from "services/exercise";
 
-const useCreateSetOneMutation = () => {
-    const {showToast} = useToast();
-
+const useExerciseDeleteMutation = () => {
     const queryClient = useQueryClient();
+    const {showToast} = useToast();
     return useMutation({
-        mutationFn: ({routineExerciseId}: {routineExerciseId: string}) =>
-            createSetOne({routineExerciseId}),
+        mutationFn: (exerciseId: string) => deleteExerciseOne(exerciseId),
         onError: error => {
             console.log(error);
             showToast(error.message, "error");
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getRoutineOne],
+                queryKey: [queryKey.getExerciseAll],
             });
         },
     });
 };
 
-export default useCreateSetOneMutation;
+export default useExerciseDeleteMutation;

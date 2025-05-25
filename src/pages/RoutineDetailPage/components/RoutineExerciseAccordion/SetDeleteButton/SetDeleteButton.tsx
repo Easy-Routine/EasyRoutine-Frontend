@@ -1,7 +1,6 @@
 import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
-import useDeleteSetOneMutation from "hooks/server/useDeleteSetOneMutation";
 import {ReactComponent as MinusIcon} from "assets/image/minus.svg";
 import {Set, RoutineExercise} from "types/model";
 import {useRoutineUpdateParams} from "../../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
@@ -24,7 +23,7 @@ const SetDeleteButton = ({routineExercise}: SetDeleteButtonProps) => {
         // 운동 설정 상태의 아이디를 이용하여 해당 운동을 찾는다.
         const routineExercises = newRoutine.routineExercises;
         const foundRoutineExercise = routineExercises.find(
-            routineExercise => routineExercise.id === id,
+            (routineExercise: RoutineExercise) => routineExercise.id === id,
         ) as RoutineExercise;
         // 세트 설정 배열에서 마지막 요소를 제거한다.
         const sets = foundRoutineExercise.sets;

@@ -1,3 +1,5 @@
+// src/components/SetUpdateTable/SetUpdateTable.tsx
+import React from "react";
 import BasicTable from "headful/BasicTable/BasicTable";
 import {Set, RoutineExercise} from "types/model";
 import {useRoutineUpdateParams} from "../../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
@@ -7,7 +9,7 @@ type SetUpdateTableProps = {
 };
 
 type TypeMapper = {
-    [key: string]: string;
+    [key in keyof Set]?: string;
 };
 
 const typeMapper: TypeMapper = {
@@ -16,30 +18,58 @@ const typeMapper: TypeMapper = {
     workoutSec: "시간",
 };
 
-const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
-    // const {routineId} = useParams();
-    const {exercise, id, sets} = routineExercise;
-    const {type} = exercise;
+const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
+    const {exercise, sets} = routineExercise;
+    // exercise.type 은 서버에서 내려오는 string[] 이지만,
+    // 실제로는 Set의 키 중 일부라고 가정
+    const types = exercise.type as Array<keyof Set>;
+
     const {routine, setRoutine} = useRoutineUpdateParams();
 
-    const handleSetInputChange = async (
+    const handleSetInputChange = async <K extends keyof Set>(
         setId: string,
-        key: string,
-        value: string,
+        key: K,
+        value: Set[K],
     ) => {
-        // 루틴 설정 상태를 가져와서 깊은 복사를 해준다.
+        // 1) 기존 루틴 상태를 깊은 복사
         const newRoutine = structuredClone(routine);
-        // 운동 설정 상태의 아이디를 이용하여 해당 운동을 찾는다.
+
+        // 2) 복사한 루틴에서 routineExercises 배열 가져오기
         const routineExercises = newRoutine.routineExercises;
+
+        // 3) 해당 운동 항목 찾기
         const foundRoutineExercise = routineExercises.find(
-            routineExercise => routineExercise.id === id,
-        ) as RoutineExercise;
-        // 세트 설정 상태의 아이디를 이용하여 해당 세트를 찾는다.
-        const sets = foundRoutineExercise.sets;
-        const foundSet = sets.find(set => set.id === setId) as Set;
-        // 찾은 세트 설정의 값을 변경해준다.
-        foundSet[key] = value;
-        // 새로운 루틴 상태로 업데이트 시켜준다.
+            (routineExercise: RoutineExercise) =>
+                routineExercise.id === routineExercise.id,
+        );
+        if (!foundRoutineExercise) {
+            console.warn(
+                `RoutineExercise with id=${routineExercise.id} not found.`,
+            );
+            return;
+        }
+
+        // 4) 해당 세트 찾기
+        const targetSets = foundRoutineExercise.sets;
+        const foundSet = targetSets.find((s: Set) => s.id === setId) as Set;
+        if (!foundSet) {
+            console.warn(`Set with id=${setId} not found.`);
+            return;
+        }
+
+        // 5) 숫자로 변환이 필요한 경우 처리
+        if (
+            key === "weight" ||
+            key === "rep" ||
+            key === "workoutSec" ||
+            key === "restSec"
+        ) {
+            foundSet[key] = Number(value) as Set[K];
+        } else {
+            foundSet[key] = value;
+        }
+
+        // 6) 상태 업데이트
         setRoutine(newRoutine);
     };
 
@@ -47,33 +77,47 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
         <BasicTable>
             <BasicTable.Header>
                 <BasicTable.Cell>세트</BasicTable.Cell>
-                {type.map(type => (
+                {types.map(type => (
                     <BasicTable.Cell key={type}>
-                        {typeMapper[type]}
+                        {typeMapper[type] || type}
                     </BasicTable.Cell>
                 ))}
                 <BasicTable.Cell>휴식</BasicTable.Cell>
             </BasicTable.Header>
+
             <BasicTable.Body>
                 {sets.map((set, index) => (
-                    <BasicTable.Row>
+                    <BasicTable.Row key={set.id}>
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
-                        {type.map(type => (
+
+                        {types.map(type => (
                             <BasicTable.Cell key={type}>
                                 <BasicTable.Input
-                                    value={set[type]}
+                                    // field가 Set의 키이므로 안전하게 인덱싱
+                                    value={set[type] ?? ""}
                                     onChange={e =>
                                         handleSetInputChange(
                                             set.id,
                                             type,
-                                            e.target.value,
+                                            e.target.value as Set[typeof type],
                                         )
                                     }
                                 />
                             </BasicTable.Cell>
                         ))}
+
                         <BasicTable.Cell>
-                            <BasicTable.Input value={set.restSec} />
+                            <BasicTable.Input
+                                value={set.restSec}
+                                onChange={e =>
+                                    handleSetInputChange(
+                                        set.id,
+                                        "restSec",
+                                        e.target
+                                            .value as unknown as Set["restSec"],
+                                    )
+                                }
+                            />
                         </BasicTable.Cell>
                     </BasicTable.Row>
                 ))}

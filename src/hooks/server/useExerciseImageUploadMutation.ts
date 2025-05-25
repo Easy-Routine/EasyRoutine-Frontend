@@ -1,7 +1,7 @@
 import {useMutation} from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import {uploadImage} from "services";
-const useUploadExerciseImageMutation = () => {
+const useExerciseImageUploadMutation = () => {
     const {showToast} = useToast();
     return useMutation({
         mutationFn: ({formData}: {formData: FormData}) => uploadImage(formData),
@@ -13,4 +13,4 @@ const useUploadExerciseImageMutation = () => {
     });
 };
 
-export default useUploadExerciseImageMutation;
+export default useExerciseImageUploadMutation;

@@ -29,7 +29,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     ) => {
         const newRoutine = structuredClone(routine);
         const foundRoutineExercise = newRoutine.routineExercises.find(
-            routineExercise => routineExercise.id === id,
+            (routineExercise: RoutineExercise) => routineExercise.id === id,
         ) as RoutineExercise;
 
         const foundSet = foundRoutineExercise.sets.find(

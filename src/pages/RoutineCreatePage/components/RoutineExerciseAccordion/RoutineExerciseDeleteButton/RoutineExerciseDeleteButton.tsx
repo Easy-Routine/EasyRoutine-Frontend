@@ -22,7 +22,7 @@ const RoutineExerciseDeleteButton = ({
         const routineExercises = newRoutine.routineExercises;
         // 새로운 루틴 상태로 업데이트 시켜준다.
         newRoutine.routineExercises = routineExercises.filter(
-            routineExercise => routineExercise.id !== id,
+            (routineExercise: RoutineExercise) => routineExercise.id !== id,
         );
         setRoutine(newRoutine);
     };

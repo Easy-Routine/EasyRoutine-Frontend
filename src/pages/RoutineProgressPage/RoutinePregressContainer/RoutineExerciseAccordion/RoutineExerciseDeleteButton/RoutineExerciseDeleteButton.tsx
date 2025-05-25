@@ -1,5 +1,4 @@
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
-import useDeleteRoutineExerciseOneMutation from "hooks/server/useDeleteRoutineExerciseOneMutation";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {RoutineExercise} from "types/model";
 

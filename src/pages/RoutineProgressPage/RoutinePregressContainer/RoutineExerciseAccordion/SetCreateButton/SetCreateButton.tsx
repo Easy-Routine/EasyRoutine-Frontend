@@ -1,11 +1,8 @@
 import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
-import useCreateSetOneMutation from "hooks/server/useCreateSetOneMutation";
 import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
-import {Set, RoutineExercise} from "types/model";
-import {v4 as uuidv4} from "uuid";
-import moment from "moment";
+import {RoutineExercise} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 
 type SetCreateButtonButtonProps = {

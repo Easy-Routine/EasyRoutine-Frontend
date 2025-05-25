@@ -1,8 +1,8 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {useSuspenseQuery} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
-import { getUserOne } from "services";
+import {getUserOne} from "services";
 
-const useGetUserOneQuery = () => {
+const useUserGetQuery = () => {
     return useSuspenseQuery({
         queryKey: [queryKey.getUserOne, localStorage.getItem("userId")],
         queryFn: async () => {
@@ -12,4 +12,4 @@ const useGetUserOneQuery = () => {
     });
 };
 
-export default useGetUserOneQuery;
+export default useUserGetQuery;

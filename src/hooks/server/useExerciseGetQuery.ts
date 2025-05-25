@@ -2,7 +2,7 @@ import {useSuspenseQuery} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import {getExerciseOne} from "services/exercise";
 
-const useGetExerciseOneQuery = (exerciseId: string) => {
+const useExerciseGetQuery = (exerciseId: string) => {
     return useSuspenseQuery({
         queryKey: [queryKey.getExerciseOne, exerciseId],
         queryFn: async () => {
@@ -12,4 +12,4 @@ const useGetExerciseOneQuery = (exerciseId: string) => {
     });
 };
 
-export default useGetExerciseOneQuery;
+export default useExerciseGetQuery;

@@ -41,7 +41,7 @@ export type Exercise = {
     id: string;
     name: string;
     image: string;
-    originImage: string;
+    // originImage: string;
     category: string;
     type: string[];
     isEditable: boolean;

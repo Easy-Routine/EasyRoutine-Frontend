@@ -4,7 +4,7 @@ import {Exercise} from "types/model";
 import {createExerciseOne} from "services/exercise";
 import useToast from "hooks/useToast";
 
-const useCreateExerciseOneMutation = () => {
+const useExerciseCreateMutation = () => {
     const queryClient = useQueryClient();
     const {showToast} = useToast();
     return useMutation({
@@ -22,7 +22,6 @@ const useCreateExerciseOneMutation = () => {
                 category,
                 type,
                 isEditable,
-                userId,
             }),
         onError: error => {
             console.log(error);
@@ -36,4 +35,4 @@ const useCreateExerciseOneMutation = () => {
     });
 };
 
-export default useCreateExerciseOneMutation;
+export default useExerciseCreateMutation;

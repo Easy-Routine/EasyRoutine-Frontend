@@ -1,8 +1,6 @@
 import BasicTable from "headful/BasicTable/BasicTable";
-import useUpdateSetFieldMutation from "hooks/server/useUpdateSetFiledMutation";
-import React from "react";
-import {useParams} from "react-router-dom";
-import {Set, RoutineExercise} from "types/model";
+
+import {RoutineExercise, Set} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 
 type SetUpdateTableProps = {
@@ -26,7 +24,8 @@ const typeMapper: TypeMapper = {
 
 const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     const {exercise, id, sets} = routineExercise;
-    const {type} = exercise;
+
+    const types = exercise.type as Array<keyof Set>;
 
     //TODO: useRoutineProgress 다시 정의하기
     const {
@@ -39,12 +38,10 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
         setRoutineProgress,
     } = useRoutineProgress(); // useRoutineProgress
 
-    const exerciseType = currentRoutineExercise?.exercise?.type ?? [];
-
-    const handleSetInputChange = async (
+    const handleSetInputChange = async <K extends keyof Set>(
         setId: string,
-        key: string,
-        value: string,
+        key: K,
+        value: Set[K],
     ) => {
         // const newRoutineProgress = structuredClone(routineProgress);
         // const currentRoutineExercise = newRoutineProgress.routineExercises.find(
@@ -71,7 +68,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
         <BasicTable>
             <BasicTable.Header>
                 <BasicTable.Cell>세트</BasicTable.Cell>
-                {exerciseType.map(type => (
+                {types.map(type => (
                     <BasicTable.Cell key={type}>
                         {typeMapper[type]}
                     </BasicTable.Cell>
@@ -85,7 +82,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
                         isPrimaryLine={isCompletedSet(set.id)}
                     >
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
-                        {exerciseType.map(type => (
+                        {types.map(type => (
                             <BasicTable.Cell key={type}>
                                 <BasicTable.Input
                                     value={set[type]}
@@ -106,7 +103,8 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
                                     handleSetInputChange(
                                         set.id,
                                         "restSec",
-                                        e.target.value,
+                                        e.target
+                                            .value as unknown as Set["restSec"],
                                     )
                                 }
                             />

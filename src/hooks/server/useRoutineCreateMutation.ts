@@ -1,30 +1,33 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
-import {Exercise} from "types/model";
-import {updateExerciseOne} from "services/exercise";
 import useToast from "hooks/useToast";
+import {createRoutineOne} from "services/routine";
+import {Color} from "types/enum";
 
-const useUpdateExerciseOneMutation = () => {
-    const queryClient = useQueryClient();
+const useRoutineCreateMutation = () => {
     const {showToast} = useToast();
+
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
-            exerciseId,
-            updatedData,
+            name,
+            color,
+            userId,
         }: {
-            exerciseId: string;
-            updatedData: Partial<Exercise>;
-        }) => updateExerciseOne(exerciseId, updatedData),
+            name: string;
+            color: Color;
+            userId: string;
+        }) => createRoutineOne({name, color, userId}),
         onError: error => {
             console.log(error);
             showToast(error.message, "error");
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: [queryKey.getExerciseAll],
+                queryKey: [queryKey.getRoutineAll],
             });
         },
     });
 };
 
-export default useUpdateExerciseOneMutation;
+export default useRoutineCreateMutation;

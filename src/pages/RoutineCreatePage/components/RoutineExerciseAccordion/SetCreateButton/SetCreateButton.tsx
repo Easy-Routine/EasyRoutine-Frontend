@@ -21,14 +21,14 @@ const SetCreateButton = ({routineExercise}: SetCreateButtonButtonProps) => {
         // 루틴 설정 상태를 가져와서 깊은 복사를 해준다.
         const newRoutine = structuredClone(routine);
         // 운동 설정 상태의 아이디를 이용하여 해당 운동을 찾는다.
-        const routineExercise = newRoutine.routineExercises;
-        const foundExercise = routineExercise.find(
-            exercise => exercise.id === id,
+        const routineExercises = newRoutine.routineExercises;
+        const foundRoutineExercise = routineExercises.find(
+            (routineExercise: RoutineExercise) => routineExercise.id === id,
         ) as RoutineExercise;
         // 세트 설정 배열에서 요소를 추가한다.
 
-        const sets = foundExercise.sets;
-        const {type} = foundExercise.exercise;
+        const sets = foundRoutineExercise.sets;
+        const {type} = foundRoutineExercise.exercise;
         const last = sets[sets.length - 1] as Set | undefined;
 
         // 4) timestamp
