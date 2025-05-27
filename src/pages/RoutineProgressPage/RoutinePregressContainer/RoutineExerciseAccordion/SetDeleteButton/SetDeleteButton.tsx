@@ -10,72 +10,38 @@ type SetDeleteButtonProps = {
 };
 
 const SetDeleteButton = ({routineExercise}: SetDeleteButtonProps) => {
-    const {id} = routineExercise;
-    const {
-        sets,
-        completedSetIds,
-        setCompletedSetIds,
-        routineProgress,
-        currentWorkoutId,
-        currentSetId,
-        setRoutineProgress,
-        routineHistory,
-        setRoutineHistory,
-    } = useRoutineProgress();
+    const {routine, setRoutine, routineHistory, setRoutineHistory} =
+        useRoutineProgress();
 
-    const handleSetDeleteButtonClick: MouseEventHandler<
-        HTMLDivElement
-    > = async e => {
+    const handleSetDeleteButtonClick: MouseEventHandler<HTMLDivElement> = e => {
         e.stopPropagation();
 
-        // const newRoutineProgress = structuredClone(routineProgress);
-        // const currentWorkoutConfig = newRoutineProgress.routineExercises.find(
-        //     (routineExercise: WorkoutConfig) =>
-        //         routineExercise.id === currentWorkoutId,
-        // ) as WorkoutConfig;
+        // 1) 원본이 아닌 복사본을 먼저 만들고…
+        const newRoutine = structuredClone(routine);
+        const newRoutineHistory = structuredClone(routineHistory);
 
-        // const {sets} = currentWorkoutConfig;
+        // 2) 복사본에서 해당 운동(RoutineExercise)을 찾아서
+        const targetRE = newRoutine.routineExercises.find(
+            (re: RoutineExercise) => re.id === routineExercise.id,
+        );
+        const targetRHE = newRoutineHistory.routineExercises.find(
+            (re: RoutineExercise) => re.id === routineExercise.id,
+        );
 
-        // const newSetConfigs = structuredClone(sets);
-        // const poppedSetConfig = newSetConfigs.pop() as SetConfig;
+        if (!targetRE) return; // 혹시 못 찾으면 리턴
 
-        // currentWorkoutConfig.sets = newSetConfigs;
+        // 3) 원본이 아닌, 복사본의 sets 배열을 조작
+        if (targetRE.sets.length > (targetRHE?.sets.length ?? 0)) {
+            targetRE.sets.pop();
+        } else {
+            // sets 길이가 같으면 복사본에서도 둘 다 삭제
+            targetRE.sets.pop();
+            targetRHE?.sets.pop();
+        }
 
-        // const filteredCompletedSetIds = completedSetIds.filter(
-        //     id => id !== poppedSetConfig.id,
-        // );
-
-        // setCompletedSetIds(filteredCompletedSetIds);
-        // setRoutineProgress(newRoutineProgress);
-
-        // const isSetExist = completedSetIds.includes(poppedSetConfig.id);
-
-        // // 완료된 세트 목록에서 현재 운동의 세트목록에서 꺼낸 아이디가 있다면
-        // if (isSetExist) {
-        //     // await deleteSetOneMutate({
-        //     //     routineHistoryId: routineProgress.id,
-        //     //     routineExerciseId: currentWorkoutId,
-        //     // });
-
-        //     const newRoutineHistory = structuredClone(routineHistory);
-
-        //     // 루틴 기록의 운동 목록에서 현재 아이디의 운동을 선택한다.(객체의 주소는 동일하다.)
-        //     const currentRoutineExercise = newRoutineHistory.routineExercises.find(
-        //         (routineExercise: RoutineExercise) =>
-        //             routineExercise.routineExerciseId === currentWorkoutId,
-        //     ) as RoutineExercise;
-
-        //     // 선택한 운동에서 꺼낸 운동의 아이디를 필터링한다.
-        //     const newSets = currentRoutineExercise.sets.filter(
-        //         set => set.setId !== poppedSetConfig.id,
-        //     );
-        //     // 현재 운동에 새롭게 만든 배열을 할당한다.
-        //     currentRoutineExercise.sets = newSets;
-
-        //     setRoutineHistory(newRoutineHistory);
-        // }
-
-        // console.log("루틴 기록", routineHistory);
+        // 4) state 업데이트
+        setRoutine(newRoutine);
+        setRoutineHistory(newRoutineHistory);
     };
 
     return (

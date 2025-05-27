@@ -13,13 +13,13 @@ import RoutineExerciseRestSecTimer from "./RoutineExerciseRestSecTimer/RoutineEx
 type RoutineProgressContainerProps = {};
 
 const RoutineProgressContainer = ({}: RoutineProgressContainerProps) => {
-    const {routineProgress, remainingTime} = useRoutineProgress();
+    const {routine, remainingTime} = useRoutineProgress();
 
     return (
         <>
             <FlexBox direction="column" gap={20}>
                 <List<RoutineExercise>
-                    data={routineProgress.routineExercises}
+                    data={routine.routineExercises}
                     render={routineExercise => (
                         <RoutineExerciseAccordion
                             routineExercise={routineExercise}

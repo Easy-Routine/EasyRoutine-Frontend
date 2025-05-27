@@ -5,51 +5,51 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import {Routine, RoutineHistory, Set, RoutineExercise} from "types/model";
 
 type RoutineProgressContextType = {
-    routineProgress: Routine;
+    routine: Routine;
     routineHistory: RoutineHistory;
-    currentWorkoutId: string;
-    currentSetId: string;
-    completedSetIds: string[];
-    currentRoutineExercise: RoutineExercise;
-    currentSet: Set;
-    routineExercises: RoutineExercise[];
-    sets: Set[];
-    setRoutineProgress: React.Dispatch<React.SetStateAction<Routine>>;
+    // currentWorkoutId: string;
+    // currentSetId: string;
+    // completedSetIds: string[];
+    // currentRoutineExercise: RoutineExercise;
+    // currentSet: Set;
+    // routineExercises: RoutineExercise[];
+    // sets: Set[];
+    setRoutine: React.Dispatch<React.SetStateAction<Routine>>;
     setRoutineHistory: React.Dispatch<React.SetStateAction<RoutineHistory>>;
-    setCurrentWorkoutId: React.Dispatch<React.SetStateAction<string>>;
-    setCurrentSetId: React.Dispatch<React.SetStateAction<string>>;
-    setCompletedSetIds: React.Dispatch<React.SetStateAction<string[]>>;
+    // setCurrentWorkoutId: React.Dispatch<React.SetStateAction<string>>;
+    // setCurrentSetId: React.Dispatch<React.SetStateAction<string>>;
+    // setCompletedSetIds: React.Dispatch<React.SetStateAction<string[]>>;
     // 타이머 관련 프로퍼티
     endTime: Moment | null;
     isActive: boolean;
     startTimer: (initialSeconds: number) => void;
     skipTimer: () => void;
     remainingTime: number;
-    isAllCompleted: boolean;
+    // isAllCompleted: boolean;
 };
 
 const RoutineProgressContext = createContext<RoutineProgressContextType>({
-    routineProgress: {} as Routine,
+    routine: {} as Routine,
     routineHistory: {} as RoutineHistory,
-    currentWorkoutId: "",
-    currentSetId: "",
-    completedSetIds: [],
-    currentRoutineExercise: {} as RoutineExercise,
-    currentSet: {} as Set,
-    routineExercises: [],
-    sets: [],
-    setRoutineProgress: () => {},
+    // currentWorkoutId: "",
+    // currentSetId: "",
+    // completedSetIds: [],
+    // currentRoutineExercise: {} as RoutineExercise,
+    // currentSet: {} as Set,
+    // routineExercises: [],
+    // sets: [],
+    setRoutine: () => {},
     setRoutineHistory: () => {},
-    setCurrentWorkoutId: () => {},
-    setCurrentSetId: () => {},
-    setCompletedSetIds: () => {},
+    // setCurrentWorkoutId: () => {},
+    // setCurrentSetId: () => {},
+    // setCompletedSetIds: () => {},
     // 기본 타이머 값
     endTime: moment(),
     isActive: false,
     startTimer: () => {},
     skipTimer: () => {},
     remainingTime: 0,
-    isAllCompleted: false,
+    // isAllCompleted: false,
 });
 
 type RoutineProgressProps = {
@@ -57,56 +57,67 @@ type RoutineProgressProps = {
     children: React.ReactNode;
 };
 
-const RoutineProgressProvider = ({routine, children}: RoutineProgressProps) => {
-    const [routineProgress, setRoutineProgress] = useState(routine);
-    const [routineHistory, setRoutineHistory] = useState<RoutineHistory>(
-        {} as RoutineHistory,
-    );
-    const [currentWorkoutId, setCurrentWorkoutId] = useState("");
-    const [currentSetId, setCurrentSetId] = useState("");
-    const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
+const RoutineProgressProvider = ({
+    routine: rawRoutine,
+    children,
+}: RoutineProgressProps) => {
+    const [routine, setRoutine] = useState(rawRoutine);
+    const [routineHistory, setRoutineHistory] = useState<RoutineHistory>({
+        id: routine.id,
+        name: routine.name,
+        color: routine.color,
+        workoutTime: 0,
+        routineExercises: [],
+    });
+    // const [currentWorkoutId, setCurrentWorkoutId] = useState("");
+    // const [currentSetId, setCurrentSetId] = useState("");
+    // const [completedSetIds, setCompletedSetIds] = useState<string[]>([]);
     const {endTime, isActive, startTimer, skipTimer, remainingTime} =
         useTimer();
 
-    const {routineExercises} = routineProgress;
-    const currentRoutineExercise =
-        routineExercises.find(
-            routineExercise => routineExercise.id === currentWorkoutId,
-        ) || ({} as RoutineExercise);
+    useEffect(() => {
+        console.log("디버그", routine, routineHistory);
+    }, [routineHistory, routine]);
 
-    const sets = currentRoutineExercise?.sets || [];
+    // const {routineExercises} = routineProgress;
+    // const currentRoutineExercise =
+    //     routineExercises.find(
+    //         routineExercise => routineExercise.id === currentWorkoutId,
+    //     ) || ({} as RoutineExercise);
 
-    const currentSet = sets.find(set => set.id === currentSetId) || ({} as Set);
+    // const sets = currentRoutineExercise?.sets || [];
 
-    const totalSetIds = routineExercises.flatMap(routineExercise =>
-        routineExercise.sets.map(set => set.id),
-    );
+    // const currentSet = sets.find(set => set.id === currentSetId) || ({} as Set);
 
-    const isAllCompleted = totalSetIds.length === completedSetIds.length;
+    // const totalSetIds = routineExercises.flatMap(routineExercise =>
+    //     routineExercise.sets.map(set => set.id),
+    // );
+
+    // const isAllCompleted = totalSetIds.length === completedSetIds.length;
 
     return (
         <RoutineProgressContext.Provider
             value={{
-                routineProgress,
+                routine,
                 routineHistory,
-                currentWorkoutId,
-                currentSetId,
-                completedSetIds,
-                routineExercises,
-                currentRoutineExercise,
-                currentSet,
-                sets,
-                setRoutineProgress,
+                // routineExercises,
+                // currentWorkoutId,
+                // currentSetId,
+                // completedSetIds,
+                // currentRoutineExercise,
+                // currentSet,
+                // sets,
+                setRoutine,
                 setRoutineHistory,
-                setCurrentWorkoutId,
-                setCurrentSetId,
-                setCompletedSetIds,
+                // setCurrentWorkoutId,
+                // setCurrentSetId,
+                // setCompletedSetIds,
                 endTime,
                 isActive,
                 startTimer,
                 skipTimer,
                 remainingTime,
-                isAllCompleted,
+                // isAllCompleted,
             }}
         >
             {children}

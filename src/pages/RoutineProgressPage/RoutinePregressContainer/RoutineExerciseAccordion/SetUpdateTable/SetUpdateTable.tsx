@@ -5,11 +5,6 @@ import {useRoutineProgress} from "../../RoutineProgressProvider";
 
 type SetUpdateTableProps = {
     routineExercise: RoutineExercise;
-    // exerciseType: string[];
-    // sets: Set[];
-    // currentSetId: string;
-    // completedSetIds: string[];
-    // onSetUpdateTableChange: (sets: Set[]) => void;
 };
 
 type TypeMapper = {
@@ -24,45 +19,57 @@ const typeMapper: TypeMapper = {
 
 const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     const {exercise, id, sets} = routineExercise;
+    const {routineHistory} = useRoutineProgress();
+
+    const currentRE = routineExercise;
+    const currentRHE = routineHistory.routineExercises.find(
+        (re: RoutineExercise) => re.id === currentRE.id,
+    );
+
+    // 당연하게도 운동완료 버튼을 누르기 전까지는 루틴기록의 운동데이터는 존재하지 않는다.
 
     const types = exercise.type as Array<keyof Set>;
 
     //TODO: useRoutineProgress 다시 정의하기
     const {
-        routineProgress,
+        routine,
         // sets,
-        currentWorkoutId,
-        currentSetId,
-        completedSetIds,
-        currentRoutineExercise,
-        setRoutineProgress,
+
+        setRoutine,
     } = useRoutineProgress(); // useRoutineProgress
+
+    // setId: string,
+    //     key: K,
+    //     value: Set[K],
 
     const handleSetInputChange = async <K extends keyof Set>(
         setId: string,
         key: K,
         value: Set[K],
     ) => {
-        // const newRoutineProgress = structuredClone(routineProgress);
-        // const currentRoutineExercise = newRoutineProgress.routineExercises.find(
-        //     (routineExercise: RoutineExercise) =>
-        //         routineExercise.id === currentWorkoutId,
-        // ) as RoutineExercise;
-        // const currentSet = currentRoutineExercise.sets.find(
-        //     (set: Set) => set.id === setId,
-        // ) as Set;
-        // currentSet[key] = value;
-        // // console.log("routineProgress", newRoutineProgress);
-        // setRoutineProgress(newRoutineProgress);
+        const newRoutine = structuredClone(routine);
+        const foundRoutineExercise = newRoutine.routineExercises.find(
+            (routineExercise: RoutineExercise) => routineExercise.id === id,
+        ) as RoutineExercise;
+
+        const foundSet = foundRoutineExercise.sets.find(
+            set => set.id === setId,
+        ) as Set;
+
+        if (key === "id") {
+            foundSet[key] = value as any; // or keep it string if needed
+        } else {
+            foundSet[key] = Number(value) as any;
+        }
+
+        setRoutine(newRoutine);
     };
 
-    const isCurrentSet = (setId: string) => {
-        return setId === currentSetId;
-    };
-
-    const isCompletedSet = (setId: string) => completedSetIds.includes(setId);
-
-    // console.log(completedSetIds, "completedSetIds");
+    // 운동 기록의 세트배열에서 해당 세트 id가 있는지 확인
+    const isCompletedSet = (setId: string) =>
+        currentRHE ? currentRHE.sets.map(s => s.id).includes(setId) : false;
+    const isCurrentSet = (index: number) =>
+        currentRHE ? index === currentRHE.sets.length : index === 0;
 
     return (
         <BasicTable>
@@ -78,8 +85,8 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
             <BasicTable.Body>
                 {sets.map((set, index) => (
                     <BasicTable.Row
-                        isGrayLine={isCurrentSet(set.id)}
-                        isPrimaryLine={isCompletedSet(set.id)}
+                        isGrayLine={isCompletedSet(set.id)}
+                        isPrimaryLine={isCurrentSet(index)}
                     >
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
                         {types.map(type => (

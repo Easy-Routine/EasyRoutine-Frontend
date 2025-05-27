@@ -17,9 +17,9 @@ const RoutineProgressCompleteButton = () => {
 
 function withModal<P extends object>(WrappedComponent: React.ComponentType<P>) {
     const WithModal: React.FC<P> = props => {
-        const {isAllCompleted} = useRoutineProgress();
+        // const {isAllCompleted} = useRoutineProgress();
 
-        const modalContent = isAllCompleted ? (
+        const modalContent = true ? (
             // 모든 세트 완료 시 보여줄 콘텐츠
             <CompleteModalContent />
         ) : (

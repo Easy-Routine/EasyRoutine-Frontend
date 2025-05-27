@@ -2,8 +2,9 @@ import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
-import {RoutineExercise} from "types/model";
+import {RoutineExercise, Set} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
+import {v4 as uuid} from "uuid";
 
 type SetCreateButtonButtonProps = {
     // sets: Set[];
@@ -17,59 +18,51 @@ const SetCreateButton = ({
     // onSetCreateButtonClick,
 }: SetCreateButtonButtonProps) => {
     const {id} = routineExercise;
-    const {
-        sets,
-        completedSetIds,
-        setCurrentSetId,
-        routineProgress,
-        setRoutineProgress,
-        currentWorkoutId,
-    } = useRoutineProgress();
+    const {routine, setRoutine} = useRoutineProgress();
 
     const handleSetCreateButtonClick: MouseEventHandler<
         HTMLDivElement
     > = async e => {
         e.stopPropagation();
 
-        // const lastSetIndex = sets.length - 1;
+        e.stopPropagation();
+        // 루틴 설정 상태를 가져와서 깊은 복사를 해준다.
+        const newRoutine = structuredClone(routine);
+        // 운동 설정 상태의 아이디를 이용하여 해당 운동을 찾는다.
+        const routineExercises = newRoutine.routineExercises;
+        const foundRoutineExercise = routineExercises.find(
+            (routineExercise: RoutineExercise) => routineExercise.id === id,
+        ) as RoutineExercise;
+        // 세트 설정 배열에서 요소를 추가한다.
 
-        // // 세트 설정 배열에 새로운 세트 설정을 추가한다.
-        // sets.push({
-        //     id: uuidv4(),
-        //     weight: sets[lastSetIndex]?.weight || 0,
-        //     rep: sets[lastSetIndex]?.rep || 0,
-        //     restSec: sets[lastSetIndex]?.restSec || 0,
-        //     workoutSec: sets[lastSetIndex]?.restSec || 0,
-        //     createdAt: moment().toISOString(),
-        //     updatedAt: moment().toISOString(),
-        //     routineExerciseId: "1",
-        // });
+        const sets = foundRoutineExercise.sets;
+        const {type} = foundRoutineExercise.exercise;
+        const last = sets[sets.length - 1] as Set | undefined;
 
-        // console.log(sets, "sets");
-        // console.log(completedSetIds, "completedSetIds");
+        // 4) timestamp
+        const now = new Date().toISOString();
 
-        // // 현재 세트 설정(sets)에서 아이디 배열을 구한다.
-        // const currentSetIds = sets.map(set => set.id);
-        // // 완료된 세트 배열(completedSetIds)에서 현재 세트 설정의 아이디배열과 겹치는 아이디를 구한다.
-        // const commonSetIds = currentSetIds.filter(id =>
-        //     completedSetIds.includes(id),
-        // );
+        const newSet: Set = {
+            id: uuid(),
+            // optional fields: 이전 값이 있으면 그걸, 없으면 0
+            ...(type.includes("weight") && {weight: last?.weight ?? 0}),
 
-        // setCurrentSetId(sets[commonSetIds.length].id);
+            // exercise.type 에 "rep" 가 있고, last.rep 가 있을 때만 포함
+            ...(type.includes("rep") && {rep: last?.rep ?? 0}),
 
-        // const newRoutineProgress = structuredClone(routineProgress);
+            // exercise.type 에 "workoutSec" 가 있고, last.workoutSec 가 있을 때만 포함
+            ...(type.includes("workoutSec") && {
+                workoutSec: last?.workoutSec ?? 0,
+            }),
+            // required field: 역시 이전 값이 있으면 그걸, 없으면 0
+            restSec: last?.restSec ?? 0,
+        };
 
-        // const currentRoutineExercise = newRoutineProgress.routineExercises.find(
-        //     (routineExercise: RoutineExercise) =>
-        //         routineExercise.id === currentWorkoutId,
-        // ) as RoutineExercise;
-        // // 선택된 운동 설정의 세트설정을 업데이트 시킵니다.
-        // currentRoutineExercise.sets = sets;
+        // 6) 배열에 추가
+        sets.push(newSet);
 
-        // setRoutineProgress(newRoutineProgress);
-
-        // 완료된 세트보다 하나 더 많은 인덱스를 현재 세트로 지정한다.
-        // setCurrentSetId(newSets[completedSetIds.length].id);
+        // 새로운 루틴 상태로 업데이트 시켜준다.
+        setRoutine(newRoutine);
     };
 
     return (

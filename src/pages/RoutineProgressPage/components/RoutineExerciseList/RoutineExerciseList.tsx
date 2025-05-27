@@ -7,9 +7,9 @@ type RoutineExerciseListProps = {
 };
 
 const RoutineExerciseList = ({component}: RoutineExerciseListProps) => {
-    const {routineProgress} = useRoutineProgress();
+    const {routine} = useRoutineProgress();
 
-    return <>{routineProgress.routineExercises.map(component)}</>;
+    return <>{routine.routineExercises.map(component)}</>;
 };
 
 export default RoutineExerciseList;

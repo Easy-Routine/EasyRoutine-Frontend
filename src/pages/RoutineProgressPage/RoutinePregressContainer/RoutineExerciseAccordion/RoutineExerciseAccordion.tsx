@@ -4,11 +4,8 @@ import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {RoutineExercise} from "types/model";
 import RoutineExerciseDeleteButton from "./RoutineExerciseDeleteButton/RoutineExerciseDeleteButton";
-import SetCreateButton from "./SetCreateButton/SetCreateButton";
-import SetDeleteButton from "./SetDeleteButton/SetDeleteButton";
-import SetUpdateTable from "./SetUpdateTable/SetUpdateTable";
-import SetCompleteButton from "./SetCompleteButton/SetCompleteButton";
 import React from "react";
+import {useRoutineProgress} from "../RoutineProgressProvider";
 
 type RoutineExerciseAccordionProps = {
     routineExercise: RoutineExercise;
@@ -20,20 +17,14 @@ const RoutineExerciseAccordion = ({
     children,
 }: RoutineExerciseAccordionProps) => {
     const {exercise, sets} = routineExercise;
-    // const [
-    //     setUpdateTable, // 0: <SetUpdateTable .../>
-    //     setDeleteButton, // 1: <SetDeleteButton .../>
-    //     setCreateButton, // 2: <SetCreateButton .../>
-    //     setCompleteButton,
-    //     routineExerciseDeleteButton, // 3: <RoutineExerciseDeleteButton .../>
-    // ] = React.Children.toArray(children) as React.ReactElement[];
-    // const {
-    //     routineProgress,
-    //     currentWorkoutId,
-    //     completedSetIds,
-    //     setCurrentWorkoutId,
-    //     setCurrentSetId,
-    // } = useRoutineProgress();
+    const [
+        setUpdateTable, // 0: <SetUpdateTable .../>
+        setDeleteButton, // 1: <SetDeleteButton .../>
+        setCreateButton, // 2: <SetCreateButton .../>
+        setCompleteButton,
+        routineExerciseDeleteButton, // 3: <RoutineExerciseDeleteButton .../>
+    ] = React.Children.toArray(children) as React.ReactElement[];
+    const {routine} = useRoutineProgress();
 
     // const handleRoutineExerciseReactiveTriggerClick = () => {
     //     setCurrentWorkoutId(routineExercise.id);
@@ -78,18 +69,17 @@ const RoutineExerciseAccordion = ({
                     </FlexBox>
                 </SwipeableAccordion.Visible>
                 <SwipeableAccordion.Hidden>
-                    {/* {setUpdateTable} */}
+                    {setUpdateTable}
                     <FlexBox padding={{t: 10, b: 10}} justify="space-around">
-                        {/* {setDeleteButton} */}
-                        {/* {setCreateButton} */}
-                        dd
+                        {setDeleteButton}
+                        {setCreateButton}
                     </FlexBox>
-                    {/* {setCompleteButton} */}
+                    {setCompleteButton}
                 </SwipeableAccordion.Hidden>
-                {/* {routineExerciseDeleteButton} */}
-                {/* <RoutineExerciseDeleteButton
-                    routineExerciseId={routineExercise.id}
-                /> */}
+                {routineExerciseDeleteButton}
+                <RoutineExerciseDeleteButton
+                    routineExercise={routineExercise}
+                />
             </SwipeableAccordion.Box>
         </SwipeableAccordion>
     );

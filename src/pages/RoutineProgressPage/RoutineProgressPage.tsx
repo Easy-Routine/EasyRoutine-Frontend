@@ -15,6 +15,16 @@ import SetCompleteButton from "./RoutinePregressContainer/RoutineExerciseAccordi
 import RoutineExerciseDeleteButton from "./RoutinePregressContainer/RoutineExerciseAccordion/RoutineExerciseDeleteButton/RoutineExerciseDeleteButton";
 import SetUpdateTable from "./RoutinePregressContainer/RoutineExerciseAccordion/SetUpdateTable/SetUpdateTable";
 import RoutineExerciseAccordionList from "./RoutinePregressContainer/RoutineExerciseAccordionList/RoutineExerciseAccordionList";
+import RoutineCompleteButton from "./components/RoutineCompleteButton/RoutineCompleteButton";
+import ExerciseModal from "./components/ExerciseModal/ExerciseModal";
+import FloatingCircleButton from "headful/FloatingCircleButton/FloatingCircleButton";
+import {ReactComponent as PlusIcon} from "assets/image/plus.svg";
+import ExerciseAllProvider from "./components/ExerciseAllProvider/ExerciseAllProvider";
+import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput/ExerciseFilterSearchInput";
+import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup/ExerciseFilterTabGroup";
+import RoutineExerciseAddParamsProvider from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddParamsProvider";
+import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddCheckGroup/RoutineExerciseAddCheckBoxGroup";
+import RoutineExerciseAddButton from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddButton/RoutineExerciseAddButton";
 
 const RoutineProgressPage = () => {
     const {routineId} = useParams();
@@ -54,8 +64,40 @@ const RoutineProgressPage = () => {
                             )}
                         />
                     </Flex>
+
+                    <ExerciseModal
+                        trigger={
+                            <FloatingCircleButton
+                                width={64}
+                                height={64}
+                                onFloatingCircleButtonClick={() => {}}
+                            >
+                                <PlusIcon color={"var(--text-white)"} />
+                            </FloatingCircleButton>
+                        }
+                        content={
+                            <ExerciseAllProvider>
+                                <Flex direction="column" gap={20}>
+                                    <ExerciseFilterSearchInput />
+                                    <ExerciseFilterTabGroup />
+                                    <Flex
+                                        direction="column"
+                                        height={400}
+                                        gap={16}
+                                    >
+                                        <RoutineExerciseAddParamsProvider>
+                                            <RoutineExerciseAddCheckBoxGroup />
+                                            <RoutineExerciseAddButton />
+                                        </RoutineExerciseAddParamsProvider>
+                                    </Flex>
+                                </Flex>
+                            </ExerciseAllProvider>
+                        }
+                    />
                 </Main>
-                <Footer>푸터</Footer>
+                <Footer>
+                    <RoutineCompleteButton />
+                </Footer>
             </RoutineProgressProvider>
         </PrivatePageTemplate>
     );
