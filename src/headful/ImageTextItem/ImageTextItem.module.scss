@@ -1,0 +1,41 @@
+.ImageTextItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 56px;
+
+    .ImageText {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .Image {
+            display: flex;
+            align-items: center;
+            img {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        .Text {
+            span {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .Icon {
+        width: 24px;
+        height: 24px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 6;
+            height: 12px;
+        }
+    }
+}

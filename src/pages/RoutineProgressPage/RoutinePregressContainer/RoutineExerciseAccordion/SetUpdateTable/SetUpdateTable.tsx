@@ -28,7 +28,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
 
     // 당연하게도 운동완료 버튼을 누르기 전까지는 루틴기록의 운동데이터는 존재하지 않는다.
 
-    const types = exercise.type as Array<keyof Set>;
+    const types = exercise.types as Array<keyof Set>;
 
     //TODO: useRoutineProgress 다시 정의하기
     const {

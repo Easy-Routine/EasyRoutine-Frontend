@@ -11,17 +11,21 @@ const useExerciseCreateMutation = () => {
         mutationFn: ({
             name,
             image,
+            originImage,
             category,
-            type,
+            types,
             isEditable,
+            shareLevel,
             // userId,
-        }: Omit<Exercise, "id" | "createdAt" | "updatedAt">) =>
+        }: Omit<Exercise, "id">) =>
             createExerciseOne({
                 name,
                 image,
+                originImage,
                 category,
-                type,
+                types,
                 isEditable,
+                shareLevel,
             }),
         onError: error => {
             console.log(error);

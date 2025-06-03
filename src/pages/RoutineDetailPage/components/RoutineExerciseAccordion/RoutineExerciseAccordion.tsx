@@ -29,7 +29,11 @@ const RoutineExerciseAccordion = ({
             <SwipeableAccordion.Box>
                 <SwipeableAccordion.Visible>
                     <Flex gap={16}>
-                        <Image width={60} height={60} src={exercise.image} />
+                        <Image
+                            width={60}
+                            height={60}
+                            src={exercise?.image ?? ""}
+                        />
                         <Flex direction="column" justify="space-around">
                             <Text
                                 size={"var(--fontSize-lg)"}

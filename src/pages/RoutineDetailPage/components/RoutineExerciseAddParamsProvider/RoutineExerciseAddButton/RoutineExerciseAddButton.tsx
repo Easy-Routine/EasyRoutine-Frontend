@@ -20,7 +20,7 @@ const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
         const {routineExercises: currentRoutineExercises} = newRoutine;
         // 운동라이브러리 아이디에서 선택한 운동 라이브러리 아이디를 가져온다.
         const filteredWorkoutLibraries = workoutLibraries.filter(exercise =>
-            exerciseIds.includes(exercise.id),
+            exerciseIds.includes(exercise.id.toString()),
         );
         // 운동라이브러리를 운동 설정타입으로 변환시켜준다.
         const extraRoutineExercises: RoutineExercise[] =

@@ -38,15 +38,14 @@ export type RoutineHistory = {
 };
 
 export type Exercise = {
-    id: string;
+    id: number;
     name: string;
-    image: string;
-    // originImage: string;
+    image: string | null;
+    originImage: string | null;
     category: string;
-    type: string[];
-    isEditable: boolean;
-    createdAt: string;
-    updatedAt: string;
+    types: string[];
+    isEditable: 1 | 0;
+    shareLevel: 1 | 0;
 };
 
 // export type RoutineExercise = {

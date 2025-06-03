@@ -28,7 +28,7 @@ const SetCreateButton = ({routineExercise}: SetCreateButtonButtonProps) => {
         // 세트 설정 배열에서 요소를 추가한다.
 
         const sets = foundRoutineExercise.sets;
-        const {type} = foundRoutineExercise.exercise;
+        const {types} = foundRoutineExercise.exercise;
         const last = sets[sets.length - 1] as Set | undefined;
 
         // 4) timestamp
@@ -37,13 +37,13 @@ const SetCreateButton = ({routineExercise}: SetCreateButtonButtonProps) => {
         const newSet: Set = {
             id: uuid(),
             // optional fields: 이전 값이 있으면 그걸, 없으면 0
-            ...(type.includes("weight") && {weight: last?.weight ?? 0}),
+            ...(types.includes("weight") && {weight: last?.weight ?? 0}),
 
-            // exercise.type 에 "rep" 가 있고, last.rep 가 있을 때만 포함
-            ...(type.includes("rep") && {rep: last?.rep ?? 0}),
+            // exercise.types 에 "rep" 가 있고, last.rep 가 있을 때만 포함
+            ...(types.includes("rep") && {rep: last?.rep ?? 0}),
 
-            // exercise.type 에 "workoutSec" 가 있고, last.workoutSec 가 있을 때만 포함
-            ...(type.includes("workoutSec") && {
+            // exercise.types 에 "workoutSec" 가 있고, last.workoutSec 가 있을 때만 포함
+            ...(types.includes("workoutSec") && {
                 workoutSec: last?.workoutSec ?? 0,
             }),
             // required field: 역시 이전 값이 있으면 그걸, 없으면 0

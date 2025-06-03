@@ -21,14 +21,14 @@ const RoutineExerciseAddCheckBoxGroup =
             <LineCheckBoxGroup defaultValue={exerciseIds}>
                 {workoutLibraries.map(exercise => (
                     <LineCheckBoxGroup.Item
-                        value={exercise.id}
+                        value={exercise.id.toString()}
                         onCheckboxGroupItemClick={handleCheckBoxItemClick}
                     >
                         <Flex gap={16}>
                             <Image
                                 width={40}
                                 height={40}
-                                src={exercise.image}
+                                src={exercise?.image ?? ""}
                             />
                             <Flex direction="column" justify="space-around">
                                 <Text size="var(--fontSize-xs)">

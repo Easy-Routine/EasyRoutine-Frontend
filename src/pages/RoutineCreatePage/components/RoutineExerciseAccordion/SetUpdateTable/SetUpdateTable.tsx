@@ -19,7 +19,7 @@ const typeMapper: TypeMapper = {
 const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     // const {routineId} = useParams();
     const {exercise, id, sets} = routineExercise;
-    const {type} = exercise;
+    const {types} = exercise;
     const {routine, setRoutine} = useRoutineCreate();
 
     const handleSetInputChange = async (
@@ -49,7 +49,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
         <BasicTable>
             <BasicTable.Header>
                 <BasicTable.Cell>세트</BasicTable.Cell>
-                {type.map(type => (
+                {types.map(type => (
                     <BasicTable.Cell key={type}>
                         {typeMapper[type]}
                     </BasicTable.Cell>
@@ -60,7 +60,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
                 {sets.map((set, index) => (
                     <BasicTable.Row>
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
-                        {type.map(type => (
+                        {types.map(type => (
                             <BasicTable.Cell key={type}>
                                 <BasicTable.Input
                                     value={set[type as keyof Set]}

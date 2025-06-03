@@ -16,7 +16,7 @@ const RoutineExerciseFlex = ({routineExercise}: RoutineExerciseFlexProps) => {
 
     return (
         <Flex gap={16}>
-            <Image width={40} height={40} src={image} />
+            <Image width={40} height={40} src={image ?? ""} />
             <Flex direction="column" justify="space-around">
                 <Text
                     size={"var(--fontSize-sm)"}

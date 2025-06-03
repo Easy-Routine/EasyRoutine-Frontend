@@ -20,9 +20,9 @@ const typeMapper: TypeMapper = {
 
 const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
     const {exercise, sets} = routineExercise;
-    // exercise.type 은 서버에서 내려오는 string[] 이지만,
+    // exercise.types 은 서버에서 내려오는 string[] 이지만,
     // 실제로는 Set의 키 중 일부라고 가정
-    const types = exercise.type as Array<keyof Set>;
+    const types = exercise.types as Array<keyof Set>;
 
     const {routine, setRoutine} = useRoutineUpdateParams();
 

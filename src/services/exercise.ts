@@ -11,34 +11,24 @@ export const getExerciseAll = async ({
     try {
         return [
             {
-                id: "lib01",
-                name: "바벨 스쿼트",
-                image: "https://example.com/images/barbell-squat-thumb.jpg",
-                category: "하체",
-                type: ["weight", "rep"],
-                isEditable: true,
-                createdAt: "2025-01-15T09:30:00.000Z",
-                updatedAt: "2025-04-10T14:45:00.000Z",
+                id: 1,
+                name: "벤치프레스",
+                image: "https://healper-storage.s3.ap-southeast-2.amazonaws.com/test/a2b57b3d-d2a0-4d54-802a-fee0f2827db4_bmo.png",
+                originImage: null,
+                category: "CHEST",
+                types: ["WEIGHT", "COUNT"],
+                isEditable: 1,
+                shareLevel: 1,
             },
             {
-                id: "lib02",
-                name: "플랭크",
-                image: "https://example.com/images/plank-thumb.jpg",
-                category: "가슴",
-                type: ["weight", "rep"],
-                isEditable: false,
-                createdAt: "2024-12-05T12:00:00.000Z",
-                updatedAt: "2025-02-20T08:15:00.000Z",
-            },
-            {
-                id: "lib03",
-                name: "케틀벨 스윙",
-                image: "https://example.com/images/kettlebell-swing-thumb.jpg",
-                category: "등",
-                type: ["weight", "rep"],
-                isEditable: true,
-                createdAt: "2025-03-22T16:20:00.000Z",
-                updatedAt: "2025-05-01T10:05:00.000Z",
+                id: 2,
+                name: "덤벨프레스",
+                image: "https://healper-storage.s3.ap-southeast-2.amazonaws.com/test/a2b57b3d-d2a0-4d54-802a-fee0f2827db4_bmo.png",
+                originImage: null,
+                category: "CHEST",
+                types: ["WEIGHT", "COUNT"],
+                isEditable: 1,
+                shareLevel: 1,
             },
         ]; // 필터링된 운동 배열 반환
     } catch (e) {
@@ -57,7 +47,7 @@ export const getExerciseOne = async (
 };
 
 export const createExerciseOne = async (
-    workoutData: Omit<Exercise, "id" | "createdAt" | "updatedAt">,
+    workoutData: Omit<Exercise, "id">,
 ): Promise<Exercise | undefined> => {
     try {
         return undefined; // 생성된 운동 구성 반환
