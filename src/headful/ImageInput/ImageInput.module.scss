@@ -1,0 +1,34 @@
+.ImageInput {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    border: 1px solid #a8a8a8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .ImageText {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        img {
+            width: 36px;
+            height: 32px;
+        }
+        span {
+            font-size: 10px;
+            font-weight: 500;
+            color: #c7ccd1;
+        }
+    }
+
+    input {
+        display: none;
+    }
+}
