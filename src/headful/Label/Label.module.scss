@@ -1,0 +1,23 @@
+.Label {
+    width: 100%;
+    display: flex;
+    // align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+    .Text {
+        font-size: 12px;
+        font-weight: 500;
+        span {
+            color: #000;
+        }
+
+        .Dot {
+            display: inline-block;
+            margin-left: 4px;
+            color: red;
+        }
+    }
+
+    .Form {
+    }
+}
