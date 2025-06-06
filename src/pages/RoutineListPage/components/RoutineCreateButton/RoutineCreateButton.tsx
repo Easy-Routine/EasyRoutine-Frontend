@@ -10,15 +10,7 @@ const RoutineCreateButton = () => {
         navigate(ROUTES.CONFIG.CREATE.PATH);
     };
 
-    return (
-        <FloatingCircleButton
-            width={64}
-            height={64}
-            onFloatingCircleButtonClick={handleButtonClick}
-        >
-            <PlusIcon color={"var(--text-white)"} />
-        </FloatingCircleButton>
-    );
+    return <FloatingCircleButton onButtonClick={handleButtonClick} />;
 };
 
 export default RoutineCreateButton;

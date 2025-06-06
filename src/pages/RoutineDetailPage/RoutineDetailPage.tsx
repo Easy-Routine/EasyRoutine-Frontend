@@ -64,11 +64,7 @@ const RoutineDetailPage = () => {
                     </Flex>
 
                     <ExerciseModal
-                        trigger={
-                            <FloatingCircleButton width={64} height={64}>
-                                <PlusIcon color={"var(--text-white)"} />
-                            </FloatingCircleButton>
-                        }
+                        trigger={<FloatingCircleButton />}
                         content={
                             <ExerciseAllProvider>
                                 <Flex direction="column" gap={20}>

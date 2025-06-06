@@ -17,13 +17,5 @@ export default meta;
 type Story = StoryObj<FloatingCircleButtonProps>;
 
 export const DefaultFloatingCircleButton: Story = {
-    render: () => (
-        <FloatingCircleButton
-            width={64}
-            height={64}
-            onFloatingCircleButtonClick={() => {}}
-        >
-            버튼
-        </FloatingCircleButton>
-    ),
+    render: () => <FloatingCircleButton></FloatingCircleButton>,
 };

@@ -1,19 +1,18 @@
 import React, {useEffect, useState} from "react";
 import CircleButton from "headful/CircleButton/CircleButton";
 import styles from "./FloatingCircleButton.module.scss";
+import {ReactComponent as PlusIcon} from "assets/image/plus.svg";
 
 type FloatingCircleButtonProps = {
-    children: React.ReactNode;
-    onFloatingCircleButtonClick?: () => void;
-    width: number;
-    height: number;
+    onButtonClick?: () => void;
+    width?: number;
+    height?: number;
 };
 
 const FloatingCircleButton = ({
-    children,
-    onFloatingCircleButtonClick,
-    width,
-    height,
+    onButtonClick,
+    width = 40,
+    height = 40,
 }: FloatingCircleButtonProps) => {
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -43,10 +42,10 @@ const FloatingCircleButton = ({
         <span
             className={styles.floatingCircleButton}
             style={dynamicStyle}
-            onClick={onFloatingCircleButtonClick}
+            onClick={onButtonClick}
         >
             <CircleButton width={width} height={height}>
-                {children}
+                <PlusIcon color={"var(--text-white)"} width={20} height={20} />
             </CircleButton>
         </span>
     );

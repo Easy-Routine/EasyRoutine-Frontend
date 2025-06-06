@@ -7,7 +7,6 @@ import Footer from "headful/PrivatePageTemplate/Footer/Footer";
 import Flex from "headful/Flex/Flex";
 import FloatingCircleButton from "headful/FloatingCircleButton/FloatingCircleButton";
 import BottomBox from "headful/BottomBox/BottomBox";
-import {ReactComponent as PlusIcon} from "assets/image/plus.svg";
 import RoutineCreateProvider from "./components/RoutineCreateProvider/RoutineCreateProvider";
 import RoutineExerciseList from "./components/RoutineExerciseList/RoutineExerciseList";
 import RoutineExerciseAccordion from "./components/RoutineExerciseAccordion/RoutineExerciseAccordion";
@@ -59,15 +58,7 @@ const RoutineCreatePage = () => {
                     </Flex>
 
                     <ExerciseModal
-                        trigger={
-                            <FloatingCircleButton
-                                width={64}
-                                height={64}
-                                onFloatingCircleButtonClick={() => {}}
-                            >
-                                <PlusIcon color={"var(--text-white)"} />
-                            </FloatingCircleButton>
-                        }
+                        trigger={<FloatingCircleButton />}
                         content={
                             <ExerciseAllProvider>
                                 <Flex direction="column" gap={20}>

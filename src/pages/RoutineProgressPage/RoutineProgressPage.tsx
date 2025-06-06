@@ -66,15 +66,7 @@ const RoutineProgressPage = () => {
                     </Flex>
 
                     <ExerciseModal
-                        trigger={
-                            <FloatingCircleButton
-                                width={64}
-                                height={64}
-                                onFloatingCircleButtonClick={() => {}}
-                            >
-                                <PlusIcon color={"var(--text-white)"} />
-                            </FloatingCircleButton>
-                        }
+                        trigger={<FloatingCircleButton />}
                         content={
                             <ExerciseAllProvider>
                                 <Flex direction="column" gap={20}>
