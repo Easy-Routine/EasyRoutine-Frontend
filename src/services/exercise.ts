@@ -28,7 +28,7 @@ export const getExerciseAll = async (
                 image: "https://healper-storage.s3.ap-southeast-2.amazonaws.com/test/a2b57b3d-d2a0-4d54-802a-fee0f2827db4_bmo.png",
                 category: Category.CHEST,
                 types: [Type.WEIGHT, Type.COUNT],
-                isEditable: 1,
+                isEditable: 0,
                 shareLevel: 1,
             },
             {
