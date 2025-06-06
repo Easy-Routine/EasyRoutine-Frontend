@@ -6,13 +6,14 @@ import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
 import {Routine} from "types/model";
 import Flex from "headful/Flex/Flex";
+import {RoutineAllGetRes} from "types/routine";
 
 /*
     루틴 설정을 수정하는 페이지로 이동하는 버튼
 */
 
 type RoutineUpdateMoveButtonProps = {
-    routine: Routine;
+    routine: RoutineAllGetRes[number];
 };
 
 const RoutineUpdateMoveButton = ({routine}: RoutineUpdateMoveButtonProps) => {
@@ -24,7 +25,7 @@ const RoutineUpdateMoveButton = ({routine}: RoutineUpdateMoveButtonProps) => {
         HTMLDivElement
     > = e => {
         e.stopPropagation();
-        navigate(ROUTES.CONFIG.DETAIL.PATH(id));
+        navigate(ROUTES.CONFIG.DETAIL.PATH(id.toString()));
     };
 
     return (

@@ -1,9 +1,13 @@
 import useRoutineAllGetQuery from "hooks/server/useRoutineAllGetQuery";
 import React from "react";
 import {Routine} from "types/model";
+import {RoutineAllGetRes} from "types/routine";
 
 type RoutineListProps = {
-    component: (value: Routine, key: number) => React.ReactNode;
+    component: (
+        value: RoutineAllGetRes[number],
+        key: number,
+    ) => React.ReactNode;
 };
 
 const RoutineList = ({component}: RoutineListProps) => {

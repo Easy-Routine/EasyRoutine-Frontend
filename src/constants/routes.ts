@@ -45,12 +45,13 @@ const ROUTES = {
             COMPONENT: RoutineCreatePage,
         },
         DETAIL: {
-            PATH: (routineId: string) => `/routine-config/${routineId}`,
+            PATH: (routineId: string | number) =>
+                `/routine-config/${routineId}`,
             COMPONENT: RoutineDetailPage,
         },
     },
     PROGRESS: {
-        PATH: (routineHistoryId: string) =>
+        PATH: (routineHistoryId: string | number) =>
             `/routine-progress/${routineHistoryId}`,
         COMPONENT: RoutineProgressPage,
     },
@@ -64,7 +65,7 @@ const ROUTES = {
             COMPONENT: RoutineHistoryChartPage,
         },
         DETAIL: {
-            PATH: (routineHistoryId: string) =>
+            PATH: (routineHistoryId: string | number) =>
                 `/routine-record/${routineHistoryId}`,
             COMPONENT: RoutineHistoryDetailPage,
         },

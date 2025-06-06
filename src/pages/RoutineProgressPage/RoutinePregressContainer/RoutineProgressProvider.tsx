@@ -2,6 +2,7 @@ import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import useTimer from "hooks/client/useTimer";
 import moment, {Moment} from "moment";
 import React, {createContext, useContext, useEffect, useState} from "react";
+import {Color} from "types/enum";
 import {Routine, RoutineHistory, Set, RoutineExercise} from "types/model";
 
 type RoutineProgressContextType = {
@@ -65,7 +66,7 @@ const RoutineProgressProvider = ({
     const [routineHistory, setRoutineHistory] = useState<RoutineHistory>({
         id: routine.id,
         name: routine.name,
-        color: routine.color,
+        color: routine.color as Color,
         workoutTime: 0,
         routineExercises: [],
     });

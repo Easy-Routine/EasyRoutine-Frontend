@@ -7,7 +7,7 @@ const useRoutineDeleteMutation = () => {
     const queryClient = useQueryClient();
     const {showToast} = useToast();
     return useMutation({
-        mutationFn: (routineId: string) => deleteRoutineOne(routineId),
+        mutationFn: (routineId: string | number) => deleteRoutineOne(routineId),
         onError: error => {
             console.log(error);
             showToast(error.message, "error");

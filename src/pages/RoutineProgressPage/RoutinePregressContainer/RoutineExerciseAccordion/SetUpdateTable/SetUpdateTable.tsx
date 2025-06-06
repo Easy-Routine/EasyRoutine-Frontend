@@ -43,7 +43,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     //     value: Set[K],
 
     const handleSetInputChange = async <K extends keyof Set>(
-        setId: string,
+        setId: string | number,
         key: K,
         value: Set[K],
     ) => {
@@ -66,7 +66,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     };
 
     // 운동 기록의 세트배열에서 해당 세트 id가 있는지 확인
-    const isCompletedSet = (setId: string) =>
+    const isCompletedSet = (setId: string | number) =>
         currentRHE ? currentRHE.sets.map(s => s.id).includes(setId) : false;
     const isCurrentSet = (index: number) =>
         currentRHE ? index === currentRHE.sets.length : index === 0;

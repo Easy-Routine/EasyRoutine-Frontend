@@ -1,5 +1,3 @@
-import {Category, Color, Type} from "./enum";
-
 export type User = {
     id: number;
     provider: string;
@@ -9,20 +7,20 @@ export type User = {
     profileImage: string;
 };
 export type Routine = {
-    id: string;
+    id: string | number;
     name: string;
-    color: Color;
+    color: string;
     routineExercises: RoutineExercise[];
 };
 
 export type RoutineExercise = {
-    id: string;
+    id: string | number;
     exercise: Exercise;
     sets: Set[];
 };
 
 export type Set = {
-    id: string;
+    id: string | number;
     weight?: number;
     rep?: number;
     workoutSec?: number;
@@ -30,9 +28,9 @@ export type Set = {
 };
 
 export type RoutineHistory = {
-    id: string;
+    id: string | number;
     name: string;
-    color: Color;
+    color: string;
     workoutTime: number;
     routineExercises: RoutineExercise[];
 };
@@ -48,7 +46,7 @@ export type Exercise = {
 };
 
 // export type RoutineExercise = {
-//     id: string;
+//     id: string | number;
 //     routineExerciseId: string;
 //     createdAt: string;
 //     updatedAt: string;
@@ -58,7 +56,7 @@ export type Exercise = {
 // };
 
 // export type Set = {
-//     id: string;
+//     id: string | number;
 //     weight: number;
 //     rep: number;
 //     restSec: number;

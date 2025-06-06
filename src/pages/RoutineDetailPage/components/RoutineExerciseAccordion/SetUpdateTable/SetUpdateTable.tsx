@@ -27,7 +27,7 @@ const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
     const {routine, setRoutine} = useRoutineUpdateParams();
 
     const handleSetInputChange = async <K extends keyof Set>(
-        setId: string,
+        setId: string | number,
         key: K,
         value: Set[K],
     ) => {

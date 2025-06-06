@@ -9,9 +9,11 @@ import RoutineStartModal from "./RoutineStartModal/RoutineStartModal";
 import RoutineStartModalContent from "./RoutineStartModal/RoutineStartModalContent/RoutineStartModalContent";
 import React from "react";
 import RoutineStartButton from "./RoutineStartModal/RoutineStartModalContent/RoutineStartButton/RoutineStartButton";
+import {RoutineAllGetRes} from "types/routine";
+import {Color} from "types/enum";
 
 type RoutineAccordionProps = {
-    routine: Routine;
+    routine: RoutineAllGetRes[number];
     children: React.ReactNode;
 };
 
@@ -26,7 +28,7 @@ const RoutineAccordion = ({routine, children}: RoutineAccordionProps) => {
             <SwipeableAccordion.Box>
                 <SwipeableAccordion.Visible>
                     <Flex gap={16}>
-                        <FireColorBox color={color} />
+                        <FireColorBox color={color as Color} />
                         <Flex direction="column" justify="space-around">
                             <NameText routine={routine} />
                             <LengthText routine={routine} />

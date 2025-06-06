@@ -23,7 +23,7 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     const {routine, setRoutine} = useRoutineCreate();
 
     const handleSetInputChange = async (
-        setId: string,
+        setId: string | number,
         key: keyof Set,
         value: string,
     ) => {

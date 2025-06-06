@@ -2,21 +2,22 @@
 import {Routine} from "types/model"; // 경로에 맞게 수정
 import {Color} from "types/enum";
 import {handleError} from "utils/handleError";
+import {RoutineAllGetRes} from "types/routine";
 
 // 확인: 완료
-export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
+export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
     try {
         return [
             {
-                id: "1",
+                id: 1,
                 name: "Morning Routine",
                 color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
                 routineExercises: [
                     {
-                        id: "1",
+                        id: 1,
                         sets: [
                             {
-                                id: "1",
+                                id: 1,
                                 weight: 50,
                                 rep: 10,
                                 restSec: 60,
@@ -34,10 +35,10 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
                         },
                     },
                     {
-                        id: "2",
+                        id: 2,
                         sets: [
                             {
-                                id: "1",
+                                id: 1,
                                 weight: 50,
                                 rep: 10,
                                 restSec: 60,
@@ -58,15 +59,15 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
                 ],
             },
             {
-                id: "2",
+                id: 3,
                 name: "Evening Routine",
                 color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
                 routineExercises: [
                     {
-                        id: "2",
+                        id: 2,
                         sets: [
                             {
-                                id: "2",
+                                id: 2,
                                 weight: 60,
                                 rep: 8,
                                 restSec: 90,
@@ -87,15 +88,15 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
                 ],
             },
             {
-                id: "3",
+                id: 4,
                 name: "Cardio Routine",
                 color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
                 routineExercises: [
                     {
-                        id: "3",
+                        id: 4,
                         sets: [
                             {
-                                id: "3",
+                                id: 3,
                                 weight: 0,
                                 rep: 0,
                                 restSec: 0,
@@ -124,14 +125,14 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
 // 확인: 완료
 export const getRoutineOne = async (
     routineId: string,
-): Promise<Routine | undefined> => {
-    const routine: Routine = {
-        id: "routine1",
+): Promise<RoutineAllGetRes[number] | void> => {
+    const routine = {
+        id: 1,
         name: "Morning Workout",
         color: Color.BLUE,
         routineExercises: [
             {
-                id: "workout1",
+                id: 1,
                 exercise: {
                     id: 1,
                     name: "덤벨프레스",
@@ -143,14 +144,14 @@ export const getRoutineOne = async (
                 },
                 sets: [
                     {
-                        id: "set1",
+                        id: 1,
                         weight: 50,
                         rep: 10,
                         restSec: 60,
                         workoutSec: 30,
                     },
                     {
-                        id: "set2",
+                        id: 2,
                         weight: 60,
                         rep: 8,
                         restSec: 90,
@@ -159,7 +160,7 @@ export const getRoutineOne = async (
                 ],
             },
             {
-                id: "workout2",
+                id: 2,
                 exercise: {
                     id: 2,
                     name: "덤벨프레스",
@@ -172,14 +173,14 @@ export const getRoutineOne = async (
                 },
                 sets: [
                     {
-                        id: "set1",
+                        id: 1,
                         weight: 50,
                         rep: 10,
                         restSec: 60,
                         workoutSec: 30,
                     },
                     {
-                        id: "set2",
+                        id: 2,
                         weight: 60,
                         rep: 8,
                         restSec: 90,
@@ -214,7 +215,7 @@ export const createRoutineOne = async ({
 };
 // 확인: 완료
 export const deleteRoutineOne = async (
-    routineId: string,
+    routineId: string | number,
 ): Promise<boolean | undefined> => {
     try {
         return true;
