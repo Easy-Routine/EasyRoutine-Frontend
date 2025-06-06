@@ -1,18 +1,21 @@
 import React, {createContext, useContext, useState} from "react";
-import {Category} from "types/enum";
+import {Category, Type} from "types/enum";
+import {ExerciseUpdateReq} from "types/exercise";
 import {Exercise} from "types/model";
 
 type ExerciseUpdateContextType = {
-    id: number;
-    setId: React.Dispatch<React.SetStateAction<number>>;
-    image: string | null;
-    setImage: React.Dispatch<React.SetStateAction<string | null>>;
-    name: string;
-    setName: React.Dispatch<React.SetStateAction<string>>;
-    category: string;
-    setCategory: React.Dispatch<React.SetStateAction<string>>;
-    types: string[];
-    setTypes: React.Dispatch<React.SetStateAction<string[]>>;
+    id: ExerciseUpdateReq["id"];
+    setId: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["id"]>>;
+    image: ExerciseUpdateReq["image"];
+    setImage: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["image"]>>;
+    name: ExerciseUpdateReq["name"];
+    setName: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["name"]>>;
+    category: ExerciseUpdateReq["category"];
+    setCategory: React.Dispatch<
+        React.SetStateAction<ExerciseUpdateReq["category"]>
+    >;
+    types: ExerciseUpdateReq["types"];
+    setTypes: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["types"]>>;
 };
 
 const ExerciseUpdateContext = createContext<ExerciseUpdateContextType>({
@@ -22,7 +25,7 @@ const ExerciseUpdateContext = createContext<ExerciseUpdateContextType>({
     setImage: () => {},
     name: "",
     setName: () => {},
-    category: "",
+    category: Category.ALL,
     setCategory: () => {},
     types: [],
     setTypes: () => {},
@@ -34,10 +37,10 @@ type ExerciseUpdateProviderProps = {
 
 const ExerciseUpdateProvider = ({children}: ExerciseUpdateProviderProps) => {
     const [id, setId] = useState(0);
-    const [image, setImage] = useState<string | null>("");
+    const [image, setImage] = useState("");
     const [name, setName] = useState("");
-    const [category, setCategory] = useState("");
-    const [types, setTypes] = useState<string[]>([]);
+    const [category, setCategory] = useState<Category>(Category.CHEST);
+    const [types, setTypes] = useState<Type[]>([]);
 
     return (
         <ExerciseUpdateContext.Provider

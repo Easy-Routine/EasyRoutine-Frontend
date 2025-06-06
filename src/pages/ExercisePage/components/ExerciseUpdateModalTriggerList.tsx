@@ -3,9 +3,13 @@ import {useRoutineProgress} from "pages/RoutineProgressPage/RoutinePregressConta
 import React from "react";
 import {Exercise, RoutineExercise} from "types/model";
 import {useExerciseAllGetProvider} from "./ExerciseAllGetProvider";
+import {ExerciseAllGetRes} from "types/exercise";
 
 type ExerciseUpdateModalTriggerListProps = {
-    component: (value: Exercise, key: number) => React.ReactNode;
+    component: (
+        value: ExerciseAllGetRes[number],
+        key: number,
+    ) => React.ReactNode;
 };
 
 const RoutineExerciseList = ({
@@ -15,7 +19,7 @@ const RoutineExerciseList = ({
     const {name, category} = useExerciseAllGetProvider();
 
     // TODO: 쿼리 연결하기
-    const {data: exerciseAllData} = useExerciseAllGetQuery(name, category);
+    const {data: exerciseAllData} = useExerciseAllGetQuery({name, category});
 
     const exercises = exerciseAllData ?? [];
 

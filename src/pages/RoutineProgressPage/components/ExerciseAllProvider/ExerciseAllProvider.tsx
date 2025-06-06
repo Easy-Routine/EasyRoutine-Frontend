@@ -27,7 +27,7 @@ const ExerciseAllProvider = ({children}: ExerciseAllProviderProps) => {
     const [category, setCategory] = useState(Category.ALL);
     const [name, setName] = useState("");
 
-    const {data: exerciseAllData} = useExerciseAllGetQuery(name, category);
+    const {data: exerciseAllData} = useExerciseAllGetQuery({name, category});
 
     const exercises = exerciseAllData ?? [];
 

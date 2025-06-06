@@ -1,12 +1,15 @@
 import React, {createContext, useContext, useState} from "react";
 import {Category} from "types/enum";
+import {ExerciseAllGetReq} from "types/exercise";
 import {Exercise} from "types/model";
 
 type ExerciseAllGetContextType = {
-    category: Category;
-    name: string;
-    setCategory: React.Dispatch<React.SetStateAction<Category>>;
-    setName: React.Dispatch<React.SetStateAction<string>>;
+    category: ExerciseAllGetReq["category"];
+    name: ExerciseAllGetReq["name"];
+    setCategory: React.Dispatch<
+        React.SetStateAction<ExerciseAllGetReq["category"]>
+    >;
+    setName: React.Dispatch<React.SetStateAction<ExerciseAllGetReq["name"]>>;
 };
 
 const ExerciseAllGetContext = createContext<ExerciseAllGetContextType>({

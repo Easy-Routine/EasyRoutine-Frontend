@@ -27,7 +27,6 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
                             id: 1,
                             name: "덤벨프레스",
                             image: null,
-                            originImage: null,
                             category: "CHEST",
                             types: ["WEIGHT", "COUNT"],
                             isEditable: 1,
@@ -49,7 +48,7 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
                             id: 1,
                             name: "덤벨프레스",
                             image: null,
-                            originImage: null,
+
                             category: "CHEST",
                             types: ["WEIGHT", "COUNT"],
                             isEditable: 1,
@@ -78,7 +77,7 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
                             id: 1,
                             name: "덤벨프레스",
                             image: null,
-                            originImage: null,
+
                             category: "CHEST",
                             types: ["WEIGHT", "COUNT"],
                             isEditable: 1,
@@ -107,7 +106,7 @@ export const getRoutineAll = async (): Promise<Routine[] | undefined> => {
                             id: 3,
                             name: "덤벨프레스",
                             image: null,
-                            originImage: null,
+
                             category: "CHEST",
                             types: ["WEIGHT", "COUNT"],
                             isEditable: 1,
@@ -137,7 +136,6 @@ export const getRoutineOne = async (
                     id: 1,
                     name: "덤벨프레스",
                     image: null,
-                    originImage: null,
                     category: "CHEST",
                     types: ["WEIGHT", "COUNT"],
                     isEditable: 1 as 1, // ← '1' 리터럴 타입으로 단언
@@ -166,7 +164,7 @@ export const getRoutineOne = async (
                     id: 2,
                     name: "덤벨프레스",
                     image: null,
-                    originImage: null,
+
                     category: "CHEST",
                     types: ["WEIGHT", "COUNT"],
                     isEditable: 1 as 1,

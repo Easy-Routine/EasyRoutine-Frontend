@@ -37,9 +37,11 @@ const ExercisePage = () => {
                             <ExerciseUpdateModal>
                                 <ExerciseUpdateModalContent />
                                 <ExerciseUpdateModalTriggerList
-                                    component={exercise => (
+                                    component={exerciseAllGetRes => (
                                         <ExerciseUpdateModalTrigger
-                                            exercise={exercise}
+                                            exerciseAllGetRes={
+                                                exerciseAllGetRes
+                                            }
                                         />
                                     )}
                                 />

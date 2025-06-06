@@ -1,4 +1,4 @@
-import {Color} from "./enum";
+import {Category, Color, Type} from "./enum";
 
 export type User = {
     id: number;
@@ -41,7 +41,6 @@ export type Exercise = {
     id: number;
     name: string;
     image: string | null;
-    originImage: string | null;
     category: string;
     types: string[];
     isEditable: 1 | 0;

@@ -1,19 +1,18 @@
 import ImageTextItem from "headful/ImageTextItem/ImageTextItem";
-import React from "react";
-import {Exercise} from "types/model";
 import {useExerciseUpdate} from "./ExerciseUpdateProvider";
 import {useModal} from "headless/Modal/Modal";
+import {ExerciseAllGetRes} from "types/exercise";
 
 // TODO: 스타일 작성하기
 
 type ExerciseUpdateModalTriggerProps = {
-    exercise: Exercise;
+    exerciseAllGetRes: ExerciseAllGetRes[number];
 };
 
 const ExerciseUpdateModalTrigger = ({
-    exercise,
+    exerciseAllGetRes,
 }: ExerciseUpdateModalTriggerProps) => {
-    const {id, image, name, category, types} = exercise;
+    const {id, image, name, category, types} = exerciseAllGetRes;
     const {setId, setImage, setName, setCategory, setTypes} =
         useExerciseUpdate();
     const {openModal} = useModal();
@@ -29,8 +28,8 @@ const ExerciseUpdateModalTrigger = ({
 
     return (
         <ImageTextItem
-            image={exercise?.image ?? ""}
-            text={exercise.name}
+            image={exerciseAllGetRes?.image ?? ""}
+            text={exerciseAllGetRes.name}
             onItemClick={handleItemClick}
         />
     );
