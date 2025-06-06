@@ -1,0 +1,100 @@
+/* ConfirmSet.module.scss */
+
+.ConfirmSet {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .Main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+
+        width: 100%;
+        padding: 20px;
+
+        .IconTitle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+    }
+
+    .Buttons {
+        width: 100%;
+        display: flex;
+        height: 40px;
+
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+.Icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.Title {
+    text-align: center;
+    span {
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
+
+.Description {
+    width: 100%;
+    text-align: center;
+    word-break: keep-all;
+    line-height: 16px;
+    span {
+        font-size: 12px;
+        font-weight: 500;
+        white-space: pre-wrap;
+    }
+}
+.Cancel {
+    flex: 1;
+
+    border-bottom-left-radius: inherit;
+
+    button {
+        width: 100%;
+        height: 100%;
+        border-bottom-left-radius: inherit;
+        border: none;
+        border-top: 1px solid #e0e0e0;
+        background-color: inherit;
+        color: var(--color);
+    }
+}
+
+.Confirm {
+    flex: 1;
+
+    border-bottom-right-radius: inherit;
+    button {
+        width: 100%;
+        height: 100%;
+        border-bottom-right-radius: inherit;
+        border: none;
+
+        background-color: var(--color);
+        color: #fff;
+    }
+}
