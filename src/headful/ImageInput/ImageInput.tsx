@@ -2,8 +2,17 @@ import React, {useRef, useState} from "react";
 import styles from "./ImageInput.module.scss";
 import ImageUpload from "assets/image/image-upload.svg";
 
-const ImageInput: React.FC = () => {
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
+// 초기 값으로 사용 할 수 있다.
+// 그 후 부터는 바뀔 때마다 파라미터 상태를 바꿔야한다.
+// 근데 그럴려면 useEffect를 써야 한다. 그러면 그냥 프롭스로 받는게 맞지
+
+type ImageInputProps = {
+    value: string;
+    onInputChange: (value: File) => void;
+};
+
+const ImageInput = ({value, onInputChange}: ImageInputProps) => {
+    // const [imageUrl, setImageUrl] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleClick = () => {
@@ -13,8 +22,7 @@ const ImageInput: React.FC = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            const previewUrl = URL.createObjectURL(file);
-            setImageUrl(previewUrl);
+            onInputChange(file);
         }
     };
 
@@ -23,10 +31,10 @@ const ImageInput: React.FC = () => {
             className={styles.ImageInput}
             onClick={handleClick}
             style={{
-                backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
+                backgroundImage: value ? `url(${value})` : "none",
             }}
         >
-            {!imageUrl && (
+            {!value && (
                 <div className={styles.ImageText}>
                     <img src={ImageUpload} alt="이미지 업로드" />
                     <span>운동 이미지를 첨부해주세요</span>

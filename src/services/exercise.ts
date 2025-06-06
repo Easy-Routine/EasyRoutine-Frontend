@@ -1,3 +1,4 @@
+import {ExerciseCreateReq} from "types/exercise";
 import {Exercise} from "types/model";
 import {handleError} from "utils/handleError";
 
@@ -47,9 +48,10 @@ export const getExerciseOne = async (
 };
 
 export const createExerciseOne = async (
-    workoutData: Omit<Exercise, "id">,
+    exerciseReq: ExerciseCreateReq,
 ): Promise<Exercise | undefined> => {
     try {
+        window.alert(JSON.stringify(exerciseReq));
         return undefined; // 생성된 운동 구성 반환
     } catch (e) {
         handleError(e);

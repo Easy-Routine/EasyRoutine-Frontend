@@ -3,29 +3,18 @@ import queryKey from "constants/queryKeys";
 import {Exercise} from "types/model";
 import {createExerciseOne} from "services/exercise";
 import useToast from "hooks/useToast";
+import {ExerciseCreateReq} from "types/exercise";
 
 const useExerciseCreateMutation = () => {
     const queryClient = useQueryClient();
     const {showToast} = useToast();
     return useMutation({
-        mutationFn: ({
-            name,
-            image,
-            originImage,
-            category,
-            types,
-            isEditable,
-            shareLevel,
-            // userId,
-        }: Omit<Exercise, "id">) =>
+        mutationFn: ({name, image, category, types}: ExerciseCreateReq) =>
             createExerciseOne({
                 name,
                 image,
-                originImage,
                 category,
                 types,
-                isEditable,
-                shareLevel,
             }),
         onError: error => {
             console.log(error);

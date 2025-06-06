@@ -1,19 +1,22 @@
-import React, {createContext, useContext, useState} from "react";
-import {Category} from "types/enum";
+import React, {createContext, useContext, useEffect, useState} from "react";
+import {Category, Type} from "types/enum";
+import {ExerciseCreateReq} from "types/exercise";
 import {Exercise} from "types/model";
 
 type ExerciseCreateContextType = {
     // category: Category;
     // setCategory: React.Dispatch<React.SetStateAction<Category>>;
 
-    image: string;
-    setImage: React.Dispatch<React.SetStateAction<string>>;
-    name: string;
-    setName: React.Dispatch<React.SetStateAction<string>>;
-    category: Category;
-    setCategory: React.Dispatch<React.SetStateAction<Category>>;
-    type: string[];
-    setType: React.Dispatch<React.SetStateAction<string[]>>;
+    image: ExerciseCreateReq["image"];
+    setImage: React.Dispatch<React.SetStateAction<ExerciseCreateReq["image"]>>;
+    name: ExerciseCreateReq["name"];
+    setName: React.Dispatch<React.SetStateAction<ExerciseCreateReq["name"]>>;
+    category: ExerciseCreateReq["category"];
+    setCategory: React.Dispatch<
+        React.SetStateAction<ExerciseCreateReq["category"]>
+    >;
+    types: ExerciseCreateReq["types"];
+    setTypes: React.Dispatch<React.SetStateAction<ExerciseCreateReq["types"]>>;
 };
 
 const ExerciseCreateContext = createContext<ExerciseCreateContextType>({
@@ -23,8 +26,8 @@ const ExerciseCreateContext = createContext<ExerciseCreateContextType>({
     setName: () => {},
     category: Category.ALL,
     setCategory: () => {},
-    type: [],
-    setType: () => {},
+    types: [],
+    setTypes: () => {},
 });
 
 type ExerciseCreateProviderProps = {
@@ -35,7 +38,11 @@ const ExerciseCreateProvider = ({children}: ExerciseCreateProviderProps) => {
     const [image, setImage] = useState("");
     const [name, setName] = useState("");
     const [category, setCategory] = useState(Category.ALL);
-    const [type, setType] = useState<string[]>([]);
+    const [types, setTypes] = useState<Type[]>([]);
+
+    useEffect(() => {
+        console.log("ExerciseCreateProvider", {image, name, category, types});
+    }, [image, name, category, types]);
 
     return (
         <ExerciseCreateContext.Provider
@@ -46,8 +53,8 @@ const ExerciseCreateProvider = ({children}: ExerciseCreateProviderProps) => {
                 setName,
                 category,
                 setCategory,
-                type,
-                setType,
+                types,
+                setTypes,
             }}
         >
             {children}
