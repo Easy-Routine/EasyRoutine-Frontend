@@ -30,7 +30,7 @@ const ExercisePage = () => {
             </Header>
             <Main>
                 <ExerciseAllGetProvider>
-                    <Flex direction="column" gap={20}>
+                    <Flex direction="column" gap={20} padding={20}>
                         <ExerciseFilterSearchInput />
                         <ExerciseFilterTabGroup />
                         <ExerciseUpdateProvider>
