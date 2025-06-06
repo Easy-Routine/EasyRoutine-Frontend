@@ -28,3 +28,7 @@ export type ExerciseAllGetRes = {
     isEditable: 1 | 0;
     shareLevel: 1 | 0;
 }[];
+
+export type ExerciseDeleteReq = {
+    id: number;
+};

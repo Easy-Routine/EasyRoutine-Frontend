@@ -3,6 +3,7 @@ import {
     ExerciseAllGetReq,
     ExerciseAllGetRes,
     ExerciseCreateReq,
+    ExerciseDeleteReq,
     ExerciseUpdateReq,
 } from "types/exercise";
 import {Exercise} from "types/model";
@@ -91,10 +92,13 @@ export const updateExerciseOne = async (
 };
 
 export const deleteExerciseOne = async (
-    exerciseId: string,
-): Promise<boolean | undefined> => {
+    exerciseDeleteReq: ExerciseDeleteReq,
+): Promise<void> => {
+    const {id} = exerciseDeleteReq;
+
     try {
-        return true; // 삭제 성공
+        window.alert(JSON.stringify(exerciseDeleteReq));
+        return; // 삭제 성공
     } catch (e) {
         handleError(e);
     }

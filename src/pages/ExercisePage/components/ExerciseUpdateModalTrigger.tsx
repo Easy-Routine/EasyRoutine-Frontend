@@ -14,17 +14,17 @@ const ExerciseUpdateModalTrigger = ({
     exerciseAllGetRes,
 }: ExerciseUpdateModalTriggerProps) => {
     const {id, image, name, category, types, isEditable} = exerciseAllGetRes;
-    const {setId, setImage, setName, setCategory, setTypes} =
+    const {setId, setImage, setName, setCategory, setTypes, setMode} =
         useExerciseUpdate();
     const {openModal} = useModal();
     const {showToast} = useToast();
 
     const handleItemClick = () => {
         if (!isEditable) {
-            showToast("수정 할 수 없는 운동입니다.", "error");
+            showToast("기본운동은 수정 할 수 없습니다.", "error");
             return;
         }
-
+        setMode("update");
         setId(id);
         setImage(image);
         setName(name);
@@ -33,10 +33,20 @@ const ExerciseUpdateModalTrigger = ({
         openModal();
     };
 
+    const handleLongPressClick = () => {
+        if (!isEditable) {
+            showToast("기본운동은 삭제 할 수 없습니다.", "error");
+            return;
+        }
+        setMode("delete");
+        openModal();
+    };
+
     return (
         <ImageTextItem
             image={exerciseAllGetRes?.image ?? ""}
             text={exerciseAllGetRes.name}
+            onLongPress={handleLongPressClick}
             onItemClick={handleItemClick}
         />
     );

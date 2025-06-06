@@ -16,6 +16,9 @@ type ExerciseUpdateContextType = {
     >;
     types: ExerciseUpdateReq["types"];
     setTypes: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["types"]>>;
+
+    mode: "update" | "delete";
+    setMode: React.Dispatch<React.SetStateAction<"update" | "delete">>;
 };
 
 const ExerciseUpdateContext = createContext<ExerciseUpdateContextType>({
@@ -29,6 +32,8 @@ const ExerciseUpdateContext = createContext<ExerciseUpdateContextType>({
     setCategory: () => {},
     types: [],
     setTypes: () => {},
+    mode: "update",
+    setMode: () => {},
 });
 
 type ExerciseUpdateProviderProps = {
@@ -41,6 +46,7 @@ const ExerciseUpdateProvider = ({children}: ExerciseUpdateProviderProps) => {
     const [name, setName] = useState("");
     const [category, setCategory] = useState<Category>(Category.CHEST);
     const [types, setTypes] = useState<Type[]>([]);
+    const [mode, setMode] = useState<"update" | "delete">("update");
 
     return (
         <ExerciseUpdateContext.Provider
@@ -55,6 +61,8 @@ const ExerciseUpdateProvider = ({children}: ExerciseUpdateProviderProps) => {
                 setCategory,
                 types,
                 setTypes,
+                mode,
+                setMode,
             }}
         >
             {children}
