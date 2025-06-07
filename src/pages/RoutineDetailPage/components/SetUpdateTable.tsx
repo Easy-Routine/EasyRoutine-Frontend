@@ -26,7 +26,7 @@ const typeKeyMapper: TypeMapper = {
 };
 
 const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
-    const {exercise, sets} = routineExercise;
+    const {exercise, sets, id} = routineExercise;
     // exercise.types 은 서버에서 내려오는 string[] 이지만,
     // 실제로는 Set의 키 중 일부라고 가정
     const types = exercise.types as Array<keyof Set>;
@@ -38,45 +38,21 @@ const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
         key: K,
         value: Set[K],
     ) => {
-        // 1) 기존 루틴 상태를 깊은 복사
         const newRoutine = structuredClone(routine);
+        const foundRoutineExercise = newRoutine.routineExercises.find(
+            (routineExercise: RoutineExercise) => routineExercise.id === id,
+        ) as RoutineExercise;
 
-        // 2) 복사한 루틴에서 routineExercises 배열 가져오기
-        const routineExercises = newRoutine.routineExercises;
+        const foundSet = foundRoutineExercise.sets.find(
+            set => set.id === setId,
+        ) as Set;
 
-        // 3) 해당 운동 항목 찾기
-        const foundRoutineExercise = routineExercises.find(
-            (routineExercise: RoutineExercise) =>
-                routineExercise.id === routineExercise.id,
-        );
-        if (!foundRoutineExercise) {
-            console.warn(
-                `RoutineExercise with id=${routineExercise.id} not found.`,
-            );
-            return;
-        }
-
-        // 4) 해당 세트 찾기
-        const targetSets = foundRoutineExercise.sets;
-        const foundSet = targetSets.find((s: Set) => s.id === setId) as Set;
-        if (!foundSet) {
-            console.warn(`Set with id=${setId} not found.`);
-            return;
-        }
-
-        // 5) 숫자로 변환이 필요한 경우 처리
-        if (
-            key === "weight" ||
-            key === "rep" ||
-            key === "exerciseSec" ||
-            key === "restSec"
-        ) {
-            foundSet[key] = Number(value) as Set[K];
+        if (key === "id") {
+            foundSet[key] = value as any; // or keep it string if needed
         } else {
-            foundSet[key] = value;
+            foundSet[key] = Number(value) as any;
         }
 
-        // 6) 상태 업데이트
         setRoutine(newRoutine);
     };
 

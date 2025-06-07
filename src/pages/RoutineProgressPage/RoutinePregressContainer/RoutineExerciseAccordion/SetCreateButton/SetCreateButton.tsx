@@ -5,6 +5,7 @@ import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
 import {RoutineExercise, Set} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {v4 as uuid} from "uuid";
+import {Type} from "types/enum";
 
 type SetCreateButtonButtonProps = {
     // sets: Set[];
@@ -45,13 +46,13 @@ const SetCreateButton = ({
         const newSet: Set = {
             id: uuid(),
             // optional fields: 이전 값이 있으면 그걸, 없으면 0
-            ...(types.includes("weight") && {weight: last?.weight ?? 0}),
+            ...(types.includes(Type.WEIGHT) && {weight: last?.weight ?? 0}),
 
             // exercise.types 에 "rep" 가 있고, last.rep 가 있을 때만 포함
-            ...(types.includes("rep") && {rep: last?.rep ?? 0}),
+            ...(types.includes(Type.COUNT) && {rep: last?.rep ?? 0}),
 
             // exercise.types 에 "exerciseSec" 가 있고, last.exerciseSec 가 있을 때만 포함
-            ...(types.includes("exerciseSec") && {
+            ...(types.includes(Type.WEIGHT) && {
                 exerciseSec: last?.exerciseSec ?? 0,
             }),
             // required field: 역시 이전 값이 있으면 그걸, 없으면 0

@@ -29,10 +29,10 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
     const {types} = exercise;
     const {routine, setRoutine} = useRoutineCreate();
 
-    const handleSetInputChange = async (
+    const handleSetInputChange = async <K extends keyof Set>(
         setId: string | number,
-        key: keyof Set,
-        value: string,
+        key: K,
+        value: Set[K],
     ) => {
         const newRoutine = structuredClone(routine);
         const foundRoutineExercise = newRoutine.routineExercises.find(
@@ -84,7 +84,17 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
                             </BasicTable.Cell>
                         ))}
                         <BasicTable.Cell>
-                            <BasicTable.Input value={set.restSec} />
+                            <BasicTable.Input
+                                value={set.restSec}
+                                onChange={e =>
+                                    handleSetInputChange(
+                                        set.id,
+                                        "restSec",
+                                        e.target
+                                            .value as unknown as Set["restSec"],
+                                    )
+                                }
+                            />
                         </BasicTable.Cell>
                     </BasicTable.Row>
                 ))}
