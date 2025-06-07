@@ -32,7 +32,7 @@ const RoutineCreatePage = () => {
             </Header>
             <RoutineCreateProvider>
                 <Main>
-                    <Flex direction="column" gap={20}>
+                    <Flex direction="column" gap={20} padding={20}>
                         <RoutineExerciseList
                             component={routineExercise => (
                                 <RoutineExerciseAccordion
