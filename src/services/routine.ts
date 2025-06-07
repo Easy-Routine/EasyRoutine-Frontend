@@ -6,6 +6,7 @@ import {
     RoutineAllGetRes,
     RoutineCreateReq,
     RoutineDeleteReq,
+    RoutineUpdateReq,
 } from "types/routine";
 
 // 확인: 완료
@@ -213,6 +214,19 @@ export const createRoutineOne = async (
         handleError(e);
     }
 };
+
+export const updateRoutineOne = async (
+    routineCreateReq: RoutineUpdateReq,
+): Promise<void> => {
+    try {
+        console.log("루틴 수정 요청:", routineCreateReq);
+        window.alert(JSON.stringify(routineCreateReq));
+        return;
+    } catch (e) {
+        handleError(e);
+    }
+};
+
 // 확인: 완료
 export const deleteRoutineOne = async (
     routineDeleteReq: RoutineDeleteReq,

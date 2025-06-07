@@ -8,6 +8,8 @@ export type RoutineDeleteReq = {
 
 export type RoutineCreateReq = Omit<Routine, "id">;
 
+export type RoutineUpdateReq = Routine;
+
 // {
 //     id: number;
 //     name: string;

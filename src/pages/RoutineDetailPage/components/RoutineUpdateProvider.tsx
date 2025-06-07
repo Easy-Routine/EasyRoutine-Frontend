@@ -1,18 +1,19 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {Routine} from "types/model";
+import {RoutineUpdateReq} from "types/routine";
 
 type RoutineUpdateContextType = {
-    routine: Routine;
-    setRoutine: React.Dispatch<React.SetStateAction<Routine>>;
+    routine: RoutineUpdateReq;
+    setRoutine: React.Dispatch<React.SetStateAction<RoutineUpdateReq>>;
 };
 
 const RoutineUpdateContext = createContext<RoutineUpdateContextType>({
-    routine: {} as Routine,
+    routine: {} as RoutineUpdateReq,
     setRoutine: () => {},
 });
 
 type RoutineUpdateProviderProps = {
-    defaultValue: Routine;
+    defaultValue: RoutineUpdateReq;
     children: React.ReactNode;
 };
 
