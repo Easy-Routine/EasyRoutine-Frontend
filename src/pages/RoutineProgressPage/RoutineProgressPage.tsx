@@ -5,26 +5,25 @@ import LogoArea from "headful/LogoArea/LogoArea";
 import Main from "headful/PrivatePageTemplate/Main/Main";
 import Footer from "headful/PrivatePageTemplate/Footer/Footer";
 import useRoutineGetQuery from "hooks/server/useRoutineGetQuery";
-import RoutineProgressProvider from "./RoutinePregressContainer/RoutineProgressProvider";
+import RoutineProgressProvider from "./components/RoutineProgressProvider";
 import Flex from "headful/Flex/Flex";
-import RoutineExerciseList from "./components/RoutineExerciseList/RoutineExerciseList";
-import RoutineExerciseAccordion from "./RoutinePregressContainer/RoutineExerciseAccordion/RoutineExerciseAccordion";
-import SetDeleteButton from "./RoutinePregressContainer/RoutineExerciseAccordion/SetDeleteButton/SetDeleteButton";
-import SetCreateButton from "./RoutinePregressContainer/RoutineExerciseAccordion/SetCreateButton/SetCreateButton";
-import SetCompleteButton from "./RoutinePregressContainer/RoutineExerciseAccordion/SetCompleteButton/SetCompleteButton";
-import RoutineExerciseDeleteButton from "./RoutinePregressContainer/RoutineExerciseAccordion/RoutineExerciseDeleteButton/RoutineExerciseDeleteButton";
-import SetUpdateTable from "./RoutinePregressContainer/RoutineExerciseAccordion/SetUpdateTable/SetUpdateTable";
-import RoutineExerciseAccordionList from "./RoutinePregressContainer/RoutineExerciseAccordionList/RoutineExerciseAccordionList";
-import RoutineCompleteButton from "./components/RoutineCompleteButton/RoutineCompleteButton";
-import ExerciseModal from "./components/ExerciseModal/ExerciseModal";
+import RoutineExerciseList from "./components/RoutineExerciseList";
+import RoutineExerciseAccordion from "./components/RoutineExerciseAccordion";
+
+import RoutineCompleteButton from "./components/RoutineCompleteButton";
+import ExerciseModal from "./components/ExerciseAddBottomSheet";
 import FloatingCircleButton from "headful/FloatingCircleButton/FloatingCircleButton";
-import {ReactComponent as PlusIcon} from "assets/image/plus.svg";
-import ExerciseAllProvider from "./components/ExerciseAllProvider/ExerciseAllProvider";
-import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput/ExerciseFilterSearchInput";
-import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup/ExerciseFilterTabGroup";
-import RoutineExerciseAddParamsProvider from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddParamsProvider";
-import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddCheckGroup/RoutineExerciseAddCheckBoxGroup";
-import RoutineExerciseAddButton from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddButton/RoutineExerciseAddButton";
+import ExerciseAllProvider from "./components/ExerciseAllGetProvider";
+import SetUpdateTable from "./components/SetUpdateTable";
+import SetDeleteButton from "./components/SetDeleteButton";
+import SetCreateButton from "./components/SetCreateButton";
+import SetCompleteButton from "./components/SetCompleteButton";
+import RoutineExerciseDeleteButton from "./components/RoutineExerciseDeleteButton";
+import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput";
+import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
+import RoutineExerciseAddProvider from "./components/RoutineExerciseAddProvider";
+import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddCheckBoxGroup";
+import RoutineExerciseAddButton from "./components/RoutineExerciseAddButton";
 
 const RoutineProgressPage = () => {
     const {routineId} = useParams();
@@ -77,10 +76,10 @@ const RoutineProgressPage = () => {
                                         height={400}
                                         gap={16}
                                     >
-                                        <RoutineExerciseAddParamsProvider>
+                                        <RoutineExerciseAddProvider>
                                             <RoutineExerciseAddCheckBoxGroup />
                                             <RoutineExerciseAddButton />
-                                        </RoutineExerciseAddParamsProvider>
+                                        </RoutineExerciseAddProvider>
                                     </Flex>
                                 </Flex>
                             </ExerciseAllProvider>

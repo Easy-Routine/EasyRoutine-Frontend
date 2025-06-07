@@ -1,8 +1,8 @@
 import BasicTable from "headful/BasicTable/BasicTable";
 
 import {RoutineExercise, Set} from "types/model";
-import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {Type} from "types/enum";
+import {useRoutineProgress} from "./RoutineProgressProvider";
 
 type SetUpdateTableProps = {
     routineExercise: RoutineExercise;

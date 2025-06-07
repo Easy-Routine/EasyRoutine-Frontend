@@ -1,9 +1,9 @@
-import useExerciseAllGetQuery from "hooks/server/useExerciseAllGetQuery";
+import useExerciseAllGetGetQuery from "hooks/server/useExerciseAllGetQuery";
 import React, {createContext, useContext, useState} from "react";
 import {Category} from "types/enum";
 import {Exercise} from "types/model";
 
-type ExerciseAllContextType = {
+type ExerciseAllGetContextType = {
     category: Category;
     name: string;
     setCategory: React.Dispatch<React.SetStateAction<Category>>;
@@ -11,7 +11,7 @@ type ExerciseAllContextType = {
     exercises: Exercise[];
 };
 
-const ExerciseAllContext = createContext<ExerciseAllContextType>({
+const ExerciseAllGetContext = createContext<ExerciseAllGetContextType>({
     category: Category.ALL,
     name: "",
     setCategory: () => {},
@@ -19,20 +19,23 @@ const ExerciseAllContext = createContext<ExerciseAllContextType>({
     exercises: [],
 });
 
-type ExerciseAllProviderProps = {
+type ExerciseAllGetProviderProps = {
     children: React.ReactNode;
 };
 
-const ExerciseAllProvider = ({children}: ExerciseAllProviderProps) => {
+const ExerciseAllGetProvider = ({children}: ExerciseAllGetProviderProps) => {
     const [category, setCategory] = useState(Category.ALL);
     const [name, setName] = useState("");
 
-    const {data: exerciseAllData} = useExerciseAllGetQuery({name, category});
+    const {data: ExerciseAllGetData} = useExerciseAllGetGetQuery({
+        name,
+        category,
+    });
 
-    const exercises = exerciseAllData ?? [];
+    const exercises = ExerciseAllGetData ?? [];
 
     return (
-        <ExerciseAllContext.Provider
+        <ExerciseAllGetContext.Provider
             value={{
                 category,
                 name,
@@ -42,10 +45,10 @@ const ExerciseAllProvider = ({children}: ExerciseAllProviderProps) => {
             }}
         >
             {children}
-        </ExerciseAllContext.Provider>
+        </ExerciseAllGetContext.Provider>
     );
 };
 
-export const useExerciseAll = () => useContext(ExerciseAllContext);
+export const useExerciseAllGet = () => useContext(ExerciseAllGetContext);
 
-export default ExerciseAllProvider;
+export default ExerciseAllGetProvider;

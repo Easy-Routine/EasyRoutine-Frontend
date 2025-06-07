@@ -3,14 +3,14 @@ import {useModal} from "headless/Modal/Modal";
 import {RoutineExercise, Exercise} from "types/model";
 import {v4 as uuid} from "uuid";
 import {useRoutineExerciseAdd} from "./RoutineExerciseAddProvider";
-import {useExerciseAll} from "pages/RoutineProgressPage/components/ExerciseAllProvider/ExerciseAllProvider";
 import {useRoutineUpdate} from "./RoutineUpdateProvider";
+import {useExerciseAllGet} from "./ExerciseAllGetProvider";
 
 type RoutineExerciseAddButtonProps = {};
 
 const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
     const {exerciseIds, setExerciseIds} = useRoutineExerciseAdd();
-    const {exercises} = useExerciseAll();
+    const {exercises} = useExerciseAllGet();
 
     const {routine, setRoutine} = useRoutineUpdate();
     const {closeModal} = useModal();

@@ -3,9 +3,9 @@ import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
 import {RoutineExercise, Set} from "types/model";
-import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {v4 as uuid} from "uuid";
 import {Type} from "types/enum";
+import {useRoutineProgress} from "./RoutineProgressProvider";
 
 type SetCreateButtonButtonProps = {
     // sets: Set[];

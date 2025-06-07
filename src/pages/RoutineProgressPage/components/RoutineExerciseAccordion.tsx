@@ -3,9 +3,9 @@ import Image from "headful/Image/Image";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {RoutineExercise} from "types/model";
-import RoutineExerciseDeleteButton from "./RoutineExerciseDeleteButton/RoutineExerciseDeleteButton";
 import React from "react";
-import {useRoutineProgress} from "../RoutineProgressProvider";
+import {useRoutineProgress} from "./RoutineProgressProvider";
+import RoutineExerciseDeleteButton from "./RoutineExerciseDeleteButton";
 
 type RoutineExerciseAccordionProps = {
     routineExercise: RoutineExercise;

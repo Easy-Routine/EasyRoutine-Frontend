@@ -2,8 +2,8 @@ import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import {ReactComponent as MinusIcon} from "assets/image/minus.svg";
-import {Set, RoutineExercise} from "types/model";
-import {useRoutineProgress} from "../../RoutineProgressProvider";
+import {RoutineExercise} from "types/model";
+import {useRoutineProgress} from "./RoutineProgressProvider";
 
 type SetDeleteButtonProps = {
     routineExercise: RoutineExercise;

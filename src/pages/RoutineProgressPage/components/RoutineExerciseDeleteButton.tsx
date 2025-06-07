@@ -1,7 +1,7 @@
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
-import {useRoutineProgress} from "../../RoutineProgressProvider";
 import {RoutineExercise} from "types/model";
 import {MouseEventHandler} from "react";
+import {useRoutineProgress} from "./RoutineProgressProvider";
 
 type RoutineExerciseDeleteButtonProps = {
     routineExercise: RoutineExercise;

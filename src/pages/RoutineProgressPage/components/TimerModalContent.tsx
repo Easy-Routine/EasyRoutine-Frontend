@@ -2,8 +2,8 @@ import CircleButton from "headful/CircleButton/CircleButton";
 import Flex from "headful/Flex/Flex";
 import Text from "headful/Text/Text";
 import {ReactComponent as ClockIcon} from "assets/image/clock.svg";
-import {useRoutineProgress} from "../RoutineProgressProvider";
 import formatTime from "utils/formatTime";
+import {useRoutineProgress} from "./RoutineProgressProvider";
 
 const TimerModalContent = () => {
     const {remainingTime} = useRoutineProgress();

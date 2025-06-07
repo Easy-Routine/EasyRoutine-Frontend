@@ -1,14 +1,13 @@
 import FlexBox from "headful/Flex/Flex";
 import {RoutineExercise} from "types/model";
 import List from "components/box/Accordion/List";
-import RoutineExerciseAccordion from "./RoutineExerciseAccordion/RoutineExerciseAccordion";
+import RoutineExerciseAccordion from "./RoutineExerciseAccordion";
 import BottomBoxPortal from "components/BottomBoxPortal/BottomBoxPortal";
 import Flex from "headful/Flex/Flex";
-import BasicButton from "headful/BasicButton/BasicButton";
 import TimerModalTrigger from "./TimerModalTrigger/TimerModalTrigger";
 import {useRoutineProgress} from "./RoutineProgressProvider";
-import RoutineProgressCompleteButton from "./RoutineProgressCompleteButton/RoutineProgressCompleteButton";
-import RoutineExerciseRestSecTimer from "./RoutineExerciseRestSecTimer/RoutineExerciseRestSecTimer";
+import RoutineExerciseRestSecTimer from "./RoutineExerciseRestSecTimer";
+import RoutineProgressCompleteButton from "./RoutineProgressCompleteButton";
 
 type RoutineProgressContainerProps = {};
 

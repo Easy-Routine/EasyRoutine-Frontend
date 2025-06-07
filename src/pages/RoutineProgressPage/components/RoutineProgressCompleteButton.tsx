@@ -1,9 +1,8 @@
 import BasicButton from "headful/BasicButton/BasicButton";
-import {useRoutineProgress} from "../RoutineProgressProvider";
-import CompleteModalContent from "../CompleteModalContent/CompleteModalContent";
 import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import {useModal} from "headless/Modal/Modal";
-import UnCompleteModalContent from "../UnCompleteModalContent/UnCompleteModalContent";
+import CompleteModalContent from "./CompleteModalContent";
+import UnCompleteModalContent from "./UnCompleteModalContent";
 
 const RoutineProgressCompleteButton = () => {
     const {openModal} = useModal();

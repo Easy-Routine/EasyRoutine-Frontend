@@ -1,4 +1,4 @@
-import {useRoutineProgress} from "pages/RoutineProgressPage/RoutinePregressContainer/RoutineProgressProvider";
+import {useRoutineProgress} from "pages/RoutineProgressPage/components/RoutineProgressProvider";
 import React from "react";
 import {RoutineExercise} from "types/model";
 

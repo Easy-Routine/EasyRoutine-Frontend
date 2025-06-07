@@ -1,13 +1,11 @@
 import BasicButton from "headful/BasicButton/BasicButton";
 import {MouseEventHandler} from "react";
 import {Set, RoutineExercise} from "types/model";
-import {useRoutineProgress} from "../../RoutineProgressProvider";
-import {v4 as uuidv4} from "uuid";
-import moment from "moment";
 import {useModal} from "headless/Modal/Modal";
 import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
-import TimerModalContent from "../../TimerModalContent/TimerModalContent";
-import CompleteModalContent from "../../CompleteModalContent/CompleteModalContent";
+import {useRoutineProgress} from "./RoutineProgressProvider";
+import CompleteModalContent from "./CompleteModalContent";
+import TimerModalContent from "./TimerModalContent";
 
 type SetCompleteButtonProps = {
     routineExercise: RoutineExercise;

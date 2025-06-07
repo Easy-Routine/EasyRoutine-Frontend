@@ -1,5 +1,4 @@
 import LineCheckBoxGroup from "headful/LineCheckBoxGroup/LineCheckBoxGroup";
-import {Exercise} from "types/model";
 import Flex from "headful/Flex/Flex";
 import Image from "headful/Image/Image";
 import Text from "headful/Text/Text";
@@ -11,7 +10,7 @@ type RoutineExerciseAddCheckBoxGroupProps = {};
 const RoutineExerciseAddCheckBoxGroup =
     ({}: RoutineExerciseAddCheckBoxGroupProps) => {
         const {exerciseIds, setExerciseIds} = useRoutineExerciseAdd();
-        const {workoutLibraries} = useExerciseAllGet();
+        const {exercises} = useExerciseAllGet();
 
         const handleCheckBoxItemClick = (value: string[]) => {
             setExerciseIds(value);
@@ -19,7 +18,7 @@ const RoutineExerciseAddCheckBoxGroup =
 
         return (
             <LineCheckBoxGroup defaultValue={exerciseIds}>
-                {workoutLibraries.map(exercise => (
+                {exercises.map(exercise => (
                     <LineCheckBoxGroup.Item
                         value={exercise.id.toString()}
                         onCheckboxGroupItemClick={handleCheckBoxItemClick}

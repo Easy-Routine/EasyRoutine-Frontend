@@ -11,7 +11,7 @@ type ExerciseAllGetContextType = {
         React.SetStateAction<ExerciseAllGetReq["category"]>
     >;
     setName: React.Dispatch<React.SetStateAction<ExerciseAllGetReq["name"]>>;
-    workoutLibraries: Exercise[];
+    exercises: Exercise[];
 };
 
 const ExerciseAllGetContext = createContext<ExerciseAllGetContextType>({
@@ -19,7 +19,7 @@ const ExerciseAllGetContext = createContext<ExerciseAllGetContextType>({
     name: "",
     setCategory: () => {},
     setName: () => {},
-    workoutLibraries: [],
+    exercises: [],
 });
 
 type ExerciseAllGetProviderProps = {
@@ -32,7 +32,7 @@ const ExerciseAllGetProvider = ({children}: ExerciseAllGetProviderProps) => {
 
     const {data: ExerciseAllGetData} = useExerciseAllGetQuery({name, category});
 
-    const workoutLibraries = ExerciseAllGetData ?? [];
+    const exercises = ExerciseAllGetData ?? [];
 
     return (
         <ExerciseAllGetContext.Provider
@@ -41,7 +41,7 @@ const ExerciseAllGetProvider = ({children}: ExerciseAllGetProviderProps) => {
                 name,
                 setCategory,
                 setName,
-                workoutLibraries,
+                exercises,
             }}
         >
             {children}

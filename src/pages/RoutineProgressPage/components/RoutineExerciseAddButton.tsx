@@ -2,15 +2,16 @@ import BasicButton from "headful/BasicButton/BasicButton";
 import {useModal} from "headless/Modal/Modal";
 import {RoutineExercise, Exercise} from "types/model";
 import {v4 as uuid} from "uuid";
-import {useExerciseAll} from "../../ExerciseAllProvider/ExerciseAllProvider";
-import {useRoutineExerciseAddParams} from "../RoutineExerciseAddParamsProvider";
-import {useRoutineProgress} from "pages/RoutineProgressPage/RoutinePregressContainer/RoutineProgressProvider";
+
+import {useRoutineProgress} from "pages/RoutineProgressPage/components/RoutineProgressProvider";
+import {useRoutineExerciseAdd} from "./RoutineExerciseAddProvider";
+import {useExerciseAllGet} from "./ExerciseAllGetProvider";
 
 type RoutineExerciseAddButtonProps = {};
 
 const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
-    const {exerciseIds, setExerciseIds} = useRoutineExerciseAddParams();
-    const {exercises} = useExerciseAll();
+    const {exerciseIds, setExerciseIds} = useRoutineExerciseAdd();
+    const {exercises} = useExerciseAllGet();
 
     const {routine, setRoutine} = useRoutineProgress();
     const {closeModal} = useModal();

@@ -1,6 +1,6 @@
 import useRoutineGetQuery from "hooks/server/useRoutineGetQuery";
-import RoutineProgressContainer from "../RoutinePregressContainer/RoutineProgressContainer";
-import RoutineProgressProvider from "../RoutinePregressContainer/RoutineProgressProvider";
+import RoutineProgressContainer from "./RoutineProgressContainer";
+import RoutineProgressProvider from "./RoutineProgressProvider";
 
 type RoutineGetContainerProps = {
     routineId: string;

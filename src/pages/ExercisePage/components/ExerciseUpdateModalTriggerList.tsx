@@ -1,5 +1,5 @@
 import useExerciseAllGetQuery from "hooks/server/useExerciseAllGetQuery";
-import {useRoutineProgress} from "pages/RoutineProgressPage/RoutinePregressContainer/RoutineProgressProvider";
+import {useRoutineProgress} from "pages/RoutineProgressPage/components/RoutineProgressProvider";
 import React from "react";
 import {Exercise, RoutineExercise} from "types/model";
 import {useExerciseAllGetProvider} from "./ExerciseAllGetProvider";

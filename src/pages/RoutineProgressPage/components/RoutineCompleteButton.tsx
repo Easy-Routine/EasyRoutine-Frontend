@@ -1,5 +1,5 @@
 import BasicButton from "headful/BasicButton/BasicButton";
-import {useRoutineProgress} from "pages/RoutineProgressPage/RoutinePregressContainer/RoutineProgressProvider";
+import {useRoutineProgress} from "pages/RoutineProgressPage/components/RoutineProgressProvider";
 import React from "react";
 
 const RoutineCompleteButton = () => {
