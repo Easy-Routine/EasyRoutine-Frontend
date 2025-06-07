@@ -6,7 +6,6 @@ type BottomBoxProps = {
 };
 
 const BottomBox = ({children}: BottomBoxProps) => {
-
     return (
         <div id="bottom-box" className={styles.bottomBox}>
             {children}
