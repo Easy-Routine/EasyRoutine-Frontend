@@ -20,6 +20,7 @@ const RoutineExerciseAddCheckBoxGroup =
             <LineCheckBoxGroup defaultValue={exerciseIds}>
                 {exercises.map(exercise => (
                     <LineCheckBoxGroup.Item
+                        key={exercise.id}
                         value={exercise.id.toString()}
                         onCheckboxGroupItemClick={handleCheckBoxItemClick}
                     >

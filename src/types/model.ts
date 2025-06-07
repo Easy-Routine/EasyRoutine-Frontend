@@ -23,7 +23,7 @@ export type Set = {
     id: string | number;
     weight?: number;
     rep?: number;
-    workoutSec?: number;
+    exerciseSec?: number;
     restSec: number;
 };
 
@@ -60,7 +60,7 @@ export type Exercise = {
 //     weight: number;
 //     rep: number;
 //     restSec: number;
-//     workoutSec: number;
+//     exerciseSec: number;
 //     createdAt: string;
 //     updatedAt: string;
 //     routineExerciseId: string;

@@ -3,21 +3,15 @@ import queryKey from "constants/queryKeys";
 import useToast from "hooks/useToast";
 import {createRoutineOne} from "services/routine";
 import {Color} from "types/enum";
+import {RoutineCreateReq} from "types/routine";
 
 const useRoutineCreateMutation = () => {
     const {showToast} = useToast();
 
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({
-            name,
-            color,
-            userId,
-        }: {
-            name: string;
-            color: Color;
-            userId: string;
-        }) => createRoutineOne({name, color, userId}),
+        mutationFn: (routineCreateReq: RoutineCreateReq) =>
+            createRoutineOne(routineCreateReq),
         onError: error => {
             console.log(error);
             showToast(error.message, "error");

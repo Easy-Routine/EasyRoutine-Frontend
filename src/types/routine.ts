@@ -28,7 +28,7 @@ export type RoutineCreateReq = Omit<Routine, "id">;
 //             weight: number;
 //             rep: number;
 //             restSec: number;
-//             workoutSec: number;
+//             exerciseSec: number;
 //         }[];
 //     }[];
 // }

@@ -2,7 +2,11 @@
 import {Routine} from "types/model"; // 경로에 맞게 수정
 import {Color} from "types/enum";
 import {handleError} from "utils/handleError";
-import {RoutineAllGetRes, RoutineDeleteReq} from "types/routine";
+import {
+    RoutineAllGetRes,
+    RoutineCreateReq,
+    RoutineDeleteReq,
+} from "types/routine";
 
 // 확인: 완료
 export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
@@ -21,7 +25,7 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
                                 weight: 50,
                                 rep: 10,
                                 restSec: 60,
-                                workoutSec: 30,
+                                exerciseSec: 30,
                             },
                         ],
                         exercise: {
@@ -42,7 +46,7 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
                                 weight: 50,
                                 rep: 10,
                                 restSec: 60,
-                                workoutSec: 30,
+                                exerciseSec: 30,
                             },
                         ],
                         exercise: {
@@ -71,7 +75,7 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
                                 weight: 60,
                                 rep: 8,
                                 restSec: 90,
-                                workoutSec: 40,
+                                exerciseSec: 40,
                             },
                         ],
                         exercise: {
@@ -100,7 +104,7 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
                                 weight: 0,
                                 rep: 0,
                                 restSec: 0,
-                                workoutSec: 300,
+                                exerciseSec: 300,
                             },
                         ],
                         exercise: {
@@ -148,14 +152,14 @@ export const getRoutineOne = async (
                         weight: 50,
                         rep: 10,
                         restSec: 60,
-                        workoutSec: 30,
+                        exerciseSec: 30,
                     },
                     {
                         id: 2,
                         weight: 60,
                         rep: 8,
                         restSec: 90,
-                        workoutSec: 40,
+                        exerciseSec: 40,
                     },
                 ],
             },
@@ -177,14 +181,14 @@ export const getRoutineOne = async (
                         weight: 50,
                         rep: 10,
                         restSec: 60,
-                        workoutSec: 30,
+                        exerciseSec: 30,
                     },
                     {
                         id: 2,
                         weight: 60,
                         rep: 8,
                         restSec: 90,
-                        workoutSec: 40,
+                        exerciseSec: 40,
                     },
                 ],
             },
@@ -198,17 +202,13 @@ export const getRoutineOne = async (
     }
 };
 // 확인: 완료
-export const createRoutineOne = async ({
-    name,
-    color,
-    userId,
-}: {
-    name: string;
-    color: Color;
-    userId: string;
-}): Promise<Routine | undefined> => {
+export const createRoutineOne = async (
+    routineCreateReq: RoutineCreateReq,
+): Promise<void> => {
     try {
-        return undefined;
+        console.log("루틴 생성 요청:", routineCreateReq);
+        window.alert(JSON.stringify(routineCreateReq));
+        return;
     } catch (e) {
         handleError(e);
     }

@@ -3,19 +3,26 @@ import React from "react";
 import BasicTable from "headful/BasicTable/BasicTable";
 import {Set, RoutineExercise} from "types/model";
 import {useRoutineUpdate} from "./RoutineUpdateProvider";
+import {Type} from "types/enum";
 
 type SetUpdateTableProps = {
     routineExercise: RoutineExercise;
 };
 
 type TypeMapper = {
-    [key in keyof Set]?: string;
+    [key: string]: string;
 };
 
 const typeMapper: TypeMapper = {
-    weight: "무게",
-    rep: "횟수",
-    workoutSec: "시간",
+    [Type.WEIGHT]: "무게",
+    [Type.COUNT]: "횟수",
+    [Type.TIME]: "시간",
+};
+
+const typeKeyMapper: TypeMapper = {
+    [Type.WEIGHT]: "weight",
+    [Type.COUNT]: "rep",
+    [Type.TIME]: "exerciseSec",
 };
 
 const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
@@ -61,7 +68,7 @@ const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
         if (
             key === "weight" ||
             key === "rep" ||
-            key === "workoutSec" ||
+            key === "exerciseSec" ||
             key === "restSec"
         ) {
             foundSet[key] = Number(value) as Set[K];
@@ -91,15 +98,17 @@ const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
 
                         {types.map(type => (
-                            <BasicTable.Cell key={type}>
+                            <BasicTable.Cell key={typeKeyMapper[type]}>
                                 <BasicTable.Input
                                     // field가 Set의 키이므로 안전하게 인덱싱
-                                    value={set[type] ?? ""}
+                                    value={
+                                        set[typeKeyMapper[type] as keyof Set]
+                                    }
                                     onChange={e =>
                                         handleSetInputChange(
                                             set.id,
-                                            type,
-                                            e.target.value as Set[typeof type],
+                                            typeKeyMapper[type] as keyof Set,
+                                            e.target.value,
                                         )
                                     }
                                 />

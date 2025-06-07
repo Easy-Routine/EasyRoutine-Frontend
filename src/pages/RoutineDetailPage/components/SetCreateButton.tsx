@@ -42,9 +42,9 @@ const SetCreateButton = ({routineExercise}: SetCreateButtonButtonProps) => {
             // exercise.types 에 "rep" 가 있고, last.rep 가 있을 때만 포함
             ...(types.includes("rep") && {rep: last?.rep ?? 0}),
 
-            // exercise.types 에 "workoutSec" 가 있고, last.workoutSec 가 있을 때만 포함
-            ...(types.includes("workoutSec") && {
-                workoutSec: last?.workoutSec ?? 0,
+            // exercise.types 에 "exerciseSec" 가 있고, last.exerciseSec 가 있을 때만 포함
+            ...(types.includes("exerciseSec") && {
+                exerciseSec: last?.exerciseSec ?? 0,
             }),
             // required field: 역시 이전 값이 있으면 그걸, 없으면 0
             restSec: last?.restSec ?? 0,

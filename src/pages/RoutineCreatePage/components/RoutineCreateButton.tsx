@@ -1,12 +1,15 @@
 import BasicButton from "headful/BasicButton/BasicButton";
 import Text from "headful/Text/Text";
 import {useRoutineCreate} from "./RoutineCreateProvider";
+import useRoutineCreateMutation from "hooks/server/useRoutineCreateMutation";
 
 const RoutineCreateButton = () => {
     const {routine} = useRoutineCreate();
 
-    const handleButtonClick = () => {
-        console.log("서버에 보낼 루틴 설정", routine);
+    const {mutateAsync: createRoutineMutate} = useRoutineCreateMutation();
+
+    const handleButtonClick = async () => {
+        await createRoutineMutate(routine);
     };
 
     return (

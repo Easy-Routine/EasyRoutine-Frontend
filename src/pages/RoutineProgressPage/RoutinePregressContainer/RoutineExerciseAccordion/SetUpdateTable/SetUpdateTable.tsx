@@ -2,6 +2,7 @@ import BasicTable from "headful/BasicTable/BasicTable";
 
 import {RoutineExercise, Set} from "types/model";
 import {useRoutineProgress} from "../../RoutineProgressProvider";
+import {Type} from "types/enum";
 
 type SetUpdateTableProps = {
     routineExercise: RoutineExercise;
@@ -12,9 +13,15 @@ type TypeMapper = {
 };
 
 const typeMapper: TypeMapper = {
-    weight: "무게",
-    rep: "횟수",
-    workoutSec: "시간",
+    [Type.WEIGHT]: "무게",
+    [Type.COUNT]: "횟수",
+    [Type.TIME]: "시간",
+};
+
+const typeKeyMapper: TypeMapper = {
+    [Type.WEIGHT]: "weight",
+    [Type.COUNT]: "rep",
+    [Type.TIME]: "exerciseSec",
 };
 
 const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
@@ -90,13 +97,15 @@ const SetUpdateTable = ({routineExercise}: SetUpdateTableProps) => {
                     >
                         <BasicTable.Cell>{index + 1}</BasicTable.Cell>
                         {types.map(type => (
-                            <BasicTable.Cell key={type}>
+                            <BasicTable.Cell key={typeKeyMapper[type]}>
                                 <BasicTable.Input
-                                    value={set[type]}
+                                    value={
+                                        set[typeKeyMapper[type] as keyof Set]
+                                    }
                                     onChange={e =>
                                         handleSetInputChange(
                                             set.id,
-                                            type,
+                                            typeKeyMapper[type] as keyof Set,
                                             e.target.value,
                                         )
                                     }
