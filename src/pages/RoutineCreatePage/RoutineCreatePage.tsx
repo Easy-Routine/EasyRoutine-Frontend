@@ -60,15 +60,14 @@ const RoutineCreatePage = () => {
                     <ExerciseAddBottomSheet>
                         <FloatingCircleButton />
                         <ExerciseAllGetProvider>
-                            <Flex direction="column" gap={20}>
+                            <Flex direction="column" gap={20} height="100%">
                                 <ExerciseFilterSearchInput />
                                 <ExerciseFilterTabGroup />
-                                <Flex direction="column" height={400} gap={16}>
-                                    <RoutineExerciseAddProvider>
-                                        <RoutineExerciseAddCheckBoxGroup />
-                                        <RoutineExerciseAddButton />
-                                    </RoutineExerciseAddProvider>
-                                </Flex>
+
+                                <RoutineExerciseAddProvider>
+                                    <RoutineExerciseAddCheckBoxGroup />
+                                    <RoutineExerciseAddButton />
+                                </RoutineExerciseAddProvider>
                             </Flex>
                         </ExerciseAllGetProvider>
                     </ExerciseAddBottomSheet>
