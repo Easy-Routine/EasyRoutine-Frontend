@@ -13,11 +13,13 @@ import {RoutineAllGetRes} from "types/routine";
 */
 
 type RoutineUpdateMoveButtonProps = {
-    routine: RoutineAllGetRes[number];
+    routineAllGetRes: RoutineAllGetRes[number];
 };
 
-const RoutineUpdateMoveButton = ({routine}: RoutineUpdateMoveButtonProps) => {
-    const {id} = routine;
+const RoutineUpdateMoveButton = ({
+    routineAllGetRes,
+}: RoutineUpdateMoveButtonProps) => {
+    const {id} = routineAllGetRes;
 
     const navigate = useNavigate();
 

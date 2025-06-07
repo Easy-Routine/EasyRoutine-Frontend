@@ -2,7 +2,7 @@
 import {Routine} from "types/model"; // 경로에 맞게 수정
 import {Color} from "types/enum";
 import {handleError} from "utils/handleError";
-import {RoutineAllGetRes} from "types/routine";
+import {RoutineAllGetRes, RoutineDeleteReq} from "types/routine";
 
 // 확인: 완료
 export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
@@ -215,10 +215,12 @@ export const createRoutineOne = async ({
 };
 // 확인: 완료
 export const deleteRoutineOne = async (
-    routineId: string | number,
-): Promise<boolean | undefined> => {
+    routineDeleteReq: RoutineDeleteReq,
+): Promise<boolean | void> => {
+    const {id} = routineDeleteReq;
     try {
-        return true;
+        window.alert(`루틴 ${id}이(가) 삭제되었습니다.`);
+        return;
     } catch (error) {
         handleError(error);
     }

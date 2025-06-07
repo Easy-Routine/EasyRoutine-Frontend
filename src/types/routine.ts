@@ -2,6 +2,10 @@ import {Routine} from "./model";
 
 export type RoutineAllGetRes = Routine[];
 
+export type RoutineDeleteReq = {
+    id: string | number;
+};
+
 // {
 //     id: number;
 //     name: string;

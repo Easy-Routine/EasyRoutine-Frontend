@@ -5,11 +5,13 @@ import {Routine} from "types/model";
 import {RoutineAllGetRes} from "types/routine";
 
 type RoutineStartModalButtonProps = {
-    routine: RoutineAllGetRes[number];
+    routineAllGetRes: RoutineAllGetRes[number];
 };
 
-const RoutineStartModalButton = ({routine}: RoutineStartModalButtonProps) => {
-    const {name} = routine;
+const RoutineStartModalButton = ({
+    routineAllGetRes,
+}: RoutineStartModalButtonProps) => {
+    const {name} = routineAllGetRes;
     return (
         <FlexBox gap={16} align="center">
             <RunIcon color={"#82B1FF"} />

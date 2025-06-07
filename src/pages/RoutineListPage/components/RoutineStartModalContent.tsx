@@ -5,7 +5,7 @@ import Flex from "headful/Flex/Flex";
 import Text from "headful/Text/Text";
 import React from "react";
 import {Routine} from "types/model";
-import RoutineStartButton from "./RoutineStartButton/RoutineStartButton";
+
 import {ReactComponent as FireIcon} from "assets/image/fire.svg";
 
 type RoutineStartModalContentProps = {

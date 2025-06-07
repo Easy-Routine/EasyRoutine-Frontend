@@ -3,25 +3,27 @@ import Flex from "headful/Flex/Flex";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
 import {Routine, RoutineExercise} from "types/model";
-import RoutineDeleteModalButton from "./RoutineDeleteModalButton/RoutineDeleteModalButton";
-import RoutineExerciseFlex from "./RoutineExerciseFlex/RoutineExerciseFlex";
-import RoutineStartModal from "./RoutineStartModal/RoutineStartModal";
-import RoutineStartModalContent from "./RoutineStartModal/RoutineStartModalContent/RoutineStartModalContent";
+import RoutineExerciseFlex from "./RoutineExerciseFlex";
 import React from "react";
-import RoutineStartButton from "./RoutineStartModal/RoutineStartModalContent/RoutineStartButton/RoutineStartButton";
 import {RoutineAllGetRes} from "types/routine";
 import {Color} from "types/enum";
 
 type RoutineAccordionProps = {
-    routine: RoutineAllGetRes[number];
+    routineAllGetRes: RoutineAllGetRes[number];
     children: React.ReactNode;
 };
 
-const RoutineAccordion = ({routine, children}: RoutineAccordionProps) => {
-    const {name, color, routineExercises} = routine;
+const RoutineAccordion = ({
+    routineAllGetRes,
+    children,
+}: RoutineAccordionProps) => {
+    const {name, color, routineExercises} = routineAllGetRes;
 
-    const [routineUpdateMoveButton, routineStartModalButton] =
-        React.Children.toArray(children) as React.ReactElement[];
+    const [
+        routineUpdateMoveButton,
+        routineStartModalButton,
+        routineDeleteModalButton,
+    ] = React.Children.toArray(children) as React.ReactElement[];
 
     return (
         <SwipeableAccordion>
@@ -30,8 +32,8 @@ const RoutineAccordion = ({routine, children}: RoutineAccordionProps) => {
                     <Flex gap={16}>
                         <FireColorBox color={color as Color} />
                         <Flex direction="column" justify="space-around">
-                            <NameText routine={routine} />
-                            <LengthText routine={routine} />
+                            <NameText routine={routineAllGetRes} />
+                            <LengthText routine={routineAllGetRes} />
                         </Flex>
                     </Flex>
                 </SwipeableAccordion.Visible>
@@ -48,18 +50,11 @@ const RoutineAccordion = ({routine, children}: RoutineAccordionProps) => {
                         </Flex>
                         <Flex padding={{t: 20, b: 10}} justify="space-around">
                             {routineUpdateMoveButton}
-                            <RoutineStartModal
-                                trigger={routineStartModalButton}
-                                content={
-                                    <RoutineStartModalContent routine={routine}>
-                                        <RoutineStartButton routine={routine} />
-                                    </RoutineStartModalContent>
-                                }
-                            />
+                            {routineStartModalButton}
                         </Flex>
                     </Flex>
                 </SwipeableAccordion.Hidden>
-                <RoutineDeleteModalButton routine={routine} />
+                {routineDeleteModalButton}
             </SwipeableAccordion.Box>
         </SwipeableAccordion>
     );

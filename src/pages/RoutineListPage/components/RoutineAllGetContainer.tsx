@@ -1,6 +1,4 @@
-import FlexBox from "headful/Flex/Flex";
 import useRoutineAllGetQuery from "hooks/server/useRoutineAllGetQuery";
-import RoutineAccordion from "../RoutineAccordion/RoutineAccordion";
 import {Routine} from "types/model";
 
 type RoutineAllGetContainerProps = {
