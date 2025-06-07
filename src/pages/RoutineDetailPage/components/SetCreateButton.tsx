@@ -2,9 +2,9 @@ import FlexBox from "headful/Flex/Flex";
 import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
-import {useRoutineUpdateParams} from "../../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
 import {v4 as uuid} from "uuid";
 import {Exercise, RoutineExercise, Set} from "types/model";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 type SetCreateButtonButtonProps = {
     routineExercise: RoutineExercise;
@@ -12,7 +12,7 @@ type SetCreateButtonButtonProps = {
 
 const SetCreateButton = ({routineExercise}: SetCreateButtonButtonProps) => {
     const {id} = routineExercise;
-    const {routine, setRoutine} = useRoutineUpdateParams();
+    const {routine, setRoutine} = useRoutineUpdate();
 
     const handleSetCreateButtonClick: MouseEventHandler<
         HTMLDivElement

@@ -3,15 +3,15 @@ import {Exercise} from "types/model";
 import Flex from "headful/Flex/Flex";
 import Image from "headful/Image/Image";
 import Text from "headful/Text/Text";
-import {useRoutineExerciseAddParams} from "../RoutineExerciseAddParamsProvider";
-import {useExerciseAll} from "../../ExerciseAllProvider/ExerciseAllProvider";
+import {useRoutineExerciseAdd} from "./RoutineExerciseAddProvider";
+import {useExerciseAllGet} from "./ExerciseAllGetProvider";
 
 type RoutineExerciseAddCheckBoxGroupProps = {};
 
 const RoutineExerciseAddCheckBoxGroup =
     ({}: RoutineExerciseAddCheckBoxGroupProps) => {
-        const {exerciseIds, setExerciseIds} = useRoutineExerciseAddParams();
-        const {workoutLibraries} = useExerciseAll();
+        const {exerciseIds, setExerciseIds} = useRoutineExerciseAdd();
+        const {workoutLibraries} = useExerciseAllGet();
 
         const handleCheckBoxItemClick = (value: string[]) => {
             setExerciseIds(value);

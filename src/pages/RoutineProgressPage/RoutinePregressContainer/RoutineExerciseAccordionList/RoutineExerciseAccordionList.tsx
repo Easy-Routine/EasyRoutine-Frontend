@@ -1,4 +1,4 @@
-import RoutineExerciseAccordion from "pages/RoutineDetailPage/components/RoutineExerciseAccordion/RoutineExerciseAccordion";
+import RoutineExerciseAccordion from "pages/RoutineDetailPage/components/RoutineExerciseAccordion";
 import {RoutineExercise} from "types/model";
 
 type RoutineExerciseAccordionListProps = {

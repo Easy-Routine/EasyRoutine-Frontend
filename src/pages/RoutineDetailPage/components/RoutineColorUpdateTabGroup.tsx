@@ -1,12 +1,12 @@
 import ColorTabGroup from "headful/ColorTabGroup/ColorTabGroup";
 import {Color} from "types/enum";
-import {useRoutineUpdateParams} from "../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
 import {TabValue} from "headless/TabGroup/TabGroup";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 type RoutineColorUpdateTabGroupProps = {};
 
 const RoutineColorUpdateTabGroup = ({}: RoutineColorUpdateTabGroupProps) => {
-    const {routine, setRoutine} = useRoutineUpdateParams();
+    const {routine, setRoutine} = useRoutineUpdate();
 
     const handleColorTabItemClick = (value: TabValue) => {
         const newRoutine = structuredClone(routine);

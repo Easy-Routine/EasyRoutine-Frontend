@@ -1,7 +1,7 @@
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import {RoutineExercise} from "types/model";
-import {useRoutineUpdateParams} from "../../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
 import {MouseEventHandler} from "react";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 type RoutineExerciseDeleteButtonProps = {
     routineExercise: RoutineExercise;
@@ -11,7 +11,7 @@ const RoutineExerciseDeleteButton = ({
     routineExercise,
 }: RoutineExerciseDeleteButtonProps) => {
     const {id} = routineExercise;
-    const {routine, setRoutine} = useRoutineUpdateParams();
+    const {routine, setRoutine} = useRoutineUpdate();
 
     const handleRoutineExerciseDeleteButtonClick: MouseEventHandler<
         HTMLDivElement

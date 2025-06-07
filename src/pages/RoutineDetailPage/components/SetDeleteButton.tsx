@@ -3,7 +3,7 @@ import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import {ReactComponent as MinusIcon} from "assets/image/minus.svg";
 import {Set, RoutineExercise} from "types/model";
-import {useRoutineUpdateParams} from "../../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 type SetDeleteButtonProps = {
     routineExercise: RoutineExercise;
@@ -11,7 +11,7 @@ type SetDeleteButtonProps = {
 
 const SetDeleteButton = ({routineExercise}: SetDeleteButtonProps) => {
     const {id} = routineExercise;
-    const {routine, setRoutine} = useRoutineUpdateParams();
+    const {routine, setRoutine} = useRoutineUpdate();
 
     const handleSetDeleteButtonClick: MouseEventHandler<
         HTMLDivElement

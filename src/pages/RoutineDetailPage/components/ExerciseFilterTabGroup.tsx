@@ -1,10 +1,10 @@
 import ChipTabGroup from "headful/ChipTabGroup/ChipTabGroup";
 import {Category} from "types/enum";
-import {useExerciseAll} from "../ExerciseAllProvider/ExerciseAllProvider";
 import {TabValue} from "headless/TabGroup/TabGroup";
+import {useExerciseAllGet} from "./ExerciseAllGetProvider";
 
 const ExerciseFilterTabGroup = () => {
-    const {category, setCategory} = useExerciseAll();
+    const {category, setCategory} = useExerciseAllGet();
 
     const handleChipTabGroupItemClick = (value: TabValue) => {
         setCategory(value as Category);

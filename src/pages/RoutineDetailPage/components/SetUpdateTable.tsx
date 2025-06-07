@@ -2,7 +2,7 @@
 import React from "react";
 import BasicTable from "headful/BasicTable/BasicTable";
 import {Set, RoutineExercise} from "types/model";
-import {useRoutineUpdateParams} from "../../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 type SetUpdateTableProps = {
     routineExercise: RoutineExercise;
@@ -24,7 +24,7 @@ const SetUpdateTable: React.FC<SetUpdateTableProps> = ({routineExercise}) => {
     // 실제로는 Set의 키 중 일부라고 가정
     const types = exercise.types as Array<keyof Set>;
 
-    const {routine, setRoutine} = useRoutineUpdateParams();
+    const {routine, setRoutine} = useRoutineUpdate();
 
     const handleSetInputChange = async <K extends keyof Set>(
         setId: string | number,

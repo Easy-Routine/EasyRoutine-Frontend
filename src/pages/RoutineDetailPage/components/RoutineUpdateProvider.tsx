@@ -1,26 +1,25 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {Routine} from "types/model";
 
-type RoutineUpdateParamsContextType = {
+type RoutineUpdateContextType = {
     routine: Routine;
     setRoutine: React.Dispatch<React.SetStateAction<Routine>>;
 };
 
-const RoutineUpdateParamsContext =
-    createContext<RoutineUpdateParamsContextType>({
-        routine: {} as Routine,
-        setRoutine: () => {},
-    });
+const RoutineUpdateContext = createContext<RoutineUpdateContextType>({
+    routine: {} as Routine,
+    setRoutine: () => {},
+});
 
-type RoutineUpdateParamsProviderProps = {
+type RoutineUpdateProviderProps = {
     defaultValue: Routine;
     children: React.ReactNode;
 };
 
-const RoutineUpdateParamsProvider = ({
+const RoutineUpdateProvider = ({
     defaultValue,
     children,
-}: RoutineUpdateParamsProviderProps) => {
+}: RoutineUpdateProviderProps) => {
     const [routine, setRoutine] = useState(defaultValue);
 
     useEffect(() => {
@@ -28,18 +27,17 @@ const RoutineUpdateParamsProvider = ({
     }, [routine]);
 
     return (
-        <RoutineUpdateParamsContext.Provider
+        <RoutineUpdateContext.Provider
             value={{
                 routine,
                 setRoutine,
             }}
         >
             {children}
-        </RoutineUpdateParamsContext.Provider>
+        </RoutineUpdateContext.Provider>
     );
 };
 
-export const useRoutineUpdateParams = () =>
-    useContext(RoutineUpdateParamsContext);
+export const useRoutineUpdate = () => useContext(RoutineUpdateContext);
 
-export default RoutineUpdateParamsProvider;
+export default RoutineUpdateProvider;

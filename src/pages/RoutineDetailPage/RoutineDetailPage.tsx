@@ -5,26 +5,25 @@ import LogoArea from "headful/LogoArea/LogoArea";
 import Main from "headful/PrivatePageTemplate/Main/Main";
 import Footer from "headful/PrivatePageTemplate/Footer/Footer";
 import Flex from "headful/Flex/Flex";
-import RoutineExerciseAccordion from "./components/RoutineExerciseAccordion/RoutineExerciseAccordion";
+import RoutineExerciseAccordion from "./components/RoutineExerciseAccordion";
 import FloatingCircleButton from "headful/FloatingCircleButton/FloatingCircleButton";
 import BottomBox from "headful/BottomBox/BottomBox";
-import {ReactComponent as PlusIcon} from "assets/image/plus.svg";
-import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput/ExerciseFilterSearchInput";
-import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup/ExerciseFilterTabGroup";
-import RoutineColorUpdateTabGroup from "./components/RoutineColorUpdateTabGroup/RoutineColorUpdateTabGroup";
 import useRoutineGetQuery from "hooks/server/useRoutineGetQuery";
-import RoutineUpdateParamsProvider from "./components/RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
-import SetUpdateTable from "./components/RoutineExerciseAccordion/SetUpdateTable/SetUpdateTable";
-import SetDeleteButton from "./components/RoutineExerciseAccordion/SetDeleteButton/SetDeleteButton";
-import SetCreateButton from "./components/RoutineExerciseAccordion/SetCreateButton/SetCreateButton";
-import RoutineExerciseDeleteButton from "./components/RoutineExerciseAccordion/RoutineExerciseDeleteButton/RoutineExerciseDeleteButton";
-import RoutineUpdateButton from "./components/RoutineUpdateButton/RoutineUpdateButton";
-import RoutineExerciseAddParamsProvider from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddParamsProvider";
-import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddCheckGroup/RoutineExerciseAddCheckBoxGroup";
-import RoutineExerciseAddButton from "./components/RoutineExerciseAddParamsProvider/RoutineExerciseAddButton/RoutineExerciseAddButton";
-import ExerciseModal from "./components/ExerciseModal/ExerciseModal";
-import ExerciseAllProvider from "./components/ExerciseAllProvider/ExerciseAllProvider";
-import RoutineExerciseList from "./components/RoutineExerciseList/RoutineExerciseList";
+import SetCreateButton from "./components/SetCreateButton";
+import RoutineExerciseList from "./components/RoutineExerciseList";
+import SetUpdateTable from "./components/SetUpdateTable";
+import SetDeleteButton from "./components/SetDeleteButton";
+import RoutineExerciseDeleteButton from "./components/RoutineExerciseDeleteButton";
+import RoutineUpdateButton from "./components/RoutineUpdateButton";
+import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput";
+import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
+import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddCheckBoxGroup";
+import RoutineExerciseAddButton from "./components/RoutineExerciseAddButton";
+import RoutineColorUpdateTabGroup from "./components/RoutineColorUpdateTabGroup";
+import RoutineExerciseAddProvider from "./components/RoutineExerciseAddProvider";
+import RoutineUpdateProvider from "./components/RoutineUpdateProvider";
+import ExerciseAddBottomSheet from "./components/ExerciseAddBottomSheet";
+import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
 
 const RoutineDetailPage = () => {
     const {routineId} = useParams();
@@ -36,7 +35,7 @@ const RoutineDetailPage = () => {
             <Header>
                 <LogoArea />
             </Header>
-            <RoutineUpdateParamsProvider defaultValue={routine}>
+            <RoutineUpdateProvider defaultValue={routine}>
                 <Main>
                     <Flex direction="column" gap={20}>
                         <RoutineExerciseList
@@ -63,34 +62,29 @@ const RoutineDetailPage = () => {
                         <RoutineUpdateButton />
                     </Flex>
 
-                    <ExerciseModal
-                        trigger={<FloatingCircleButton />}
-                        content={
-                            <ExerciseAllProvider>
-                                <Flex direction="column" gap={20}>
-                                    <ExerciseFilterSearchInput />
-                                    <ExerciseFilterTabGroup />
-                                    <Flex
-                                        direction="column"
-                                        height={400}
-                                        gap={16}
-                                    >
-                                        <RoutineExerciseAddParamsProvider>
-                                            <RoutineExerciseAddCheckBoxGroup />
-                                            <RoutineExerciseAddButton />
-                                        </RoutineExerciseAddParamsProvider>
-                                    </Flex>
+                    <ExerciseAddBottomSheet>
+                        <FloatingCircleButton />
+
+                        <ExerciseAllGetProvider>
+                            <Flex direction="column" gap={20}>
+                                <ExerciseFilterSearchInput />
+                                <ExerciseFilterTabGroup />
+                                <Flex direction="column" height={400} gap={16}>
+                                    <RoutineExerciseAddProvider>
+                                        <RoutineExerciseAddCheckBoxGroup />
+                                        <RoutineExerciseAddButton />
+                                    </RoutineExerciseAddProvider>
                                 </Flex>
-                            </ExerciseAllProvider>
-                        }
-                    />
+                            </Flex>
+                        </ExerciseAllGetProvider>
+                    </ExerciseAddBottomSheet>
                 </Main>
                 <Footer>
                     <BottomBox>
                         <RoutineColorUpdateTabGroup />
                     </BottomBox>
                 </Footer>
-            </RoutineUpdateParamsProvider>
+            </RoutineUpdateProvider>
         </PrivatePageTemplate>
     );
 };

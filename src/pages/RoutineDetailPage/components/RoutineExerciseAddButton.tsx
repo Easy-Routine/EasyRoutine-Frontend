@@ -1,25 +1,25 @@
 import BasicButton from "headful/BasicButton/BasicButton";
-import {useRoutineExerciseAddParams} from "../RoutineExerciseAddParamsProvider";
 import {useModal} from "headless/Modal/Modal";
-import {useRoutineUpdateParams} from "../../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
 import {RoutineExercise, Exercise} from "types/model";
 import {v4 as uuid} from "uuid";
-import {useExerciseAll} from "../../ExerciseAllProvider/ExerciseAllProvider";
+import {useRoutineExerciseAdd} from "./RoutineExerciseAddProvider";
+import {useExerciseAll} from "pages/RoutineProgressPage/components/ExerciseAllProvider/ExerciseAllProvider";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 type RoutineExerciseAddButtonProps = {};
 
 const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
-    const {exerciseIds, setExerciseIds} = useRoutineExerciseAddParams();
-    const {workoutLibraries} = useExerciseAll();
+    const {exerciseIds, setExerciseIds} = useRoutineExerciseAdd();
+    const {exercises} = useExerciseAll();
 
-    const {routine, setRoutine} = useRoutineUpdateParams();
+    const {routine, setRoutine} = useRoutineUpdate();
     const {closeModal} = useModal();
 
     const handleBasicButtonClick = async () => {
         const newRoutine = structuredClone(routine);
         const {routineExercises: currentRoutineExercises} = newRoutine;
         // 운동라이브러리 아이디에서 선택한 운동 라이브러리 아이디를 가져온다.
-        const filteredWorkoutLibraries = workoutLibraries.filter(exercise =>
+        const filteredWorkoutLibraries = exercises.filter(exercise =>
             exerciseIds.includes(exercise.id.toString()),
         );
         // 운동라이브러리를 운동 설정타입으로 변환시켜준다.

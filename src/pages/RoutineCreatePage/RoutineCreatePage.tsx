@@ -20,9 +20,9 @@ import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
 import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddCheckBoxGroup";
 import RoutineExerciseAddButton from "./components/RoutineExerciseAddButton";
 import RoutineColorUpdateTabGroup from "./components/RoutineColorUpdateTabGroup";
-import ExerciseAddModal from "./components/ExerciseAddModal";
 import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
 import RoutineExerciseAddProvider from "./components/RoutineExerciseAddProvider";
+import ExerciseAddBottomSheet from "./components/ExerciseAddBottomSheet";
 
 const RoutineCreatePage = () => {
     return (
@@ -57,7 +57,7 @@ const RoutineCreatePage = () => {
                         <RoutineCreateButton />
                     </Flex>
 
-                    <ExerciseAddModal>
+                    <ExerciseAddBottomSheet>
                         <FloatingCircleButton />
                         <ExerciseAllGetProvider>
                             <Flex direction="column" gap={20}>
@@ -71,7 +71,7 @@ const RoutineCreatePage = () => {
                                 </Flex>
                             </Flex>
                         </ExerciseAllGetProvider>
-                    </ExerciseAddModal>
+                    </ExerciseAddBottomSheet>
                 </Main>
                 <Footer>
                     <BottomBox>

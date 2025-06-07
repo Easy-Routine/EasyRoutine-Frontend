@@ -1,10 +1,9 @@
 import BasicButton from "headful/BasicButton/BasicButton";
 import Text from "headful/Text/Text";
-import React from "react";
-import {useRoutineUpdateParams} from "../RoutineUpdateParamsProvider/RoutineUpdateParamsProvider";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 const RoutineUpdateButton = () => {
-    const {routine} = useRoutineUpdateParams();
+    const {routine} = useRoutineUpdate();
 
     const handleButtonClick = () => {
         console.log("서버에 보낼 루틴 설정", routine);
