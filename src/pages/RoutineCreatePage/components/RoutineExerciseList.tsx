@@ -1,6 +1,6 @@
 import React from "react";
 import {RoutineExercise} from "types/model";
-import {useRoutineCreate} from "../RoutineCreateProvider/RoutineCreateProvider";
+import {useRoutineCreate} from "./RoutineCreateProvider";
 
 type RoutineExerciseListProps = {
     component: (value: RoutineExercise, key: number) => React.ReactNode;

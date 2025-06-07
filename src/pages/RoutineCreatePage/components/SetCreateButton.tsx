@@ -3,9 +3,9 @@ import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import {ReactComponent as PlusIcon} from "assets/image/plus2.svg";
 import {v4 as uuid} from "uuid";
-import {useRoutineCreate} from "../../RoutineCreateProvider/RoutineCreateProvider";
 import {Exercise, RoutineExercise, Set} from "types/model";
 import {Type} from "types/enum";
+import {useRoutineCreate} from "./RoutineCreateProvider";
 
 type SetCreateButtonButtonProps = {
     routineExercise: RoutineExercise;

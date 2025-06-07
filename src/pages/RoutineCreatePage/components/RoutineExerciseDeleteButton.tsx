@@ -1,7 +1,7 @@
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import {RoutineExercise} from "types/model";
 import {MouseEventHandler} from "react";
-import {useRoutineCreate} from "../../RoutineCreateProvider/RoutineCreateProvider";
+import {useRoutineCreate} from "./RoutineCreateProvider";
 
 type RoutineExerciseDeleteButtonProps = {
     routineExercise: RoutineExercise;

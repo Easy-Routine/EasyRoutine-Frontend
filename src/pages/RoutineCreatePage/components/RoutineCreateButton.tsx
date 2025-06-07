@@ -1,6 +1,6 @@
 import BasicButton from "headful/BasicButton/BasicButton";
 import Text from "headful/Text/Text";
-import {useRoutineCreate} from "../RoutineCreateProvider/RoutineCreateProvider";
+import {useRoutineCreate} from "./RoutineCreateProvider";
 
 const RoutineCreateButton = () => {
     const {routine} = useRoutineCreate();

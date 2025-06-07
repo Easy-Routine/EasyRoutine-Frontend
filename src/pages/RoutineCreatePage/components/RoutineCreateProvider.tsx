@@ -1,19 +1,15 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {Color} from "types/enum";
 import {Routine} from "types/model";
-
-type RoutineCreateRequest = Pick<
-    Routine,
-    "name" | "color" | "routineExercises"
->;
+import {RoutineCreateReq} from "types/routine";
 
 type RoutineCreateContextType = {
-    routine: RoutineCreateRequest;
-    setRoutine: React.Dispatch<React.SetStateAction<RoutineCreateRequest>>;
+    routine: RoutineCreateReq;
+    setRoutine: React.Dispatch<React.SetStateAction<RoutineCreateReq>>;
 };
 
 const RoutineCreateContext = createContext<RoutineCreateContextType>({
-    routine: {} as RoutineCreateRequest,
+    routine: {} as RoutineCreateReq,
     setRoutine: () => {},
 });
 
@@ -22,7 +18,7 @@ type RoutineCreateProviderProps = {
 };
 
 const RoutineCreateProvider = ({children}: RoutineCreateProviderProps) => {
-    const [routine, setRoutine] = useState<RoutineCreateRequest>({
+    const [routine, setRoutine] = useState<RoutineCreateReq>({
         name: "",
         color: Color.VIOLET,
         routineExercises: [],

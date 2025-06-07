@@ -6,6 +6,8 @@ export type RoutineDeleteReq = {
     id: string | number;
 };
 
+export type RoutineCreateReq = Omit<Routine, "id">;
+
 // {
 //     id: number;
 //     name: string;

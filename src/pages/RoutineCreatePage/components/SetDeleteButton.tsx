@@ -3,7 +3,7 @@ import {MouseEventHandler} from "react";
 import Text from "headful/Text/Text";
 import {ReactComponent as MinusIcon} from "assets/image/minus.svg";
 import {RoutineExercise} from "types/model";
-import {useRoutineCreate} from "../../RoutineCreateProvider/RoutineCreateProvider";
+import {useRoutineCreate} from "./RoutineCreateProvider";
 
 type SetDeleteButtonProps = {
     routineExercise: RoutineExercise;

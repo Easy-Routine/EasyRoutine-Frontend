@@ -1,7 +1,7 @@
 import ColorTabGroup from "headful/ColorTabGroup/ColorTabGroup";
 import {Color} from "types/enum";
 import {TabValue} from "headless/TabGroup/TabGroup";
-import {useRoutineCreate} from "../RoutineCreateProvider/RoutineCreateProvider";
+import {useRoutineCreate} from "./RoutineCreateProvider";
 
 type RoutineColorUpdateTabGroupProps = {};
 

@@ -1,6 +1,6 @@
 import BasicTable from "headful/BasicTable/BasicTable";
 import {Set, RoutineExercise} from "types/model";
-import {useRoutineCreate} from "../../RoutineCreateProvider/RoutineCreateProvider";
+import {useRoutineCreate} from "./RoutineCreateProvider";
 
 type SetUpdateTableProps = {
     routineExercise: RoutineExercise;

@@ -1,9 +1,9 @@
 import SearchInput from "headful/SearchInput/SearchInput";
 import React, {ChangeEventHandler} from "react";
-import {useExerciseAll} from "../ExerciseAllProvider/ExerciseAllProvider";
+import {useExerciseAllGet} from "./ExerciseAllGetProvider";
 
 const ExerciseFilterSearchInput = () => {
-    const {name, setName} = useExerciseAll();
+    const {name, setName} = useExerciseAllGet();
 
     const handleSearchInputChange: ChangeEventHandler<HTMLInputElement> = e => {
         setName(e.target.value);
