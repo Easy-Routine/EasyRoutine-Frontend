@@ -1,3 +1,4 @@
+import EmptyBoundary from "headful/EmptyBoundary/EmptyBoundary";
 import useRoutineAllGetQuery from "hooks/server/useRoutineAllGetQuery";
 import React from "react";
 import {Routine} from "types/model";
@@ -15,7 +16,11 @@ const RoutineList = ({component}: RoutineListProps) => {
 
     const routines = data.routines!;
 
-    return <>{routines.map(component)}</>;
+    return (
+        <EmptyBoundary data={routines} fallback={<>루틴이 없습니다.</>}>
+            {routines.map(component)}
+        </EmptyBoundary>
+    );
 };
 
 export default RoutineList;
