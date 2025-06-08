@@ -45,6 +45,7 @@ const SetCreateButton = ({
 
         const newSet: Set = {
             id: uuid(),
+            order: sets.length + 1,
             // optional fields: 이전 값이 있으면 그걸, 없으면 0
             ...(types.includes(Type.WEIGHT) && {weight: last?.weight ?? 0}),
 

@@ -135,6 +135,7 @@ export const getRoutineOne = async (
         routineExercises: [
             {
                 id: 1,
+                order: 1,
                 exercise: {
                     id: 1,
                     name: "덤벨프레스",
@@ -147,6 +148,7 @@ export const getRoutineOne = async (
                 sets: [
                     {
                         id: 1,
+                        order: 1,
                         weight: 50,
                         rep: 10,
                         restSec: 60,
@@ -154,6 +156,7 @@ export const getRoutineOne = async (
                     },
                     {
                         id: 2,
+                        order: 2,
                         weight: 60,
                         rep: 8,
                         restSec: 90,
@@ -163,6 +166,7 @@ export const getRoutineOne = async (
             },
             {
                 id: 2,
+                order: 2,
                 exercise: {
                     id: 2,
                     name: "덤벨프레스",
@@ -176,6 +180,7 @@ export const getRoutineOne = async (
                 sets: [
                     {
                         id: 1,
+                        order: 1,
                         weight: 50,
                         rep: 10,
                         restSec: 60,
@@ -183,6 +188,7 @@ export const getRoutineOne = async (
                     },
                     {
                         id: 2,
+                        order: 2,
                         weight: 60,
                         rep: 8,
                         restSec: 90,

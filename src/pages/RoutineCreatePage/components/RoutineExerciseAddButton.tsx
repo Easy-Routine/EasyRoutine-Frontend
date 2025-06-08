@@ -26,6 +26,7 @@ const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
         const extraRoutineExercises: RoutineExercise[] = filteredExercises.map(
             (exercise, index) => ({
                 id: uuid(),
+                order: currentRoutineExercises.length + 1 + index,
                 exercise,
                 sets: [],
             }),
