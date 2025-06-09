@@ -17,13 +17,26 @@ const RoutineExerciseDeleteButton = ({
         HTMLDivElement
     > = e => {
         e.stopPropagation();
-        // 루틴 설정 상태를 가져와서 깊은 복사를 해준다.
+
+        // 루틴 상태 깊은 복사
         const newRoutine = structuredClone(routine);
-        const routineExercises = newRoutine.routineExercises;
-        // 새로운 루틴 상태로 업데이트 시켜준다.
-        newRoutine.routineExercises = routineExercises.filter(
+        let routineExercises = newRoutine.routineExercises;
+
+        // 해당 ID를 제외
+        routineExercises = routineExercises.filter(
             (routineExercise: RoutineExercise) => routineExercise.id !== id,
         );
+
+        // order 재정렬
+        routineExercises = routineExercises
+            .sort((a: RoutineExercise, b: RoutineExercise) => a.order - b.order)
+            .map((exercise: RoutineExercise, index: number) => ({
+                ...exercise,
+                order: index + 1,
+            }));
+
+        // 새로운 배열로 루틴 업데이트
+        newRoutine.routineExercises = routineExercises;
         setRoutine(newRoutine);
     };
 

@@ -19,19 +19,41 @@ const RoutineExerciseDeleteButton = ({
         HTMLDivElement
     > = e => {
         e.stopPropagation();
-        // 루틴 설정 상태를 가져와서 깊은 복사를 해준다.
+
+        // 루틴 상태 깊은 복사
         const newRoutine = structuredClone(routine);
         const newRoutineHistory = structuredClone(routineHistory);
 
-        const currentRE = newRoutine.routineExercises;
-        const currentRHE = newRoutineHistory.routineExercises;
-        // 새로운 루틴 상태로 업데이트 시켜준다.
-        newRoutine.routineExercises = currentRE.filter(
+        // 현재 운동 배열 복사
+        let currentRE = newRoutine.routineExercises;
+        let currentRHE = newRoutineHistory.routineExercises;
+
+        // 삭제
+        currentRE = currentRE.filter(
             (routineExercise: RoutineExercise) => routineExercise.id !== id,
         );
-        newRoutineHistory.routineExercises = currentRHE.filter(
+        currentRHE = currentRHE.filter(
             (routineExercise: RoutineExercise) => routineExercise.id !== id,
         );
+
+        // order 재정렬
+        currentRE = currentRE
+            .sort((a: RoutineExercise, b: RoutineExercise) => a.order - b.order)
+            .map((exercise: RoutineExercise, index: number) => ({
+                ...exercise,
+                order: index + 1,
+            }));
+
+        currentRHE = currentRHE
+            .sort((a: RoutineExercise, b: RoutineExercise) => a.order - b.order)
+            .map((exercise: RoutineExercise, index: number) => ({
+                ...exercise,
+                order: index + 1,
+            }));
+
+        // 상태 업데이트
+        newRoutine.routineExercises = currentRE;
+        newRoutineHistory.routineExercises = currentRHE;
 
         setRoutine(newRoutine);
         setRoutineHistory(newRoutineHistory);
