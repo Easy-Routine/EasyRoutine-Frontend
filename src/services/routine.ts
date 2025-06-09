@@ -20,9 +20,11 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
             //     routineExercises: [
             //         {
             //             id: 1,
+            //             order: 1,
             //             sets: [
             //                 {
             //                     id: 1,
+            //                     order: 1,
             //                     weight: 50,
             //                     rep: 10,
             //                     restSec: 60,
@@ -40,10 +42,12 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
             //             },
             //         },
             //         {
-            //             id: 2,
+            //             id: 1,
+            //             order: 1,
             //             sets: [
             //                 {
             //                     id: 1,
+            //                     order: 1,
             //                     weight: 50,
             //                     rep: 10,
             //                     restSec: 60,
@@ -68,10 +72,12 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
             //     color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
             //     routineExercises: [
             //         {
-            //             id: 2,
+            //             id: 1,
+            //             order: 1,
             //             sets: [
             //                 {
             //                     id: 2,
+            //                     order: 1,
             //                     weight: 60,
             //                     rep: 8,
             //                     restSec: 90,
@@ -97,9 +103,11 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
             //     routineExercises: [
             //         {
             //             id: 4,
+            //             order: 1,
             //             sets: [
             //                 {
             //                     id: 3,
+            //                     order: 1,
             //                     weight: 0,
             //                     rep: 0,
             //                     restSec: 0,

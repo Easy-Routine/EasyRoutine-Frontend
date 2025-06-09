@@ -1,4 +1,5 @@
 import EmptyBoundary from "headful/EmptyBoundary/EmptyBoundary";
+import RoutineListEmptyView from "headful/RoutineListEmptyView/RoutineListEmptyView";
 import useRoutineAllGetQuery from "hooks/server/useRoutineAllGetQuery";
 import React from "react";
 import {Routine} from "types/model";
@@ -17,7 +18,7 @@ const RoutineList = ({component}: RoutineListProps) => {
     const routines = data.routines!;
 
     return (
-        <EmptyBoundary data={routines} fallback={<>루틴이 없습니다.</>}>
+        <EmptyBoundary data={routines} fallback={<RoutineListEmptyView />}>
             {routines.map(component)}
         </EmptyBoundary>
     );

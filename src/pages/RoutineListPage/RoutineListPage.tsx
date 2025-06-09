@@ -26,7 +26,7 @@ const RoutineListPage = () => {
                 <LogoArea />
             </Header>
             <Main>
-                <Flex direction="column" gap={20} padding={20}>
+                <Flex direction="column" gap={20} padding={20} height={"100%"}>
                     <RoutineList
                         component={routineAllGetRes => (
                             <RoutineAccordion
