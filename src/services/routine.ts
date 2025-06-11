@@ -218,8 +218,25 @@ export const createRoutineOne = async (
     routineCreateReq: RoutineCreateReq,
 ): Promise<void> => {
     try {
-        console.log("루틴 생성 요청:", routineCreateReq);
-        window.alert(JSON.stringify(routineCreateReq));
+        const newRoutineExercises = routineCreateReq.routineExercises.map(
+            ({id, sets, exercise, ...rest}) => ({
+                ...rest,
+                exercise: {
+                    id: exercise.id,
+                },
+                sets: sets.map(({id, ...setRest}) => ({
+                    ...setRest,
+                })),
+            }),
+        );
+
+        const newRoutineCreateReq = {
+            ...routineCreateReq,
+            routineExercises: newRoutineExercises,
+        };
+
+        console.log("루틴 생성 요청:", newRoutineCreateReq);
+        window.alert(JSON.stringify(newRoutineCreateReq));
         return;
     } catch (e) {
         handleError(e);
@@ -227,11 +244,27 @@ export const createRoutineOne = async (
 };
 
 export const updateRoutineOne = async (
-    routineCreateReq: RoutineUpdateReq,
+    routineUpdateReq: RoutineUpdateReq,
 ): Promise<void> => {
     try {
-        console.log("루틴 수정 요청:", routineCreateReq);
-        window.alert(JSON.stringify(routineCreateReq));
+        const newRoutineExercises = routineUpdateReq.routineExercises.map(
+            ({id, sets, exercise, ...rest}) => ({
+                ...rest,
+                exercise: {
+                    id: exercise.id,
+                },
+                sets: sets.map(({id, ...setRest}) => ({
+                    ...setRest,
+                })),
+            }),
+        );
+
+        const newRoutineUpdateReq = {
+            ...routineUpdateReq,
+            routineExercises: newRoutineExercises,
+        };
+        console.log("루틴 수정 요청:", newRoutineUpdateReq);
+        window.alert(JSON.stringify(newRoutineUpdateReq));
         return;
     } catch (e) {
         handleError(e);

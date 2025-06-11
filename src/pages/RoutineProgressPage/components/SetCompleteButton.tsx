@@ -39,6 +39,7 @@ const SetCompleteButton = ({routineExercise}: SetCompleteButtonProps) => {
 
             newRoutineHistory.routineExercises.push({
                 id: currentRE.id,
+                order: currentRE.order,
                 exercise: currentRE.exercise,
                 sets: [REFirstSet],
             });
