@@ -26,6 +26,8 @@ import RoutineExerciseAddModalButton from "./components/RoutineExerciseAddModalB
 import RoutineExerciseEmptyText from "./components/RoutineExerciseEmptyText";
 import Label from "headful/Label/Label";
 import BasicInput from "headful/BasicInput/BasicInput";
+import RoutineNameInput from "./components/RoutineNameInput";
+import Text from "headful/Text/Text";
 
 const RoutineCreatePage = () => {
     return (
@@ -37,7 +39,7 @@ const RoutineCreatePage = () => {
                 <Main>
                     <Flex direction="column" gap={20} padding={20}>
                         <Label text="루틴 제목" required>
-                            <BasicInput />
+                            <RoutineNameInput />
                         </Label>
 
                         <RoutineExerciseList
@@ -81,13 +83,18 @@ const RoutineCreatePage = () => {
                 </Main>
                 <Footer>
                     <BottomBox>
-                        <Flex
-                            direction="column"
-                            align="center"
-                            gap={10}
-                            width="100%"
-                        >
-                            <RoutineColorUpdateTabGroup />
+                        <Flex direction="column" gap={10} width="100%">
+                            <Text
+                                color="#000"
+                                size={12}
+                                weight="500"
+                                align="left"
+                            >
+                                루틴 색상
+                            </Text>
+                            <Flex justify="center">
+                                <RoutineColorUpdateTabGroup />
+                            </Flex>
                             <RoutineCreateButton />
                         </Flex>
                     </BottomBox>
