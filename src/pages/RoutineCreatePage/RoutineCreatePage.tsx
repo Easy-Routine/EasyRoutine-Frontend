@@ -4,11 +4,9 @@ import LogoArea from "headful/LogoArea/LogoArea";
 import Main from "headful/PrivatePageTemplate/Main/Main";
 import Footer from "headful/PrivatePageTemplate/Footer/Footer";
 import Flex from "headful/Flex/Flex";
-import FloatingCircleButton from "headful/FloatingCircleButton/FloatingCircleButton";
 import BottomBox from "headful/BottomBox/BottomBox";
 import RoutineCreateProvider from "./components/RoutineCreateProvider";
 import RoutineExerciseAccordion from "./components/RoutineExerciseAccordion";
-import RoutineExerciseAddParamsProvider from "./components/RoutineExerciseAddProvider";
 import RoutineExerciseList from "./components/RoutineExerciseList";
 import SetUpdateTable from "./components/SetUpdateTable";
 import SetDeleteButton from "./components/SetDeleteButton";
@@ -23,6 +21,11 @@ import RoutineColorUpdateTabGroup from "./components/RoutineColorUpdateTabGroup"
 import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
 import RoutineExerciseAddProvider from "./components/RoutineExerciseAddProvider";
 import ExerciseAddBottomSheet from "./components/ExerciseAddBottomSheet";
+import CircleButton from "headful/CircleButton/CircleButton";
+import RoutineExerciseAddModalButton from "./components/RoutineExerciseAddModalButton";
+import RoutineExerciseEmptyText from "./components/RoutineExerciseEmptyText";
+import Label from "headful/Label/Label";
+import BasicInput from "headful/BasicInput/BasicInput";
 
 const RoutineCreatePage = () => {
     return (
@@ -33,6 +36,10 @@ const RoutineCreatePage = () => {
             <RoutineCreateProvider>
                 <Main>
                     <Flex direction="column" gap={20} padding={20}>
+                        <Label text="루틴 제목" required>
+                            <BasicInput />
+                        </Label>
+
                         <RoutineExerciseList
                             component={routineExercise => (
                                 <RoutineExerciseAccordion
@@ -54,27 +61,35 @@ const RoutineCreatePage = () => {
                                 </RoutineExerciseAccordion>
                             )}
                         />
-                        <RoutineCreateButton />
+
+                        <ExerciseAddBottomSheet>
+                            <RoutineExerciseAddModalButton />
+                            <ExerciseAllGetProvider>
+                                <Flex direction="column" gap={20} height="100%">
+                                    <ExerciseFilterSearchInput />
+                                    <ExerciseFilterTabGroup />
+
+                                    <RoutineExerciseAddProvider>
+                                        <RoutineExerciseAddCheckBoxGroup />
+                                        <RoutineExerciseAddButton />
+                                    </RoutineExerciseAddProvider>
+                                </Flex>
+                            </ExerciseAllGetProvider>
+                        </ExerciseAddBottomSheet>
+                        <RoutineExerciseEmptyText />
                     </Flex>
-
-                    <ExerciseAddBottomSheet>
-                        <FloatingCircleButton />
-                        <ExerciseAllGetProvider>
-                            <Flex direction="column" gap={20} height="100%">
-                                <ExerciseFilterSearchInput />
-                                <ExerciseFilterTabGroup />
-
-                                <RoutineExerciseAddProvider>
-                                    <RoutineExerciseAddCheckBoxGroup />
-                                    <RoutineExerciseAddButton />
-                                </RoutineExerciseAddProvider>
-                            </Flex>
-                        </ExerciseAllGetProvider>
-                    </ExerciseAddBottomSheet>
                 </Main>
                 <Footer>
                     <BottomBox>
-                        <RoutineColorUpdateTabGroup />
+                        <Flex
+                            direction="column"
+                            align="center"
+                            gap={10}
+                            width="100%"
+                        >
+                            <RoutineColorUpdateTabGroup />
+                            <RoutineCreateButton />
+                        </Flex>
                     </BottomBox>
                 </Footer>
             </RoutineCreateProvider>

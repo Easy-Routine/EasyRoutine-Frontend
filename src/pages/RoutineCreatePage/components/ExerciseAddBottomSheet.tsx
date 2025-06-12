@@ -10,7 +10,7 @@ const ExerciseAddBottomSheet = ({children}: ExerciseAddBottomSheetProps) => {
 
     return (
         <BottomSheetModal>
-            <BottomSheetModal.Trigger>{trigger}</BottomSheetModal.Trigger>
+            {trigger}
             <BottomSheetModal.Content>{content}</BottomSheetModal.Content>
             <BottomSheetModal.Backdrop />
         </BottomSheetModal>
