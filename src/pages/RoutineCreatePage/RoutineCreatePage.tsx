@@ -12,7 +12,7 @@ import SetUpdateTable from "./components/SetUpdateTable";
 import SetDeleteButton from "./components/SetDeleteButton";
 import SetCreateButton from "./components/SetCreateButton";
 import RoutineExerciseDeleteButton from "./components/RoutineExerciseDeleteButton";
-import RoutineCreateButton from "./components/RoutineCreateButton";
+import RoutineCreateButton from "./components/RoutineCreateModalButton";
 import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput";
 import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
 import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddCheckBoxGroup";
@@ -28,6 +28,8 @@ import Label from "headful/Label/Label";
 import BasicInput from "headful/BasicInput/BasicInput";
 import RoutineNameInput from "./components/RoutineNameInput";
 import Text from "headful/Text/Text";
+import RoutineCreateModal from "./components/RoutineCreateModal";
+import RoutineCreateConfirm from "./components/RoutineCreateConfirm";
 
 const RoutineCreatePage = () => {
     return (
@@ -95,7 +97,11 @@ const RoutineCreatePage = () => {
                             <Flex justify="center">
                                 <RoutineColorUpdateTabGroup />
                             </Flex>
-                            <RoutineCreateButton />
+
+                            <RoutineCreateModal>
+                                <RoutineCreateButton />
+                                <RoutineCreateConfirm />
+                            </RoutineCreateModal>
                         </Flex>
                     </BottomBox>
                 </Footer>

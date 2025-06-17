@@ -2,14 +2,17 @@ import BasicButton from "headful/BasicButton/BasicButton";
 import Text from "headful/Text/Text";
 import {useRoutineCreate} from "./RoutineCreateProvider";
 import useRoutineCreateMutation from "hooks/server/useRoutineCreateMutation";
+import {useModal} from "headless/Modal/Modal";
 
-const RoutineCreateButton = () => {
+const RoutineCreateModalButton = () => {
     const {routine} = useRoutineCreate();
+    const {openModal} = useModal();
 
     const {mutateAsync: createRoutineMutate} = useRoutineCreateMutation();
 
     const handleButtonClick = async () => {
-        await createRoutineMutate(routine);
+        // await createRoutineMutate(routine);
+        openModal();
     };
 
     return (
@@ -19,4 +22,4 @@ const RoutineCreateButton = () => {
     );
 };
 
-export default RoutineCreateButton;
+export default RoutineCreateModalButton;
