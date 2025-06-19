@@ -1,0 +1,42 @@
+.TitleHeaderContent {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .Left {
+        flex: 1;
+        .Circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .Icon {
+                width: 20px;
+                height: 20px;
+                color: #fff;
+            }
+        }
+    }
+
+    .Mid {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .Title {
+            .Text {
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .Right {
+        flex: 1;
+    }
+}

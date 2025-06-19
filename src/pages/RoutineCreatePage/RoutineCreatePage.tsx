@@ -30,12 +30,13 @@ import RoutineNameInput from "./components/RoutineNameInput";
 import Text from "headful/Text/Text";
 import RoutineCreateModal from "./components/RoutineCreateModal";
 import RoutineCreateConfirm from "./components/RoutineCreateConfirm";
+import TitleHeaderContent from "components/TitleHeaderContent/TitleHeaderContent";
 
 const RoutineCreatePage = () => {
     return (
         <PrivatePageTemplate>
             <Header>
-                <LogoArea />
+                <TitleHeaderContent title="루틴 생성" />
             </Header>
             <RoutineCreateProvider>
                 <Main>
