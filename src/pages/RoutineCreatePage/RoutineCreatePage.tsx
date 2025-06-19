@@ -21,22 +21,25 @@ import RoutineColorUpdateTabGroup from "./components/RoutineColorUpdateTabGroup"
 import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
 import RoutineExerciseAddProvider from "./components/RoutineExerciseAddProvider";
 import ExerciseAddBottomSheet from "./components/ExerciseAddBottomSheet";
-import CircleButton from "headful/CircleButton/CircleButton";
 import RoutineExerciseAddModalButton from "./components/RoutineExerciseAddModalButton";
 import RoutineExerciseEmptyText from "./components/RoutineExerciseEmptyText";
 import Label from "headful/Label/Label";
-import BasicInput from "headful/BasicInput/BasicInput";
 import RoutineNameInput from "./components/RoutineNameInput";
 import Text from "headful/Text/Text";
 import RoutineCreateModal from "./components/RoutineCreateModal";
 import RoutineCreateConfirm from "./components/RoutineCreateConfirm";
-import TitleHeaderContent from "components/TitleHeaderContent/TitleHeaderContent";
+import PageMoveModal from "./components/PageMoveModal";
+import PageMoveConfirm from "./components/PageMoveConfirm";
+import PageMoveModalOpenTitleHeaderContent from "./components/PageMoveModalOpenTitleHeaderContent";
 
 const RoutineCreatePage = () => {
     return (
         <PrivatePageTemplate>
             <Header>
-                <TitleHeaderContent title="루틴 생성" />
+                <PageMoveModal>
+                    <PageMoveModalOpenTitleHeaderContent />
+                    <PageMoveConfirm />
+                </PageMoveModal>
             </Header>
             <RoutineCreateProvider>
                 <Main>

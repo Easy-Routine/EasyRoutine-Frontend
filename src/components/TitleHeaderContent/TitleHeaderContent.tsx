@@ -5,13 +5,17 @@ import {useNavigate} from "react-router-dom";
 
 type TitleHeaderContentProps = {
     title: string;
+    onBackButtonClick?: () => void;
 };
 
-const TitleHeaderContent = ({title}: TitleHeaderContentProps) => {
+const TitleHeaderContent = ({
+    title,
+    onBackButtonClick,
+}: TitleHeaderContentProps) => {
     const navigate = useNavigate();
 
     const handleBackButtonClick = () => {
-        navigate(-1);
+        onBackButtonClick ? onBackButtonClick() : navigate(-1);
     };
 
     return (
