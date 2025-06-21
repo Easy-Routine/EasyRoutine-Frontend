@@ -97,4 +97,11 @@
         background-color: var(--color);
         color: #fff;
     }
+
+    &.Single {
+        border-bottom-left-radius: inherit;
+        button {
+            border-bottom-left-radius: inherit; // 왼쪽도 라운딩
+        }
+    }
 }
