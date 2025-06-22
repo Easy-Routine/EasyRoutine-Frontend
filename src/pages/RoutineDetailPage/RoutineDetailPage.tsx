@@ -24,6 +24,8 @@ import RoutineExerciseAddProvider from "./components/RoutineExerciseAddProvider"
 import RoutineUpdateProvider from "./components/RoutineUpdateProvider";
 import ExerciseAddBottomSheet from "./components/ExerciseAddBottomSheet";
 import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
+import Label from "headful/Label/Label";
+import RoutineNameInput from "./components/RoutineNameInput";
 
 const RoutineDetailPage = () => {
     const {routineId} = useParams();
@@ -38,6 +40,10 @@ const RoutineDetailPage = () => {
             <RoutineUpdateProvider defaultValue={routine}>
                 <Main>
                     <Flex direction="column" gap={20} padding={20}>
+                        <Label text="루틴 제목" required>
+                            <RoutineNameInput />
+                        </Label>
+
                         <RoutineExerciseList
                             component={routineExercise => (
                                 <RoutineExerciseAccordion
