@@ -33,6 +33,7 @@ import Text from "headful/Text/Text";
 import RoutineUpdateModal from "./components/RoutineUpdateModal";
 import RoutineUpdateModalButton from "./components/RoutineUpdateModalButton";
 import RoutineUpdateConfirm from "./components/RoutineUpdateConfirm";
+import RoutineExerciseAddModalButton from "./components/RoutineExerciseAddModalButton";
 
 const RoutineDetailPage = () => {
     const {routineId} = useParams();
@@ -78,8 +79,7 @@ const RoutineDetailPage = () => {
                     </Flex>
 
                     <ExerciseAddBottomSheet>
-                        <FloatingCircleButton />
-
+                        <RoutineExerciseAddModalButton />
                         <ExerciseAllGetProvider>
                             <Flex direction="column" gap={20} height="100%">
                                 <ExerciseFilterSearchInput />
