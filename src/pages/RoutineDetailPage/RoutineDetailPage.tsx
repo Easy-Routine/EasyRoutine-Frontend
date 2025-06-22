@@ -26,6 +26,13 @@ import ExerciseAddBottomSheet from "./components/ExerciseAddBottomSheet";
 import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
 import Label from "headful/Label/Label";
 import RoutineNameInput from "./components/RoutineNameInput";
+import PageMoveModal from "./components/PageMoveModal";
+import PageMoveModalOpenTitleHeaderContent from "./components/PageMoveModalOpenTitleHeaderContent";
+import PageMoveConfirm from "./components/PageMoveConfirm";
+import Text from "headful/Text/Text";
+import RoutineUpdateModal from "./components/RoutineUpdateModal";
+import RoutineUpdateModalButton from "./components/RoutineUpdateModalButton";
+import RoutineUpdateConfirm from "./components/RoutineUpdateConfirm";
 
 const RoutineDetailPage = () => {
     const {routineId} = useParams();
@@ -35,7 +42,10 @@ const RoutineDetailPage = () => {
     return (
         <PrivatePageTemplate>
             <Header>
-                <LogoArea />
+                <PageMoveModal>
+                    <PageMoveModalOpenTitleHeaderContent />
+                    <PageMoveConfirm />
+                </PageMoveModal>
             </Header>
             <RoutineUpdateProvider defaultValue={routine}>
                 <Main>
@@ -65,7 +75,6 @@ const RoutineDetailPage = () => {
                                 </RoutineExerciseAccordion>
                             )}
                         />
-                        <RoutineUpdateButton />
                     </Flex>
 
                     <ExerciseAddBottomSheet>
@@ -86,7 +95,24 @@ const RoutineDetailPage = () => {
                 </Main>
                 <Footer>
                     <BottomBox>
-                        <RoutineColorUpdateTabGroup />
+                        <Flex direction="column" gap={10} width="100%">
+                            <Text
+                                color="#000"
+                                size={12}
+                                weight="500"
+                                align="left"
+                            >
+                                루틴 색상
+                            </Text>
+                            <Flex justify="center">
+                                <RoutineColorUpdateTabGroup />
+                            </Flex>
+
+                            <RoutineUpdateModal>
+                                <RoutineUpdateModalButton />
+                                <RoutineUpdateConfirm />
+                            </RoutineUpdateModal>
+                        </Flex>
                     </BottomBox>
                 </Footer>
             </RoutineUpdateProvider>
