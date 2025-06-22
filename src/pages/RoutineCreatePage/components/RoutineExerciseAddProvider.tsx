@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from "react";
+import React, {createContext, useContext, useEffect, useState} from "react";
 
 type RoutineExerciseAddContextType = {
     exerciseIds: string[];
@@ -18,6 +18,10 @@ const RoutineExerciseAddProvider = ({
     children,
 }: RoutineExerciseAddProviderProps) => {
     const [exerciseIds, setExerciseIds] = useState<string[]>([]);
+
+    useEffect(() => {
+        console.log("exerciseId", exerciseIds);
+    }, [exerciseIds]);
 
     return (
         <RoutineExerciseAddContext.Provider

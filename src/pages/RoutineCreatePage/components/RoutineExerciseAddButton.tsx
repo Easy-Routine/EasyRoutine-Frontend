@@ -37,6 +37,8 @@ const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
         ];
 
         setRoutine(newRoutine);
+        console.log("이거 맞는데", exerciseIds);
+        setExerciseIds([]); // 선택한 운동 라이브러리 아이디 초기화
 
         closeModal();
     };

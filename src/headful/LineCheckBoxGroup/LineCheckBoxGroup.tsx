@@ -6,9 +6,9 @@ import styles from "./LineCheckBoxGroup.module.scss";
 
 type CheckboxGroupProps = React.ComponentProps<typeof CheckboxGroup>;
 
-const LineCheckBoxGroup = ({children}: CheckboxGroupProps) => {
+const LineCheckBoxGroup = ({children, ...props}: CheckboxGroupProps) => {
     return (
-        <CheckboxGroup>
+        <CheckboxGroup {...props}>
             <div className={styles.lineCheckBoxGroup}>{children}</div>
         </CheckboxGroup>
     );
