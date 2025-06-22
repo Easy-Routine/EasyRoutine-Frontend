@@ -3,7 +3,7 @@ import Trash from "assets/image/trash.svg";
 import {useModal} from "headless/Modal/Modal";
 import {useNavigate} from "react-router-dom";
 import {RoutineExercise} from "types/model";
-import {useRoutineCreate} from "./RoutineCreateProvider";
+import {useRoutineUpdate} from "./RoutineUpdateProvider";
 
 type RoutineExerciseDeleteConfirmProps = {
     routineExercise: RoutineExercise;
@@ -13,7 +13,7 @@ const RoutineExerciseDeleteConfirm = ({
     routineExercise,
 }: RoutineExerciseDeleteConfirmProps) => {
     const {id} = routineExercise;
-    const {routine, setRoutine} = useRoutineCreate();
+    const {routine, setRoutine} = useRoutineUpdate();
     const {closeModal} = useModal();
 
     const handleCancelButtonClick = () => {

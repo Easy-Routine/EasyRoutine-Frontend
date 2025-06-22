@@ -11,7 +11,6 @@ import RoutineExerciseList from "./components/RoutineExerciseList";
 import SetUpdateTable from "./components/SetUpdateTable";
 import SetDeleteButton from "./components/SetDeleteButton";
 import SetCreateButton from "./components/SetCreateButton";
-import RoutineExerciseDeleteButton from "./components/RoutineExerciseDeleteModalButton";
 import RoutineCreateButton from "./components/RoutineCreateModalButton";
 import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput";
 import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
@@ -33,6 +32,7 @@ import PageMoveConfirm from "./components/PageMoveConfirm";
 import PageMoveModalOpenTitleHeaderContent from "./components/PageMoveModalOpenTitleHeaderContent";
 import RoutineExerciseDeleteModal from "./components/RoutineExerciseDeleteModal";
 import RoutineExerciseDeleteConfirm from "./components/RoutineExerciseDeleteConfirm";
+import RoutineExerciseDeleteModalButton from "./components/RoutineExerciseDeleteModalButton";
 
 const RoutineCreatePage = () => {
     return (
@@ -66,7 +66,7 @@ const RoutineCreatePage = () => {
                                         routineExercise={routineExercise}
                                     />
                                     <RoutineExerciseDeleteModal>
-                                        <RoutineExerciseDeleteButton
+                                        <RoutineExerciseDeleteModalButton
                                             routineExercise={routineExercise}
                                         />
                                         <RoutineExerciseDeleteConfirm
