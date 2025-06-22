@@ -11,7 +11,7 @@ import RoutineExerciseList from "./components/RoutineExerciseList";
 import SetUpdateTable from "./components/SetUpdateTable";
 import SetDeleteButton from "./components/SetDeleteButton";
 import SetCreateButton from "./components/SetCreateButton";
-import RoutineExerciseDeleteButton from "./components/RoutineExerciseDeleteButton";
+import RoutineExerciseDeleteButton from "./components/RoutineExerciseDeleteModalButton";
 import RoutineCreateButton from "./components/RoutineCreateModalButton";
 import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput";
 import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
@@ -31,6 +31,8 @@ import RoutineCreateConfirm from "./components/RoutineCreateConfirm";
 import PageMoveModal from "./components/PageMoveModal";
 import PageMoveConfirm from "./components/PageMoveConfirm";
 import PageMoveModalOpenTitleHeaderContent from "./components/PageMoveModalOpenTitleHeaderContent";
+import RoutineExerciseDeleteModal from "./components/RoutineExerciseDeleteModal";
+import RoutineExerciseDeleteConfirm from "./components/RoutineExerciseDeleteConfirm";
 
 const RoutineCreatePage = () => {
     return (
@@ -63,9 +65,14 @@ const RoutineCreatePage = () => {
                                     <SetCreateButton
                                         routineExercise={routineExercise}
                                     />
-                                    <RoutineExerciseDeleteButton
-                                        routineExercise={routineExercise}
-                                    />
+                                    <RoutineExerciseDeleteModal>
+                                        <RoutineExerciseDeleteButton
+                                            routineExercise={routineExercise}
+                                        />
+                                        <RoutineExerciseDeleteConfirm
+                                            routineExercise={routineExercise}
+                                        />
+                                    </RoutineExerciseDeleteModal>
                                 </RoutineExerciseAccordion>
                             )}
                         />
