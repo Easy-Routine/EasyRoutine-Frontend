@@ -7,6 +7,7 @@ import {ReactComponent as CalendarArrowLeftIcon} from "assets/image/calendar-arr
 import {ReactComponent as CalendarArrowRightIcon} from "assets/image/calendar-arrow-right.svg";
 import moment from "moment";
 import "moment/locale/ko";
+import useRoutineHistoryAllGetMonthlyQuery from "hooks/server/useRoutineHistoryAllGetMonthlyQuery";
 
 type DotData = {
     _id: number;
@@ -38,10 +39,9 @@ const RoutineHistoryCalendar = (
     const [date, setDate] = useState(new Date());
     const [activeStartDate, setActiveStartDate] = useState(new Date());
 
-    // const {data: routineRecordAllMonthly} =
-    //     useGetRoutineRecordAllMonthlyQuery(currentMonth);
-
-    // const dotDataByDate = routineRecordAllMonthly!;
+    const {
+        data: {routineHistories},
+    } = useRoutineHistoryAllGetMonthlyQuery({date});
 
     const handleDateButtonClick = (date: any) => {
         // onDateButtonClick(date);
@@ -73,40 +73,42 @@ const RoutineHistoryCalendar = (
         return moment(date).format("YYYY년 M월");
     };
 
-    // const getDotDataForDate = (date: Date, dotDataKey: string) => {
-    //     const formattedDate = moment(date).format("YYYY-MM-DD");
-    //     const record = dotDataByDate.find(item => item.date === formattedDate);
-    //     return record ? record[dotDataKey] : [];
-    // };
+    const getDotDataForDate = (date: Date) => {
+        const formattedDate = moment(date).format("YYYY-MM-DD");
+        const record = routineHistories.find(
+            rh => moment(rh.createdAt).format("YYYY-MM-DD") === formattedDate,
+        );
+        return record ? [{}] : [];
+    };
 
-    // const tileContent = ({date: tileDate}: {date: Date}) => {
-    //     const isActive = moment(date).isSame(moment(tileDate), "day");
-    //     const isToday = moment(tileDate).isSame(moment(), "day");
-    //     const dotData = getDotDataForDate(tileDate, dotDataKey);
-    //     return (
-    //         <>
-    //             <div
-    //                 className={`${styles.circle} ${
-    //                     isActive ? styles.active : isToday ? styles.today : ""
-    //                 }`}
-    //             >
-    //                 {tileDate.getDate()}
-    //             </div>
-    //             <div className={styles.dotWrapper}>
-    //                 {Array.isArray(dotData) &&
-    //                     dotData
-    //                         .map(item => (
-    //                             <div
-    //                                 key={item._id}
-    //                                 className={styles.dot}
-    //                                 style={{backgroundColor: item.color}}
-    //                             />
-    //                         ))
-    //                         .splice(0, 3)}
-    //             </div>
-    //         </>
-    //     );
-    // };
+    const tileContent = ({date: tileDate}: {date: Date}) => {
+        const isActive = moment(date).isSame(moment(tileDate), "day");
+        const isToday = moment(tileDate).isSame(moment(), "day");
+        const dotData = getDotDataForDate(tileDate);
+        return (
+            <>
+                <div
+                    className={`${styles.circle} ${
+                        isActive ? styles.active : isToday ? styles.today : ""
+                    }`}
+                >
+                    {tileDate.getDate()}
+                </div>
+                <div className={styles.dotWrapper}>
+                    {Array.isArray(dotData) &&
+                        dotData
+                            .map((item, index) => (
+                                <div
+                                    key={index}
+                                    className={styles.dot}
+                                    style={{backgroundColor: "red"}}
+                                />
+                            ))
+                            .splice(0, 3)}
+                </div>
+            </>
+        );
+    };
 
     return (
         <Box>
@@ -128,7 +130,7 @@ const RoutineHistoryCalendar = (
                     onChange={handleDateButtonClick}
                     value={date}
                     activeStartDate={activeStartDate}
-                    // tileContent={tileContent}
+                    tileContent={tileContent}
                 />
             </div>
         </Box>

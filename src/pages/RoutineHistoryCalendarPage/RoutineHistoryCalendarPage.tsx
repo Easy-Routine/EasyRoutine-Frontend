@@ -7,6 +7,8 @@ import Header from "headful/PrivatePageTemplate/Header/Header";
 import Main from "headful/PrivatePageTemplate/Main/Main";
 import PrivatePageTemplate from "headful/PrivatePageTemplate/PrivatePageTemplate";
 import {useLocation} from "react-router-dom";
+import RoutineHistoryCalendar from "./components/RoutineHistoryCaledar/RoutineHistoryCalendar";
+import SummaryBox from "headful/SummaryBox/SummaryBox";
 
 const RoutineHistoryCalendarPage = () => {
     const location = useLocation();
@@ -18,7 +20,12 @@ const RoutineHistoryCalendarPage = () => {
             <Main>
                 <Flex direction="column" gap={20} padding={20}>
                     <RoutineHistoryPageMoveTab />
-                    캘린더 페이지
+                    <RoutineHistoryCalendar />
+
+                    <SummaryBox>
+                        <SummaryBox.Text label="운동시간" value="1시간 36분" />
+                        <SummaryBox.Text label="전체볼륨" value="3450KG" />
+                    </SummaryBox>
                 </Flex>
             </Main>
             <Footer>
