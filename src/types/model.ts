@@ -44,6 +44,7 @@ export type RoutineHistory = {
     name: string;
     color: string;
     workoutTime: number;
+    createdAt: string;
     routineExercises: RoutineExercise[];
 };
 
