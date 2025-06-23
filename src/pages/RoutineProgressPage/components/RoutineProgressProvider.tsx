@@ -68,6 +68,7 @@ const RoutineProgressProvider = ({
         name: routine.name,
         color: routine.color as Color,
         workoutTime: 0,
+        createdAt: moment().toISOString(),
         routineExercises: [],
     });
     // const [currentWorkoutId, setCurrentWorkoutId] = useState("");
