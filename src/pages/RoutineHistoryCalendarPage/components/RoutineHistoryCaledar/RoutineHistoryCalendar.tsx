@@ -75,18 +75,18 @@ const RoutineHistoryCalendar = (
         return moment(date).format("YYYY년 M월");
     };
 
-    const getDotDataForDate = (date: Date) => {
+    const getRoutineHistoriesAt = (date: Date) => {
         const formattedDate = moment(date).format("YYYY-MM-DD");
-        const record = routineHistories.find(
+        const rhs = routineHistories.filter(
             rh => moment(rh.createdAt).format("YYYY-MM-DD") === formattedDate,
         );
-        return record ? [{}] : [];
+        return rhs;
     };
 
     const tileContent = ({date: tileDate}: {date: Date}) => {
         const isActive = moment(dailyDate).isSame(moment(tileDate), "day");
         const isToday = moment(tileDate).isSame(moment(), "day");
-        const dotData = getDotDataForDate(tileDate);
+        const routineHistories = getRoutineHistoriesAt(tileDate);
         return (
             <>
                 <div
@@ -97,16 +97,15 @@ const RoutineHistoryCalendar = (
                     {tileDate.getDate()}
                 </div>
                 <div className={styles.dotWrapper}>
-                    {Array.isArray(dotData) &&
-                        dotData
-                            .map((item, index) => (
-                                <div
-                                    key={index}
-                                    className={styles.dot}
-                                    style={{backgroundColor: "red"}}
-                                />
-                            ))
-                            .splice(0, 3)}
+                    {routineHistories
+                        .map((item, index) => (
+                            <div
+                                key={index}
+                                className={styles.dot}
+                                style={{backgroundColor: "red"}}
+                            />
+                        ))
+                        .splice(0, 3)}
                 </div>
             </>
         );

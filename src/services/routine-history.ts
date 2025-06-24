@@ -150,6 +150,38 @@ export const getRoutineHistoryAllMonthly = async (
                     },
                 ],
             },
+            {
+                id: 5,
+                name: "Cardio Routine",
+                color: Color.GREEN,
+                workoutTime: 3600,
+                createdAt: "2025-06-20T09:00:00Z",
+                routineExercises: [
+                    {
+                        id: 4,
+                        order: 1,
+                        sets: [
+                            {
+                                id: 3,
+                                order: 1,
+                                weight: 0,
+                                rep: 0,
+                                restSec: 0,
+                                exerciseSec: 300,
+                            },
+                        ],
+                        exercise: {
+                            id: 3,
+                            name: "덤벨프레스",
+                            image: null,
+                            category: "CHEST",
+                            types: ["WEIGHT", "COUNT"],
+                            isEditable: 1,
+                            shareLevel: 1,
+                        },
+                    },
+                ],
+            },
         ];
     } catch (e) {
         handleError(e);
@@ -262,6 +294,38 @@ export const getRoutineHistoryAllDaily = async ({
                 color: Color.GREEN,
                 workoutTime: 3600,
                 createdAt: "2025-06-20T08:00:00Z",
+                routineExercises: [
+                    {
+                        id: 4,
+                        order: 1,
+                        sets: [
+                            {
+                                id: 3,
+                                order: 1,
+                                weight: 0,
+                                rep: 0,
+                                restSec: 0,
+                                exerciseSec: 300,
+                            },
+                        ],
+                        exercise: {
+                            id: 3,
+                            name: "덤벨프레스",
+                            image: null,
+                            category: "CHEST",
+                            types: ["WEIGHT", "COUNT"],
+                            isEditable: 1,
+                            shareLevel: 1,
+                        },
+                    },
+                ],
+            },
+            {
+                id: 5,
+                name: "Cardio Routine",
+                color: Color.GREEN,
+                workoutTime: 3600,
+                createdAt: "2025-06-20T09:00:00Z",
                 routineExercises: [
                     {
                         id: 4,
