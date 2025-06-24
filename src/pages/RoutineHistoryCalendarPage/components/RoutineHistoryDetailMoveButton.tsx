@@ -26,7 +26,7 @@ const RoutineHistoryDetailMoveButton = ({
         HTMLDivElement
     > = e => {
         e.stopPropagation();
-        navigate(ROUTES.CONFIG.DETAIL.PATH(id.toString()));
+        navigate(ROUTES.RECORD.DETAIL.PATH(id.toString()));
     };
 
     return (
