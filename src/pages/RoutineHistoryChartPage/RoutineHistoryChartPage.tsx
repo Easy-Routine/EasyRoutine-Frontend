@@ -15,10 +15,13 @@ const RoutineHistoryChartPage = () => {
             <Header>
                 <LogoArea />
             </Header>
-            <Flex direction="column" gap={20} padding={20}>
+            <Main>
+                {/* <Flex direction="column" gap={20} padding={20}> */}
                 <RoutineHistoryPageMoveTab />
                 차트 페이지
-            </Flex>
+                {/* </Flex> */}
+            </Main>
+
             <Footer>
                 <NavigateBottomBox path={location.pathname} />
             </Footer>

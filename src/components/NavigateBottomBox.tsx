@@ -19,9 +19,20 @@ const NavigateBottomBox = ({path}: NaviationBottomBoxProps) => {
         navigate(value as string);
     };
 
+    const getTabValue = (pathname: string) => {
+        // 기록 계열 URL이면 전부 동일 value 로 귀결
+        if (
+            pathname.startsWith(ROUTES.RECORD.CALENDAR.PATH) ||
+            pathname.startsWith(ROUTES.RECORD.CHART.PATH)
+        ) {
+            return ROUTES.RECORD.CALENDAR.PATH;
+        }
+        return pathname;
+    };
+
     return (
         <BottomBox>
-            <IconTabGroup defaultValue={path}>
+            <IconTabGroup defaultValue={getTabValue(path)}>
                 <IconTabGroup.Item
                     value={ROUTES.CONFIG.LIST.PATH}
                     onTabGroupItemClick={handleNavigationItemClick}
