@@ -39,12 +39,14 @@ const RoutineHistoryCalendar = (
 ) => {
     const {date: dailyDate, setDate: setDailyDate} =
         useRoutineHistoryAllGetDailyProvider();
+    const {date: monthlyDate, setDate: setMonthlyDate} =
+        useRoutineHistoryAllGetDailyProvider();
     // const [date, setDate] = useState(new Date());
     const [activeStartDate, setActiveStartDate] = useState(new Date());
 
     const {
         data: {routineHistories},
-    } = useRoutineHistoryAllGetMonthlyQuery({date: dailyDate});
+    } = useRoutineHistoryAllGetMonthlyQuery({date: monthlyDate});
 
     const handleDateButtonClick = (date: any) => {
         setDailyDate(date);
@@ -57,6 +59,7 @@ const RoutineHistoryCalendar = (
             1,
         );
         // onPrevMonthButtonClick(previousMonth);
+        setMonthlyDate(previousMonth);
         setActiveStartDate(previousMonth);
     };
 
@@ -67,6 +70,7 @@ const RoutineHistoryCalendar = (
             1,
         );
         // onNextMonthButtnClick(nextMonth);
+        setMonthlyDate(nextMonth);
         setActiveStartDate(nextMonth);
     };
 

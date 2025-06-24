@@ -17,6 +17,7 @@ import RoutineHistoryDeleteModalButton from "./components/RoutineHistoryDeleteMo
 import RoutineHistoryDeleteConfirm from "./components/RoutineHistoryDeleteConfirm";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import RoutineHistoryAllGetDailyProvider from "./components/RoutineHistoryAllGetDailyProvider";
+import RoutineHistoryAllGetMonthlyProvider from "./components/RoutineHistoryAllGetMonthlyProvider";
 
 const RoutineHistoryCalendarPage = () => {
     const location = useLocation();
@@ -30,7 +31,10 @@ const RoutineHistoryCalendarPage = () => {
                     <RoutineHistoryPageMoveTab />
 
                     <RoutineHistoryAllGetDailyProvider>
-                        <RoutineHistoryCalendar />
+                        <RoutineHistoryAllGetMonthlyProvider>
+                            <RoutineHistoryCalendar />
+                        </RoutineHistoryAllGetMonthlyProvider>
+
                         <SummaryBox>
                             <SummaryBox.Text
                                 label="운동시간"
