@@ -9,6 +9,13 @@ import PrivatePageTemplate from "headful/PrivatePageTemplate/PrivatePageTemplate
 import {useLocation} from "react-router-dom";
 import RoutineHistoryCalendar from "./components/RoutineHistoryCaledar/RoutineHistoryCalendar";
 import SummaryBox from "headful/SummaryBox/SummaryBox";
+import RoutineHistoryAccordionList from "./components/RoutineHistoryAccordionList";
+import RoutineHistoryAccordion from "./components/RoutineHistoryAccordion";
+import RoutineHistoryDetailMoveButton from "./components/RoutineHistoryDetailMoveButton";
+import RoutineHistoryDeleteModal from "./components/RoutineHistoryDeleteModal";
+import RoutineHistoryDeleteModalButton from "./components/RoutineHistoryDeleteModalButton";
+import RoutineHistoryDeleteConfirm from "./components/RoutineHistoryDeleteConfirm";
+import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 
 const RoutineHistoryCalendarPage = () => {
     const location = useLocation();
@@ -26,6 +33,32 @@ const RoutineHistoryCalendarPage = () => {
                         <SummaryBox.Text label="운동시간" value="1시간 36분" />
                         <SummaryBox.Text label="전체볼륨" value="3450KG" />
                     </SummaryBox>
+
+                    <RoutineHistoryAccordionList
+                        component={routineHistory => (
+                            <RoutineHistoryAccordion
+                                routineHistory={routineHistory}
+                            >
+                                <RoutineHistoryDetailMoveButton
+                                    routineHistory={routineHistory}
+                                />
+                                <RoutineHistoryDeleteModal>
+                                    <RoutineHistoryDeleteModalButton
+                                        routineHistory={routineHistory}
+                                    />
+                                    <RoutineHistoryDeleteConfirm
+                                        routineHistory={routineHistory}
+                                    />
+                                </RoutineHistoryDeleteModal>
+                                <RoutineHistoryDeleteModal>
+                                    <SwipeableAccordion.DeleteButton />
+                                    <RoutineHistoryDeleteConfirm
+                                        routineHistory={routineHistory}
+                                    />
+                                </RoutineHistoryDeleteModal>
+                            </RoutineHistoryAccordion>
+                        )}
+                    />
                 </Flex>
             </Main>
             <Footer>

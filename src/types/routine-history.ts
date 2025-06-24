@@ -1,6 +1,7 @@
 import {Routine, RoutineHistory} from "./model";
 
 export type RoutineHistoryAllGetMonthlyReq = {date: Date};
+export type RoutineHistoryAllGetDailyReq = {date: Date};
 
 export type RoutineHistoryAllGetMonthlyRes = RoutineHistory[];
 export type RoutineHistoryAllGetDailyRes = RoutineHistory[];
