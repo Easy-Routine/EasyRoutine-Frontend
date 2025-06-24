@@ -13,3 +13,6 @@ export type RoutineHistoryDeleteReq = {
 export type RoutineHistoryCreateReq = Omit<Routine, "id">;
 
 export type RoutineHistoryUpdateReq = Routine;
+
+export type RoutineHistoryGetReq = {routineHistoryId: string | number};
+export type RoutineHistoryGetRes = RoutineHistory;
