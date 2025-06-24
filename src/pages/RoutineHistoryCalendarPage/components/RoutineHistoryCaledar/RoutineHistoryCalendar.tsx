@@ -9,6 +9,7 @@ import moment from "moment";
 import "moment/locale/ko";
 import useRoutineHistoryAllGetMonthlyQuery from "hooks/server/useRoutineHistoryAllGetMonthlyQuery";
 import {useRoutineHistoryAllGetDailyProvider} from "../RoutineHistoryAllGetDailyProvider";
+import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from "react-icons/md";
 
 type DotData = {
     _id: number;
@@ -124,6 +125,7 @@ const RoutineHistoryCalendar = (
                     </span>
                     <div className={styles.navButtons}>
                         <CalendarArrowLeftIcon
+                            color="black"
                             onClick={handlePrevMonthButtonClick}
                         />
                         <CalendarArrowRightIcon
