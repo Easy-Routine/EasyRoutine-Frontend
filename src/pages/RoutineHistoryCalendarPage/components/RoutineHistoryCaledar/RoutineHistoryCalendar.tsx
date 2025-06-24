@@ -8,6 +8,7 @@ import {ReactComponent as CalendarArrowRightIcon} from "assets/image/calendar-ar
 import moment from "moment";
 import "moment/locale/ko";
 import useRoutineHistoryAllGetMonthlyQuery from "hooks/server/useRoutineHistoryAllGetMonthlyQuery";
+import {useRoutineHistoryAllGetDailyProvider} from "../RoutineHistoryAllGetDailyProvider";
 
 type DotData = {
     _id: number;
@@ -36,16 +37,17 @@ const RoutineHistoryCalendar = (
         // dotDataKey,
     }: CustomCalendarProps,
 ) => {
-    const [date, setDate] = useState(new Date());
+    const {date: dailyDate, setDate: setDailyDate} =
+        useRoutineHistoryAllGetDailyProvider();
+    // const [date, setDate] = useState(new Date());
     const [activeStartDate, setActiveStartDate] = useState(new Date());
 
     const {
         data: {routineHistories},
-    } = useRoutineHistoryAllGetMonthlyQuery({date});
+    } = useRoutineHistoryAllGetMonthlyQuery({date: dailyDate});
 
     const handleDateButtonClick = (date: any) => {
-        // onDateButtonClick(date);
-        setDate(date);
+        setDailyDate(date);
     };
 
     const handlePrevMonthButtonClick = () => {
@@ -82,7 +84,7 @@ const RoutineHistoryCalendar = (
     };
 
     const tileContent = ({date: tileDate}: {date: Date}) => {
-        const isActive = moment(date).isSame(moment(tileDate), "day");
+        const isActive = moment(dailyDate).isSame(moment(tileDate), "day");
         const isToday = moment(tileDate).isSame(moment(), "day");
         const dotData = getDotDataForDate(tileDate);
         return (
@@ -128,7 +130,7 @@ const RoutineHistoryCalendar = (
                 </div>
                 <Calendar
                     onChange={handleDateButtonClick}
-                    value={date}
+                    value={dailyDate}
                     activeStartDate={activeStartDate}
                     tileContent={tileContent}
                 />

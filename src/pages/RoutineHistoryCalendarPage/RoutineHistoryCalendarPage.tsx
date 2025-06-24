@@ -16,6 +16,7 @@ import RoutineHistoryDeleteModal from "./components/RoutineHistoryDeleteModal";
 import RoutineHistoryDeleteModalButton from "./components/RoutineHistoryDeleteModalButton";
 import RoutineHistoryDeleteConfirm from "./components/RoutineHistoryDeleteConfirm";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
+import RoutineHistoryAllGetDailyProvider from "./components/RoutineHistoryAllGetDailyProvider";
 
 const RoutineHistoryCalendarPage = () => {
     const location = useLocation();
@@ -27,38 +28,43 @@ const RoutineHistoryCalendarPage = () => {
             <Main>
                 <Flex direction="column" gap={20} padding={20}>
                     <RoutineHistoryPageMoveTab />
-                    <RoutineHistoryCalendar />
 
-                    <SummaryBox>
-                        <SummaryBox.Text label="운동시간" value="1시간 36분" />
-                        <SummaryBox.Text label="전체볼륨" value="3450KG" />
-                    </SummaryBox>
+                    <RoutineHistoryAllGetDailyProvider>
+                        <RoutineHistoryCalendar />
+                        <SummaryBox>
+                            <SummaryBox.Text
+                                label="운동시간"
+                                value="1시간 36분"
+                            />
+                            <SummaryBox.Text label="전체볼륨" value="3450KG" />
+                        </SummaryBox>
 
-                    <RoutineHistoryAccordionList
-                        component={routineHistory => (
-                            <RoutineHistoryAccordion
-                                routineHistory={routineHistory}
-                            >
-                                <RoutineHistoryDetailMoveButton
+                        <RoutineHistoryAccordionList
+                            component={routineHistory => (
+                                <RoutineHistoryAccordion
                                     routineHistory={routineHistory}
-                                />
-                                <RoutineHistoryDeleteModal>
-                                    <RoutineHistoryDeleteModalButton
+                                >
+                                    <RoutineHistoryDetailMoveButton
                                         routineHistory={routineHistory}
                                     />
-                                    <RoutineHistoryDeleteConfirm
-                                        routineHistory={routineHistory}
-                                    />
-                                </RoutineHistoryDeleteModal>
-                                <RoutineHistoryDeleteModal>
-                                    <SwipeableAccordion.DeleteButton />
-                                    <RoutineHistoryDeleteConfirm
-                                        routineHistory={routineHistory}
-                                    />
-                                </RoutineHistoryDeleteModal>
-                            </RoutineHistoryAccordion>
-                        )}
-                    />
+                                    <RoutineHistoryDeleteModal>
+                                        <RoutineHistoryDeleteModalButton
+                                            routineHistory={routineHistory}
+                                        />
+                                        <RoutineHistoryDeleteConfirm
+                                            routineHistory={routineHistory}
+                                        />
+                                    </RoutineHistoryDeleteModal>
+                                    <RoutineHistoryDeleteModal>
+                                        <SwipeableAccordion.DeleteButton />
+                                        <RoutineHistoryDeleteConfirm
+                                            routineHistory={routineHistory}
+                                        />
+                                    </RoutineHistoryDeleteModal>
+                                </RoutineHistoryAccordion>
+                            )}
+                        />
+                    </RoutineHistoryAllGetDailyProvider>
                 </Flex>
             </Main>
             <Footer>

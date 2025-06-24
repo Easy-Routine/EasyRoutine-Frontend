@@ -163,11 +163,16 @@ export const getRoutineHistoryAllDaily = async ({
     date: Date;
 }): Promise<RoutineHistoryAllGetDailyRes | void> => {
     try {
+        // 50% 확률로 빈 배열 반환
+        if (Math.random() < 0.5) {
+            return [];
+        }
+
         return [
             {
                 id: 1,
                 name: "Morning Routine",
-                color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
+                color: Color.VIOLET,
                 workoutTime: 3600,
                 createdAt: "2025-06-01T08:00:00Z",
                 routineExercises: [
@@ -222,7 +227,7 @@ export const getRoutineHistoryAllDaily = async ({
             {
                 id: 3,
                 name: "Evening Routine",
-                color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
+                color: Color.BLUE,
                 workoutTime: 3600,
                 createdAt: "2025-06-10T08:00:00Z",
                 routineExercises: [
@@ -254,7 +259,7 @@ export const getRoutineHistoryAllDaily = async ({
             {
                 id: 4,
                 name: "Cardio Routine",
-                color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
+                color: Color.GREEN,
                 workoutTime: 3600,
                 createdAt: "2025-06-20T08:00:00Z",
                 routineExercises: [
