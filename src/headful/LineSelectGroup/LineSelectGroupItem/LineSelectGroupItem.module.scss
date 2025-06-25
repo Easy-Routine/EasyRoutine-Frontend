@@ -1,0 +1,10 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.LineSelectGroupItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* 불릿 제거 */
+    list-style: none;
+}

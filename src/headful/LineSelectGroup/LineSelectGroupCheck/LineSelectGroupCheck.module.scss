@@ -1,0 +1,12 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.LineSelectGroupCheck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.LineSelectGroupSelected {
+    color: var(--color-primary);
+}

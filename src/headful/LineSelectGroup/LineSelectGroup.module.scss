@@ -1,0 +1,9 @@
+@import "theme"; // 절대경로 설정 시, 예: @import "theme";
+
+.LineSelectGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    overflow: auto;
+}
