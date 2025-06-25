@@ -7,6 +7,13 @@ import Header from "headful/PrivatePageTemplate/Header/Header";
 import Main from "headful/PrivatePageTemplate/Main/Main";
 import PrivatePageTemplate from "headful/PrivatePageTemplate/PrivatePageTemplate";
 import {useLocation} from "react-router-dom";
+import RoutineExerciseSelectBottomSheet from "./components/RoutineExerciseSelectBottomSheet";
+import RoutineExerciseSelectBottomSheetButton from "./components/RoutineExerciseSelectBottomSheetButton";
+import RoutineHistoryChartGetProvider from "./components/RoutineHistoryChartGetProvider";
+import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
+import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput";
+import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
+import ExerciseSelectList from "./components/ExerciseSelectList";
 
 const RoutineHistoryChartPage = () => {
     const location = useLocation();
@@ -16,10 +23,24 @@ const RoutineHistoryChartPage = () => {
                 <LogoArea />
             </Header>
             <Main>
-                {/* <Flex direction="column" gap={20} padding={20}> */}
-                <RoutineHistoryPageMoveTab />
-                차트 페이지
-                {/* </Flex> */}
+                <Flex direction="column" gap={20} padding={20}>
+                    <RoutineHistoryPageMoveTab />
+
+                    <RoutineHistoryChartGetProvider>
+                        {/* <RoutineHistoryGraph /> */}
+
+                        <RoutineExerciseSelectBottomSheet>
+                            <ExerciseAllGetProvider>
+                                <Flex direction="column" gap={20} height="100%">
+                                    <ExerciseFilterSearchInput />
+                                    <ExerciseFilterTabGroup />
+                                    <ExerciseSelectList />
+                                </Flex>
+                            </ExerciseAllGetProvider>
+                            <RoutineExerciseSelectBottomSheetButton />
+                        </RoutineExerciseSelectBottomSheet>
+                    </RoutineHistoryChartGetProvider>
+                </Flex>
             </Main>
 
             <Footer>
