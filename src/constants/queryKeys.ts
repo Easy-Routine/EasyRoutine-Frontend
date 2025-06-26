@@ -8,7 +8,8 @@ const queryKey = {
     getRoutineHistoryOne: "getRoutineHistoryOne",
     getRoutineHistoryAllMonthly: "getRoutineHistoryAllMonthly",
     getRoutineHistoryAllDaily: "getRoutineHistoryAllDaily",
-    getExerciseSumAll: "getExerciseSumAll",
+    getRoutineHistoryExerciseVolumeByPeriodAll:
+        "getRoutineHistoryExerciseVolumeByPeriodAll",
     getUserOne: "getUserOne",
 } as const;
 

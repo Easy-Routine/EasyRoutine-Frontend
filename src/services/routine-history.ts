@@ -5,6 +5,8 @@ import {
     RoutineHistoryAllGetDailyRes,
     RoutineHistoryAllGetMonthlyReq,
     RoutineHistoryAllGetMonthlyRes,
+    RoutineHistoryExerciseVolumeByPeriodAllGetReq,
+    RoutineHistoryExerciseVolumeByPeriodAllGetRes,
     RoutineHistoryGetReq,
 } from "types/routine-history";
 
@@ -424,6 +426,113 @@ export const updateRoutineHistoryWorkoutEndAt = async ({
 > => {
     try {
         return undefined; // 업데이트된 루틴 기록 반환
+    } catch (e) {
+        handleError(e);
+    }
+};
+
+export const getRoutineHistoryExerciseVolumeByPeriodAll = async (
+    routineHistoryExerciseVolumeByPeriodAllGetReq: RoutineHistoryExerciseVolumeByPeriodAllGetReq,
+): Promise<RoutineHistoryExerciseVolumeByPeriodAllGetRes | void> => {
+    try {
+        return [
+            {
+                key: "2025-01-04",
+                value: 1591,
+            },
+            {
+                key: "2025-01-11",
+                value: 3679,
+            },
+            {
+                key: "2025-01-18",
+                value: 2384,
+            },
+            {
+                key: "2025-02-01",
+                value: 1370,
+            },
+            {
+                key: "2025-02-08",
+                value: 1054,
+            },
+            {
+                key: "2025-02-22",
+                value: 1888,
+            },
+            {
+                key: "2025-03-01",
+                value: 4553,
+            },
+            {
+                key: "2025-03-08",
+                value: 4446,
+            },
+            {
+                key: "2025-03-22",
+                value: 2282,
+            },
+            {
+                key: "2025-03-29",
+                value: 2805,
+            },
+            {
+                key: "2025-04-12",
+                value: 4414,
+            },
+            {
+                key: "2025-04-19",
+                value: 1962,
+            },
+            {
+                key: "2025-04-26",
+                value: 1884,
+            },
+            {
+                key: "2025-05-17",
+                value: 1286,
+            },
+            {
+                key: "2025-05-24",
+                value: 3803,
+            },
+            {
+                key: "2025-05-31",
+                value: 1730,
+            },
+            {
+                key: "2025-06-14",
+                value: 4974,
+            },
+            {
+                key: "2025-06-20",
+                value: 2862,
+            },
+            {
+                key: "2025-06-21",
+                value: 2895,
+            },
+            {
+                key: "2025-06-22",
+                value: 4718,
+            },
+            {
+                key: "2025-06-23",
+                value: 3969,
+            },
+            {
+                key: "2025-06-24",
+                value: 2225,
+            },
+            {
+                key: "2025-06-25",
+                value: 4594,
+            },
+            {
+                key: "2025-06-26",
+                value: 4871,
+            },
+        ];
     } catch (e) {
         handleError(e);
     }

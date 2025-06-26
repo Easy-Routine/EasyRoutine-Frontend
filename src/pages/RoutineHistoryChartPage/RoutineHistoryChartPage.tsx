@@ -14,6 +14,7 @@ import ExerciseAllGetProvider from "./components/ExerciseAllGetProvider";
 import ExerciseFilterSearchInput from "./components/ExerciseFilterSearchInput";
 import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
 import ExerciseSelectList from "./components/ExerciseSelectList";
+import RoutineHistoryExerciseVolumeGraph from "./components/RoutineHistoryExerciseVolumeGraph";
 
 const RoutineHistoryChartPage = () => {
     const location = useLocation();
@@ -27,7 +28,7 @@ const RoutineHistoryChartPage = () => {
                     <RoutineHistoryPageMoveTab />
 
                     <RoutineHistoryChartGetProvider>
-                        {/* <RoutineHistoryGraph /> */}
+                        <RoutineHistoryExerciseVolumeGraph />
 
                         <RoutineExerciseSelectBottomSheet>
                             <ExerciseAllGetProvider>
