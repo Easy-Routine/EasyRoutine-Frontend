@@ -17,7 +17,7 @@ export type ExerciseUpdateReq = {
 
 export type ExerciseAllGetReq = {
     category: Category;
-    name: string;
+    keyword: string;
 };
 
 export type ExerciseAllGetItem = {

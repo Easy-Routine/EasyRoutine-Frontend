@@ -3,18 +3,18 @@ import React, {ChangeEventHandler} from "react";
 import {useExerciseAllGetProvider} from "./ExerciseAllGetProvider";
 
 const ExerciseFilterSearchInput = () => {
-    const {name, setName} = useExerciseAllGetProvider();
+    const {keyword, setKeyword} = useExerciseAllGetProvider();
 
     const handleSearchInputChange: ChangeEventHandler<HTMLInputElement> = e => {
-        setName(e.target.value);
+        setKeyword(e.target.value);
     };
     const handleSearchInputClear = () => {
-        setName("");
+        setKeyword("");
     };
 
     return (
         <SearchInput
-            value={name}
+            value={keyword}
             onInputChange={handleSearchInputChange}
             onInputClear={handleSearchInputClear}
         />

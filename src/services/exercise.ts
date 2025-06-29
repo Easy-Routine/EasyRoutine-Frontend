@@ -19,6 +19,7 @@ export const getExerciseAll = async (
         headers: {
             "Content-Type": "application/json",
         },
+        params: exerciseAllGetReq,
     };
 
     const response = await api<ExerciseAllGetRes>(config);

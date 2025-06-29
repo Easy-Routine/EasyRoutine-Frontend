@@ -13,10 +13,10 @@ const RoutineExerciseList = ({
     component,
 }: ExerciseUpdateModalTriggerListProps) => {
     // const {routine} = useRoutineProgress();
-    const {name, category} = useExerciseAllGetProvider();
+    const {keyword, category} = useExerciseAllGetProvider();
 
     // TODO: 쿼리 연결하기
-    const {data} = useExerciseAllGetQuery({name, category});
+    const {data} = useExerciseAllGetQuery({keyword, category});
 
     const exercises = data?.exercises ?? [];
 

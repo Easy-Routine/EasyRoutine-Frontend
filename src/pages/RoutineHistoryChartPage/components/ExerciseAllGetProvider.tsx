@@ -6,19 +6,21 @@ import {Exercise} from "types/model";
 
 type ExerciseAllGetContextType = {
     category: ExerciseAllGetReq["category"];
-    name: ExerciseAllGetReq["name"];
+    keyword: ExerciseAllGetReq["keyword"];
     setCategory: React.Dispatch<
         React.SetStateAction<ExerciseAllGetReq["category"]>
     >;
-    setName: React.Dispatch<React.SetStateAction<ExerciseAllGetReq["name"]>>;
+    setKeyword: React.Dispatch<
+        React.SetStateAction<ExerciseAllGetReq["keyword"]>
+    >;
     exercises: Exercise[];
 };
 
 const ExerciseAllGetContext = createContext<ExerciseAllGetContextType>({
     category: Category.ALL,
-    name: "",
+    keyword: "",
     setCategory: () => {},
-    setName: () => {},
+    setKeyword: () => {},
     exercises: [],
 });
 
@@ -28,9 +30,9 @@ type ExerciseAllGetProviderProps = {
 
 const ExerciseAllGetProvider = ({children}: ExerciseAllGetProviderProps) => {
     const [category, setCategory] = useState(Category.ALL);
-    const [name, setName] = useState("");
+    const [keyword, setKeyword] = useState("");
 
-    const {data} = useExerciseAllGetQuery({name, category});
+    const {data} = useExerciseAllGetQuery({keyword, category});
 
     const exercises = data?.exercises ?? [];
 
@@ -38,9 +40,9 @@ const ExerciseAllGetProvider = ({children}: ExerciseAllGetProviderProps) => {
         <ExerciseAllGetContext.Provider
             value={{
                 category,
-                name,
+                keyword,
                 setCategory,
-                setName,
+                setKeyword,
                 exercises,
             }}
         >
