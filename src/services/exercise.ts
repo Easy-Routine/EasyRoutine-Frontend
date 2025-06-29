@@ -82,7 +82,7 @@ export const updateExerciseOne = async (
     window.alert(JSON.stringify(exerciseUpdateReq));
 
     const config = {
-        method: "UPDATE",
+        method: "PUT",
         url: "/v1/exercises",
         headers: {
             "Content-Type": "application/json",
@@ -103,12 +103,21 @@ export const updateExerciseOne = async (
 export const deleteExerciseOne = async (
     exerciseDeleteReq: ExerciseDeleteReq,
 ): Promise<void> => {
-    const {id} = exerciseDeleteReq;
+    const config = {
+        method: "DELETE",
+        url: "/v1/exercises",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        data: exerciseDeleteReq,
+    };
 
-    try {
-        window.alert(JSON.stringify(exerciseDeleteReq));
-        return; // 삭제 성공
-    } catch (e) {
-        handleError(e);
+    const response = await api<ExerciseAllGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
     }
+
+    return; // 생성된 운동 구성 반환
 };

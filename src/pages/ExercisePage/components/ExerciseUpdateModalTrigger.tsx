@@ -39,6 +39,7 @@ const ExerciseUpdateModalTrigger = ({
             return;
         }
         setMode("delete");
+        setId(exerciseAllGetRes.id);
         openModal();
     };
 
