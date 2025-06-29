@@ -9,7 +9,7 @@ export type ExerciseCreateReq = {
 };
 export type ExerciseUpdateReq = {
     id: number;
-    image: string;
+    imageUrl: string;
     name: string;
     types: Type[];
     category: Category;

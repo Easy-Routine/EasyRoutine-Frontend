@@ -14,7 +14,7 @@ const ExerciseUpdateModalTrigger = ({
     exerciseAllGetRes,
 }: ExerciseUpdateModalTriggerProps) => {
     const {id, image, name, category, types, isEditable} = exerciseAllGetRes;
-    const {setId, setImage, setName, setCategory, setTypes, setMode} =
+    const {setId, setImageUrl, setName, setCategory, setTypes, setMode} =
         useExerciseUpdate();
     const {openModal} = useModal();
     const {showToast} = useToast();
@@ -26,7 +26,7 @@ const ExerciseUpdateModalTrigger = ({
         }
         setMode("update");
         setId(id);
-        setImage(image);
+        setImageUrl(image);
         setName(name);
         setCategory(category);
         setTypes(types);

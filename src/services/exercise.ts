@@ -44,8 +44,6 @@ export const getExerciseOne = async (
 export const createExerciseOne = async (
     exerciseCreateReq: ExerciseCreateReq,
 ): Promise<void> => {
-    window.alert(JSON.stringify(exerciseCreateReq));
-
     const config = {
         method: "POST",
         url: "/v1/exercises",
@@ -80,12 +78,26 @@ export const updateExerciseField = async (
 export const updateExerciseOne = async (
     exerciseUpdateReq: ExerciseUpdateReq, // 업데이트할 데이터
 ): Promise<void> => {
-    try {
-        window.alert(JSON.stringify(exerciseUpdateReq));
-        return; // 생성된 운동 구성 반환
-    } catch (e) {
-        handleError(e);
+    // const {id, name, category, types, imageUrl} = exerciseUpdateReq;
+    window.alert(JSON.stringify(exerciseUpdateReq));
+
+    const config = {
+        method: "UPDATE",
+        url: "/v1/exercises",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        data: exerciseUpdateReq,
+    };
+
+    const response = await api<ExerciseAllGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
     }
+
+    return; // 생성된 운동 구성 반환
 };
 
 export const deleteExerciseOne = async (

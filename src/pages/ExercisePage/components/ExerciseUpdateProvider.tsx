@@ -6,8 +6,10 @@ import {Exercise} from "types/model";
 type ExerciseUpdateContextType = {
     id: ExerciseUpdateReq["id"];
     setId: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["id"]>>;
-    image: ExerciseUpdateReq["image"];
-    setImage: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["image"]>>;
+    imageUrl: ExerciseUpdateReq["imageUrl"];
+    setImageUrl: React.Dispatch<
+        React.SetStateAction<ExerciseUpdateReq["imageUrl"]>
+    >;
     name: ExerciseUpdateReq["name"];
     setName: React.Dispatch<React.SetStateAction<ExerciseUpdateReq["name"]>>;
     category: ExerciseUpdateReq["category"];
@@ -24,8 +26,8 @@ type ExerciseUpdateContextType = {
 const ExerciseUpdateContext = createContext<ExerciseUpdateContextType>({
     id: 0,
     setId: () => {},
-    image: "",
-    setImage: () => {},
+    imageUrl: "",
+    setImageUrl: () => {},
     name: "",
     setName: () => {},
     category: Category.ALL,
@@ -42,7 +44,7 @@ type ExerciseUpdateProviderProps = {
 
 const ExerciseUpdateProvider = ({children}: ExerciseUpdateProviderProps) => {
     const [id, setId] = useState(0);
-    const [image, setImage] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
     const [name, setName] = useState("");
     const [category, setCategory] = useState<Category>(Category.CHEST);
     const [types, setTypes] = useState<Type[]>([]);
@@ -53,8 +55,8 @@ const ExerciseUpdateProvider = ({children}: ExerciseUpdateProviderProps) => {
             value={{
                 id,
                 setId,
-                image,
-                setImage,
+                imageUrl,
+                setImageUrl,
                 name,
                 setName,
                 category,

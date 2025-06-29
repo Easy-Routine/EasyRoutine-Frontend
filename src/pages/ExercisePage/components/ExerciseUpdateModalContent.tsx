@@ -12,17 +12,14 @@ import CheckSet from "headful/CheckSet/CheckSet";
 import BasicButton from "headful/BasicButton/BasicButton";
 import {useModal} from "headless/Modal/Modal";
 import useExerciseUpdateMutation from "hooks/server/useExerciseUpdateMutation";
-import {useExerciseAllGetProvider} from "./ExerciseAllGetProvider";
-import useExerciseAllGetQuery from "hooks/server/useExerciseAllGetQuery";
-import {ExerciseAllGetRes} from "types/exercise";
 
 const ExerciseUpdateModalContent = () => {
     const {closeModal} = useModal();
     const {
         id,
         setId,
-        image,
-        setImage,
+        imageUrl,
+        setImageUrl,
         name,
         setName,
         category,
@@ -38,7 +35,7 @@ const ExerciseUpdateModalContent = () => {
     const handleImageChange = (value: File) => {
         if (value) {
             const previewUrl = URL.createObjectURL(value);
-            setImage(previewUrl);
+            setImageUrl(previewUrl);
         }
     };
 
@@ -55,12 +52,12 @@ const ExerciseUpdateModalContent = () => {
     };
 
     const handleUpdateButtonClick = async () => {
-        updateExerciseMutate({id, name, category, types, image});
+        updateExerciseMutate({id, name, category, types, imageUrl});
         setId(0);
         setName("");
         setCategory(Category.CHEST);
         setTypes([]);
-        setImage("");
+        setImageUrl("");
         closeModal();
     };
 
@@ -70,7 +67,10 @@ const ExerciseUpdateModalContent = () => {
                 새 운동 이미지
             </Text>
             <Flex justify="center">
-                <ImageInput value={image} onInputChange={handleImageChange} />
+                <ImageInput
+                    value={imageUrl}
+                    onInputChange={handleImageChange}
+                />
             </Flex>
             <Label text="운동 부위">
                 <ChipTabGroup defaultValue={category}>
