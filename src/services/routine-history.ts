@@ -36,6 +36,7 @@ export const getRoutineHistoryAllMonthly = async (
         return [
             {
                 id: 1,
+                order: 1,
                 name: "Morning Routine",
                 color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
                 workoutTime: 3600,
@@ -90,7 +91,8 @@ export const getRoutineHistoryAllMonthly = async (
                 ],
             },
             {
-                id: 3,
+                id: 2,
+                order: 2,
                 name: "Evening Routine",
                 color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
                 workoutTime: 3600,
@@ -122,7 +124,8 @@ export const getRoutineHistoryAllMonthly = async (
                 ],
             },
             {
-                id: 4,
+                id: 3,
+                order: 3,
                 name: "Cardio Routine",
                 color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
                 workoutTime: 3600,
@@ -154,7 +157,8 @@ export const getRoutineHistoryAllMonthly = async (
                 ],
             },
             {
-                id: 5,
+                id: 4,
+                order: 4,
                 name: "Cardio Routine",
                 color: Color.GREEN,
                 workoutTime: 3600,
@@ -206,6 +210,7 @@ export const getRoutineHistoryAllDaily = async ({
         return [
             {
                 id: 1,
+                order: 1,
                 name: "Morning Routine",
                 color: Color.VIOLET,
                 workoutTime: 3600,
@@ -260,7 +265,8 @@ export const getRoutineHistoryAllDaily = async ({
                 ],
             },
             {
-                id: 3,
+                id: 2,
+                order: 2,
                 name: "Evening Routine",
                 color: Color.BLUE,
                 workoutTime: 3600,
@@ -292,7 +298,8 @@ export const getRoutineHistoryAllDaily = async ({
                 ],
             },
             {
-                id: 4,
+                id: 3,
+                order: 3,
                 name: "Cardio Routine",
                 color: Color.GREEN,
                 workoutTime: 3600,
@@ -324,7 +331,8 @@ export const getRoutineHistoryAllDaily = async ({
                 ],
             },
             {
-                id: 5,
+                id: 4,
+                order: 4,
                 name: "Cardio Routine",
                 color: Color.GREEN,
                 workoutTime: 3600,
@@ -368,6 +376,7 @@ export const getRoutineHistoryOne = async (
     try {
         return {
             id: 5,
+            order: 5,
             name: "Cardio Routine",
             color: Color.GREEN,
             workoutTime: 3600,

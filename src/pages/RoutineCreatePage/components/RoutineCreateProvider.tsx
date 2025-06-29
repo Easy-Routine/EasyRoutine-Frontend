@@ -1,3 +1,4 @@
+import useRoutineAllGetQuery from "hooks/server/useRoutineAllGetQuery";
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {Color} from "types/enum";
 import {Routine} from "types/model";
@@ -18,8 +19,11 @@ type RoutineCreateProviderProps = {
 };
 
 const RoutineCreateProvider = ({children}: RoutineCreateProviderProps) => {
+    const {data} = useRoutineAllGetQuery();
+
     const [routine, setRoutine] = useState<RoutineCreateReq>({
         name: "",
+        order: data.routines.length + 1,
         color: Color.VIOLET,
         routineExercises: [],
     });

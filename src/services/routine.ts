@@ -15,6 +15,7 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
         return [
             {
                 id: 1,
+                order: 1,
                 name: "Morning Routine",
                 color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
                 routineExercises: [
@@ -67,7 +68,8 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
                 ],
             },
             {
-                id: 3,
+                id: 2,
+                order: 2,
                 name: "Evening Routine",
                 color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
                 routineExercises: [
@@ -97,7 +99,8 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
                 ],
             },
             {
-                id: 4,
+                id: 3,
+                order: 2,
                 name: "Cardio Routine",
                 color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
                 routineExercises: [
@@ -138,6 +141,7 @@ export const getRoutineOne = async (
 ): Promise<RoutineAllGetRes[number] | void> => {
     const routine = {
         id: 1,
+        order: 1,
         name: "Morning Workout",
         color: Color.BLUE,
         routineExercises: [

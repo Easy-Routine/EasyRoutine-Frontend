@@ -65,6 +65,7 @@ const RoutineProgressProvider = ({
     const [routine, setRoutine] = useState(rawRoutine);
     const [routineHistory, setRoutineHistory] = useState<RoutineHistory>({
         id: routine.id,
+        order: routine.order,
         name: routine.name,
         color: routine.color as Color,
         workoutTime: 0,

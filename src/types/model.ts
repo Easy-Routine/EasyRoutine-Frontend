@@ -8,6 +8,7 @@ export type User = {
 };
 export type Routine = {
     id: string | number;
+    order: number;
     name: string;
     color: string;
     routineExercises: RoutineExercise[];
@@ -41,6 +42,7 @@ export type Set = {
 
 export type RoutineHistory = {
     id: string | number;
+    order: number;
     name: string;
     color: string;
     workoutTime: number;
