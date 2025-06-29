@@ -1,4 +1,5 @@
 import {AxiosError} from "axios";
+import {ImageUploadReq, ImageUploadRes} from "types/exercise";
 import {User} from "types/model";
 import api from "utils/axios";
 import {handleError} from "utils/handleError";
@@ -26,27 +27,28 @@ export const getUserOne = async (): Promise<User> => {
     }
 };
 
-type ImageResponse = {
-    message: string;
-    data: {
-        thumbnail: string;
-        original: string;
-    };
-};
-
 export const uploadImage = async (
-    formData: FormData,
-): Promise<ImageResponse | undefined> => {
-    try {
-        const response = await api.post<any>("/upload-image", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data", // FormData로 전송 시 이 헤더가 필요
-            },
-        });
-        return response.data;
-    } catch (e) {
-        handleError(e);
+    ImageUploadReq: ImageUploadReq,
+): Promise<ImageUploadRes> => {
+    const config = {
+        method: "POST",
+        url: "/v1/images/upload",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        data: ImageUploadReq,
+    };
+
+    const response = await api<ImageUploadRes>(config);
+
+    console.log("업로드", response);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
     }
+
+    return response.data; // 생성된 운동 구성 반환
 };
 
 export const sendPushAlarm = async ({

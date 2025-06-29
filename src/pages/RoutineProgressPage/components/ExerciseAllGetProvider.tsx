@@ -1,4 +1,4 @@
-import useExerciseAllGetGetQuery from "hooks/server/useExerciseAllGetQuery";
+import useExerciseAllGetQuery from "hooks/server/useExerciseAllGetQuery";
 import React, {createContext, useContext, useState} from "react";
 import {Category} from "types/enum";
 import {Exercise} from "types/model";
@@ -27,12 +27,12 @@ const ExerciseAllGetProvider = ({children}: ExerciseAllGetProviderProps) => {
     const [category, setCategory] = useState(Category.ALL);
     const [name, setName] = useState("");
 
-    const {data: ExerciseAllGetData} = useExerciseAllGetGetQuery({
+    const {data} = useExerciseAllGetQuery({
         name,
         category,
     });
 
-    const exercises = ExerciseAllGetData ?? [];
+    const exercises = data?.exercises ?? [];
 
     return (
         <ExerciseAllGetContext.Provider

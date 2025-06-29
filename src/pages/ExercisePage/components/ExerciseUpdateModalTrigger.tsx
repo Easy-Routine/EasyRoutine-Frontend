@@ -1,13 +1,13 @@
 import ImageTextItem from "headful/ImageTextItem/ImageTextItem";
 import {useExerciseUpdate} from "./ExerciseUpdateProvider";
 import {useModal} from "headless/Modal/Modal";
-import {ExerciseAllGetRes} from "types/exercise";
+import {ExerciseAllGetItem, ExerciseAllGetRes} from "types/exercise";
 import useToast from "hooks/useToast";
 
 // TODO: 스타일 작성하기
 
 type ExerciseUpdateModalTriggerProps = {
-    exerciseAllGetRes: ExerciseAllGetRes[number];
+    exerciseAllGetRes: ExerciseAllGetItem;
 };
 
 const ExerciseUpdateModalTrigger = ({

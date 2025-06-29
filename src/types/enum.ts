@@ -1,11 +1,11 @@
 export enum Category {
     ALL = "",
-    CHEST = "chest",
-    BACK = "back",
-    SHOULDER = "shoulder",
-    LEG = "leg",
-    ARM = "arm",
-    ETC = "etc",
+    CHEST = "CHEST",
+    BACK = "BACK",
+    SHOULDER = "SHOULDER",
+    LEG = "LEG",
+    ARM = "ARM",
+    ETC = "ETC",
 }
 export enum Color {
     VIOLET = "#855CF8",

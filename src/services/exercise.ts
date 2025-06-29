@@ -8,43 +8,27 @@ import {
 } from "types/exercise";
 import {Exercise} from "types/model";
 import {handleError} from "utils/handleError";
+import api from "utils/axios";
 
 export const getExerciseAll = async (
     exerciseAllGetReq: ExerciseAllGetReq,
-): Promise<ExerciseAllGetRes | void> => {
-    try {
-        return [
-            {
-                id: 1,
-                name: "스쿼트",
-                image: "https://healper-storage.s3.ap-southeast-2.amazonaws.com/test/a2b57b3d-d2a0-4d54-802a-fee0f2827db4_bmo.png",
-                category: Category.CHEST,
-                types: [Type.WEIGHT, Type.COUNT],
-                isEditable: 1,
-                shareLevel: 1,
-            },
-            {
-                id: 2,
-                name: "벤치프레스",
-                image: "https://healper-storage.s3.ap-southeast-2.amazonaws.com/test/a2b57b3d-d2a0-4d54-802a-fee0f2827db4_bmo.png",
-                category: Category.CHEST,
-                types: [Type.WEIGHT, Type.COUNT],
-                isEditable: 0,
-                shareLevel: 1,
-            },
-            {
-                id: 3,
-                name: "데드리프트",
-                image: "https://healper-storage.s3.ap-southeast-2.amazonaws.com/test/a2b57b3d-d2a0-4d54-802a-fee0f2827db4_bmo.png",
-                category: Category.BACK,
-                types: [Type.WEIGHT, Type.COUNT],
-                isEditable: 1,
-                shareLevel: 1,
-            },
-        ]; // 필터링된 운동 배열 반환
-    } catch (e) {
-        handleError(e);
+): Promise<ExerciseAllGetRes> => {
+    const config = {
+        method: "get" as const,
+        url: "/v1/exercises",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+
+    const response = await api<ExerciseAllGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
     }
+
+    return response.data;
 };
 
 export const getExerciseOne = async (
@@ -60,12 +44,25 @@ export const getExerciseOne = async (
 export const createExerciseOne = async (
     exerciseCreateReq: ExerciseCreateReq,
 ): Promise<void> => {
-    try {
-        window.alert(JSON.stringify(exerciseCreateReq));
-        return; // 생성된 운동 구성 반환
-    } catch (e) {
-        handleError(e);
+    window.alert(JSON.stringify(exerciseCreateReq));
+
+    const config = {
+        method: "POST",
+        url: "/v1/exercises",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        data: exerciseCreateReq,
+    };
+
+    const response = await api<ExerciseAllGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
     }
+
+    return; // 생성된 운동 구성 반환
 };
 
 export const updateExerciseField = async (

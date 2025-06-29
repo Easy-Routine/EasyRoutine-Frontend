@@ -30,9 +30,9 @@ const ExerciseAllGetProvider = ({children}: ExerciseAllGetProviderProps) => {
     const [category, setCategory] = useState(Category.ALL);
     const [name, setName] = useState("");
 
-    const {data: ExerciseAllGetData} = useExerciseAllGetQuery({name, category});
+    const {data} = useExerciseAllGetQuery({name, category});
 
-    const exercises = ExerciseAllGetData ?? [];
+    const exercises = data?.exercises ?? [];
 
     return (
         <ExerciseAllGetContext.Provider

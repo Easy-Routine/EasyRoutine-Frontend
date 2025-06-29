@@ -11,6 +11,12 @@ const useExerciseAllGetQuery = (ExerciseAllGetReq: ExerciseAllGetReq) => {
             const data = await getExerciseAll(ExerciseAllGetReq);
             return data;
         },
+
+        select: data => {
+            return {
+                exercises: data.result.contents,
+            };
+        },
     });
 };
 

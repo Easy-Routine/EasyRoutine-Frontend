@@ -1,6 +1,5 @@
 import BasicInput from "headful/BasicInput/BasicInput";
 import Flex from "headful/Flex/Flex";
-import ImageInput from "headful/ImageInput/ImageInput";
 import Label from "headful/Label/Label";
 import Text from "headful/Text/Text";
 import {ChangeEventHandler} from "react";
@@ -12,12 +11,15 @@ import CheckSet from "headful/CheckSet/CheckSet";
 import BasicButton from "headful/BasicButton/BasicButton";
 import {useModal} from "headless/Modal/Modal";
 import useExerciseCreateMutation from "hooks/server/useExerciseCreateMutation";
+import ImageInput from "headful/ImageInput/ImageInput";
+import useExerciseImageUploadMutation from "hooks/server/useExerciseImageUploadMutation";
+import {uploadImage} from "services";
 
 const ExerciseCreateModalContent = () => {
     const {closeModal} = useModal();
     const {
-        image,
-        setImage,
+        imageUrl,
+        setImageUrl,
         name,
         setName,
         category,
@@ -28,10 +30,12 @@ const ExerciseCreateModalContent = () => {
 
     const {mutateAsync: createExerciseMutate} = useExerciseCreateMutation();
 
-    const handleImageChange = (value: File) => {
+    const handleimageUrlChange = async (value: File) => {
         if (value) {
-            const previewUrl = URL.createObjectURL(value);
-            setImage(previewUrl);
+            const data = await uploadImage({image: value});
+
+            // const previewUrl = URL.createObjectURL(value);
+            setImageUrl(data.result);
         }
     };
 
@@ -48,11 +52,11 @@ const ExerciseCreateModalContent = () => {
     };
 
     const handleCreateButtonClick = async () => {
-        createExerciseMutate({name, category, types, image});
+        createExerciseMutate({name, category, types, imageUrl});
         setName("");
         setCategory(Category.CHEST);
         setTypes([]);
-        setImage("");
+        setImageUrl("");
         closeModal();
     };
 
@@ -62,16 +66,13 @@ const ExerciseCreateModalContent = () => {
                 새 운동 이미지
             </Text>
             <Flex justify="center">
-                <ImageInput value={image} onInputChange={handleImageChange} />
+                <ImageInput
+                    value={imageUrl}
+                    onInputChange={handleimageUrlChange}
+                />
             </Flex>
             <Label text="운동 부위">
                 <ChipTabGroup defaultValue={category}>
-                    <ChipTabGroup.Item
-                        value={Category.ALL}
-                        onTabGroupItemClick={handleCategoryChange}
-                    >
-                        전체
-                    </ChipTabGroup.Item>
                     <ChipTabGroup.Item
                         value={Category.CHEST}
                         onTabGroupItemClick={handleCategoryChange}

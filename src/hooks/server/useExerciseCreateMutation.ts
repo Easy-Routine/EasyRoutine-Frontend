@@ -9,10 +9,10 @@ const useExerciseCreateMutation = () => {
     const queryClient = useQueryClient();
     const {showToast} = useToast();
     return useMutation({
-        mutationFn: ({name, image, category, types}: ExerciseCreateReq) =>
+        mutationFn: ({name, imageUrl, category, types}: ExerciseCreateReq) =>
             createExerciseOne({
                 name,
-                image,
+                imageUrl,
                 category,
                 types,
             }),
