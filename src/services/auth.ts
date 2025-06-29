@@ -4,7 +4,7 @@ import axiosInstance from "utils/axios";
 
 export const getContext = async (): Promise<Response<User>> => {
     try {
-        const axiosResponse = await axiosInstance.get("/admin/token/context");
+        const axiosResponse = await axiosInstance.get("/context");
 
         const response = axiosResponse.data;
 
@@ -16,7 +16,7 @@ export const getContext = async (): Promise<Response<User>> => {
 
 export const deleteContext = async () => {
     try {
-        await axiosInstance.delete("/admin/token");
+        await axiosInstance.delete("/token");
     } catch (e) {
         throw e;
     }
