@@ -1,6 +1,23 @@
 import {Routine} from "./model";
+import {Response} from "./response";
 
-export type RoutineAllGetRes = Routine[];
+export type RoutineAllGetItem = Routine;
+
+export type RoutineAllGetResult = {
+    contents: RoutineAllGetItem[];
+    total: number;
+};
+
+export type RoutineAllGetRes = Response<RoutineAllGetResult>;
+
+export type RoutineGetItem = Routine;
+
+export type RoutineGetResult = {
+    contents: RoutineGetItem;
+    total: number;
+};
+
+export type RoutineGetRes = Response<RoutineGetResult>;
 
 export type RoutineDeleteReq = {
     id: string | number;
