@@ -5,25 +5,54 @@ import {
     RoutineHistoryAllGetDailyRes,
     RoutineHistoryAllGetMonthlyReq,
     RoutineHistoryAllGetMonthlyRes,
+    RoutineHistoryCreateReq,
     RoutineHistoryExerciseVolumeByPeriodAllGetReq,
     RoutineHistoryExerciseVolumeByPeriodAllGetRes,
     RoutineHistoryGetReq,
 } from "types/routine-history";
+import api from "utils/axios";
 
 // 확인: 완료
-export const createRoutineHistoryOne = async ({
-    id,
-    name,
-    color,
-    userId,
-}: {
-    id: string;
-    name: string;
-    color: Color;
-    userId: string;
-}): Promise<RoutineHistory | undefined> => {
+export const createRoutineHistoryOne = async (
+    routineHistoryCreateReq: RoutineHistoryCreateReq,
+): Promise<RoutineHistory | undefined> => {
     try {
-        return undefined;
+        const newRoutineHistoryExercises =
+            routineHistoryCreateReq.routineExercises.map(
+                ({id, sets, exercise, ...rest}) => ({
+                    ...rest,
+                    exercise: {
+                        id: exercise.id,
+                    },
+                    sets: sets.map(({id, ...setRest}) => ({
+                        ...setRest,
+                    })),
+                }),
+            );
+
+        const newRoutineHistoryCreateReq = {
+            ...routineHistoryCreateReq,
+            routineExercises: newRoutineHistoryExercises,
+        };
+
+        console.log("newRoutineHistoryCreateReq", newRoutineHistoryCreateReq);
+
+        const config = {
+            method: "POST",
+            url: "/v1/routine/histories",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: newRoutineHistoryCreateReq,
+        };
+
+        const response = await api(config);
+
+        if (!response.data.success) {
+            // 원하는 방식으로 error throw
+            throw new Error(`API 실패: ${response.data.code}`);
+        }
+        return;
     } catch (e) {
         handleError(e);
     }

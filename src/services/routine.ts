@@ -278,7 +278,7 @@ export const createRoutineOne = async (
 
         const config = {
             method: "POST",
-            url: "/v1/exercises",
+            url: "/v1/routines",
             headers: {
                 "Content-Type": "application/json",
             },

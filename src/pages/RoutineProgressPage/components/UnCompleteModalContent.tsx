@@ -2,19 +2,25 @@ import ConfirmSet from "headful/ConfirmSet/ConfirmSet";
 import ExClmation from "assets/image/exclamation.svg";
 import {useModal} from "headless/Modal/Modal";
 import {useRoutineProgress} from "./RoutineProgressProvider";
+import useRoutineHistoryCreateMutation from "hooks/server/useRoutineHistoryCreateMutation";
+import {useNavigate} from "react-router-dom";
+import ROUTES from "constants/routes";
 
 const UnCompleteModalContent = () => {
     const {closeModal} = useModal();
+    const navigate = useNavigate();
     const {routineHistory} = useRoutineProgress();
+    const {mutateAsync: routineHistoryCreateMutate} =
+        useRoutineHistoryCreateMutation();
 
     const handleCancelButtonClick = () => {
         closeModal();
     };
-    const handleConfirmButtonClick = () => {
+    const handleConfirmButtonClick = async () => {
         // Navigate to the record page or perform any other action
         closeModal();
-        console.log("루틴 기록:", routineHistory);
-        window.alert(routineHistory);
+        await routineHistoryCreateMutate(routineHistory);
+        navigate(ROUTES.RECORD.CALENDAR.PATH);
     };
 
     return (

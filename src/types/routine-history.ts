@@ -11,7 +11,7 @@ export type RoutineHistoryDeleteReq = {
     id: string | number;
 };
 
-export type RoutineHistoryCreateReq = Omit<Routine, "id">;
+export type RoutineHistoryCreateReq = Omit<RoutineHistory, "id">;
 
 export type RoutineHistoryUpdateReq = Routine;
 
