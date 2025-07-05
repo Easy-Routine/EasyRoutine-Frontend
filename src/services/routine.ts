@@ -3,25 +3,200 @@ import {Routine} from "types/model"; // 경로에 맞게 수정
 import {Color} from "types/enum";
 import {handleError} from "utils/handleError";
 import {
+    RoutineAllGetItem,
     RoutineAllGetRes,
     RoutineCreateReq,
     RoutineDeleteReq,
+    RoutineGetRes,
     RoutineUpdateReq,
 } from "types/routine";
+import api from "utils/axios";
 
 // 확인: 완료
-export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
-    try {
-        return [
-            {
+export const getRoutineAll = async (): Promise<RoutineAllGetRes> => {
+    const config = {
+        method: "GET",
+        url: "/v1/routines",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+
+    const response = await api<RoutineAllGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
+    }
+    // TODO: API 나오면 넣기
+    return {
+        code: "OK",
+        success: true,
+        result: {
+            contents: [
+                {
+                    id: 1,
+                    order: 1,
+                    name: "Morning Routine!!",
+                    color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
+                    routineExercises: [
+                        {
+                            id: 1,
+                            order: 1,
+                            sets: [
+                                {
+                                    id: 1,
+                                    order: 1,
+                                    weight: 50,
+                                    rep: 10,
+                                    restSec: 60,
+                                    exerciseSec: 30,
+                                },
+                            ],
+                            exercise: {
+                                id: 1,
+                                name: "덤벨프레스",
+                                image: null,
+                                category: "CHEST",
+                                types: ["WEIGHT", "COUNT"],
+                                isEditable: 1,
+                                shareLevel: 1,
+                            },
+                        },
+                        {
+                            id: 1,
+                            order: 1,
+                            sets: [
+                                {
+                                    id: 1,
+                                    order: 1,
+                                    weight: 50,
+                                    rep: 10,
+                                    restSec: 60,
+                                    exerciseSec: 30,
+                                },
+                            ],
+                            exercise: {
+                                id: 1,
+                                name: "덤벨프레스",
+                                image: null,
+                                category: "CHEST",
+                                types: ["WEIGHT", "COUNT"],
+                                isEditable: 1,
+                                shareLevel: 1,
+                            },
+                        },
+                    ],
+                },
+                {
+                    id: 2,
+                    order: 2,
+                    name: "Evening Routine",
+                    color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
+                    routineExercises: [
+                        {
+                            id: 1,
+                            order: 1,
+                            sets: [
+                                {
+                                    id: 2,
+                                    order: 1,
+                                    weight: 60,
+                                    rep: 8,
+                                    restSec: 90,
+                                    exerciseSec: 40,
+                                },
+                            ],
+                            exercise: {
+                                id: 1,
+                                name: "덤벨프레스",
+                                image: null,
+                                category: "CHEST",
+                                types: ["WEIGHT", "COUNT"],
+                                isEditable: 1,
+                                shareLevel: 1,
+                            },
+                        },
+                    ],
+                },
+                {
+                    id: 3,
+                    order: 2,
+                    name: "Cardio Routine",
+                    color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
+                    routineExercises: [
+                        {
+                            id: 4,
+                            order: 1,
+                            sets: [
+                                {
+                                    id: 3,
+                                    order: 1,
+                                    weight: 0,
+                                    rep: 0,
+                                    restSec: 0,
+                                    exerciseSec: 300,
+                                },
+                            ],
+                            exercise: {
+                                id: 3,
+                                name: "덤벨프레스",
+                                image: null,
+                                category: "CHEST",
+                                types: ["WEIGHT", "COUNT"],
+                                isEditable: 1,
+                                shareLevel: 1,
+                            },
+                        },
+                    ],
+                },
+            ],
+            total: 0,
+        },
+    };
+};
+
+// 확인: 완료
+export const getRoutineOne = async (
+    routineId: string,
+): Promise<RoutineGetRes> => {
+    const config = {
+        method: "GET",
+        url: "/v1/routines",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+
+    const response = await api<RoutineGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
+    }
+
+    return {
+        code: "OK",
+        success: true,
+        result: {
+            contents: {
                 id: 1,
                 order: 1,
-                name: "Morning Routine",
-                color: Color.VIOLET, // 가정: Color enum에서 'red'를 사용
+                name: "Morning Workout",
+                color: Color.BLUE,
                 routineExercises: [
                     {
                         id: 1,
                         order: 1,
+                        exercise: {
+                            id: 1,
+                            name: "덤벨프레스",
+                            image: null,
+                            category: "CHEST",
+                            types: ["WEIGHT", "COUNT"],
+                            isEditable: 1 as 1, // ← '1' 리터럴 타입으로 단언
+                            shareLevel: 1 as 1, // ← '1' 리터럴 타입으로 단언
+                        },
                         sets: [
                             {
                                 id: 1,
@@ -31,191 +206,53 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes | void> => {
                                 restSec: 60,
                                 exerciseSec: 30,
                             },
-                        ],
-                        exercise: {
-                            id: 1,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
-                    },
-                    {
-                        id: 1,
-                        order: 1,
-                        sets: [
-                            {
-                                id: 1,
-                                order: 1,
-                                weight: 50,
-                                rep: 10,
-                                restSec: 60,
-                                exerciseSec: 30,
-                            },
-                        ],
-                        exercise: {
-                            id: 1,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
-                    },
-                ],
-            },
-            {
-                id: 2,
-                order: 2,
-                name: "Evening Routine",
-                color: Color.BLUE, // 가정: Color enum에서 'blue'를 사용
-                routineExercises: [
-                    {
-                        id: 1,
-                        order: 1,
-                        sets: [
                             {
                                 id: 2,
-                                order: 1,
+                                order: 2,
                                 weight: 60,
                                 rep: 8,
                                 restSec: 90,
                                 exerciseSec: 40,
                             },
                         ],
+                    },
+                    {
+                        id: 2,
+                        order: 2,
                         exercise: {
-                            id: 1,
+                            id: 2,
                             name: "덤벨프레스",
                             image: null,
+
                             category: "CHEST",
                             types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
+                            isEditable: 1 as 1,
+                            shareLevel: 1 as 1,
                         },
-                    },
-                ],
-            },
-            {
-                id: 3,
-                order: 2,
-                name: "Cardio Routine",
-                color: Color.GREEN, // 가정: Color enum에서 'green'을 사용
-                routineExercises: [
-                    {
-                        id: 4,
-                        order: 1,
                         sets: [
                             {
-                                id: 3,
+                                id: 1,
                                 order: 1,
-                                weight: 0,
-                                rep: 0,
-                                restSec: 0,
-                                exerciseSec: 300,
+                                weight: 50,
+                                rep: 10,
+                                restSec: 60,
+                                exerciseSec: 30,
+                            },
+                            {
+                                id: 2,
+                                order: 2,
+                                weight: 60,
+                                rep: 8,
+                                restSec: 90,
+                                exerciseSec: 40,
                             },
                         ],
-                        exercise: {
-                            id: 3,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
                     },
                 ],
             },
-        ];
-    } catch (e) {
-        handleError(e);
-    }
-};
-
-// 확인: 완료
-export const getRoutineOne = async (
-    routineId: string,
-): Promise<RoutineAllGetRes[number] | void> => {
-    const routine = {
-        id: 1,
-        order: 1,
-        name: "Morning Workout",
-        color: Color.BLUE,
-        routineExercises: [
-            {
-                id: 1,
-                order: 1,
-                exercise: {
-                    id: 1,
-                    name: "덤벨프레스",
-                    image: null,
-                    category: "CHEST",
-                    types: ["WEIGHT", "COUNT"],
-                    isEditable: 1 as 1, // ← '1' 리터럴 타입으로 단언
-                    shareLevel: 1 as 1, // ← '1' 리터럴 타입으로 단언
-                },
-                sets: [
-                    {
-                        id: 1,
-                        order: 1,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 60,
-                        exerciseSec: 30,
-                    },
-                    {
-                        id: 2,
-                        order: 2,
-                        weight: 60,
-                        rep: 8,
-                        restSec: 90,
-                        exerciseSec: 40,
-                    },
-                ],
-            },
-            {
-                id: 2,
-                order: 2,
-                exercise: {
-                    id: 2,
-                    name: "덤벨프레스",
-                    image: null,
-
-                    category: "CHEST",
-                    types: ["WEIGHT", "COUNT"],
-                    isEditable: 1 as 1,
-                    shareLevel: 1 as 1,
-                },
-                sets: [
-                    {
-                        id: 1,
-                        order: 1,
-                        weight: 50,
-                        rep: 10,
-                        restSec: 60,
-                        exerciseSec: 30,
-                    },
-                    {
-                        id: 2,
-                        order: 2,
-                        weight: 60,
-                        rep: 8,
-                        restSec: 90,
-                        exerciseSec: 40,
-                    },
-                ],
-            },
-        ],
+            total: 0,
+        },
     };
-
-    try {
-        return routine;
-    } catch (e) {
-        handleError(e);
-    }
 };
 // 확인: 완료
 export const createRoutineOne = async (
@@ -239,8 +276,21 @@ export const createRoutineOne = async (
             routineExercises: newRoutineExercises,
         };
 
-        console.log("루틴 생성 요청:", newRoutineCreateReq);
-        window.alert(JSON.stringify(newRoutineCreateReq));
+        const config = {
+            method: "POST",
+            url: "/v1/exercises",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: newRoutineCreateReq,
+        };
+
+        const response = await api(config);
+
+        if (!response.data.success) {
+            // 원하는 방식으로 error throw
+            throw new Error(`API 실패: ${response.data.code}`);
+        }
         return;
     } catch (e) {
         handleError(e);

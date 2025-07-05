@@ -1,11 +1,11 @@
 import ConfirmSet from "headful/ConfirmSet/ConfirmSet";
 import Trash from "assets/image/trash.svg";
 import {useModal} from "headless/Modal/Modal";
-import {RoutineAllGetRes} from "types/routine";
+import {RoutineAllGetItem, RoutineAllGetRes} from "types/routine";
 import useRoutineDeleteMutation from "hooks/server/useRoutineDeleteMutation";
 
 type RoutineDeleteConfirmProps = {
-    routineAllGetRes: RoutineAllGetRes[number];
+    routineAllGetRes: RoutineAllGetItem;
 };
 
 const RoutineDeleteConfirm = ({

@@ -3,12 +3,12 @@ import React from "react";
 import Trash from "assets/image/trash.svg";
 import {useModal} from "headless/Modal/Modal";
 import useExerciseDeleteMutation from "hooks/server/useExerciseDeleteMutation";
-import {RoutineAllGetRes} from "types/routine";
+import {RoutineAllGetItem, RoutineAllGetRes} from "types/routine";
 import {useNavigate} from "react-router-dom";
 import ROUTES from "constants/routes";
 
 type RoutineStartConfirmProps = {
-    routineAllGetRes: RoutineAllGetRes[number];
+    routineAllGetRes: RoutineAllGetItem;
 };
 
 const RoutineStartConfirm = ({routineAllGetRes}: RoutineStartConfirmProps) => {

@@ -9,8 +9,8 @@ const useRoutineAllGetQuery = () => {
             const response = await getRoutineAll();
             return response;
         },
-        select: response => ({
-            routines: response ?? [],
+        select: data => ({
+            routines: data.result.contents,
         }),
     });
 };

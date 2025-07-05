@@ -6,11 +6,11 @@ const useRoutineGetQuery = (routineId: string) => {
     return useSuspenseQuery({
         queryKey: [queryKey.getRoutineOne, routineId],
         queryFn: async () => {
-            const response = await getRoutineOne(routineId);
-            return response;
+            const data = await getRoutineOne(routineId);
+            return data;
         },
-        select: response => ({
-            routine: response,
+        select: data => ({
+            routine: data.result.contents,
         }),
     });
 };

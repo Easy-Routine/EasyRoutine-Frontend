@@ -5,11 +5,11 @@ import Text from "headful/Text/Text";
 import {Routine, RoutineExercise} from "types/model";
 import RoutineExerciseFlex from "./RoutineExerciseFlex";
 import React from "react";
-import {RoutineAllGetRes} from "types/routine";
+import {RoutineAllGetItem, RoutineAllGetRes} from "types/routine";
 import {Color} from "types/enum";
 
 type RoutineAccordionProps = {
-    routineAllGetRes: RoutineAllGetRes[number];
+    routineAllGetRes: RoutineAllGetItem;
     children: React.ReactNode;
 };
 
