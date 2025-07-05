@@ -1,0 +1,9 @@
+.ContentBox {
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 16px;
+    padding: 15px;
+    background-color: var(--background-box);
+    box-shadow: var(--boxShadow);
+}

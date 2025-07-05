@@ -1,4 +1,4 @@
-import {Period} from "./enum";
+import {Period, Type} from "./enum";
 import {Routine, RoutineHistory} from "./model";
 
 export type RoutineHistoryAllGetMonthlyReq = {date: Date};
@@ -21,6 +21,7 @@ export type RoutineHistoryGetRes = RoutineHistory;
 export type RoutineHistoryExerciseVolumeByPeriodAllGetReq = {
     exerciseId: number;
     period: Period;
+    type: Type;
 };
 
 export type RoutineHistoryExerciseVolumeByPeriodAllGetRes = {

@@ -6,12 +6,14 @@ import {RoutineHistoryExerciseVolumeByPeriodAllGetReq} from "types/routine-histo
 const useRoutineHistoryExerciseVolumeByPeriodAllGetQuery = (
     routineHistoryExerciseVolumeByPeriodAllGetReq: RoutineHistoryExerciseVolumeByPeriodAllGetReq,
 ) => {
-    const {exerciseId, period} = routineHistoryExerciseVolumeByPeriodAllGetReq;
+    const {exerciseId, period, type} =
+        routineHistoryExerciseVolumeByPeriodAllGetReq;
     return useQuery({
         queryKey: [
             queryKey.getRoutineHistoryExerciseVolumeByPeriodAll,
             exerciseId,
             period,
+            type,
         ],
         queryFn: async () => {
             const data = await getRoutineHistoryExerciseVolumeByPeriodAll(

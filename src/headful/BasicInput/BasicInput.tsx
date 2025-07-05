@@ -8,7 +8,7 @@ const BasicInput = ({...props}: BasicInputProps) => {
         <input
             {...props}
             className={styles.BasicInput}
-            placeholder="운동 이름을 입력해주세요."
+            placeholder={props.placeholder ?? '"운동 이름을 입력해주세요."'}
         />
     );
 };

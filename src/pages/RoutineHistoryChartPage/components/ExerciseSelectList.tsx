@@ -6,6 +6,7 @@ import {useExerciseAllGet} from "./ExerciseAllGetProvider";
 import LineSelectGroup from "headful/LineSelectGroup/LineSelectGroup";
 import {SelectGroupValue} from "headless/SelectGroup/SelectGroupItem";
 import {useRoutineHistoryChartGet} from "./RoutineHistoryChartGetProvider";
+import {useModal} from "headless/Modal/Modal";
 
 type ExerciseSelectListProps = {};
 
@@ -13,10 +14,12 @@ const ExerciseSelectList = ({}: ExerciseSelectListProps) => {
     // const {exerciseIds, setExerciseIds} = useRoutineExerciseAdd();
     const {exercises} = useExerciseAllGet();
     const {exerciseId, setExerciseId} = useRoutineHistoryChartGet();
+    const {closeModal} = useModal();
 
     const handleSelectItemClick = (value: SelectGroupValue) => {
         // setExerciseIds(value);
         setExerciseId(Number(value));
+        closeModal();
     };
 
     return (

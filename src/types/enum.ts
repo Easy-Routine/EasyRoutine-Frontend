@@ -22,11 +22,12 @@ export enum BackgroundColor {
     PINK = "#FFE6F2", // 연한 분홍색
 }
 export enum Period {
-    Month = "month",
-    Quarter = "quarter",
-    Half = "half",
-    Year = "year",
-    All = "all",
+    WEEK = "week",
+    MONTH = "month",
+    QUARTER = "quarter",
+    HALF = "half",
+    YEAR = "year",
+    ALL = "all",
 }
 export enum Type {
     WEIGHT = "WEIGHT",

@@ -1,0 +1,19 @@
+.Item {
+    // margin: 0 8px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 400; /* Block: basic-select */
+    padding: 6px 10px;
+
+    color: #474747;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-primary);
+        color: #fff;
+    }
+}

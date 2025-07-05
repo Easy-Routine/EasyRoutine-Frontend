@@ -1,0 +1,27 @@
+/* Block: basic-select, Element: content */
+.Content {
+    height: auto;
+    width: 100%;
+    padding: var(--space-7) 0;
+
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+
+    position: absolute;
+    left: 0;
+    top: calc(100% + var(--space-7));
+    list-style: none;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 30px 84px 0px rgba(19, 10, 46, 0.08), 0px 8px 32px 0px rgba(19, 10, 46, 0.07),
+        0px 3px 14px 0px rgba(19, 10, 46, 0.03), 0px 1px 3px 0px rgba(19, 10, 46, 0.13);
+    z-index: 500;
+
+    &.Open {
+        transition: opacity 400ms, transform 400ms;
+    }
+
+    &.Close {
+        transition: opacity 400ms, transform 400ms;
+    }
+}
