@@ -4,7 +4,7 @@ import DialogModalContent from "./DialogModalContent/DialogModalContent";
 import DialogModalTrigger from "./DialogModalTrigger";
 import Modal from "headless/Modal/Modal";
 
-type DialogModalProps = {
+type DialogModalProps = React.ComponentProps<typeof Modal> & {
     children: React.ReactNode;
 };
 

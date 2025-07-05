@@ -24,6 +24,11 @@ import ExerciseFilterTabGroup from "./components/ExerciseFilterTabGroup";
 import RoutineExerciseAddProvider from "./components/RoutineExerciseAddProvider";
 import RoutineExerciseAddCheckBoxGroup from "./components/RoutineExerciseAddCheckBoxGroup";
 import RoutineExerciseAddButton from "./components/RoutineExerciseAddButton";
+import BottomBox from "headful/BottomBox/BottomBox";
+import TimerModal from "./components/TimeModal";
+import TimerModalContent from "./components/TimerModalContent";
+import TimerDisplayButton from "./components/TimerDisplayButton";
+import CompleteModal from "./components/CompleteModal";
 
 const RoutineProgressPage = () => {
     const {routineId} = useParams();
@@ -53,9 +58,12 @@ const RoutineProgressPage = () => {
                                     <SetCreateButton
                                         routineExercise={routineExercise}
                                     />
-                                    <SetCompleteButton
-                                        routineExercise={routineExercise}
-                                    />
+                                    <TimerModal>
+                                        <SetCompleteButton
+                                            routineExercise={routineExercise}
+                                        />
+                                    </TimerModal>
+
                                     <RoutineExerciseDeleteButton
                                         routineExercise={routineExercise}
                                     />
@@ -82,7 +90,18 @@ const RoutineProgressPage = () => {
                     />
                 </Main>
                 <Footer>
-                    <RoutineCompleteButton />
+                    <BottomBox>
+                        <div style={{flex: 1}}>
+                            <TimerModal>
+                                <TimerDisplayButton />
+                            </TimerModal>
+                        </div>
+                        <div style={{flex: 2}}>
+                            <CompleteModal>
+                                <RoutineCompleteButton />
+                            </CompleteModal>
+                        </div>
+                    </BottomBox>
                 </Footer>
             </RoutineProgressProvider>
         </PrivatePageTemplate>

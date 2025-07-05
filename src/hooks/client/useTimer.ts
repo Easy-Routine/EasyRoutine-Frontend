@@ -1,5 +1,5 @@
-import moment, { Moment } from "moment";
-import { useState, useEffect } from "react";
+import moment, {Moment} from "moment";
+import {useState, useEffect} from "react";
 
 const useTimer = (onComplete?: () => void) => {
     const [endTime, setEndTime] = useState<Moment | null>(null);
@@ -7,16 +7,19 @@ const useTimer = (onComplete?: () => void) => {
     const [remainingTime, setRemainingTime] = useState<number>(0); // 남은 시간 상태 추가
 
     const startTimer = (initialSeconds: number) => {
+        // 현재 시간에 휴식시간을 더한 값을 endTime으로 설정
         const newEndTime = moment().add(initialSeconds, "seconds");
         setEndTime(newEndTime);
-        setRemainingTime(initialSeconds); // 남은 시간을 초기화
+        // 남은 시간을 초기화
+        setRemainingTime(initialSeconds);
         window.ReactNativeWebView &&
             window.ReactNativeWebView.postMessage(
                 JSON.stringify({
                     type: "timer",
                     date: newEndTime.toISOString(),
-                })
+                }),
             );
+        // 활성 상태로 변경
         setIsActive(true);
     };
 
@@ -29,7 +32,7 @@ const useTimer = (onComplete?: () => void) => {
                 JSON.stringify({
                     type: "timer",
                     date: currentTime.toISOString(),
-                })
+                }),
             );
 
         onComplete && onComplete(); // 타이머 완료 시 호출
@@ -71,7 +74,11 @@ const useTimer = (onComplete?: () => void) => {
         };
     }, [isActive, endTime, onComplete]);
 
-    return { endTime, isActive, startTimer, skipTimer, remainingTime };
+    useEffect(() => {
+        console.log("남은 시간 업데이트:", remainingTime);
+    }, [remainingTime]);
+
+    return {endTime, isActive, startTimer, skipTimer, remainingTime};
 };
 
 export default useTimer;

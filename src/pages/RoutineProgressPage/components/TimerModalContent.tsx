@@ -4,35 +4,45 @@ import Text from "headful/Text/Text";
 import {ReactComponent as ClockIcon} from "assets/image/clock.svg";
 import formatTime from "utils/formatTime";
 import {useRoutineProgress} from "./RoutineProgressProvider";
+import ConfirmSet from "headful/ConfirmSet/ConfirmSet";
+import Clock from "assets/image/clock.svg";
+import {useModal} from "headless/Modal/Modal";
 
 const TimerModalContent = () => {
-    const {remainingTime} = useRoutineProgress();
+    const {remainingTime, skipTimer} = useRoutineProgress();
+    const {closeModal} = useModal();
+
+    const handleCancelButtonClick = () => {
+        closeModal();
+    };
+    const handleConfirmButtonClick = () => {
+        skipTimer();
+        closeModal();
+    };
+
     return (
-        <Flex padding={20} direction="column" align="center" gap={20}>
-            <CircleButton width={65} height={65}>
-                <ClockIcon
-                    style={{
-                        color: "white",
-                        width: "30px",
-                        height: "30px",
-                    }}
-                />
-            </CircleButton>
-            <Text
-                size={"var(--fontSize-xl)"}
-                weight={"var(--fontWeight-semibold)"}
-                color={"var(--text-black)"}
-            >
-                휴식 타이머
-            </Text>
-            <Text
-                size={"var(--fontSize-md)"}
-                weight={"var(--fontWeight-regular)"}
-                color={"var(--text-black)"}
-            >
-                {formatTime(remainingTime)}
-            </Text>
-        </Flex>
+        <ConfirmSet>
+            <ConfirmSet.Icon icon={Clock} />
+            <ConfirmSet.Title text="루틴 삭제" />
+
+            <ConfirmSet.Description
+                text={
+                    <Flex justify="center">
+                        <Text size={40} weight="600">
+                            {formatTime(remainingTime)}
+                        </Text>
+                    </Flex>
+                }
+            />
+            <ConfirmSet.Cancel
+                text="잠시 닫기"
+                onButtonClick={handleCancelButtonClick}
+            />
+            <ConfirmSet.Confirm
+                text="건너띄기"
+                onButtonClick={handleConfirmButtonClick}
+            />
+        </ConfirmSet>
     );
 };
 

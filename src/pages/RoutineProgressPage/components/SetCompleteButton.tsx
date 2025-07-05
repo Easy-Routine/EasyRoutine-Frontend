@@ -6,15 +6,21 @@ import ConfirmModal from "headful/ConfirmModal/ConfirmModal";
 import {useRoutineProgress} from "./RoutineProgressProvider";
 import CompleteModalContent from "./CompleteModalContent";
 import TimerModalContent from "./TimerModalContent";
+import moment from "moment";
 
 type SetCompleteButtonProps = {
     routineExercise: RoutineExercise;
 };
 
 const SetCompleteButton = ({routineExercise}: SetCompleteButtonProps) => {
-    const currentRE = routineExercise;
-    const {routineHistory, setRoutineHistory, routine, startTimer} =
-        useRoutineProgress();
+    const {
+        routineHistory,
+        setRoutineHistory,
+        routine,
+        startTimer,
+        remainingTime,
+        routineStartTime,
+    } = useRoutineProgress();
 
     const {openModal} = useModal();
 
@@ -23,33 +29,55 @@ const SetCompleteButton = ({routineExercise}: SetCompleteButtonProps) => {
     > = async e => {
         e.stopPropagation();
 
-        // 운동 기록 상태를 가져와서 객체를 복사한다.
         const newRoutineHistory = structuredClone(routineHistory);
+        const currentRE = routineExercise;
         const currentRHE = newRoutineHistory.routineExercises.find(
             (re: RoutineExercise) => re.id === currentRE.id,
         );
 
+        let currentRESet;
+
         if (currentRHE) {
-            // 현재 운동 기록의 세트 배열 길이에 해당하는 인덱스의 세트 설정을 푸쉬한다.
             const currentRHESetLength = currentRHE.sets.length;
-            const currentRESet = currentRE.sets[currentRHESetLength];
+            currentRESet = currentRE.sets[currentRHESetLength];
             currentRHE.sets.push(currentRESet);
         } else {
-            const REFirstSet = currentRE.sets[0];
-
+            currentRESet = currentRE.sets[0];
             newRoutineHistory.routineExercises.push({
                 id: currentRE.id,
                 order: currentRE.order,
                 exercise: currentRE.exercise,
-                sets: [REFirstSet],
+                sets: [currentRESet],
             });
         }
 
-        setRoutineHistory(newRoutineHistory);
+        const totalRoutineSets = routine.routineExercises.flatMap(
+            exercise => exercise.sets,
+        ).length;
 
-        // 현재 세트를 기록에 추가한다.
+        const totalHistorySets = routineHistory.routineExercises.flatMap(
+            exercise => exercise.sets,
+        ).length;
+
+        const isRoutineCompleted = totalRoutineSets === totalHistorySets + 1;
+
+        openModal();
+        if (!isRoutineCompleted) {
+            startTimer(currentRESet.restSec);
+        }
+
+        if (isRoutineCompleted) {
+            newRoutineHistory.workoutTime = moment().diff(
+                routineStartTime,
+                "seconds",
+            );
+            setRoutineHistory(newRoutineHistory);
+        } else {
+            setRoutineHistory(newRoutineHistory);
+        }
     };
 
+    const currentRE = routineExercise;
     const currentRHE = routineHistory.routineExercises.find(
         (re: RoutineExercise) => re.id === currentRE.id,
     );
@@ -59,7 +87,7 @@ const SetCompleteButton = ({routineExercise}: SetCompleteButtonProps) => {
 
     return (
         <BasicButton
-            disabled={isRoutineExerciseCompleted}
+            disabled={isRoutineExerciseCompleted || remainingTime > 0}
             onClick={handleSetCompleteButtonClick}
         >
             세트 완료
@@ -67,26 +95,4 @@ const SetCompleteButton = ({routineExercise}: SetCompleteButtonProps) => {
     );
 };
 
-function withModal<P extends object>(WrappedComponent: React.ComponentType<P>) {
-    const WithModal: React.FC<P> = props => {
-        // const {isAllCompleted} = useRoutineProgress();
-
-        const modalContent = false ? (
-            <CompleteModalContent />
-        ) : (
-            <TimerModalContent />
-        );
-
-        return (
-            <ConfirmModal>
-                <ConfirmModal.Backdrop />
-                <ConfirmModal.Content>{modalContent}</ConfirmModal.Content>
-                <WrappedComponent {...props} />
-            </ConfirmModal>
-        );
-    };
-
-    return WithModal;
-}
-
-export default withModal(SetCompleteButton);
+export default SetCompleteButton;

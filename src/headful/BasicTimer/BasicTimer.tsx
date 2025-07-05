@@ -2,16 +2,14 @@ import moment from "moment";
 import "moment-duration-format";
 import styles from "./BasicTimer.module.scss";
 import classNames from "classnames";
+import formatTime from "utils/formatTime";
 
 type BasicTimerProps = {
     value: number;
+    onTimerClick?: () => void;
 };
 
-const BasicTimer = ({value}: BasicTimerProps) => {
-    const formatted = moment.duration(value, "seconds").format("mm:ss", {
-        trim: false,
-    });
-
+const BasicTimer = ({value, onTimerClick}: BasicTimerProps) => {
     // seconds가 1초 이상 9초 이하일 경우 경고 스타일 클래스 적용
 
     const combinedClassName = classNames(styles.Text, {
@@ -19,8 +17,8 @@ const BasicTimer = ({value}: BasicTimerProps) => {
     });
 
     return (
-        <div className={styles.BasicTimer}>
-            <div className={combinedClassName}>{formatted}</div>
+        <div className={styles.BasicTimer} onClick={onTimerClick}>
+            <div className={combinedClassName}>{formatTime(value)}</div>
         </div>
     );
 };
