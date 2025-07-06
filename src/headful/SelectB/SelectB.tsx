@@ -30,14 +30,24 @@ type SelectBProps = {
     children: React.ReactNode;
     defaultValue: SelectGroupValue;
     disabled?: boolean;
+    full?: boolean;
 };
 
-const SelectB = ({children, defaultValue, disabled = false}: SelectBProps) => {
+const SelectB = ({
+    children,
+    defaultValue,
+    disabled = false,
+    full,
+}: SelectBProps) => {
+    const className = classNames(styles.SelectB, {
+        [styles.Full]: full,
+    });
+
     return (
         <SelectBContext.Provider value={{disabled}}>
             <SelectGroup defaultValue={defaultValue}>
                 <Dropdown>
-                    <Dropdown.Box className={styles.SelectB}>
+                    <Dropdown.Box className={className}>
                         {children}
                     </Dropdown.Box>
                 </Dropdown>

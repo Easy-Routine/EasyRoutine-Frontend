@@ -1,4 +1,9 @@
 .SelectB {
+    width: auto;
+
+    &.Full {
+        width: 100%;
+    }
 }
 
 .Box {

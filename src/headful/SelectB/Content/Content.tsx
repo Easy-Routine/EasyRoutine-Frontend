@@ -5,10 +5,15 @@ import classNames from "classnames";
 
 type ContentProps = {
     children: React.ReactNode;
+    height?: number;
 };
 
-const Content = ({children}: ContentProps) => {
+const Content = ({children, height}: ContentProps) => {
     const {dropdownValue} = useDropdown();
+
+    const cssVariables: React.CSSProperties = {
+        "--height": `${height}px`,
+    } as React.CSSProperties;
 
     const combinedStyle = classNames(styles.Content, {
         [styles.Open]: dropdownValue, // dropdownValue가 true일 때 Open 클래스 적용
@@ -16,7 +21,7 @@ const Content = ({children}: ContentProps) => {
     });
 
     return (
-        <Dropdown.Content className={combinedStyle}>
+        <Dropdown.Content className={combinedStyle} style={{...cssVariables}}>
             {children}
         </Dropdown.Content>
     );
