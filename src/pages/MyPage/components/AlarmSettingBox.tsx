@@ -1,8 +1,7 @@
 import ContentBox from "headful/ContentBox/ContentBox";
 import Flex from "headful/Flex/Flex";
 import Text from "headful/Text/Text";
-import React from "react";
-import {FaClock, FaRegClock} from "react-icons/fa";
+
 import {LuAlarmClock} from "react-icons/lu";
 import {LuClock} from "react-icons/lu";
 import {useAlram} from "./AlarmProvider";
