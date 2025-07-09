@@ -4,14 +4,12 @@ import CommonLoading from "components/content/CommonLoading/CommonLoading";
 import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 import PublicRoute from "components/PublicRoute/PublicRoute";
 import ROUTES from "constants/routes";
-import PrivatePageTemplate from "headful/PrivatePageTemplate/PrivatePageTemplate";
-import PublicPageTemplate from "headful/PublicPageTemplate/PublicPageTemplate";
-import useRouteChangeTracker from "hooks/client/useRouteChangeTracker";
+
 import {Suspense} from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 
 const AppRouter = () => {
-    useRouteChangeTracker();
+    // useRouteChangeTracker();
     return (
         <>
             <Suspense
