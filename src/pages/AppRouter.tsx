@@ -7,11 +7,19 @@ import ROUTES from "constants/routes";
 
 import {Suspense} from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
+import {ErrorBoundary} from "react-error-boundary";
+
+const ErrorFallback = ({error}: {error: Error}) => (
+    <div style={{padding: 24}}>
+        <h2>예기치 못한 오류가 발생했습니다.</h2>
+        <p>{error.message}</p>
+        <button onClick={() => window.location.reload()}>새로고침</button>
+    </div>
+);
 
 const AppRouter = () => {
-    // useRouteChangeTracker();
     return (
-        <>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense
                 fallback={
                     <DefferredComponent>
@@ -21,15 +29,12 @@ const AppRouter = () => {
             >
                 <Routes>
                     <Route element={<PublicRoute />}>
-                        {/* <Route element={<PublicPageTemplate />}> */}
                         <Route
                             path={ROUTES.LOGIN.PATH}
                             element={<ROUTES.LOGIN.COMPONENT />}
                         />
-                        {/* </Route> */}
                     </Route>
                     <Route element={<PrivateRoute />}>
-                        {/* <Route element={<PrivatePageTemplate />}> */}
                         <Route
                             path={ROUTES.MY.PATH}
                             element={<ROUTES.MY.COMPONENT />}
@@ -75,10 +80,9 @@ const AppRouter = () => {
                             <Navigate to={ROUTES.CONFIG.LIST.PATH} replace />
                         }
                     />
-                    {/* </Route> */}
                 </Routes>
             </Suspense>
-        </>
+        </ErrorBoundary>
     );
 };
 
