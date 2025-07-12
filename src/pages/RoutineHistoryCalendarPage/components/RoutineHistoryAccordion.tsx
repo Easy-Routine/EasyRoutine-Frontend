@@ -2,7 +2,7 @@ import FireColorBox from "headful/FireColorBox/FireColorBox";
 import Flex from "headful/Flex/Flex";
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import Text from "headful/Text/Text";
-import {Routine, RoutineExercise} from "types/model";
+import {Routine, RoutineExercise, RoutineHistory} from "types/model";
 import React from "react";
 import {RoutineAllGetRes} from "types/routine";
 import {Color} from "types/enum";
@@ -10,7 +10,7 @@ import RoutineExerciseFlex from "pages/RoutineListPage/components/RoutineExercis
 import {RoutineHistoryAllGetDailyRes} from "types/routine-history";
 
 type RoutineHistoryAccordionProps = {
-    routineHistory: RoutineHistoryAllGetDailyRes[number];
+    routineHistory: RoutineHistory;
     children: React.ReactNode;
 };
 

@@ -229,172 +229,187 @@ export const getRoutineHistoryAllDaily = async ({
     date,
 }: {
     date: Date;
-}): Promise<RoutineHistoryAllGetDailyRes | void> => {
+}): Promise<RoutineHistoryAllGetDailyRes> => {
     try {
         // 50% 확률로 빈 배열 반환
         if (Math.random() < 0.5) {
-            return [];
+            return {
+                code: "OK",
+                success: true,
+                result: {
+                    contents: [],
+                    total: 0,
+                },
+            };
         }
 
-        return [
-            {
-                id: 1,
-                order: 1,
-                name: "Morning Routine",
-                color: Color.VIOLET,
-                workoutTime: 3600,
-                createdAt: "2025-06-01T08:00:00Z",
-                routineExercises: [
+        return {
+            code: "OK",
+            success: true,
+            result: {
+                contents: [
                     {
                         id: 1,
                         order: 1,
-                        sets: [
+                        name: "Morning Routine",
+                        color: Color.VIOLET,
+                        workoutTime: 3600,
+                        createdAt: "2025-06-01T08:00:00Z",
+                        routineExercises: [
                             {
                                 id: 1,
                                 order: 1,
-                                weight: 50,
-                                rep: 10,
-                                restSec: 60,
-                                exerciseSec: 30,
+                                sets: [
+                                    {
+                                        id: 1,
+                                        order: 1,
+                                        weight: 50,
+                                        rep: 10,
+                                        restSec: 60,
+                                        exerciseSec: 30,
+                                    },
+                                ],
+                                exercise: {
+                                    id: 1,
+                                    name: "덤벨프레스",
+                                    image: null,
+                                    category: "CHEST",
+                                    types: ["WEIGHT", "COUNT"],
+                                    isEditable: 1,
+                                    shareLevel: 1,
+                                },
                             },
-                        ],
-                        exercise: {
-                            id: 1,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
-                    },
-                    {
-                        id: 1,
-                        order: 1,
-                        sets: [
                             {
                                 id: 1,
                                 order: 1,
-                                weight: 50,
-                                rep: 10,
-                                restSec: 60,
-                                exerciseSec: 30,
+                                sets: [
+                                    {
+                                        id: 1,
+                                        order: 1,
+                                        weight: 50,
+                                        rep: 10,
+                                        restSec: 60,
+                                        exerciseSec: 30,
+                                    },
+                                ],
+                                exercise: {
+                                    id: 1,
+                                    name: "덤벨프레스",
+                                    image: null,
+                                    category: "CHEST",
+                                    types: ["WEIGHT", "COUNT"],
+                                    isEditable: 1,
+                                    shareLevel: 1,
+                                },
                             },
                         ],
-                        exercise: {
-                            id: 1,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
                     },
-                ],
-            },
-            {
-                id: 2,
-                order: 2,
-                name: "Evening Routine",
-                color: Color.BLUE,
-                workoutTime: 3600,
-                createdAt: "2025-06-10T08:00:00Z",
-                routineExercises: [
                     {
-                        id: 1,
-                        order: 1,
-                        sets: [
+                        id: 2,
+                        order: 2,
+                        name: "Evening Routine",
+                        color: Color.BLUE,
+                        workoutTime: 3600,
+                        createdAt: "2025-06-10T08:00:00Z",
+                        routineExercises: [
                             {
-                                id: 2,
+                                id: 1,
                                 order: 1,
-                                weight: 60,
-                                rep: 8,
-                                restSec: 90,
-                                exerciseSec: 40,
+                                sets: [
+                                    {
+                                        id: 2,
+                                        order: 1,
+                                        weight: 60,
+                                        rep: 8,
+                                        restSec: 90,
+                                        exerciseSec: 40,
+                                    },
+                                ],
+                                exercise: {
+                                    id: 1,
+                                    name: "덤벨프레스",
+                                    image: null,
+                                    category: "CHEST",
+                                    types: ["WEIGHT", "COUNT"],
+                                    isEditable: 1,
+                                    shareLevel: 1,
+                                },
                             },
                         ],
-                        exercise: {
-                            id: 1,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
                     },
-                ],
-            },
-            {
-                id: 3,
-                order: 3,
-                name: "Cardio Routine",
-                color: Color.GREEN,
-                workoutTime: 3600,
-                createdAt: "2025-06-20T08:00:00Z",
-                routineExercises: [
                     {
-                        id: 4,
-                        order: 1,
-                        sets: [
+                        id: 3,
+                        order: 3,
+                        name: "Cardio Routine",
+                        color: Color.GREEN,
+                        workoutTime: 3600,
+                        createdAt: "2025-06-20T08:00:00Z",
+                        routineExercises: [
                             {
-                                id: 3,
+                                id: 4,
                                 order: 1,
-                                weight: 0,
-                                rep: 0,
-                                restSec: 0,
-                                exerciseSec: 300,
+                                sets: [
+                                    {
+                                        id: 3,
+                                        order: 1,
+                                        weight: 0,
+                                        rep: 0,
+                                        restSec: 0,
+                                        exerciseSec: 300,
+                                    },
+                                ],
+                                exercise: {
+                                    id: 3,
+                                    name: "덤벨프레스",
+                                    image: null,
+                                    category: "CHEST",
+                                    types: ["WEIGHT", "COUNT"],
+                                    isEditable: 1,
+                                    shareLevel: 1,
+                                },
                             },
                         ],
-                        exercise: {
-                            id: 3,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
                     },
-                ],
-            },
-            {
-                id: 4,
-                order: 4,
-                name: "Cardio Routine",
-                color: Color.GREEN,
-                workoutTime: 3600,
-                createdAt: "2025-06-20T09:00:00Z",
-                routineExercises: [
                     {
                         id: 4,
-                        order: 1,
-                        sets: [
+                        order: 4,
+                        name: "Cardio Routine",
+                        color: Color.GREEN,
+                        workoutTime: 3600,
+                        createdAt: "2025-06-20T09:00:00Z",
+                        routineExercises: [
                             {
-                                id: 3,
+                                id: 4,
                                 order: 1,
-                                weight: 0,
-                                rep: 0,
-                                restSec: 0,
-                                exerciseSec: 300,
+                                sets: [
+                                    {
+                                        id: 3,
+                                        order: 1,
+                                        weight: 0,
+                                        rep: 0,
+                                        restSec: 0,
+                                        exerciseSec: 300,
+                                    },
+                                ],
+                                exercise: {
+                                    id: 3,
+                                    name: "덤벨프레스",
+                                    image: null,
+                                    category: "CHEST",
+                                    types: ["WEIGHT", "COUNT"],
+                                    isEditable: 1,
+                                    shareLevel: 1,
+                                },
                             },
                         ],
-                        exercise: {
-                            id: 3,
-                            name: "덤벨프레스",
-                            image: null,
-                            category: "CHEST",
-                            types: ["WEIGHT", "COUNT"],
-                            isEditable: 1,
-                            shareLevel: 1,
-                        },
                     },
                 ],
+                total: 0,
             },
-        ];
+        };
     } catch (error) {
-        handleError(error);
+        throw error;
+        // handleError(error);
     }
 };
 

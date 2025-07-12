@@ -1,11 +1,15 @@
 import {Period, Type} from "./enum";
 import {Routine, RoutineHistory} from "./model";
+import {Response} from "./response";
 
 export type RoutineHistoryAllGetMonthlyReq = {date: Date};
 export type RoutineHistoryAllGetDailyReq = {date: Date};
 
 export type RoutineHistoryAllGetMonthlyRes = RoutineHistory[];
-export type RoutineHistoryAllGetDailyRes = RoutineHistory[];
+export type RoutineHistoryAllGetDailyRes = Response<{
+    contents: RoutineHistory[];
+    total: number;
+}>;
 
 export type RoutineHistoryDeleteReq = {
     id: string | number;

@@ -19,7 +19,7 @@ const useRoutineHistoryAllGetDailyQuery = (
             return response;
         },
         select: response => ({
-            routineHistories: response ?? [],
+            routineHistories: response.result.contents,
         }),
     });
 };
