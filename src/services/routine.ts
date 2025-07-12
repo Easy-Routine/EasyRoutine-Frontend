@@ -120,7 +120,7 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes> => {
                     ],
                 },
                 {
-                    id: 3,
+                    id: 18,
                     order: 2,
                     name: "Cardio Routine",
                     color: Color.GREEN, // 가정: Color enum에서 'green'을 사용

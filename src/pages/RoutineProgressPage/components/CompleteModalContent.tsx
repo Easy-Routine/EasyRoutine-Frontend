@@ -3,12 +3,13 @@ import Check from "assets/image/check.svg";
 import {useModal} from "headless/Modal/Modal";
 import {useRoutineProgress} from "./RoutineProgressProvider";
 import useRoutineHistoryCreateMutation from "hooks/server/useRoutineHistoryCreateMutation";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ROUTES from "constants/routes";
 
 const CompleteModalContent = () => {
     const {closeModal} = useModal();
     const {routineHistory} = useRoutineProgress();
+    const {routineId} = useParams();
     const {mutateAsync: routineHistoryCreateMutate} =
         useRoutineHistoryCreateMutation();
     const navigate = useNavigate();
@@ -20,7 +21,10 @@ const CompleteModalContent = () => {
         // Navigate to the record page or perform any other action
         closeModal();
 
-        await routineHistoryCreateMutate(routineHistory);
+        await routineHistoryCreateMutate({
+            ...routineHistory,
+            routineId: Number(routineId),
+        });
         navigate(ROUTES.RECORD.CALENDAR.PATH);
     };
 

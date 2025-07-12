@@ -29,11 +29,18 @@ import TimerModal from "./components/TimeModal";
 import TimerModalContent from "./components/TimerModalContent";
 import TimerDisplayButton from "./components/TimerDisplayButton";
 import CompleteModal from "./components/CompleteModal";
+import useRoutineAllGetQuery from "hooks/server/useRoutineAllGetQuery";
+import {Routine} from "types/model";
 
 const RoutineProgressPage = () => {
     const {routineId} = useParams();
-    const {data} = useRoutineGetQuery(routineId as string);
-    const routine = data.routine!;
+    const {data} = useRoutineAllGetQuery();
+
+    const currentRoutine = data.routines.find(
+        routine => routine.id === parseInt(routineId as string),
+    ) as Routine;
+
+    const routine = currentRoutine;
 
     return (
         <PrivatePageTemplate>

@@ -39,7 +39,7 @@ export const createRoutineHistoryOne = async (
 
         const config = {
             method: "POST",
-            url: "/v1/routine/histories",
+            url: "/v1/routines/histories",
             headers: {
                 "Content-Type": "application/json",
             },
