@@ -193,8 +193,23 @@ export const updateRoutineOne = async (
             ...routineUpdateReq,
             routineExercises: newRoutineExercises,
         };
-        console.log("루틴 수정 요청:", newRoutineUpdateReq);
-        window.alert(JSON.stringify(newRoutineUpdateReq));
+
+        const config = {
+            method: "PUT",
+            url: `/v1/routines/${routineUpdateReq.id}`,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: newRoutineUpdateReq,
+        };
+
+        const response = await api(config);
+
+        if (!response.data.success) {
+            // 원하는 방식으로 error throw
+            throw new Error(`API 실패: ${response.data.code}`);
+        }
+
         return;
     } catch (e) {
         handleError(e);

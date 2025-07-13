@@ -5,6 +5,8 @@ import {useModal} from "headless/Modal/Modal";
 import {RoutineAllGetRes} from "types/routine";
 import useRoutineUpdateMutation from "hooks/server/useRoutineUpdateMutation";
 import {useRoutineUpdate} from "./RoutineUpdateProvider";
+import {useNavigate} from "react-router-dom";
+import ROUTES from "constants/routes";
 
 type RoutineUpdateConfirmProps = {};
 
@@ -31,6 +33,7 @@ const RoutineUpdateSuccessConfirm = () => {
     const {routine} = useRoutineUpdate();
     const {closeModal} = useModal();
     const {mutateAsync: UpdateRoutineMutate} = useRoutineUpdateMutation();
+    const navigate = useNavigate();
 
     const handleCancelButtonClick = () => {
         closeModal();
@@ -39,6 +42,7 @@ const RoutineUpdateSuccessConfirm = () => {
     const handleConfirmButtonClick = async () => {
         await UpdateRoutineMutate(routine);
         closeModal();
+        navigate(ROUTES.CONFIG.LIST.PATH);
     };
 
     return (
