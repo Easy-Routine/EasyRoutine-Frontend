@@ -15,10 +15,18 @@ const useTimer = (onComplete?: () => void) => {
         window.ReactNativeWebView &&
             window.ReactNativeWebView.postMessage(
                 JSON.stringify({
-                    type: "timer",
+                    type: "REST_TIME_OVER",
                     date: newEndTime.toISOString(),
                 }),
             );
+
+        // window.ReactNativeWebView &&
+        //     window.ReactNativeWebView.postMessage(
+        //         JSON.stringify({
+        //             type: "ROUTINE_RESERVATION",
+        //             date: newEndTime.toISOString(),
+        //         }),
+        //     );
         // 활성 상태로 변경
         setIsActive(true);
     };

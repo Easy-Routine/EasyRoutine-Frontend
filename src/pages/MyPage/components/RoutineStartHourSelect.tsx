@@ -1,9 +1,16 @@
 import SelectB from "headful/SelectB/SelectB";
 import React, {useState} from "react";
 import {useAlram} from "./AlarmProvider";
+import useNativeMessage from "hooks/client/useNativeMessage";
 
 const RoutineStartHourSelect = () => {
-    const {routineStartHour, setRoutineStartHour} = useAlram();
+    const {
+        routineStartHour,
+        routineStartMinute,
+        beforeRoutineStartTime,
+        setRoutineStartHour,
+    } = useAlram();
+    const {sendNativeMessage} = useNativeMessage();
 
     // 00 ~ 23시
     const hours = Array.from({length: 24}, (_, i) =>
@@ -12,6 +19,16 @@ const RoutineStartHourSelect = () => {
 
     const handleItemClick = (hour: string) => {
         setRoutineStartHour(hour);
+        localStorage.setItem("hour", hour);
+        sendNativeMessage({
+            type: "ROUTINE_RESERVATION",
+            data: {
+                isActive: true,
+                hour: hour,
+                minute: routineStartMinute,
+                before: beforeRoutineStartTime,
+            },
+        });
     };
 
     return (

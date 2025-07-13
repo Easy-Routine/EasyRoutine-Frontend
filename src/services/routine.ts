@@ -22,12 +22,12 @@ export const getRoutineAll = async (): Promise<RoutineAllGetRes> => {
         },
     };
 
-    const response = await api<RoutineAllGetRes>(config);
+    // const response = await api<RoutineAllGetRes>(config);
 
-    if (!response.data.success) {
-        // 원하는 방식으로 error throw
-        throw new Error(`API 실패: ${response.data.code}`);
-    }
+    // if (!response.data.success) {
+    //     // 원하는 방식으로 error throw
+    //     throw new Error(`API 실패: ${response.data.code}`);
+    // }
     // TODO: API 나오면 넣기
     return {
         code: "OK",

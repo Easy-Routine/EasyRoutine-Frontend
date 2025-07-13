@@ -35,9 +35,19 @@ type AlramProviderProps = {
 };
 
 const AlramProvider = ({children}: AlramProviderProps) => {
-    const [isActive, setIsActive] = useState<boolean>(false);
-    const [routineStartHour, setRoutineStartHour] = useState<string>("00");
-    const [routineStartMinute, setRoutineStartMinute] = useState<string>("00");
+    const [isActive, setIsActive] = useState<boolean>(() => {
+        const stored = localStorage.getItem("isActive");
+        return stored !== null ? (JSON.parse(stored) as boolean) : false;
+    });
+
+    const [routineStartHour, setRoutineStartHour] = useState<string>(() => {
+        const stored = localStorage.getItem("hour");
+        return stored !== null ? stored : "00";
+    });
+    const [routineStartMinute, setRoutineStartMinute] = useState<string>(() => {
+        const stored = localStorage.getItem("minute");
+        return stored !== null ? stored : "00";
+    });
     const [beforeRoutineStartTime, setBeforeRoutineStartTime] =
         useState<Before>(Before.HALF_HOUR);
 

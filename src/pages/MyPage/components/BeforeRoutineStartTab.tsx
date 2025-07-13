@@ -2,13 +2,29 @@ import ButtonTabGroup from "headful/ButtonTabGroup/ButtonTabGroup";
 import React from "react";
 import {Before, useAlram} from "./AlarmProvider";
 import {TabValue} from "headless/TabGroup/TabGroup";
+import useNativeMessage from "hooks/client/useNativeMessage";
 
 const BeforeRoutineStartTab = () => {
-    const {beforeRoutineStartTime, setBeforeRoutineStartTime} = useAlram();
+    const {
+        routineStartHour,
+        routineStartMinute,
+        beforeRoutineStartTime,
+        setBeforeRoutineStartTime,
+    } = useAlram();
+    const {sendNativeMessage} = useNativeMessage();
 
     const handleTabClick = (value: TabValue) => {
         const newTime = value as Before;
         setBeforeRoutineStartTime(newTime);
+        sendNativeMessage({
+            type: "ROUTINE_RESERVATION",
+            data: {
+                isActive: true,
+                hour: routineStartHour,
+                minute: routineStartMinute,
+                before: beforeRoutineStartTime,
+            },
+        });
     };
 
     return (
