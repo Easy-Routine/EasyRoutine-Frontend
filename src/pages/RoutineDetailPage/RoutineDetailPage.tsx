@@ -37,11 +37,16 @@ import RoutineExerciseAddModalButton from "./components/RoutineExerciseAddModalB
 import RoutineExerciseDeleteModal from "./components/RoutineExerciseDeleteModal";
 import RoutineExerciseDeleteConfirm from "./components/RoutineExerciseDeleteConfirm";
 import RoutineExerciseDeleteModalButton from "./components/RoutineExerciseDeleteModalButton";
+import useRoutineAllGetQuery from "hooks/server/useRoutineAllGetQuery";
+import {Routine} from "types/model";
 
 const RoutineDetailPage = () => {
     const {routineId} = useParams();
-    const {data} = useRoutineGetQuery(routineId as string);
-    const routine = data.routine!;
+    const {data} = useRoutineAllGetQuery();
+
+    const currentRoutine = data.routines.find(
+        routine => routine.id === parseInt(routineId as string),
+    ) as Routine;
 
     return (
         <PrivatePageTemplate>
@@ -51,7 +56,7 @@ const RoutineDetailPage = () => {
                     <PageMoveConfirm />
                 </PageMoveModal>
             </Header>
-            <RoutineUpdateProvider defaultValue={routine}>
+            <RoutineUpdateProvider defaultValue={currentRoutine}>
                 <Main>
                     <Flex direction="column" gap={20} padding={20}>
                         <Label text="루틴 제목" required>
