@@ -30,6 +30,7 @@ const RoutineListPage = () => {
                     <RoutineList
                         component={routineAllGetRes => (
                             <RoutineAccordion
+                                key={routineAllGetRes.id}
                                 routineAllGetRes={routineAllGetRes}
                             >
                                 <RoutineUpdateMoveButton

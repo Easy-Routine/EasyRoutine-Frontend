@@ -206,11 +206,23 @@ export const deleteRoutineOne = async (
     routineDeleteReq: RoutineDeleteReq,
 ): Promise<boolean | void> => {
     const {id} = routineDeleteReq;
+    const config = {
+        method: "DELETE",
+        url: `/v1/routines/${id}`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    const response = await api(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
+    }
     try {
-        window.alert(`루틴 ${id}이(가) 삭제되었습니다.`);
         return;
     } catch (error) {
-        handleError(error);
+        throw error;
     }
 };
 
