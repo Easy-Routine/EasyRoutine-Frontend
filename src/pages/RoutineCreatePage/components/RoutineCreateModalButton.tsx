@@ -3,16 +3,20 @@ import Text from "headful/Text/Text";
 import {useRoutineCreate} from "./RoutineCreateProvider";
 import useRoutineCreateMutation from "hooks/server/useRoutineCreateMutation";
 import {useModal} from "headless/Modal/Modal";
+import {useNavigate} from "react-router-dom";
+import ROUTES from "constants/routes";
 
 const RoutineCreateModalButton = () => {
     const {routine} = useRoutineCreate();
-    const {openModal} = useModal();
+    const {closeModal} = useModal();
+    const navigate = useNavigate();
 
     const {mutateAsync: createRoutineMutate} = useRoutineCreateMutation();
 
     const handleButtonClick = async () => {
-        // await createRoutineMutate(routine);
-        openModal();
+        await createRoutineMutate(routine);
+        closeModal();
+        navigate(ROUTES.CONFIG.LIST.PATH);
     };
 
     return (
