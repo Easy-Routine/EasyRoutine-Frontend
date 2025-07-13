@@ -3,10 +3,11 @@ import useRoutineHistoryGetQuery from "hooks/server/useRoutineHistoryGetQuery";
 import {useParams} from "react-router-dom";
 
 const RoutineNameInput = () => {
-    const {routineHistoryId} = useParams<{routineHistoryId: string}>();
-
-    const {data: routineHistory} = useRoutineHistoryGetQuery({
-        routineHistoryId: routineHistoryId as string,
+    const {routineHistoryId} = useParams();
+    const {
+        data: {routineHistory},
+    } = useRoutineHistoryGetQuery({
+        routineHistoryId: parseInt(routineHistoryId as string),
     });
     const {name} = routineHistory!;
 

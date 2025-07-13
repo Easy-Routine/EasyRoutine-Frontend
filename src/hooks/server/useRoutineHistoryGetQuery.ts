@@ -15,6 +15,9 @@ const useRoutineHistoryGetQuery = (
             const data = await getRoutineHistoryOne(routineHistoryGetReq);
             return data;
         },
+        select: response => ({
+            routineHistory: response.result,
+        }),
     });
 };
 

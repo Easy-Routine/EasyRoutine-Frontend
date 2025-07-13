@@ -12,8 +12,17 @@ import SetUpdateTable from "./components/SetUpdateTable";
 import RoutineExerciseDeleteModal from "./components/RoutineExerciseDeleteModal";
 import RoutineExerciseDeleteModalButton from "./components/RoutineExerciseDeleteModalButton";
 import RoutineExerciseDeleteConfirm from "./components/RoutineExerciseDeleteConfirm";
+import {useParams} from "react-router-dom";
+import useRoutineHistoryGetQuery from "hooks/server/useRoutineHistoryGetQuery";
 
 const RoutineHistoryDetailPage = () => {
+    const {routineHistoryId} = useParams();
+    const {
+        data: {routineHistory},
+    } = useRoutineHistoryGetQuery({
+        routineHistoryId: parseInt(routineHistoryId as string),
+    });
+
     return (
         <PrivatePageTemplate>
             <Header>

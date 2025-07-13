@@ -10,13 +10,12 @@ type RoutineHistoryExerciseListProps = {
 const RoutineHistoryExerciseList = ({
     component,
 }: RoutineHistoryExerciseListProps) => {
-    const {routineHistoryId} = useParams<{routineHistoryId: string}>();
-
-    const {data: routineHistoryData} = useRoutineHistoryGetQuery({
-        routineHistoryId: routineHistoryId as string,
+    const {routineHistoryId} = useParams();
+    const {
+        data: {routineHistory},
+    } = useRoutineHistoryGetQuery({
+        routineHistoryId: parseInt(routineHistoryId as string),
     });
-
-    const routineHistory = routineHistoryData!;
 
     return <>{routineHistory.routineExercises.map(component)}</>;
 };

@@ -22,7 +22,7 @@ export type RoutineHistoryCreateReq = Omit<RoutineHistory, "id"> & {
 export type RoutineHistoryUpdateReq = Routine;
 
 export type RoutineHistoryGetReq = {routineHistoryId: string | number};
-export type RoutineHistoryGetRes = RoutineHistory;
+export type RoutineHistoryGetRes = Response<RoutineHistory>;
 
 export type RoutineHistoryExerciseVolumeByPeriodAllGetReq = {
     exerciseId: number;

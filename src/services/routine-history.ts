@@ -9,6 +9,7 @@ import {
     RoutineHistoryExerciseVolumeByPeriodAllGetReq,
     RoutineHistoryExerciseVolumeByPeriodAllGetRes,
     RoutineHistoryGetReq,
+    RoutineHistoryGetRes,
 } from "types/routine-history";
 import api from "utils/axios";
 import moment from "moment";
@@ -252,44 +253,22 @@ export const getRoutineHistoryAllDaily = async ({
 // 확인: 완료
 export const getRoutineHistoryOne = async (
     routineHistoryGetReq: RoutineHistoryGetReq,
-): Promise<RoutineHistory | undefined> => {
-    try {
-        return {
-            id: 5,
-            order: 5,
-            name: "Cardio Routine",
-            color: Color.GREEN,
-            workoutTime: 3600,
-            createdAt: "2025-06-20T09:00:00Z",
-            routineExercises: [
-                {
-                    id: 4,
-                    order: 1,
-                    sets: [
-                        {
-                            id: 3,
-                            order: 1,
-                            weight: 0,
-                            rep: 0,
-                            restSec: 0,
-                            exerciseSec: 300,
-                        },
-                    ],
-                    exercise: {
-                        id: 3,
-                        name: "덤벨프레스",
-                        image: null,
-                        category: "CHEST",
-                        types: ["WEIGHT", "COUNT"],
-                        isEditable: 1,
-                        shareLevel: 1,
-                    },
-                },
-            ],
-        };
-    } catch (e) {
-        handleError(e);
+): Promise<RoutineHistoryGetRes> => {
+    const config = {
+        method: "GET",
+        url: `/v1/routines/histories/${routineHistoryGetReq.routineHistoryId}`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    const response = await api<RoutineHistoryGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
     }
+    // TODO: API 나오면 넣기
+    return response.data;
 };
 // 확인: 완료
 export const deleteRoutineHistoryOne = async (
