@@ -34,3 +34,13 @@ export type RoutineHistoryExerciseVolumeByPeriodAllGetRes = {
     key: string;
     value: number;
 }[];
+
+export type RoutineHistorySummaryGetItem = {
+    totalWorkoutTime: number;
+    totalworkoutWeight: number;
+};
+
+export type RoutineHistorySummaryGetRes =
+    Response<RoutineHistorySummaryGetItem>;
+
+export type RoutineHistorySummaryGetReq = {date: Date};

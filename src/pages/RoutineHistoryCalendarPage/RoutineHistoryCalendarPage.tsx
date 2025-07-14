@@ -18,6 +18,7 @@ import RoutineHistoryDeleteConfirm from "./components/RoutineHistoryDeleteConfir
 import SwipeableAccordion from "headful/SwiperableAccordion/SwipeableAccordion";
 import RoutineHistoryAllGetDailyProvider from "./components/RoutineHistoryAllGetDailyProvider";
 import RoutineHistoryAllGetMonthlyProvider from "./components/RoutineHistoryAllGetMonthlyProvider";
+import RoutineHistorySummaryBox from "./components/RoutineHistorySummaryBox";
 
 const RoutineHistoryCalendarPage = () => {
     const location = useLocation();
@@ -35,13 +36,7 @@ const RoutineHistoryCalendarPage = () => {
                             <RoutineHistoryCalendar />
                         </RoutineHistoryAllGetMonthlyProvider>
 
-                        <SummaryBox>
-                            <SummaryBox.Text
-                                label="운동시간"
-                                value="1시간 36분"
-                            />
-                            <SummaryBox.Text label="전체볼륨" value="3450KG" />
-                        </SummaryBox>
+                        <RoutineHistorySummaryBox />
 
                         <RoutineHistoryAccordionList
                             component={routineHistory => (

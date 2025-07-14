@@ -10,6 +10,8 @@ import {
     RoutineHistoryExerciseVolumeByPeriodAllGetRes,
     RoutineHistoryGetReq,
     RoutineHistoryGetRes,
+    RoutineHistorySummaryGetReq,
+    RoutineHistorySummaryGetRes,
 } from "types/routine-history";
 import api from "utils/axios";
 import moment from "moment";
@@ -376,4 +378,25 @@ export const getRoutineHistoryExerciseVolumeByPeriodAll = async (
     } catch (e) {
         handleError(e);
     }
+};
+
+export const getRoutineHistorySummary = async (
+    request: RoutineHistorySummaryGetReq,
+): Promise<RoutineHistorySummaryGetRes> => {
+    const config = {
+        method: "GET",
+        url: `/v1/routines/histories/summary`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        params: {date: moment(request.date).format("YYYY-MM-DD")},
+    };
+    const response = await api<RoutineHistorySummaryGetRes>(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
+    }
+    // TODO: API 나오면 넣기
+    return response.data;
 };

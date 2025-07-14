@@ -11,6 +11,7 @@ const queryKey = {
     getRoutineHistoryExerciseVolumeByPeriodAll:
         "getRoutineHistoryExerciseVolumeByPeriodAll",
     getUserOne: "getUserOne",
+    getRoutineHistorySummary: "getRoutineHistorySummary",
 } as const;
 
 export default queryKey;
