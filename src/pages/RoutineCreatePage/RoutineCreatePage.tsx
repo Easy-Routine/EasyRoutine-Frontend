@@ -80,7 +80,12 @@ const RoutineCreatePage = () => {
                         <ExerciseAddBottomSheet>
                             <RoutineExerciseAddModalButton />
                             <ExerciseAllGetProvider>
-                                <Flex direction="column" gap={20} height="100%">
+                                <Flex
+                                    direction="column"
+                                    gap={20}
+                                    padding={20}
+                                    height="100%"
+                                >
                                     <ExerciseFilterSearchInput />
                                     <ExerciseFilterTabGroup />
 

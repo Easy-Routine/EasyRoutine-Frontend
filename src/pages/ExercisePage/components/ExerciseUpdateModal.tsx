@@ -4,6 +4,7 @@ import React from "react";
 import {useExerciseUpdate} from "./ExerciseUpdateProvider";
 import ExerciseDeleteConfirm from "./ExerciseDeleteConfirm";
 import DialogModal from "headful/DialogModal/DialogModal";
+import BottomSheet from "headless/BottomSheet/BottomSheet";
 
 type ExerciseUpdateModalProps = {
     children: [React.ReactNode, React.ReactNode];
@@ -14,18 +15,18 @@ const ExerciseUpdateModal = ({children}: ExerciseUpdateModalProps) => {
     const {mode} = useExerciseUpdate();
 
     return (
-        <BottomSheetModal>
+        <BottomSheet>
             {mode === "update" ? (
-                <BottomSheetModal.Content>{content}</BottomSheetModal.Content>
+                <BottomSheet.Content>{content}</BottomSheet.Content>
             ) : (
-                <DialogModal.Content>
+                <BottomSheet.Content>
                     <ExerciseDeleteConfirm />
-                </DialogModal.Content>
+                </BottomSheet.Content>
             )}
 
-            <BottomSheetModal.Backdrop />
+            <BottomSheet.Backdrop />
             {trigger}
-        </BottomSheetModal>
+        </BottomSheet>
     );
 };
 

@@ -6,6 +6,7 @@ import {v4 as uuid} from "uuid";
 import {useRoutineProgress} from "pages/RoutineProgressPage/components/RoutineProgressProvider";
 import {useRoutineExerciseAdd} from "./RoutineExerciseAddProvider";
 import {useExerciseAllGet} from "./ExerciseAllGetProvider";
+import {useBottomSheet} from "headless/BottomSheet/BottomSheet";
 
 type RoutineExerciseAddButtonProps = {};
 
@@ -14,7 +15,7 @@ const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
     const {exercises} = useExerciseAllGet();
 
     const {routine, setRoutine} = useRoutineProgress();
-    const {closeModal} = useModal();
+    const {close} = useBottomSheet();
 
     const handleBasicButtonClick = async () => {
         const newRoutine = structuredClone(routine);
@@ -39,7 +40,7 @@ const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
 
         setRoutine(newRoutine);
 
-        closeModal();
+        close();
     };
 
     return (

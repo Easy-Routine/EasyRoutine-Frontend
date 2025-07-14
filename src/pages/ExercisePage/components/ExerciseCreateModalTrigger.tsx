@@ -1,10 +1,10 @@
 import FloatingCircleButton from "headful/FloatingCircleButton/FloatingCircleButton";
-import {useModal} from "headless/Modal/Modal";
+import {useBottomSheet} from "headless/BottomSheet/BottomSheet";
 
 const ExerciseCreateModalTrigger = () => {
-    const {openModal} = useModal();
+    const {open} = useBottomSheet();
 
-    return <FloatingCircleButton onButtonClick={() => openModal()} />;
+    return <FloatingCircleButton onButtonClick={() => open()} />;
 };
 
 export default ExerciseCreateModalTrigger;

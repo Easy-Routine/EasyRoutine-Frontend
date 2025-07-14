@@ -1,4 +1,5 @@
 import BottomSheetModal from "headful/BottomSheetModal/BottomSheetModal";
+import BottomSheet from "headless/BottomSheet/BottomSheet";
 import React from "react";
 
 type RoutineExerciseSelectBottomSheetProps = {
@@ -11,11 +12,11 @@ const RoutineExerciseSelectBottomSheet = ({
     const [content, trigger] = children;
 
     return (
-        <BottomSheetModal>
-            <BottomSheetModal.Content>{content}</BottomSheetModal.Content>
-            <BottomSheetModal.Backdrop />
+        <BottomSheet>
+            <BottomSheet.Content>{content}</BottomSheet.Content>
+            <BottomSheet.Backdrop />
             {trigger}
-        </BottomSheetModal>
+        </BottomSheet>
     );
 };
 

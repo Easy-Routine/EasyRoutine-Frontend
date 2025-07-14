@@ -14,9 +14,10 @@ import useExerciseCreateMutation from "hooks/server/useExerciseCreateMutation";
 import ImageInput from "headful/ImageInput/ImageInput";
 import useExerciseImageUploadMutation from "hooks/server/useExerciseImageUploadMutation";
 import {uploadImage} from "services";
+import {useBottomSheet} from "headless/BottomSheet/BottomSheet";
 
 const ExerciseCreateModalContent = () => {
-    const {closeModal} = useModal();
+    const {close} = useBottomSheet();
     const {
         imageUrl,
         setImageUrl,
@@ -57,11 +58,11 @@ const ExerciseCreateModalContent = () => {
         setCategory(Category.CHEST);
         setTypes([]);
         setImageUrl("");
-        closeModal();
+        close();
     };
 
     return (
-        <Flex direction="column" gap={12}>
+        <Flex direction="column" gap={12} padding={20} height="100%">
             <Text size={14} weight="500" align="center">
                 새 운동 이미지
             </Text>

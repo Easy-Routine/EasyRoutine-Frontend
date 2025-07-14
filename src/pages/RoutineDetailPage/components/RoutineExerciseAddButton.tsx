@@ -5,6 +5,7 @@ import {v4 as uuid} from "uuid";
 import {useRoutineExerciseAdd} from "./RoutineExerciseAddProvider";
 import {useRoutineUpdate} from "./RoutineUpdateProvider";
 import {useExerciseAllGet} from "./ExerciseAllGetProvider";
+import {useBottomSheet} from "headless/BottomSheet/BottomSheet";
 
 type RoutineExerciseAddButtonProps = {};
 
@@ -13,7 +14,7 @@ const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
     const {exercises} = useExerciseAllGet();
 
     const {routine, setRoutine} = useRoutineUpdate();
-    const {closeModal} = useModal();
+    const {close} = useBottomSheet();
 
     const handleBasicButtonClick = async () => {
         const newRoutine = structuredClone(routine);
@@ -37,7 +38,7 @@ const RoutineExerciseAddButton = ({}: RoutineExerciseAddButtonProps) => {
 
         setRoutine(newRoutine);
         setExerciseIds([]); // 선택한 운동 라이브러리 아이디 초기화
-        closeModal();
+        close();
     };
 
     return (

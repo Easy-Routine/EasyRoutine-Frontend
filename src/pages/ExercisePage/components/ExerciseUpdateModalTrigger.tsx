@@ -3,6 +3,7 @@ import {useExerciseUpdate} from "./ExerciseUpdateProvider";
 import {useModal} from "headless/Modal/Modal";
 import {ExerciseAllGetItem, ExerciseAllGetRes} from "types/exercise";
 import useToast from "hooks/useToast";
+import {useBottomSheet} from "headless/BottomSheet/BottomSheet";
 
 // TODO: 스타일 작성하기
 
@@ -16,7 +17,7 @@ const ExerciseUpdateModalTrigger = ({
     const {id, image, name, category, types, isEditable} = exerciseAllGetRes;
     const {setId, setImageUrl, setName, setCategory, setTypes, setMode} =
         useExerciseUpdate();
-    const {openModal} = useModal();
+    const {open} = useBottomSheet();
     const {showToast} = useToast();
 
     const handleItemClick = () => {
@@ -30,7 +31,7 @@ const ExerciseUpdateModalTrigger = ({
         setName(name);
         setCategory(category);
         setTypes(types);
-        openModal();
+        open();
     };
 
     const handleLongPressClick = () => {
@@ -40,7 +41,7 @@ const ExerciseUpdateModalTrigger = ({
         }
         setMode("delete");
         setId(exerciseAllGetRes.id);
-        openModal();
+        open();
     };
 
     return (

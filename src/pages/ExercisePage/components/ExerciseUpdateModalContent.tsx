@@ -62,7 +62,7 @@ const ExerciseUpdateModalContent = () => {
     };
 
     return (
-        <Flex direction="column" gap={12}>
+        <Flex direction="column" gap={12} padding={20}>
             <Text size={14} weight="500" align="center">
                 새 운동 이미지
             </Text>

@@ -2,12 +2,13 @@ import CircleButton from "headful/CircleButton/CircleButton";
 import {ReactComponent as PlusIcon} from "assets/image/plus.svg";
 import {useModal} from "headless/Modal/Modal";
 import Flex from "headful/Flex/Flex";
+import {useBottomSheet} from "headless/BottomSheet/BottomSheet";
 
 const RoutineExerciseAddModalButton = () => {
-    const {openModal} = useModal();
+    const {open} = useBottomSheet();
 
     const handleButtonClick = () => {
-        openModal();
+        open();
     };
 
     return (

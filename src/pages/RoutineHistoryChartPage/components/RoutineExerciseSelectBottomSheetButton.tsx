@@ -1,10 +1,11 @@
 import BasicButton from "headful/BasicButton/BasicButton";
+import {useBottomSheet} from "headless/BottomSheet/BottomSheet";
 import {useModal} from "headless/Modal/Modal";
 
 const RoutineExerciseSelectBottomSheetButton = () => {
-    const {openModal} = useModal();
+    const {open} = useBottomSheet();
 
-    return <BasicButton onClick={() => openModal()}>운동 선택하기</BasicButton>;
+    return <BasicButton onClick={() => open()}>운동 선택하기</BasicButton>;
 };
 
 export default RoutineExerciseSelectBottomSheetButton;

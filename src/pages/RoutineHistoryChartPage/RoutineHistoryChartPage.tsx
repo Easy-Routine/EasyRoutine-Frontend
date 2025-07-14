@@ -50,7 +50,12 @@ const RoutineHistoryChartPage = () => {
                             <RoutineExerciseSelectBottomSheet>
                                 {/*운동 목록을 가져오는 역할*/}
 
-                                <Flex direction="column" gap={20} height="100%">
+                                <Flex
+                                    direction="column"
+                                    gap={20}
+                                    height="100%"
+                                    padding={20}
+                                >
                                     <ExerciseFilterSearchInput />
                                     <ExerciseFilterTabGroup />
                                     <ExerciseSelectList />
