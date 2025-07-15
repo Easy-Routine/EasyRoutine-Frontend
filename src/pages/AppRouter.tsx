@@ -19,70 +19,66 @@ const ErrorFallback = ({error}: {error: Error}) => (
 
 const AppRouter = () => {
     return (
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Suspense
-                fallback={
-                    <DefferredComponent>
-                        <CommonLoading />
-                    </DefferredComponent>
-                }
-            >
-                <Routes>
-                    <Route element={<PublicRoute />}>
-                        <Route
-                            path={ROUTES.LOGIN.PATH}
-                            element={<ROUTES.LOGIN.COMPONENT />}
-                        />
-                    </Route>
-                    <Route element={<PrivateRoute />}>
-                        <Route
-                            path={ROUTES.MY.PATH}
-                            element={<ROUTES.MY.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.CONFIG.CREATE.PATH}
-                            element={<ROUTES.CONFIG.CREATE.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.CONFIG.DETAIL.PATH(":routineId")}
-                            element={<ROUTES.CONFIG.DETAIL.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.CONFIG.LIST.PATH}
-                            element={<ROUTES.CONFIG.LIST.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.PROGRESS.PATH(":routineId")}
-                            element={<ROUTES.PROGRESS.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.RECORD.CALENDAR.PATH}
-                            element={<ROUTES.RECORD.CALENDAR.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.RECORD.CHART.PATH}
-                            element={<ROUTES.RECORD.CHART.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.RECORD.DETAIL.PATH(
-                                ":routineHistoryId",
-                            )}
-                            element={<ROUTES.RECORD.DETAIL.COMPONENT />}
-                        />
-                        <Route
-                            path={ROUTES.LIBRARY.PATH}
-                            element={<ROUTES.LIBRARY.COMPONENT />}
-                        />
-                    </Route>
+        // <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense
+            fallback={
+                <DefferredComponent>
+                    <CommonLoading />
+                </DefferredComponent>
+            }
+        >
+            <Routes>
+                <Route element={<PublicRoute />}>
                     <Route
-                        path="*"
-                        element={
-                            <Navigate to={ROUTES.CONFIG.LIST.PATH} replace />
-                        }
+                        path={ROUTES.LOGIN.PATH}
+                        element={<ROUTES.LOGIN.COMPONENT />}
                     />
-                </Routes>
-            </Suspense>
-        </ErrorBoundary>
+                </Route>
+                <Route element={<PrivateRoute />}>
+                    <Route
+                        path={ROUTES.MY.PATH}
+                        element={<ROUTES.MY.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.CONFIG.CREATE.PATH}
+                        element={<ROUTES.CONFIG.CREATE.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.CONFIG.DETAIL.PATH(":routineId")}
+                        element={<ROUTES.CONFIG.DETAIL.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.CONFIG.LIST.PATH}
+                        element={<ROUTES.CONFIG.LIST.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.PROGRESS.PATH(":routineId")}
+                        element={<ROUTES.PROGRESS.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.RECORD.CALENDAR.PATH}
+                        element={<ROUTES.RECORD.CALENDAR.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.RECORD.CHART.PATH}
+                        element={<ROUTES.RECORD.CHART.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.RECORD.DETAIL.PATH(":routineHistoryId")}
+                        element={<ROUTES.RECORD.DETAIL.COMPONENT />}
+                    />
+                    <Route
+                        path={ROUTES.LIBRARY.PATH}
+                        element={<ROUTES.LIBRARY.COMPONENT />}
+                    />
+                </Route>
+                <Route
+                    path="*"
+                    element={<Navigate to={ROUTES.CONFIG.LIST.PATH} replace />}
+                />
+            </Routes>
+        </Suspense>
+        // </ErrorBoundary>
     );
 };
 

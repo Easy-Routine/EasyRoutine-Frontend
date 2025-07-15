@@ -1,5 +1,5 @@
 import ROUTES from "constants/routes";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {
     Outlet,
     useLocation,
@@ -9,6 +9,7 @@ import {
 import {useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import {getContext} from "services/auth";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const PrivateRoute = () => {
     const location = useLocation();
@@ -16,37 +17,43 @@ const PrivateRoute = () => {
     const currentPath = location.pathname;
     const queryClient = useQueryClient();
     const [searchParams, setSearchParams] = useSearchParams();
+    const [isVerified, setIsVerified] = useState(false);
+    const [isChecking, setIsChecking] = useState(true); // ✅ 상태 분리: 인증 중 여부
 
     useEffect(() => {
         (async () => {
             try {
-                console.log("Private Route!");
-
                 if (searchParams.has("token")) {
-                    // 토큰을 제거합니다.
-
                     const token = searchParams.get("token");
                     localStorage.setItem("accessToken", token as string);
                     searchParams.delete("token");
-                    // 변경된 searchParams를 반영하여 URL을 업데이트합니다.
                     setSearchParams(searchParams, {replace: true});
                 }
 
-                // 'context'라는 queryKey로 데이터를 prefetch 합니다.
                 await queryClient.fetchQuery({
                     queryKey: [queryKey.getContext],
                     queryFn: async () => {
                         const response = await getContext();
-                        console.log("프리페치", response);
+                        console.log("프리페치 성공:", response);
                         return response;
                     },
                 });
+                // throw Error
+                setIsVerified(true);
             } catch (e) {
-                // 에러 발생 시 로그인 페이지로 이동합니다.
-                // navigate(ROUTES.LOGIN.PATH);
+                console.error("인증 실패:", e);
+                navigate(ROUTES.LOGIN.PATH, {replace: true});
+            } finally {
+                setIsChecking(false);
             }
         })();
     }, [currentPath]);
+
+    // ✅ 인증 중인 상태에서 로딩 표시
+    if (isChecking) return <CommonLoading />;
+
+    // ✅ 인증 실패 시 navigate로 이동하고 이 라인은 실행 안됨
+    if (!isVerified) return null;
 
     return <Outlet />;
 };

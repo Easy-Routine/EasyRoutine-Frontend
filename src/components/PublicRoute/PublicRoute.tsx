@@ -1,15 +1,17 @@
 import ROUTES from "constants/routes";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useQueryClient} from "@tanstack/react-query";
 import queryKey from "constants/queryKeys";
 import {getContext} from "services/auth";
+import CommonLoading from "components/content/CommonLoading/CommonLoading";
 
 const PublicRoute = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const currentPath = location.pathname;
     const queryClient = useQueryClient();
+
+    const [isChecking, setIsChecking] = useState(true);
 
     // useEffect(() => {
     //     (async () => {
@@ -18,16 +20,23 @@ const PublicRoute = () => {
     //                 queryKey: [queryKey.getContext],
     //                 queryFn: async () => {
     //                     const response = await getContext();
+    //                     console.log("로그인 상태 확인 성공:", response);
     //                     return response;
     //                 },
     //             });
-    //             // context API 호출이 성공하면, 로그인 상태로 간주하여 inquiry 페이지로 이동합니다.
-    //             navigate(ROUTES.CONFIG.LIST.PATH);
+
+    //             // ✅ 로그인 상태일 경우 바로 루트로 이동
+    //             navigate(ROUTES.CONFIG.LIST.PATH, {replace: true});
     //         } catch (e) {
-    //             // 에러가 발생하면 별도 처리 없이 그대로 PublicRoute의 Outlet을 렌더링합니다.
+    //             console.log("비로그인 상태 확인:", e);
+    //             // ❌ 로그인 상태가 아닐 때는 그냥 페이지 렌더링
+    //         } finally {
+    //             setIsChecking(false);
     //         }
     //     })();
-    // }, [currentPath, navigate, queryClient]);
+    // }, []);
+
+    // if (isChecking) return <CommonLoading />;
 
     return <Outlet />;
 };
