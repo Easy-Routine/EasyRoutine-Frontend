@@ -1,4 +1,4 @@
-import React from "react";
+import React, {HTMLAttributes} from "react";
 import styles from "./Text.module.scss";
 
 type TextProps = {
@@ -7,9 +7,9 @@ type TextProps = {
     size?: string | number;
     weight?: string;
     align?: React.CSSProperties["textAlign"];
-};
+} & HTMLAttributes<HTMLDivElement>;
 
-const Text = ({children, color, size, weight, align}: TextProps) => {
+const Text = ({children, color, size, weight, align, ...props}: TextProps) => {
     // 기본값은 CSS 변수로 설정된 값으로 대체할 수 있습니다.
     const dynamicStyle: React.CSSProperties = {
         fontSize: size || "var(--fontSize-md)",
@@ -19,7 +19,7 @@ const Text = ({children, color, size, weight, align}: TextProps) => {
     };
 
     return (
-        <div className={styles.text} style={dynamicStyle}>
+        <div {...props} className={styles.text} style={dynamicStyle}>
             {children}
         </div>
     );

@@ -85,9 +85,31 @@ export const getBaseWorkout = async (): Promise<any> => {
 
 export const signOut = async (): Promise<any> => {
     try {
-        const response = await api.post("/signout");
-        return response.data;
+        // const response = await api.post("/signout");
+        // return response.data;
+        localStorage.removeItem("accessToken");
     } catch (error) {
         throw new Error("");
+    }
+};
+
+export const cancelMembership = async () => {
+    const config = {
+        method: "DELETE",
+        url: `/v1/members`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    const response = await api(config);
+
+    if (!response.data.success) {
+        // 원하는 방식으로 error throw
+        throw new Error(`API 실패: ${response.data.code}`);
+    }
+    try {
+        return;
+    } catch (error) {
+        throw error;
     }
 };

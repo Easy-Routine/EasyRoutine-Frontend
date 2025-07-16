@@ -18,6 +18,9 @@ import {IoExtensionPuzzle} from "react-icons/io5";
 import AlarmToggle from "./components/AlarmToggle";
 import AlramProvider from "./components/AlarmProvider";
 import AlarmSettingBox from "./components/AlarmSettingBox";
+import Text from "headful/Text/Text";
+import MemberQuitText from "./components/MemberQuitText";
+import LogoutText from "./components/LogoutText";
 
 const MyPage = () => {
     const location = useLocation();
@@ -52,6 +55,14 @@ const MyPage = () => {
                         <UnderlineItem Icon={IoExtensionPuzzle} label="앱 버전">
                             <VersionText />
                         </UnderlineItem>
+                    </Flex>
+
+                    <Flex gap={8} justify="center" align="center">
+                        <MemberQuitText />
+                        <Text color="#707070" size={12}>
+                            |
+                        </Text>
+                        <LogoutText />
                     </Flex>
                 </Flex>
             </Main>
